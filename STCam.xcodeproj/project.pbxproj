@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		484F64620EFBEC733F2D85B1 /* libPods-STCam.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C18EA7F117ED0291D64659B7 /* libPods-STCam.a */; };
 		A442C2A8213199A100198910 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = A442BFB3213199A000198910 /* Makefile */; };
 		A442C2AA213199A100198910 /* axdllEx.c in Sources */ = {isa = PBXBuildFile; fileRef = A442BFB5213199A000198910 /* axdllEx.c */; };
 		A442C2AB213199A100198910 /* thPlay.c in Sources */ = {isa = PBXBuildFile; fileRef = A442BFB7213199A000198910 /* thPlay.c */; };
@@ -94,6 +95,26 @@
 		A4947001212C5B470015990C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4946FFF212C5B470015990C /* LaunchScreen.storyboard */; };
 		A4947004212C5B470015990C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A4947003212C5B470015990C /* main.m */; };
 		A494700E212C5B470015990C /* STCamTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A494700D212C5B470015990C /* STCamTests.m */; };
+		A4AE323E2134265B0036212B /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE323D2134265B0036212B /* LoginViewController.m */; };
+		A4AE3241213426BE0036212B /* MainTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE3240213426BE0036212B /* MainTabController.m */; };
+		A4AE3244213427480036212B /* DevListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE3243213427480036212B /* DevListViewController.m */; };
+		A4AE32472134275C0036212B /* AlarmListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE32462134275C0036212B /* AlarmListViewController.m */; };
+		A4AE324A2134276E0036212B /* MediaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE32492134276E0036212B /* MediaViewController.m */; };
+		A4AE324D2134277D0036212B /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE324C2134277D0036212B /* MoreViewController.m */; };
+		A4AE326E21342EFD0036212B /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE325021342EFD0036212B /* NSDate+Helper.m */; };
+		A4AE326F21342EFD0036212B /* UITableView+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE325121342EFD0036212B /* UITableView+Common.m */; };
+		A4AE327021342EFD0036212B /* UIViewController+HUD.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE325221342EFD0036212B /* UIViewController+HUD.m */; };
+		A4AE327121342EFD0036212B /* MBProgressHUD+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE325521342EFD0036212B /* MBProgressHUD+Add.m */; };
+		A4AE327221342EFD0036212B /* UISegmentedControl+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE325621342EFD0036212B /* UISegmentedControl+Category.m */; };
+		A4AE327321342EFD0036212B /* UIView+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE325821342EFD0036212B /* UIView+Common.m */; };
+		A4AE327421342EFD0036212B /* UIView+Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE325921342EFD0036212B /* UIView+Layout.m */; };
+		A4AE327521342EFD0036212B /* UIView+YYAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE325B21342EFD0036212B /* UIView+YYAdd.m */; };
+		A4AE327621342EFD0036212B /* NSString+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE325F21342EFD0036212B /* NSString+Common.m */; };
+		A4AE327721342EFD0036212B /* NSDate+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE326021342EFD0036212B /* NSDate+Common.m */; };
+		A4AE327821342EFD0036212B /* UIControl+YYAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE326821342EFD0036212B /* UIControl+YYAdd.m */; };
+		A4AE327921342EFD0036212B /* UIColor+expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE326921342EFD0036212B /* UIColor+expanded.m */; };
+		A4AE327A21342EFD0036212B /* UIImage+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE326A21342EFD0036212B /* UIImage+Common.m */; };
+		A4AE327C21342EFD0036212B /* NSDate+convenience.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE326D21342EFD0036212B /* NSDate+convenience.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +128,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		02368DE58D9110FCE2D67420 /* Pods-STCam.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-STCam.release.xcconfig"; path = "Pods/Target Support Files/Pods-STCam/Pods-STCam.release.xcconfig"; sourceTree = "<group>"; };
 		A442BFB0213199A000198910 /* thPlay_windows.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = thPlay_windows.h; sourceTree = "<group>"; };
 		A442BFB2213199A000198910 /* axdll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = axdll.h; sourceTree = "<group>"; };
 		A442BFB3213199A000198910 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
@@ -411,6 +433,49 @@
 		A4947009212C5B470015990C /* STCamTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = STCamTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A494700D212C5B470015990C /* STCamTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STCamTests.m; sourceTree = "<group>"; };
 		A494700F212C5B470015990C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A4AE323C2134265B0036212B /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		A4AE323D2134265B0036212B /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		A4AE323F213426BE0036212B /* MainTabController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainTabController.h; sourceTree = "<group>"; };
+		A4AE3240213426BE0036212B /* MainTabController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainTabController.m; sourceTree = "<group>"; };
+		A4AE3242213427480036212B /* DevListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DevListViewController.h; sourceTree = "<group>"; };
+		A4AE3243213427480036212B /* DevListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DevListViewController.m; sourceTree = "<group>"; };
+		A4AE32452134275C0036212B /* AlarmListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlarmListViewController.h; sourceTree = "<group>"; };
+		A4AE32462134275C0036212B /* AlarmListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlarmListViewController.m; sourceTree = "<group>"; };
+		A4AE32482134276E0036212B /* MediaViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MediaViewController.h; sourceTree = "<group>"; };
+		A4AE32492134276E0036212B /* MediaViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MediaViewController.m; sourceTree = "<group>"; };
+		A4AE324B2134277D0036212B /* MoreViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoreViewController.h; sourceTree = "<group>"; };
+		A4AE324C2134277D0036212B /* MoreViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoreViewController.m; sourceTree = "<group>"; };
+		A4AE325021342EFD0036212B /* NSDate+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Helper.m"; sourceTree = "<group>"; };
+		A4AE325121342EFD0036212B /* UITableView+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+Common.m"; sourceTree = "<group>"; };
+		A4AE325221342EFD0036212B /* UIViewController+HUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+HUD.m"; sourceTree = "<group>"; };
+		A4AE325321342EFD0036212B /* NSDate+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Common.h"; sourceTree = "<group>"; };
+		A4AE325421342EFD0036212B /* NSString+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Common.h"; sourceTree = "<group>"; };
+		A4AE325521342EFD0036212B /* MBProgressHUD+Add.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+Add.m"; sourceTree = "<group>"; };
+		A4AE325621342EFD0036212B /* UISegmentedControl+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UISegmentedControl+Category.m"; sourceTree = "<group>"; };
+		A4AE325721342EFD0036212B /* UIControl+YYAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIControl+YYAdd.h"; sourceTree = "<group>"; };
+		A4AE325821342EFD0036212B /* UIView+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Common.m"; sourceTree = "<group>"; };
+		A4AE325921342EFD0036212B /* UIView+Layout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Layout.m"; sourceTree = "<group>"; };
+		A4AE325A21342EFD0036212B /* NSDate+convenience.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+convenience.h"; sourceTree = "<group>"; };
+		A4AE325B21342EFD0036212B /* UIView+YYAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+YYAdd.m"; sourceTree = "<group>"; };
+		A4AE325D21342EFD0036212B /* UIImage+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Common.h"; sourceTree = "<group>"; };
+		A4AE325E21342EFD0036212B /* UIColor+expanded.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+expanded.h"; sourceTree = "<group>"; };
+		A4AE325F21342EFD0036212B /* NSString+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Common.m"; sourceTree = "<group>"; };
+		A4AE326021342EFD0036212B /* NSDate+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Common.m"; sourceTree = "<group>"; };
+		A4AE326121342EFD0036212B /* UIViewController+HUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+HUD.h"; sourceTree = "<group>"; };
+		A4AE326221342EFD0036212B /* UITableView+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Common.h"; sourceTree = "<group>"; };
+		A4AE326321342EFD0036212B /* NSDate+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Helper.h"; sourceTree = "<group>"; };
+		A4AE326421342EFD0036212B /* UISegmentedControl+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UISegmentedControl+Category.h"; sourceTree = "<group>"; };
+		A4AE326521342EFD0036212B /* MBProgressHUD+Add.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+Add.h"; sourceTree = "<group>"; };
+		A4AE326621342EFD0036212B /* UIView+Layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Layout.h"; sourceTree = "<group>"; };
+		A4AE326721342EFD0036212B /* UIView+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Common.h"; sourceTree = "<group>"; };
+		A4AE326821342EFD0036212B /* UIControl+YYAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIControl+YYAdd.m"; sourceTree = "<group>"; };
+		A4AE326921342EFD0036212B /* UIColor+expanded.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+expanded.m"; sourceTree = "<group>"; };
+		A4AE326A21342EFD0036212B /* UIImage+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Common.m"; sourceTree = "<group>"; };
+		A4AE326C21342EFD0036212B /* UIView+YYAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+YYAdd.h"; sourceTree = "<group>"; };
+		A4AE326D21342EFD0036212B /* NSDate+convenience.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+convenience.m"; sourceTree = "<group>"; };
+		A4AE327D21342FDB0036212B /* PrefixHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.h; sourceTree = "<group>"; };
+		C18EA7F117ED0291D64659B7 /* libPods-STCam.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-STCam.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C99CB2FCE47F51F123C0F082 /* Pods-STCam.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-STCam.debug.xcconfig"; path = "Pods/Target Support Files/Pods-STCam/Pods-STCam.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -439,6 +504,7 @@
 				A46F7AF12132CD5100854DB8 /* libswresample.a in Frameworks */,
 				A46F7AF22132CD5100854DB8 /* libavdevice.a in Frameworks */,
 				A46F7AF32132CD5100854DB8 /* libavfilter.a in Frameworks */,
+				484F64620EFBEC733F2D85B1 /* libPods-STCam.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -452,6 +518,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8B530263E64BCD781E06B7DA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C99CB2FCE47F51F123C0F082 /* Pods-STCam.debug.xcconfig */,
+				02368DE58D9110FCE2D67420 /* Pods-STCam.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		A442BFAF213199A000198910 /* thSDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -835,6 +910,7 @@
 				A46F7AE72132CD5100854DB8 /* libpostproc.a */,
 				A46F7AE92132CD5100854DB8 /* libswresample.a */,
 				A46F7AE52132CD5100854DB8 /* libswscale.a */,
+				C18EA7F117ED0291D64659B7 /* libPods-STCam.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -851,11 +927,13 @@
 		A4946FE8212C5B460015990C = {
 			isa = PBXGroup;
 			children = (
+				A4AE327D21342FDB0036212B /* PrefixHeader.h */,
 				A4DC4229212C5B83005663F3 /* thSDK */,
 				A4946FF3212C5B460015990C /* STCam */,
 				A494700C212C5B470015990C /* STCamTests */,
 				A4946FF2212C5B460015990C /* Products */,
 				A46F7AE32132CD5100854DB8 /* Frameworks */,
+				8B530263E64BCD781E06B7DA /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -871,6 +949,8 @@
 		A4946FF3212C5B460015990C /* STCam */ = {
 			isa = PBXGroup;
 			children = (
+				A4AE324E21342EFD0036212B /* Util */,
+				A4AE323B213426090036212B /* ViewController */,
 				A46F7B0E2132D25700854DB8 /* ViewModel */,
 				A4946FF4212C5B460015990C /* AppDelegate.h */,
 				A4946FF5212C5B460015990C /* AppDelegate.m */,
@@ -894,6 +974,68 @@
 			path = STCamTests;
 			sourceTree = "<group>";
 		};
+		A4AE323B213426090036212B /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A4AE323C2134265B0036212B /* LoginViewController.h */,
+				A4AE323D2134265B0036212B /* LoginViewController.m */,
+				A4AE323F213426BE0036212B /* MainTabController.h */,
+				A4AE3240213426BE0036212B /* MainTabController.m */,
+				A4AE3242213427480036212B /* DevListViewController.h */,
+				A4AE3243213427480036212B /* DevListViewController.m */,
+				A4AE32452134275C0036212B /* AlarmListViewController.h */,
+				A4AE32462134275C0036212B /* AlarmListViewController.m */,
+				A4AE32482134276E0036212B /* MediaViewController.h */,
+				A4AE32492134276E0036212B /* MediaViewController.m */,
+				A4AE324B2134277D0036212B /* MoreViewController.h */,
+				A4AE324C2134277D0036212B /* MoreViewController.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		A4AE324E21342EFD0036212B /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				A4AE324F21342EFD0036212B /* OC_Category */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		A4AE324F21342EFD0036212B /* OC_Category */ = {
+			isa = PBXGroup;
+			children = (
+				A4AE325021342EFD0036212B /* NSDate+Helper.m */,
+				A4AE325121342EFD0036212B /* UITableView+Common.m */,
+				A4AE325221342EFD0036212B /* UIViewController+HUD.m */,
+				A4AE325321342EFD0036212B /* NSDate+Common.h */,
+				A4AE325421342EFD0036212B /* NSString+Common.h */,
+				A4AE325521342EFD0036212B /* MBProgressHUD+Add.m */,
+				A4AE325621342EFD0036212B /* UISegmentedControl+Category.m */,
+				A4AE325721342EFD0036212B /* UIControl+YYAdd.h */,
+				A4AE325821342EFD0036212B /* UIView+Common.m */,
+				A4AE325921342EFD0036212B /* UIView+Layout.m */,
+				A4AE325A21342EFD0036212B /* NSDate+convenience.h */,
+				A4AE325B21342EFD0036212B /* UIView+YYAdd.m */,
+				A4AE325D21342EFD0036212B /* UIImage+Common.h */,
+				A4AE325E21342EFD0036212B /* UIColor+expanded.h */,
+				A4AE325F21342EFD0036212B /* NSString+Common.m */,
+				A4AE326021342EFD0036212B /* NSDate+Common.m */,
+				A4AE326121342EFD0036212B /* UIViewController+HUD.h */,
+				A4AE326221342EFD0036212B /* UITableView+Common.h */,
+				A4AE326321342EFD0036212B /* NSDate+Helper.h */,
+				A4AE326421342EFD0036212B /* UISegmentedControl+Category.h */,
+				A4AE326521342EFD0036212B /* MBProgressHUD+Add.h */,
+				A4AE326621342EFD0036212B /* UIView+Layout.h */,
+				A4AE326721342EFD0036212B /* UIView+Common.h */,
+				A4AE326821342EFD0036212B /* UIControl+YYAdd.m */,
+				A4AE326921342EFD0036212B /* UIColor+expanded.m */,
+				A4AE326A21342EFD0036212B /* UIImage+Common.m */,
+				A4AE326C21342EFD0036212B /* UIView+YYAdd.h */,
+				A4AE326D21342EFD0036212B /* NSDate+convenience.m */,
+			);
+			path = OC_Category;
+			sourceTree = "<group>";
+		};
 		A4DC4229212C5B83005663F3 /* thSDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -913,9 +1055,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A4947012212C5B470015990C /* Build configuration list for PBXNativeTarget "STCam" */;
 			buildPhases = (
+				21637F7E53F13B03379D19A9 /* [CP] Check Pods Manifest.lock */,
 				A4946FED212C5B460015990C /* Sources */,
 				A4946FEE212C5B460015990C /* Frameworks */,
 				A4946FEF212C5B460015990C /* Resources */,
+				94DD7D8A8149580594CB58FE /* [CP] Embed Pods Frameworks */,
+				6A4BD0C7AAB8323C96097F9C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1046,6 +1191,57 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		21637F7E53F13B03379D19A9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-STCam-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6A4BD0C7AAB8323C96097F9C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-STCam/Pods-STCam-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		94DD7D8A8149580594CB58FE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-STCam/Pods-STCam-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		A4946FED212C5B460015990C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -1053,18 +1249,38 @@
 			files = (
 				A442C322213199A100198910 /* cJSON.c in Sources */,
 				A46F7B112132D2E400854DB8 /* DevListViewModel.m in Sources */,
+				A4AE324D2134277D0036212B /* MoreViewController.m in Sources */,
+				A4AE327321342EFD0036212B /* UIView+Common.m in Sources */,
 				A442C2B0213199A100198910 /* TFun.c in Sources */,
+				A4AE326F21342EFD0036212B /* UITableView+Common.m in Sources */,
 				A442C31A213199A100198910 /* thRec.c in Sources */,
+				A4AE32472134275C0036212B /* AlarmListViewController.m in Sources */,
+				A4AE327C21342EFD0036212B /* NSDate+convenience.m in Sources */,
+				A4AE327421342EFD0036212B /* UIView+Layout.m in Sources */,
 				A442C2AC213199A100198910 /* List.c in Sources */,
+				A4AE327921342EFD0036212B /* UIColor+expanded.m in Sources */,
 				A442C2B2213199A100198910 /* audio_g711.c in Sources */,
+				A4AE324A2134276E0036212B /* MediaViewController.m in Sources */,
 				A442C2A8213199A100198910 /* Makefile in Sources */,
+				A4AE327521342EFD0036212B /* UIView+YYAdd.m in Sources */,
+				A4AE3241213426BE0036212B /* MainTabController.m in Sources */,
+				A4AE327A21342EFD0036212B /* UIImage+Common.m in Sources */,
 				A4946FF9212C5B460015990C /* ViewController.m in Sources */,
+				A4AE326E21342EFD0036212B /* NSDate+Helper.m in Sources */,
+				A4AE327721342EFD0036212B /* NSDate+Common.m in Sources */,
 				A442C315213199A100198910 /* thVideoEnc.c in Sources */,
+				A4AE327821342EFD0036212B /* UIControl+YYAdd.m in Sources */,
 				A442C2AB213199A100198910 /* thPlay.c in Sources */,
 				A442C2AA213199A100198910 /* axdllEx.c in Sources */,
+				A4AE3244213427480036212B /* DevListViewController.m in Sources */,
 				A4947004212C5B470015990C /* main.m in Sources */,
 				A442C2AD213199A100198910 /* skt.c in Sources */,
 				A442C2AF213199A100198910 /* av_Queue.c in Sources */,
+				A4AE327621342EFD0036212B /* NSString+Common.m in Sources */,
+				A4AE323E2134265B0036212B /* LoginViewController.m in Sources */,
+				A4AE327121342EFD0036212B /* MBProgressHUD+Add.m in Sources */,
+				A4AE327021342EFD0036212B /* UIViewController+HUD.m in Sources */,
+				A4AE327221342EFD0036212B /* UISegmentedControl+Category.m in Sources */,
 				A442C31B213199A100198910 /* thImg.c in Sources */,
 				A442C313213199A100198910 /* thVideoDec.c in Sources */,
 				A4946FF6212C5B460015990C /* AppDelegate.m in Sources */,
@@ -1221,6 +1437,7 @@
 		};
 		A4947013212C5B470015990C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C99CB2FCE47F51F123C0F082 /* Pods-STCam.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1249,6 +1466,7 @@
 		};
 		A4947014212C5B470015990C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 02368DE58D9110FCE2D67420 /* Pods-STCam.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

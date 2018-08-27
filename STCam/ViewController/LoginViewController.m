@@ -9,7 +9,7 @@
 #import "LoginViewController.h"
 
 @interface LoginViewController ()
-
+@property(nonatomic,strong)UIScrollView * mainScrollView;
 @end
 
 @implementation LoginViewController
@@ -17,6 +17,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+}
+-(void)loadView{
+    [super loadView];
+    
 }
 
 - (void)didReceiveMemoryWarning {
