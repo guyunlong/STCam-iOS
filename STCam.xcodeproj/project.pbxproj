@@ -89,7 +89,7 @@
 		A46F7B0D2132D03500854DB8 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A46F7B0C2132D03500854DB8 /* CoreMedia.framework */; };
 		A46F7B112132D2E400854DB8 /* DevListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A46F7B102132D2E400854DB8 /* DevListViewModel.m */; };
 		A4946FF6212C5B460015990C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A4946FF5212C5B460015990C /* AppDelegate.m */; };
-		A4946FF9212C5B460015990C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4946FF8212C5B460015990C /* ViewController.m */; };
+		A4946FF9212C5B460015990C /* SplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4946FF8212C5B460015990C /* SplashViewController.m */; };
 		A4946FFC212C5B460015990C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4946FFA212C5B460015990C /* Main.storyboard */; };
 		A4946FFE212C5B470015990C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4946FFD212C5B470015990C /* Assets.xcassets */; };
 		A4947001212C5B470015990C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4946FFF212C5B470015990C /* LaunchScreen.storyboard */; };
@@ -115,6 +115,7 @@
 		A4AE327921342EFD0036212B /* UIColor+expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE326921342EFD0036212B /* UIColor+expanded.m */; };
 		A4AE327A21342EFD0036212B /* UIImage+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE326A21342EFD0036212B /* UIImage+Common.m */; };
 		A4AE327C21342EFD0036212B /* NSDate+convenience.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE326D21342EFD0036212B /* NSDate+convenience.m */; };
+		A4F50440216268A6002B71FF /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4F5043F216268A6002B71FF /* RootViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -423,8 +424,8 @@
 		A4946FF1212C5B460015990C /* STCam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = STCam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4946FF4212C5B460015990C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A4946FF5212C5B460015990C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		A4946FF7212C5B460015990C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		A4946FF8212C5B460015990C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		A4946FF7212C5B460015990C /* SplashViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SplashViewController.h; sourceTree = "<group>"; };
+		A4946FF8212C5B460015990C /* SplashViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SplashViewController.m; sourceTree = "<group>"; };
 		A4946FFB212C5B460015990C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A4946FFD212C5B470015990C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A4947000212C5B470015990C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -474,6 +475,8 @@
 		A4AE326C21342EFD0036212B /* UIView+YYAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+YYAdd.h"; sourceTree = "<group>"; };
 		A4AE326D21342EFD0036212B /* NSDate+convenience.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+convenience.m"; sourceTree = "<group>"; };
 		A4AE327D21342FDB0036212B /* PrefixHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.h; sourceTree = "<group>"; };
+		A4F5043E216268A6002B71FF /* RootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		A4F5043F216268A6002B71FF /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		C18EA7F117ED0291D64659B7 /* libPods-STCam.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-STCam.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C99CB2FCE47F51F123C0F082 /* Pods-STCam.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-STCam.debug.xcconfig"; path = "Pods/Target Support Files/Pods-STCam/Pods-STCam.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -954,8 +957,8 @@
 				A46F7B0E2132D25700854DB8 /* ViewModel */,
 				A4946FF4212C5B460015990C /* AppDelegate.h */,
 				A4946FF5212C5B460015990C /* AppDelegate.m */,
-				A4946FF7212C5B460015990C /* ViewController.h */,
-				A4946FF8212C5B460015990C /* ViewController.m */,
+				A4946FF7212C5B460015990C /* SplashViewController.h */,
+				A4946FF8212C5B460015990C /* SplashViewController.m */,
 				A4946FFA212C5B460015990C /* Main.storyboard */,
 				A4946FFD212C5B470015990C /* Assets.xcassets */,
 				A4946FFF212C5B470015990C /* LaunchScreen.storyboard */,
@@ -989,6 +992,8 @@
 				A4AE32492134276E0036212B /* MediaViewController.m */,
 				A4AE324B2134277D0036212B /* MoreViewController.h */,
 				A4AE324C2134277D0036212B /* MoreViewController.m */,
+				A4F5043E216268A6002B71FF /* RootViewController.h */,
+				A4F5043F216268A6002B71FF /* RootViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1265,7 +1270,7 @@
 				A4AE327521342EFD0036212B /* UIView+YYAdd.m in Sources */,
 				A4AE3241213426BE0036212B /* MainTabController.m in Sources */,
 				A4AE327A21342EFD0036212B /* UIImage+Common.m in Sources */,
-				A4946FF9212C5B460015990C /* ViewController.m in Sources */,
+				A4946FF9212C5B460015990C /* SplashViewController.m in Sources */,
 				A4AE326E21342EFD0036212B /* NSDate+Helper.m in Sources */,
 				A4AE327721342EFD0036212B /* NSDate+Common.m in Sources */,
 				A442C315213199A100198910 /* thVideoEnc.c in Sources */,
@@ -1275,6 +1280,7 @@
 				A4AE3244213427480036212B /* DevListViewController.m in Sources */,
 				A4947004212C5B470015990C /* main.m in Sources */,
 				A442C2AD213199A100198910 /* skt.c in Sources */,
+				A4F50440216268A6002B71FF /* RootViewController.m in Sources */,
 				A442C2AF213199A100198910 /* av_Queue.c in Sources */,
 				A4AE327621342EFD0036212B /* NSString+Common.m in Sources */,
 				A4AE323E2134265B0036212B /* LoginViewController.m in Sources */,
@@ -1459,7 +1465,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.south.STCam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/ffmpeg/include";
 			};
 			name = Debug;
@@ -1488,7 +1494,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.south.STCam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/ffmpeg/include";
 			};
 			name = Release;
