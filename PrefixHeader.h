@@ -41,6 +41,7 @@
  * */
 #define kScreenBounds [UIScreen mainScreen].bounds
 #define kScreenWith [UIScreen mainScreen].bounds.size.width
+#define kScreenWidth [UIScreen mainScreen].bounds.size.width
 /**
  *屏幕的高
  */
@@ -54,6 +55,7 @@
 #import "UIView+Common.h"
 #import "NSDate+Helper.h"
 #import "NSDate+Common.h"
+#import "UIButton+Common.h"
 #import <Masonry/Masonry.h>
 #import "MASConstraint.h"
 #import <ReactiveCocoa/ReactiveCocoa.h>
@@ -63,6 +65,16 @@
 #import "MBProgressHUD+Add.h"
 #import "UIViewController+HUD.h"
 
+#define  kMainColor [UIColor colorWithHexString:@"0x2197d8"]
+#define  kDeepMainColor [UIColor colorWithHexString:@"0x41b7f8"]
+#define  kLightGrayColor [UIColor colorWithHexString:@"0x969696"]
+#define kHeightCoefficient kScreenHeight/667.0
+#define kWidthCoefficient kScreenWidth/375.0
+
+#define kPadding 10*kWidthCoefficient
+#define kSafeAreaBottomHeight (kScreenHeight == 812.0 ? 34 : 0)
+#define kSafeAreaHeaderHeight (kScreenHeight == 812.0 ? 44 : 20)
+#define kButtonHeight 40*kWidthCoefficient
 #endif /* PrefixHeader_pch */
 
 

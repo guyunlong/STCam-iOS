@@ -88,6 +88,8 @@
 		A46F7B0B2132CF9100854DB8 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A46F7B0A2132CF9100854DB8 /* AVFoundation.framework */; };
 		A46F7B0D2132D03500854DB8 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A46F7B0C2132D03500854DB8 /* CoreMedia.framework */; };
 		A46F7B112132D2E400854DB8 /* DevListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A46F7B102132D2E400854DB8 /* DevListViewModel.m */; };
+		A470AA8921636FFC0068AA80 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A470AA8B21636FFC0068AA80 /* Localizable.strings */; };
+		A470AA912163BE050068AA80 /* UIButton+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = A470AA902163BE050068AA80 /* UIButton+Common.m */; };
 		A4946FF6212C5B460015990C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A4946FF5212C5B460015990C /* AppDelegate.m */; };
 		A4946FF9212C5B460015990C /* SplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4946FF8212C5B460015990C /* SplashViewController.m */; };
 		A4946FFC212C5B460015990C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4946FFA212C5B460015990C /* Main.storyboard */; };
@@ -421,6 +423,10 @@
 		A46F7B0C2132D03500854DB8 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		A46F7B0F2132D2E400854DB8 /* DevListViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DevListViewModel.h; sourceTree = "<group>"; };
 		A46F7B102132D2E400854DB8 /* DevListViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DevListViewModel.m; sourceTree = "<group>"; };
+		A470AA8A21636FFC0068AA80 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A470AA8C216371940068AA80 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		A470AA8F2163BE050068AA80 /* UIButton+Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+Common.h"; sourceTree = "<group>"; };
+		A470AA902163BE050068AA80 /* UIButton+Common.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Common.m"; sourceTree = "<group>"; };
 		A4946FF1212C5B460015990C /* STCam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = STCam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4946FF4212C5B460015990C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A4946FF5212C5B460015990C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -930,6 +936,7 @@
 		A4946FE8212C5B460015990C = {
 			isa = PBXGroup;
 			children = (
+				A470AA8B21636FFC0068AA80 /* Localizable.strings */,
 				A4AE327D21342FDB0036212B /* PrefixHeader.h */,
 				A4DC4229212C5B83005663F3 /* thSDK */,
 				A4946FF3212C5B460015990C /* STCam */,
@@ -1037,6 +1044,8 @@
 				A4AE326A21342EFD0036212B /* UIImage+Common.m */,
 				A4AE326C21342EFD0036212B /* UIView+YYAdd.h */,
 				A4AE326D21342EFD0036212B /* NSDate+convenience.m */,
+				A470AA8F2163BE050068AA80 /* UIButton+Common.h */,
+				A470AA902163BE050068AA80 /* UIButton+Common.m */,
 			);
 			path = OC_Category;
 			sourceTree = "<group>";
@@ -1119,6 +1128,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = A4946FE8212C5B460015990C;
 			productRefGroup = A4946FF2212C5B460015990C /* Products */;
@@ -1146,6 +1156,7 @@
 				A442C3AE213199A100198910 /* mixerocx.idl in Resources */,
 				A442C3CE213199A100198910 /* devenum.idl in Resources */,
 				A442C3C7213199A100198910 /* austream.idl in Resources */,
+				A470AA8921636FFC0068AA80 /* Localizable.strings in Resources */,
 				A4947001212C5B470015990C /* LaunchScreen.storyboard in Resources */,
 				A442C3C8213199A100198910 /* tuner.idl in Resources */,
 				A442C31D213199A100198910 /* test4 in Resources */,
@@ -1268,6 +1279,7 @@
 				A4AE324A2134276E0036212B /* MediaViewController.m in Sources */,
 				A442C2A8213199A100198910 /* Makefile in Sources */,
 				A4AE327521342EFD0036212B /* UIView+YYAdd.m in Sources */,
+				A470AA912163BE050068AA80 /* UIButton+Common.m in Sources */,
 				A4AE3241213426BE0036212B /* MainTabController.m in Sources */,
 				A4AE327A21342EFD0036212B /* UIImage+Common.m in Sources */,
 				A4946FF9212C5B460015990C /* SplashViewController.m in Sources */,
@@ -1312,6 +1324,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		A470AA8B21636FFC0068AA80 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A470AA8A21636FFC0068AA80 /* en */,
+				A470AA8C216371940068AA80 /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		A4946FFA212C5B460015990C /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1335,6 +1356,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1393,6 +1415,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

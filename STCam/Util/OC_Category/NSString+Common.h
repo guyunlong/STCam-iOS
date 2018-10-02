@@ -15,5 +15,5 @@
 - (CGSize)getSizeWithFont:(UIFont *)font constrainedToSize:(CGSize)size;
 - (CGFloat)getHeightWithFont:(UIFont *)font constrainedToSize:(CGSize)size;
 - (CGFloat)getWidthWithFont:(UIFont *)font constrainedToSize:(CGSize)size;
-
+- (NSString *)localizedString;
 @end

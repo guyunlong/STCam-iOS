@@ -11,6 +11,7 @@
 #import "LoginViewController.h"
 #import "UIColor+expanded.h"
 #import "UIImage+Common.h"
+#import "PrefixHeader.h"
 @interface SplashViewController ()
 @property(nonatomic,strong)DevListViewModel * viewModel;
 @end
@@ -27,7 +28,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
-     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithHexString:@"0x2197d8"]] forBarPosition:UIBarPositionTopAttached barMetrics:UIBarMetricsDefault];
+     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:kMainColor] forBarPosition:UIBarPositionTopAttached barMetrics:UIBarMetricsDefault];
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
@@ -38,7 +39,7 @@
     //跳转到LoginViewController
     
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         LoginViewController * ctl  = [[LoginViewController alloc] init];
         [self.navigationController pushViewController:ctl animated:YES];
     });

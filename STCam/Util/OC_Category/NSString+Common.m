@@ -75,5 +75,9 @@
 - (CGFloat)getWidthWithFont:(UIFont *)font constrainedToSize:(CGSize)size{
     return [self getSizeWithFont:font constrainedToSize:size].width;
 }
+- (NSString *)localizedString
+{
+    return NSLocalizedString(self, @"");
+}
 
 @end
