@@ -66,6 +66,8 @@
 		A442C3D2213199A100198910 /* msvidctl.tlb in Resources */ = {isa = PBXBuildFile; fileRef = A442C223213199A100198910 /* msvidctl.tlb */; };
 		A442C3D3213199A100198910 /* tuner.tlb in Resources */ = {isa = PBXBuildFile; fileRef = A442C228213199A100198910 /* tuner.tlb */; };
 		A442C3D4213199A100198910 /* d3dxmath.inl in Resources */ = {isa = PBXBuildFile; fileRef = A442C229213199A100198910 /* d3dxmath.inl */; };
+		A45934E02164A5320018A61B /* BasicTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = A45934DF2164A5320018A61B /* BasicTextField.m */; };
+		A45934E32164A5FF0018A61B /* LoginBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A45934E22164A5FF0018A61B /* LoginBackgroundView.m */; };
 		A46F7AEC2132CD5100854DB8 /* libavformat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A46F7AE42132CD5100854DB8 /* libavformat.a */; };
 		A46F7AED2132CD5100854DB8 /* libswscale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A46F7AE52132CD5100854DB8 /* libswscale.a */; };
 		A46F7AEE2132CD5100854DB8 /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A46F7AE62132CD5100854DB8 /* libavutil.a */; };
@@ -400,6 +402,10 @@
 		A442C2A4213199A100198910 /* cm_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cm_types.h; sourceTree = "<group>"; };
 		A442C2A5213199A100198910 /* avDecode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = avDecode.h; sourceTree = "<group>"; };
 		A442C2A6213199A100198910 /* libthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libthSDK.h; sourceTree = "<group>"; };
+		A45934DE2164A5320018A61B /* BasicTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BasicTextField.h; sourceTree = "<group>"; };
+		A45934DF2164A5320018A61B /* BasicTextField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BasicTextField.m; sourceTree = "<group>"; };
+		A45934E12164A5FF0018A61B /* LoginBackgroundView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginBackgroundView.h; sourceTree = "<group>"; };
+		A45934E22164A5FF0018A61B /* LoginBackgroundView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginBackgroundView.m; sourceTree = "<group>"; };
 		A46F7AE42132CD5100854DB8 /* libavformat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavformat.a; path = ffmpeg/lib/libavformat.a; sourceTree = "<group>"; };
 		A46F7AE52132CD5100854DB8 /* libswscale.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libswscale.a; path = ffmpeg/lib/libswscale.a; sourceTree = "<group>"; };
 		A46F7AE62132CD5100854DB8 /* libavutil.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavutil.a; path = ffmpeg/lib/libavutil.a; sourceTree = "<group>"; };
@@ -895,6 +901,25 @@
 			path = dshowidl;
 			sourceTree = "<group>";
 		};
+		A45934DC2164A4FA0018A61B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A45934DD2164A51A0018A61B /* CustomView */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A45934DD2164A51A0018A61B /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				A45934DE2164A5320018A61B /* BasicTextField.h */,
+				A45934DF2164A5320018A61B /* BasicTextField.m */,
+				A45934E12164A5FF0018A61B /* LoginBackgroundView.h */,
+				A45934E22164A5FF0018A61B /* LoginBackgroundView.m */,
+			);
+			path = CustomView;
+			sourceTree = "<group>";
+		};
 		A46F7AE32132CD5100854DB8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -959,6 +984,7 @@
 		A4946FF3212C5B460015990C /* STCam */ = {
 			isa = PBXGroup;
 			children = (
+				A45934DC2164A4FA0018A61B /* View */,
 				A4AE324E21342EFD0036212B /* Util */,
 				A4AE323B213426090036212B /* ViewController */,
 				A46F7B0E2132D25700854DB8 /* ViewModel */,
@@ -1277,6 +1303,7 @@
 				A4AE327921342EFD0036212B /* UIColor+expanded.m in Sources */,
 				A442C2B2213199A100198910 /* audio_g711.c in Sources */,
 				A4AE324A2134276E0036212B /* MediaViewController.m in Sources */,
+				A45934E32164A5FF0018A61B /* LoginBackgroundView.m in Sources */,
 				A442C2A8213199A100198910 /* Makefile in Sources */,
 				A4AE327521342EFD0036212B /* UIView+YYAdd.m in Sources */,
 				A470AA912163BE050068AA80 /* UIButton+Common.m in Sources */,
@@ -1293,6 +1320,7 @@
 				A4947004212C5B470015990C /* main.m in Sources */,
 				A442C2AD213199A100198910 /* skt.c in Sources */,
 				A4F50440216268A6002B71FF /* RootViewController.m in Sources */,
+				A45934E02164A5320018A61B /* BasicTextField.m in Sources */,
 				A442C2AF213199A100198910 /* av_Queue.c in Sources */,
 				A4AE327621342EFD0036212B /* NSString+Common.m in Sources */,
 				A4AE323E2134265B0036212B /* LoginViewController.m in Sources */,

@@ -6,6 +6,7 @@ def shared_pods
     pod 'TPKeyboardAvoiding'
     pod 'Masonry'
     pod 'MBProgressHUD'
+    pod 'BEMCheckBox'
 end
 target 'STCam' do
     shared_pods

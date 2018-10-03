@@ -14,6 +14,7 @@
 #import "PrefixHeader.h"
 @interface SplashViewController ()
 @property(nonatomic,strong)DevListViewModel * viewModel;
+
 @end
 
 @implementation SplashViewController

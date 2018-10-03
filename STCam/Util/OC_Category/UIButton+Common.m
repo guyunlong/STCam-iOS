@@ -35,6 +35,11 @@
             [self setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
             self.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
             break;
+        case ButtonStyleText_Gray_Right:
+            [self setTitleColor:kLightGrayColor forState:UIControlStateNormal];
+            [self setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
+            self.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+            break;
         default:
             break;
     }

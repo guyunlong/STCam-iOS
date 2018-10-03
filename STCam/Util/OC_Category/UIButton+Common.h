@@ -14,6 +14,7 @@ typedef NS_ENUM(NSInteger,ButtonStyle) {
     ButtonStyleHollow,
     ButtonStyleText_Blue, // 文字按钮样式蓝色
     ButtonStyleText_Gray, // 文字按钮样式灰色
+    ButtonStyleText_Gray_Right
 };
 @interface UIButton (Common)
 - (void)setAppThemeType:(ButtonStyle)style;
