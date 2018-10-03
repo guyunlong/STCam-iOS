@@ -1,23 +1,27 @@
 //
-//  MoreViewController.m
+//  STNavigationController.m
 //  STCam
 //
-//  Created by guyunlong on 8/27/18.
+//  Created by guyunlong on 10/3/18.
 //  Copyright © 2018 South. All rights reserved.
 //
 
-#import "MoreViewController.h"
-
-@interface MoreViewController ()
+#import "STNavigationController.h"
+#import "PrefixHeader.h"
+@interface STNavigationController ()
 
 @end
 
-@implementation MoreViewController
+@implementation STNavigationController
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.navigationBar setBackgroundImage:[UIImage imageWithColor:kMainColor] forBarPosition:UIBarPositionTopAttached barMetrics:UIBarMetricsDefault];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self.view setBackgroundColor:[UIColor whiteColor]];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		484F64620EFBEC733F2D85B1 /* libPods-STCam.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C18EA7F117ED0291D64659B7 /* libPods-STCam.a */; };
+		A439D831216506E200FCE7FE /* LoginViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A439D830216506E200FCE7FE /* LoginViewModel.m */; };
+		A439D835216508F300FCE7FE /* FFHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = A439D834216508F300FCE7FE /* FFHttpTool.m */; };
+		A439D83921650DE300FCE7FE /* RetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A439D83821650DE300FCE7FE /* RetModel.m */; };
+		A439D83C2165149800FCE7FE /* STNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A439D83B2165149800FCE7FE /* STNavigationController.m */; };
 		A442C2A8213199A100198910 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = A442BFB3213199A000198910 /* Makefile */; };
 		A442C2AA213199A100198910 /* axdllEx.c in Sources */ = {isa = PBXBuildFile; fileRef = A442BFB5213199A000198910 /* axdllEx.c */; };
 		A442C2AB213199A100198910 /* thPlay.c in Sources */ = {isa = PBXBuildFile; fileRef = A442BFB7213199A000198910 /* thPlay.c */; };
@@ -134,6 +138,14 @@
 
 /* Begin PBXFileReference section */
 		02368DE58D9110FCE2D67420 /* Pods-STCam.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-STCam.release.xcconfig"; path = "Pods/Target Support Files/Pods-STCam/Pods-STCam.release.xcconfig"; sourceTree = "<group>"; };
+		A439D82F216506E200FCE7FE /* LoginViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewModel.h; sourceTree = "<group>"; };
+		A439D830216506E200FCE7FE /* LoginViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewModel.m; sourceTree = "<group>"; };
+		A439D833216508F300FCE7FE /* FFHttpTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FFHttpTool.h; sourceTree = "<group>"; };
+		A439D834216508F300FCE7FE /* FFHttpTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FFHttpTool.m; sourceTree = "<group>"; };
+		A439D83721650DE300FCE7FE /* RetModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RetModel.h; sourceTree = "<group>"; };
+		A439D83821650DE300FCE7FE /* RetModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RetModel.m; sourceTree = "<group>"; };
+		A439D83A2165149800FCE7FE /* STNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STNavigationController.h; sourceTree = "<group>"; };
+		A439D83B2165149800FCE7FE /* STNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STNavigationController.m; sourceTree = "<group>"; };
 		A442BFB0213199A000198910 /* thPlay_windows.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = thPlay_windows.h; sourceTree = "<group>"; };
 		A442BFB2213199A000198910 /* axdll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = axdll.h; sourceTree = "<group>"; };
 		A442BFB3213199A000198910 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
@@ -540,6 +552,24 @@
 				02368DE58D9110FCE2D67420 /* Pods-STCam.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		A439D832216508DE00FCE7FE /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				A439D833216508F300FCE7FE /* FFHttpTool.h */,
+				A439D834216508F300FCE7FE /* FFHttpTool.m */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		A439D83621650DD700FCE7FE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A439D83721650DE300FCE7FE /* RetModel.h */,
+				A439D83821650DE300FCE7FE /* RetModel.m */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		A442BFAF213199A000198910 /* thSDK */ = {
@@ -954,6 +984,8 @@
 			children = (
 				A46F7B0F2132D2E400854DB8 /* DevListViewModel.h */,
 				A46F7B102132D2E400854DB8 /* DevListViewModel.m */,
+				A439D82F216506E200FCE7FE /* LoginViewModel.h */,
+				A439D830216506E200FCE7FE /* LoginViewModel.m */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -984,6 +1016,8 @@
 		A4946FF3212C5B460015990C /* STCam */ = {
 			isa = PBXGroup;
 			children = (
+				A439D83621650DD700FCE7FE /* Model */,
+				A439D832216508DE00FCE7FE /* Manager */,
 				A45934DC2164A4FA0018A61B /* View */,
 				A4AE324E21342EFD0036212B /* Util */,
 				A4AE323B213426090036212B /* ViewController */,
@@ -1027,6 +1061,8 @@
 				A4AE324C2134277D0036212B /* MoreViewController.m */,
 				A4F5043E216268A6002B71FF /* RootViewController.h */,
 				A4F5043F216268A6002B71FF /* RootViewController.m */,
+				A439D83A2165149800FCE7FE /* STNavigationController.h */,
+				A439D83B2165149800FCE7FE /* STNavigationController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1298,6 +1334,7 @@
 				A442C31A213199A100198910 /* thRec.c in Sources */,
 				A4AE32472134275C0036212B /* AlarmListViewController.m in Sources */,
 				A4AE327C21342EFD0036212B /* NSDate+convenience.m in Sources */,
+				A439D83C2165149800FCE7FE /* STNavigationController.m in Sources */,
 				A4AE327421342EFD0036212B /* UIView+Layout.m in Sources */,
 				A442C2AC213199A100198910 /* List.c in Sources */,
 				A4AE327921342EFD0036212B /* UIColor+expanded.m in Sources */,
@@ -1314,6 +1351,7 @@
 				A4AE327721342EFD0036212B /* NSDate+Common.m in Sources */,
 				A442C315213199A100198910 /* thVideoEnc.c in Sources */,
 				A4AE327821342EFD0036212B /* UIControl+YYAdd.m in Sources */,
+				A439D83921650DE300FCE7FE /* RetModel.m in Sources */,
 				A442C2AB213199A100198910 /* thPlay.c in Sources */,
 				A442C2AA213199A100198910 /* axdllEx.c in Sources */,
 				A4AE3244213427480036212B /* DevListViewController.m in Sources */,
@@ -1321,8 +1359,10 @@
 				A442C2AD213199A100198910 /* skt.c in Sources */,
 				A4F50440216268A6002B71FF /* RootViewController.m in Sources */,
 				A45934E02164A5320018A61B /* BasicTextField.m in Sources */,
+				A439D831216506E200FCE7FE /* LoginViewModel.m in Sources */,
 				A442C2AF213199A100198910 /* av_Queue.c in Sources */,
 				A4AE327621342EFD0036212B /* NSString+Common.m in Sources */,
+				A439D835216508F300FCE7FE /* FFHttpTool.m in Sources */,
 				A4AE323E2134265B0036212B /* LoginViewController.m in Sources */,
 				A4AE327121342EFD0036212B /* MBProgressHUD+Add.m in Sources */,
 				A4AE327021342EFD0036212B /* UIViewController+HUD.m in Sources */,

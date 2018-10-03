@@ -12,6 +12,8 @@
 #import "LoginBackgroundView.h"
 #import "BasicTextField.h"
 #import "BEMCheckBox.h"
+#import "LoginViewModel.h"
+#import "MainTabController.h"
 #define checkboxwidth 16
 #define TextColor [UIColor colorWithHexString:@"0x535353"]
 #define TextFont [UIFont systemFontOfSize:14]
@@ -35,6 +37,8 @@
 @property (nonatomic, assign) BOOL isUserEmpty;
 @property (nonatomic, assign) BOOL isPasswordEmpty;
 
+@property (nonatomic,strong) LoginViewModel * viewModel;
+
 @end
 
 @implementation LoginViewController
@@ -45,6 +49,12 @@
     
     //隐藏返回按钮
     self.navigationItem.hidesBackButton = YES;
+    
+    [self initViewModel];
+}
+
+-(void)initViewModel{
+    _viewModel = [LoginViewModel new];
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewDidAppear:animated];
@@ -125,6 +135,7 @@
     [_loginButton setAppThemeType:ButtonStyleStyleAppTheme];
     [_loginButton setTitle:@"action_sign_in".localizedString forState:UIControlStateNormal];
     [_mainScrollView addSubview:_loginButton];
+    [_loginButton addTarget:self action:@selector(loginClicked) forControlEvents:UIControlEventTouchUpInside];
     
     y += kButtonHeight + 3*kPadding;
     _registerButton = [[UIButton alloc] initWithFrame:CGRectMake(2*kPadding, y, kScreenWidth-4*kPadding, kButtonHeight)];
@@ -191,6 +202,23 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma methods
+-(void)loginClicked{
+    @weakify(self)
+    [[_viewModel racLogin] subscribeNext:^(id x) {
+        if ([x integerValue] == 1) {
+           //跳转到tab页面
+            @strongify(self)
+            MainTabController * mainTabController = [[MainTabController alloc] init];
+            [self presentViewController:mainTabController animated:YES completion:^{
+                
+            }];
+        }
+        else{
+            [self showHint:@"error_login_failed".localizedString];
+        }
+    }];
+}
 #pragma checkbox
 - (void)didTapCheckBox:(BEMCheckBox*)checkBox{
     BOOL value = checkBox.on;

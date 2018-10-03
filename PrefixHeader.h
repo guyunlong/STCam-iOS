@@ -77,6 +77,7 @@
 #define kButtonHeight 40*kWidthCoefficient
 #endif /* PrefixHeader_pch */
 
-
+#define serverIP @"211.149.199.247"
+#define ServerPort  800
 #endif
 
