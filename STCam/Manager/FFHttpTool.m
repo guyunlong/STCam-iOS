@@ -34,7 +34,8 @@
             NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
             if (httpResponse.statusCode == 200) {
                 NSError *error;
-                NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
+                NSData* uft8Data = [FFHttpTool UTF8WithGB2312Data:data];
+                id dictionary = [NSJSONSerialization JSONObjectWithData:uft8Data options:NSJSONReadingMutableLeaves error:&error];
                 success(dictionary);
                 
             } else {
@@ -47,4 +48,13 @@
     
     
 }
++(NSData *)UTF8WithGB2312Data:(NSData *)gb2312Data
+{
+    NSStringEncoding enc = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
+    NSString *str = [[NSString alloc] initWithData:gb2312Data encoding:enc];
+    NSData *utf8Data = [str dataUsingEncoding:NSUTF8StringEncoding];
+    return utf8Data;
+}
+
+
 @end

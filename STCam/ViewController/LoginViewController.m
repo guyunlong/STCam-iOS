@@ -55,6 +55,20 @@
 
 -(void)initViewModel{
     _viewModel = [LoginViewModel new];
+    [_userTextField setText:self.viewModel.user];
+    [_passwordTextField setText:self.viewModel.password];
+    [_rememberCheckBox setOn:self.viewModel.remember];
+    if (self.viewModel.remember) {
+        [_rememberTitleLb setTextColor:kMainColor];
+    }
+    else{
+        [_rememberTitleLb setTextColor:TextColor];
+    }
+    
+    RAC(self.viewModel, user)  = self.userTextField.rac_textSignal;
+    RAC(self.viewModel, password)  = self.passwordTextField.rac_textSignal;
+    RAC(self.loginButton, enabled) = self.viewModel.validLoginSignal;
+    
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewDidAppear:animated];
@@ -169,7 +183,7 @@
     //self.userTextField.keyboardType  = UIKeyboardTypeNumberPad;
     self.userTextField.delegate = self;
     self.userTextField.tag  = 7;
-    self.userTextField.placeholder = @"请输入账号";
+    self.userTextField.placeholder = @"string_input_email_address".localizedString;
     [self.userTextField setFont:[UIFont systemFontOfSize:14]];
     UIImageView *userTextFieldImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"userIcon"]];
     self.userTextField.leftView = userTextFieldImage;
@@ -183,7 +197,7 @@
     self.passwordTextField = [[BasicTextField alloc] initWithFrame:CGRectMake(0, 40*kWidthCoefficient, frame.size.width, 40*kWidthCoefficient)];
     self.passwordTextField.delegate = self;
     self.passwordTextField.tag = 11;
-    self.passwordTextField.placeholder = @"请输入密码";
+    self.passwordTextField.placeholder = @"string_pwd".localizedString;
     [self.passwordTextField setFont:[UIFont systemFontOfSize:14]];
     UIImageView *passwordTextFieldImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"passwordIcon"]];
     self.passwordTextField.leftView = passwordTextFieldImage;
@@ -222,6 +236,7 @@
 #pragma checkbox
 - (void)didTapCheckBox:(BEMCheckBox*)checkBox{
     BOOL value = checkBox.on;
+    _viewModel.remember =value;
     if (value) {
         [_rememberTitleLb setTextColor:kMainColor];
     }

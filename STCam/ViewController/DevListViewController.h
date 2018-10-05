@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface DevListViewController : UIViewController
+#import "RootViewController.h"
+@interface DevListViewController : RootViewController
 
 @end

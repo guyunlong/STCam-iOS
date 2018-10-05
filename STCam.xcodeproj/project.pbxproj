@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		484F64620EFBEC733F2D85B1 /* libPods-STCam.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C18EA7F117ED0291D64659B7 /* libPods-STCam.a */; };
+		A4134F932165F78500831B8D /* AccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A4134F922165F78500831B8D /* AccountManager.m */; };
+		A43853DB21675A1500B8CC56 /* DeviceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A43853DA21675A1500B8CC56 /* DeviceModel.m */; };
 		A439D831216506E200FCE7FE /* LoginViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A439D830216506E200FCE7FE /* LoginViewModel.m */; };
 		A439D835216508F300FCE7FE /* FFHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = A439D834216508F300FCE7FE /* FFHttpTool.m */; };
 		A439D83921650DE300FCE7FE /* RetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A439D83821650DE300FCE7FE /* RetModel.m */; };
@@ -123,6 +125,8 @@
 		A4AE327921342EFD0036212B /* UIColor+expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE326921342EFD0036212B /* UIColor+expanded.m */; };
 		A4AE327A21342EFD0036212B /* UIImage+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE326A21342EFD0036212B /* UIImage+Common.m */; };
 		A4AE327C21342EFD0036212B /* NSDate+convenience.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE326D21342EFD0036212B /* NSDate+convenience.m */; };
+		A4AE70BD2167AEF600614024 /* DevListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE70BB2167AEF600614024 /* DevListCell.m */; };
+		A4AE70BE2167AEF600614024 /* DevListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4AE70BC2167AEF600614024 /* DevListCell.xib */; };
 		A4F50440216268A6002B71FF /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4F5043F216268A6002B71FF /* RootViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -138,6 +142,10 @@
 
 /* Begin PBXFileReference section */
 		02368DE58D9110FCE2D67420 /* Pods-STCam.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-STCam.release.xcconfig"; path = "Pods/Target Support Files/Pods-STCam/Pods-STCam.release.xcconfig"; sourceTree = "<group>"; };
+		A4134F912165F78500831B8D /* AccountManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccountManager.h; sourceTree = "<group>"; };
+		A4134F922165F78500831B8D /* AccountManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountManager.m; sourceTree = "<group>"; };
+		A43853D921675A1500B8CC56 /* DeviceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceModel.h; sourceTree = "<group>"; };
+		A43853DA21675A1500B8CC56 /* DeviceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceModel.m; sourceTree = "<group>"; };
 		A439D82F216506E200FCE7FE /* LoginViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewModel.h; sourceTree = "<group>"; };
 		A439D830216506E200FCE7FE /* LoginViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewModel.m; sourceTree = "<group>"; };
 		A439D833216508F300FCE7FE /* FFHttpTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FFHttpTool.h; sourceTree = "<group>"; };
@@ -499,6 +507,9 @@
 		A4AE326C21342EFD0036212B /* UIView+YYAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+YYAdd.h"; sourceTree = "<group>"; };
 		A4AE326D21342EFD0036212B /* NSDate+convenience.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+convenience.m"; sourceTree = "<group>"; };
 		A4AE327D21342FDB0036212B /* PrefixHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.h; sourceTree = "<group>"; };
+		A4AE70BA2167AEF600614024 /* DevListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DevListCell.h; sourceTree = "<group>"; };
+		A4AE70BB2167AEF600614024 /* DevListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DevListCell.m; sourceTree = "<group>"; };
+		A4AE70BC2167AEF600614024 /* DevListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DevListCell.xib; sourceTree = "<group>"; };
 		A4F5043E216268A6002B71FF /* RootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		A4F5043F216268A6002B71FF /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		C18EA7F117ED0291D64659B7 /* libPods-STCam.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-STCam.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -559,6 +570,8 @@
 			children = (
 				A439D833216508F300FCE7FE /* FFHttpTool.h */,
 				A439D834216508F300FCE7FE /* FFHttpTool.m */,
+				A4134F912165F78500831B8D /* AccountManager.h */,
+				A4134F922165F78500831B8D /* AccountManager.m */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -568,6 +581,8 @@
 			children = (
 				A439D83721650DE300FCE7FE /* RetModel.h */,
 				A439D83821650DE300FCE7FE /* RetModel.m */,
+				A43853D921675A1500B8CC56 /* DeviceModel.h */,
+				A43853DA21675A1500B8CC56 /* DeviceModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -934,6 +949,7 @@
 		A45934DC2164A4FA0018A61B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A4AE70B92167AEDD00614024 /* Cell */,
 				A45934DD2164A51A0018A61B /* CustomView */,
 			);
 			path = View;
@@ -1112,6 +1128,16 @@
 			path = OC_Category;
 			sourceTree = "<group>";
 		};
+		A4AE70B92167AEDD00614024 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				A4AE70BA2167AEF600614024 /* DevListCell.h */,
+				A4AE70BB2167AEF600614024 /* DevListCell.m */,
+				A4AE70BC2167AEF600614024 /* DevListCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		A4DC4229212C5B83005663F3 /* thSDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -1243,6 +1269,7 @@
 				A442C3C5213199A100198910 /* vmr9.idl in Resources */,
 				A442C3B9213199A100198910 /* Mpeg2Structs.idl in Resources */,
 				A442C3CA213199A100198910 /* Vmrender.idl in Resources */,
+				A4AE70BE2167AEF600614024 /* DevListCell.xib in Resources */,
 				A442C3C0213199A100198910 /* Mstvgs.idl in Resources */,
 				A442C3C6213199A100198910 /* dshowasf.idl in Resources */,
 				A442C3CB213199A100198910 /* tvratings.idl in Resources */,
@@ -1334,6 +1361,7 @@
 				A442C31A213199A100198910 /* thRec.c in Sources */,
 				A4AE32472134275C0036212B /* AlarmListViewController.m in Sources */,
 				A4AE327C21342EFD0036212B /* NSDate+convenience.m in Sources */,
+				A4134F932165F78500831B8D /* AccountManager.m in Sources */,
 				A439D83C2165149800FCE7FE /* STNavigationController.m in Sources */,
 				A4AE327421342EFD0036212B /* UIView+Layout.m in Sources */,
 				A442C2AC213199A100198910 /* List.c in Sources */,
@@ -1343,6 +1371,7 @@
 				A45934E32164A5FF0018A61B /* LoginBackgroundView.m in Sources */,
 				A442C2A8213199A100198910 /* Makefile in Sources */,
 				A4AE327521342EFD0036212B /* UIView+YYAdd.m in Sources */,
+				A4AE70BD2167AEF600614024 /* DevListCell.m in Sources */,
 				A470AA912163BE050068AA80 /* UIButton+Common.m in Sources */,
 				A4AE3241213426BE0036212B /* MainTabController.m in Sources */,
 				A4AE327A21342EFD0036212B /* UIImage+Common.m in Sources */,
@@ -1359,6 +1388,7 @@
 				A442C2AD213199A100198910 /* skt.c in Sources */,
 				A4F50440216268A6002B71FF /* RootViewController.m in Sources */,
 				A45934E02164A5320018A61B /* BasicTextField.m in Sources */,
+				A43853DB21675A1500B8CC56 /* DeviceModel.m in Sources */,
 				A439D831216506E200FCE7FE /* LoginViewModel.m in Sources */,
 				A442C2AF213199A100198910 /* av_Queue.c in Sources */,
 				A4AE327621342EFD0036212B /* NSString+Common.m in Sources */,

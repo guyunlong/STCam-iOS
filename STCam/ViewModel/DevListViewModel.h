@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <ReactiveCocoa/ReactiveCocoa.h>
+#import <ReactiveCocoa/RACEXTScope.h>
 @interface DevListViewModel : NSObject
 -(void)searchDevice;
+-(RACSignal *)racGetDeviceList;
+@property(nonatomic,strong)NSMutableArray* deviceArray;
 @end

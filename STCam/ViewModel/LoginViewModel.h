@@ -10,7 +10,10 @@
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import <ReactiveCocoa/RACEXTScope.h>
 @interface LoginViewModel : NSObject
+-(void)initConfig;
 @property(nonatomic,strong)NSString* user;
 @property(nonatomic,strong)NSString* password;
+@property(nonatomic,assign)BOOL remember;
+@property (nonatomic, strong) RACSignal *validLoginSignal;
 -(RACSignal *)racLogin;
 @end

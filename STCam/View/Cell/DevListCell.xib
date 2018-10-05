@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DevListCellIdentify" rowHeight="177" id="KGk-i7-Jjw" customClass="DevListCell">
+            <rect key="frame" x="0.0" y="0.0" width="432" height="177"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="432" height="176.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Okz-dw-frv">
+                        <rect key="frame" x="30" y="21" width="372" height="135"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wqq-2W-bUS">
+                                <rect key="frame" x="5" y="5" width="362" height="100"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rnW-5y-iNx">
+                                <rect key="frame" x="5" y="109" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i7P-zw-JDg">
+                                <rect key="frame" x="329" y="108" width="24" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="setting"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2I3-hj-Gsx">
+                                <rect key="frame" x="275" y="107" width="24" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="playback"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hSZ-Fb-cQV">
+                                <rect key="frame" x="215" y="107" width="24" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="share"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="wqq-2W-bUS" secondAttribute="bottom" constant="30" id="K41-Hp-WVD"/>
+                            <constraint firstItem="wqq-2W-bUS" firstAttribute="top" secondItem="Okz-dw-frv" secondAttribute="top" constant="5" id="dgR-3M-eIG"/>
+                            <constraint firstItem="rnW-5y-iNx" firstAttribute="leading" secondItem="Okz-dw-frv" secondAttribute="leading" constant="5" id="rAO-U7-Kri"/>
+                            <constraint firstAttribute="bottom" secondItem="rnW-5y-iNx" secondAttribute="bottom" constant="5" id="rJe-lr-SYw"/>
+                            <constraint firstItem="wqq-2W-bUS" firstAttribute="leading" secondItem="Okz-dw-frv" secondAttribute="leading" constant="5" id="wNM-wF-7tV"/>
+                            <constraint firstAttribute="trailing" secondItem="wqq-2W-bUS" secondAttribute="trailing" constant="5" id="xl7-WV-ceV"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Okz-dw-frv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="4Sp-jX-8xN"/>
+                    <constraint firstItem="Okz-dw-frv" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" constant="-10" id="HZi-6X-shS"/>
+                    <constraint firstItem="Okz-dw-frv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="10" id="xy5-SQ-o0h"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Okz-dw-frv" secondAttribute="trailing" constant="10" id="zMt-sM-qai"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="backView" destination="Okz-dw-frv" id="vNC-Lt-9WE"/>
+                <outlet property="playBackBtn" destination="2I3-hj-Gsx" id="byM-3s-meN"/>
+                <outlet property="settingBtn" destination="i7P-zw-JDg" id="S8C-Hc-KIM"/>
+                <outlet property="shareBtn" destination="hSZ-Fb-cQV" id="ASe-TX-YVv"/>
+                <outlet property="snapImageView" destination="wqq-2W-bUS" id="gc5-6v-VDr"/>
+                <outlet property="titleLb" destination="rnW-5y-iNx" id="M8U-6k-suw"/>
+            </connections>
+            <point key="canvasLocation" x="27" y="63.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="playback" width="24" height="24"/>
+        <image name="setting" width="24" height="24"/>
+        <image name="share" width="24" height="24"/>
+    </resources>
+</document>
