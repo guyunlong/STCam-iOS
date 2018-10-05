@@ -116,7 +116,7 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     DevListCell * cell = [DevListCell DevListCellWith:tableView indexPath:indexPath];
-    
+    [cell setModel:_viewModel.deviceArray[indexPath.row]];
     return cell;
 }
 
@@ -124,7 +124,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 200;
+    return [DevListCell cellHeight];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

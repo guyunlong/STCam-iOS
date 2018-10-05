@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "DeviceModel.h"
 @interface DevListCell : UITableViewCell
+@property(nonatomic,strong)DeviceModel * model;
 + (instancetype)DevListCellWith:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath;
++(CGFloat)cellHeight;
 @end
