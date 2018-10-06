@@ -130,6 +130,12 @@
 		A4CFFE6E2168656000A93B72 /* LiveVidController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CFFE6D2168656000A93B72 /* LiveVidController.m */; };
 		A4CFFE71216865A200A93B72 /* LiveVidViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CFFE70216865A200A93B72 /* LiveVidViewModel.m */; };
 		A4CFFE742168861A00A93B72 /* thRender.c in Sources */ = {isa = PBXBuildFile; fileRef = A4CFFE732168861A00A93B72 /* thRender.c */; };
+		A4CFFE772168BAB100A93B72 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A4CFFE752168BAB100A93B72 /* Model.xcdatamodeld */; };
+		A4CFFE7A2168BB2E00A93B72 /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CFFE792168BB2E00A93B72 /* CoreDataManager.m */; };
+		A4CFFE822168C7B600A93B72 /* VideoDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CFFE7C2168C7B600A93B72 /* VideoDecoder.m */; };
+		A4CFFE832168C7B600A93B72 /* VideoBufferParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CFFE7D2168C7B600A93B72 /* VideoBufferParser.m */; };
+		A4CFFE842168C7B600A93B72 /* AAPLEAGLLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CFFE7E2168C7B600A93B72 /* AAPLEAGLLayer.m */; };
+		A4CFFE862168C7D500A93B72 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4CFFE852168C7D500A93B72 /* AVKit.framework */; };
 		A4F50440216268A6002B71FF /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4F5043F216268A6002B71FF /* RootViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -519,6 +525,16 @@
 		A4CFFE70216865A200A93B72 /* LiveVidViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LiveVidViewModel.m; sourceTree = "<group>"; };
 		A4CFFE7221687E9E00A93B72 /* thPlay_manage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = thPlay_manage.h; sourceTree = "<group>"; };
 		A4CFFE732168861A00A93B72 /* thRender.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = thRender.c; sourceTree = "<group>"; };
+		A4CFFE762168BAB100A93B72 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		A4CFFE782168BB2E00A93B72 /* CoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataManager.h; sourceTree = "<group>"; };
+		A4CFFE792168BB2E00A93B72 /* CoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataManager.m; sourceTree = "<group>"; };
+		A4CFFE7C2168C7B600A93B72 /* VideoDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoDecoder.m; sourceTree = "<group>"; };
+		A4CFFE7D2168C7B600A93B72 /* VideoBufferParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoBufferParser.m; sourceTree = "<group>"; };
+		A4CFFE7E2168C7B600A93B72 /* AAPLEAGLLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAPLEAGLLayer.m; sourceTree = "<group>"; };
+		A4CFFE7F2168C7B600A93B72 /* VideoDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoDecoder.h; sourceTree = "<group>"; };
+		A4CFFE802168C7B600A93B72 /* AAPLEAGLLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAPLEAGLLayer.h; sourceTree = "<group>"; };
+		A4CFFE812168C7B600A93B72 /* VideoBufferParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoBufferParser.h; sourceTree = "<group>"; };
+		A4CFFE852168C7D500A93B72 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		A4F5043E216268A6002B71FF /* RootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		A4F5043F216268A6002B71FF /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		C18EA7F117ED0291D64659B7 /* libPods-STCam.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-STCam.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -530,6 +546,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4CFFE862168C7D500A93B72 /* AVKit.framework in Frameworks */,
 				A46F7B0D2132D03500854DB8 /* CoreMedia.framework in Frameworks */,
 				A46F7B0B2132CF9100854DB8 /* AVFoundation.framework in Frameworks */,
 				A46F7B092132CF5400854DB8 /* AudioToolbox.framework in Frameworks */,
@@ -577,6 +594,8 @@
 		A439D832216508DE00FCE7FE /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				A4CFFE782168BB2E00A93B72 /* CoreDataManager.h */,
+				A4CFFE792168BB2E00A93B72 /* CoreDataManager.m */,
 				A439D833216508F300FCE7FE /* FFHttpTool.h */,
 				A439D834216508F300FCE7FE /* FFHttpTool.m */,
 				A4134F912165F78500831B8D /* AccountManager.h */,
@@ -980,6 +999,7 @@
 		A46F7AE32132CD5100854DB8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A4CFFE852168C7D500A93B72 /* AVKit.framework */,
 				A46F7B0C2132D03500854DB8 /* CoreMedia.framework */,
 				A46F7B0A2132CF9100854DB8 /* AVFoundation.framework */,
 				A46F7B082132CF5400854DB8 /* AudioToolbox.framework */,
@@ -1045,6 +1065,7 @@
 		A4946FF3212C5B460015990C /* STCam */ = {
 			isa = PBXGroup;
 			children = (
+				A4CFFE7B2168C7B600A93B72 /* AVCodec */,
 				A439D83621650DD700FCE7FE /* Model */,
 				A439D832216508DE00FCE7FE /* Manager */,
 				A45934DC2164A4FA0018A61B /* View */,
@@ -1060,6 +1081,7 @@
 				A4946FFF212C5B470015990C /* LaunchScreen.storyboard */,
 				A4947002212C5B470015990C /* Info.plist */,
 				A4947003212C5B470015990C /* main.m */,
+				A4CFFE752168BAB100A93B72 /* Model.xcdatamodeld */,
 			);
 			path = STCam;
 			sourceTree = "<group>";
@@ -1151,6 +1173,19 @@
 				A4AE70BC2167AEF600614024 /* DevListCell.xib */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		A4CFFE7B2168C7B600A93B72 /* AVCodec */ = {
+			isa = PBXGroup;
+			children = (
+				A4CFFE812168C7B600A93B72 /* VideoBufferParser.h */,
+				A4CFFE7D2168C7B600A93B72 /* VideoBufferParser.m */,
+				A4CFFE802168C7B600A93B72 /* AAPLEAGLLayer.h */,
+				A4CFFE7E2168C7B600A93B72 /* AAPLEAGLLayer.m */,
+				A4CFFE7F2168C7B600A93B72 /* VideoDecoder.h */,
+				A4CFFE7C2168C7B600A93B72 /* VideoDecoder.m */,
+			);
+			path = AVCodec;
 			sourceTree = "<group>";
 		};
 		A4DC4229212C5B83005663F3 /* thSDK */ = {
@@ -1375,9 +1410,13 @@
 				A442C2B0213199A100198910 /* TFun.c in Sources */,
 				A4AE326F21342EFD0036212B /* UITableView+Common.m in Sources */,
 				A442C31A213199A100198910 /* thRec.c in Sources */,
+				A4CFFE822168C7B600A93B72 /* VideoDecoder.m in Sources */,
 				A4AE32472134275C0036212B /* AlarmListViewController.m in Sources */,
 				A4AE327C21342EFD0036212B /* NSDate+convenience.m in Sources */,
 				A4134F932165F78500831B8D /* AccountManager.m in Sources */,
+				A4CFFE772168BAB100A93B72 /* Model.xcdatamodeld in Sources */,
+				A4CFFE832168C7B600A93B72 /* VideoBufferParser.m in Sources */,
+				A4CFFE842168C7B600A93B72 /* AAPLEAGLLayer.m in Sources */,
 				A439D83C2165149800FCE7FE /* STNavigationController.m in Sources */,
 				A4CFFE742168861A00A93B72 /* thRender.c in Sources */,
 				A4AE327421342EFD0036212B /* UIView+Layout.m in Sources */,
@@ -1391,6 +1430,7 @@
 				A4AE327521342EFD0036212B /* UIView+YYAdd.m in Sources */,
 				A4AE70BD2167AEF600614024 /* DevListCell.m in Sources */,
 				A470AA912163BE050068AA80 /* UIButton+Common.m in Sources */,
+				A4CFFE7A2168BB2E00A93B72 /* CoreDataManager.m in Sources */,
 				A4AE3241213426BE0036212B /* MainTabController.m in Sources */,
 				A4AE327A21342EFD0036212B /* UIImage+Common.m in Sources */,
 				A4946FF9212C5B460015990C /* SplashViewController.m in Sources */,
@@ -1707,6 +1747,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		A4CFFE752168BAB100A93B72 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				A4CFFE762168BAB100A93B72 /* Model.xcdatamodel */,
+			);
+			currentVersion = A4CFFE762168BAB100A93B72 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = A4946FE9212C5B460015990C /* Project object */;
 }

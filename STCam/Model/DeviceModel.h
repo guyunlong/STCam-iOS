@@ -43,6 +43,8 @@ typedef NS_ENUM(NSInteger, ConnType){
 @property(nonatomic,strong)  NSString* IPUID;
 @property(nonatomic,assign)  NSInteger WebPort;
 @property(nonatomic,assign)  NSInteger DataPort;
+@property(nonatomic,strong)  NSString* User;
+@property(nonatomic,strong)  NSString* Pwd;
 @property(nonatomic,assign)  BOOL IsVideo;
 @property(nonatomic,assign)  BOOL IsHistory;
 @property(nonatomic,assign)  BOOL IsPush;

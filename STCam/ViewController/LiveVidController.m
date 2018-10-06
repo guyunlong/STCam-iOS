@@ -7,9 +7,9 @@
 //
 
 #import "LiveVidController.h"
-
-@interface LiveVidController ()
-
+#import "AAPLEAGLLayer.h"
+@interface LiveVidController ()<VidViewModelDelegate>
+@property (strong, nonatomic)  AAPLEAGLLayer *glLayer;//视频播放控件
 @end
 
 @implementation LiveVidController
@@ -17,11 +17,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    _viewModel.delegate = self;
 }
 -(void)loadView{
     [super loadView];
     [self initNav];
     [self.view setBackgroundColor:[UIColor whiteColor]];
+    
+    _glLayer = [[AAPLEAGLLayer alloc] initWithFrame:self.view.bounds];
+    [_glLayer setBackgroundColor:[[UIColor blackColor] CGColor]];
+    [self.view.layer addSublayer:_glLayer];
 }
 -(void)initNav{
     [self setTitle:_viewModel.model.DevName];
@@ -45,14 +50,9 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+# pragma  delegate
+- (void)updateVidView:(CVPixelBufferRef)pixelBuffer{
+    _glLayer.pixelBuffer = pixelBuffer;
 }
-*/
 
 @end
