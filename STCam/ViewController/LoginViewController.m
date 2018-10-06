@@ -163,6 +163,7 @@
     [_visitorButton setTitle:@"action_visitor".localizedString forState:UIControlStateNormal];
     [_mainScrollView addSubview:_visitorButton];
     
+     [_visitorButton addTarget:self action:@selector(visitorModeClicked) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)addLoginBackgroundView:(CGFloat)y{
@@ -232,6 +233,10 @@
             [self showHint:@"error_login_failed".localizedString];
         }
     }];
+}
+-(void)visitorModeClicked{
+    MainTabController * mainTabController = [[MainTabController alloc] initWithVisitorMode:YES];
+    [self presentViewController:mainTabController animated:YES completion:nil];
 }
 #pragma checkbox
 - (void)didTapCheckBox:(BEMCheckBox*)checkBox{

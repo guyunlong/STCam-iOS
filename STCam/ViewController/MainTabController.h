@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface MainTabController : UITabBarController
-
+-(id)initWithVisitorMode:(BOOL)visitorMode;
+@property(nonatomic,assign)BOOL visitorMode;
 @end

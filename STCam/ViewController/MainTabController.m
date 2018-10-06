@@ -21,12 +21,27 @@
 @end
 
 @implementation MainTabController
-
+-(id)initWithVisitorMode:(BOOL)visitorMode{
+    self = [super init];
+    if (self) {
+        [self setVisitorMode:visitorMode];
+    }
+    return self;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
      [[UITabBar appearance] setTintColor:kMainColor];
+    
+}
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    if(_devListNav){
+        return;
+    }
     _devListNav= ( {
-        DevListViewController * ctl = [[DevListViewController alloc] init];
+        DevListViewModel * viewModel = [[DevListViewModel alloc] init];
+        [viewModel setVisitorMode:_visitorMode];
+        DevListViewController * ctl = [[DevListViewController alloc] initWithViewModel:viewModel];
         UIImage *image = [UIImage imageNamed:@"tab_device_nor"];
         UIImage * selectImage = [[UIImage imageNamed:@"tab_device_sel"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         ctl.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"title_main_dev_list".localizedString image:image selectedImage:selectImage];
@@ -56,7 +71,7 @@
         ctl.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"action_mine".localizedString image:image selectedImage:selectImage];
         [[STNavigationController alloc] initWithRootViewController:ctl];
     });
-     self.viewControllers = @[_devListNav,_mediaNav,_alarmListNav,_moreNav];
+    self.viewControllers = @[_devListNav,_mediaNav,_alarmListNav,_moreNav];
 }
 
 - (void)didReceiveMemoryWarning {

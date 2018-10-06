@@ -30,9 +30,6 @@
 }
 -(void)initNav{
     [self setTitle:_viewModel.model.DevName];
-    
-   
-    
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     backButton.frame = CGRectMake(0, 0, 28, 28);
     [backButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];

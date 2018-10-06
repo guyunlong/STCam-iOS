@@ -14,21 +14,32 @@
 #import "MASConstraint.h"
 #import "LiveVidController.h"
 @interface DevListViewController ()<UITableViewDataSource, UITableViewDelegate>
-@property(nonatomic,strong)DevListViewModel * viewModel;
+
 @property(nonatomic,strong)UITableView * mTableView;
 @end
 
 @implementation DevListViewController
+-(id)initWithViewModel:(DevListViewModel*)viewModel{
+    self = [super init];
+    if (self) {
+        _viewModel = viewModel;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view setBackgroundColor:[UIColor whiteColor]];
     [self setTitle:@"title_main_dev_list".localizedString];
     [self initNav];
+   
+    
+    
+    
+}
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
     [self initViewModel];
-    
-    
-    
 }
 -(void)initNav{
     UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -87,14 +98,28 @@
 }
 
 -(void)initViewModel{
-    _viewModel = [[DevListViewModel alloc] init];
-    @weakify(self)
-    [[_viewModel racGetDeviceList] subscribeNext:^(id x) {
-        @strongify(self)
-        if ([x integerValue] == 1) {
-            [self.mTableView reloadData];
-        }
-    }];
+   @weakify(self)
+    if (_viewModel.visitorMode) {
+        [[[_viewModel racSearchDevice]
+         deliverOn:[RACScheduler mainThreadScheduler]]
+         subscribeNext:^(id x) {
+            @strongify(self)
+            if ([x integerValue] == 1) {
+                [self.mTableView reloadData];
+            }
+        }];
+    }
+    else{
+        
+        [[_viewModel racGetDeviceList] subscribeNext:^(id x) {
+            @strongify(self)
+            if ([x integerValue] == 1) {
+                [self.mTableView reloadData];
+            }
+        }];
+    }
+    
+   
 }
 
 - (void)didReceiveMemoryWarning {

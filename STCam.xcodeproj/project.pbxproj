@@ -546,6 +546,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A46F7AF92132CD8C00854DB8 /* libiconv.tbd in Frameworks */,
 				A4CFFE862168C7D500A93B72 /* AVKit.framework in Frameworks */,
 				A46F7B0D2132D03500854DB8 /* CoreMedia.framework in Frameworks */,
 				A46F7B0B2132CF9100854DB8 /* AVFoundation.framework in Frameworks */,
@@ -557,7 +558,6 @@
 				A46F7B052132CEDC00854DB8 /* libIOTCAPIs_ALLT.a in Frameworks */,
 				A46F7AFD2132CE6100854DB8 /* VideoToolbox.framework in Frameworks */,
 				A46F7AFB2132CE1E00854DB8 /* libx264.a in Frameworks */,
-				A46F7AF92132CD8C00854DB8 /* libiconv.tbd in Frameworks */,
 				A46F7AF72132CD8500854DB8 /* libbz2.tbd in Frameworks */,
 				A46F7AF52132CD7B00854DB8 /* libz.tbd in Frameworks */,
 				A46F7AEC2132CD5100854DB8 /* libavformat.a in Frameworks */,

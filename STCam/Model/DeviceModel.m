@@ -35,7 +35,7 @@
 
  */
 -(ConnType)getConnectType{
-    if ([self.ConnType isEqualToString:@"IS_CONN_LAN"]){
+    if ([self.ConnType isEqualToString:@"ConnType_NODEV"]){
         return ConnType_NODEV;
     }
     else if([self.ConnType isEqualToString:@"IS_CONN_OFFLINE"]){
