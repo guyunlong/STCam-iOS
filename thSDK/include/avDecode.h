@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Author      : Öìºì²¨
+// Author      : æœ±çº¢æ³¢
 // Date        : 2017.09.14
 // Version     : V 2.00
 // Description : www.southipcam.com
@@ -53,255 +53,258 @@
 extern "C"
 {
 #endif
-//-----------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------
 #define FMT_YUV420P       0
 #define FMT_BGR24         3
 #define FMT_BGR32        30
-
-typedef enum TMediaType
-{
-  CODEC_NONE = 0,//AV_CODEC_ID_NONE
-  CODEC_MJPEG = 8,//AV_CODEC_ID_MJPEG
-  CODEC_MPEG4 = 13,//AV_CODEC_ID_MPEG4
-  CODEC_H264 = 28,//AV_CODEC_ID_H264
-  CODEC_H265 = 174,//AV_CODEC_ID_H265 AV_CODEC_ID_HEVC
-  CODEC_PCM = 0x10000,//AV_CODEC_ID_PCM_S16LE
-  CODEC_G711 = 0x10007,//AV_CODEC_ID_PCM_ALAW
-  CODEC_AAC = 0x15002,//AV_CODEC_ID_AAC
-} TMediaType;
-
-//#define AV_PIX_FMT_RGB565   44
-//#define AV_PIX_FMT_YUV420P   0
-
-typedef struct TencParam
-{
-  int VideoType;                   //MJPEG=8, MPEG4=13  H264=28 H265=174 AAC=0x15002=86018
-  int FrameRate;                   //Ö¡ÂÊ 1-30 MAX:PAL 25 NTSC 30
-  int IPInterval;                  //IPÖ¡¼ä¸ô 1-120 default 30
-  int BitRate;                     //ÂëÁ÷ 64K 128K 256K 512K 1024K 1536K 2048K 2560K 3072K
-
-  char *yuvbuf;                    //±ØĞëÏÈÉêÇë
-
-  int encWidth;                    //¿í 720 360 180 704 352 176 640 320 160
-  int encHeight;                   //¸ß 480 240 120 576 288 144 
-  char *encBuf;                    //±ØĞëÏÈÉêÇë
-  int encBufSize;                  //Ö¸¶¨encBuf ´óĞ¡
-  int encLen;                      //½âÂëºóÊı¾İ´óĞ¡
-  int IsKeyFrame;                  //ÊÇ·ñIÖ¡
-  int ForceKeyFrame;               //Îª1Ê±£¬Ç¿ÖÆ±àÂë³ÉIÖ¡
-
-} TencParam;
-
-typedef struct TavPicture
-{
-  unsigned char *data[8];
-  int linesize[8];
-} TavPicture;
-
-
-typedef struct TdecInfoPkt
-{
-  //H_THREADLOCK Lock;
-  //video
-  TMediaType VideoType;
-  AVCodecContext *pCodecCtxV;
-  AVFrame *FrameV;
-  //audio
-
-} TdecInfoPkt;
-
-typedef struct TPlayParam
-{
-  u32 SN;
-  //ÄÚ²¿
-  bool IsExit;
-  bool IsAutoReConn;
-  H_THREADLOCK Lock;
-  pthread_cond_t SyncCond;
-
-  char20 LocalIP;
-
-  H_THREAD thRecv;//ÊÕÈ¡Ïß³Ì¾ä±ú
-
-  HANDLE RecHandle;//Â¼Ïñ¾ä±ú
-
-  char1024 RecPath;//Â¼ÏñÂ·¾¶
-  char1024 JpgPath;//ÅÄÕÕÂ·¾¶
-  bool IsSnapShot;
-  char1024 FileName_Jpg;
-
-  bool IsTaskRec;//Òò»¹Ã»ÓĞIFrame£¬Ã»ÓĞÃ»ÓĞĞ´Í·£¬ÈÎÎñ
-
-  HANDLE decHandle;//½âÂë¾ä±ú
-  HANDLE RenderHandle;//ÏÔÊ¾¾ä±ú
-  HANDLE audioHandle;//ÒôÆµ²¥·Å¾ä±ú
-
+    
+    typedef enum TMediaType
+    {
+        CODEC_NONE = 0,//AV_CODEC_ID_NONE
+        CODEC_MJPEG = 8,//AV_CODEC_ID_MJPEG
+        CODEC_MPEG4 = 13,//AV_CODEC_ID_MPEG4
+        CODEC_H264 = 28,//AV_CODEC_ID_H264
+        CODEC_H265 = 174,//AV_CODEC_ID_H265 AV_CODEC_ID_HEVC
+        CODEC_PCM = 0x10000,//AV_CODEC_ID_PCM_S16LE
+        CODEC_G711 = 0x10007,//AV_CODEC_ID_PCM_ALAW
+        CODEC_AAC = 0x15002,//AV_CODEC_ID_AAC
+    } TMediaType;
+    
+    //#define AV_PIX_FMT_RGB565   44
+    //#define AV_PIX_FMT_YUV420P   0
+    
+    typedef struct TencParam
+    {
+        int VideoType;                   //MJPEG=8, MPEG4=13  H264=28 H265=174 AAC=0x15002=86018
+        int FrameRate;                   //å¸§ç‡ 1-30 MAX:PAL 25 NTSC 30
+        int IPInterval;                  //IPå¸§é—´éš” 1-120 default 30
+        int BitRate;                     //ç æµ 64K 128K 256K 512K 1024K 1536K 2048K 2560K 3072K
+        
+        char *yuvbuf;                    //å¿…é¡»å…ˆç”³è¯·
+        
+        int encWidth;                    //å®½ 720 360 180 704 352 176 640 320 160
+        int encHeight;                   //é«˜ 480 240 120 576 288 144
+        char *encBuf;                    //å¿…é¡»å…ˆç”³è¯·
+        int encBufSize;                  //æŒ‡å®šencBuf å¤§å°
+        int encLen;                      //è§£ç åæ•°æ®å¤§å°
+        int IsKeyFrame;                  //æ˜¯å¦Iå¸§
+        int ForceKeyFrame;               //ä¸º1æ—¶ï¼Œå¼ºåˆ¶ç¼–ç æˆIå¸§
+        
+    } TencParam;
+    
+    typedef struct TavPicture
+    {
+        unsigned char *data[8];
+        int linesize[8];
+    } TavPicture;
+    
+    
+    typedef struct TdecInfoPkt
+    {
+        //H_THREADLOCK Lock;
+        //video
+        TMediaType VideoType;
+        AVCodecContext *pCodecCtxV;
+        AVFrame *FrameV;
+        //audio
+        
+    } TdecInfoPkt;
+    
+    typedef struct TPlayParam
+    {
+        u64 SN;
+        //å†…éƒ¨
+        bool IsExit;
+        bool IsAutoReConn;
+        H_THREADLOCK Lock;
+        //pthread_cond_t SyncCond;
+        
+        char20 LocalIP;
+        
+        H_THREAD thRecv;//æ”¶å–çº¿ç¨‹å¥æŸ„
+        
+        HANDLE RecHandle;//å½•åƒå¥æŸ„
+        
+        char1024 RecPath;//å½•åƒè·¯å¾„
+        char1024 JpgPath;//æ‹ç…§è·¯å¾„
+        bool IsSnapShot;
+        char1024 FileName_Jpg;
+        
+        bool IsTaskRec;//å› è¿˜æ²¡æœ‰IFrameï¼Œæ²¡æœ‰æ²¡æœ‰å†™å¤´ï¼Œä»»åŠ¡
+        
+        HANDLE decHandle;//è§£ç å¥æŸ„
+        HANDLE RenderHandle;//æ˜¾ç¤ºå¥æŸ„
+        HANDLE audioHandle;//éŸ³é¢‘æ’­æ”¾å¥æŸ„
+        
 #define AUDIO_COLLECT_SIZE      2048
-  HANDLE talkHandle;//ÒôÆµ¶Ô½²¾ä±ú
-
-  TMediaType VideoMediaType;//ÊÓÆµÀàĞÍ
-
+        HANDLE talkHandle;//éŸ³é¢‘å¯¹è®²å¥æŸ„
+        
+        TMediaType VideoMediaType;//è§†é¢‘ç±»å‹
+        
 #define MAX_DSPINFO_COUNT  10
-  TDspInfo DspInfoLst[MAX_DSPINFO_COUNT];//ÏÔÊ¾ÇøÓò
-
-  bool IsQueue;//ÊÇ·ñ¶ÓÁĞ½âÂëÏÔÊ¾
-  bool IsAdjustTime;//ÊÇ·ñĞ£×¼Éè±¸Ê±¼ä
-
+        TDspInfo DspInfoLst[MAX_DSPINFO_COUNT];//æ˜¾ç¤ºåŒºåŸŸ
+        
+        bool IsAdjustTime;//æ˜¯å¦æ ¡å‡†è®¾å¤‡æ—¶é—´
+        
 #define MAX_QUEUE_COUNT    120
-  HANDLE hQueueDraw;//ÉÏÆÁ¶ÓÁĞ¾ä±ú
+        HANDLE hQueueDraw;//ä¸Šå±é˜Ÿåˆ—å¥æŸ„
 #ifdef WIN32
-  HANDLE hTimerIDQueueDraw;//ÉÏÆÁÊÂ¼ş¾ä±ú
+        HANDLE hTimerIDQueueDraw;//ä¸Šå±äº‹ä»¶å¥æŸ„
 #endif
-  u32 iSleepTime;//
-  int iFrameTime;//
-
-  HANDLE hQueueVideo;//ÊÓÆµ½âÂë¶ÓÁĞ¾ä±ú
-  H_THREAD thQueueVideo;//ÊÓÆµ½âÂëÏß³Ì¾ä±ú
-  HANDLE hQueueAudio;//ÒôÆµ½âÂë¶ÓÁĞ¾ä±ú
-  H_THREAD thQueueAudio;//ÒôÆµ½âÂëÏß³Ì¾ä±ú
-  HANDLE hQueueRec;//Â¼Ïñ¶ÓÁĞ¾ä±ú
-  H_THREAD thQueueRec;//Â¼ÏñÏß³Ì¾ä±ú
-
-  //Íâ²¿´«Èë²ÎÊı
-  TDevCfg DevCfg;
+        u32 iSleepTime;//
+        int iFrameTime;//
+        
+        HANDLE hQueueVideo;//è§†é¢‘è§£ç é˜Ÿåˆ—å¥æŸ„
+        H_THREAD thQueueVideo;//è§†é¢‘è§£ç çº¿ç¨‹å¥æŸ„
+        HANDLE hQueueAudio;//éŸ³é¢‘è§£ç é˜Ÿåˆ—å¥æŸ„
+        H_THREAD thQueueAudio;//éŸ³é¢‘è§£ç çº¿ç¨‹å¥æŸ„
+        HANDLE hQueueRec;//å½•åƒé˜Ÿåˆ—å¥æŸ„
+        H_THREAD thQueueRec;//å½•åƒçº¿ç¨‹å¥æŸ„
+        
+        //å¤–éƒ¨ä¼ å…¥å‚æ•°
+        TDevCfg DevCfg;
 #define MAX_BUF_SIZE 1024*1024
-  char RecvBuffer[MAX_BUF_SIZE];//ÊÕÈ¡»º´æ
-  i32 RecvLen;//ÊÕÈ¡»º´æ³¤¶È
-  char RecvDownloadBuf[MAX_BUF_SIZE];//http p2pnew
-  i32 RecvDownloadLen;//http p2pnew
-
-  TRecFileHead HistoryHead;
-  i64 HistoryTimestampPosition;//»Ø·ÅposÊ±¼ä´Á
-  i64 HistoryTimestampDuration;//»Ø·ÅÎÄ¼şÊ±³¤
-  i32 HistoryIndexType;
-  i32 HistoryIsClose;
-
-  TavPicture FrameV420;
-
-  TvideoCallBack *videoEvent;
-  TaudioCallBack *audioEvent;
-  TalarmCallBack *AlmEvent;
-  void *UserCustom;
-
-  int DecodeStyle;
-  int DisplayStreamTypeOld, DisplayStreamType;
-
-  u32 VideoChlMask;
-  u32 AudioChlMask;
-  u32 SubVideoChlMask;
-  TGroupType GroupType;
-
-  bool IsAudioMute;//ÊÇ·ñ¾²Òô
-  //ÄÚ²¿±êÖ¾
-  bool IsIFrameFlag;//ÊÓÆµÁ÷ÊÇ·ñ³öÏÖÁËIÖ¡±êÖ¾£¬³õÊ¼=false, Óöµ½IÖ¡ = true
-  bool IsVideoDecodeSuccessFlag;//ÊÇ·ñÕıÈ·µØ½âÂëÁËÊÓÆµ
-
-  bool IsStopHttpGet;
-  //sem_t semHttpDownload;
-
-  i32 LastSenseTime;//¶ÏÏßÖØÁ¬ÓÃ
-
-  bool IsConnect;
-  i32 iConnectStatus;
-  i32 StreamType;//0Ö÷ÂëÁ÷ 1´ÎÂëÁ÷
-  i32 ImgWidth;
-  i32 ImgHeight;
-  i32 FrameRate;
-
-  //IP
-  char40 UserName;
-  char40 Password;
-  char256 IPUID;
-  i32 DataPort;
-  u32 TimeOut;
-
-  u32 Session;
-  SOCKET hSocket;
-
-  //P2P
-  i32 p2pSoftVersion;//0=old 1=qiu/new 2=now...
-  i32 Isp2pConn;
-
-  i32 p2p_SessionID;
-  i32 p2p_avIndex;
-  i32 p2p_talkIndex;
-
+        char RecvBuffer[MAX_BUF_SIZE];//æ”¶å–ç¼“å­˜
+        i32 RecvLen;//æ”¶å–ç¼“å­˜é•¿åº¦
+        char RecvDownloadBuf[MAX_BUF_SIZE];//http p2pnew
+        i32 RecvDownloadLen;//http p2pnew
+        
+        TRecFileHead HistoryHead;
+        i64 HistoryTimestampPosition;//å›æ”¾posæ—¶é—´æˆ³
+        i64 HistoryTimestampDuration;//å›æ”¾æ–‡ä»¶æ—¶é•¿
+        i32 HistoryIndexType;
+        i32 HistoryIsClose;
+        
+        TavPicture FrameV420;
+        
+        TvideoCallBack *videoEvent;
+        TaudioCallBack *audioEvent;
+        TalarmCallBack *AlmEvent;
+        void *UserCustom;
+        
+        int DisplayStreamTypeOld, DisplayStreamType;
+        
+        u32 VideoChlMask;
+        u32 AudioChlMask;
+        u32 SubVideoChlMask;
+        u32 ExtraChl;
+        TGroupType GroupType;
+        
+        bool IsAudioMute;//æ˜¯å¦é™éŸ³
+        //å†…éƒ¨æ ‡å¿—
+        bool IsIFrameFlag;//è§†é¢‘æµæ˜¯å¦å‡ºç°äº†Iå¸§æ ‡å¿—ï¼Œåˆå§‹=false, é‡åˆ°Iå¸§ = true
+        bool IsVideoDecodeSuccessFlag;//æ˜¯å¦æ­£ç¡®åœ°è§£ç äº†è§†é¢‘
+        
+        bool IsStopHttpGet;
+        //sem_t semHttpDownload;
+        
+        i32 LastSenseTime;//æ–­çº¿é‡è¿ç”¨
+        i32 iSmartFrameIndex;
+        
+        bool IsConnect;
+        i32 iConnectStatus;
+        i32 StreamType;//0ä¸»ç æµ 1æ¬¡ç æµ
+        i32 ImgWidth;
+        i32 ImgHeight;
+        i32 FrameRate;
+        
+        //IP
+        char40 UserName;
+        char40 Password;
+        char256 IPUID;
+        i32 DataPort;
+        u32 TimeOut;
+        
+        u32 Session;
+        SOCKET hSocket;
+        
+        bool IsRecvDevCfg;
+        //P2P
+        i32 p2pSoftVersion;//0=old 1=qiu/new 2=now...
+        i32 Isp2pConn;
+        
+        i32 p2p_SessionID;
+        i32 p2p_avIndex;
+        i32 p2p_talkIndex;
+        
 #ifdef ANDROID
-  bool IsExitRender;
-  bool IsRenderSuccess;
-  H_THREAD thRenderEGL;//ÊÓÆµ½âÂëÏß³Ì¾ä±ú
-  ANativeWindow *Window;
+        bool IsExitRender;
+        bool IsRenderSuccess;
+        H_THREAD thRenderEGL;//è§†é¢‘è§£ç çº¿ç¨‹å¥æŸ„
+        ANativeWindow *Window;
 #endif
-} TPlayParam;
-
-
-
-//-----------------------------------------------------------------------------
-EXPORT int g711_decode(char *dstBuf, const unsigned char *srcBuf, int srcBufLen);
-
-EXPORT int g711_encode(unsigned char *dstBuf, const char *srcBuf, int srcBufLen);
-
-EXPORT int pcm_DB(unsigned char *buf, int size);
-//-----------------------------------------------------------------------------
-EXPORT int thImgConvertFill(TavPicture *pFrame, char *Buf, int fmt, int Width, int Height);
-
-EXPORT bool thImgConvertScale(char *d, int dfmt, int dw, int dh, char *s, int sfmt, int sw, int sh, int IsFlip);
-
-EXPORT bool thImgConvertScale1(TavPicture *dst, int dfmt, int dw, int dh, TavPicture *src, int sfmt, int sw, int sh, int IsFlip);
-
-EXPORT bool thImgConvertScale2(char *d, int dfmt, int dw, int dh, TavPicture *src, int sfmt, int sw, int sh, int IsFlip);
-//-----------------------------------------------------------------------------
-EXPORT HANDLE thDecodeVideoInit(int VideoType);
-
-EXPORT bool thDecodeVideoFrame(HANDLE decHandle, char *encBuf, int encLen, int *decWidth, int *decHeight, TavPicture *avPicture);
-
-EXPORT bool thDecodeVideoSaveToJpg(HANDLE decHandle, char *FileName_Jpg);
-
-EXPORT bool thDecodeVideoFree(HANDLE decHandle);
-//-----------------------------------------------------------------------------
-EXPORT HANDLE thEncodeVideoInit(TencParam *Param);
-
-EXPORT bool thEncodeVideoFrame(HANDLE encHandle, TencParam *Param);
-
-EXPORT bool thEncodeVideoFree(HANDLE encHandle);
-//-----------------------------------------------------------------------------
-EXPORT HANDLE thRecordStart(char *FileName, TMediaType VideoType, int Width, int Height, int FrameRate, TMediaType AudioType, int nChannels,
-                            int nSamplesPerSec, int wBitsPerSample);
-
-EXPORT bool thRecordWriteVideo(HANDLE RecHandle, char *Buf, int Len, i64 pts);//pts = -1 Îª×Ô¶¯¼ÆËã
-EXPORT bool thRecordWriteAudio(HANDLE RecHandle, char *Buf, int Len, i64 pts);//pts = -1 Îª×Ô¶¯¼ÆËã LenÖ»ÄÜÎª2048£¬²»È»»á¶ª°ü
-EXPORT bool thRecordIsRec(HANDLE RecHandle);
-
-EXPORT bool thRecordStop(HANDLE RecHandle);
-//-----------------------------------------------------------------------------
-EXPORT HANDLE thRender_Init(int iDDrawMode/*0=VIDEOMEMORY 1=SYSTEMMEMORY*/);
-
-EXPORT bool thRender_Free(HANDLE videoHandle);
-
-EXPORT bool thRender_FillMem(HANDLE videoHandle, TavPicture v, i32 ImgWidth, i32 ImgHeight);
-
-EXPORT bool thRender_Display(HANDLE videoHandle, HWND DspHandle, TRect DspRect);
-
-EXPORT HANDLE thAudioPlay_Init();
-
-EXPORT bool thAudioPlay_SetFormat(HANDLE audioHandle, i32 nChannels, i32 wBitsPerSample, i32 nSamplesPerSec, i32 AudioPacketSize);
-
-EXPORT bool thAudioPlay_PlayFrame(HANDLE audioHandle, char *Buf, i32 BufLen);
-
-EXPORT bool thAudioPlay_Free(HANDLE audioHandle);
-
-typedef void(TAudioTalkCallBack)(void *UserCustom, char *Buf, i32 Len);
-
-EXPORT HANDLE thAudioTalk_Init();
-
-EXPORT bool thAudioTalk_SetFormat(HANDLE talkHandle, i32 nChannels, i32 wBitsPerSample, i32 nSamplesPerSec, i32 AudioPacketSize,
-                                  TAudioTalkCallBack callback, void *UserCustom);
-
-EXPORT bool thAudioTalk_Free(HANDLE talkHandle);
-
+    } TPlayParam;
+    
+    
+    
+    //-----------------------------------------------------------------------------
+    EXPORT int g711_decode(char *dstBuf, const unsigned char *srcBuf, int srcBufLen);
+    
+    EXPORT int g711_encode(unsigned char *dstBuf, const char *srcBuf, int srcBufLen);
+    
+    EXPORT int pcm_DB(unsigned char *buf, int size);
+    //-----------------------------------------------------------------------------
+    EXPORT int thImgConvertFill(TavPicture *pFrame, char *Buf, int fmt, int Width, int Height);
+    
+    EXPORT bool thImgConvertScale(char *d, int dfmt, int dw, int dh, char *s, int sfmt, int sw, int sh, int IsFlip);
+    
+    EXPORT bool thImgConvertScale1(TavPicture *dst, int dfmt, int dw, int dh, TavPicture *src, int sfmt, int sw, int sh, int IsFlip);
+    
+    EXPORT bool thImgConvertScale2(char *d, int dfmt, int dw, int dh, TavPicture *src, int sfmt, int sw, int sh, int IsFlip);
+    //-----------------------------------------------------------------------------
+    EXPORT HANDLE thDecodeVideoInit(int VideoType);
+    
+    EXPORT bool thDecodeVideoFrame(HANDLE decHandle, char *encBuf, int encLen, int *decWidth, int *decHeight, TavPicture *avPicture);
+    
+    EXPORT bool thDecodeVideoSaveToJpg(HANDLE decHandle, char *FileName_Jpg);
+    
+    EXPORT bool thDecodeVideoFree(HANDLE decHandle);
+    //-----------------------------------------------------------------------------
+    EXPORT HANDLE thEncodeVideoInit(TencParam *Param);
+    
+    EXPORT bool thEncodeVideoFrame(HANDLE encHandle, TencParam *Param);
+    
+    EXPORT bool thEncodeVideoFree(HANDLE encHandle);
+    //-----------------------------------------------------------------------------
+    EXPORT HANDLE thRecordStart(char *FileName, TMediaType VideoType, int Width, int Height, int FrameRate, TMediaType AudioType, int nChannels,
+                                int nSamplesPerSec, int wBitsPerSample);
+    
+    EXPORT bool thRecordWriteVideo(HANDLE RecHandle, char *Buf, int Len, i64 pts);//pts = -1 ä¸ºè‡ªåŠ¨è®¡ç®—
+    EXPORT bool thRecordWriteAudio(HANDLE RecHandle, char *Buf, int Len, i64 pts);//pts = -1 ä¸ºè‡ªåŠ¨è®¡ç®— Lenåªèƒ½ä¸º2048ï¼Œä¸ç„¶ä¼šä¸¢åŒ…
+    EXPORT bool thRecordIsRec(HANDLE RecHandle);
+    
+    EXPORT bool thRecordStop(HANDLE RecHandle);
+    //-----------------------------------------------------------------------------
+    EXPORT HANDLE thRender_Init(int iDDrawMode/*0=VIDEOMEMORY 1=SYSTEMMEMORY*/);
+    
+    EXPORT bool thRender_Free(HANDLE videoHandle);
+    
+    EXPORT bool thRender_FillMem(HANDLE videoHandle, TavPicture v, i32 ImgWidth, i32 ImgHeight);
+    
+    EXPORT bool thRender_Display(HANDLE videoHandle, HWND DspHandle, TRect DspRect);
+    
+    EXPORT HANDLE thAudioPlay_Init();
+    
+    EXPORT bool thAudioPlay_SetFormat(HANDLE audioHandle, i32 nChannels, i32 wBitsPerSample, i32 nSamplesPerSec, i32 AudioPacketSize);
+    
+    EXPORT bool thAudioPlay_PlayFrame(HANDLE audioHandle, char *Buf, i32 BufLen);
+    
+    EXPORT bool thAudioPlay_Free(HANDLE audioHandle);
+    
+    typedef void(TAudioTalkCallBack)(void *UserCustom, char *Buf, i32 Len);
+    
+    EXPORT HANDLE thAudioTalk_Init();
+    
+    EXPORT bool thAudioTalk_SetFormat(HANDLE talkHandle, i32 nChannels, i32 wBitsPerSample, i32 nSamplesPerSec, i32 AudioPacketSize,
+                                      TAudioTalkCallBack callback, void *UserCustom);
+    
+    EXPORT bool thAudioTalk_Free(HANDLE talkHandle);
+    
 #ifdef __cplusplus
 }
 #endif
 
 #endif
+
+
 

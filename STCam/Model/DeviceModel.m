@@ -8,9 +8,21 @@
 
 #import "DeviceModel.h"
 #import "UIColor+expanded.h"
+#import "PrefixHeader.h"
+@interface DeviceModel(){
+    dispatch_queue_t serialQueue;
+}
+@property(assign)BOOL IsConnecting;
+@end
 @implementation DeviceModel
 
-
+-(id)init{
+    self = [super init];
+    if (self) {
+        serialQueue = dispatch_queue_create("com.sentry.mlock.get", DISPATCH_QUEUE_SERIAL);
+    }
+    return self;
+}
 /**
  public final static int IS_CONN_NODEV = 0;
  public final static int IS_CONN_OFFLINE = 1;
@@ -71,5 +83,116 @@
 }
 -(void)setValue:(id)value forUndefinedKey:(NSString *)key{
     NSLog(@"%s---%@",__func__,key);
+}
+
+/**************设备连接**************/
+-(BOOL)IsConnect{
+    BOOL ret = NO;
+    if (_NetHandle == 0)
+    {
+        return ret;
+    }
+    ret = thNet_IsConnect(_NetHandle);
+    //TFun.printf(SN + "(" + IPUID + ") thNetIsConnect:" + ret);
+    return ret;
+}
+-(BOOL)Connect;
+{
+    BOOL ret;
+    if ([self.IPUID length] == 0)
+    {
+        return NO;
+    }
+    
+    if (_IsConnecting)
+    {
+        return NO;
+    }
+    
+    
+    _IsConnecting = YES;
+    //thNet_Connect(HANDLE NetHandle, u64 SN, char* UserName, char* Password, char* IPUID, i32 DataPort, u32 TimeOut)
+    ret = thNet_Connect(self.NetHandle,
+                           [_SN integerValue],
+                           [@"admin" UTF8String],
+                           [@"admin" UTF8String],
+                           [self.IPUID UTF8String],
+                           self.DataPort,
+                           10 * 1000);
+    
+    _IsConnecting = false;
+    return ret;
+}
+
+-(void)threadConnect
+{
+    @weakify(self)
+    dispatch_async(serialQueue, ^{
+        @strongify(self);
+        if (self.NetHandle == 0) {
+            self.NetHandle = thNet_Init(true, false);
+        }
+        if (![self IsConnect]) {
+            [self Connect];
+        }
+        if ([self IsConnect]) {
+            
+        }
+    });
+    
+//    new Thread()
+//    {
+//        @Override
+//        public void run()
+//        {
+//            try
+//            {
+//                if (tmpNode.NetHandle == 0)
+//                {
+//                    tmpNode.NetHandle = lib.thNetInit(
+//                                                      true,
+//                                                      false
+//                                                      );
+//                }
+//
+//                if (!tmpNode.IsConnect())
+//                {
+//                    tmpNode.Connect();
+//                }
+//
+//                if (tmpNode.IsConnect())
+//                {
+//                    if (ipc != null)
+//                    {
+//                        ipc.sendMessage(Message.obtain(ipc, TMsg.Msg_NetConnSucceed, tmpNode.Index, 0, tmpNode));
+//                    }
+//                    String tmpStr = tmpNode.GetAllCfg();
+//                    JSONObject json = new JSONObject(tmpStr);
+//                    tmpNode.DevCfg = json;
+//                    tmpNode.ExistSD = json.getJSONObject("DevInfo").getInt("ExistSD");
+//                    tmpNode.DevType = json.getJSONObject("DevInfo").getInt("DevType");
+//                    tmpNode.Brightness = json.getJSONObject("Video").getInt("Brightness");
+//                    tmpNode.Contrast = json.getJSONObject("Video").getInt("Contrast");
+//                    tmpNode.Sharpness = json.getJSONObject("Video").getInt("Sharpness");
+//                    //tmpNode.UID = json.getJSONObject("P2P").getString("P2P_UID");
+//                    tmpNode.DevName = json.getJSONObject("DevInfo").getString("DevName");
+//                    tmpNode.SoftVersion = json.getJSONObject("DevInfo").getString("SoftVersion");
+//                    //Log.e("java", "SoftVersion is :" + tmpNode.SoftVersion + ",uid is " + tmpNode.UID);
+//                }
+//                else
+//                {
+//                    if (ipc != null)
+//                    {
+//                        ipc.sendMessage(Message.obtain(ipc, TMsg.Msg_NetConnFail, tmpNode.Index, 0, tmpNode));
+//                    }
+//                    return;
+//                }
+//            }
+//            catch (Exception e)
+//            {
+//                return;
+//            }
+//        }
+//    }.start();
 }
 @end

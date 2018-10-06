@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Author      : ÷Ï∫Ï≤®
+// Author      : ÔøΩÔøΩÏ≤®
 // Date        : 2017.09.14
 // Version     : V 2.00
 // Description : www.southipcam.com
@@ -8,6 +8,7 @@
 #define thPlayaxdll_H
 
 #include "../include/th_protocol.h"
+#include "../include/TFun.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -30,33 +31,49 @@ extern "C" {
     struct Twifi_sta_item Lst[MAX_WIFICFG_LST_COUNT];
   }TwifiCfgLst;
   //-----------------------------------------------------------------------------
+  typedef struct TSnapShotCfg {//sizeof 4
+    u8 SnapShotOrRec;//ÊãçÁÖßÊàñÂΩïÂÉè
+    u8 Action;//0=ÂçïÊãç 1=Â§öÊãç
+    u8 TotalTime;//ÊãçÁÖßÊÄªÊó∂Èó¥3ÂàÜÈíü„ÄÅ5ÂàÜÈíü„ÄÅ6ÂàÜÈíü„ÄÅ8ÂàÜÈíü„ÄÅ10ÂàÜÈíü 5Êå°
+    u8 IntervalTime;//ÊãçÁÖßÈó¥ÈöîÊó∂Èó¥
+    //u8 Reserved;
+  }TSnapShotCfg;
+
   typedef struct TDevCfg {//sizeof x1 5216
-    struct TNetCfgPkt NetCfgPkt;                            //…Ë±∏Õ¯¬Á≈‰÷√∞¸sizeof 372
-    struct TWiFiCfgPkt WiFiCfgPkt;                          //Œﬁœﬂ≈‰÷√∞¸ sizeof 200
-    struct TDevInfoPkt DevInfoPkt;                          //…Ë±∏–≈œ¢∞¸sizeof 180
+    struct TNetCfgPkt NetCfgPkt;                            //ËÆæÂ§áÁΩëÁªúÈÖçÁΩÆÂåÖsizeof 372
+    struct TWiFiCfgPkt WiFiCfgPkt;                          //Êó†Á∫øÈÖçÁΩÆÂåÖ sizeof 200
+    struct TDevInfoPkt DevInfoPkt;                          //ËÆæÂ§á‰ø°ÊÅØÂåÖsizeof 180
     struct TUserCfgPkt UserCfgPkt;                          //sizeof 1048
-    struct TAlmCfgPkt AlmCfgPkt;                            //æØ±®≈‰÷√∞¸sizeof 52//
-    char Reserved[1024];
-    struct TVideoCfgPkt VideoCfgPkt;                        // ”∆µ…Ë÷√∞¸ sizeof 148
-    struct TAudioCfgPkt AudioCfgPkt;                        //“Ù∆µ…Ë÷√∞¸ sizeof 48
-    struct TMDCfgPkt MDCfgPkt;                              //“∆∂Ø’Ï≤‚∞¸ sizeof 96
-    struct THideAreaCfgPkt HideAreaCfgPkt;                  //“˛≤ÿ¬º”∞«¯”Ú∞¸ sizeof 72
+    struct TAlmCfgPkt AlmCfgPkt;                            //Ë≠¶Êä•ÈÖçÁΩÆÂåÖsizeof 52//
+    struct TLightCfgPkt LightCfgPkt;                        //ÁÅØÂÖâÊéßÂà∂ÂåÖ
+    char Reserved0[1024-36];
+    struct TVideoCfgPkt VideoCfgPkt;                        //ËßÜÈ¢ëËÆæÁΩÆÂåÖ sizeof 148
+    struct TAudioCfgPkt AudioCfgPkt;                        //Èü≥È¢ëËÆæÁΩÆÂåÖ sizeof 48
+    struct TMDCfgPkt MDCfgPkt;                              //ÁßªÂä®‰æ¶ÊµãÂåÖ sizeof 96
+    struct THideAreaCfgPkt HideAreaCfgPkt;                  //ÈöêËóèÂΩïÂΩ±Âå∫ÂüüÂåÖ sizeof 72
     struct TDiskCfgPkt DiskCfgPkt;                          //888 -> 60
+#ifdef WIFI_SAVE_SSID_LIST
     struct TwifiCfgLst wifiCfgLst;                          //804  add at 20140927
-    char Reserved1[24];
-    struct TRecCfgPkt RecCfgPkt;                            //¬º”∞≈‰÷√∞¸ sizeof 260
+#else
+    char Reserved4[804];
+#endif
+    struct TPushCfgPkt PushCfgPkt;
+    char Reserved1[20];
+    struct TRecCfgPkt RecCfgPkt;                            //ÂΩïÂΩ±ÈÖçÁΩÆÂåÖ sizeof 260
     struct TFTPCfgPkt FTPCfgPkt;                            //sizeof 232
     struct Tp2pCfgPkt p2pCfgPkt;                            //sizeof 88
     struct TSMTPCfgPkt SMTPCfgPkt;                          //sizeof 500
-    i32 Flag;
-    i32 Flag1;
+    u8 PanSpeed;                                          //‰∫ëÂè∞ËΩ¨ÈÄü
+    u8 Reserved2[3];
+    //int Flag;
+    struct TSnapShotCfg SnapShotCfg;
   }TDevCfg;
 
 #define dm_GetDiskSpaceInfo(S) (true)
 
 char* cgi_Get_VideoType(int Value);
 char* cgi_Get_Standard(int Value);
-bool GetWidthHeightFromStandard(i32 Value, i32* w, i32* h);//”…TStandard»°µ√≥§°¢øÌ
+bool GetWidthHeightFromStandard(i32 Value, i32* w, i32* h);//ÔøΩÔøΩTStandard»°ÔøΩ√≥ÔøΩÔøΩÔøΩÔøΩÔøΩ
 i32 GetStandardFromWidthHeight(i32 w, i32 h);
 
 EXPORT bool DevCfg_to_NewDevCfg(TDevCfg* DevCfg, TNewDevCfg* NewDevCfg);
@@ -69,3 +86,4 @@ EXPORT char* NewDevCfg_to_Json(TNewDevCfg* NewDevCfg);
 #endif
 
 #endif
+

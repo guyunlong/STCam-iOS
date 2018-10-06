@@ -19,6 +19,7 @@ HANDLE thRender_Init(int iDDrawMode/*0=VIDEOMEMORY 1=SYSTEMMEMORY*/)
 #ifdef IS_VIDEOPLAY_OPENGL
   return thOpenGLVideo_Init();
 #endif
+    return 0;
 }
 //-----------------------------------------------------------------------------
 bool thRender_Free(HANDLE videoHandle)
@@ -32,6 +33,7 @@ bool thRender_Free(HANDLE videoHandle)
 #ifdef IS_VIDEOPLAY_OPENGL
   return thOpenGLVideo_Free(videoHandle);
 #endif
+    return 0;
 }
 //-----------------------------------------------------------------------------
 bool thRender_FillMem(HANDLE videoHandle, TavPicture FrameV, i32 ImgWidth, i32 ImgHeight)
@@ -45,6 +47,7 @@ bool thRender_FillMem(HANDLE videoHandle, TavPicture FrameV, i32 ImgWidth, i32 I
 #ifdef IS_VIDEOPLAY_OPENGL
   return thOpenGLVideo_FillMem(videoHandle, FrameV, ImgWidth, ImgHeight);
 #endif
+    return 0;
 }
 //-----------------------------------------------------------------------------
 bool thRender_Display(HANDLE videoHandle, HWND DspHandle, TRect DspRect)
@@ -58,6 +61,7 @@ bool thRender_Display(HANDLE videoHandle, HWND DspHandle, TRect DspRect)
 #ifdef IS_VIDEOPLAY_OPENGL
   return thOpenGLVideo_Display(videoHandle, DspHandle, DspRect);
 #endif
+    return 0;
 }
 //-----------------------------------------------------------------------------
 //*****************************************************************************
@@ -73,6 +77,7 @@ HANDLE thAudioPlay_Init()
 #ifdef IS_AUDIOPLAY_SLES
   return thSLESAudioPlay_Init();
 #endif
+    return 0;
 }
 //-----------------------------------------------------------------------------
 bool thAudioPlay_SetFormat(HANDLE audioHandle, i32 nChannels, i32 wBitsPerSample, i32 nSamplesPerSec, i32 AudioPacketSize)
@@ -86,6 +91,7 @@ bool thAudioPlay_SetFormat(HANDLE audioHandle, i32 nChannels, i32 wBitsPerSample
 #ifdef IS_AUDIOPLAY_SLES
   return thSLESAudioPlay_SetFormat(audioHandle, nChannels, wBitsPerSample, nSamplesPerSec, AudioPacketSize);
 #endif
+    return 0;
 }
 //-----------------------------------------------------------------------------
 bool thAudioPlay_PlayFrame(HANDLE audioHandle, char* Buf, i32 BufLen)
@@ -99,6 +105,7 @@ bool thAudioPlay_PlayFrame(HANDLE audioHandle, char* Buf, i32 BufLen)
 #ifdef IS_AUDIOPLAY_SLES
   return thSLESAudioPlay_PlayFrame(audioHandle, Buf, BufLen);
 #endif
+    return 0;
 }
 //-----------------------------------------------------------------------------
 bool thAudioPlay_Free(HANDLE audioHandle)
@@ -112,6 +119,7 @@ bool thAudioPlay_Free(HANDLE audioHandle)
 #ifdef IS_AUDIOPLAY_SLES
   return thSLESAudioPlay_Free(audioHandle);
 #endif
+    return 0;
 }
 //-----------------------------------------------------------------------------
 //*****************************************************************************
@@ -127,6 +135,7 @@ HANDLE thAudioTalk_Init()
 #ifdef IS_AUDIOTALK_SLES
   return thSLESAudioTalk_Init();
 #endif
+    return 0;
 }
 //-----------------------------------------------------------------------------
 bool thAudioTalk_SetFormat(HANDLE talkHandle,
@@ -144,6 +153,7 @@ bool thAudioTalk_SetFormat(HANDLE talkHandle,
 #ifdef IS_AUDIOTALK_SLES
   return thSLESAudioTalk_SetFormat(talkHandle, nChannels, wBitsPerSample, nSamplesPerSec, AudioPacketSize, callback, UserCustom);
 #endif
+    return 0;
 }
 //-----------------------------------------------------------------------------
 bool thAudioTalk_Free(HANDLE talkHandle)
@@ -157,4 +167,5 @@ bool thAudioTalk_Free(HANDLE talkHandle)
 #ifdef IS_AUDIOTALK_SLES
   return thSLESAudioTalk_Free(talkHandle);
 #endif
+    return 0;
 }

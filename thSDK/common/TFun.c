@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Author      : ÷Ï∫Ï≤®
+// Author      : Êú±Á∫¢Ê≥¢
 // Date        : 2017.09.14
 // Version     : V 2.00
 // Description : www.southipcam.com
@@ -10,8 +10,9 @@
 #include "../include/pthreads/semaphore.h"
 #pragma comment (lib, "Ws2_32.lib")
 #endif
+
 //-----------------------------------------------------------------------------
-void ThreadLockInit(H_THREADLOCK* lock)
+void ThreadLockInit(H_THREADLOCK *lock)
 {
 #ifndef WIN32
   //*lock = PTHREAD_MUTEX_INITIALIZER;
@@ -21,16 +22,16 @@ void ThreadLockInit(H_THREADLOCK* lock)
 #endif
 }
 //-----------------------------------------------------------------------------
-void ThreadLockFree(H_THREADLOCK* lock)
+void ThreadLockFree(H_THREADLOCK *lock)
 {
 #ifndef WIN32
   pthread_mutex_destroy(lock);
 #else
   DeleteCriticalSection(lock);
-#endif  
+#endif
 }
 //-----------------------------------------------------------------------------
-void ThreadLock(H_THREADLOCK* lock)
+void ThreadLock(H_THREADLOCK *lock)
 {
 #ifndef WIN32
   pthread_mutex_lock(lock);
@@ -39,7 +40,7 @@ void ThreadLock(H_THREADLOCK* lock)
 #endif
 }
 //-----------------------------------------------------------------------------
-void ThreadUnlock(H_THREADLOCK* lock)
+void ThreadUnlock(H_THREADLOCK *lock)
 {
 #ifndef WIN32
   pthread_mutex_unlock(lock);
@@ -48,11 +49,11 @@ void ThreadUnlock(H_THREADLOCK* lock)
 #endif
 }
 //-----------------------------------------------------------------------------
-H_THREAD ThreadCreate(void* funcAddr, void* Param, bool IsCloseHandle)
+H_THREAD ThreadCreate(void *funcAddr, void *Param, bool IsCloseHandle)
 {
   H_THREAD tHandle;
 #ifndef WIN32
-  pthread_create(&tHandle, NULL, (void *(*)(void*))funcAddr, Param);
+  pthread_create(&tHandle, NULL, (void *(*)(void *)) funcAddr, Param);
   if (IsCloseHandle)
   {
     pthread_detach(tHandle);
@@ -112,7 +113,7 @@ return true;
 }
 */
 //-----------------------------------------------------------------------------
-SOCKET FastConnect(char* aIP, i32 aPort, i32 TimeOut)//∑µªÿSocketHandle
+SOCKET FastConnect(char *aIP, i32 aPort, i32 TimeOut)//ËøîÂõûSocketHandle
 {
 #define NULLHANDLE  -1
   i32 hSocket = NULLHANDLE;
@@ -122,7 +123,7 @@ SOCKET FastConnect(char* aIP, i32 aPort, i32 TimeOut)//∑µªÿSocketHandle
   struct timeval tval;
   struct sockaddr_in CSktAddr;
   u32 tmp = INADDR_NONE;
-  struct hostent* h = NULL;
+  struct hostent *h = NULL;
 
   if (!aIP) return NULLHANDLE;
   if (aPort == 0) return NULLHANDLE;
@@ -131,7 +132,7 @@ SOCKET FastConnect(char* aIP, i32 aPort, i32 TimeOut)//∑µªÿSocketHandle
   CSktAddr.sin_family = AF_INET;
   CSktAddr.sin_port = htons(aPort);
   //inet_aton(aIP, &CSktAddr.sin_addr);
-  h = (struct hostent*)gethostbyname(aIP);
+  h = (struct hostent *) gethostbyname(aIP);
   if (h == NULL) return NULLHANDLE;
   memcpy(&CSktAddr.sin_addr, h->h_addr_list[0], h->h_length);
 
@@ -139,38 +140,38 @@ SOCKET FastConnect(char* aIP, i32 aPort, i32 TimeOut)//∑µªÿSocketHandle
   //  if (hSocket <= 0) return NULLHANDLE;
   //hSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_IP);
   //if (hSocket <= 0) hSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_IP);
-  for (i=0; i<10; i++)
+  for (i = 0; i < 10; i++)
   {
     hSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_IP);
     if (hSocket > 0) break;
-    usleep(1000*100);
+    usleep(1000 * 100);
   }
-  if (hSocket <= 0) return NULLHANDLE;  	
+  if (hSocket <= 0) return NULLHANDLE;
 
 #ifndef WIN32
   Flag = fcntl(hSocket, F_GETFL, 0);// ==2
   fcntl(hSocket, F_SETFL, Flag | O_NONBLOCK);//O_NONBLOCK==2048 |2 = 2050
 #else
   Flag = 1;//0
-  ioctlsocket(hSocket, FIONBIO, &Flag);//∑«◊Ë»˚∑Ω Ω
+  ioctlsocket(hSocket, FIONBIO, &Flag);//ÈùûÈòªÂ°ûÊñπÂºè
 #endif
 
-  Ret = connect(hSocket, (struct sockaddr*) &CSktAddr, sizeof(struct sockaddr_in));
-  if(Ret == 0) goto Done;
+  Ret = connect(hSocket, (struct sockaddr *) &CSktAddr, sizeof(struct sockaddr_in));
+  if (Ret == 0) goto Done;
 
   FD_ZERO(&rs);
   FD_SET(hSocket, &rs);
-  ws = rs;//FD_SET(hSocket, &ws);  
+  ws = rs;//FD_SET(hSocket, &ws);
 
-  tval.tv_sec  = TimeOut / 1000;//TimeOut;
+  tval.tv_sec = TimeOut / 1000;//TimeOut;
   tval.tv_usec = (TimeOut % 1000) * 1000;
-  if ((Ret = select(hSocket+1, &rs, &ws, NULL, TimeOut ? &tval: NULL)) == 0) 
+  if ((Ret = select(hSocket + 1, &rs, &ws, NULL, TimeOut ? &tval : NULL)) == 0)
   {
     closesocket(hSocket);
     //errno = ETIMEDOUT;
     return NULLHANDLE;
   }
-  if (FD_ISSET(hSocket, &rs)||FD_ISSET(hSocket, &ws)) 
+  if (FD_ISSET(hSocket, &rs) || FD_ISSET(hSocket, &ws))
   {
     Error = 0;
     Ret = sizeof(i32);
@@ -182,11 +183,11 @@ SOCKET FastConnect(char* aIP, i32 aPort, i32 TimeOut)//∑µªÿSocketHandle
     }
   }
 
-Done:
+  Done:
 #ifndef WIN32
   fcntl(hSocket, F_SETFL, Flag);
 #endif
-  if (Error) 
+  if (Error)
   {
     closesocket(hSocket);
     errno = Error;
@@ -195,7 +196,7 @@ Done:
   return hSocket;
 }
 //-----------------------------------------------------------------------------
-SOCKET SktConnect(char* IP, i32 Port, i32 TimeOut)
+SOCKET SktConnect(char *IP, i32 Port, i32 TimeOut)
 {
 #ifndef WIN32
 #define INVALID_SOCKET -1
@@ -206,14 +207,14 @@ SOCKET SktConnect(char* IP, i32 Port, i32 TimeOut)
   struct timeval tval;
   fd_set rs, ws;
   SOCKET hSocket;
-  struct hostent* h = NULL;
+  struct hostent *h = NULL;
   unsigned long flag = 1;
 
-  for (i=0; i<100; i++)
+  for (i = 0; i < 100; i++)
   {
     hSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);//IPPROTO_IP
     if (hSocket > 0) break;
-    usleep(1000*100);
+    usleep(1000 * 100);
   }
 
   if (hSocket <= 0) return 0;
@@ -229,7 +230,7 @@ SOCKET SktConnect(char* IP, i32 Port, i32 TimeOut)
 #if 0
   CSktAddr.sin_addr.s_addr = inet_addr(IP);
 #else
-  h = (struct hostent*)gethostbyname(IP);
+  h = (struct hostent *) gethostbyname(IP);
   if (h == NULL) return NULLHANDLE;
   memcpy(&CSktAddr.sin_addr, h->h_addr_list[0], h->h_length);
 #endif
@@ -237,15 +238,15 @@ SOCKET SktConnect(char* IP, i32 Port, i32 TimeOut)
 #ifdef WIN32
   ioctlsocket(hSocket, FIONBIO, &flag);
 #else
-  fcntl(hSocket, F_SETFL, O_NONBLOCK);//∑«◊Ë»˚∑Ω Ω
+  fcntl(hSocket, F_SETFL, O_NONBLOCK);//ÈùûÈòªÂ°ûÊñπÂºè
 #endif
-  ret = connect(hSocket, (struct sockaddr*)&CSktAddr, sizeof(CSktAddr));
+  ret = connect(hSocket, (struct sockaddr *) &CSktAddr, sizeof(CSktAddr));
   FD_ZERO(&rs);
   FD_SET(hSocket, &rs);
   ws = rs;
   tval.tv_sec = TimeOut / 1000;
   tval.tv_usec = (TimeOut % 1000) * 1000;
-  IsConn = select(hSocket+1, &rs, &ws, NULL, &tval);
+  IsConn = select(hSocket + 1, &rs, &ws, NULL, &tval);
   if (IsConn != 1)
   {
     closesocket(hSocket);
@@ -271,17 +272,17 @@ i32 SktWaitForData(SOCKET hSocket, i32 TimeOut)
   return (select(0, &rs, NULL, NULL, &tval) > 0);
 }
 //-----------------------------------------------------------------------------
-i32 SktSendBuf(SOCKET hSocket, char* Buf, i32 Len)
+i32 SktSendBuf(SOCKET hSocket, char *Buf, i32 Len)
 {
   return send(hSocket, Buf, Len, 0);
 }
 //-----------------------------------------------------------------------------
-i32 SktRecvBuf(SOCKET hSocket, char* Buf, i32 Len)
+i32 SktRecvBuf(SOCKET hSocket, char *Buf, i32 Len)
 {
   return recv(hSocket, Buf, Len, 0);
 }
 //-----------------------------------------------------------------------------
-bool SendBuf(SOCKET hSocket, char* Buf, i32 BufLen, i32 TimeOut)
+bool SendBuf(SOCKET hSocket, char *Buf, i32 BufLen, i32 TimeOut)
 {
   //  i32 Ret = send(hSocket, Buf, BufLen, 0);
   //  return (Ret >= 0);
@@ -336,14 +337,13 @@ bool SendBuf(SOCKET hSocket, char* Buf, i32 BufLen, i32 TimeOut)
     if (hSocket <=0) return false;
 #endif
 
-    SendLen = send(hSocket, (char*)Buf + k, SendLen, 0);
+    SendLen = send(hSocket, (char *) Buf + k, SendLen, 0);
 
     if (SendLen != -1)
     {
       k = SendLen + k;
-    }
-    else
-    {      
+    } else
+    {
       if (errno == EINTR || errno == EAGAIN)//EWOULDBLOCK = EAGAIN
       {
         t1 = GetTickCount();
@@ -352,24 +352,23 @@ bool SendBuf(SOCKET hSocket, char* Buf, i32 BufLen, i32 TimeOut)
           return false;
         }
         errno = 0;
-        usleep(1000*10);
+        usleep(1000 * 10);
         continue;
-      }
-      else
+      } else
       {
-        if (errno != 0 )
+        if (errno != 0)
         {
           errno = 0;
         }
         return false;
       }
-    }    
+    }
   }
   return true;
 #endif
 }
 //-----------------------------------------------------------------------------
-bool RecvBuf(SOCKET hSocket, char* RecvBuf, i32 BufLen, i32 TimeOut)
+bool RecvBuf(SOCKET hSocket, char *RecvBuf, i32 BufLen, i32 TimeOut)
 {
 #ifdef WIN32
   i32 Len, RecvLen, LastError;
@@ -406,7 +405,7 @@ bool RecvBuf(SOCKET hSocket, char* RecvBuf, i32 BufLen, i32 TimeOut)
   }
   return false;
 #else
-  char* Buf = RecvBuf;
+  char *Buf = RecvBuf;
   i32 Len, RecvLen;
   u32 t, t1;
   RecvLen = 0;
@@ -420,12 +419,11 @@ bool RecvBuf(SOCKET hSocket, char* RecvBuf, i32 BufLen, i32 TimeOut)
 #ifdef __cplusplus
     if (hSocket <=0) return false;
 #endif
-    Len = recv(hSocket, &Buf[RecvLen], BufLen-RecvLen, 0);
+    Len = recv(hSocket, &Buf[RecvLen], BufLen - RecvLen, 0);
     if (Len != -1)
     {
       RecvLen = RecvLen + Len;
-    }
-    else
+    } else
     {
       if (errno == EINTR || errno == EAGAIN)//EWOULDBLOCK = EAGAIN
       {
@@ -435,12 +433,11 @@ bool RecvBuf(SOCKET hSocket, char* RecvBuf, i32 BufLen, i32 TimeOut)
           return false;
         }
         errno = 0;
-        usleep(1000*10);
+        usleep(1000 * 10);
         continue;
-      }
-      else
+      } else
       {
-        if (errno != 0 )
+        if (errno != 0)
         {
           errno = 0;
         }
@@ -476,13 +473,14 @@ i32 myusleep(i32 us)
   do
   {
     ret = select(0, NULL, NULL, NULL, &tv);
-  }
-  while(ret < 0 && errno == EINTR);
+  } while (ret < 0 && errno == EINTR);
   return ret;
 #endif
 }
+
 //-----------------------------------------------------------------------------
-typedef struct TmmTimeInfo{
+typedef struct TmmTimeInfo
+{
   H_THREADLOCK Lock;
   sem_t sem;
   H_THREAD thTimer;
@@ -490,12 +488,13 @@ typedef struct TmmTimeInfo{
   bool IsExit;
 
   u32 uDelayms;
-  TTimerCallBack* callback;
-  void* dwUser;
+  TTimerCallBack *callback;
+  void *dwUser;
 
-}TmmTimeInfo;
+} TmmTimeInfo;
+
 //-----------------------------------------------------------------------------
-void thread_mmTimerEvent(TmmTimeInfo* Info)
+void thread_mmTimerEvent(TmmTimeInfo *Info)
 {
   if (!Info) return;
   while (1)
@@ -506,11 +505,12 @@ void thread_mmTimerEvent(TmmTimeInfo* Info)
 #else
     if (sem_trywait(&Info->sem) != 0) continue;//cpu high
 #endif
-    if (Info->callback) Info->callback((HANDLE)Info, 0, Info->dwUser, 0, 0);
+    if (Info->callback) Info->callback((HANDLE) Info, 0, Info->dwUser, 0, 0);
   }
 }
+
 //-----------------------------------------------------------------------------
-void thread_mmTimer(TmmTimeInfo* Info)
+void thread_mmTimer(TmmTimeInfo *Info)
 {
   if (!Info) return;
   while (1)
@@ -521,12 +521,12 @@ void thread_mmTimer(TmmTimeInfo* Info)
   }
 }
 //-----------------------------------------------------------------------------
-HANDLE mmTimeSetEvent(u32 uDelayms, TTimerCallBack callback, void* dwUser)
+HANDLE mmTimeSetEvent(u32 uDelayms, TTimerCallBack callback, void *dwUser)
 {
 #ifdef WIN32
   return (HANDLE)timeSetEvent(uDelayms, 0, (LPTIMECALLBACK)callback, (u32)dwUser, 1);
 #else
-  TmmTimeInfo* Info = (TmmTimeInfo*)malloc(sizeof(TmmTimeInfo));
+  TmmTimeInfo *Info = (TmmTimeInfo *) malloc(sizeof(TmmTimeInfo));
   memset(Info, 0, sizeof(TmmTimeInfo));
   Info->IsExit = false;
   Info->uDelayms = uDelayms;
@@ -536,7 +536,7 @@ HANDLE mmTimeSetEvent(u32 uDelayms, TTimerCallBack callback, void* dwUser)
   sem_init(&Info->sem, 0, 0);
   Info->thTimer = ThreadCreate(thread_mmTimer, Info, false);
   Info->thTimerEvent = ThreadCreate(thread_mmTimerEvent, Info, false);
-  return (HANDLE)Info;
+  return (HANDLE) Info;
 #endif
 }
 //-----------------------------------------------------------------------------
@@ -546,7 +546,7 @@ i32 mmTimeKillEvent(HANDLE mmHandle)
   return timeKillEvent(mmHandle);
 #else
   u32 ret;
-  TmmTimeInfo* Info = (TmmTimeInfo*)mmHandle;
+  TmmTimeInfo *Info = (TmmTimeInfo *) mmHandle;
   if (!Info) return false;
 
   ThreadLock(&Info->Lock);
@@ -571,11 +571,11 @@ u32 mmTimeGetTime()//add -lrt
 #ifdef WIN32
   return timeGetTime();
 #else
-  u32 uptime = 0;  
-  struct timespec on;  
-  if(clock_gettime(CLOCK_MONOTONIC, &on) == 0)
+  u32 uptime = 0;
+  struct timespec on;
+  if (clock_gettime(CLOCK_MONOTONIC, &on) == 0)
   {
-    uptime = on.tv_sec*1000 + on.tv_nsec/1000000;  
+    uptime = on.tv_sec * 1000 + on.tv_nsec / 1000000;
   }
   return uptime;
 #endif
@@ -594,13 +594,13 @@ u32 GetTickCount()
   {
 #if 0
     FILE* f = fopen("/proc/uptime", "r+");
-    if (f) 
+    if (f)
     {
       fgets(buf, sizeof(buf), f);
       fclose(f);
       sscanf(buf, "%f %f", &a, &b);
       t = tv.tv_sec - (i32)a;
-    } 
+    }
     else
     {
       t = tv.tv_sec;
@@ -609,8 +609,9 @@ u32 GetTickCount()
     t = tv.tv_sec;
 #endif
   }
-  return (u32)(tv.tv_sec - t)*1000 + tv.tv_usec/1000;
+  return (u32) (tv.tv_sec - t) * 1000 + tv.tv_usec / 1000;
 }
+
 #endif
 //-----------------------------------------------------------------------------
 #ifdef WIN32
@@ -667,8 +668,8 @@ char* WorkPath()
 {
   i32 i, m;
   char c;
-  char Path[MAX_PATH + 1]; 
-  GetModuleFileNameA(NULL, Path, MAX_PATH); 
+  char Path[MAX_PATH + 1];
+  GetModuleFileNameA(NULL, Path, MAX_PATH);
   m = strlen(Path);
   for (i = m - 1; i>=0; i--)
   {
@@ -679,47 +680,47 @@ char* WorkPath()
       break;
     }
   }
-  //(_tcschr(Path, '\\'))[1] = 0;//…æ≥˝Œƒº˛√˚£¨÷ªªÒµ√¬∑æ∂_tcsrchr
+  //(_tcschr(Path, '\\'))[1] = 0;//Âà†Èô§Êñá‰ª∂ÂêçÔºåÂè™Ëé∑ÂæóË∑ØÂæÑ_tcsrchr
   return Path;
 }
 //-----------------------------------------------------------------------------
 char* GetFileVersion(char* FileName)
-{  
+{
 #pragma comment(lib,"Version.lib")
   static char Str[100];
   u32 dwTemp, dwSize;
   u32 verMS, verLS, major, minor, build, revision;
-  BYTE *pData = NULL;  
-  UINT uLen;  
-  VS_FIXEDFILEINFO *pVerInfo = NULL;  
+  BYTE *pData = NULL;
+  UINT uLen;
+  VS_FIXEDFILEINFO *pVerInfo = NULL;
   sprintf(Str, "0.0.0.0");
 
-  dwSize = GetFileVersionInfoSize(FileName, &dwTemp);  
+  dwSize = GetFileVersionInfoSize(FileName, &dwTemp);
   if (dwSize == 0) return Str;
-  pData = malloc(dwSize+1);  
-  if (!GetFileVersionInfo(FileName, 0, dwSize, pData))  
-  {  
+  pData = malloc(dwSize+1);
+  if (!GetFileVersionInfo(FileName, 0, dwSize, pData))
+  {
     free(pData);
-    return Str;  
-  }  
+    return Str;
+  }
 
-  if (!VerQueryValue(pData, TEXT("\\"), (void **)&pVerInfo, &uLen))   
-  {  
+  if (!VerQueryValue(pData, TEXT("\\"), (void **)&pVerInfo, &uLen))
+  {
     free(pData);
-    return Str;  
-  }  
+    return Str;
+  }
 
-  verMS = pVerInfo->dwFileVersionMS;  
-  verLS = pVerInfo->dwFileVersionLS;  
-  major = HIWORD(verMS);  
-  minor = LOWORD(verMS);  
-  build = HIWORD(verLS);  
-  revision = LOWORD(verLS);  
+  verMS = pVerInfo->dwFileVersionMS;
+  verLS = pVerInfo->dwFileVersionLS;
+  major = HIWORD(verMS);
+  minor = LOWORD(verMS);
+  build = HIWORD(verLS);
+  revision = LOWORD(verLS);
   free(pData);
 
-  sprintf(Str, ("%d.%d.%d.%d"), major, minor, build, revision);  
+  sprintf(Str, ("%d.%d.%d.%d"), major, minor, build, revision);
 
-  return Str;  
+  return Str;
 }
 //-----------------------------------------------------------------------------
 HANDLE comConnect(const char* comName, i32 BaudRate/*CBR_115200*/, char Parity/*'N'*/, i32 DataBits/*8*/, i32 StopBits/*1*/)
@@ -733,11 +734,11 @@ HANDLE comConnect(const char* comName, i32 BaudRate/*CBR_115200*/, char Parity/*
   if (hComm == INVALID_HANDLE_VALUE) return NULL;
   ret = SetupComm(hComm, 4096, 4096);
   GetCommTimeouts(hComm, &CommTimeouts);
-  CommTimeouts.ReadIntervalTimeout = 1000;//∂¡º‰∏Ù≥¨ ±
-  CommTimeouts.ReadTotalTimeoutConstant = 500;//∂¡ ±º‰œµ ˝
-  CommTimeouts.ReadTotalTimeoutMultiplier = 5000;//∂¡ ±º‰≥£¡ø
-  CommTimeouts.WriteTotalTimeoutConstant = 500;//–¥ ±º‰œµ ˝
-  CommTimeouts.WriteTotalTimeoutMultiplier = 2000;//–¥ ±º‰≥£¡ø, ◊‹≥¨ ±µƒº∆À„π´ Ω «£∫◊‹≥¨ ±£Ω ±º‰œµ ˝°¡“™«Û∂¡/–¥µƒ◊÷∑˚ ˝£´ ±º‰≥£¡ø
+  CommTimeouts.ReadIntervalTimeout = 1000;//ËØªÈó¥ÈöîË∂ÖÊó∂
+  CommTimeouts.ReadTotalTimeoutConstant = 500;//ËØªÊó∂Èó¥Á≥ªÊï∞
+  CommTimeouts.ReadTotalTimeoutMultiplier = 5000;//ËØªÊó∂Èó¥Â∏∏Èáè
+  CommTimeouts.WriteTotalTimeoutConstant = 500;//ÂÜôÊó∂Èó¥Á≥ªÊï∞
+  CommTimeouts.WriteTotalTimeoutMultiplier = 2000;//ÂÜôÊó∂Èó¥Â∏∏Èáè, ÊÄªË∂ÖÊó∂ÁöÑËÆ°ÁÆóÂÖ¨ÂºèÊòØÔºöÊÄªË∂ÖÊó∂ÔºùÊó∂Èó¥Á≥ªÊï∞√óË¶ÅÊ±ÇËØª/ÂÜôÁöÑÂ≠óÁ¨¶Êï∞ÔºãÊó∂Èó¥Â∏∏Èáè
   ret = SetCommTimeouts(hComm, &CommTimeouts);
 
   GetCommState(hComm, &dcb);
@@ -785,41 +786,41 @@ i32 comSendBuf(HANDLE hComm, char* Buf, i32 Len)
   if (hComm == INVALID_HANDLE_VALUE) return 0;
 
   ret = WriteFile(hComm, Buf, Len, &BytesToSend, NULL);
-  if (!ret)  
-  {  
-    u32 dwError = GetLastError();    
-    PurgeComm(hComm, PURGE_RXCLEAR | PURGE_RXABORT);//«Âø’¥Æø⁄ª∫≥Â«¯
+  if (!ret)
+  {
+    u32 dwError = GetLastError();
+    PurgeComm(hComm, PURGE_RXCLEAR | PURGE_RXABORT);//Ê∏ÖÁ©∫‰∏≤Âè£ÁºìÂÜ≤Âå∫
     return 0;
-  }  
+  }
   return BytesToSend;
 }
 //-----------------------------------------------------------------------------
 i32 comRecvBuf(HANDLE hComm, char* Buf, i32 Len)
-{  
+{
   BOOL  ret = TRUE;
   u32 BytesRead = 0;
   if (hComm == INVALID_HANDLE_VALUE) return 0;
 
-  ret = ReadFile(hComm, Buf, Len, &BytesRead, NULL);//¥”ª∫≥Â«¯∂¡»°“ª∏ˆ◊÷Ω⁄µƒ ˝æ›
-  if ((!ret))  
-  {  
+  ret = ReadFile(hComm, Buf, Len, &BytesRead, NULL);//‰ªéÁºìÂÜ≤Âå∫ËØªÂèñ‰∏Ä‰∏™Â≠óËäÇÁöÑÊï∞ÊçÆ
+  if ((!ret))
+  {
     u32 dwError = GetLastError();
-    PurgeComm(hComm, PURGE_RXCLEAR | PURGE_RXABORT);//«Âø’¥Æø⁄ª∫≥Â«¯
+    PurgeComm(hComm, PURGE_RXCLEAR | PURGE_RXABORT);//Ê∏ÖÁ©∫‰∏≤Âè£ÁºìÂÜ≤Âå∫
     return 0;
   }
   return BytesRead;
 }
 //-----------------------------------------------------------------------------
 i32 comRecvLength(HANDLE hComm)
-{  
+{
   u32 dwError = 0;
   COMSTAT comstat;
   i32 BytesInQue = 0;
   memset(&comstat, 0, sizeof(COMSTAT));
-  if (ClearCommError(hComm, &dwError, &comstat))  
-  {  
-    BytesInQue = comstat.cbInQue;//ªÒ»°‘⁄ ‰»Îª∫≥Â«¯÷–µƒ◊÷Ω⁄ ˝
-  }  
+  if (ClearCommError(hComm, &dwError, &comstat))
+  {
+    BytesInQue = comstat.cbInQue;//Ëé∑ÂèñÂú®ËæìÂÖ•ÁºìÂÜ≤Âå∫‰∏≠ÁöÑÂ≠óËäÇÊï∞
+  }
   return BytesInQue;
 }
 //-----------------------------------------------------------------------------
@@ -852,10 +853,10 @@ i32 comWaitForData(HANDLE hComm, i32 TimeOut)
 
   case WAIT_OBJECT_0:
     memset(&comstat, 0, sizeof(COMSTAT));
-    if (ClearCommError(hComm, &dwError, &comstat))  
-    {  
-      BytesInQue = comstat.cbInQue;//ªÒ»°‘⁄ ‰»Îª∫≥Â«¯÷–µƒ◊÷Ω⁄ ˝
-    }  
+    if (ClearCommError(hComm, &dwError, &comstat))
+    {
+      BytesInQue = comstat.cbInQue;//Ëé∑ÂèñÂú®ËæìÂÖ•ÁºìÂÜ≤Âå∫‰∏≠ÁöÑÂ≠óËäÇÊï∞
+    }
     return BytesInQue;
   }
   return 0;
@@ -867,7 +868,7 @@ i32 UnicodeToAnsi(char* src, char* dst)
   i32 Len;
   WCHAR* wBuf = (WCHAR*)src;
   Len = WideCharToMultiByte(CP_ACP, 0, wBuf, -1, NULL, 0, NULL, NULL);
-  Len = WideCharToMultiByte(CP_ACP, 0, wBuf, -1, dst, Len, NULL,NULL);  
+  Len = WideCharToMultiByte(CP_ACP, 0, wBuf, -1, dst, Len, NULL,NULL);
   dst[Len] = 0x00;
   return Len;
 }
@@ -940,7 +941,7 @@ bool ShareMemCloseFile(HANDLE FileHandle, HANDLE MapHandle, void* FData)
 }
 #endif
 //-----------------------------------------------------------------------------
-HANDLE FileCreate(char* FileName)//¥¥Ω®“ª∏ˆ–¬Œƒº˛
+HANDLE FileCreate(char *FileName)//ÂàõÂª∫‰∏Ä‰∏™Êñ∞Êñá‰ª∂
 {
 #ifndef WIN32
   return fopen(FileName, "w+b");
@@ -949,7 +950,7 @@ HANDLE FileCreate(char* FileName)//¥¥Ω®“ª∏ˆ–¬Œƒº˛
 #endif
 }
 //-----------------------------------------------------------------------------
-HANDLE FileOpen(char* FileName)//¥Úø™“ª∏ˆŒƒº˛£¨ø…∂¡ø…–¥
+HANDLE FileOpen(char *FileName)//ÊâìÂºÄ‰∏Ä‰∏™Êñá‰ª∂ÔºåÂèØËØªÂèØÂÜô
 {
   HANDLE ret;
 #ifndef WIN32
@@ -960,7 +961,7 @@ HANDLE FileOpen(char* FileName)//¥Úø™“ª∏ˆŒƒº˛£¨ø…∂¡ø…–¥
   return ret;
 }
 //-----------------------------------------------------------------------------
-bool FileClose(HANDLE f)//πÿ±’Œƒº˛
+bool FileClose(HANDLE f)//ÂÖ≥Èó≠Êñá‰ª∂
 {
 #ifndef WIN32
   return (fclose(f) == 0);
@@ -969,7 +970,7 @@ bool FileClose(HANDLE f)//πÿ±’Œƒº˛
 #endif
 }
 //-----------------------------------------------------------------------------
-bool FileWrite(HANDLE f, void* Buf, i32 Len)//–¥Œƒº˛
+bool FileWrite(HANDLE f, void *Buf, i32 Len)//ÂÜôÊñá‰ª∂
 {
 #ifndef WIN32
   return (fwrite(Buf, Len, 1, f) != 0);
@@ -980,7 +981,7 @@ bool FileWrite(HANDLE f, void* Buf, i32 Len)//–¥Œƒº˛
 #endif
 }
 //-----------------------------------------------------------------------------
-bool FileRead(HANDLE f, void* Buf, i32 Len)//∂¡Œƒº˛
+bool FileRead(HANDLE f, void *Buf, i32 Len)//ËØªÊñá‰ª∂
 {
 #ifndef WIN32
   return (fread(Buf, Len, 1, f) != 0);
@@ -991,31 +992,23 @@ bool FileRead(HANDLE f, void* Buf, i32 Len)//∂¡Œƒº˛
 #endif
 }
 //-----------------------------------------------------------------------------
-u32 FileSeek(HANDLE f, i32 Offset, i32 Origin)//Œƒº˛∂®Œª Origin=0¥”Œƒº˛Õ∑  =1 µ±«∞Œª÷√  =2 ¥”Œƒº˛Œ≤
+u32 FileSeek(HANDLE f, i32 Offset, i32 Origin)//Êñá‰ª∂ÂÆö‰Ωç Origin=0‰ªéÊñá‰ª∂Â§¥  =1 ÂΩìÂâç‰ΩçÁΩÆ  =2 ‰ªéÊñá‰ª∂Â∞æ
 {
-    return -1;
+    return 0;
 }
 //-----------------------------------------------------------------------------
-u32 FileGetPos(HANDLE f)//»°µ√Œƒº˛µ±«∞Œª÷√
+u32 FileGetPos(HANDLE f)//ÂèñÂæóÊñá‰ª∂ÂΩìÂâç‰ΩçÁΩÆ
 {
-    return -1;
+ return 0;
 }
+
 //-----------------------------------------------------------------------------
-bool FileDelete(char* FileName)//…æ≥˝Œƒº˛
+char *FileExtName(char *FileName)//'.txt'ÂèñÂæóÊñá‰ª∂Êâ©Â±ïÂêç
 {
-#ifndef WIN32
-  return (unlink(FileName) != -1);
-#else
-  return DeleteFile(FileName);
-#endif
-}
-//-----------------------------------------------------------------------------
-char* FileExtName(char* FileName)//'.txt'»°µ√Œƒº˛¿©’π√˚
-{
-  char* Ext = NULL;
+  char *Ext = NULL;
   i32 i, m;
   m = strlen(FileName);
-  for (i=m-1; i>=0; i--)
+  for (i = m - 1; i >= 0; i--)
   {
     if (FileName[i] != '.') continue;
     if (i < m - 1) Ext = &FileName[i];
@@ -1023,26 +1016,27 @@ char* FileExtName(char* FileName)//'.txt'»°µ√Œƒº˛¿©’π√˚
   }
   return Ext;
 }
+
 //-----------------------------------------------------------------------------
-char* ExtractFileName(char* FileName)
+char *ExtractFileName(char *FileName)
 {
-  char* Ext = FileName;
+  char *Ext = FileName;
   i32 i, m;
   m = strlen(FileName);
-  for (i=m-1; i>=0; i--)
+  for (i = m - 1; i >= 0; i--)
   {
-    if ((FileName[i] != '/')&&(FileName[i] != '\\')) continue;
-    if (i < m - 1) Ext = &FileName[i+1];
+    if ((FileName[i] != '/') && (FileName[i] != '\\')) continue;
+    if (i < m - 1) Ext = &FileName[i + 1];
     break;
   }
   return Ext;
 }
 //-----------------------------------------------------------------------------
-bool DirectoryExists(char* Directory)//ƒø¬º «∑Ò¥Ê‘⁄
+bool DirectoryExists(char *Directory)//ÁõÆÂΩïÊòØÂê¶Â≠òÂú®
 {
 #ifndef WIN32
   struct stat st;
-  if(stat(Directory, &st) ==  - 1)
+  if (stat(Directory, &st) == -1)
     return false;
   else
     return S_ISDIR(st.st_mode);
@@ -1053,7 +1047,7 @@ bool DirectoryExists(char* Directory)//ƒø¬º «∑Ò¥Ê‘⁄
 #endif
 }
 //-----------------------------------------------------------------------------
-bool FileExists(char* FileName)//Œƒº˛ «∑Ò¥Ê‘⁄
+bool FileExists(char *FileName)//Êñá‰ª∂ÊòØÂê¶Â≠òÂú®
 {
 #ifndef WIN32
   struct stat st;
@@ -1067,12 +1061,12 @@ bool FileExists(char* FileName)//Œƒº˛ «∑Ò¥Ê‘⁄
 #endif
 }
 //-----------------------------------------------------------------------------
-u32 FileGetSize(char* FileName)//»°µ√Œƒº˛¥Û–°
+u32 FileGetSize(char *FileName)//ÂèñÂæóÊñá‰ª∂Â§ßÂ∞è
 {
 #ifndef WIN32
   struct stat statbuf;
   i32 i = stat(FileName, &statbuf);
-  if(i<0) return 0;
+  if (i < 0) return 0;
   S_ISDIR(statbuf.st_mode);
   S_ISREG(statbuf.st_mode);
   return statbuf.st_size;
@@ -1085,20 +1079,20 @@ u32 FileGetSize(char* FileName)//»°µ√Œƒº˛¥Û–°
 #endif
 }
 //-----------------------------------------------------------------------------
-bool InArray(i32 Value, i32 Count, ...)// ˝÷µ «∑Ò‘⁄...÷Æ÷–
+bool InArray(i32 Value, i32 Count, ...)//Êï∞ÂÄºÊòØÂê¶Âú®...‰πã‰∏≠
 {
   i32 i, m;
-  char* args = (char*)&Count;//∂®Œªµ⁄“ª∏ˆ≤Œ ˝
-  for (i=0; i<Count; i++)
+  char *args = (char *) &Count;//ÂÆö‰ΩçÁ¨¨‰∏Ä‰∏™ÂèÇÊï∞
+  for (i = 0; i < Count; i++)
   {
     args = args + 4;
-    m = *(i32*)args;
+    m = *(i32 *) args;
     if (Value == m) return true;
   }
   return false;
 }
 //-----------------------------------------------------------------------------
-i32 RandomNum(i32 seed)//ÀÊª˙∫Ø ˝
+i32 RandomNum(i32 seed)//ÈöèÊú∫ÂáΩÊï∞
 {
   i32 RandSeed;
 #ifndef WIN32
@@ -1109,35 +1103,36 @@ i32 RandomNum(i32 seed)//ÀÊª˙∫Ø ˝
   return random() % seed;
 #else
   RandSeed = GetTickCount();
-  srand(RandSeed); 
+  srand(RandSeed);
   return rand() % seed;
 #endif
 }
 //-----------------------------------------------------------------------------
-i32 timeval_dec(struct timeval* tv2, struct timeval* tv1)// ±º‰œ‡ºı£¨∑µªÿ∫¡√Î
+i32 timeval_dec(struct timeval *tv2, struct timeval *tv1)//Êó∂Èó¥Áõ∏ÂáèÔºåËøîÂõûÊØ´Áßí
 {
-  return (tv2->tv_sec - tv1->tv_sec)*1000 + (tv2->tv_usec - tv1->tv_usec)/1000;
+  return (tv2->tv_sec - tv1->tv_sec) * 1000 + (tv2->tv_usec - tv1->tv_usec) / 1000;
 }
+
 //-----------------------------------------------------------------------------
-void Time_tToSystemTime(i32 t, SYSTEMTIME* pst)//linux ±º‰µΩwindows ±º‰
+void Time_tToSystemTime(i32 t, SYSTEMTIME *pst)//linuxÊó∂Èó¥Âà∞windowsÊó∂Èó¥
 {
 #ifndef WIN32
   struct timeval tv;
-  struct tm* m;
+  struct tm *m;
   gettimeofday(&tv, NULL);
   m = localtime(&tv.tv_sec);
-  pst->wYear   = m->tm_year + 1900;
-  pst->wMonth  = m->tm_mon + 1;
-  pst->wDay    = m->tm_mday;
-  pst->wHour   = m->tm_hour;
+  pst->wYear = m->tm_year + 1900;
+  pst->wMonth = m->tm_mon + 1;
+  pst->wDay = m->tm_mday;
+  pst->wHour = m->tm_hour;
   pst->wMinute = m->tm_min;
   pst->wSecond = m->tm_sec;
   pst->wMilliseconds = tv.tv_usec / 1000;
-  pst->wDayOfWeek =m->tm_wday;
-  printf("pst->wYear:%d,pst->wMonth:%d,pst->wMilliseconds:%d, pst->wDayOfWeek:%d pst->wHour:%d\n",
-    pst->wYear,pst->wMonth,pst->wMilliseconds, pst->wDayOfWeek, pst->wHour);
+  pst->wDayOfWeek = m->tm_wday;
+  printf("pst->wYear:%d,pst->wMonth:%d,pst->wMilliseconds:%d, pst->wDayOfWeek:%d pst->wHour:%d\n", pst->wYear, pst->wMonth,
+         pst->wMilliseconds, pst->wDayOfWeek, pst->wHour);
 #else
-  FILETIME ft; 
+  FILETIME ft;
   LONGLONG ll = Int32x32To64(t, 10000000) + 116444736000000000;
   ft.dwLowDateTime = (u32) ll;
   ft.dwHighDateTime = (u32)(ll >> 32);
@@ -1145,12 +1140,12 @@ void Time_tToSystemTime(i32 t, SYSTEMTIME* pst)//linux ±º‰µΩwindows ±º‰
 #endif
 }
 //-----------------------------------------------------------------------------
-i32 SystemTimeToTime_t(SYSTEMTIME* pst)//windows ±º‰µΩlinux ±º‰
+i32 SystemTimeToTime_t(SYSTEMTIME *pst)//windowsÊó∂Èó¥Âà∞linuxÊó∂Èó¥
 {
 #ifndef WIN32
   struct tm m;
   m.tm_year = pst->wYear - 1900;
-  m.tm_mon = pst->wMonth -1;
+  m.tm_mon = pst->wMonth - 1;
   m.tm_mday = pst->wDay;
   m.tm_hour = pst->wHour;
   m.tm_min = pst->wMinute;
@@ -1169,7 +1164,7 @@ i32 SystemTimeToTime_t(SYSTEMTIME* pst)//windows ±º‰µΩlinux ±º‰
 #endif
 }
 //-----------------------------------------------------------------------------
-i32 GetTime() //»°µ√œµÕ≥ ±º‰
+i32 GetTime() //ÂèñÂæóÁ≥ªÁªüÊó∂Èó¥
 {
 #ifndef WIN32
   return time(NULL);
@@ -1180,12 +1175,23 @@ i32 GetTime() //»°µ√œµÕ≥ ±º‰
 #endif
 }
 //-----------------------------------------------------------------------------
-i64 getutime() //»°µ√Œ¢√Îº∂ ±º‰
+i32 GetTimezoneTime()
+{
+  time_t t, iaddsec;
+  struct tm *tm_local;
+
+  t = 0;
+  tm_local = localtime(&t);
+  iaddsec = tm_local->tm_hour * 3600 + tm_local->tm_min * 60 + tm_local->tm_sec;
+  return time(NULL) + iaddsec;
+}
+//-----------------------------------------------------------------------------
+i64 getutime() //ÂèñÂæóÂæÆÁßíÁ∫ßÊó∂Èó¥
 {
 #ifndef WIN32
   struct timeval tv;
   gettimeofday(&tv, NULL);
-  return (i64)(tv.tv_sec)* 1000000+tv.tv_usec;
+  return (i64) (tv.tv_sec) * 1000000 + tv.tv_usec;
 #else
   struct timeval tv;
   SYSTEMTIME st;
@@ -1195,8 +1201,9 @@ i64 getutime() //»°µ√Œ¢√Îº∂ ±º‰
   return (i64)(tv.tv_sec)* 1000000+tv.tv_usec;
 #endif
 }
+
 //-----------------------------------------------------------------------------
-void QuickSort(i32* Lst, i32 iLo, i32 iHi)//≈≈–Ú
+void QuickSort(i32 *Lst, i32 iLo, i32 iHi)//ÊéíÂ∫è
 {
   i32 Lo, Hi, Mid, T;
   Lo = iLo;
@@ -1204,8 +1211,8 @@ void QuickSort(i32* Lst, i32 iLo, i32 iHi)//≈≈–Ú
   Mid = Lst[(Lo + Hi) / 2];
   while (Lo <= Hi)
   {
-    while (Lst[Lo]<Mid) Lo++;
-    while (Lst[Hi]>Mid) Hi--;
+    while (Lst[Lo] < Mid) Lo++;
+    while (Lst[Hi] > Mid) Hi--;
     if (Lo <= Hi)
     {
       T = Lst[Lo];
@@ -1215,28 +1222,26 @@ void QuickSort(i32* Lst, i32 iLo, i32 iHi)//≈≈–Ú
       Hi--;
     }
   }//until (Lo>Hi);
-  if (Hi>iLo) QuickSort(Lst, iLo, Hi);
-  if (Lo<iHi) QuickSort(Lst, Lo, iHi);
+  if (Hi > iLo) QuickSort(Lst, iLo, Hi);
+  if (Lo < iHi) QuickSort(Lst, Lo, iHi);
 }
 //------------------------------------------------------------------------------
-i32 SearchByDichotomy(i32* Lst, i32 iL, i32 iH, i32 Key)//¡Ω∑÷∑®
+i32 SearchByDichotomy(i32 *Lst, i32 iL, i32 iH, i32 Key)//‰∏§ÂàÜÊ≥ï
 {
   i32 iLow, iHigh, iMid, Result;
-  iLow  = iL;//Low(Lst);
+  iLow = iL;//Low(Lst);
   iHigh = iH;//High(Lst);
   Result = -1;
-  while (iLow<=iHigh)
+  while (iLow <= iHigh)
   {
-    iMid = (iLow+iHigh)/ 2;
-    if (Key<Lst[iMid])
+    iMid = (iLow + iHigh) / 2;
+    if (Key < Lst[iMid])
     {
-      iHigh = iMid-1;
-    }
-    else if (Key>Lst[iMid])
+      iHigh = iMid - 1;
+    } else if (Key > Lst[iMid])
     {
-      iLow =iMid+1;
-    }
-    else if (Key=Lst[iMid])
+      iLow = iMid + 1;
+    } else if (Key = Lst[iMid])
     {
       Result = iMid;
       return Result;
@@ -1255,10 +1260,10 @@ void init_crc32_tab(void)
   u32 crc;
   for (i = 0; i < 256; i++)
   {
-    crc = (u32)i;
+    crc = (u32) i;
     for (j = 0; j < 8; j++)
     {
-      if (crc &0x00000001L)
+      if (crc & 0x00000001L)
         crc = (crc >> 1) ^ P_32;
       else
         crc = crc >> 1;
@@ -1268,35 +1273,35 @@ void init_crc32_tab(void)
   crc_tab32_init = true;
 }
 //-----------------------------------------------------------------------------
-u32 crc32(char* buf, i32 buflen)
+u32 crc32(char *buf, i32 buflen)
 {
-  u32 crc;	
+  u32 crc;
   u32 tmp, long_c;
   char c;
   i32 i;
   if (!crc_tab32_init) init_crc32_tab();
   crc = 0xffffffffL;
-  for (i=0; i<buflen; i++)
+  for (i = 0; i < buflen; i++)
   {
     c = buf[i];
-    long_c = 0x000000ffL & (u32)c;
+    long_c = 0x000000ffL & (u32) c;
     tmp = crc ^ long_c;
-    crc = (crc >> 8) ^ crc_tab32[tmp &0xff];
+    crc = (crc >> 8) ^ crc_tab32[tmp & 0xff];
   }
   return crc ^ 0xffffffffL;
 }
 //-----------------------------------------------------------------------------
-u32 crc32F(char* FileName)
+u32 crc32F(char *FileName)
 {
-  FILE* f;
+  FILE *f;
   i32 buflen;
-  char* buf;
+  char *buf;
   u32 crc;
   buflen = FileGetSize(FileName);
   if (buflen <= 0) return 0;
   f = fopen(FileName, "r+b");
   if (!f) return 0;
-  buf = (char*)malloc(buflen);
+  buf = (char *) malloc(buflen);
   if (!buf) return 0;
   fread(buf, buflen, 1, f);
   fclose(f);
@@ -1305,15 +1310,15 @@ u32 crc32F(char* FileName)
   return crc;
 }
 //-----------------------------------------------------------------------------
-u32 crc32F2(char* FileName, i32 FileSize)
+u32 crc32F2(char *FileName, i32 FileSize)
 {
-  FILE* f;
-  char* buf;
+  FILE *f;
+  char *buf;
   u32 crc;
   if (FileSize <= 0) return 0;
   f = fopen(FileName, "r+b");
   if (!f) return 0;
-  buf = (char*)malloc(FileSize);
+  buf = (char *) malloc(FileSize);
   if (!buf) return 0;
   fread(buf, FileSize, 1, f);
   fclose(f);
@@ -1321,36 +1326,38 @@ u32 crc32F2(char* FileName, i32 FileSize)
   free(buf);
   return crc;
 }
+
 //-----------------------------------------------------------------------------
-char* LowerCase(char* s)//◊÷∑˚¥Æ£¨–°–¥◊™¥Û–¥
+char *LowerCase(char *s)//Â≠óÁ¨¶‰∏≤ÔºåÂ∞èÂÜôËΩ¨Â§ßÂÜô
 {
   i32 i;
-  for (i=0; i<strlen(s); i++) 
+  for (i = 0; i < strlen(s); i++)
   {
-    if (s[i] >='A' && s[i] <='Z')  s[i] = s[i] + 32;
+    if (s[i] >= 'A' && s[i] <= 'Z') s[i] = s[i] + 32;
+  }
+  return s;
+}
+
+//-----------------------------------------------------------------------------
+char *UpperCase(char *s)//Â≠óÁ¨¶‰∏≤ÔºåÂ§ßÂÜôËΩ¨Â∞èÂÜô
+{
+  i32 i;
+  for (i = 0; i < strlen(s); i++)
+  {
+    if (s[i] >= 'a' && s[i] <= 'z') s[i] = s[i] - 32;
   }
   return s;
 }
 //-----------------------------------------------------------------------------
-char* UpperCase(char* s)//◊÷∑˚¥Æ£¨¥Û–¥◊™–°–¥
-{
-  i32 i;
-  for (i=0; i<strlen(s); i++) 
-  {
-    if (s[i] >='a' && s[i] <='z')  s[i] = s[i] - 32;
-  }
-  return s;
-}
-//-----------------------------------------------------------------------------
-i32 CharCount(char c, const char* S)//◊÷∑˚ ˝Õ≥º∆
+i32 CharCount(char c, const char *S)//Â≠óÁ¨¶Êï∞ÁªüËÆ°
 {
   i32 Result = 0;
   i32 i;
-  for (i=0; i<strlen(S); i++) if (S[i] == c) Result++;
+  for (i = 0; i < strlen(S); i++) if (S[i] == c) Result++;
   return Result;
 }
 //-----------------------------------------------------------------------------
-bool IsValidIP(const char* IP)// «∑Ò «”––ßµƒIPµÿ÷∑
+bool IsValidIP(const char *IP)//ÊòØÂê¶ÊòØÊúâÊïàÁöÑIPÂú∞ÂùÄ
 {
   i32 i, m, len;
   i32 d[4];
@@ -1358,31 +1365,30 @@ bool IsValidIP(const char* IP)// «∑Ò «”––ßµƒIPµÿ÷∑
   len = strlen(IP);
   if (len > 15) return false;
   strcpy(ip, IP);
-  for (i=0; i<len; i++) 
+  for (i = 0; i < len; i++)
   {
     if (ip[i] == '.')
       ip[i] = 0x20;//space
-    else
-      if ( (ip[i] < '0') || (ip[i] > '9') ) return false;
+    else if ((ip[i] < '0') || (ip[i] > '9')) return false;
   }
-  m = sscanf(ip, "%d %d %d %d",&d[3], &d[2], &d[1], &d[0]);
+  m = sscanf(ip, "%d %d %d %d", &d[3], &d[2], &d[1], &d[0]);
   if (m != 4) return false;
-  for (i=0; i<4; i++)
+  for (i = 0; i < 4; i++)
   {
-    if ( (d[i] < 0) || (d[i] > 255) ) return false;
+    if ((d[i] < 0) || (d[i] > 255)) return false;
   }
   return true;
 }
 //-----------------------------------------------------------------------------
-bool IsValidHost(const char* Host)// «∑Ò «”––ßµƒ”Ú√˚
+bool IsValidHost(const char *Host)//ÊòØÂê¶ÊòØÊúâÊïàÁöÑÂüüÂêç
 {
   i32 i;
-  if (CharCount('.', Host)<1) return false;
-  if (CharCount('@', Host)>0) return false;
-  for (i=0; i<strlen(Host); i++) 
+  if (CharCount('.', Host) < 1) return false;
+  if (CharCount('@', Host) > 0) return false;
+  for (i = 0; i < strlen(Host); i++)
   {
     if (Host[i] < '.') return false;
-    if (Host[i] > 'z') return false;    
+    if (Host[i] > 'z') return false;
     if (Host[i] == '\\') return false;
     if (Host[i] == '[') return false;
     if (Host[i] == ']') return false;
@@ -1394,55 +1400,55 @@ bool IsValidHost(const char* Host)// «∑Ò «”––ßµƒ”Ú√˚
   return true;
 }
 //-----------------------------------------------------------------------------
-bool IsValidMAC(const char* MAC, char SplitChar)// «∑Ò «”––ßµƒMACµÿ÷∑
+bool IsValidMAC(const char *MAC, char SplitChar)//ÊòØÂê¶ÊòØÊúâÊïàÁöÑMACÂú∞ÂùÄ
 {
   i32 i, Ret;
   i32 d[6];
   char m[20];
   strcpy(m, MAC);
-  for (i=0; i<strlen(m); i++) 
+  for (i = 0; i < strlen(m); i++)
   {
     if (m[i] == SplitChar)
       m[i] = 0x20;//space
-    else
-      if (!(((m[i]>='0') && (m[i]<='9')) || ((m[i]>='a') && (m[i]<='f')) || ((m[i]>='A') && (m[i]<='F')))) return false;
+    else if (!(((m[i] >= '0') && (m[i] <= '9')) || ((m[i] >= 'a') && (m[i] <= 'f')) || ((m[i] >= 'A') && (m[i] <= 'F')))) return false;
   }
-  Ret = sscanf(m, "%x %x %x %x %x %x",&d[5], &d[4], &d[3], &d[2], &d[1], &d[0]);
+  Ret = sscanf(m, "%x %x %x %x %x %x", &d[5], &d[4], &d[3], &d[2], &d[1], &d[0]);
   if (Ret != 6) return false;
-  for (i=0; i<6; i++)
+  for (i = 0; i < 6; i++)
   {
-    if ( (d[i] < 0) || (d[i] > 0xff) ) return false;
+    if ((d[i] < 0) || (d[i] > 0xff)) return false;
   }
   return true;
 }
 //-----------------------------------------------------------------------------
-bool IsLANIP(char* IP)// «∑Ò «ƒ⁄Õ¯IPµÿ÷∑
+bool IsLANIP(char *IP)//ÊòØÂê¶ÊòØÂÜÖÁΩëIPÂú∞ÂùÄ
 {
   u32 nIP;
   u8 a, b;
 
   nIP = IPToInt(IP);
-  a = (u8)nIP;
-  b = (u8)(nIP >> 8);
-  return (((a==192)&&(b==168))||((a==172)&&(b>=16)&&(b<=31))||(a==0)||(b==10));
+  a = (u8) nIP;
+  b = (u8) (nIP >> 8);
+  return (((a == 192) && (b == 168)) || ((a == 172) && (b >= 16) && (b <= 31)) || (a == 0) || (b == 10));
 }
 //------------------------------------------------------------------------------
-i32 IPToInt(char* IP)
+i32 IPToInt(char *IP)
 {
   return inet_addr(IP);
 }
+
 //------------------------------------------------------------------------------
-char* IntToIP(i32 IP)
+char *IntToIP(i32 IP)
 {
-  return inet_ntoa(*(struct in_addr*)&IP);
+  return inet_ntoa(*(struct in_addr *) &IP);
 }
 //-----------------------------------------------------------------------------
-i32 Base64Encode1(char* src, char* dst)
+i32 Base64Encode1(char *src, char *dst)
 {
-  static const char* lst = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+  static const char *lst = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
   i32 len;
-  char* strnew;
-  char* strold;
+  char *strnew;
+  char *strold;
 
   if (!src) return 0;
   if (!dst) return 0;
@@ -1453,72 +1459,73 @@ i32 Base64Encode1(char* src, char* dst)
 
   while ((len - (strold - src)) >= 3)
   {
-    strnew[0] = lst[(strold[0] &(u8)0xFC) >> 2];
-    strnew[1] = lst[((strold[0] &(u8)0x03) << 4) | ((strold[1] &(u8)0xF0) >> 4)];
-    strnew[2] = lst[((strold[1] &(u8)0x0F) << 2) | ((strold[2] &(u8)0xC0) >> 6)];
-    strnew[3] = lst[strold[2] &(u8)0x3F];
+    strnew[0] = lst[(strold[0] & (u8) 0xFC) >> 2];
+    strnew[1] = lst[((strold[0] & (u8) 0x03) << 4) | ((strold[1] & (u8) 0xF0) >> 4)];
+    strnew[2] = lst[((strold[1] & (u8) 0x0F) << 2) | ((strold[2] & (u8) 0xC0) >> 6)];
+    strnew[3] = lst[strold[2] & (u8) 0x3F];
     strnew += 4;
     strold += 3;
   }
 
   switch (len - (strold - src))
   {
-  case 1:
-    strnew[0] = lst[(strold[0] &(u8)0xFC) >> 2];
-    strnew[1] = lst[(strold[0] &(u8)0x03) << 4];
-    strnew[2] = '=';
-    strnew[3] = '=';
-    strnew += 4;
-    break;
+    case 1:
+      strnew[0] = lst[(strold[0] & (u8) 0xFC) >> 2];
+      strnew[1] = lst[(strold[0] & (u8) 0x03) << 4];
+      strnew[2] = '=';
+      strnew[3] = '=';
+      strnew += 4;
+      break;
 
-  case 2:
-    strnew[0] = lst[(strold[0] &(u8)0xFC) >> 2];
-    strnew[1] = lst[((strold[0] &(u8)0x03) << 4) | ((strold[1] &(u8)0xF0) >> 4)];
-    strnew[2] = lst[(strold[1] &(u8)0x0F) << 2];
-    strnew[3] = '=';
-    strnew += 4;
+    case 2:
+      strnew[0] = lst[(strold[0] & (u8) 0xFC) >> 2];
+      strnew[1] = lst[((strold[0] & (u8) 0x03) << 4) | ((strold[1] & (u8) 0xF0) >> 4)];
+      strnew[2] = lst[(strold[1] & (u8) 0x0F) << 2];
+      strnew[3] = '=';
+      strnew += 4;
   }
   return 1;
 }
 //-----------------------------------------------------------------------------
-bool GetIPPortFromAddr(struct sockaddr_in Addr, char* IP, u16* Port)
+bool GetIPPortFromAddr(struct sockaddr_in Addr, char *IP, u16 *Port)
 {
   //  CltAddr.sin_family = AF_INET;
   //  CltAddr.sin_addr.s_addr = inet_addr(DDNSSvrIP);
   //  CltAddr.sin_port = htons(Port);
 
-  char* tmpIP;
-  if(!IP) return false;
+  char *tmpIP;
+  if (!IP) return false;
   tmpIP = inet_ntoa(Addr.sin_addr);
   strcpy(IP, tmpIP);
   *Port = ntohs(Addr.sin_port);
   return true;
 }
+
 //-----------------------------------------------------------------------------
-void __encodeBase64(unsigned char* in, unsigned char* out)  
-{  
+void __encodeBase64(unsigned char *in, unsigned char *out)
+{
   static const unsigned char encodeBase64Map[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
   out[0] = encodeBase64Map[(in[0] >> 2) & 0x3F];
   out[1] = encodeBase64Map[((in[0] << 4) & 0x30) | ((in[1] >> 4) & 0x0F)];
   out[2] = encodeBase64Map[((in[1] << 2) & 0x3C) | ((in[2] >> 6) & 0x03)];
   out[3] = encodeBase64Map[in[2] & 0x3F];
-}  
+}
 //-----------------------------------------------------------------------------
-i32 Base64Encode(unsigned char* inbuf, i32 insize, unsigned char* outbuf, i32 outsize)  
-{  
+i32 Base64Encode(unsigned char *inbuf, i32 insize, unsigned char *outbuf, i32 outsize)
+{
   i32 inpos = 0, outpos = 0;
-  while(inpos != insize)
-  {  
-    if(inpos + 3 <= insize)
-    {  
-      if(outpos + 4 > outsize) return -1;
+  while (inpos != insize)
+  {
+    if (inpos + 3 <= insize)
+    {
+      if (outpos + 4 > outsize) return -1;
       __encodeBase64(inbuf + inpos, outbuf + outpos);
       inpos += 3;
       outpos += 4;
-    }  
+    }
 
-    if(insize - inpos == 2)
-    {  
+    if (insize - inpos == 2)
+    {
       unsigned char tail[3] = {0};
       tail[0] = *(inbuf + inpos);
       tail[1] = *(inbuf + inpos + 1);
@@ -1526,9 +1533,9 @@ i32 Base64Encode(unsigned char* inbuf, i32 insize, unsigned char* outbuf, i32 ou
       *(outbuf + outpos + 3) = '=';
       inpos += 2;
       outpos += 4;
-    }  
-    if(insize - inpos == 1)
-    {  
+    }
+    if (insize - inpos == 1)
+    {
       unsigned char tail[3] = {0};
       tail[0] = *(inbuf + inpos);
       __encodeBase64(tail, outbuf + outpos);
@@ -1536,30 +1543,32 @@ i32 Base64Encode(unsigned char* inbuf, i32 insize, unsigned char* outbuf, i32 ou
       *(outbuf + outpos + 2) = '=';
       inpos += 1;
       outpos += 4;
-    }  
-  }  
+    }
+  }
   return outpos;
-}  
+}
+
 //-----------------------------------------------------------------------------
-unsigned char __decodeBase64Map(unsigned char a)  
-{  
-  if(a >= 'A' && a <= 'Z')  
+unsigned char __decodeBase64Map(unsigned char a)
+{
+  if (a >= 'A' && a <= 'Z')
     return a - 'A';
-  if(a >= 'a' && a <= 'z')  
+  if (a >= 'a' && a <= 'z')
     return 26 + a - 'a';
-  if(a >= '0' && a <= '9')  
+  if (a >= '0' && a <= '9')
     return 52 + a - '0';
-  if(a == '+')  
+  if (a == '+')
     return 62;
-  if(a == '/')  
+  if (a == '/')
     return 63;
-  if(a == '=')  
+  if (a == '=')
     return 0;
   return -1;
-}  
+}
+
 //-----------------------------------------------------------------------------
-void __decodeBase64(unsigned char *in, unsigned char *out)  
-{  
+void __decodeBase64(unsigned char *in, unsigned char *out)
+{
   unsigned char map[4];
   map[0] = __decodeBase64Map(in[0]);
   map[1] = __decodeBase64Map(in[1]);
@@ -1568,37 +1577,35 @@ void __decodeBase64(unsigned char *in, unsigned char *out)
   out[0] = ((map[0] << 2) & 0xFC) | ((map[1] >> 4) & 0x03);
   out[1] = ((map[1] << 4) & 0xF0) | ((map[2] >> 2) & 0x0F);
   out[2] = ((map[2] << 6) & 0xC0) | ((map[3] >> 0) & 0x3F);
-}  
+}
 //-----------------------------------------------------------------------------
-i32 Base64Decode(unsigned char* inbuf, i32 insize, unsigned char* outbuf, i32 outsize)  
-{  
+i32 Base64Decode(unsigned char *inbuf, i32 insize, unsigned char *outbuf, i32 outsize)
+{
   i32 inpos = 0, outpos = 0;
-  if(insize % 4) return -1;
+  if (insize % 4) return -1;
 
-  while(inpos != insize)
-  {  
-    if(outpos + 3 > outsize) return -1;
+  while (inpos != insize)
+  {
+    if (outpos + 3 > outsize) return -1;
     __decodeBase64(inbuf + inpos, outbuf + outpos);
-    if(*(inbuf + inpos + 2) == '=')
-    {  
+    if (*(inbuf + inpos + 2) == '=')
+    {
       outpos += 1;
       break;
-    }
-    else if (*(inbuf + inpos + 3) == '=')
-    {  
+    } else if (*(inbuf + inpos + 3) == '=')
+    {
       outpos += 2;
       break;
-    }
-    else  
+    } else
     {
       outpos += 3;
     }
     inpos += 4;
-  }  
+  }
   return outpos;
 }
 //-----------------------------------------------------------------------------
-bool IsSameSegmentIP(char* IP1, char* IP2)//¡Ω∏ˆIP «∑Ò‘⁄Õ¨“ª∂Œ
+bool IsSameSegmentIP(char *IP1, char *IP2)//‰∏§‰∏™IPÊòØÂê¶Âú®Âêå‰∏ÄÊÆµ
 {
   struct sockaddr_in s1;
   struct sockaddr_in s2;
@@ -1607,63 +1614,74 @@ bool IsSameSegmentIP(char* IP1, char* IP2)//¡Ω∏ˆIP «∑Ò‘⁄Õ¨“ª∂Œ
   int a, b;
   memcpy(&a, &s1.sin_addr, 4);
   memcpy(&b, &s2.sin_addr, 4);
-  return ((int)(a<<8) == (int)(b<<8));
+  return ((int) (a << 8) == (int) (b << 8));
 }
+
 //-----------------------------------------------------------------------------
-char* GetLocalIP()
+char *GetLocalIP()
 {
 #ifdef WIN32
 
   static char ip[100];
   HOSTENT* host;
-  char hostname[256];  
+  char hostname[256];
   i32 ret;
-  WSADATA wsaData;  
-  WSAStartup(MAKEWORD(2, 2), &wsaData);  
-  ret = gethostname(hostname, sizeof(hostname));  
+  WSADATA wsaData;
+  WSAStartup(MAKEWORD(2, 2), &wsaData);
+  ret = gethostname(hostname, sizeof(hostname));
   if (ret == SOCKET_ERROR) return NULL;
-  host = gethostbyname(hostname);  
+  host = gethostbyname(hostname);
   if (host == NULL) return NULL;
-  strcpy(ip, inet_ntoa(*(struct in_addr*)*host->h_addr_list));  
+  strcpy(ip, inet_ntoa(*(struct in_addr*)*host->h_addr_list));
   return ip;
 
 #else
 
   struct ifconf conf;
-  struct ifreq* ifr;
+  struct ifreq *ifr;
   char buff[512];
   i32 num;
-  i32 i;
-  i32 hSkt = socket(PF_INET, SOCK_DGRAM, 0);
+  i32 i, hSkt;
+  for (i = 0; i < 9; i++)
+  {
+    hSkt = socket(PF_INET, SOCK_DGRAM, 0);
+    if (hSkt > 0) break;
+  }
+  if (hSkt <= 0) return NULL;
   conf.ifc_len = 512;
   conf.ifc_buf = buff;
   ioctl(hSkt, SIOCGIFCONF, &conf);
   num = conf.ifc_len / sizeof(struct ifreq);
   ifr = conf.ifc_req;
-  for(i = 0; i<num; i ++)
+  for (i = 0; i < num; i++)
   {
-    struct sockaddr_in* sin = (struct sockaddr_in*)(&ifr->ifr_addr);
+    struct sockaddr_in *sin = (struct sockaddr_in *) (&ifr->ifr_addr);
     ioctl(hSkt, SIOCGIFFLAGS, ifr);
-    if(((ifr->ifr_flags &IFF_LOOPBACK) == 0)&&(ifr->ifr_flags &IFF_UP))
+    if (((ifr->ifr_flags & IFF_LOOPBACK) == 0) && (ifr->ifr_flags & IFF_UP))
     {
       closesocket(hSkt);
       return inet_ntoa(sin->sin_addr);
     }
     ifr++;
   }
-    return "0.0.0.0";
+
+  closesocket(hSkt);
+  return NULL;
 #endif
 }
+
 //-----------------------------------------------------------------------------
-//SHA1◊¥Ã¨ ˝æ›Ω·ππ¿‡–Õ
-typedef struct TSHA_State {
-  u32 h[5]; // 5∏ˆ≥ı º¡¥Ω”±‰¡ø;±£¥Ê20◊÷Ω⁄’™“™
-  u8 block[64]; // ∑÷◊È
+//SHA1Áä∂ÊÄÅÊï∞ÊçÆÁªìÊûÑÁ±ªÂûã
+typedef struct TSHA_State
+{
+  u32 h[5]; // 5‰∏™ÂàùÂßãÈìæÊé•ÂèòÈáè;‰øùÂ≠ò20Â≠óËäÇÊëòË¶Å
+  u8 block[64]; // ÂàÜÁªÑ
   i32 blkused;
-  u32 lenhi, lenlo; // ≥§∂»”Ú
+  u32 lenhi, lenlo; // ÈïøÂ∫¶Âüü
 } TSHA_State;
+
 //-----------------------------------------------
-void SHA_Init(TSHA_State* s)
+void SHA_Init(TSHA_State *s)
 {
   s->h[0] = 0x67452301;
   s->h[1] = 0xefcdab89;
@@ -1673,10 +1691,11 @@ void SHA_Init(TSHA_State* s)
   s->blkused = 0;
   s->lenhi = s->lenlo = 0;
 }
+
 //-----------------------------------------------
-void SHATransform(u32* digest, u32* block)
+void SHATransform(u32 *digest, u32 *block)
 {
-#define rol(x,y) ( ((x) << (y)) | (((u32)x) >> (32-y)) )
+#define rol(x, y) ( ((x) << (y)) | (((u32)x) >> (32-y)) )
   u32 w[80];
   u32 a, b, c, d, e;
   u32 tmp;
@@ -1696,7 +1715,7 @@ void SHATransform(u32* digest, u32* block)
 
   for (t = 0; t < 20; t++)
   {
-    tmp = rol(a, 5) + ((b &c) | (d &~b)) + e+w[t] + 0x5a827999;
+    tmp = rol(a, 5) + ((b & c) | (d & ~b)) + e + w[t] + 0x5a827999;
     e = d;
     d = c;
     c = rol(b, 30);
@@ -1706,7 +1725,7 @@ void SHATransform(u32* digest, u32* block)
 
   for (t = 20; t < 40; t++)
   {
-    tmp = rol(a, 5) + (b ^ c ^ d) + e+w[t] + 0x6ed9eba1;
+    tmp = rol(a, 5) + (b ^ c ^ d) + e + w[t] + 0x6ed9eba1;
     e = d;
     d = c;
     c = rol(b, 30);
@@ -1716,7 +1735,7 @@ void SHATransform(u32* digest, u32* block)
 
   for (t = 40; t < 60; t++)
   {
-    tmp = rol(a, 5) + ((b &c) | (b &d) | (c &d)) + e+w[t] + 0x8f1bbcdc;
+    tmp = rol(a, 5) + ((b & c) | (b & d) | (c & d)) + e + w[t] + 0x8f1bbcdc;
     e = d;
     d = c;
     c = rol(b, 30);
@@ -1726,7 +1745,7 @@ void SHATransform(u32* digest, u32* block)
 
   for (t = 60; t < 80; t++)
   {
-    tmp = rol(a, 5) + (b ^ c ^ d) + e+w[t] + 0xca62c1d6;
+    tmp = rol(a, 5) + (b ^ c ^ d) + e + w[t] + 0xca62c1d6;
     e = d;
     d = c;
     c = rol(b, 30);
@@ -1740,13 +1759,14 @@ void SHATransform(u32* digest, u32* block)
   digest[3] += d;
   digest[4] += e;
 }
+
 //-----------------------------------------------
-void SHA_Bytes(TSHA_State* s, void* p, i32 len)
+void SHA_Bytes(TSHA_State *s, void *p, i32 len)
 {
   i32 i;
   u32 wordblock[16];
   u32 lenw = len;
-  unsigned char* q = (unsigned char*)p;
+  unsigned char *q = (unsigned char *) p;
 
   s->lenlo += lenw;
   s->lenhi += (s->lenlo < lenw);
@@ -1755,21 +1775,18 @@ void SHA_Bytes(TSHA_State* s, void* p, i32 len)
   {
     memcpy(s->block + s->blkused, q, len);
     s->blkused += len;
-  }
-  else
+  } else
   {
     while (s->blkused + len >= 64)
     {
-      memcpy(s->block + s->blkused, q, 64-s->blkused);
-      q += 64-s->blkused;
-      len -= 64-s->blkused;
+      memcpy(s->block + s->blkused, q, 64 - s->blkused);
+      q += 64 - s->blkused;
+      len -= 64 - s->blkused;
 
       for (i = 0; i < 16; i++)
       {
-        wordblock[i] = (((u32)s->block[i* 4+0]) << 24) | 
-          (((u32)s->block[i* 4+1]) << 16) |
-          (((u32)s->block[i* 4+2]) << 8)  |
-          (((u32)s->block[i* 4+3]) << 0);
+        wordblock[i] = (((u32) s->block[i * 4 + 0]) << 24) | (((u32) s->block[i * 4 + 1]) << 16) | (((u32) s->block[i * 4 + 2]) << 8) |
+                       (((u32) s->block[i * 4 + 3]) << 0);
       }
       SHATransform(s->h, wordblock);
       s->blkused = 0;
@@ -1778,41 +1795,42 @@ void SHA_Bytes(TSHA_State* s, void* p, i32 len)
     s->blkused = len;
   }
 }
+
 //-----------------------------------------------
-void SHA_Final(TSHA_State* s, unsigned char* output)
+void SHA_Final(TSHA_State *s, unsigned char *output)
 {
   i32 i, pad;
   unsigned char c[64];
   u32 lenhi, lenlo;
 
-  if (s->blkused >= 56) pad = 56+64-s->blkused; else pad = 56-s->blkused;
-  lenhi = (s->lenhi << 3) | (s->lenlo >> (32-3));
+  if (s->blkused >= 56) pad = 56 + 64 - s->blkused; else pad = 56 - s->blkused;
+  lenhi = (s->lenhi << 3) | (s->lenlo >> (32 - 3));
   lenlo = (s->lenlo << 3);
   memset(c, 0, pad);
   c[0] = 0x80;
   SHA_Bytes(s, &c, pad);
 
-  c[0] = (lenhi >> 24) &0xFF;
-  c[1] = (lenhi >> 16) &0xFF;
-  c[2] = (lenhi >> 8) &0xFF;
-  c[3] = (lenhi >> 0) &0xFF;
-  c[4] = (lenlo >> 24) &0xFF;
-  c[5] = (lenlo >> 16) &0xFF;
-  c[6] = (lenlo >> 8) &0xFF;
-  c[7] = (lenlo >> 0) &0xFF;
+  c[0] = (lenhi >> 24) & 0xFF;
+  c[1] = (lenhi >> 16) & 0xFF;
+  c[2] = (lenhi >> 8) & 0xFF;
+  c[3] = (lenhi >> 0) & 0xFF;
+  c[4] = (lenlo >> 24) & 0xFF;
+  c[5] = (lenlo >> 16) & 0xFF;
+  c[6] = (lenlo >> 8) & 0xFF;
+  c[7] = (lenlo >> 0) & 0xFF;
 
   SHA_Bytes(s, &c, 8);
 
   for (i = 0; i < 5; i++)
   {
-    output[i* 4] = (s->h[i] >> 24) &0xFF;
-    output[i* 4+1] = (s->h[i] >> 16) &0xFF;
-    output[i* 4+2] = (s->h[i] >> 8) &0xFF;
-    output[i* 4+3] = (s->h[i]) &0xFF;
+    output[i * 4] = (s->h[i] >> 24) & 0xFF;
+    output[i * 4 + 1] = (s->h[i] >> 16) & 0xFF;
+    output[i * 4 + 2] = (s->h[i] >> 8) & 0xFF;
+    output[i * 4 + 3] = (s->h[i]) & 0xFF;
   }
 }
 //-----------------------------------------------
-i32 SHA1Encode(unsigned char* inbuf, i32 insize, unsigned char* outbuf, i32 outsize)
+i32 SHA1Encode(unsigned char *inbuf, i32 insize, unsigned char *outbuf, i32 outsize)
 {
   TSHA_State s;
   SHA_Init(&s);
@@ -1821,12 +1839,12 @@ i32 SHA1Encode(unsigned char* inbuf, i32 insize, unsigned char* outbuf, i32 outs
   return strlen(outbuf);
 }
 //-----------------------------------------------------------------------------
-HTTPERROR HttpGet(const char* url, char* OutBuf, i32* OutBufLen, bool IsShowHead, i32 TimeOut)
+HTTPERROR HttpGet(const char *url, char *OutBuf, i32 *OutBufLen, bool IsShowHead, i32 TimeOut)
 {
   return HttpPost(url, NULL, 0, OutBuf, OutBufLen, IsShowHead, TimeOut);
 }
 //-----------------------------------------------------------------------------
-HTTPERROR HttpPost(const char* url, char* InBuf, i32 InBufLen, char* OutBuf, i32* OutBufLen, bool IsShowHead, i32 TimeOut)
+HTTPERROR HttpPost(const char *url, char *InBuf, i32 InBufLen, char *OutBuf, i32 *OutBufLen, bool IsShowHead, i32 TimeOut)
 {
 #ifndef WIN32
 #define SOCKET_ERROR -1
@@ -1840,20 +1858,20 @@ HTTPERROR HttpPost(const char* url, char* InBuf, i32 InBufLen, char* OutBuf, i32
   char SendStr[2048];
   char PageName[1024];
   struct sockaddr_in addr;
-  struct hostent* h;
+  struct hostent *h;
   unsigned long tmp_address = INADDR_NONE;
   i32 recvLen = 0;
   i32 port = 80;
-  i32 m[4]; 
+  i32 m[4];
   SOCKET hSocket = INVALID_SOCKET;
   fd_set fs;
   struct timeval tv;
   time_t t;
   i32 ret, i;
   i32 iContentLength = 0;
-  char* tmpBuf;
+  char *tmpBuf;
   i32 itmp;
-  char* strGetPost = NULL;
+  char *strGetPost = NULL;
 
   iErrorCode = 0;
   if (!OutBuf) return iErrorCode;
@@ -1873,25 +1891,24 @@ HTTPERROR HttpPost(const char* url, char* InBuf, i32 InBufLen, char* OutBuf, i32
   ret = sscanf(SvrName, "%[^:]:%d", HostName, &port);
   if (ret == 2)
   {
-    if ((strlen(HostName) == 0) || (port <= 0) || (port >0xffff)) return iErrorCode;
-  }
-  else
+    if ((strlen(HostName) == 0) || (port <= 0) || (port > 0xffff)) return iErrorCode;
+  } else
   {
     strcpy(HostName, SvrName);
     port = 80;
   }
 
   addr.sin_family = AF_INET;
-  addr.sin_port = htons((u16)port);
+  addr.sin_port = htons((u16) port);
 
   ret = sscanf(HostName, "%d.%d.%d.%d", &m[0], &m[1], &m[2], &m[3]);
-  if ((ret == 4) && (m[0] >= 0) && (m[0] <= 255) && (m[1] >= 0) && (m[1] <= 255) && (m[2] >= 0) && (m[2] <= 255) && (m[3] >= 0) && (m[3] <= 255))
+  if ((ret == 4) && (m[0] >= 0) && (m[0] <= 255) && (m[1] >= 0) && (m[1] <= 255) && (m[2] >= 0) && (m[2] <= 255) && (m[3] >= 0) &&
+      (m[3] <= 255))
   {
     if ((tmp_address = inet_addr(HostName)) != INADDR_NONE)
       memcpy(&addr.sin_addr, &tmp_address, sizeof(unsigned long));
     else return iErrorCode;
-  }
-  else
+  } else
   {
     if ((h = gethostbyname(HostName)) != NULL)
       memcpy(&addr.sin_addr, h->h_addr_list[0], h->h_length);
@@ -1904,35 +1921,33 @@ HTTPERROR HttpPost(const char* url, char* InBuf, i32 InBufLen, char* OutBuf, i32
     {
       memset(b64UserNamePassword, 0, sizeof(b64UserNamePassword));
       Base64Encode(UserNamePassword, strlen(UserNamePassword), b64UserNamePassword, sizeof(b64UserNamePassword));
-      sprintf(SendStr, "POST %s HTTP/1.0\r\nHost: %s\r\nContent-Length: %d\r\nAuthorization: Basic %s\r\n\r\n", PageName, HostName, InBufLen, b64UserNamePassword);
-    }
-    else
+      sprintf(SendStr, "POST %s HTTP/1.0\r\nHost: %s\r\nContent-Length: %d\r\nAuthorization: Basic %s\r\n\r\n", PageName, HostName,
+              InBufLen, b64UserNamePassword);
+    } else
     {
       sprintf(SendStr, "POST %s HTTP/1.0\r\nHost: %s\r\nContent-Length: %d\r\n\r\n", PageName, HostName, InBufLen);
     }
-  }
-  else
+  } else
   {//GET
     if (strlen(UserNamePassword) > 0)
     {
       memset(b64UserNamePassword, 0, sizeof(b64UserNamePassword));
       Base64Encode(UserNamePassword, strlen(UserNamePassword), b64UserNamePassword, sizeof(b64UserNamePassword));
       sprintf(SendStr, "GET %s HTTP/1.0\r\nHost: %s\r\nAuthorization: Basic %s\r\n\r\n", PageName, HostName, b64UserNamePassword);
-    }
-    else
+    } else
     {
       sprintf(SendStr, "GET %s HTTP/1.0\r\nHost: %s\r\n\r\n", PageName, HostName);
     }
   }
 
-  //Ω®¡¢SOCKET
+  //Âª∫Á´ãSOCKET
   hSocket = socket(AF_INET, SOCK_STREAM, 0);
   if (hSocket == INVALID_SOCKET) return iErrorCode;
 
-  ret = connect(hSocket, (struct sockaddr*) &addr, sizeof(struct sockaddr_in));
+  ret = connect(hSocket, (struct sockaddr *) &addr, sizeof(struct sockaddr_in));
   if (ret == SOCKET_ERROR) goto exits;
 
-  TimeOut =  TimeOut / 1000;
+  TimeOut = TimeOut / 1000;
   tv.tv_sec = TimeOut;
   tv.tv_usec = 0;
   FD_ZERO(&fs);
@@ -1950,10 +1965,10 @@ HTTPERROR HttpPost(const char* url, char* InBuf, i32 InBufLen, char* OutBuf, i32
     ret = send(hSocket, InBuf, InBufLen, 0);
     if (ret == SOCKET_ERROR) goto exits;
   }
-  // ’»°Õ∑
+  //Êî∂ÂèñÂ§¥
   t = time(NULL);
   *OutBufLen = 0;
-  do 
+  do
   {
     tv.tv_sec = TimeOut - (time(NULL) - t);
     tv.tv_usec = 0;
@@ -1964,22 +1979,22 @@ HTTPERROR HttpPost(const char* url, char* InBuf, i32 InBufLen, char* OutBuf, i32
     if (ret == SOCKET_ERROR) goto exits;
     if (ret == 0) goto exits;
 
-    recvLen = recv(hSocket, &OutBuf[*OutBufLen], 1, 0);//“ª¥Œ ’“ª∏ˆ◊÷Ω⁄
+    recvLen = recv(hSocket, &OutBuf[*OutBufLen], 1, 0);//‰∏ÄÊ¨°Êî∂‰∏Ä‰∏™Â≠óËäÇ
     if (recvLen > 0) *OutBufLen = *OutBufLen + recvLen;
     if (*OutBufLen < 4) continue;
 
-    if (*OutBufLen > 1024) goto exits;//Õ∑Ã´¥Û
+    if (*OutBufLen > 1024) goto exits;//Â§¥Â§™Â§ß
 
-    memcpy(&itmp, &OutBuf[*OutBufLen-4], 4);
+    memcpy(&itmp, &OutBuf[*OutBufLen - 4], 4);
     if (itmp != 0x0A0D0A0D) continue;
 
     OutBuf[*OutBufLen] = 0x00;
 
-    for (i=0; i<*OutBufLen; i++) 
+    for (i = 0; i < *OutBufLen; i++)
     {
-      if (OutBuf[i] >='A' && OutBuf[i] <='Z')  OutBuf[i] = OutBuf[i] + 32;
+      if (OutBuf[i] >= 'A' && OutBuf[i] <= 'Z') OutBuf[i] = OutBuf[i] + 32;
     }
-    //{$message 'HttpPost“™”≈ªØ'}
+    //{$message 'HttpPostË¶Å‰ºòÂåñ'}
     tmpBuf = strstr(OutBuf, "content-length:");
     if (tmpBuf)
     {
@@ -1991,8 +2006,7 @@ HTTPERROR HttpPost(const char* url, char* InBuf, i32 InBufLen, char* OutBuf, i32
       }
       break;
     }
-  }
-  while ((recvLen > 0) && ((time(NULL) - t) < TimeOut));
+  } while ((recvLen > 0) && ((time(NULL) - t) < TimeOut));
 
   if (iContentLength <= 0) goto exits;
 
@@ -2008,9 +2022,9 @@ HTTPERROR HttpPost(const char* url, char* InBuf, i32 InBufLen, char* OutBuf, i32
     goto exits;
   }
 
-  // ’»° ˝æ›
+  //Êî∂ÂèñÊï∞ÊçÆ
   t = time(NULL);
-  do 
+  do
   {
     tv.tv_sec = TimeOut - (time(NULL) - t);
     tv.tv_usec = 0;
@@ -2018,25 +2032,24 @@ HTTPERROR HttpPost(const char* url, char* InBuf, i32 InBufLen, char* OutBuf, i32
     FD_SET(hSocket, &fs);
 
     ret = select(hSocket + 1, &fs, NULL, NULL, &tv);
-    if (ret == SOCKET_ERROR) 
+    if (ret == SOCKET_ERROR)
       goto exits;
     if (ret == 0)
       goto exits;
 
     recvLen = recv(hSocket, &OutBuf[*OutBufLen], iContentLength - *OutBufLen, 0);
     if (recvLen > 0) *OutBufLen = *OutBufLen + recvLen;
-  }
-  while ((recvLen > 0) && ((time(NULL) - t) < TimeOut));
+  } while ((recvLen > 0) && ((time(NULL) - t) < TimeOut));
   if (*OutBufLen <= 0) goto exits;
   //
-exits:
+  exits:
   shutdown(hSocket, SD_SEND);
   closesocket(hSocket);
 
   return iErrorCode;
 }
 //-----------------------------------------------------------------------------
-bool DiskExists(char* Path)// «∑Ò¥Ê‘⁄¥≈≈Ã
+bool DiskExists(char *Path)//ÊòØÂê¶Â≠òÂú®Á£ÅÁõò
 {
   u32 TotalSpace = 0;
   u32 FreeSpace = 0;
@@ -2044,32 +2057,60 @@ bool DiskExists(char* Path)// «∑Ò¥Ê‘⁄¥≈≈Ã
   return (TotalSpace > 0);
 }
 //-----------------------------------------------------------------------------
-bool GetDiskSpace(char* Path, u32* TotalSpace, u32* FreeSpace)//»°µ√¥≈≈Ãø’º‰ M
+bool GetDiskSpace(char *Path, u32 *TotalSpace, u32 *FreeSpace)//ÂèñÂæóÁ£ÅÁõòÁ©∫Èó¥ M
 {
-    return false;
+#ifndef WIN32
+  struct statfs stat;
+  *FreeSpace = 0;
+  *TotalSpace = 0;
+  int Ret = statfs(Path, &stat);
+  if (Ret == 0)
+  {
+    *FreeSpace = (u32) ((u32) (stat.f_bsize / 1024) * (u32) (stat.f_bfree / 1024));
+    *TotalSpace = (u32) ((u32) (stat.f_bsize / 1024) * (u32) (stat.f_blocks / 1024));
+  }
+  //printf(" filetype 0x%x \n", stat.f_type);
+  return (Ret == 0);
+#else
+#ifdef _MSC_VER
+  unsigned __int64 iTotalFree, iTotalSpace;
+  bool ret;
+  *TotalSpace = 0;
+  *FreeSpace  = 0;
+  //ret = GetDiskSpace(Path, &iTotalFree, &iTotalSpace);
+  ret = GetDiskFreeSpaceEx(Path, &iTotalFree, &iTotalSpace, NULL);
+  if (ret)
+  {
+    *FreeSpace = iTotalFree    / 1024;
+    *TotalSpace  = iTotalSpace / 1024;
+  }
+  return ret;
+#endif
+#endif
 }
+
 //------------------------------------------------------------------------------
-void printPI()//¥Ú”°‘≤÷‹¬ 
+void printPI()//ÊâìÂç∞ÂúÜÂë®Áéá
 {
   static int a = 10000;
   static int b, d, e, g;
   static int c = 2800;
   static int f[2801];
-  for(;b - c;)
+  for (; b - c;)
   {
     f[b++] = a / 5;
   }
 
-  for(;d = 0, g = c * 2;)
+  for (; d = 0, g = c * 2;)
   {
     b = c;
-    d = d+f[b]*a;
+    d = d + f[b] * a;
     --g;
     f[b] = d % g;
     d = d / g;
     g--;
 
-    for(;--b;)
+    for (; --b;)
     {
       d = d * b;
       d = d + f[b] * a;
@@ -2079,20 +2120,20 @@ void printPI()//¥Ú”°‘≤÷‹¬ 
       g--;
     }
     c = c - 14;
-    printf("%.4d",e + d / a);
+    printf("%.4d", e + d / a);
     e = d % a;
   }
   printf("\n");
 }
 //-----------------------------------------------------------------------------
-bool IsConnectWLAN()//Õ‚Õ¯ «∑Ò“—¡¨Ω”
+bool IsConnectWLAN()//Â§ñÁΩëÊòØÂê¶Â∑≤ËøûÊé•
 {
-  struct hostent* h;
-  h = (struct hostent*)gethostbyname("www.google.com");
+  struct hostent *h;
+  h = (struct hostent *) gethostbyname("www.google.com");
   return (h != NULL);
 }
 //-----------------------------------------------------------------------------
-bool RectIsIntersect(TRect* r1, TRect* r2)//«¯”Ú «∑Ò∞¸∫¨
+bool RectIsIntersect(TRect *r1, TRect *r2)//Âå∫ÂüüÊòØÂê¶ÂåÖÂê´
 {
   int iMaxLeft, iMaxTop, iMinRight, iMinBottom;
   iMaxLeft = max(r1->left, r2->left);
@@ -2100,51 +2141,184 @@ bool RectIsIntersect(TRect* r1, TRect* r2)//«¯”Ú «∑Ò∞¸∫¨
   iMinRight = min(r1->right, r2->right);
   iMinBottom = min(r1->bottom, r2->bottom);
 
-  return !(iMaxLeft > iMinRight || iMaxTop>iMinBottom);
+  return !(iMaxLeft > iMinRight || iMaxTop > iMinBottom);
 }
+
 //-----------------------------------------------------------------------------
-int StrToHex(char* src, int srclen, char* dst)
+int StrToHex(char *src, int srclen, char *dst)
 {
   unsigned char h1, h2;
   unsigned char s1, s2;
   int i, dstlen;
   dstlen = srclen / 2;
 
-  for (i=0; i<dstlen; i++)
+  for (i = 0; i < dstlen; i++)
   {
-    h1 = (unsigned char)src[2*i];
-    h2 = (unsigned char)src[2*i+1];
+    h1 = (unsigned char) src[2 * i];
+    h2 = (unsigned char) src[2 * i + 1];
     s1 = toupper(h1) - 0x30;
     if (s1 > 9) s1 = s1 - 7;
     s2 = toupper(h2) - 0x30;
     if (s2 > 9) s2 = s2 - 7;
-    dst[i] = s1*16 + s2;
+    dst[i] = s1 * 16 + s2;
   }
   dst[dstlen] = 0x00;
   return dstlen;
 }
+
 //-----------------------------------------------------------------------------
-int HexToStr(char* src, int srclen, char* dst)
+int HexToStr(char *src, int srclen, char *dst)
 {
   unsigned char ddl, ddh;
   int i, dstlen;
   dstlen = srclen * 2;
 
-  for (i=0; i<srclen; i++)
+  for (i = 0; i < srclen; i++)
   {
-    ddh = (unsigned char)src[i] / 16;
-    ddl = (unsigned char)src[i] % 16;
+    ddh = (unsigned char) src[i] / 16;
+    ddl = (unsigned char) src[i] % 16;
     if (ddh > 9) ddh = ddh + 7;
     if (ddl > 9) ddl = ddl + 7;
 
-    dst[i*2] = ddh + 0x30;
-    dst[i*2+1] = ddl + 0x30;
+    dst[i * 2] = ddh + 0x30;
+    dst[i * 2 + 1] = ddl + 0x30;
   }
-  dst[srclen*2] = '\0';
+  dst[srclen * 2] = '\0';
   return dstlen;
 }
 //-----------------------------------------------------------------------------
+#ifndef WIN32
+int Initcomm(char* DevName, int BPS, int DataBit, int ParityCheck, int StopBit)//ÊâìÂºÄ‰∏Ä‰∏™‰∏≤Âè£
+{
+  int h = open(DevName, O_RDWR | O_NOCTTY | O_NDELAY);
+  if (h < 0) return false;
 
+  fcntl(h, F_SETFL, 0);
+  isatty(STDIN_FILENO);
+
+  printf("Initcomm: BPS %d DataBit %d ParityCheck %d StopBit %d \n", BPS, DataBit, ParityCheck, StopBit);
+
+  struct termios Pkt;
+  if (tcgetattr(h, &Pkt) != 0) goto Fail;
+
+  bzero(&Pkt,sizeof(Pkt));
+  Pkt.c_cflag |=CLOCAL | CREAD;
+  Pkt.c_cflag &= ~CSIZE;
+
+  switch(DataBit)
+  {
+    case 5:
+      Pkt.c_cflag |= CS5;
+      break;
+    case 6:
+      Pkt.c_cflag |= CS6;
+      break;
+    case 7:
+      Pkt.c_cflag |= CS7;
+      break;
+    case 8:
+      Pkt.c_cflag |= CS8;
+      break;
+    default:
+      Pkt.c_cflag |= CS8;
+      break;
+  }
+
+  switch(ParityCheck)
+  {
+    case 1:
+      Pkt.c_cflag |= PARENB;
+      Pkt.c_cflag |= PARODD;
+      Pkt.c_cflag |= (INPCK | ISTRIP);
+      break;
+    case 2:
+      Pkt.c_cflag |= (INPCK | ISTRIP);
+      Pkt.c_cflag |= PARENB;
+      Pkt.c_cflag &= ~PARODD;
+      break;
+    case 0:
+      Pkt.c_cflag &= ~PARENB;
+      break;
+    default:
+      Pkt.c_cflag &= ~PARENB;
+      break;
+  }
+
+  int nBPS;
+
+  switch(BPS)
+  {
+    case 1200:
+      nBPS = B1200;
+      break;
+    case 2400:
+      nBPS = B2400;
+      break;
+    case 4800:
+      nBPS = B4800;
+      break;
+    case 9600:
+      nBPS = B9600;
+      break;
+    case 19200:
+      nBPS = B19200;
+      break;
+    case 38400:
+      nBPS = B38400;
+      break;
+    case 57600:
+      nBPS = B57600;
+      break;
+    case 115200:
+      nBPS = B115200;
+      break;
+    default:
+      nBPS = 2400;
+      break;
+  }
+
+  cfsetispeed(&Pkt, nBPS);
+  cfsetospeed(&Pkt, nBPS);
+
+  switch(StopBit)
+  {
+    case 0://StopBit_1:
+      Pkt.c_cflag &= ~CSTOPB;
+      break;
+    case 1://StopBit_1_5:
+      Pkt.c_cflag = Pkt.c_cflag;
+      break;
+    case 2://StopBit_2:
+      Pkt.c_cflag |=  CSTOPB;
+      break;
+    default:
+      Pkt.c_cflag &= ~CSTOPB;
+      break;
+  }
+  Pkt.c_cc[VTIME] = 0;
+  Pkt.c_cc[VMIN]  = 0;
+
+  tcflush(h, TCIFLUSH);
+
+  if((tcsetattr(h, TCSANOW, &Pkt))!=0) goto Fail;
+
+  return h;
+
+
+  Fail:
+  close(h);
+  h = 0;
+  return h;
+}
+//-----------------------------------------------------------------------------
+int Freecomm(int* Handle)//ÂÖ≥Èó≠‰∏Ä‰∏™‰∏≤Âè£
+{
+  close(*Handle);
+  *Handle = 0;
+  return 1;
+}
+#endif
+//-----------------------------------------------------------------------------
 #ifdef linux
 #warning "linux linuxlinux linux linux"
 #endif
@@ -2176,3 +2350,4 @@ int HexToStr(char* src, int srclen, char* dst)
 #ifdef TARGET_IPHONE_SIMULATOR
 #warning "TARGET_IPHONE_SIMULATOR TARGET_IPHONE_SIMULATOR TARGET_IPHONE_SIMULATOR"
 #endif
+

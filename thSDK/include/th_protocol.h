@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Author      : Öìºì²¨
+// Author      : æœ±çº¢æ³¢
 // Date        : 2017.09.14
 // Version     : V 2.00
 // Description : www.southipcam.com
@@ -19,7 +19,7 @@
 #define Port_Ax_Multicast      2000
 #define Port_Ax_Search_Local   1999
 #define Port_onvifSearch       3702
-#define IP_Ax_Multicast  "239.255.255.250"//uPnP IP²éÑ¯ ¶à²¥¶Ô½²IP
+#define IP_Ax_Multicast  "239.255.255.250"//uPnP IPæŸ¥è¯¢ å¤šæ’­å¯¹è®²IP
 #define REC_FILE_EXT           "av"
 #define REC_FILE_EXT_DOT      ".av"
 
@@ -32,9 +32,9 @@ typedef enum TDevType {// sizeof 4
   dt_DevOther
 }TDevType;
 
-/*ÍøÂç°ü*/
+/*ç½‘ç»œåŒ…*/
 //-----------------------------------------------------------------------------
-typedef struct TSMTPCfgPkt {//sizeof 500 u8ÓÊ¼şÅäÖÃ°ü
+typedef struct TSMTPCfgPkt {//sizeof 500 u8é‚®ä»¶é…ç½®åŒ…
   i32 Active;
   char40 SMTPServer;
   i32 SMTPPort;
@@ -46,7 +46,7 @@ typedef struct TSMTPCfgPkt {//sizeof 500 u8ÓÊ¼şÅäÖÃ°ü
   char Reserved[8];
 }TSMTPCfgPkt;
 //-----------------------------------------------------------------------------
-typedef struct TFTPCfgPkt {//sizeof 232 u8 FTPÅäÖÃ°ü
+typedef struct TFTPCfgPkt {//sizeof 232 u8 FTPé…ç½®åŒ…
   i32 Active;
   char100 FTPServer;
   i32 FTPPort;
@@ -56,10 +56,10 @@ typedef struct TFTPCfgPkt {//sizeof 232 u8 FTPÅäÖÃ°ü
   char Reserved[4];
 }TFTPCfgPkt;
 
-typedef struct Tp2pCfgPkt {//sizeof 88 u8 P2PÅäÖÃ°ü
+typedef struct Tp2pCfgPkt {//sizeof 88 u8 P2Pé…ç½®åŒ…
   char80 UID;
-  bool Active;
-  u8 StreamType;//0 Ö÷ÂëÁ÷ 1 ´ÎÂëÁ÷
+  u8 Active;
+  u8 StreamType;//0 ä¸»ç æµ 1 æ¬¡ç æµ
   u8 Version; //20171103
   u8 p2pType;   //tutk=0 self=1
   char Reserved[4];
@@ -110,7 +110,7 @@ typedef enum TStandardEx {
   StandardExMax=30
 }TStandardEx;
 //-----------------------------------------------------------------------------
-typedef enum TVideoType {                        //ÊÓÆµ¸ñÊ½sizeof 4 u8
+typedef enum TVideoType {                        //è§†é¢‘æ ¼å¼sizeof 4 u8
   MPEG4          =0,
   MJPEG          =1,
   H264           =2,
@@ -124,26 +124,26 @@ typedef enum TStandard {
 //-----------------------------------------------------------------------------
 #define CBR    0
 #define VBR    1
-typedef struct TVideoFormat {                    //ÊÓÆµ¸ñÊ½ sizeof 128
-  i32  Standard;                                 //ÖÆÊ½ PAL=1, NTSC=0 default=0xff
-  i32  Width;                                    //¿í 720 360 180 704 352 176 640 320 160
-  i32  Height;                                   //¸ß 480 240 120 576 288 144
+typedef struct TVideoFormat {                    //è§†é¢‘æ ¼å¼ sizeof 128
+  i32  Standard;                                 //åˆ¶å¼ PAL=1, NTSC=0 default=0xff
+  i32  Width;                                    //å®½ 720 360 180 704 352 176 640 320 160
+  i32  Height;                                   //é«˜ 480 240 120 576 288 144 
   TVideoType VideoType;                          //MPEG4=0x00, MJPEG=0x01  H264=0x02
-  u8  Brightness;                               //ÁÁ¶È   0-255
-  u8  Contrast;                                 //¶Ô±È¶È 0-255
-  u8  Hue;                                      //É«¶È   0-255
-  u8  Saturation;                               //±¥ºÍ¶È 0-255
-  i32  FrameRate;                                //Ö¡ÂÊ 1-30 MAX:PAL 25 NTSC 30
-  i32  IPInterval;                               //IPÖ¡¼ä¸ô 1-120 default 30
-  u8 BitRateType;                              //0¶¨ÂëÁ÷CBR 1¶¨»­ÖÊVBR
-  u8 BitRateQuant;                             //»­ÖÊ  0..4
-  u8  BrightnessNight;                          //ÁÁ¶È   0-255
-  u8  ContrastNight;                            //¶Ô±È¶È 0-255
+  u8  Brightness;                               //äº®åº¦   0-255
+  u8  Contrast;                                 //å¯¹æ¯”åº¦ 0-255
+  u8  Hue;                                      //è‰²åº¦   0-255
+  u8  Saturation;                               //é¥±å’Œåº¦ 0-255
+  i32  FrameRate;                                //å¸§ç‡ 1-30 MAX:PAL 25 NTSC 30
+  i32  IPInterval;                               //IPå¸§é—´éš” 1-120 default 30
+  u8 BitRateType;                              //0å®šç æµCBR 1å®šç”»è´¨VBR
+  u8 BitRateQuant;                             //ç”»è´¨  0..4
+  u8  BrightnessNight;                          //äº®åº¦   0-255
+  u8  ContrastNight;                            //å¯¹æ¯”åº¦ 0-255
 
-  i32  BitRate;                                  //ÂëÁ÷ 64K 128K 256K 512K 1024K 1536K 2048K 2560K 3072K
-  i32  IsMirror;                                 //Ë®Æ½·­×ª false or true
-  i32  IsFlip;                                   //´¹Ö±·­×ª false or true
-  char20 Reserved;                                //OSD±êÌâ 20¸öºº×Ö
+  i32  BitRate;                                  //ç æµ 64K 128K 256K 512K 1024K 1536K 2048K 2560K 3072K
+  i32  IsMirror;                                 //æ°´å¹³ç¿»è½¬ false or true
+  i32  IsFlip;                                   //å‚ç›´ç¿»è½¬ false or true
+  char20 Reserved;                                //OSDæ ‡é¢˜ 20ä¸ªæ±‰å­—
   float TitleY;
   float TimeY;
   float FrameRateY;
@@ -151,118 +151,118 @@ typedef struct TVideoFormat {                    //ÊÓÆµ¸ñÊ½ sizeof 128
   float LogoY;
 
   u8 HueNight;
-  bool ShowTitleInDev;
-  bool IsShowTitle;                            //ÏÔÊ¾Ê±¼ä±êÌâ false or true
+  u8 ShowTitleInDev;
+  u8 IsShowTitle;                            //æ˜¾ç¤ºæ—¶é—´æ ‡é¢˜ false or true
   u8 TitleColor;
   float TitleX;
 
   u8 SaturationNight;
-  bool ShowTimeInDev;
-  bool IsShowTime;                               //ÏÔÊ¾Ë®Ó¡ false or true
+  u8 ShowTimeInDev;
+  u8 IsShowTime;                               //æ˜¾ç¤ºæ°´å° false or true
   u8 TimeColor;
   float TimeX;
 
   u8 DeInterlaceType;
-  bool IsDeInterlace;
-  bool IsOSDBigFont;
-  bool IsWDR;
-  u8  Sharpness;                               //Èñ¶È 0-255
+  u8 IsDeInterlace;
+  u8 IsOSDBigFont;
+  u8 IsWDR;
+  u8  Sharpness;                               //é”åº¦ 0-255
   u8 IRCutSensitive;
-  u8 IsNewSendStyle;//µ¥Ïß³Ì·¢ËÍ»¹ÊÇ¶àÏß³Ì·¢ËÍ 178 185=1 / old 16c 18e=0
-  bool IsShowLogo;
+  u8 IsNewSendStyle;//å•çº¿ç¨‹å‘é€è¿˜æ˜¯å¤šçº¿ç¨‹å‘é€ 178 185=1 / old 16c 18e=0
+  u8 IsShowLogo;
 
   u8 SharpnessNight;
-  bool IsOsdTransparent;//ShowFrameRateInDev
-  bool IsShowFrameRate;
+  u8 IsOsdTransparent;//ShowFrameRateInDev
+  u8 IsShowFrameRate;
   u8 FrameRateColor;
   float FrameRateX;
 
   struct { //add at 2009/09/02
-    u8 BitRateQuant;//»­ÖÊ  0..4
+    u8 BitRateQuant;//ç”»è´¨  0..4
     u8 StandardEx;//TStandardEx
-    u8 FrameRate;//Ö¡ÂÊ 1-30 MAX:PAL 25 NTSC 30
-    u8 BitRateType;//0¶¨ÂëÁ÷ 1¶¨»­ÖÊ
-    i32 BitRate;//ÂëÁ÷ 64K 128K 256K 512K 1024K 1536K 2048K 2560K 3072K
-  }Sub;//×ÓÂëÁ÷
+    u8 FrameRate;//å¸§ç‡ 1-30 MAX:PAL 25 NTSC 30
+    u8 BitRateType;//0å®šç æµ 1å®šç”»è´¨
+    i32 BitRate;//ç æµ 64K 128K 256K 512K 1024K 1536K 2048K 2560K 3072K
+  }Sub;//å­ç æµ
 
   u8 WDRLevel;
   u8 Reserved1[3];
 }TVideoFormat;
 //-----------------------------------------------------------------------------
-typedef struct TVideoCfgPkt {                    //ÊÓÆµÉèÖÃ°ü sizeof 148 u8
-  i32  Chl;                                      //Í¨µÀ 0..15 ¶ÔÓ¦ 1..16Í¨µÀ
-  i32  Active;                                   //ÊÇ·ñÆô¶¯(¿ÉÄÜÔİÊ±Ã»ÓĞÓÃµ½)
-  u8 InputType;                                //ÊäÈëÀàĞÍ
+typedef struct TVideoCfgPkt {                    //è§†é¢‘è®¾ç½®åŒ… sizeof 148 u8
+  i32  Chl;                                      //é€šé“ 0..15 å¯¹åº” 1..16é€šé“
+  i32  Active;                                   //æ˜¯å¦å¯åŠ¨(å¯èƒ½æš‚æ—¶æ²¡æœ‰ç”¨åˆ°)
+  u8 InputType;                                //è¾“å…¥ç±»å‹
   u8 Reserved[3];
-  struct TVideoFormat VideoFormat;               //ÊÓÆµ¸ñÊ½
-  i32 Flag;                                      //Á¢¼´ÉúĞ§=1
+  struct TVideoFormat VideoFormat;               //è§†é¢‘æ ¼å¼
+  i32 Flag;                                      //ç«‹å³ç”Ÿæ•ˆ=1
   i32 Flag1;
 }TVideoCfgPkt;
 //-----------------------------------------------------------------------------
-typedef enum TAudioType {                        //ÒôÆµ¸ñÊ½sizeof 4 u8
+typedef enum TAudioType {                        //éŸ³é¢‘æ ¼å¼sizeof 4 u8
   Audio_NULL            =0x00,
   PCM                   =0x01,
   G711                  =0x02,
 }TAudioType;
 //-----------------------------------------------------------------------------
-typedef struct TAudioFormat {                    //ÒôÆµ¸ñÊ½ = TWaveFormatEx = sizeof 32
+typedef struct TAudioFormat {                    //éŸ³é¢‘æ ¼å¼ = TWaveFormatEx = sizeof 32
   u32 wFormatTag;                              //PCM=0X0001, ADPCM=0x0011, MP2=0x0050, MP3=0X0055, GSM610=0x0031
-  u32 nChannels;                               //µ¥ÉùµÀ=0 Á¢ÌåÉù=1
-  u32 nSamplesPerSec;                          //²ÉÑùÂÊ
-  u32 nAvgbytesPerSec;                         //for buffer estimation
-  u32 nBlockAlign;                             //block size of data
-  u32 wBitsPerSample;                          //number of bits per sample of mono data
-  u32 cbSize;                                  //±¾°ü´óĞ¡
+  u32 nChannels;                               //å•å£°é“=0 ç«‹ä½“å£°=1
+  u32 nSamplesPerSec;                          //é‡‡æ ·ç‡ 
+  u32 nAvgbytesPerSec;                         //for buffer estimation 
+  u32 nBlockAlign;                             //block size of data 
+  u32 wBitsPerSample;                          //number of bits per sample of mono data 
+  u32 cbSize;                                  //æœ¬åŒ…å¤§å°
   i32 Reserved;
 }TAudioFormat;
 //-----------------------------------------------------------------------------
-typedef struct TAudioCfgPkt {                    //ÒôÆµÉèÖÃ°ü sizeof 48 u8
-  i32  Chl;                                      //Í¨µÀ0..15 ¶ÔÓ¦ 1..16Í¨µÀ
-  i32  Active;                                   //ÊÇ·ñÆô¶¯ÉùÒô
-  struct TAudioFormat AudioFormat;               //ÒôÆµ¸ñÊ½
+typedef struct TAudioCfgPkt {                    //éŸ³é¢‘è®¾ç½®åŒ… sizeof 48 u8
+  i32  Chl;                                      //é€šé“0..15 å¯¹åº” 1..16é€šé“
+  i32  Active;                                   //æ˜¯å¦å¯åŠ¨å£°éŸ³
+  struct TAudioFormat AudioFormat;               //éŸ³é¢‘æ ¼å¼
 #define MIC_IN  0
 #define LINE_IN 1
-  u8 InputType;                                 //0 MICÊäÈë, 1 LINEÊäÈë
-  u8 Reserved;
+  u8 InputType;                                 //0 MICè¾“å…¥, 1 LINEè¾“å…¥
+  u8 IsPlayPromptSound;
   u8 VolumeLineIn;
   u8 VolumeLineOut;
-  bool SoundTriggerActive;
+  u8 SoundTriggerActive;
   u8 SoundTriggerSensitive;
-  bool IsAudioGain;
+  u8 IsAudioGain;
   u8 AudioGainLevel;
 }TAudioCfgPkt;
 //-----------------------------------------------------------------------------
-typedef enum TPlayCtrl {                         //²¥·Å¿ØÖÆsizeof 4 u8
-  PS_None               =0,                 //¿Õ
-  PS_Play               =1,                 //²¥·Å
-  PS_Pause              =2,                 //ÔİÍ£
-  PS_Stop               =3,                 //Í£Ö¹
-  PS_FastBackward       =4,                 //¿ìÍË
-  PS_FastForward        =5,                 //¿ì½ø
-  PS_StepBackward       =6,                 //²½ÍË
-  PS_StepForward        =7,                 //²½½ø
-  PS_DragPos            =8,                 //ÍÏ¶¯
+typedef enum TPlayCtrl {                         //æ’­æ”¾æ§åˆ¶sizeof 4 u8
+  PS_None               =0,                 //ç©º
+  PS_Play               =1,                 //æ’­æ”¾
+  PS_Pause              =2,                 //æš‚åœ
+  PS_Stop               =3,                 //åœæ­¢
+  PS_FastBackward       =4,                 //å¿«é€€
+  PS_FastForward        =5,                 //å¿«è¿›
+  PS_StepBackward       =6,                 //æ­¥é€€
+  PS_StepForward        =7,                 //æ­¥è¿›
+  PS_DragPos            =8,                 //æ‹–åŠ¨
 }TPlayCtrl;
 //-----------------------------------------------------------------------------
 typedef struct TPlayCtrlPkt {
   TPlayCtrl PlayCtrl;
-  u32 Speed;//Èç¹ûPlayCtrl=PS_StepBackward, PS_FastForward £¬Ôò±£´æ¿ì½ø¿ìÍË±¶ÂÊ 1 2 4 8 16 32±¶ÂÊ
-  u32 Pos;//Èç¹ûPlayCtrl=PS_DragPos£¬Ôò±£´æÎÄ¼şÎÄ¼şÎ»ÖÃPos
+  u32 Speed;//å¦‚æœPlayCtrl=PS_StepBackward, PS_FastForward ï¼Œåˆ™ä¿å­˜å¿«è¿›å¿«é€€å€ç‡ 1 2 4 8 16 32å€ç‡
+  u32 Pos;//å¦‚æœPlayCtrl=PS_DragPosï¼Œåˆ™ä¿å­˜æ–‡ä»¶æ–‡ä»¶ä½ç½®Pos
 }TPlayCtrlPkt;
 //-----------------------------------------------------------------------------
-typedef struct TRecFilePkt {                     //²¥·ÅÀúÊ·°ü SizeOf 100
+typedef struct TRecFilePkt {                     //æ’­æ”¾å†å²åŒ… SizeOf 100
   char20 DevIP;
   u8 Chl;
-  u8 RecType;                               //0:ÆÕÍ¨Â¼Ó° 1:¾¯±¨Â¼Ó° 2Ã½ÌåÎÄ¼ş
+  u8 RecType;                               //0:æ™®é€šå½•å½± 1:è­¦æŠ¥å½•å½± 2åª’ä½“æ–‡ä»¶
   u8 Reserved[2];
-  i32 StartTime;                              //¿ªÊ¼Ê±¼ä
-  i32 EndTime;                                //½áÊøÊ±¼ä
-  char64 FileName;                            //ÎÄ¼şÃû
-  i32 Reserved1;                              //±£Áô
+  i32 StartTime;                              //å¼€å§‹æ—¶é—´
+  i32 EndTime;                                //ç»“æŸæ—¶é—´
+  char64 FileName;                            //æ–‡ä»¶å
+  i32 Reserved1;                              //ä¿ç•™
 }TRecFilePkt;
 //-----------------------------------------------------------------------------
 //  /sd/rec/20091120/20091120_092749_0.ra2
-typedef struct TRecFileIdx {                     //Â¼Ó°ÎÄ¼şË÷Òı°ü sizeof 80
+typedef struct TRecFileIdx {                     //å½•å½±æ–‡ä»¶ç´¢å¼•åŒ… sizeof 80
   char64 FileName;
   u8 Chl;
   u8 RecType;
@@ -280,25 +280,26 @@ typedef struct TRecFileLst { //sizeof 1288
   TRecFileIdx Lst[RECFILELSTCOUNT];
 }TRecFileLst;
 //-----------------------------------------------------------------------------
-typedef struct TRecFileHead {                    //Â¼Ó°ÎÄ¼şÍ·¸ñÊ½ sizeof 256 u8
-  u32 DevType;                                 //Éè±¸ÀàĞÍ = DEV_Ax
-  u32 FileSize;                                //ÎÄ¼ş´óĞ¡
-  i32 StartTime;                              //¿ªÊ¼Ê±¼ä
-  i32 EndTime;                                //Í£Ö¹Ê±¼ä
-  char20 DevName;                                //Éè±¸ID
-  char20 DevIP;                                  //Éè±¸IP
-  u32 VideoChannel;                            //ÊÓÆµÍ¨µÀÊıÍ³¼Æ
-  u32 AudioChannel;                            //ÒôÆµÍ¨µÀÊıÍ³¼Æ
-  struct TVideoFormat VideoFormat;               //ÊÓÆµ¸ñÊ½
-  struct TAudioFormat AudioFormat;               //ÒôÆµ¸ñÊ½
-  i32 IndexType;                                 //Ã»ÓĞ=0 °´ÎÄ¼ş´óĞ¡ = 1 °´Ê±³¤=2
-  char Reserved[28];                             //±£Áô
+typedef struct TRecFileHead {                    //å½•å½±æ–‡ä»¶å¤´æ ¼å¼ sizeof 256 u8
+  u32 DevType;                                 //è®¾å¤‡ç±»å‹ = DEV_Ax
+  u32 FileSize;                                //æ–‡ä»¶å¤§å°
+  i32 StartTime;                              //å¼€å§‹æ—¶é—´
+  i32 EndTime;                                //åœæ­¢æ—¶é—´
+  char20 DevName;                                //è®¾å¤‡ID
+  char20 DevIP;                                  //è®¾å¤‡IP
+  u32 VideoChannel;                            //è§†é¢‘é€šé“æ•°ç»Ÿè®¡
+  u32 AudioChannel;                            //éŸ³é¢‘é€šé“æ•°ç»Ÿè®¡
+  struct TVideoFormat VideoFormat;               //è§†é¢‘æ ¼å¼
+  struct TAudioFormat AudioFormat;               //éŸ³é¢‘æ ¼å¼
+  i32 IndexType;                                 //æ²¡æœ‰=0 æŒ‰æ–‡ä»¶å¤§å° = 1 æŒ‰æ—¶é•¿=2
+  char Reserved[28];                             //ä¿ç•™
 }TRecFileHead;
 //-----------------------------------------------------------------------------
-typedef struct TFilePkt {                        //ÉÏ´«ÎÄ¼ş°ü sizeof 532
-#define FILETYPE_BURNIN_UBOOT 7 //x1 burn in
-#define FILETYPE_BIN          2 //x1 x2 bin Éı¼¶ÓÃ
-#define FILETYPE_X4ISP        3
+typedef struct TFilePkt {                        //ä¸Šä¼ æ–‡ä»¶åŒ… sizeof 532
+#define FILETYPE_BURNIN_UBOOT  7 //x1 burn in
+#define FILETYPE_BIN           2 //x1 x2 bin å‡çº§ç”¨
+#define FILETYPE_UPDATE_PKT    3
+#define FILETYPE_FILESYSTEM    4
   i32 FileType;
   u32 FileSize;
   char256 FileName;
@@ -309,24 +310,26 @@ typedef struct TFilePkt {                        //ÉÏ´«ÎÄ¼ş°ü sizeof 532
 #define UPGRAD_UPLOAD_OVER_OK   2
 #define UPGRAD_UPLOAD_FLASHING  3
 #define UPGRAD_UPLOAD_ING       4
-  i32 Flag;//0=ÉÏ´«ÎÄ¼şÊ§°Ü 1=ÉÏ´«ÎÄ¼şÍê±Ï,ÕıÔÚÉı¼¶,Çë²»Òª¶Ïµç  2=ÉÏ´«ÎÄ¼ş³É¹¦ (3=ÕıÔÚÉÏ´«ÎÄ¼ş x5add)
+#define UPGRAD_UPLOAD_FS_ERROR  5
+#define UPGRAD_UPLOAD_CRC       6
+  i32 Result;//0=ä¸Šä¼ æ–‡ä»¶å¤±è´¥ 1=ä¸Šä¼ æ–‡ä»¶å®Œæ¯•,æ­£åœ¨å‡çº§,è¯·ä¸è¦æ–­ç”µ  2=ä¸Šä¼ æ–‡ä»¶æˆåŠŸ (3=æ­£åœ¨ä¸Šä¼ æ–‡ä»¶ x5add)
   char256 DstFile;
   u32 crc;
 }TFilePkt;
 //-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------
-typedef struct TAlmSendPkt {                     //¾¯±¨ÉÏ´«°üsizeof 36
-  TAlmType AlmType;                              //¾¯±¨ÀàĞÍ
-  i32 AlmTime;                                   //¾¯±¨Ê±¼ä
-  i32 AlmPort;                                   //¾¯±¨¶Ë¿Ú
+typedef struct TAlmSendPkt {                     //è­¦æŠ¥ä¸Šä¼ åŒ…sizeof 36
+  TAlmType AlmType;                              //è­¦æŠ¥ç±»å‹
+  i32 AlmTime;                                   //è­¦æŠ¥æ—¶é—´
+  i32 AlmPort;                                   //è­¦æŠ¥ç«¯å£
   char20 DevIP;
-  i32 Flag;                                      //MD ÇøÓòË÷Òı
+  i32 Flag;                                      //MD åŒºåŸŸç´¢å¼•
 }TAlmSendPkt;
 //-----------------------------------------------------------------------------
-typedef struct TDoControlPkt {                 //do¿ØÖÆ°ü¡¡sizeof 16
+typedef struct TDoControlPkt {                 //doæ§åˆ¶åŒ…ã€€sizeof 16
   i32 Chl;
-  i32 Value;                                   // 0 ¹Ø¡¡1 ¿ª
+  i32 Value;                                   // 0 å…³ã€€1 å¼€
   i32 Reserved;
 }TDoControlPkt;
 //-----------------------------------------------------------------------------
@@ -335,15 +338,15 @@ typedef struct TTaskhm {
   u8 w;
   u8 Days;
   u8 Reserved[2];
-  u8 start_h;//Ê± 0-23
-  u8 start_m;//·Ö 0-59
-  u8 stop_h;//Ê± 0-23
-  u8 stop_m;//·Ö 0-59
+  u8 start_h;//æ—¶ 0-23
+  u8 start_m;//åˆ† 0-59
+  u8 stop_h;//æ—¶ 0-23
+  u8 stop_m;//åˆ† 0-59
 }TTaskhm;
 //-----------------------------------------------------------------------------
-typedef struct THideAreaCfgPkt {                 //Òş²ØÂ¼Ó°ÇøÓò°ü sizeof 72
+typedef struct THideAreaCfgPkt {                 //éšè—å½•å½±åŒºåŸŸåŒ… sizeof 72
   char Reserved0[8];
-  bool Active;                                    //false or true
+  u8 Active;                                    //false or true
   char Reserved1[23];
   struct {
     float left,top,right,bottom;
@@ -351,11 +354,11 @@ typedef struct THideAreaCfgPkt {                 //Òş²ØÂ¼Ó°ÇøÓò°ü sizeof 72
   char Reserved2[24];
 }THideAreaCfgPkt;
 //-----------------------------------------------------------------------------
-typedef struct TMDCfgPkt {                       //ÒÆ¶¯Õì²â°ü sizeof 96
+typedef struct TMDCfgPkt {                       //ç§»åŠ¨ä¾¦æµ‹åŒ… sizeof 96
   u8 Reserved0[8];
-  bool Active;
+  u8 Active;
   u8 Reserved1[1];
-  u8 Sensitive;                              //Õì²âÁéÃô¶È 0-255
+  u8 Sensitive;                              //ä¾¦æµ‹çµæ•åº¦ 0-255
   u8 Reserved2[57];
   struct TTaskhm hm;
   struct {
@@ -368,15 +371,15 @@ typedef struct TAlmCfgItem {
   u8 AlmType;//u8(TAlmType)
   u8 Channel;
   u8 Active;//only di
-  bool IsAlmRec;
-  bool IsFTPUpload;//NetSend
-  bool ActiveDO;//DI¹ØÁªDOÍ¨µÀ false close
-  bool IsSendEmail;//u8 DOChannel;
+  u8 IsAlmRec;
+  u8 IsFTPUpload;//NetSend
+  u8 ActiveDO;//DIå…³è”DOé€šé“ false close
+  u8 IsSendEmail;//u8 DOChannel;
   u8 Reserved;
 }TAlmCfgItem;
 
-typedef struct TAlmCfgPkt {                   //¾¯±¨ÅäÖÃ°ü sizeof 268 -> 52 20140928
-  i32 AlmOutTimeLen;                    //±¨¾¯Êä³öÊ±³¤(Ãë) 0 ..600 s
+typedef struct TAlmCfgPkt {                   //è­¦æŠ¥é…ç½®åŒ… sizeof 268 -> 52 20140928
+  i32 AlmOutTimeLen;                    //æŠ¥è­¦è¾“å‡ºæ—¶é•¿(ç§’) 0 ..600 s
   i32 AutoClearAlarm;
   i32 Reserved;
   TAlmCfgItem DIAlm;
@@ -392,14 +395,14 @@ typedef struct TAlmCfgPkt {                   //¾¯±¨ÅäÖÃ°ü sizeof 268 -> 52 2014
 #define GROUP_OPERATOR 2
 #define GROUP_ADMIN    3
 
-#define MAXUSERCOUNT             20              //×î´óÓÃ»§ÊıÁ¿
+#define MAXUSERCOUNT             20              //æœ€å¤§ç”¨æˆ·æ•°é‡
 typedef struct TUserCfgPkt {                     //sizeof 1048
   i32 Count;
   struct {
     i32 UserGroup;                                 //Guest=1 Operator=2 Administrator=3
-    i32 Authority;                                 //3Îªadmin ,
-    char20 UserName;                               //ÓÃ»§Ãû admin²»ÄÜ¸ü¸Ä
-    char20 Password;                               //ÃÜÂë
+    i32 Authority;                                 //3ä¸ºadmin ,
+    char20 UserName;                               //ç”¨æˆ·å adminä¸èƒ½æ›´æ”¹
+    char20 Password;                               //å¯†ç 
     i32 Flag;
   }Lst[MAXUSERCOUNT];
   i32 Reserved;
@@ -407,59 +410,59 @@ typedef struct TUserCfgPkt {                     //sizeof 1048
 //-----------------------------------------------------------------------------
 typedef enum TPTZCmd {                           //sizeof 4 u8
   PTZ_None             = 0,
-  PTZ_Up               = 1,//ÉÏ
-  PTZ_Up_Stop          = 2,//ÉÏÍ£Ö¹
-  PTZ_Down             = 3,//ÏÂ
-  PTZ_Down_Stop        = 4,//ÏÂÍ£Ö¹
-  PTZ_Left             = 5,//×ó
-  PTZ_Left_Stop        = 6,//×óÍ£Ö¹
-  PTZ_Right            = 7,//ÓÒ
-  PTZ_Right_Stop       = 8,//ÓÒÍ£Ö¹
-  PTZ_LeftUp           = 9,//×óÉÏ
-  PTZ_LeftUp_Stop      =10,//×óÉÏÍ£Ö¹
-  PTZ_RightUp          =11,//ÓÒÉÏ
-  PTZ_RightUp_Stop     =12,//ÓÒÉÏÍ£Ö¹
-  PTZ_LeftDown         =13,//×óÏÂ
-  PTZ_LeftDown_Stop    =14,//×óÏÂÍ£Ö¹
-  PTZ_RightDown        =15,//ÓÒÏÂ
-  PTZ_RightDown_Stop   =16,//ÓÒÏÂÍ£Ö¹
-  PTZ_IrisIn           =17,//¹âÈ¦Ğ¡
-  PTZ_IrisInStop       =18,//¹âÈ¦Í£Ö¹
-  PTZ_IrisOut          =19,//¹âÈ¦´ó
-  PTZ_IrisOutStop      =20,//¹âÈ¦Í£Ö¹
-  PTZ_ZoomIn           =21,//±¶ÂÊĞ¡
-  PTZ_ZoomInStop       =22,//±¶ÂÊÍ£Ö¹
-  PTZ_ZoomOut          =23,//±¶ÂÊ´ó
-  PTZ_ZoomOutStop      =24,//±¶ÂÊÍ£Ö¹
-  PTZ_FocusIn          =25,//½¹¾àĞ¡
-  PTZ_FocusInStop      =26,//½¹¾àÍ£Ö¹
-  PTZ_FocusOut         =27,//½¹¾à´ó
-  PTZ_FocusOutStop     =28,//½¹¾àÍ£Ö¹
-  PTZ_LightOn          =29,//µÆ¹âĞ¡
-  PTZ_LightOff         =30,//µÆ¹â´ó
-  PTZ_RainBrushOn      =31,//ÓêË¢¿ª
-  PTZ_RainBrushOff     =32,//ÓêË¢¿ª
-  PTZ_AutoOn           =33,//×Ô¶¯¿ªÊ¼  //Rotation
-  PTZ_AutoOff          =34,//×Ô¶¯Í£Ö¹
+  PTZ_Up               = 1,//ä¸Š
+  PTZ_Up_Stop          = 2,//ä¸Šåœæ­¢
+  PTZ_Down             = 3,//ä¸‹
+  PTZ_Down_Stop        = 4,//ä¸‹åœæ­¢
+  PTZ_Left             = 5,//å·¦
+  PTZ_Left_Stop        = 6,//å·¦åœæ­¢
+  PTZ_Right            = 7,//å³
+  PTZ_Right_Stop       = 8,//å³åœæ­¢
+  PTZ_LeftUp           = 9,//å·¦ä¸Š
+  PTZ_LeftUp_Stop      =10,//å·¦ä¸Šåœæ­¢
+  PTZ_RightUp          =11,//å³ä¸Š
+  PTZ_RightUp_Stop     =12,//å³ä¸Šåœæ­¢
+  PTZ_LeftDown         =13,//å·¦ä¸‹
+  PTZ_LeftDown_Stop    =14,//å·¦ä¸‹åœæ­¢
+  PTZ_RightDown        =15,//å³ä¸‹
+  PTZ_RightDown_Stop   =16,//å³ä¸‹åœæ­¢
+  PTZ_IrisIn           =17,//å…‰åœˆå°
+  PTZ_IrisInStop       =18,//å…‰åœˆåœæ­¢
+  PTZ_IrisOut          =19,//å…‰åœˆå¤§
+  PTZ_IrisOutStop      =20,//å…‰åœˆåœæ­¢
+  PTZ_ZoomIn           =21,//å€ç‡å°
+  PTZ_ZoomInStop       =22,//å€ç‡åœæ­¢
+  PTZ_ZoomOut          =23,//å€ç‡å¤§
+  PTZ_ZoomOutStop      =24,//å€ç‡åœæ­¢
+  PTZ_FocusIn          =25,//ç„¦è·å°
+  PTZ_FocusInStop      =26,//ç„¦è·åœæ­¢
+  PTZ_FocusOut         =27,//ç„¦è·å¤§
+  PTZ_FocusOutStop     =28,//ç„¦è·åœæ­¢
+  PTZ_LightOn          =29,//ç¯å…‰å°
+  PTZ_LightOff         =30,//ç¯å…‰å¤§
+  PTZ_RainBrushOn      =31,//é›¨åˆ·å¼€
+  PTZ_RainBrushOff     =32,//é›¨åˆ·å¼€
+  PTZ_AutoOn           =33,//è‡ªåŠ¨å¼€å§‹  //Rotation
+  PTZ_AutoOff          =34,//è‡ªåŠ¨åœæ­¢
   PTZ_TrackOn          =35,
   PTZ_TrackOff         =36,
   PTZ_IOOn             =37,
   PTZ_IOOff            =38,
-  PTZ_ClearPoint       =39,//ÔÆÌ¨¸´Î»
-  PTZ_SetPoint         =40,//Éè¶¨ÔÆÌ¨¶¨Î»
-  PTZ_GotoPoint        =41,//ÔÆÌ¨¶¨Î»
+  PTZ_ClearPoint       =39,//äº‘å°å¤ä½
+  PTZ_SetPoint         =40,//è®¾å®šäº‘å°å®šä½
+  PTZ_GotoPoint        =41,//äº‘å°å®šä½
 
   PTZ_GetStatus        =42,
-  PTZ_AbsoluteMoveXY   =43,//Anto SIP¾ø¶Ô
-  PTZ_AbsoluteZoomIn   =44,//Anto
+  PTZ_AbsoluteMoveXY   =43,//Anto SIPç»å¯¹
+  PTZ_AbsoluteZoomIn   =44,//Anto 
   PTZ_AbsoluteZoomOut  =45,//Anto
-  PTZ_RelativeMoveXY   =46,//Anto SIPÏà¶Ô
-  PTZ_RelativeZoomIn   =47,//Anto
+  PTZ_RelativeMoveXY   =46,//Anto SIPç›¸å¯¹
+  PTZ_RelativeZoomIn   =47,//Anto 
   PTZ_RelativeZoomOut  =48,//Anto
 
-  PTZ_RunTour          =49,//Anto Ñ²º½
-  PTZ_GuardSetPoint    =50,//Anto ¿´ÊØÎ»
-  PTZ_GuardGotoPoint   =51,//Anto ¿´ÊØÎ»
+  PTZ_RunTour          =49,//Anto å·¡èˆª
+  PTZ_GuardSetPoint    =50,//Anto çœ‹å®ˆä½
+  PTZ_GuardGotoPoint   =51,//Anto çœ‹å®ˆä½
 
   PTZ_Max              =52
 }TPTZCmd;
@@ -471,21 +474,21 @@ typedef struct TPTZStatus {//sizeof 16
   int flag;
 }TPTZStatus;
 
-typedef enum TPTZProtocol {                      //ÔÆÌ¨Ğ­Òé sizeof 4
+typedef enum TPTZProtocol {                      //äº‘å°åè®® sizeof 4
   Pelco_P               =0,
   Pelco_D               =1,
-  Pelco_D_Anto          =2,                      //°²Í¾
+  Pelco_D_Anto          =2,                      //å®‰é€”
   Protocol_Custom       =2,
 }TPTZProtocol;
 
-typedef struct TPTZPkt {                         //PTZ ÔÆÌ¨¿ØÖÆ  sizeof 108
-  TPTZCmd PTZCmd;                                    //=PTZ_None ÎªÍ¸Ã÷´«Êä
+typedef struct TPTZPkt {                         //PTZ äº‘å°æ§åˆ¶  sizeof 108
+  TPTZCmd PTZCmd;                                    //=PTZ_None ä¸ºé€æ˜ä¼ è¾“
   union {
     struct {
-      TPTZProtocol Protocol;                         //ÔÆÌ¨Ğ­Òé
-      i32 Address;                                   //ÔÆÌ¨µØÖ·
-      i32 wParam;                                    //ÔÆÌ¨ËÙ¶È»òÆäËü
-      i32 lParam;                                    //±£Áô»òÔ¤ÉèÎ»»òÆäËü
+      TPTZProtocol Protocol;                         //äº‘å°åè®®
+      i32 Address;                                   //äº‘å°åœ°å€
+      i32 wParam;                                    //äº‘å°é€Ÿåº¦æˆ–å…¶å®ƒ
+      i32 lParam;                                    //ä¿ç•™æˆ–é¢„è®¾ä½æˆ–å…¶å®ƒ
       i32 Autotype;
       i32 SleepMS;//20140722 x3 ptz add
     };
@@ -496,87 +499,87 @@ typedef struct TPTZPkt {                         //PTZ ÔÆÌ¨¿ØÖÆ  sizeof 108
   };
 }TPTZPkt;
 //-----------------------------------------------------------------------------
-typedef struct TPlayLivePkt {                    //²¥·ÅÏÖ³¡°ü//sizeof 20
-  u32 VideoChlMask;//Í¨µÀÑÚÂë
+typedef struct TPlayLivePkt {                    //æ’­æ”¾ç°åœºåŒ…//sizeof 20
+  u32 VideoChlMask;//é€šé“æ©ç  
   //  31 .. 19 18 17 16   15 .. 03 02 01 00
-  //         0  0  0  0          0  0  0  1
+  //         0  0  0  0          0  0  0  1     
   u32 AudioChlMask;
   //  31 .. 19 18 17 16   15 .. 03 02 01 00
   //         0  0  0  0          0  0  0  1
-  i32 Value;                                     //Value=0·¢ËÍËùÓĞÖ¡£¬Value=1Ö»·¢ËÍÊÓÆµIÖ¡
+  i32 Value;                                     //Value=0å‘é€æ‰€æœ‰å¸§ï¼ŒValue=1åªå‘é€è§†é¢‘Iå¸§
   //begin add at 2009/09/02
   u32 SubVideoChlMask;
-  //11  i32 IsRecvAlarm;                               //0½ÓÊÕÉè±¸¾¯±¨ 1²»½ÓÊÕÉè±¸¾¯±¨
+  //11  i32 IsRecvAlarm;                               //0æ¥æ”¶è®¾å¤‡è­¦æŠ¥ 1ä¸æ¥æ”¶è®¾å¤‡è­¦æŠ¥
   //end add
-  i32 Flag;                                      //±£Áô
+  u32 ExtraChl;
 }TPlayLivePkt;
 //-----------------------------------------------------------------------------
 typedef struct TPlayBackPkt {                    //sizeof 20
   i32 Chl;
-  i32 FileType;                                  //0:ÆÕÍ¨Â¼Ó° 1:¾¯±¨Â¼Ó° 2Ã½ÌåÎÄ¼ş
-  i32 StartTime;                                 //¿ªÊ¼Ê±¼ä
-  i32 EndTime;                                   //½áÊøÊ±¼ä
+  i32 FileType;                                  //0:æ™®é€šå½•å½± 1:è­¦æŠ¥å½•å½± 2åª’ä½“æ–‡ä»¶
+  i32 StartTime;                                 //å¼€å§‹æ—¶é—´
+  i32 EndTime;                                   //ç»“æŸæ—¶é—´
   i32 Flag;
 }TPlayBackPkt;
 //-----------------------------------------------------------------------------
 typedef enum TMsgID {
   Msg_None                   =  0,
-  Msg_Login                  =  1,//ÓÃ»§µÇÂ¼
-  Msg_PlayLive               =  2,//¿ªÊ¼²¥·ÅÏÖ³¡
-  Msg_StartPlayRecFile       =  3,//²¥·ÅÂ¼Ó°ÎÄ¼ş
-  Msg_StopPlayRecFile        =  4,//Í£Ö¹²¥·ÅÂ¼Ó°ÎÄ¼ş
-  Msg_GetRecFileLst          =  5,//È¡µÃÂ¼Ó°ÎÄ¼şÁĞ±í
-  Msg_GetDevRecFileHead      =  6,//È¡µÃÉè±¸ÎÄ¼şÎÄ¼şÍ·ĞÅÏ¢
-  Msg_StartUploadFile        =  7,//¿ªÊ¼ÉÏ´«ÎÄ¼ş
-  Msg_AbortUploadFile        =  8,//È¡ÏûÉÏ´«ÎÄ¼ş
-  Msg_StartUploadFileEx      =  9,//¿ªÊ¼ÉÏ´«ÎÄ¼ştftp
-  Msg_StartTalk              = 10,//¿ªÊ¼¶Ô½²
-  Msg_StopTalk               = 11,//Í£Ö¹¶Ô½²
-  Msg_PlayControl            = 12,//²¥·Å¿ØÖÆ
-  Msg_PTZControl             = 13,//ÔÆÌ¨¿ØÖÆ
-  Msg_Alarm                  = 14,//¾¯±¨
-  Msg_ClearAlarm             = 15,//¹Ø±Õ¾¯±¨
-  Msg_GetTime                = 16,//È¡µÃÊ±¼ä
-  Msg_SetTime                = 17,//ÉèÖÃÊ±¼ä
-  Msg_SetDevReboot           = 18,//ÖØÆôÉè±¸
-  Msg_SetDevLoadDefault      = 19,//ÏµÍ³»Øµ½È±Ê¡ÅäÖÃ Pkt.Value= 0 ²»»Ö¸´IP, Pkt.Value= 1 »Ö¸´IP
-  Msg_DevSnapShot            = 20,//Éè±¸ÅÄÕÕ
-  Msg_DevStartRec            = 21,//Éè±¸¿ªÊ¼Â¼Ïñ
-  Msg_DevStopRec             = 22,//Éè±¸Í£Ö¹Â¼Ïó
-  Msg_GetColors              = 23,//È¡µÃÁÁ¶È¡¢¶Ô±È¶È¡¢É«¶È¡¢±¥ºÍ¶È
-  Msg_SetColors              = 24,//ÉèÖÃÁÁ¶È¡¢¶Ô±È¶È¡¢É«¶È¡¢±¥ºÍ¶È
+  Msg_Login                  =  1,//ç”¨æˆ·ç™»å½•
+  Msg_PlayLive               =  2,//å¼€å§‹æ’­æ”¾ç°åœº
+  Msg_StartPlayRecFile       =  3,//æ’­æ”¾å½•å½±æ–‡ä»¶
+  Msg_StopPlayRecFile        =  4,//åœæ­¢æ’­æ”¾å½•å½±æ–‡ä»¶
+  Msg_GetRecFileLst          =  5,//å–å¾—å½•å½±æ–‡ä»¶åˆ—è¡¨
+  Msg_GetDevRecFileHead      =  6,//å–å¾—è®¾å¤‡æ–‡ä»¶æ–‡ä»¶å¤´ä¿¡æ¯
+  Msg_StartUploadFile        =  7,//å¼€å§‹ä¸Šä¼ æ–‡ä»¶
+  Msg_AbortUploadFile        =  8,//å–æ¶ˆä¸Šä¼ æ–‡ä»¶
+  Msg_StartUploadFileEx      =  9,//å¼€å§‹ä¸Šä¼ æ–‡ä»¶tftp
+  Msg_StartTalk              = 10,//å¼€å§‹å¯¹è®²
+  Msg_StopTalk               = 11,//åœæ­¢å¯¹è®²
+  Msg_PlayControl            = 12,//æ’­æ”¾æ§åˆ¶
+  Msg_PTZControl             = 13,//äº‘å°æ§åˆ¶
+  Msg_Alarm                  = 14,//è­¦æŠ¥
+  Msg_ClearAlarm             = 15,//å…³é—­è­¦æŠ¥
+  Msg_GetTime                = 16,//å–å¾—æ—¶é—´
+  Msg_SetTime                = 17,//è®¾ç½®æ—¶é—´
+  Msg_SetDevReboot           = 18,//é‡å¯è®¾å¤‡
+  Msg_SetDevLoadDefault      = 19,//ç³»ç»Ÿå›åˆ°ç¼ºçœé…ç½® Pkt.Value= 0 ä¸æ¢å¤IP, Pkt.Value= 1 æ¢å¤IP
+  Msg_DevSnapShot            = 20,//è®¾å¤‡æ‹ç…§
+  Msg_DevStartRec            = 21,//è®¾å¤‡å¼€å§‹å½•åƒ
+  Msg_DevStopRec             = 22,//è®¾å¤‡åœæ­¢å½•è±¡
+  Msg_GetColors              = 23,//å–å¾—äº®åº¦ã€å¯¹æ¯”åº¦ã€è‰²åº¦ã€é¥±å’Œåº¦
+  Msg_SetColors              = 24,//è®¾ç½®äº®åº¦ã€å¯¹æ¯”åº¦ã€è‰²åº¦ã€é¥±å’Œåº¦
   Msg_SetColorDefault        = 25,
   Msg_GetMulticastInfo       = 26,
   Msg_SetMulticastInfo       = 27,
-  Msg_GetAllCfg              = 28,//È¡µÃËùÓĞÅäÖÃ
-  Msg_SetAllCfg              = 29,//ÉèÖÃËùÓĞÅäÖÃ
-  Msg_GetDevInfo             = 30,//È¡µÃÉè±¸ĞÅÏ¢
-  Msg_SetDevInfo             = 31,//ÉèÖÃÉè±¸ĞÅÏ¢
-  Msg_GetUserLst             = 32,//È¡µÃÓÃ»§ÁĞ±í
-  Msg_SetUserLst             = 33,//ÉèÖÃÓÃ»§ÁĞ±í
-  Msg_GetNetCfg              = 34,//È¡µÃÍøÂçÅäÖÃ
-  Msg_SetNetCfg              = 35,//ÉèÖÃÍøÂçÅäÖÃ
+  Msg_GetAllCfg              = 28,//å–å¾—æ‰€æœ‰é…ç½®
+  Msg_SetAllCfg              = 29,//è®¾ç½®æ‰€æœ‰é…ç½®
+  Msg_GetDevInfo             = 30,//å–å¾—è®¾å¤‡ä¿¡æ¯
+  Msg_SetDevInfo             = 31,//è®¾ç½®è®¾å¤‡ä¿¡æ¯
+  Msg_GetUserLst             = 32,//å–å¾—ç”¨æˆ·åˆ—è¡¨
+  Msg_SetUserLst             = 33,//è®¾ç½®ç”¨æˆ·åˆ—è¡¨
+  Msg_GetNetCfg              = 34,//å–å¾—ç½‘ç»œé…ç½®
+  Msg_SetNetCfg              = 35,//è®¾ç½®ç½‘ç»œé…ç½®
   Msg_WiFiSearch             = 36,
-  Msg_GetWiFiCfg             = 37,//È¡µÃWiFiÅäÖÃ
-  Msg_SetWiFiCfg             = 38,//ÉèÖÃWiFiÅäÖÃ
-  Msg_GetVideoCfg            = 39,//È¡µÃÊÓÆµÅäÖÃ
-  Msg_SetVideoCfg            = 40,//ÉèÖÃÊÓÆµÅäÖÃ
-  Msg_GetAudioCfg            = 41,//È¡µÃÒôÆµÅäÖÃ
-  Msg_SetAudioCfg            = 42,//ÉèÖÃÒôÆµÅäÖÃ
-  Msg_GetHideArea            = 43,//ÃØÂ¼
-  Msg_SetHideArea            = 44,//ÃØÂ¼
-  Msg_GetMDCfg               = 45,//ÒÆ¶¯Õì²âÅäÖÃ
-  Msg_SetMDCfg               = 46,//ÒÆ¶¯Õì²âÅäÖÃ
+  Msg_GetWiFiCfg             = 37,//å–å¾—WiFié…ç½®
+  Msg_SetWiFiCfg             = 38,//è®¾ç½®WiFié…ç½®
+  Msg_GetVideoCfg            = 39,//å–å¾—è§†é¢‘é…ç½®
+  Msg_SetVideoCfg            = 40,//è®¾ç½®è§†é¢‘é…ç½®
+  Msg_GetAudioCfg            = 41,//å–å¾—éŸ³é¢‘é…ç½®
+  Msg_SetAudioCfg            = 42,//è®¾ç½®éŸ³é¢‘é…ç½®
+  Msg_GetHideArea            = 43,//ç§˜å½•
+  Msg_SetHideArea            = 44,//ç§˜å½•
+  Msg_GetMDCfg               = 45,//ç§»åŠ¨ä¾¦æµ‹é…ç½®
+  Msg_SetMDCfg               = 46,//ç§»åŠ¨ä¾¦æµ‹é…ç½®
   Msg_GetDiDoCfg__Disable    = 47,
   Msg_SetDiDoCfg__Disable    = 48,
-  Msg_GetAlmCfg              = 49,//È¡µÃAlarmÅäÖÃ
-  Msg_SetAlmCfg              = 50,//ÉèÖÃAlarmÅäÖÃ
+  Msg_GetAlmCfg              = 49,//å–å¾—Alarmé…ç½®
+  Msg_SetAlmCfg              = 50,//è®¾ç½®Alarmé…ç½®
   Msg_GetRS485Cfg__Disable   = 51,
   Msg_SetRS485Cfg__Disable   = 52,
-  Msg_GetDiskCfg             = 53,//ÉèÖÃDiskÅäÖÃ
-  Msg_SetDiskCfg             = 54,//ÉèÖÃDiskÅäÖÃ
-  Msg_GetRecCfg              = 55,//È¡µÃÂ¼Ó°ÅäÖÃ
-  Msg_SetRecCfg              = 56,//ÉèÖÃÂ¼Ó°ÅäÖÃ
+  Msg_GetDiskCfg             = 53,//è®¾ç½®Diské…ç½®
+  Msg_SetDiskCfg             = 54,//è®¾ç½®Diské…ç½®
+  Msg_GetRecCfg              = 55,//å–å¾—å½•å½±é…ç½®
+  Msg_SetRecCfg              = 56,//è®¾ç½®å½•å½±é…ç½®
   Msg_GetFTPCfg              = 57,
   Msg_SetFTPCfg              = 58,
   Msg_GetSMTPCfg             = 59,
@@ -604,7 +607,7 @@ typedef enum TMsgID {
   Msg_HIISPCfg_Default       = 81,
   Msg_GetAllCfgEx            = 82,
   Msg_MulticastSetWIFI       = 83,
-  Msg_GetSensors             = 84,//¶ÁPH ×Ç¶È ÎÂ¶ÈµÈ
+  Msg_GetSensors             = 84,//è¯»PH æµŠåº¦ æ¸©åº¦ç­‰
   Msg_DevIsRec               = 85,
   Msg_GetPicFileLst          = 86,
   Msg_GetSnapShotCfg         = 87,
@@ -613,20 +616,30 @@ typedef enum TMsgID {
   Msg_SetRecCfgEx            = 90,
   Msg_GetRecStartTime        = 91,
   Msg_FormattfCard           = 92,
-  Msg_______                 = 93,
+
+  Msg_CheckUpgradeBin        = 93,
+  Msg_TestModeStart          = 94,
+  Msg_TestModeStop           = 95,
+  Msg_GetLightCfg            = 96,
+  Msg_SetLightCfg            = 97,
+  Msg_GetPushCfg             = 98,
+  Msg_SetPushCfg             = 99,
+  Msg_PlayWavFile            =100,
+
+  Msg_______                 =100,
 }TMsgID;
 //-----------------------------------------------------------------------------
 #define RECPLANLST 4
-typedef struct TPlanRecPkt {                        //ÅÅ³ÌÂ¼Ó°½á¹¹ sizeof 224
+typedef struct TPlanRecPkt {                        //æ’ç¨‹å½•å½±ç»“æ„ sizeof 224
   struct {
-    bool Active;
-    u8 start_h;    //Ê± 0-23
-    u8 start_m;    //·Ö 0-59
-    u8 stop_h;     //Ê± 0-23»ñÈ¡Éè±¸ÊÇ·ñÓĞ¾¯±¨·¢Éú
-    u8 stop_m;     //·Ö 0-59
-    bool IsRun;      //µ±Ç°¼Æ»®ÊÇ·ñÆô¶¯
+    u8 Active;
+    u8 start_h;    //æ—¶ 0-23
+    u8 start_m;    //åˆ† 0-59
+    u8 stop_h;     //æ—¶ 0-23è·å–è®¾å¤‡æ˜¯å¦æœ‰è­¦æŠ¥å‘ç”Ÿ
+    u8 stop_m;     //åˆ† 0-59
+    u8 IsRun;      //å½“å‰è®¡åˆ’æ˜¯å¦å¯åŠ¨
     u8 Reserved[2];
-  }Week[7][RECPLANLST];                                 //ÈÕÒ»¶şÈıËÄÎåÁù Ã¿Ìì×î¶à4¸öÈÎÎñ
+  }Week[7][RECPLANLST];                                 //æ—¥ä¸€äºŒä¸‰å››äº”å…­ æ¯å¤©æœ€å¤š4ä¸ªä»»åŠ¡
 }TPlanRecPkt;
 //-----------------------------------------------------------------------------
 typedef enum TRecStyle {
@@ -636,26 +649,26 @@ typedef enum TRecStyle {
   rs_RecAlarm
 }TRecStyle;
 
-typedef struct TRecCfgPkt {                      //Â¼Ó°ÅäÖÃ°ü sizeof 260
+typedef struct TRecCfgPkt {                      //å½•å½±é…ç½®åŒ… sizeof 260
   i32 ID;
-  i32 DevID;//PC¶Ë¹ÜÀíÈí¼şÖ»ÓÃÓÚ´æ´¢Êı¾İ¿âÖĞÉè±¸±àºÅ¡¡Éè±¸¶Ë±£Áô
+  i32 DevID;//PCç«¯ç®¡ç†è½¯ä»¶åªç”¨äºå­˜å‚¨æ•°æ®åº“ä¸­è®¾å¤‡ç¼–å·ã€€è®¾å¤‡ç«¯ä¿ç•™
   i32 Chl;
-  bool IsLoseFrameRec;//ÊÇ·ñ¶ªÖ¡Â¼Ó°
-  u8 RecStreamType;//0 Ö÷ÂëÁ÷ 1 ´ÎÂëÁ÷
+  u8 IsLoseFrameRec;//æ˜¯å¦ä¸¢å¸§å½•å½±
+  u8 RecStreamType;//0 ä¸»ç æµ 1 æ¬¡ç æµ
   u8 Reserved;
-  bool IsRecAudio;//Â¼ÖÆÒôÆµ ÔİÃ»ÓĞÓÃµ½
-  u32 Rec_AlmPrevTimeLen;//¾¯Ç°Â¼Ó°Ê±³¤     5 s
-  u32 Rec_AlmTimeLen;//¾¯ºóÂ¼Ó°Ê±³¤        10 s
-  u32 Rec_NmlTimeLen;//Ò»°ãÂ¼Ó°·Ö¸îÊ±³¤   600 s
-  TRecStyle RecStyle;//Â¼Ó°ÀàĞÍ
+  u8 IsRecAudio;//å½•åˆ¶éŸ³é¢‘ æš‚æ²¡æœ‰ç”¨åˆ°
+  u32 Rec_AlmPrevTimeLen;//è­¦å‰å½•å½±æ—¶é•¿     5 s
+  u32 Rec_AlmTimeLen;//è­¦åå½•å½±æ—¶é•¿        10 s
+  u32 Rec_NmlTimeLen;//ä¸€èˆ¬å½•å½±åˆ†å‰²æ—¶é•¿   600 s
+  TRecStyle RecStyle;//å½•å½±ç±»å‹
   TPlanRecPkt Plan;
   i32 bFlag;
 }TRecCfgPkt;
 //-----------------------------------------------------------------------------
 typedef struct TDiskCfgPkt {   //sizeof 60
   char Reserved1[24];
-  char20 DiskName;      // ´ÅÅÌ
-  i32 Active;           // ÊÇ·ñ×öÎªÂ¼Ó°´ÅÅÌ false or true
+  char20 DiskName;      // ç£ç›˜
+  i32 Active;           // æ˜¯å¦åšä¸ºå½•å½±ç£ç›˜ false or true
   u32 DiskSize;       // M ReadOnly
   u32 FreeSize;       // M
   u32 MinFreeSize;    // M
@@ -665,20 +678,20 @@ typedef struct TAxInfo {//sizeof 40
   union {
     char40 BufValue;
     struct {
-      bool ExistWiFi;
-      bool ExistSD;
-      bool ethLinkStatus;      //ÓĞÏßÍøÂçÊÇ·ñÁ¬½Ó
-      u8 HardType;      //Ó²¼şÀàĞÍ
+      u8 ExistWiFi;
+      u8 ExistSD;
+      u8 IsEtherLink;      //æœ‰çº¿ç½‘ç»œæ˜¯å¦è¿æ¥
+      u8 HardType;      //ç¡¬ä»¶ç±»å‹
       u32 VideoTypeMask;// 8
       u64 StandardMask;//16
-      bool ExistFlash;
+      u8 ReservedExistFlash;
       u8 PlatformType;//TPlatFormType
       u8 SDKVersion;
       u8 Reserved[1];
-      bool wifiStatus;
-      bool upnpStatus;
-      bool WlanStatus;
-      bool p2pStatus;
+      u8 wifiStatus;
+      u8 upnpStatus;
+      u8 IsConnWLAN;
+      u8 p2pStatus;
       u64 SubStandardMask;//32
       struct {
         i32 FirstDate;
@@ -689,13 +702,13 @@ typedef struct TAxInfo {//sizeof 40
   };
 }TAxInfo;
 
-typedef struct TDevInfoPkt {                     //Éè±¸ĞÅÏ¢°üsizeof 180
-  char DevModal[12];                             //Éè±¸ĞÍºÅ  ='7xxx'
+typedef struct TDevInfoPkt {                     //è®¾å¤‡ä¿¡æ¯åŒ…sizeof 180
+  char DevModal[12];                             //è®¾å¤‡å‹å·  ='7xxx'
   u32 SN;
-  i32 DevType;                                   //Éè±¸ÀàĞÍ
-  char20 SoftVersion;                            //Èí¼ş°æ±¾
-  char20 FileVersion;                            //ÎÄ¼ş°æ±¾
-  char60 DevName;                                //Éè±¸±êÊ¶
+  i32 DevType;                                   //è®¾å¤‡ç±»å‹
+  char20 SoftVersion;                            //è½¯ä»¶ç‰ˆæœ¬
+  char20 FileVersion;                            //æ–‡ä»¶ç‰ˆæœ¬
+  char60 DevName;                                //è®¾å¤‡æ ‡è¯†
   struct TAxInfo Info;
   i32 VideoChlCount;
   u8 AudioChlCount;
@@ -703,13 +716,13 @@ typedef struct TDevInfoPkt {                     //Éè±¸ĞÅÏ¢°üsizeof 180
   u8 DoChlCount;
   u8 RS485DevCount;
   signed char TimeZone;
-  u8 MaxUserConn;                               //×î´óÓÃ»§Á¬½ÓÊı default 10
+  u8 MaxUserConn;                               //æœ€å¤§ç”¨æˆ·è¿æ¥æ•° default 10
   u8 OEMType;
-  bool DoubleStream;                              //ÊÇ·ñË«ÂëÁ÷ add at 2009/09/02
+  u8 DoubleStream;                              //æ˜¯å¦åŒç æµ add at 2009/09/02
   struct {
     u8 w;//TTaskDayType;
-    u8 start_h;//Ê± 0-23
-    u8 start_m;//·Ö 0-59
+    u8 start_h;//æ—¶ 0-23
+    u8 start_m;//åˆ† 0-59
     u8 Days;
   }RebootHM;
   i32 ProcRunningTime;
@@ -717,7 +730,7 @@ typedef struct TDevInfoPkt {                     //Éè±¸ĞÅÏ¢°üsizeof 180
 //-----------------------------------------------------------------------------
 typedef struct TWiFiSearchPkt {//sizeof 40
   char32 SSID;
-  u8 Siganl;//ĞÅºÅ 0..100 ¼«ºÃ ºÃ Ò»°ã ²î ¼«²î
+  u8 Siganl;//ä¿¡å· 0..100 æå¥½ å¥½ ä¸€èˆ¬ å·® æå·®
   u8 Channel;
   u8 EncryptType; //0=None 1=WEP 2=WPA
   u8 NetworkType;//0=Infra 1=Adhoc
@@ -734,15 +747,19 @@ typedef struct TWiFiSearchPkt {//sizeof 40
   };
 }TWiFiSearchPkt;
 //-----------------------------------------------------------------------------
-typedef struct TWiFiCfgPkt {                     //ÎŞÏßÅäÖÃ°ü sizeof 200
-  bool Active;
-  bool IsAPMode;//sta=0  ap=1
+typedef struct TWiFiCfgPkt {                     //æ— çº¿é…ç½®åŒ… sizeof 200
+  u8 Active;
+#define WIFIMODE_STA   0
+#define WIFIMODE_AP    1
+#define WIFIMODE_SMT   2
+
+  u8 WifiMode;//sta=0  ap=1 smt=2
   u8 Reserved[2];
   char SSID_AP[30];
   char Password_AP[30];
 
   char32 SSID_STA;
-  i32 Channel;//ÆµµÀ1..14 default 1=Auto
+  i32 Channel;//é¢‘é“1..14 default 1=Auto
 #define Encrypt_None   0
 #define Encrypt_WEP    1
 #define Encrypt_WPA    2
@@ -768,10 +785,10 @@ typedef struct TWiFiCfgPkt {                     //ÎŞÏßÅäÖÃ°ü sizeof 200
   };
 }TWiFiCfgPkt;
 //-----------------------------------------------------------------------------
-typedef struct TNetCfgPkt {                      //Éè±¸ÍøÂçÅäÖÃ°üsizeof 372
-  i32 DataPort;                                   //ÃüÁîÊı¾İ¶Ë¿Ú
-  i32 rtspPort;                                  //rtsp¶Ë¿Ú
-  i32 HttpPort;                                  //httpÍøÒ³¶Ë¿Ú
+typedef struct TNetCfgPkt {                      //è®¾å¤‡ç½‘ç»œé…ç½®åŒ…sizeof 372
+  i32 DataPort;                                   //å‘½ä»¤æ•°æ®ç«¯å£
+  i32 rtspPort;                                  //rtspç«¯å£
+  i32 HttpPort;                                  //httpç½‘é¡µç«¯å£
   struct {
 #define IP_STATIC   0
 #define IP_DYNAMIC  1
@@ -783,7 +800,7 @@ typedef struct TNetCfgPkt {                      //Éè±¸ÍøÂçÅäÖÃ°üsizeof 372
     char20 Gateway;
     char20 DNS1;
     char20 DNS2;
-    bool IsManualChange;//ÊÇ·ñÊÇÊÖ¶¯ĞŞ¸ÄµÄ£¬ÊÇÔò²»×Ô¶¯ĞŞ¸ÄIP //20171030
+    u8 IsManualChange;//æ˜¯å¦æ˜¯æ‰‹åŠ¨ä¿®æ”¹çš„ï¼Œæ˜¯åˆ™ä¸è‡ªåŠ¨ä¿®æ”¹IP //20171030
     char Reserved[3];//20171030
   }Lan;
   struct {
@@ -793,7 +810,7 @@ typedef struct TNetCfgPkt {                      //Éè±¸ÍøÂçÅäÖÃ°üsizeof 372
 #define DDNS_MyDDNS   2
 #define DDNS_9299     3
     i32 DDNSType;                               //0=3322.ORG 1=dynDNS.ORG 2=MyDDNS 3=9299.org
-    char40 DDNSDomain;                           //»òDDNS SERVER IP
+    char40 DDNSDomain;                           //æˆ–DDNS SERVER IP
     char40 DDNSServer;
     char Reserved[44];
   }DDNS;
@@ -842,20 +859,20 @@ typedef enum TStopBit{
   StopBit_2   = 2
 }TStopBit;
 
-typedef struct TRS485CfgPkt__Disable {                       //485Í¨ĞÅ°ü sizeof 280
+typedef struct TRS485CfgPkt__Disable {                       //485é€šä¿¡åŒ… sizeof 280
   i32 Chl;
-  TBaudRate BPS;//²¨ÌØÂÊ
-  TDataBit DataBit;//Êı¾İÎ»
-  TParityCheck ParityCheck;//ÆæÅ¼Ğ£Ñé
-  TStopBit StopBit;//Í£Ö¹Î»
+  TBaudRate BPS;//æ³¢ç‰¹ç‡
+  TDataBit DataBit;//æ•°æ®ä½
+  TParityCheck ParityCheck;//å¥‡å¶æ ¡éªŒ
+  TStopBit StopBit;//åœæ­¢ä½
   struct {
     u8 Address;
-    u8 PTZProtocol;//ÔÆÌ¨Ğ­Òé
+    u8 PTZProtocol;//äº‘å°åè®®
     u8 PTZSpeed;
     u8 Reserved;
-  }Lst[32];//¶ÔÓ¦ÏàÓ¦µÄÊÓÆµÍ¨µÀ
+  }Lst[32];//å¯¹åº”ç›¸åº”çš„è§†é¢‘é€šé“
 
-  //char PTZNameLst[128];//ÔİÊ±Î´ÓÃµ½ format "Pelco_P\nPelco_D\nProtocol_Custom"
+  //char PTZNameLst[128];//æš‚æ—¶æœªç”¨åˆ° format "Pelco_P\nPelco_D\nProtocol_Custom"
 
   i32 PTZCount;
   char20 PTZNameLst[6];
@@ -865,15 +882,15 @@ typedef struct TRS485CfgPkt__Disable {                       //485Í¨ĞÅ°ü sizeof 
 //-----------------------------------------------------------------------------
 typedef struct TColorsPkt {
   i32 Chl;
-  u8  Brightness;                               //ÁÁ¶È   0-255
-  u8  Contrast;                                 //¶Ô±È¶È 0-255
-  u8  Hue;                                      //É«¶È   0-255
-  u8  Saturation;                               //±¥ºÍ¶È 0-255
-  u8  Sharpness;                                //±¥ºÍ¶È 0-255
+  u8  Brightness;                               //äº®åº¦   0-255
+  u8  Contrast;                                 //å¯¹æ¯”åº¦ 0-255
+  u8  Hue;                                      //è‰²åº¦   0-255
+  u8  Saturation;                               //é¥±å’Œåº¦ 0-255
+  u8  Sharpness;                                //é¥±å’Œåº¦ 0-255
   u8 Reserved[3];
 }TColorsPkt;
 //-----------------------------------------------------------------------------
-typedef struct TMulticastInfoPkt {               //¶à²¥·¢ËÍĞÅÏ¢°üsizeof 556->588->628
+typedef struct TMulticastInfoPkt {               //å¤šæ’­å‘é€ä¿¡æ¯åŒ…sizeof 556->588->628
   TDevInfoPkt DevInfo;
   TNetCfgPkt NetCfg;
   i32 Flag;// sendfrom client=0 sendfrom device=1
@@ -881,120 +898,228 @@ typedef struct TMulticastInfoPkt {               //¶à²¥·¢ËÍĞÅÏ¢°üsizeof 556->588
   Tp2pCfgPkt p2pCfg;
   TVideoCfgPkt VideoCfg;
   TAudioCfgPkt AudioCfg;
-  char20 UserName;                               //ÓÃ»§Ãû admin²»ÄÜ¸ü¸Ä
-  char20 Password;                               //ÃÜÂë
+  char20 UserName;                               //ç”¨æˆ·å adminä¸èƒ½æ›´æ”¹
+  char20 Password;                               //å¯†ç 
 }TMulticastInfoPkt;
 //-----------------------------------------------------------------------------
-#define Head_CmdPkt           0xAAAAAAAA         //ÃüÁî°ü°üÍ·
-#define Head_VideoPkt         0xBBBBBBBB         //ÊÓÆµ°ü°üÍ·
-#define Head_AudioPkt         0xCCCCCCCC         //ÒôÆµ°ü°üÍ·
-#define Head_TalkPkt          0xDDDDDDDD         //¶Ô½²°ü°üÍ·
-#define Head_UploadPkt        0xEEEEEEEE         //ÉÏ´«°ü
-#define Head_DownloadPkt      0xFFFFFFFF         //ÏÂÔØ°ü//Î´ÓÃ
-#define Head_CfgPkt           0x99999999         //ÅäÖÃ°ü
-#define Head_SensePkt         0x88888888         //Õì²â°ü//Î´ÓÃ
-#define Head_MotionInfoPkt    0x77777777         //ÒÆ¶¯Õì²â·§Öµ°üÍ·
+#define Head_CmdPkt           0xAAAAAAAA         //å‘½ä»¤åŒ…åŒ…å¤´
+#define Head_VideoPkt         0xBBBBBBBB         //è§†é¢‘åŒ…åŒ…å¤´
+#define Head_AudioPkt         0xCCCCCCCC         //éŸ³é¢‘åŒ…åŒ…å¤´
+#define Head_TalkPkt          0xDDDDDDDD         //å¯¹è®²åŒ…åŒ…å¤´
+#define Head_UploadPkt        0xEEEEEEEE         //ä¸Šä¼ åŒ…
+#define Head_DownloadPkt      0xFFFFFFFF         //ä¸‹è½½åŒ…//æœªç”¨
+#define Head_CfgPkt           0x99999999         //é…ç½®åŒ…
+#define Head_SensePkt         0x88888888         //ä¾¦æµ‹åŒ…//æœªç”¨
+#define Head_MotionInfoPkt    0x77777777         //ç§»åŠ¨ä¾¦æµ‹é˜€å€¼åŒ…å¤´
+#define Head_LightCfgPkt      0x66666666
 //-----------------------------------------------------------------------------
 typedef struct THeadPkt{                         //sizeof 8
-  u32 VerifyCode;                              //Ğ£ÑéÂë = 0xAAAAAAAA 0XBBBBBBBB 0XCCCCCCCC 0XDDDDDDDD 0XEEEEEEEE
-  u32 PktSize;                                 //±¾°ü´óĞ¡=1460-8
+  u32 VerifyCode;                              //æ ¡éªŒç  = 0xAAAAAAAA 0XBBBBBBBB 0XCCCCCCCC 0XDDDDDDDD 0XEEEEEEEE
+  u32 PktSize;                                 //æœ¬åŒ…å¤§å°=1460-8
 }THeadPkt;
 //-----------------------------------------------------------------------------
-typedef struct TTalkHeadPkt {                    //¶Ô½²°ü°üÍ·  sizeof 32
-  u32 VerifyCode;                              //Ğ£ÑéÂë = 0XDDDDDDDD
+typedef struct TTalkHeadPkt {                    //å¯¹è®²åŒ…åŒ…å¤´  sizeof 32
+  u32 VerifyCode;                              //æ ¡éªŒç  = 0XDDDDDDDD
   u32 PktSize;
   char20 TalkIP;
   u32 TalkPort;
 }TTalkHeadPkt;
 //-----------------------------------------------------------------------------
-typedef struct TFrameInfo { //Â¼Ó°ÎÄ¼şÊı¾İÖ¡Í·  16 u8
-  i64 FrameTime;                               //Ö¡Ê±¼ä£¬time_t*1000000 +us
-  u8 Chl;                                      //Í¨µÀ 0..15 ¶ÔÓ¦ 1..16Í¨µÀ
-  bool IsIFrame;                                 //ÊÇ·ñIÖ¡
-  u16 FrameID;                                  //Ö¡Ë÷Òı,´Ó0 ¿ªÊ¼,µ½65535£¬ÖÜ¶ø¸´Ê¼
+typedef struct TFrameInfo { //å½•å½±æ–‡ä»¶æ•°æ®å¸§å¤´  16 u8
+  i64 FrameTime;                               //å¸§æ—¶é—´ï¼Œtime_t*1000000 +us
+  u8 Chl;                                      //é€šé“ 0..15 å¯¹åº” 1..16é€šé“
+  u8 IsIFrame;                                 //æ˜¯å¦Iå¸§
+  u16 FrameID;                                  //å¸§ç´¢å¼•,ä»0 å¼€å§‹,åˆ°65535ï¼Œå‘¨è€Œå¤?
   union {
-    u32 PrevIFramePos;                         //Ç°Ò»¸öIÖ¡ÎÄ¼şÖ¸Õë£¬ÓÃÓÚÎÄ¼şÖĞ´¦Àí»òÍøÂç°ü·¢ËÍ
-    i32 StreamType;                              //Èç¹ûÊÇË«ÂëÁ÷£¬ÏÖ³¡°ü 0ÎªÖ÷ÂëÁ÷ 1Îª´ÎÂëÁ÷ add at 2009/09/02
+    u32 PrevIFramePos;                         //å‰ä¸€ä¸ªIå¸§æ–‡ä»¶æŒ‡é’ˆï¼Œç”¨äºæ–‡ä»¶ä¸­å¤„ç†æˆ–ç½‘ç»œåŒ…å‘é€
+    i32 StreamType;                              //å¦‚æœæ˜¯åŒç æµï¼Œç°åœºåŒ… 0ä¸ºä¸»ç æµ 1ä¸ºæ¬¡ç æµ add at 2009/09/02
   };
 }TFrameInfo;
 
-typedef struct TDataFrameInfo { //Â¼Ó°ÎÄ¼şÊı¾İÖ¡Í·  24 u8
+typedef struct TDataFrameInfo { //å½•å½±æ–‡ä»¶æ•°æ®å¸§å¤´  24 u8
   THeadPkt Head;
   TFrameInfo Frame;
 }TDataFrameInfo;
 //-----------------------------------------------------------------------------
-typedef struct TMotionInfoPkt { //ÒÆ¶¯Õì²â·§Öµ  sizeof 4
+typedef struct TMotionInfoPkt { //ç§»åŠ¨ä¾¦æµ‹é˜€å€¼  sizeof 4
   u8 AreaIndex;
   u8 ActiveNum;
   u8 Sensitive;
   u8 Tag;
 }TMotionInfoPkt;
 //-----------------------------------------------------------------------------
-//´íÎó´úÂë
-#define ERR_FAIL           0
-#define ERR_OK             1
-#define ERR_MAXUSERCONN    10001//Á¬½ÓÓÃ»§Êı³¬¹ı×î´óÉè¶¨
+typedef struct TGPIOStatusPkt {  //GPIOStatus sizeof 16
+  THeadPkt Head;
+  u64 DOStatus000_063;
+}TGPIOStatusPkt;
 //-----------------------------------------------------------------------------
-typedef struct TLoginPkt {                       //ÓÃ»§µÇÂ¼°ü sizeof 252->892
-  char20 UserName;                               //ÓÃ»§Ãû³Æ
-  char20 Password;                               //ÓÃ»§ÃÜÂë
-  char20 DevIP;                                  //ÒªÁ¬½ÓµÄÉè±¸IP,»ò host
+//é”™è¯¯ä»£ç 
+#define ERR_FAIL           0
+//#define ERR_OK             1
+#define ERR_MAXUSERCONN    10001//è¿æ¥ç”¨æˆ·æ•°è¶…è¿‡æœ€å¤§è®¾å®š
+//-----------------------------------------------------------------------------
+typedef struct TLoginPkt {                       //ç”¨æˆ·ç™»å½•åŒ… sizeof 252->892
+  char20 UserName;                               //ç”¨æˆ·åç§°
+  char20 Password;                               //ç”¨æˆ·å¯†ç 
+  char20 DevIP;                                  //è¦è¿æ¥çš„è®¾å¤‡IP,æˆ– host
   i32 UserGroup;                                 //Guest=1 Operator=2 Administrator=3
-  i32 Reserved;                                 //±£Áô
+  i32 Reserved;                                 //ä¿ç•™
   TDevInfoPkt DevInfoPkt;
   //2009-05-12 add begin
   TVideoFormat v[4];
   TAudioFormat a[4];
   //2009-05-12 add end
-  //i32 Flag;//·µ»ØÊÇ·ñÔÚÏß¡¡0²»ÔÚÏß¡¡1ÔÚÏß
+  //i32 Flag;//è¿”å›æ˜¯å¦åœ¨çº¿ã€€0ä¸åœ¨çº¿ã€€1åœ¨çº¿
 #define SENDFROM_CLIENT    1
 #define SENDFROM_NVRMOBILE 0
-  i32 SendFrom;// (x2 0=ÊÖ»úNVR 1=¿Í»§¶Ë )
+  i32 SendFrom;// (x2 0=æ‰‹æœºNVR 1=å®¢æˆ·ç«¯ )
 }TLoginPkt;
 //-----------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+typedef struct TLightCfgPkt { //sizeof 36
+#define LIGHT_CONTROLTYPE_NULL    0
+#define LIGHT_CONTROLTYPE_AUTO    1
+#define LIGHT_CONTROLTYPE_MANUAL  2
+#define LIGHT_CONTROLTYPE_TIMER   3
+#define LIGHT_CONTROLTYPE_D2D     4
+  struct {
+    u8 Mode;//auto=1 manual=2 timer=3 d2d=4
+    u8 LightStatus;//åªè¦è¿”å›æ—¶æ‰æœ‰ç”¨åˆ°
+    u8 Flag[2];
+
+    struct {
+      u16 Delay;
+      u8 Lux;
+      u8 Brightness;
+      u8 Reserved[4];
+    }Auto;
+    struct {
+      u8 Brightness;
+      u8 Reserved[7];
+    }Manual;
+    struct {
+      u8 Brightness;
+      u8 StartH;
+      u8 StartM;
+      u8 StopH;
+      u8 StopM;
+      u8 Reserved[3];
+    }Timer;
+    struct {
+      u8 Brightness;
+      u8 Flag;
+      u8 Lux;
+      u8 Reserved[5];
+    }D2D;
+  };
+}TLightCfgPkt;
+//-----------------------------------------------------------------------------
+typedef struct TPushCfgPkt {//sizeof 4
+  u16 PushInterval;
+  u8 PushActive;
+  u8 PIRSensitive;
+}TPushCfgPkt;
+//-----------------------------------------------------------------------------
+typedef enum TTestStep {
+  ts_NULL,
+  ts_TestSD,
+  ts_TestNetwork,
+  ts_TestWiFi,
+  ts_TestVideo,
+  ts_TestAudioCollect,
+  ts_TestAudioPlay,
+  ts_TestDI,
+  ts_TestDO,
+  ts_TestMCU,
+  ts_TestOver,
+}TTestStep;
+
+typedef struct TTestPkt {//sizeof 12
+  int IsTestMode;
+  TTestStep TestStep;
+  int Result;
+}TTestPkt;
+//-----------------------------------------------------------------------------
 typedef struct TCmdPkt {                         //sizeof 1460-8
-  u32 PktHead;                                 //°üÍ·Ğ£ÑéÂë =Head_CmdPkt 0xAAAAAAAA
-  TMsgID MsgID;                                  //ÏûÏ¢
-  u32 Session;                                 //ÍøÂçÓÃ»§Ğí¿É£¬µ±·¢ËÍÍøÂçµÇÂ¼°üÊ±´ËÖµÎª0£¬µÈÓÚ·µ»ØµÇÂ¼°üµÄSession  //µ±°üÎª³ÌĞòÄÚ²¿Í¨Ñ¶°üÊ±£¬´ËÖµºöÂÔ
-  u32 Value;                                   //ÊôĞÔ»ò·µ»ØÖµ 0 or 1 or ErrorCode
+  u32 PktHead;                                 //åŒ…å¤´æ ¡éªŒç  =Head_CmdPkt 0xAAAAAAAA
+  TMsgID MsgID;                                  //æ¶ˆæ¯
+  u32 Session;                                 //ç½‘ç»œç”¨æˆ·è®¸å¯ï¼Œå½“å‘é€ç½‘ç»œç™»å½•åŒ…æ—¶æ­¤å€¼ä¸º0ï¼Œç­‰äºè¿”å›ç™»å½•åŒ…çš„Session  //å½“åŒ…ä¸ºç¨‹åºå†…éƒ¨é€šè®¯åŒ…æ—¶ï¼Œæ­¤å€¼å¿½ç•¥
+  u32 Value;                                   //å±æ€§æˆ–è¿”å›å€¼ 0 or 1 or ErrorCode
   union {
     char ValueStr[1460 - 4*4 - 8];
-    struct TLoginPkt LoginPkt;                   //µÇÂ¼°ü
-    struct TPlayLivePkt LivePkt;                 //²¥·ÅÏÖ³¡°ü
-    struct TRecFilePkt RecFilePkt;               //»Ø·ÅÂ¼Ó°°ü
-    struct TPTZPkt PTZPkt;                       //ÔÆÌ¨¿ØÖÆÌ¨
+    struct TLoginPkt LoginPkt;                   //ç™»å½•åŒ…
+    struct TPlayLivePkt LivePkt;                 //æ’­æ”¾ç°åœºåŒ…
+    struct TRecFilePkt RecFilePkt;               //å›æ”¾å½•å½±åŒ…
+    struct TPTZPkt PTZPkt;                       //äº‘å°æ§åˆ¶å°
     struct TRecFileLst RecFileLst;
-    struct TPlayCtrlPkt PlayCtrlPkt;             //»Ø·ÅÂ¼Ó°¿ØÖÆ°ü
+    struct TPlayCtrlPkt PlayCtrlPkt;             //å›æ”¾å½•å½±æ§åˆ¶åŒ…
 
-    struct TAlmSendPkt AlmSendPkt;               //¾¯±¨ÉÏ´«°ü
-    struct TDevInfoPkt DevInfoPkt;               //Éè±¸ĞÅÏ¢°ü
-    struct TNetCfgPkt NetCfgPkt;                 //Éè±¸ÍøÂçÅäÖÃ°ü
-    struct TWiFiCfgPkt WiFiCfgPkt;               //ÎŞÏßÍøÂçÅäÖÃ°ü
-    struct TDiskCfgPkt DiskCfgPkt;               //´ÅÅÌÅäÖÃ°ü
-    struct TUserCfgPkt UserCfgPkt;               //ÓÃ»§ÅäÖÃ°ü
-    struct TRecCfgPkt RecCfgPkt;                 //Â¼Ó°ÅäÖÃ°ü
-    struct TMDCfgPkt MDCfgPkt;                   //ÒÆ¶¯Õì²â°ü--µ¥Í¨µÀ
-    //    struct TDiDoCfgPkt DiDoCfgPkt;               //DIDOÅäÖÃ°ü 528
-    struct TDoControlPkt DoControlPkt;           //DO¿ØÖÆ°ü
-    struct THideAreaCfgPkt HideAreaCfgPkt;       //Òş²ØÂ¼Ó°ÇøÓò°ü--µ¥Í¨µÀ
-    struct TAlmCfgPkt AlmCfgPkt;                 //¾¯±¨ÅäÖÃ°ü
-    struct TVideoCfgPkt VideoCfgPkt;             //ÊÓÆµÅäÖÃ°ü--µ¥Í¨µÀ
-    struct TAudioCfgPkt AudioCfgPkt;             //ÒôÆµÅäÖÃ°ü--µ¥Í¨µÀ
-    struct TRecFileHead FileHead;                //È¡µÃÉè±¸ÎÄ¼şÎÄ¼şÍ·ĞÅÏ¢
-    struct TFilePkt FilePkt;                     //ÉÏ´«ÎÄ¼ş°ü
-    //struct TRS485CfgPkt RS485CfgPkt;             //485Í¨ĞÅ°ü--µ¥Í¨µÀ
-    struct TColorsPkt Colors;                    //ÉèÖÃÈ¡µÃÁÁ¶È¡¢¶Ô±È¶È¡¢É«¶È¡¢±¥ºÍ¶È
+    struct TAlmSendPkt AlmSendPkt;               //è­¦æŠ¥ä¸Šä¼ åŒ…
+    struct TDevInfoPkt DevInfoPkt;               //è®¾å¤‡ä¿¡æ¯åŒ…
+    struct TNetCfgPkt NetCfgPkt;                 //è®¾å¤‡ç½‘ç»œé…ç½®åŒ…
+    struct TWiFiCfgPkt WiFiCfgPkt;               //æ— çº¿ç½‘ç»œé…ç½®åŒ…
+    struct TDiskCfgPkt DiskCfgPkt;               //ç£ç›˜é…ç½®åŒ…
+    struct TUserCfgPkt UserCfgPkt;               //ç”¨æˆ·é…ç½®åŒ…
+    struct TRecCfgPkt RecCfgPkt;                 //å½•å½±é…ç½®åŒ…
+    struct TMDCfgPkt MDCfgPkt;                   //ç§»åŠ¨ä¾¦æµ‹åŒ…--å•é€šé“
+    //    struct TDiDoCfgPkt DiDoCfgPkt;               //DIDOé…ç½®åŒ… 528
+    struct TDoControlPkt DoControlPkt;           //DOæ§åˆ¶åŒ…
+    struct THideAreaCfgPkt HideAreaCfgPkt;       //éšè—å½•å½±åŒºåŸŸåŒ…--å•é€šé“
+    struct TAlmCfgPkt AlmCfgPkt;                 //è­¦æŠ¥é…ç½®åŒ…
+    struct TVideoCfgPkt VideoCfgPkt;             //è§†é¢‘é…ç½®åŒ…--å•é€šé“
+    struct TAudioCfgPkt AudioCfgPkt;             //éŸ³é¢‘é…ç½®åŒ…--å•é€šé“
+    struct TRecFileHead FileHead;                //å–å¾—è®¾å¤‡æ–‡ä»¶æ–‡ä»¶å¤´ä¿¡æ¯
+    struct TFilePkt FilePkt;                     //ä¸Šä¼ æ–‡ä»¶åŒ…
+    //struct TRS485CfgPkt RS485CfgPkt;             //485é€šä¿¡åŒ…--å•é€šé“
+    struct TColorsPkt Colors;                    //è®¾ç½®å–å¾—äº®åº¦ã€å¯¹æ¯”åº¦ã€è‰²åº¦ã€é¥±å’Œåº¦
 
-    struct TMulticastInfoPkt MulticastInfo;      //¶à²¥ĞÅÏ¢
+    struct TMulticastInfoPkt MulticastInfo;      //å¤šæ’­ä¿¡æ¯
 
     struct TFTPCfgPkt FTPCfgPkt;
     struct TSMTPCfgPkt SMTPCfgPkt;
     struct TWiFiSearchPkt WiFiSearchPkt[30];
     struct Tp2pCfgPkt p2pCfgPkt;
+    struct TLightCfgPkt LightCfgPkt;
   };
 }TCmdPkt;
 //-----------------------------------------------------------------------------
-typedef struct TNetCmdPkt {                      //ÍøÂç·¢ËÍ°ü sizeof 1460
+typedef struct TNetCmdPkt {                      //ç½‘ç»œå‘é€åŒ… sizeof 1460
   struct THeadPkt HeadPkt;
   struct TCmdPkt CmdPkt;
 }TNetCmdPkt;
@@ -1011,32 +1136,32 @@ typedef struct TNetCmdPkt {                      //ÍøÂç·¢ËÍ°ü sizeof 1460
 //*****************************************************************************
 //*****************************************************************************
 typedef struct TNewDevInfo {//sizeof 80
-  char DevModal[8];                             //Éè±¸ĞÍºÅ  ='7xxx'
+  char DevModal[8];                             //è®¾å¤‡å‹å·  ='7xxx'
   u32 SN;
-  char16 SoftVersion;                            //Èí¼ş°æ±¾
-  char20 DevName;                                //Éè±¸±êÊ¶
+  char16 SoftVersion;                            //è½¯ä»¶ç‰ˆæœ¬
+  char20 DevName;                                //è®¾å¤‡æ ‡è¯†
   u64 StandardMask;//16
   u64 SubStandardMask;//32
-  u8 DevType;                                   //Éè±¸ÀàĞÍ
-  bool ExistWiFi;
-  bool ExistSD;
-  bool ethLinkStatus;      //ÓĞÏßÍøÂçÊÇ·ñÁ¬½Ó
-  bool wifiStatus;
-  bool upnpStatus;
-  bool WlanStatus;
-  bool p2pStatus;
-  u8 HardType;      //Ó²¼şÀàĞÍ
+  u8 DevType;                                   //è®¾å¤‡ç±»å‹
+  u8 ExistWiFi;
+  u8 ExistSD;
+  u8 IsEtherLink;      //æœ‰çº¿ç½‘ç»œæ˜¯å¦è¿æ¥
+  u8 wifiStatus;
+  u8 upnpStatus;
+  u8 IsConnWLAN;
+  u8 p2pStatus;
+  u8 HardType;      //ç¡¬ä»¶ç±»å‹
   signed char TimeZone;
-  bool DoubleStream;                              //ÊÇ·ñË«ÂëÁ÷ add at 2009/09/02
-  bool ExistFlash;
+  u8 DoubleStream;                              //æ˜¯å¦åŒç æµ add at 2009/09/02
+  u8 ReservedExistFlash;
   u8 SDKVersion;
   u8 Reserved[3];
 }TNewDevInfo;
 
 typedef struct TNewNetCfg{//sizeof 132
-  u16 DataPort;                                   //ÃüÁîÊı¾İ¶Ë¿Ú
-  u16 rtspPort;                                  //rtsp¶Ë¿Ú
-  u16 HttpPort;                                  //httpÍøÒ³¶Ë¿Ú
+  u16 DataPort;                                   //å‘½ä»¤æ•°æ®ç«¯å£
+  u16 rtspPort;                                  //rtspç«¯å£
+  u16 HttpPort;                                  //httpç½‘é¡µç«¯å£
   u8 IPType;
   u8 Reserved0;
   i32 DevIP;
@@ -1044,25 +1169,25 @@ typedef struct TNewNetCfg{//sizeof 132
   i32 Gateway;
   i32 DNS1;
   char20 DevMAC;
-  bool ActiveuPnP;
-  bool ActiveDDNS;
+  u8 ActiveuPnP;
+  u8 ActiveDDNS;
   u8 DDNSType;                               //0=3322.ORG 1=dynDNS.ORG 2=MyDDNS 3=9299.org
   u8 Reserved1;
-  char40 DDNSDomain;                           //»òDDNS SERVER IP
+  char40 DDNSDomain;                           //æˆ–DDNS SERVER IP
   char40 DDNSServer;
   i32 Reserved2;
 }TNewNetCfg;
 
 typedef struct TNewwifiCfg{//sizeof 92
-  bool ActiveWIFI;
-  bool IsAPMode;//sta=0  ap=1
+  u8 ActiveWIFI;
+  u8 WifiMode;//sta=0  ap=1
   u8 Reserved0;
   u8 Reserved1;
   char20 SSID_AP;
   char20 Password_AP;
   char20 SSID_STA;
   char20 Password_STA;
-  u8 Channel;//ÆµµÀ1..14 default 1=Auto
+  u8 Channel;//é¢‘é“1..14 default 1=Auto
   u8 EncryptType;//(Encrypt_None,Encrypt_WEP,Encrypt_WPA);
   u8 Auth;//WEP(0=AUTO 1=OPEN 2=SHARED)  WPA(0=AUTO 1=WPA-PSK 2=WPA2-PSK)
   u8 Enc;//WPA(0=AUTO 1=TKIP 2=AES)
@@ -1070,8 +1195,8 @@ typedef struct TNewwifiCfg{//sizeof 92
 }TNewwifiCfg;
 
 typedef struct TNewp2pCfg{//sizeof 64
-  bool ActiveP2P;
-  u8 Version;//0 Ö÷ÂëÁ÷ 1 ´ÎÂëÁ÷
+  u8 ActiveP2P;
+  u8 Version;//0 ä¸»ç æµ 1 æ¬¡ç æµ
   u8 p2pType;   //tutk=0 self=1
   char UID[21];
   char40 Reserved;
@@ -1079,62 +1204,62 @@ typedef struct TNewp2pCfg{//sizeof 64
 
 typedef struct TNewVideoCfg {//sizeof 16
   u8 StandardEx0;//TStandardEx
-  u8 FrameRate0;                                //Ö¡ÂÊ 1-30 MAX:PAL 25 NTSC 30
+  u8 FrameRate0;                                //å¸§ç‡ 1-30 MAX:PAL 25 NTSC 30
   u16 BitRate0;
   u8 StandardEx1;//TStandardEx
-  u8 FrameRate1;//Ö¡ÂÊ 1-30 MAX:PAL 25 NTSC 30
-  u16 BitRate1;//ÂëÁ÷ 64K 128K 256K 512K 1024K 1536K 2048K 2560K 3072K
-  bool IsMirror;                           //Ë®Æ½·­×ª false or true
-  bool IsFlip;                             //´¹Ö±·­×ª false or true
-  bool IsShowFrameRate;
+  u8 FrameRate1;//å¸§ç‡ 1-30 MAX:PAL 25 NTSC 30
+  u16 BitRate1;//ç æµ 64K 128K 256K 512K 1024K 1536K 2048K 2560K 3072K
+  u8 IsMirror;                           //æ°´å¹³ç¿»è½¬ false or true
+  u8 IsFlip;                             //å‚ç›´ç¿»è½¬ false or true
+  u8 IsShowFrameRate;
   u8 VideoType;                            //MPEG4=0x0000, MJPEG=0x0001  H264=0x0002
-  u8 BitRateType0;                              //0¶¨ÂëÁ÷CBR 1¶¨»­ÖÊVBR
+  u8 BitRateType0;                              //0å®šç æµCBR 1å®šç”»è´¨VBR
   u8 BitRateQuant0;
-  u8 BitRateType1;                              //0¶¨ÂëÁ÷CBR 1¶¨»­ÖÊVBR
+  u8 BitRateType1;                              //0å®šç æµCBR 1å®šç”»è´¨VBR
   u8 BitRateQuant1;
 }TNewVideoCfg;
 
 typedef struct TNewAudioCfg{//sizeof 12
-  bool  ActiveAUDIO;                                   //ÊÇ·ñÆô¶¯ÉùÒô
-  u8 InputTypeAUDIO;                                 //0 MICÊäÈë, 1 LINEÊäÈë
+  u8  ActiveAUDIO;                                   //æ˜¯å¦å¯åŠ¨å£°éŸ³
+  u8 InputTypeAUDIO;                                 //0 MICè¾“å…¥, 1 LINEè¾“å…¥
   u8 VolumeLineIn;
   u8 VolumeLineOut;
-  u8 nChannels;                               //µ¥ÉùµÀ=0 Á¢ÌåÉù=1
+  u8 nChannels;                               //å•å£°é“=0 ç«‹ä½“å£°=1
   u8 wBitsPerSample;                          //number of bits per sample of mono data
-  u16 nSamplesPerSec;                          //²ÉÑùÂÊ
+  u16 nSamplesPerSec;                          //é‡‡æ ·ç‡
   u8 wFormatTag;
   u8 Reserved[3];
 }TNewAudioCfg;
 
 typedef struct TNewUserCfg {//sizeof 128
-  char20 UserName[3];                               //ÓÃ»§Ãû admin²»ÄÜ¸ü¸Ä
-  char20 Password[3];                               //ÃÜÂë
-  u8 Authority[3];                                 //3Îªadmin
+  char20 UserName[3];                               //ç”¨æˆ·å adminä¸èƒ½æ›´æ”¹
+  char20 Password[3];                               //å¯†ç 
+  u8 Authority[3];                                 //3ä¸ºadmin
   u8 Reserved[5];
 }TNewUserCfg;
 
 typedef struct TNewDIAlm {//sizeof 12
-  bool ActiveDI;
+  u8 ActiveDI;
   u8 Reserved0;
-  bool IsAlmRec;
-  bool IsFTPUpload;
-  bool ActiveDO;//DI¹ØÁªDOÍ¨µÀ false close
-  bool IsSendEmail;
-  u8 Reserved1;// >0ÎªÔ¤ÉèÎ»
-  u8 AlmOutTimeLen;//±¨¾¯Êä³öÊ±³¤(Ãë) 0 ..255 s
+  u8 IsAlmRec;
+  u8 IsFTPUpload;
+  u8 ActiveDO;//DIå…³è”DOé€šé“ false close
+  u8 IsSendEmail;
+  u8 Reserved1;// >0ä¸ºé¢„è®¾ä½
+  u8 AlmOutTimeLen;//æŠ¥è­¦è¾“å‡ºæ—¶é•¿(ç§’) 0 ..255 s
   //struct TTaskhm hm;
   i32 Reserved2;
 }TNewDIAlm;
 
-typedef struct TNewMDAlm {//sizeof 28                       //ÒÆ¶¯Õì²â°ü
-  bool ActiveMD;
-  u8 Sensitive;                              //Õì²âÁéÃô¶È 0-255
-  bool IsAlmRec;
-  bool IsFTPUpload;
-  bool ActiveDO;//DI¹ØÁªDOÍ¨µÀ false close
-  bool IsSendEmail;
+typedef struct TNewMDAlm {//sizeof 28                       //ç§»åŠ¨ä¾¦æµ‹åŒ…
+  u8 ActiveMD;
+  u8 Sensitive;                              //ä¾¦æµ‹çµæ•åº¦ 0-255
+  u8 IsAlmRec;
+  u8 IsFTPUpload;
+  u8 ActiveDO;//DIå…³è”DOé€šé“ false close
+  u8 IsSendEmail;
   u8 Reserved2;
-  u8 AlmOutTimeLen;                    //±¨¾¯Êä³öÊ±³¤(Ãë) 0 ..255 s
+  u8 AlmOutTimeLen;                    //æŠ¥è­¦è¾“å‡ºæ—¶é•¿(ç§’) 0 ..255 s
   struct {
     float left,top,right,bottom;
   }Rect;
@@ -1142,38 +1267,38 @@ typedef struct TNewMDAlm {//sizeof 28                       //ÒÆ¶¯Õì²â°ü
 }TNewMDAlm;
 
 typedef struct TNewSoundAlm{//sizeof 12
-  bool ActiveSoundTrigger;
+  u8 ActiveSoundTrigger;
   u8 Sensitive;
-  bool IsAlmRec;
-  bool IsFTPUpload;
-  bool ActiveDO;//DI¹ØÁªDOÍ¨µÀ false close
-  bool IsSendEmail;
-  u8 Reserved1;// >0ÎªÔ¤ÉèÎ»
-  u8 AlmOutTimeLen;                    //±¨¾¯Êä³öÊ±³¤(Ãë) 0 ..255 s
+  u8 IsAlmRec;
+  u8 IsFTPUpload;
+  u8 ActiveDO;//DIå…³è”DOé€šé“ false close
+  u8 IsSendEmail;
+  u8 Reserved1;// >0ä¸ºé¢„è®¾ä½
+  u8 AlmOutTimeLen;                    //æŠ¥è­¦è¾“å‡ºæ—¶é•¿(ç§’) 0 ..255 s
   i32 Reserved2;
 }TNewSoundAlm;
 
-typedef struct TNewRecCfg{//sizeof 236                      //Â¼Ó°ÅäÖÃ°ü
-  u8 RecStreamType;//0 Ö÷ÂëÁ÷ 1 ´ÎÂëÁ÷
-  bool IsRecAudio;//Â¼ÖÆÒôÆµ ÔİÃ»ÓĞÓÃµ½
-  u8 RecStyle;//Â¼Ó°ÀàĞÍ
+typedef struct TNewRecCfg{//sizeof 236                      //å½•å½±é…ç½®åŒ…
+  u8 RecStreamType;//0 ä¸»ç æµ 1 æ¬¡ç æµ
+  u8 IsRecAudio;//å½•åˆ¶éŸ³é¢‘ æš‚æ²¡æœ‰ç”¨åˆ°
+  u8 RecStyle;//å½•å½±ç±»å‹
   u8 Reserved;
   TPlanRecPkt Plan;
-  u16 Rec_AlmTimeLen;//¾¯ºóÂ¼Ó°Ê±³¤        10 s
-  u16 Rec_NmlTimeLen;//Ò»°ãÂ¼Ó°·Ö¸îÊ±³¤   600 s
+  u16 Rec_AlmTimeLen;//è­¦åå½•å½±æ—¶é•¿        10 s
+  u16 Rec_NmlTimeLen;//ä¸€èˆ¬å½•å½±åˆ†å‰²æ—¶é•¿   600 s
   i32 Reserved1;
 }TNewRecCfg;
 
 typedef struct TNewExtractCfg{// sizeof 188 //20171219
   u32 VerifyCode;                      //0xAAAAAAAA
-  char60 DevName;                      //Éè±¸±êÊ¶
+  char60 DevName;                      //è®¾å¤‡æ ‡è¯†
   u32 DiskSize;                        // M ReadOnly
   u32 FreeSize;                        //72
   u8 PlatformType;
-  bool IsAudioGain;
+  u8 IsAudioGain;
   u8 AudioGainLevel;
   u8 IRCutSensitive;                   //76
-  bool HideAreaActive;
+  u8 HideAreaActive;
   u8 HideAreaLeft;
   u8 HideAreaTop;
   u8 HideAreaRight;                    //80
@@ -1191,12 +1316,12 @@ typedef struct TNewExtractCfg{// sizeof 188 //20171219
   u8 HueNight;                         //92
   u8 SaturationNight;
   u8 SharpnessNight;
-  bool IsWDR;
+  u8 IsWDR;
   u8 WDRLevel;                         //96
-  bool IsShowTime;
-  bool IsShowTitle;
-  bool IsShowFrameRate;
-  bool IsShowLogo;                     //100
+  u8 IsShowTime;
+  u8 IsShowTitle;
+  u8 IsShowFrameRate;
+  u8 IsShowLogo;                     //100
   u8 TimeX;                            //0=0.00 100=1.00
   u8 TimeY;
   u8 TitleX;
@@ -1205,14 +1330,14 @@ typedef struct TNewExtractCfg{// sizeof 188 //20171219
   u8 FrameRateY;
   u8 LogoX;
   u8 LogoY;                            //108
-  bool IsOsdTransparent;
-  bool IsOSDBigFont;                   //110
-  bool IsNewSendStyle;                 //111
-  u8 MaxUserConn;                      //112 ×î´óÓÃ»§Á¬½ÓÊı default 10
+  u8 IsOsdTransparent;
+  u8 IsOSDBigFont;                   //110
+  u8 IsNewSendStyle;                 //111
+  u8 MaxUserConn;                      //112 æœ€å¤§ç”¨æˆ·è¿æ¥æ•° default 10
   struct {
     u8 w;//TTaskDayType;
-    u8 start_h;//Ê± 0-23
-    u8 start_m;//·Ö 0-59
+    u8 start_h;//æ—¶ 0-23
+    u8 start_m;//åˆ† 0-59
     u8 Days;
   }RebootHM;                           //116
   i32 ProcRunningTime;                 //120
@@ -1241,7 +1366,7 @@ typedef struct TNewDevCfg {//812->1000 || 952->1000
 }TNewDevCfg;
 
 typedef struct TNewCmdPkt {//maxsize sizeof 1008
-  u32 VerifyCode;//Ğ£ÑéÂë = 0xAAAAAAAA
+  u32 VerifyCode;//æ ¡éªŒç  = 0xAAAAAAAA
   u8 MsgID;//TMsgID
   u8 Result;
   u16 PktSize;
@@ -1250,29 +1375,30 @@ typedef struct TNewCmdPkt {//maxsize sizeof 1008
     char Buf[1000];
     struct TNewDevCfg NewDevCfg;
 
-    struct TLoginPkt LoginPkt;                   //µÇÂ¼°ü 892
-    struct TPlayLivePkt LivePkt;                 //²¥·ÅÏÖ³¡°ü
-    struct TRecFilePkt RecFilePkt;               //»Ø·ÅÂ¼Ó°°ü
-    struct TPTZPkt PTZPkt;                       //ÔÆÌ¨¿ØÖÆÌ¨
-    struct TPlayCtrlPkt PlayCtrlPkt;             //»Ø·ÅÂ¼Ó°¿ØÖÆ°ü
+    struct TLoginPkt LoginPkt;                   //ç™»å½•åŒ… 892
+    struct TPlayLivePkt LivePkt;                 //æ’­æ”¾ç°åœºåŒ…
+    struct TRecFilePkt RecFilePkt;               //å›æ”¾å½•å½±åŒ…
+    struct TPTZPkt PTZPkt;                       //äº‘å°æ§åˆ¶å°
+    struct TPlayCtrlPkt PlayCtrlPkt;             //å›æ”¾å½•å½±æ§åˆ¶åŒ…
 
-    struct TAlmSendPkt AlmSendPkt;               //¾¯±¨ÉÏ´«°ü
-    struct TDevInfoPkt DevInfoPkt;               //Éè±¸ĞÅÏ¢°ü
-    struct TNetCfgPkt NetCfgPkt;                 //Éè±¸ÍøÂçÅäÖÃ°ü
-    struct TWiFiCfgPkt WiFiCfgPkt;               //ÎŞÏßÍøÂçÅäÖÃ°ü
-    struct TDiskCfgPkt DiskCfgPkt;               //´ÅÅÌÅäÖÃ°ü 888
-    struct TRecCfgPkt RecCfgPkt;                 //Â¼Ó°ÅäÖÃ°ü
-    struct TMDCfgPkt MDCfgPkt;                   //ÒÆ¶¯Õì²â°ü--µ¥Í¨µÀ
-    struct TDoControlPkt DoControlPkt;           //DO¿ØÖÆ°ü
-    struct THideAreaCfgPkt HideAreaCfgPkt;       //Òş²ØÂ¼Ó°ÇøÓò°ü--µ¥Í¨µÀ
-    struct TAlmCfgPkt AlmCfgPkt;                 //¾¯±¨ÅäÖÃ°ü
-    struct TVideoCfgPkt VideoCfgPkt;             //ÊÓÆµÅäÖÃ°ü--µ¥Í¨µÀ
-    struct TAudioCfgPkt AudioCfgPkt;             //ÒôÆµÅäÖÃ°ü--µ¥Í¨µÀ
-    struct TRecFileHead FileHead;                //È¡µÃÉè±¸ÎÄ¼şÎÄ¼şÍ·ĞÅÏ¢
-    struct TFilePkt FilePkt;                     //ÉÏ´«ÎÄ¼ş°ü
+    struct TAlmSendPkt AlmSendPkt;               //è­¦æŠ¥ä¸Šä¼ åŒ…
+    struct TDevInfoPkt DevInfoPkt;               //è®¾å¤‡ä¿¡æ¯åŒ…
+    struct TNetCfgPkt NetCfgPkt;                 //è®¾å¤‡ç½‘ç»œé…ç½®åŒ…
+    struct TWiFiCfgPkt WiFiCfgPkt;               //æ— çº¿ç½‘ç»œé…ç½®åŒ…
+    struct TDiskCfgPkt DiskCfgPkt;               //ç£ç›˜é…ç½®åŒ… 888
+    struct TRecCfgPkt RecCfgPkt;                 //å½•å½±é…ç½®åŒ…
+    struct TMDCfgPkt MDCfgPkt;                   //ç§»åŠ¨ä¾¦æµ‹åŒ…--å•é€šé“
+    struct TDoControlPkt DoControlPkt;           //DOæ§åˆ¶åŒ…
+    struct THideAreaCfgPkt HideAreaCfgPkt;       //éšè—å½•å½±åŒºåŸŸåŒ…--å•é€šé“
+    struct TAlmCfgPkt AlmCfgPkt;                 //è­¦æŠ¥é…ç½®åŒ…
+    struct TVideoCfgPkt VideoCfgPkt;             //è§†é¢‘é…ç½®åŒ…--å•é€šé“
+    struct TAudioCfgPkt AudioCfgPkt;             //éŸ³é¢‘é…ç½®åŒ…--å•é€šé“
+    struct TRecFileHead FileHead;                //å–å¾—è®¾å¤‡æ–‡ä»¶æ–‡ä»¶å¤´ä¿¡æ¯
+    struct TFilePkt FilePkt;                     //ä¸Šä¼ æ–‡ä»¶åŒ…
     struct TFTPCfgPkt FTPCfgPkt;
     struct TSMTPCfgPkt SMTPCfgPkt;
     struct Tp2pCfgPkt p2pCfgPkt;
+    struct TLightCfgPkt LightCfgPkt;
   };
 }TNewCmdPkt;
 

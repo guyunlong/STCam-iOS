@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Author      : Öìºì²¨
+// Author      : æœ±çº¢æ³¢
 // Date        : 2017.09.14
 // Version     : V 2.00
 // Description : www.southipcam.com
@@ -18,86 +18,69 @@ extern "C"
 
 //*****************************************************************************
 //-----------------------------------------------------------------------------
-EXPORT HANDLE thNet_Init(bool IsQueue, bool IsAdjustTime, bool IsAutoReConn);
+EXPORT HANDLE thNet_Init(bool IsAdjustTime, bool IsAutoReConn);
 /*-----------------------------------------------------------------------------
-º¯ÊıÃèÊö£º³õÊ¼»¯ÍøÂç²¥·Å
-²ÎÊıËµÃ÷£º
-IsInsideDecode:ÊÇ·ñSDKÄÚ²¿½âÂëÏÔÊ¾
-IsQueue:ÊÇ·ñ»º´æ¶ÓÁĞ
-IsAdjustTime:ÊÇ·ñĞ£×¼Éè±¸Ê±¼äÎª¿Í»§¶ËÊ±¼ä
-·µ »Ø Öµ£ºNetHandle:·µ»ØÍøÂç¾ä±ú
+å‡½æ•°æè¿°ï¼šåˆå§‹åŒ–ç½‘ç»œæ’­æ”¾
+å‚æ•°è¯´æ˜ï¼š
+IsAdjustTime:æ˜¯å¦æ ¡å‡†è®¾å¤‡æ—¶é—´ä¸ºå®¢æˆ·ç«¯æ—¶é—´
+è¿” å› å€¼ï¼šNetHandle:è¿”å›ç½‘ç»œå¥æŸ„
 ------------------------------------------------------------------------------*/
 
 //-----------------------------------------------------------------------------
-typedef void(TvideoCallBack)(void *UserCustom,         //ÓÃ»§×Ô¶¨ÒåÊı¾İ
-                             i32 Chl, char *Buf,                //ÒôÊÓÆµ½âÂëÇ°Ö¡Êı¾İ
-                             i32 Len,                  //Êı¾İ³¤¶È
+typedef void(TvideoCallBack)(void *UserCustom,         //ç”¨æˆ·è‡ªå®šä¹‰æ•°æ®
+                             i32 Chl, char *Buf,                //éŸ³è§†é¢‘è§£ç å‰å¸§æ•°æ®
+                             i32 Len,                  //æ•°æ®é•¿åº¦
                              int IsIFrame);
 
-typedef void(TaudioCallBack)(void *UserCustom,         //ÓÃ»§×Ô¶¨ÒåÊı¾İ
-                             i32 Chl, char *Buf,                //ÒôÊÓÆµ½âÂëÇ°Ö¡Êı¾İ
-                             i32 Len                   //Êı¾İ³¤¶È
+typedef void(TaudioCallBack)(void *UserCustom,         //ç”¨æˆ·è‡ªå®šä¹‰æ•°æ®
+                             i32 Chl, char *Buf,                //éŸ³è§†é¢‘è§£ç å‰å¸§æ•°æ®
+                             i32 Len                   //æ•°æ®é•¿åº¦
 );
 
-typedef void(TalarmCallBack)(i32 AlmType,             //¾¯±¨ÀàĞÍ£¬²Î¼ûTAlmType
-                             i32 AlmTime,             //¾¯±¨Ê±¼ätime_t
-                             i32 AlmChl,              //¾¯±¨Í¨µÀ
-                             void *UserCustom         //ÓÃ»§×Ô¶¨ÒåÊı¾İ
+typedef void(TalarmCallBack)(i32 AlmType,             //è­¦æŠ¥ç±»å‹ï¼Œå‚è§TAlmType
+                             i32 AlmTime,             //è­¦æŠ¥æ—¶é—´time_t
+                             i32 AlmChl,              //è­¦æŠ¥é€šé“
+                             void *UserCustom         //ç”¨æˆ·è‡ªå®šä¹‰æ•°æ®
 );
 
-
-#define Decode_None   0
-#define Decode_IFrame 1
-#define Decode_All    2
-EXPORT bool thNet_SetDecodeStyle(HANDLE NetHandle, int DecodeStyle);//Î´Íê
-/*-----------------------------------------------------------------------------
-º¯ÊıÃèÊö£ºÉèÖÃÊÓÆµÊı¾İ½âÂë·½Ê½£¬ÒÔ½ÚÊ¡CPUÕ¼ÓÃÂÊ
-²ÎÊıËµÃ÷£º
-NetHandle:ÍøÂç¾ä±ú£¬ÓÉthNet_Init·µ»Ø
-DecodeStyle:½âÂë·½Ê½,Decode_None=0 Decode_IFrame=1 Decode_All=2
-Decode_None:  ²»½âÂëÉÏÆÁ
-Decode_IFrame:Ö»½âÂëÉÏÆÁIÖ¡
-Decode_All:   ½âÂëÉÏÆÁËùÓĞÖ¡
-·µ »Ø Öµ£º³É¹¦·µ»Øtrue£¬Ê§°Ü·µ»Øfalse
-------------------------------------------------------------------------------*/
 EXPORT bool
 thNet_SetCallBack(HANDLE NetHandle, TvideoCallBack videoEvent, TaudioCallBack audioEvent, TalarmCallBack AlmEvent,
                   void *UserCustom);
 /*-----------------------------------------------------------------------------
-º¯ÊıÃèÊö£ºÍøÂç²¥·ÅÉèÖÃ»Øµ÷º¯Êı£¬ ÔÚµ÷ÓÃthNet_ConnectÖ®Ç°µ÷ÓÃ
-²ÎÊıËµÃ÷£º
-NetHandle:ÍøÂç¾ä±ú£¬ÓÉthNet_Init·µ»Ø
-avEvent:ÊÓÆµÒôÆµÊı¾İ»Øµ÷º¯Êı
-AlmEvent:Éè±¸¾¯±¨»Øµ÷º¯Êı
-UserCustom:ÓÃ»§×Ô¶¨ÒåÊı¾İ
-·µ »Ø Öµ£º³É¹¦·µ»Øtrue£¬Ê§°Ü·µ»Øfalse
+å‡½æ•°æè¿°ï¼šç½‘ç»œæ’­æ”¾è®¾ç½®å›è°ƒå‡½æ•°ï¼Œ åœ¨è°ƒç”¨thNet_Connectä¹‹å‰è°ƒç”¨
+å‚æ•°è¯´æ˜ï¼š
+NetHandle:ç½‘ç»œå¥æŸ„ï¼Œç”±thNet_Initè¿”å›
+avEvent:è§†é¢‘éŸ³é¢‘æ•°æ®å›è°ƒå‡½æ•°
+AlmEvent:è®¾å¤‡è­¦æŠ¥å›è°ƒå‡½æ•°
+UserCustom:ç”¨æˆ·è‡ªå®šä¹‰æ•°æ®
+è¿” å› å€¼ï¼šæˆåŠŸè¿”å›trueï¼Œå¤±è´¥è¿”å›false
 ------------------------------------------------------------------------------*/
 EXPORT bool thNet_Free(HANDLE NetHandle);
 /*-----------------------------------------------------------------------------
-º¯ÊıÃèÊö£ºÊÍ·ÅÍøÂç²¥·Å
-²ÎÊıËµÃ÷£º
-NetHandle:ÍøÂç¾ä±ú£¬ÓÉthNet_Init·µ»Ø
-·µ »Ø Öµ£º³É¹¦·µ»Øtrue£¬Ê§°Ü·µ»Øfalse
+å‡½æ•°æè¿°ï¼šé‡Šæ”¾ç½‘ç»œæ’­æ”¾
+å‚æ•°è¯´æ˜ï¼š
+NetHandle:ç½‘ç»œå¥æŸ„ï¼Œç”±thNet_Initè¿”å›
+è¿” å› å€¼ï¼šæˆåŠŸè¿”å›trueï¼Œå¤±è´¥è¿”å›false
 ------------------------------------------------------------------------------*/
-EXPORT bool thNet_Connect(HANDLE NetHandle, char *UserName, char *Password, char *IPUID, i32 DataPort, u32 TimeOut);
+EXPORT bool thNet_Connect(HANDLE NetHandle, u64 SN, char *UserName, char *Password, char *IPUID, i32 DataPort, u32 TimeOut);
 /*-----------------------------------------------------------------------------
-º¯ÊıÃèÊö£ºÁ¬½ÓÍøÂçÉè±¸
-²ÎÊıËµÃ÷£º
-NetHandle:ÍøÂç¾ä±ú£¬ÓÉthNet_Init·µ»Ø
-UserName:Á¬½ÓÕÊºÅ
-Password:Á¬½ÓÃÜÂë
-IPUID:Éè±¸IP¡¢ÓòÃû »òÕß P2P UID
-DataPort:Éè±¸»ò×ª·¢·şÎñÆ÷¶Ë¿Ú
-TimeOut:Á¬½Ó³¬Ê±£¬µ¥Î»ms,È±Ê¡ 3000ms
-·µ »Ø Öµ£º³É¹¦·µ»Øtrue
-Ê§°Ü·µ»Øfalse
+å‡½æ•°æè¿°ï¼šè¿æ¥ç½‘ç»œè®¾å¤‡
+å‚æ•°è¯´æ˜ï¼š
+NetHandle:ç½‘ç»œå¥æŸ„ï¼Œç”±thNet_Initè¿”å›
+UserName:è¿æ¥å¸å·
+Password:è¿æ¥å¯†ç 
+IPUID:è®¾å¤‡IPã€åŸŸå æˆ–è€… P2P UID
+DataPort:è®¾å¤‡æˆ–è½¬å‘æœåŠ¡å™¨ç«¯å£
+TimeOut:è¿æ¥è¶…æ—¶ï¼Œå•ä½ms,ç¼ºçœ 3000ms
+è¿” å› å€¼ï¼šæˆåŠŸè¿”å›true
+å¤±è´¥è¿”å›false
 ------------------------------------------------------------------------------*/
 EXPORT bool thNet_DisConn(HANDLE NetHandle);
 /*-----------------------------------------------------------------------------
-º¯ÊıÃèÊö£º¶Ï¿ªÍøÂçÉè±¸Á¬½Ó
-²ÎÊıËµÃ÷£º
-NetHandle:ÍøÂç¾ä±ú£¬ÓÉthNet_Init·µ»Ø
-·µ »Ø Öµ£º³É¹¦·µ»Øtrue£¬Ê§°Ü·µ»Øfalse
+å‡½æ•°æè¿°ï¼šæ–­å¼€ç½‘ç»œè®¾å¤‡è¿æ¥
+å‚æ•°è¯´æ˜ï¼š
+NetHandle:ç½‘ç»œå¥æŸ„ï¼Œç”±thNet_Initè¿”å›
+è¿” å› å€¼ï¼šæˆåŠŸè¿”å›trueï¼Œå¤±è´¥è¿”å›false
 ------------------------------------------------------------------------------*/
 EXPORT bool thNet_IsConnect(HANDLE NetHandle);
 
@@ -109,145 +92,148 @@ EXPORT bool thNet_SendSensePkt(HANDLE NetHandle);
 #define THNET_CONNSTATUS_FAIL     3
 EXPORT int thNet_GetConnectStatus(HANDLE NetHandle);
 /*-----------------------------------------------------------------------------
-º¯ÊıÃèÊö£ºÉè±¸ÊÇ·ñÁ¬½Ó
-²ÎÊıËµÃ÷£º
-NetHandle:ÍøÂç¾ä±ú£¬ÓÉthNet_Init·µ»Ø
-·µ »Ø Öµ£º³É¹¦·µ»Øtrue£¬Ê§°Ü·µ»Øfalse
+å‡½æ•°æè¿°ï¼šè®¾å¤‡æ˜¯å¦è¿æ¥
+å‚æ•°è¯´æ˜ï¼š
+NetHandle:ç½‘ç»œå¥æŸ„ï¼Œç”±thNet_Initè¿”å›
+è¿” å› å€¼ï¼šæˆåŠŸè¿”å›trueï¼Œå¤±è´¥è¿”å›false
 ------------------------------------------------------------------------------*/
-EXPORT bool thNet_Play(HANDLE NetHandle, u32 VideoChlMask, u32 AudioChlMask, u32 SubVideoChlMask);
+EXPORT bool thNet_Play_OnlySend(HANDLE NetHandle);
+EXPORT bool thNet_Play(HANDLE NetHandle, u32 VideoChlMask, u32 AudioChlMask, u32 SubVideoChlMask, u32 ExtraChl);
 /*-----------------------------------------------------------------------------
-º¯ÊıÃèÊö£º¿ªÊ¼²¥·Å
-²ÎÊıËµÃ÷£º
-NetHandle:ÍøÂç¾ä±ú£¬ÓÉthNet_Init·µ»Ø
-VideoChlMask:Í¨µÀÑÚÂë£¬
+å‡½æ•°æè¿°ï¼šå¼€å§‹æ’­æ”¾
+å‚æ•°è¯´æ˜ï¼š
+NetHandle:ç½‘ç»œå¥æŸ„ï¼Œç”±thNet_Initè¿”å›
+VideoChlMask:é€šé“æ©ç ï¼Œ
 bit: 31 .. 19 18 17 16   15 .. 03 02 01 00
 0  0  0  0          0  0  0  1
-AudioChlMask:Í¨µÀÑÚÂë£¬
+AudioChlMask:é€šé“æ©ç ï¼Œ
 bit: 31 .. 19 18 17 16   15 .. 03 02 01 00
 0  0  0  0          0  0  0  1
-SubVideoChlMask:´ÎÂëÁ÷Í¨µÀÑÚÂë
+SubVideoChlMask:æ¬¡ç æµé€šé“æ©ç 
 bit: 31 .. 19 18 17 16   15 .. 03 02 01 00
 0  0  0  0          0  0  0  1
-·µ »Ø Öµ£º³É¹¦·µ»Øtrue£¬Ê§°Ü·µ»Øfalse
+è¿” å› å€¼ï¼šæˆåŠŸè¿”å›trueï¼Œå¤±è´¥è¿”å›false
 ------------------------------------------------------------------------------*/
 EXPORT bool thNet_Stop(HANDLE NetHandle);
 /*-----------------------------------------------------------------------------
-º¯ÊıÃèÊö£ºÍ£Ö¹²¥·Å
-²ÎÊıËµÃ÷£º
-NetHandle:ÍøÂç¾ä±ú£¬ÓÉthNet_Init·µ»Ø
-·µ »Ø Öµ£º³É¹¦·µ»Øtrue£¬Ê§°Ü·µ»Øfalse
+å‡½æ•°æè¿°ï¼šåœæ­¢æ’­æ”¾
+å‚æ•°è¯´æ˜ï¼š
+NetHandle:ç½‘ç»œå¥æŸ„ï¼Œç”±thNet_Initè¿”å›
+è¿” å› å€¼ï¼šæˆåŠŸè¿”å›trueï¼Œå¤±è´¥è¿”å›false
 ------------------------------------------------------------------------------*/
 EXPORT bool thNet_IsPlay(HANDLE NetHandle);
 /*-----------------------------------------------------------------------------
-º¯ÊıÃèÊö£ºÉè±¸ÊÇ·ñ²¥·Å
-²ÎÊıËµÃ÷£º
-NetHandle:ÍøÂç¾ä±ú£¬ÓÉthNet_Init·µ»Ø
-·µ »Ø Öµ£º³É¹¦·µ»Øtrue£¬Ê§°Ü·µ»Øfalse
+å‡½æ•°æè¿°ï¼šè®¾å¤‡æ˜¯å¦æ’­æ”¾
+å‚æ•°è¯´æ˜ï¼š
+NetHandle:ç½‘ç»œå¥æŸ„ï¼Œç”±thNet_Initè¿”å›
+è¿” å› å€¼ï¼šæˆåŠŸè¿”å›trueï¼Œå¤±è´¥è¿”å›false
 ------------------------------------------------------------------------------*/
 EXPORT char *thNet_GetAllCfg(HANDLE NetHandle);
 /*-----------------------------------------------------------------------------
-º¯ÊıÃèÊö£º»ñÈ¡ËùÓĞÅäÖÃ
-²ÎÊıËµÃ÷£º
-NetHandle:ÍøÂç¾ä±ú£¬ÓÉthNet_Init·µ»Ø
-·µ »Ø Öµ£º
+å‡½æ•°æè¿°ï¼šè·å–æ‰€æœ‰é…ç½®
+å‚æ•°è¯´æ˜ï¼š
+NetHandle:ç½‘ç»œå¥æŸ„ï¼Œç”±thNet_Initè¿”å›
+è¿” å› å€¼ï¼š
 ------------------------------------------------------------------------------*/
+EXPORT char* thNet_GetLightCfg(HANDLE NetHandle);
+
 EXPORT bool thNet_TalkOpen(HANDLE NetHandle);
 /*-----------------------------------------------------------------------------
-º¯ÊıÃèÊö£º¿ªÊ¼¶Ô½²
-²ÎÊıËµÃ÷£º
-NetHandle:ÍøÂç¾ä±ú£¬ÓÉthNet_Init·µ»Ø
-·µ »Ø Öµ£º³É¹¦·µ»Øtrue£¬Ê§°Ü·µ»Øfalse
+å‡½æ•°æè¿°ï¼šå¼€å§‹å¯¹è®²
+å‚æ•°è¯´æ˜ï¼š
+NetHandle:ç½‘ç»œå¥æŸ„ï¼Œç”±thNet_Initè¿”å›
+è¿” å› å€¼ï¼šæˆåŠŸè¿”å›trueï¼Œå¤±è´¥è¿”å›false
 ------------------------------------------------------------------------------*/
 EXPORT bool thNet_TalkClose(HANDLE NetHandle);
 
 EXPORT bool net_SetTalk(HANDLE NetHandle, char *Buf, int Len);//old
 /*-----------------------------------------------------------------------------
-º¯ÊıÃèÊö£ºÍ£Ö¹¶Ô½²
-²ÎÊıËµÃ÷£º
-NetHandle:ÍøÂç¾ä±ú£¬ÓÉthNet_Init·µ»Ø
-·µ »Ø Öµ£º³É¹¦·µ»Øtrue£¬Ê§°Ü·µ»Øfalse
+å‡½æ•°æè¿°ï¼šåœæ­¢å¯¹è®²
+å‚æ•°è¯´æ˜ï¼š
+NetHandle:ç½‘ç»œå¥æŸ„ï¼Œç”±thNet_Initè¿”å›
+è¿” å› å€¼ï¼šæˆåŠŸè¿”å›trueï¼Œå¤±è´¥è¿”å›false
 ------------------------------------------------------------------------------*/
-typedef void(TSearchDevCallBack)(void *UserCustom,  //ÓÃ»§´«Èë²ÎÊı
-                                 u32 SN,            //ĞòÁĞºÅ
-                                 i32 DevType,       //Éè±¸ÀàĞÍ
-                                 char *DevModal,    //Éè±¸ĞÍºÅ
-                                 char *SoftVersion, //Èí¼ş°æ±¾
-                                 i32 DataPort,      //Êı¾İ¶Ë¿Ú
-                                 i32 HttpPort,      //http¶Ë¿Ú
-                                 i32 rtspPort,      //rtsp¶Ë¿Ú
-                                 char *DevName,     //Éè±¸Ãû³Æ
-                                 char *DevIP,       //Éè±¸IP
-                                 char *DevMAC,      //Éè±¸MACµØÖ·
-                                 char *SubMask,     //Éè±¸×ÓÍøÑÚÂë
-                                 char *Gateway,     //Éè±¸Íø¹Ø
-                                 char *DNS1,        //Éè±¸DNS
-                                 char *DDNSServer,  //DDNS·şÎñÆ÷µØÖ·
-                                 char *DDNSHost,    //DDNSÓòÃû
-                                 char *UID          //P2P·½Ê½UID
+typedef void(TSearchDevCallBack)(void *UserCustom,  //ç”¨æˆ·ä¼ å…¥å‚æ•°
+                                 u32 SN,            //åºåˆ—å·
+                                 i32 DevType,       //è®¾å¤‡ç±»å‹
+                                 char *DevModal,    //è®¾å¤‡å‹å·
+                                 char *SoftVersion, //è½¯ä»¶ç‰ˆæœ¬
+                                 i32 DataPort,      //æ•°æ®ç«¯å£
+                                 i32 HttpPort,      //httpç«¯å£
+                                 i32 rtspPort,      //rtspç«¯å£
+                                 char *DevName,     //è®¾å¤‡åç§°
+                                 char *DevIP,       //è®¾å¤‡IP
+                                 char *DevMAC,      //è®¾å¤‡MACåœ°å€
+                                 char *SubMask,     //è®¾å¤‡å­ç½‘æ©ç 
+                                 char *Gateway,     //è®¾å¤‡ç½‘å…³
+                                 char *DNS1,        //è®¾å¤‡DNS
+                                 char *DDNSServer,  //DDNSæœåŠ¡å™¨åœ°å€
+                                 char *DDNSHost,    //DDNSåŸŸå
+                                 char *UID          //P2Pæ–¹å¼UID
 );
 
 EXPORT HANDLE thSearch_Init(TSearchDevCallBack SearchEvent, void *UserCustom);
 /*-----------------------------------------------------------------------------
-º¯ÊıÃèÊö£º³õÊ¼»¯²éÑ¯Éè±¸
-²ÎÊıËµÃ÷£º
-SearchEvent:²éÑ¯Éè±¸»Øµ÷º¯Êı
-·µ »Ø Öµ£º³É¹¦·µ»Øtrue£¬Ê§°Ü·µ»Øfalse
+å‡½æ•°æè¿°ï¼šåˆå§‹åŒ–æŸ¥è¯¢è®¾å¤‡
+å‚æ•°è¯´æ˜ï¼š
+SearchEvent:æŸ¥è¯¢è®¾å¤‡å›è°ƒå‡½æ•°
+è¿” å› å€¼ï¼šæˆåŠŸè¿”å›trueï¼Œå¤±è´¥è¿”å›false
 ------------------------------------------------------------------------------*/
 EXPORT bool thSearch_SetWiFiCfg(HANDLE SearchHandle, char *SSID, char *Password);
 
 EXPORT bool thSearch_SearchDevice(HANDLE SearchHandle);
 /*-----------------------------------------------------------------------------
-º¯ÊıÃèÊö£º¿ªÊ¼²éÑ¯Éè±¸
-LocalIP:´«ÈëµÄ±¾µØIP£¬È±Ê¡ÎªNULL
-·µ »Ø Öµ£º³É¹¦·µ»Øtrue£¬Ê§°Ü·µ»Øfalse
+å‡½æ•°æè¿°ï¼šå¼€å§‹æŸ¥è¯¢è®¾å¤‡
+LocalIP:ä¼ å…¥çš„æœ¬åœ°IPï¼Œç¼ºçœä¸ºNULL
+è¿” å› å€¼ï¼šæˆåŠŸè¿”å›trueï¼Œå¤±è´¥è¿”å›false
 ------------------------------------------------------------------------------*/
 EXPORT bool thSearch_Free(HANDLE SearchHandle);
 /*-----------------------------------------------------------------------------
-º¯ÊıÃèÊö£ºÊÍ·Å²éÑ¯Éè±¸
-·µ »Ø Öµ£º³É¹¦·µ»Øtrue£¬Ê§°Ü·µ»Øfalse
+å‡½æ•°æè¿°ï¼šé‡Šæ”¾æŸ¥è¯¢è®¾å¤‡
+è¿” å› å€¼ï¼šæˆåŠŸè¿”å›trueï¼Œå¤±è´¥è¿”å›false
 ------------------------------------------------------------------------------*/
 
 //*****************************************************************************
 EXPORT bool thNet_RemoteFilePlay(HANDLE NetHandle, char *FileName);
 /*-----------------------------------------------------------------------------
-º¯ÊıÃèÊö£º¿ªÊ¼²¥·ÅÔ¶³ÌÎÄ¼ş
-²ÎÊıËµÃ÷£º
-NetHandle:ÍøÂç¾ä±ú£¬ÓÉthNet_Init·µ»Ø
-FileName:´«ÈëµÄÔ¶³ÌÂ¼ÏñÎÄ¼şÃû
-·µ »Ø Öµ£º³É¹¦·µ»Øtrue£¬Ê§°Ü·µ»Øfalse
+å‡½æ•°æè¿°ï¼šå¼€å§‹æ’­æ”¾è¿œç¨‹æ–‡ä»¶
+å‚æ•°è¯´æ˜ï¼š
+NetHandle:ç½‘ç»œå¥æŸ„ï¼Œç”±thNet_Initè¿”å›
+FileName:ä¼ å…¥çš„è¿œç¨‹å½•åƒæ–‡ä»¶å
+è¿” å› å€¼ï¼šæˆåŠŸè¿”å›trueï¼Œå¤±è´¥è¿”å›false
 ------------------------------------------------------------------------------*/
 EXPORT bool thNet_RemoteFileStop(HANDLE NetHandle);
 /*-----------------------------------------------------------------------------
-º¯ÊıÃèÊö£ºÍ£Ö¹²¥·ÅÔ¶³ÌÎÄ¼ş
-²ÎÊıËµÃ÷£º
-NetHandle:ÍøÂç¾ä±ú£¬ÓÉthNet_Init·µ»Ø
-·µ »Ø Öµ£º³É¹¦·µ»Øtrue£¬Ê§°Ü·µ»Øfalse
+å‡½æ•°æè¿°ï¼šåœæ­¢æ’­æ”¾è¿œç¨‹æ–‡ä»¶
+å‚æ•°è¯´æ˜ï¼š
+NetHandle:ç½‘ç»œå¥æŸ„ï¼Œç”±thNet_Initè¿”å›
+è¿” å› å€¼ï¼šæˆåŠŸè¿”å›trueï¼Œå¤±è´¥è¿”å›false
 ------------------------------------------------------------------------------*/
 EXPORT bool thNet_RemoteFilePlayControl(HANDLE NetHandle, i32 PlayCtrl, i32 Speed, i32 Pos);
 /*-----------------------------------------------------------------------------
-º¯ÊıÃèÊö£ºÔ¶³ÌÎÄ¼ş²¥·Å¿ØÖÆ
-²ÎÊıËµÃ÷£º
-NetHandle:ÍøÂç¾ä±ú£¬ÓÉthNet_Init·µ»Ø
-PlayCtrl:   PS_None               =0,                 //¿Õ
-PS_Play               =1,                 //²¥·Å
-PS_Pause              =2,                 //ÔİÍ£
-PS_Stop               =3,                 //Í£Ö¹
-PS_FastBackward       =4,                 //¿ìÍË
-PS_FastForward        =5,                 //¿ì½ø
-PS_StepBackward       =6,                 //²½ÍË
-PS_StepForward        =7,                 //²½½ø
-PS_DragPos            =8,                 //ÍÏ¶¯
-Speed:Èç¹ûPlayCtrl=PS_StepBackward, PS_FastForward £¬Ôò±£´æ¿ì½ø¿ìÍË±¶ÂÊ 1 2 4 8 16 32±¶ÂÊ
-Pos:Èç¹ûPlayCtrl=PS_DragPos£¬Ôò±£´æÎÄ¼şÎÄ¼şÎ»ÖÃPos
-·µ »Ø Öµ£º³É¹¦·µ»Øtrue£¬Ê§°Ü·µ»Øfalse
+å‡½æ•°æè¿°ï¼šè¿œç¨‹æ–‡ä»¶æ’­æ”¾æ§åˆ¶
+å‚æ•°è¯´æ˜ï¼š
+NetHandle:ç½‘ç»œå¥æŸ„ï¼Œç”±thNet_Initè¿”å›
+PlayCtrl:   PS_None               =0,                 //ç©º
+PS_Play               =1,                 //æ’­æ”¾
+PS_Pause              =2,                 //æš‚åœ
+PS_Stop               =3,                 //åœæ­¢
+PS_FastBackward       =4,                 //å¿«é€€
+PS_FastForward        =5,                 //å¿«è¿›
+PS_StepBackward       =6,                 //æ­¥é€€
+PS_StepForward        =7,                 //æ­¥è¿›
+PS_DragPos            =8,                 //æ‹–åŠ¨
+Speed:å¦‚æœPlayCtrl=PS_StepBackward, PS_FastForward ï¼Œåˆ™ä¿å­˜å¿«è¿›å¿«é€€å€ç‡ 1 2 4 8 16 32å€ç‡
+Pos:å¦‚æœPlayCtrl=PS_DragPosï¼Œåˆ™ä¿å­˜æ–‡ä»¶æ–‡ä»¶ä½ç½®Pos
+è¿” å› å€¼ï¼šæˆåŠŸè¿”å›trueï¼Œå¤±è´¥è¿”å›false
 ------------------------------------------------------------------------------*/
 EXPORT int thNet_RemoteFileGetIndexType(HANDLE NetHandle);
 EXPORT int thNet_RemoteFileIsClose(HANDLE NetHandle);
-EXPORT int thNet_RemoteFileGetPosition(HANDLE NetHandle);//Ê±¼ä´Á£¬µ¥Î»ms
+EXPORT int thNet_RemoteFileGetPosition(HANDLE NetHandle);//æ—¶é—´æˆ³ï¼Œå•ä½ms
 
-EXPORT bool thNet_RemoteFileSetPosition(HANDLE NetHandle, int Pos);//Ê±¼ä´Á£¬µ¥Î»ms
+EXPORT bool thNet_RemoteFileSetPosition(HANDLE NetHandle, int Pos);//æ—¶é—´æˆ³ï¼Œå•ä½ms
 
-EXPORT int thNet_RemoteFileGetDuration(HANDLE NetHandle);//ÎÄ¼ş³¤¶È£¬µ¥Î»ms
+EXPORT int thNet_RemoteFileGetDuration(HANDLE NetHandle);//æ–‡ä»¶é•¿åº¦ï¼Œå•ä½ms
 
 EXPORT bool thNet_AudioPlayOpen(HANDLE NetHandle);
 
@@ -256,60 +242,61 @@ EXPORT bool thNet_AudioPlayClose(HANDLE NetHandle);
 EXPORT bool thNet_SetAudioIsMute(HANDLE NetHandle, int IsAudioMute);
 
 /*-----------------------------------------------------------------------------
-º¯ÊıÃèÊö£ºÊÇ·ñ¾²Òô
-²ÎÊıËµÃ÷£º
-NetHandle:ÍøÂç¾ä±ú£¬ÓÉthNet_Init·µ»Ø
-IsAudioMute:ÊÇ·ñ¾²Òô
-·µ »Ø Öµ£º³É¹¦·µ»Øtrue£¬Ê§°Ü·µ»Øfalse
+å‡½æ•°æè¿°ï¼šæ˜¯å¦é™éŸ³
+å‚æ•°è¯´æ˜ï¼š
+NetHandle:ç½‘ç»œå¥æŸ„ï¼Œç”±thNet_Initè¿”å›
+IsAudioMute:æ˜¯å¦é™éŸ³
+è¿” å› å€¼ï¼šæˆåŠŸè¿”å›trueï¼Œå¤±è´¥è¿”å›false
 ------------------------------------------------------------------------------*/
 typedef struct TDspInfo
-{//PlayerÏÔÊ¾ĞÅÏ¢
-  HWND DspHandle;//ÏÔÊ¾´°¿Ú¾ä±ú
-  int Channel;//Í¨µÀ
-  TRect DspRect;//ÏÔÊ¾ÇøÓò
+{//Playeræ˜¾ç¤ºä¿¡æ¯
+  HWND DspHandle;//æ˜¾ç¤ºçª—å£å¥æŸ„
+  int Channel;//é€šé“
+  TRect DspRect;//æ˜¾ç¤ºåŒºåŸŸ
 } TDspInfo;
 
 EXPORT bool thNet_AddDspInfo(HANDLE NetHandle, TDspInfo *PDspInfo);
 /*-------------------------------------------------------------------------------
-º¯ÊıÃèÊö£ºÔö¼ÓÒ»¸öÉÏÆÁÇøÓò£¬Í¬Ò»ÊÓÆµÔ´¿ÉÉè¶à¸öÉÏÆÁÇøÓò
-²ÎÊıËµÃ÷£º
-NetHandle:ÍøÂç¾ä±ú£¬ÓÉthNet_Init·µ»Ø
-PInfo:ÉÏÆÁÏÔÊ¾ĞÅÏ¢Ö¸Õë
-DspHandle:hWnd;//ÏÔÊ¾´°¿Ú¾ä±ú
-Channel:Int;//Í¨µÀ£¬Í¨µÀ´Ó0¿ªÊ¼
-DspRect:TRect;//ÏÔÊ¾ÇøÓò
-·µ »Ø Öµ£º³É¹¦·µ»Øtrue£¬Ê§°Ü·µ»Øfalse
+å‡½æ•°æè¿°ï¼šå¢åŠ ä¸€ä¸ªä¸Šå±åŒºåŸŸï¼ŒåŒä¸€è§†é¢‘æºå¯è®¾å¤šä¸ªä¸Šå±åŒºåŸŸ
+å‚æ•°è¯´æ˜ï¼š
+NetHandle:ç½‘ç»œå¥æŸ„ï¼Œç”±thNet_Initè¿”å›
+PInfo:ä¸Šå±æ˜¾ç¤ºä¿¡æ¯æŒ‡é’ˆ
+DspHandle:hWnd;//æ˜¾ç¤ºçª—å£å¥æŸ„
+Channel:Int;//é€šé“ï¼Œé€šé“ä»0å¼€å§‹
+DspRect:TRect;//æ˜¾ç¤ºåŒºåŸŸ
+è¿” å› å€¼ï¼šæˆåŠŸè¿”å›trueï¼Œå¤±è´¥è¿”å›false
 -------------------------------------------------------------------------------*/
 EXPORT bool thNet_DelDspInfo(HANDLE NetHandle, TDspInfo *PDspInfo);
 /*-------------------------------------------------------------------------------
-º¯ÊıÃèÊö£ºÉ¾³ıÒ»¸öÉÏÆÁÇøÓò
-²ÎÊıËµÃ÷£º
-NetHandle:ÍøÂç¾ä±ú£¬ÓÉthNet_Init·µ»Ø
-PInfo:ÉÏÆÁÏÔÊ¾ĞÅÏ¢Ö¸Õë
-DspHandle:hWnd;//ÏÔÊ¾´°¿Ú¾ä±ú
-Channel:Int;//Í¨µÀ£¬Í¨µÀ´Ó0¿ªÊ¼
-DspRect:TRect;//ÏÔÊ¾ÇøÓò
-·µ »Ø Öµ£º³É¹¦·µ»Øtrue£¬Ê§°Ü·µ»Øfalse
+å‡½æ•°æè¿°ï¼šåˆ é™¤ä¸€ä¸ªä¸Šå±åŒºåŸŸ
+å‚æ•°è¯´æ˜ï¼š
+NetHandle:ç½‘ç»œå¥æŸ„ï¼Œç”±thNet_Initè¿”å›
+PInfo:ä¸Šå±æ˜¾ç¤ºä¿¡æ¯æŒ‡é’ˆ
+DspHandle:hWnd;//æ˜¾ç¤ºçª—å£å¥æŸ„
+Channel:Int;//é€šé“ï¼Œé€šé“ä»0å¼€å§‹
+DspRect:TRect;//æ˜¾ç¤ºåŒºåŸŸ
+è¿” å› å€¼ï¼šæˆåŠŸè¿”å›trueï¼Œå¤±è´¥è¿”å›false
 -------------------------------------------------------------------------------*/
 EXPORT bool thNet_HttpGet(HANDLE NetHandle, char *url, char *Buf, i32 *BufLen);
 
 EXPORT bool thNet_HttpGetStop(HANDLE NetHandle);
 
-EXPORT bool thNet_SetRecPath(HANDLE NetHandle, char *RecPath);//linux ÒÔ"/"½áÊø£¬windowsÒÔ "\"½áÊø
-EXPORT bool thNet_StartRec(HANDLE NetHandle, char *RecFileName/*RecFileName=NULL,ÅäºÏthNet_SetRecPathÊ¹ÓÃ*/);
+EXPORT bool thNet_SetRecPath(HANDLE NetHandle, char *RecPath);//linux ä»¥"/"ç»“æŸï¼Œwindowsä»¥ "\"ç»“æŸ
+EXPORT bool thNet_StartRec(HANDLE NetHandle, char *RecFileName/*RecFileName=NULL,é…åˆthNet_SetRecPathä½¿ç”¨*/);
 
 EXPORT bool thNet_IsRec(HANDLE NetHandle);
 
 EXPORT bool thNet_StopRec(HANDLE NetHandle);
 
-EXPORT bool thNet_SetJpgPath(HANDLE NetHandle, char *JpgPath);//linux ÒÔ"/"½áÊø£¬windowsÒÔ "\"½áÊø
-EXPORT bool thNet_SaveToJpg(HANDLE NetHandle, char *JpgFileName/*JpgFileName=NULL,ÅäºÏthNet_SetJpgPathÊ¹ÓÃ*/);
+EXPORT bool thNet_SetJpgPath(HANDLE NetHandle, char *JpgPath);//linux ä»¥"/"ç»“æŸï¼Œwindowsä»¥ "\"ç»“æŸ
+EXPORT bool thNet_SaveToJpg(HANDLE NetHandle, char *JpgFileName/*JpgFileName=NULL,é…åˆthNet_SetJpgPathä½¿ç”¨*/);
+
 /*-------------------------------------------------------------------------------
-º¯ÊıÃèÊö£º±£´æÎªJPGÍ¼Æ¬
-²ÎÊıËµÃ÷£º
-NetHandle:ÍøÂç¾ä±ú£¬ÓÉthNet_Init·µ»Ø
-FileName:ÎÄ¼şÃû£¬±ØĞë´øÂ·¾¶
-·µ »Ø Öµ£º³É¹¦·µ»Øtrue£¬Ê§°Ü·µ»Øfalse
+å‡½æ•°æè¿°ï¼šä¿å­˜ä¸ºJPGå›¾ç‰‡
+å‚æ•°è¯´æ˜ï¼š
+NetHandle:ç½‘ç»œå¥æŸ„ï¼Œç”±thNet_Initè¿”å›
+FileName:æ–‡ä»¶åï¼Œå¿…é¡»å¸¦è·¯å¾„
+è¿” å› å€¼ï¼šæˆåŠŸè¿”å›trueï¼Œå¤±è´¥è¿”å›false
 -------------------------------------------------------------------------------*/
 EXPORT bool P2P_Init();
 
@@ -322,8 +309,6 @@ EXPORT bool DTMFWavFileToText(char *FileName, char *txt);
 EXPORT bool DTMFBufToText(char *Buf, int BufLen, int iSample/*=8000*/, int iBits/*=16*/, char *txt);
 
 #if defined(ANDROID)
-EXPORT bool thOpenGL_RenderRGB565(HANDLE NetHandle);
-
 EXPORT bool thOpenGL_CreateEGL(HANDLE NetHandle, void *Window);
 
 EXPORT bool thOpenGL_FreeEGL(HANDLE NetHandle);

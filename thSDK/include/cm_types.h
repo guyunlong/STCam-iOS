@@ -74,6 +74,7 @@
 #endif
 
 #else
+#include <sys/mount.h>
 //#include <sys/shm.h> //android no
 //#include <sys/msg.h> //android no
 #include <dlfcn.h>

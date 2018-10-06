@@ -185,7 +185,7 @@
     self.userTextField.tag  = 7;
     self.userTextField.placeholder = @"string_input_email_address".localizedString;
     [self.userTextField setFont:[UIFont systemFontOfSize:14]];
-    UIImageView *userTextFieldImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"userIcon"]];
+    UIImageView *userTextFieldImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_user"]];
     self.userTextField.leftView = userTextFieldImage;
     self.userTextField.leftViewMode = UITextFieldViewModeAlways;
     self.userTextField.clearButtonMode = UITextFieldViewModeAlways;
@@ -199,7 +199,7 @@
     self.passwordTextField.tag = 11;
     self.passwordTextField.placeholder = @"string_pwd".localizedString;
     [self.passwordTextField setFont:[UIFont systemFontOfSize:14]];
-    UIImageView *passwordTextFieldImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"passwordIcon"]];
+    UIImageView *passwordTextFieldImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_pwd"]];
     self.passwordTextField.leftView = passwordTextFieldImage;
     self.passwordTextField.leftViewMode =
     UITextFieldViewModeAlways;

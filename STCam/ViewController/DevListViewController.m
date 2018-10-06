@@ -12,6 +12,7 @@
 #import "DevListCell.h"
 #import <Masonry/Masonry.h>
 #import "MASConstraint.h"
+#import "LiveVidController.h"
 @interface DevListViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property(nonatomic,strong)DevListViewModel * viewModel;
 @property(nonatomic,strong)UITableView * mTableView;
@@ -129,7 +130,14 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
      [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    LiveVidController * ctl = [LiveVidController new];
+    LiveVidViewModel * viewModel = [LiveVidViewModel new];
+    [viewModel setModel:_viewModel.deviceArray[indexPath.row]];
+    ctl.hidesBottomBarWhenPushed = YES;
+    [ctl setViewModel:viewModel];
+    [self.navigationController pushViewController:ctl animated:YES];
 }
 
 @end

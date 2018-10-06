@@ -127,6 +127,9 @@
 		A4AE327C21342EFD0036212B /* NSDate+convenience.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE326D21342EFD0036212B /* NSDate+convenience.m */; };
 		A4AE70BD2167AEF600614024 /* DevListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE70BB2167AEF600614024 /* DevListCell.m */; };
 		A4AE70BE2167AEF600614024 /* DevListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4AE70BC2167AEF600614024 /* DevListCell.xib */; };
+		A4CFFE6E2168656000A93B72 /* LiveVidController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CFFE6D2168656000A93B72 /* LiveVidController.m */; };
+		A4CFFE71216865A200A93B72 /* LiveVidViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CFFE70216865A200A93B72 /* LiveVidViewModel.m */; };
+		A4CFFE742168861A00A93B72 /* thRender.c in Sources */ = {isa = PBXBuildFile; fileRef = A4CFFE732168861A00A93B72 /* thRender.c */; };
 		A4F50440216268A6002B71FF /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4F5043F216268A6002B71FF /* RootViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -510,6 +513,12 @@
 		A4AE70BA2167AEF600614024 /* DevListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DevListCell.h; sourceTree = "<group>"; };
 		A4AE70BB2167AEF600614024 /* DevListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DevListCell.m; sourceTree = "<group>"; };
 		A4AE70BC2167AEF600614024 /* DevListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DevListCell.xib; sourceTree = "<group>"; };
+		A4CFFE6C2168656000A93B72 /* LiveVidController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LiveVidController.h; sourceTree = "<group>"; };
+		A4CFFE6D2168656000A93B72 /* LiveVidController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LiveVidController.m; sourceTree = "<group>"; };
+		A4CFFE6F216865A200A93B72 /* LiveVidViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LiveVidViewModel.h; sourceTree = "<group>"; };
+		A4CFFE70216865A200A93B72 /* LiveVidViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LiveVidViewModel.m; sourceTree = "<group>"; };
+		A4CFFE7221687E9E00A93B72 /* thPlay_manage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = thPlay_manage.h; sourceTree = "<group>"; };
+		A4CFFE732168861A00A93B72 /* thRender.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = thRender.c; sourceTree = "<group>"; };
 		A4F5043E216268A6002B71FF /* RootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		A4F5043F216268A6002B71FF /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		C18EA7F117ED0291D64659B7 /* libPods-STCam.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-STCam.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -596,6 +605,7 @@
 				A442BFB5213199A000198910 /* axdllEx.c */,
 				A442BFB6213199A000198910 /* thPlay_android.h */,
 				A442BFB7213199A000198910 /* thPlay.c */,
+				A4CFFE7221687E9E00A93B72 /* thPlay_manage.h */,
 			);
 			path = thSDK;
 			sourceTree = "<group>";
@@ -620,6 +630,7 @@
 				A442C035213199A000198910 /* thVideoEnc.c */,
 				A442C03C213199A000198910 /* thffmpeg.h */,
 				A442C03F213199A000198910 /* thRec.c */,
+				A4CFFE732168861A00A93B72 /* thRender.c */,
 				A442C043213199A000198910 /* thImg.c */,
 			);
 			path = avDecode;
@@ -1002,6 +1013,8 @@
 				A46F7B102132D2E400854DB8 /* DevListViewModel.m */,
 				A439D82F216506E200FCE7FE /* LoginViewModel.h */,
 				A439D830216506E200FCE7FE /* LoginViewModel.m */,
+				A4CFFE6F216865A200A93B72 /* LiveVidViewModel.h */,
+				A4CFFE70216865A200A93B72 /* LiveVidViewModel.m */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1079,6 +1092,8 @@
 				A4F5043F216268A6002B71FF /* RootViewController.m */,
 				A439D83A2165149800FCE7FE /* STNavigationController.h */,
 				A439D83B2165149800FCE7FE /* STNavigationController.m */,
+				A4CFFE6C2168656000A93B72 /* LiveVidController.h */,
+				A4CFFE6D2168656000A93B72 /* LiveVidController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1352,6 +1367,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4CFFE71216865A200A93B72 /* LiveVidViewModel.m in Sources */,
 				A442C322213199A100198910 /* cJSON.c in Sources */,
 				A46F7B112132D2E400854DB8 /* DevListViewModel.m in Sources */,
 				A4AE324D2134277D0036212B /* MoreViewController.m in Sources */,
@@ -1363,10 +1379,12 @@
 				A4AE327C21342EFD0036212B /* NSDate+convenience.m in Sources */,
 				A4134F932165F78500831B8D /* AccountManager.m in Sources */,
 				A439D83C2165149800FCE7FE /* STNavigationController.m in Sources */,
+				A4CFFE742168861A00A93B72 /* thRender.c in Sources */,
 				A4AE327421342EFD0036212B /* UIView+Layout.m in Sources */,
 				A442C2AC213199A100198910 /* List.c in Sources */,
 				A4AE327921342EFD0036212B /* UIColor+expanded.m in Sources */,
 				A442C2B2213199A100198910 /* audio_g711.c in Sources */,
+				A4CFFE6E2168656000A93B72 /* LiveVidController.m in Sources */,
 				A4AE324A2134276E0036212B /* MediaViewController.m in Sources */,
 				A45934E32164A5FF0018A61B /* LoginBackgroundView.m in Sources */,
 				A442C2A8213199A100198910 /* Makefile in Sources */,

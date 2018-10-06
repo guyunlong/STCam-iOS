@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------------
-// Author      : Öìºì²¨
-// Date        : 2012.01.18
+// Author      : æœ±çº¢æ³¢
+// Date        : 2018.01.18
 // Version     : V 1.00
 // Description : 
 //-----------------------------------------------------------------------------
@@ -24,15 +24,15 @@ bool DevCfg_to_NewDevCfg(TDevCfg* DevCfg, TNewDevCfg* NewDevCfg)
   NewDevCfg->DevInfo.DevType = DevCfg->DevInfoPkt.DevType;
   NewDevCfg->DevInfo.ExistWiFi = DevCfg->DevInfoPkt.Info.ExistWiFi;
   NewDevCfg->DevInfo.ExistSD = DevCfg->DevInfoPkt.Info.ExistSD;
-  NewDevCfg->DevInfo.ethLinkStatus = DevCfg->DevInfoPkt.Info.ethLinkStatus;
+  NewDevCfg->DevInfo.IsEtherLink = DevCfg->DevInfoPkt.Info.IsEtherLink;
   NewDevCfg->DevInfo.wifiStatus = DevCfg->DevInfoPkt.Info.wifiStatus;
   NewDevCfg->DevInfo.upnpStatus = DevCfg->DevInfoPkt.Info.upnpStatus;
-  NewDevCfg->DevInfo.WlanStatus = DevCfg->DevInfoPkt.Info.WlanStatus;
+  NewDevCfg->DevInfo.IsConnWLAN = DevCfg->DevInfoPkt.Info.IsConnWLAN;
   NewDevCfg->DevInfo.p2pStatus = DevCfg->DevInfoPkt.Info.p2pStatus;
   NewDevCfg->DevInfo.HardType = DevCfg->DevInfoPkt.Info.HardType;
   NewDevCfg->DevInfo.TimeZone = DevCfg->DevInfoPkt.TimeZone;
   NewDevCfg->DevInfo.DoubleStream = DevCfg->DevInfoPkt.DoubleStream;
-  NewDevCfg->DevInfo.ExistFlash = DevCfg->DevInfoPkt.Info.ExistFlash;
+  //NewDevCfg->DevInfo.ExistFlash = DevCfg->DevInfoPkt.Info.ExistFlash;
   NewDevCfg->DevInfo.SDKVersion = DevCfg->DevInfoPkt.Info.SDKVersion;//20171108
   //NetCfg
   NewDevCfg->NetCfg.DataPort = DevCfg->NetCfgPkt.DataPort;
@@ -51,7 +51,7 @@ bool DevCfg_to_NewDevCfg(TDevCfg* DevCfg, TNewDevCfg* NewDevCfg)
   strcpy(NewDevCfg->NetCfg.DDNSServer, DevCfg->NetCfgPkt.DDNS.DDNSServer);
   //wifiCfg
   NewDevCfg->wifiCfg.ActiveWIFI = DevCfg->WiFiCfgPkt.Active;
-  NewDevCfg->wifiCfg.IsAPMode = DevCfg->WiFiCfgPkt.IsAPMode;
+  NewDevCfg->wifiCfg.WifiMode = DevCfg->WiFiCfgPkt.WifiMode;
   strcpy(NewDevCfg->wifiCfg.SSID_AP, DevCfg->WiFiCfgPkt.SSID_AP);
   strcpy(NewDevCfg->wifiCfg.Password_AP, DevCfg->WiFiCfgPkt.Password_AP);
   strcpy(NewDevCfg->wifiCfg.SSID_STA, DevCfg->WiFiCfgPkt.SSID_STA);
@@ -137,7 +137,7 @@ bool DevCfg_to_NewDevCfg(TDevCfg* DevCfg, TNewDevCfg* NewDevCfg)
   NewDevCfg->ExtractCfg.FreeSize = DevCfg->DiskCfgPkt.FreeSize;
   NewDevCfg->ExtractCfg.PlatformType = DevCfg->DevInfoPkt.Info.PlatformType;
   NewDevCfg->ExtractCfg.IsAudioGain = DevCfg->AudioCfgPkt.IsAudioGain;
-  NewDevCfg->ExtractCfg.AudioGainLevel = DevCfg->AudioCfgPkt.AudioGainLevel;//Î´ÓÃµ½
+  NewDevCfg->ExtractCfg.AudioGainLevel = DevCfg->AudioCfgPkt.AudioGainLevel;//æœªç”¨åˆ°
   NewDevCfg->ExtractCfg.IRCutSensitive = DevCfg->VideoCfgPkt.VideoFormat.IRCutSensitive;
   NewDevCfg->ExtractCfg.HideAreaActive = DevCfg->HideAreaCfgPkt.Active;
   NewDevCfg->ExtractCfg.HideAreaLeft = (unsigned char)(DevCfg->HideAreaCfgPkt.NewRect.left * 100 + 0.5);
@@ -192,7 +192,7 @@ bool DevCfg_to_NewDevCfg(TDevCfg* DevCfg, TNewDevCfg* NewDevCfg)
 bool NewDevCfg_to_DevCfg(TNewDevCfg* NewDevCfg, TDevCfg* DevCfg)
 {
   i32 i, m;
-  //²»ÄÜÒª memset(DevCfg, 0, sizeof(DevCfg));
+  //ä¸èƒ½è¦ memset(DevCfg, 0, sizeof(DevCfg));
   //DevInfo
   strcpy(DevCfg->DevInfoPkt.DevModal, NewDevCfg->DevInfo.DevModal);
   DevCfg->DevInfoPkt.SN = NewDevCfg->DevInfo.SN;
@@ -210,15 +210,15 @@ bool NewDevCfg_to_DevCfg(TNewDevCfg* NewDevCfg, TDevCfg* DevCfg)
   DevCfg->DevInfoPkt.DevType = NewDevCfg->DevInfo.DevType;
   DevCfg->DevInfoPkt.Info.ExistWiFi = NewDevCfg->DevInfo.ExistWiFi;
   DevCfg->DevInfoPkt.Info.ExistSD = NewDevCfg->DevInfo.ExistSD;
-  DevCfg->DevInfoPkt.Info.ethLinkStatus = NewDevCfg->DevInfo.ethLinkStatus;
+  DevCfg->DevInfoPkt.Info.IsEtherLink = NewDevCfg->DevInfo.IsEtherLink;
   DevCfg->DevInfoPkt.Info.wifiStatus = NewDevCfg->DevInfo.wifiStatus;
   DevCfg->DevInfoPkt.Info.upnpStatus = NewDevCfg->DevInfo.upnpStatus;
-  DevCfg->DevInfoPkt.Info.WlanStatus = NewDevCfg->DevInfo.WlanStatus;
+  DevCfg->DevInfoPkt.Info.IsConnWLAN = NewDevCfg->DevInfo.IsConnWLAN;
   DevCfg->DevInfoPkt.Info.p2pStatus = NewDevCfg->DevInfo.p2pStatus;
   DevCfg->DevInfoPkt.Info.HardType = NewDevCfg->DevInfo.HardType;
   DevCfg->DevInfoPkt.TimeZone = NewDevCfg->DevInfo.TimeZone;
   DevCfg->DevInfoPkt.DoubleStream = NewDevCfg->DevInfo.DoubleStream;
-  DevCfg->DevInfoPkt.Info.ExistFlash = NewDevCfg->DevInfo.ExistFlash;
+  //DevCfg->DevInfoPkt.Info.ExistFlash = NewDevCfg->DevInfo.ExistFlash;
   DevCfg->DevInfoPkt.Info.SDKVersion = NewDevCfg->DevInfo.SDKVersion;//20171108
   //NetCfg
   DevCfg->NetCfgPkt.DataPort = NewDevCfg->NetCfg.DataPort;
@@ -237,7 +237,7 @@ bool NewDevCfg_to_DevCfg(TNewDevCfg* NewDevCfg, TDevCfg* DevCfg)
   strcpy(DevCfg->NetCfgPkt.DDNS.DDNSServer, NewDevCfg->NetCfg.DDNSServer);
   //wifiCfg
   DevCfg->WiFiCfgPkt.Active = NewDevCfg->wifiCfg.ActiveWIFI;
-  DevCfg->WiFiCfgPkt.IsAPMode = NewDevCfg->wifiCfg.IsAPMode;
+  DevCfg->WiFiCfgPkt.WifiMode = NewDevCfg->wifiCfg.WifiMode;
   strcpy(DevCfg->WiFiCfgPkt.SSID_AP, NewDevCfg->wifiCfg.SSID_AP);
   strcpy(DevCfg->WiFiCfgPkt.Password_AP, NewDevCfg->wifiCfg.Password_AP);
   strcpy(DevCfg->WiFiCfgPkt.SSID_STA, NewDevCfg->wifiCfg.SSID_STA);
@@ -328,7 +328,7 @@ bool NewDevCfg_to_DevCfg(TNewDevCfg* NewDevCfg, TDevCfg* DevCfg)
     DevCfg->DiskCfgPkt.FreeSize = NewDevCfg->ExtractCfg.FreeSize;
     DevCfg->DevInfoPkt.Info.PlatformType = NewDevCfg->ExtractCfg.PlatformType;
     DevCfg->AudioCfgPkt.IsAudioGain = NewDevCfg->ExtractCfg.IsAudioGain;
-    DevCfg->AudioCfgPkt.AudioGainLevel = NewDevCfg->ExtractCfg.AudioGainLevel;//Î´ÓÃµ½
+    DevCfg->AudioCfgPkt.AudioGainLevel = NewDevCfg->ExtractCfg.AudioGainLevel;//æœªç”¨åˆ°
     DevCfg->VideoCfgPkt.VideoFormat.IRCutSensitive = NewDevCfg->ExtractCfg.IRCutSensitive;
     DevCfg->HideAreaCfgPkt.Active = NewDevCfg->ExtractCfg.HideAreaActive;
     DevCfg->HideAreaCfgPkt.NewRect.left = NewDevCfg->ExtractCfg.HideAreaLeft / 100.0;
@@ -412,7 +412,7 @@ char* cgi_Get_Standard(int Value)
   return Str;
 }
 //-----------------------------------------------------------------------------
-bool GetWidthHeightFromStandard(i32 Value, i32* w, i32* h)//ÓÉTStandardÈ¡µÃ³¤¡¢¿í
+bool GetWidthHeightFromStandard(i32 Value, i32* w, i32* h)//ç”±TStandardå–å¾—é•¿ã€å®½
 {
   switch (Value)
   {
@@ -466,7 +466,7 @@ i32 GetStandardFromWidthHeight(i32 w, i32 h)
   else return StandardExMin;
 }
 //-----------------------------------------------------------------------------
-void Json_cgi_GetDevInfo(char* cgiBuf, TDevCfg* DevCfg)//Í¨¹ıÍøÒ³µ÷ÓÃ£¬È¡µÃÉè±¸ĞÅÏ¢
+void Json_cgi_GetDevInfo(char* cgiBuf, TDevCfg* DevCfg)//é€šè¿‡ç½‘é¡µè°ƒç”¨ï¼Œå–å¾—è®¾å¤‡ä¿¡æ¯
 {
   //http://192.168.0.169/cfg1.cgi?User=admin&Psd=admin&MsgID=30
   int i, len;
@@ -482,14 +482,14 @@ void Json_cgi_GetDevInfo(char* cgiBuf, TDevCfg* DevCfg)//Í¨¹ıÍøÒ³µ÷ÓÃ£¬È¡µÃÉè±¸Ğ
   sprintf(Str, "\"FileVersion\":\"%s\",", DevCfg->DevInfoPkt.FileVersion); strcat(cgiBuf, Str);
   sprintf(Str, "\"ExistWiFi\":%d,", DevCfg->DevInfoPkt.Info.ExistWiFi); strcat(cgiBuf, Str);
   sprintf(Str, "\"ExistSD\":%d,", DevCfg->DevInfoPkt.Info.ExistSD); strcat(cgiBuf, Str);
-  sprintf(Str, "\"ExistFlash\":%d,", DevCfg->DevInfoPkt.Info.ExistFlash); strcat(cgiBuf, Str);
+  //sprintf(Str, "\"ExistFlash\":%d,", DevCfg->DevInfoPkt.Info.ExistFlash); strcat(cgiBuf, Str);
   sprintf(Str, "\"HardType\":%d,", DevCfg->DevInfoPkt.Info.HardType); strcat(cgiBuf, Str);
   sprintf(Str, "\"TimeZone\":%d,", DevCfg->DevInfoPkt.TimeZone); strcat(cgiBuf, Str);
 
-  sprintf(Str, "\"ethLinkStatus\":%d,", DevCfg->DevInfoPkt.Info.ethLinkStatus); strcat(cgiBuf, Str);
+  sprintf(Str, "\"ethLinkStatus\":%d,", DevCfg->DevInfoPkt.Info.IsEtherLink); strcat(cgiBuf, Str);
   sprintf(Str, "\"wifiStatus\":%d,", DevCfg->DevInfoPkt.Info.wifiStatus); strcat(cgiBuf, Str);//20171215 add
   sprintf(Str, "\"upnpStatus\":%d,", DevCfg->DevInfoPkt.Info.upnpStatus); strcat(cgiBuf, Str);
-  sprintf(Str, "\"WlanStatus\":%d,", DevCfg->DevInfoPkt.Info.WlanStatus); strcat(cgiBuf, Str);
+  sprintf(Str, "\"WlanStatus\":%d,", DevCfg->DevInfoPkt.Info.IsConnWLAN); strcat(cgiBuf, Str);
   sprintf(Str, "\"p2pStatus\":%d,", DevCfg->DevInfoPkt.Info.p2pStatus); strcat(cgiBuf, Str);
   sprintf(Str, "\"DoubleStream\":%d,", DevCfg->DevInfoPkt.DoubleStream); strcat(cgiBuf, Str);//20171215 add
 
@@ -543,7 +543,7 @@ void Json_cgi_GetDevInfo(char* cgiBuf, TDevCfg* DevCfg)//Í¨¹ıÍøÒ³µ÷ÓÃ£¬È¡µÃÉè±¸Ğ
   sprintf(Str, "}"); strcat(cgiBuf, Str);
 }
 //-----------------------------------------------------------------------------
-void Json_cgi_GetUserLst(char* cgiBuf, TDevCfg* DevCfg)//Í¨¹ıÍøÒ³µ÷ÓÃ£¬È¡µÃÓÃ»§ÁĞ±í
+void Json_cgi_GetUserLst(char* cgiBuf, TDevCfg* DevCfg)//é€šè¿‡ç½‘é¡µè°ƒç”¨ï¼Œå–å¾—ç”¨æˆ·åˆ—è¡¨
 {
   //http://192.168.0.169/cfg1.cgi?User=admin&Psd=admin&MsgID=32
   int i, len;
@@ -564,7 +564,7 @@ void Json_cgi_GetUserLst(char* cgiBuf, TDevCfg* DevCfg)//Í¨¹ıÍøÒ³µ÷ÓÃ£¬È¡µÃÓÃ»§Á
   sprintf(Str, "}"); strcat(cgiBuf, Str);
 }
 //-----------------------------------------------------------------------------
-void Json_cgi_GetNetCfg(char* cgiBuf, TDevCfg* DevCfg)//Í¨¹ıÍøÒ³µ÷ÓÃ£¬È¡µÃÍøÂçÅäÖÃ
+void Json_cgi_GetNetCfg(char* cgiBuf, TDevCfg* DevCfg)//é€šè¿‡ç½‘é¡µè°ƒç”¨ï¼Œå–å¾—ç½‘ç»œé…ç½®
 {
   int len;
   char Str[1024];
@@ -584,22 +584,22 @@ void Json_cgi_GetNetCfg(char* cgiBuf, TDevCfg* DevCfg)//Í¨¹ıÍøÒ³µ÷ÓÃ£¬È¡µÃÍøÂçÅä
   sprintf(Str, "\"DDNSType\":%d,", DevCfg->NetCfgPkt.DDNS.DDNSType); strcat(cgiBuf, Str);
   sprintf(Str, "\"DDNSDomain\":\"%s\",", DevCfg->NetCfgPkt.DDNS.DDNSDomain); strcat(cgiBuf, Str);
   sprintf(Str, "\"DDNSDDNSServer\":\"%s\",", DevCfg->NetCfgPkt.DDNS.DDNSServer); strcat(cgiBuf, Str);
-  sprintf(Str, "\"PPPOEActive\":%d,", DevCfg->NetCfgPkt.PPPOE.Active); strcat(cgiBuf, Str);
-  sprintf(Str, "\"PPPOEAccount\":\"%s\",", DevCfg->NetCfgPkt.PPPOE.Account); strcat(cgiBuf, Str);
-  sprintf(Str, "\"PPPOEPassword\":\"%s\",", DevCfg->NetCfgPkt.PPPOE.Password); strcat(cgiBuf, Str);
+//  sprintf(Str, "\"PPPOEActive\":%d,", DevCfg->NetCfgPkt.PPPOE.Active); strcat(cgiBuf, Str);
+//  sprintf(Str, "\"PPPOEAccount\":\"%s\",", DevCfg->NetCfgPkt.PPPOE.Account); strcat(cgiBuf, Str);
+//  sprintf(Str, "\"PPPOEPassword\":\"%s\",", DevCfg->NetCfgPkt.PPPOE.Password); strcat(cgiBuf, Str);
   len = strlen(cgiBuf);
   if (cgiBuf[len - 1] == ',') cgiBuf[len - 1] = 0x00;
   sprintf(Str, "}"); strcat(cgiBuf, Str);
 }
 //-----------------------------------------------------------------------------
-void Json_cgi_GetWiFiCfg(char* cgiBuf, TDevCfg* DevCfg)//Í¨¹ıÍøÒ³µ÷ÓÃ£¬È¡µÃWIFIÅäÖÃ
+void Json_cgi_GetWiFiCfg(char* cgiBuf, TDevCfg* DevCfg)//é€šè¿‡ç½‘é¡µè°ƒç”¨ï¼Œå–å¾—WIFIé…ç½®
 {
   //http://192.168.0.169/cfg1.cgi?User=admin&Psd=admin&MsgID=37
   char Str[1024];
   TWiFiCfgPkt* wPkt = &DevCfg->WiFiCfgPkt;
   sprintf(Str, "{"); strcat(cgiBuf, Str);
   sprintf(Str, "\"wifi_Active\":%d,", wPkt->Active); strcat(cgiBuf, Str);
-  sprintf(Str, "\"wifi_IsAPMode\":%d,", wPkt->IsAPMode); strcat(cgiBuf, Str);
+  sprintf(Str, "\"wifi_IsAPMode\":%d,", wPkt->WifiMode); strcat(cgiBuf, Str);
   sprintf(Str, "\"wifi_SSID_AP\":\"%s\",", wPkt->SSID_AP); strcat(cgiBuf, Str);
   sprintf(Str, "\"wifi_Password_AP\":\"%s\",", wPkt->Password_AP); strcat(cgiBuf, Str);
 
@@ -609,8 +609,9 @@ void Json_cgi_GetWiFiCfg(char* cgiBuf, TDevCfg* DevCfg)//Í¨¹ıÍøÒ³µ÷ÓÃ£¬È¡µÃWIFIÅ
   sprintf(Str, "}"); strcat(cgiBuf, Str);
 }
 //-----------------------------------------------------------------------------
-void Json_cgi_GetWiFiSTALst(char* cgiBuf, TDevCfg* DevCfg)//Í¨¹ıÍøÒ³µ÷ÓÃ£¬È¡µÃ±£´æÔÚÅäÖÃÖĞWIFIÂ·ÓÉÆ÷ÁĞ±í
+void Json_cgi_GetWiFiSTALst(char* cgiBuf, TDevCfg* DevCfg)//é€šè¿‡ç½‘é¡µè°ƒç”¨ï¼Œå–å¾—ä¿å­˜åœ¨é…ç½®ä¸­WIFIè·¯ç”±å™¨åˆ—è¡¨
 {
+#ifdef WIFI_SAVE_SSID_LIST
   //http://192.168.0.169/cfg1.cgi?User=admin&Psd=admin&MsgID=70
   int i, len;
   char Str[1024];
@@ -625,9 +626,10 @@ void Json_cgi_GetWiFiSTALst(char* cgiBuf, TDevCfg* DevCfg)//Í¨¹ıÍøÒ³µ÷ÓÃ£¬È¡µÃ±£
   len = strlen(cgiBuf);
   if (cgiBuf[len - 1] == ',') cgiBuf[len - 1] = 0x00;
   sprintf(Str, "]"); strcat(cgiBuf, Str);
+#endif
 }
 //-----------------------------------------------------------------------------
-void Json_cgi_GetVideoCfg(char* cgiBuf, TDevCfg* DevCfg)//Í¨¹ıÍøÒ³µ÷ÓÃ£¬È¡µÃÊÓÆµÅäÖÃ
+void Json_cgi_GetVideoCfg(char* cgiBuf, TDevCfg* DevCfg)//é€šè¿‡ç½‘é¡µè°ƒç”¨ï¼Œå–å¾—è§†é¢‘é…ç½®
 {
   int w, h;
   char Str[1024];
@@ -704,7 +706,7 @@ void Json_cgi_GetVideoCfg(char* cgiBuf, TDevCfg* DevCfg)//Í¨¹ıÍøÒ³µ÷ÓÃ£¬È¡µÃÊÓÆµ
   sprintf(Str, "}"); strcat(cgiBuf, Str);
 }
 //-----------------------------------------------------------------------------
-void Json_cgi_GetAudioCfg(char* cgiBuf, TDevCfg* DevCfg)//Í¨¹ıÍøÒ³µ÷ÓÃ£¬È¡µÃÒôÆµÅäÖÃ
+void Json_cgi_GetAudioCfg(char* cgiBuf, TDevCfg* DevCfg)//é€šè¿‡ç½‘é¡µè°ƒç”¨ï¼Œå–å¾—éŸ³é¢‘é…ç½®
 {
   int len;
   char Str[1024];
@@ -712,6 +714,7 @@ void Json_cgi_GetAudioCfg(char* cgiBuf, TDevCfg* DevCfg)//Í¨¹ıÍøÒ³µ÷ÓÃ£¬È¡µÃÒôÆµ
   //http://192.168.0.169/cfg1.cgi?User=admin&Psd=admin&MsgID=41
   sprintf(Str, "{"); strcat(cgiBuf, Str);
   sprintf(Str, "\"AUDIO_Active\":%d,", DevCfg->AudioCfgPkt.Active); strcat(cgiBuf, Str);
+  sprintf(Str, "\"AUDIO_IsPlayPromptSound\":%d,", DevCfg->AudioCfgPkt.IsPlayPromptSound); strcat(cgiBuf, Str);
   sprintf(Str, "\"AUDIO_InputType\":%d,", DevCfg->AudioCfgPkt.InputType); strcat(cgiBuf, Str);
   //sprintf(Str, "\"AUDIO_VolumeMicIn\":%d,", DevCfg->AudioCfgPkt.VolumeMicIn); strcat(cgiBuf, Str);//20171215 del
   sprintf(Str, "\"AUDIO_VolumeLineIn\":%d,", DevCfg->AudioCfgPkt.VolumeLineIn); strcat(cgiBuf, Str);
@@ -735,7 +738,7 @@ void Json_cgi_GetAudioCfg(char* cgiBuf, TDevCfg* DevCfg)//Í¨¹ıÍøÒ³µ÷ÓÃ£¬È¡µÃÒôÆµ
   sprintf(Str, "}"); strcat(cgiBuf, Str);
 }
 //-----------------------------------------------------------------------------
-void Json_cgi_GetHideArea(char* cgiBuf, TDevCfg* DevCfg)//Í¨¹ıÍøÒ³µ÷ÓÃ£¬È¡µÃÒş²ØÇøÓòÅäÖÃ
+void Json_cgi_GetHideArea(char* cgiBuf, TDevCfg* DevCfg)//é€šè¿‡ç½‘é¡µè°ƒç”¨ï¼Œå–å¾—éšè—åŒºåŸŸé…ç½®
 {
   int len;
   char Str[1024];
@@ -751,7 +754,7 @@ void Json_cgi_GetHideArea(char* cgiBuf, TDevCfg* DevCfg)//Í¨¹ıÍøÒ³µ÷ÓÃ£¬È¡µÃÒş²Ø
   sprintf(Str, "}"); strcat(cgiBuf, Str);
 }
 //-----------------------------------------------------------------------------
-void Json_cgi_GetMDCfg(char* cgiBuf, TDevCfg* DevCfg)//Í¨¹ıÍøÒ³µ÷ÓÃ£¬È¡µÃÒÆ¶¯Õì²âÅäÖÃ
+void Json_cgi_GetMDCfg(char* cgiBuf, TDevCfg* DevCfg)//é€šè¿‡ç½‘é¡µè°ƒç”¨ï¼Œå–å¾—ç§»åŠ¨ä¾¦æµ‹é…ç½®
 {
   //http://192.168.0.169/cfg1.cgi?User=admin&Psd=admin&MsgID=45
   int len;
@@ -777,7 +780,7 @@ void Json_cgi_GetMDCfg(char* cgiBuf, TDevCfg* DevCfg)//Í¨¹ıÍøÒ³µ÷ÓÃ£¬È¡µÃÒÆ¶¯Õì²
   sprintf(Str, "}"); strcat(cgiBuf, Str);
 }
 //-----------------------------------------------------------------------------
-void Json_cgi_GetDiskCfg(char* cgiBuf, TDevCfg* DevCfg)//Í¨¹ıÍøÒ³µ÷ÓÃ£¬È¡µÃTF¿¨ĞÅÏ¢
+void Json_cgi_GetDiskCfg(char* cgiBuf, TDevCfg* DevCfg)//é€šè¿‡ç½‘é¡µè°ƒç”¨ï¼Œå–å¾—TFå¡ä¿¡æ¯
 {
   //http://192.168.0.169/cfg1.cgi?User=admin&Psd=admin&MsgID=53
   char Str[1024];
@@ -792,7 +795,7 @@ void Json_cgi_GetDiskCfg(char* cgiBuf, TDevCfg* DevCfg)//Í¨¹ıÍøÒ³µ÷ÓÃ£¬È¡µÃTF¿¨Ğ
   sprintf(Str, "}"); strcat(cgiBuf, Str);
 }
 //-----------------------------------------------------------------------------
-void Json_cgi_GetRecCfg(char* cgiBuf, TDevCfg* DevCfg)//Í¨¹ıÍøÒ³µ÷ÓÃ£¬È¡µÃÂ¼ÏñÅäÖÃ
+void Json_cgi_GetRecCfg(char* cgiBuf, TDevCfg* DevCfg)//é€šè¿‡ç½‘é¡µè°ƒç”¨ï¼Œå–å¾—å½•åƒé…ç½®
 {
   int len;
   char Str[1024];
@@ -809,7 +812,7 @@ void Json_cgi_GetRecCfg(char* cgiBuf, TDevCfg* DevCfg)//Í¨¹ıÍøÒ³µ÷ÓÃ£¬È¡µÃÂ¼ÏñÅä
   sprintf(Str, "}"); strcat(cgiBuf, Str);
 }
 //-----------------------------------------------------------------------------
-void Json_cgi_GetFTPCfg(char* cgiBuf, TDevCfg* DevCfg)//Í¨¹ıÍøÒ³µ÷ÓÃ£¬È¡µÃFTPÅäÖÃ
+void Json_cgi_GetFTPCfg(char* cgiBuf, TDevCfg* DevCfg)//é€šè¿‡ç½‘é¡µè°ƒç”¨ï¼Œå–å¾—FTPé…ç½®
 {
   int len;
   char Str[1024];
@@ -826,7 +829,7 @@ void Json_cgi_GetFTPCfg(char* cgiBuf, TDevCfg* DevCfg)//Í¨¹ıÍøÒ³µ÷ÓÃ£¬È¡µÃFTPÅäÖ
   sprintf(Str, "}"); strcat(cgiBuf, Str);
 }
 //-----------------------------------------------------------------------------
-void Json_cgi_GetSMTPCfg(char* cgiBuf, TDevCfg* DevCfg)//Í¨¹ıÍøÒ³µ÷ÓÃ£¬È¡µÃÓÊ¼şÅäÖÃ
+void Json_cgi_GetSMTPCfg(char* cgiBuf, TDevCfg* DevCfg)//é€šè¿‡ç½‘é¡µè°ƒç”¨ï¼Œå–å¾—é‚®ä»¶é…ç½®
 {
   int len;
   char Str[1024];
@@ -844,7 +847,7 @@ void Json_cgi_GetSMTPCfg(char* cgiBuf, TDevCfg* DevCfg)//Í¨¹ıÍøÒ³µ÷ÓÃ£¬È¡µÃÓÊ¼şÅ
   sprintf(Str, "}"); strcat(cgiBuf, Str);
 }
 //-----------------------------------------------------------------------------
-void Json_cgi_GetP2PCfg(char* cgiBuf, TDevCfg* DevCfg)//Í¨¹ıÍøÒ³µ÷ÓÃ£¬È¡µÃP2PÅäÖÃ
+void Json_cgi_GetP2PCfg(char* cgiBuf, TDevCfg* DevCfg)//é€šè¿‡ç½‘é¡µè°ƒç”¨ï¼Œå–å¾—P2Pé…ç½®
 {
   int len;
   char Str[1024];
@@ -935,3 +938,4 @@ char* NewDevCfg_to_Json(TNewDevCfg* NewDevCfg)
   NewDevCfg_to_DevCfg(NewDevCfg, &DevCfg);
   return DevCfg_to_Json(&DevCfg);
 }
+

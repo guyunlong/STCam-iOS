@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "libthSDK.h"
 /*
  {
  "SN": "31194514",
@@ -54,7 +55,7 @@ typedef NS_ENUM(NSInteger, ConnType){
 /**
  根据不同的连接类型返回对应的颜色
 
- @return
+ @return color
  */
 -(UIColor*)getConnectColor;
 -(ConnType)getConnectType;
@@ -62,4 +63,9 @@ typedef NS_ENUM(NSInteger, ConnType){
 +(instancetype)DeviceModelWithDict:(NSDictionary *)dict;
 -(instancetype)initWithDict:(NSDictionary *)dict;
 -(void)setValue:(id)value forUndefinedKey:(NSString *)key;
+
+/**************设备连接**************/
+@property(nonatomic,assign)  THandle NetHandle;
+-(BOOL)IsConnect;
+-(void)threadConnect;
 @end
