@@ -18,6 +18,8 @@
 @property(nonatomic,weak)IBOutlet UIButton * shareBtn;
 @property(nonatomic,weak)IBOutlet UIButton * playBackBtn;
 @property(nonatomic,weak)IBOutlet UIButton * settingBtn;
+@property(nonatomic,strong) UIView * onlineStatusImageView;
+@property(nonatomic,strong) UILabel * onlineStatusLb;
 @end
 @implementation DevListCell
 
@@ -57,7 +59,28 @@
     _backView.layer.shadowOpacity = 1.0;
     _backView.layer.shadowRadius = kShadowRadius;
     
-   
+    
+    _onlineStatusImageView =[[UIView alloc] init];
+    _onlineStatusLb =[[UILabel alloc] init];
+    [_snapImageView addSubview:_onlineStatusImageView];
+    [_snapImageView addSubview:_onlineStatusLb];
+    [_onlineStatusLb setFont:[UIFont systemFontOfSize:13]];
+    [_onlineStatusLb mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.width.equalTo(@55);
+        make.height.equalTo(@16);
+        make.top.mas_equalTo(self.snapImageView.mas_top).with.offset(20);
+        make.right.mas_equalTo(self.snapImageView.mas_right).with.offset(-5);
+    }];
+    
+    [_onlineStatusImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(@16);
+        make.height.equalTo(@16);
+        make.top.mas_equalTo(self.snapImageView.mas_top).with.offset(20);
+        make.right.mas_equalTo(self.onlineStatusLb.mas_left).with.offset(-10);
+    }];
+    _onlineStatusImageView.layer.cornerRadius = 8;
+    _onlineStatusImageView.layer.masksToBounds = YES;
     
 }
 
@@ -70,6 +93,9 @@
     [super layoutSubviews];
     if (_model) {
         [_titleLb setText:_model.DevName];
+        [_onlineStatusImageView setBackgroundColor:[_model getConnectColor]];
+        [_onlineStatusLb setTextColor:[_model getConnectColor]];
+        [_onlineStatusLb setText:[_model getOnLineDesc]];
     }
     
   //  _backView.layer.shadowPath = [UIBezierPath bezierPathWithRect:CGRectMake(kShadowRadius, _backView.bounds.size.height/2, _backView.bounds.size.width-(2*kShadowRadius), _backView.bounds.size.height/2)].CGPath;

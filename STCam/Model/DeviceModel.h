@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 /*
  {
  "SN": "31194514",
@@ -25,6 +26,15 @@
  "IsSnapshot": 1
  }
  */
+typedef NS_ENUM(NSInteger, ConnType){
+    ConnType_NODEV,
+    ConnType_OFFLINE,
+    ConnType_LAN,
+    ConnType_DDNS,
+    ConnType_P2P,
+    ConnType_NOWAY
+};
+
 @interface DeviceModel : NSObject
 @property(nonatomic,strong)  NSString* SN;
 @property(nonatomic,strong)  NSString* DevName;
@@ -40,6 +50,15 @@
 @property(nonatomic,assign)  BOOL IsShare;
 @property(nonatomic,assign)  BOOL IsRec;
 @property(nonatomic,assign)  BOOL IsSnapshot;
+
+/**
+ 根据不同的连接类型返回对应的颜色
+
+ @return
+ */
+-(UIColor*)getConnectColor;
+-(ConnType)getConnectType;
+-(NSString*)getOnLineDesc;
 +(instancetype)DeviceModelWithDict:(NSDictionary *)dict;
 -(instancetype)initWithDict:(NSDictionary *)dict;
 -(void)setValue:(id)value forUndefinedKey:(NSString *)key;
