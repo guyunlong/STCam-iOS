@@ -20,5 +20,10 @@
  @param sub 辅码流
  */
 -(void)openVid:(int)sub;
+
+/**
+ 关闭视频
+ */
+-(void)closeVid;
 @property (nonatomic, weak) id<VidViewModelDelegate> delegate;
 @end

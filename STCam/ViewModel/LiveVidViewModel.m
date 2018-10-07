@@ -9,6 +9,7 @@
 #import "LiveVidViewModel.h"
 #import "VideoBufferParser.h"
 #import "PrefixHeader.h"
+#import "TFun.h"
 @interface LiveVidViewModel ()<VideoBufferParserDelegate>
 @property (strong, nonatomic)  VideoBufferParser *parser;
 @end
@@ -63,6 +64,17 @@ void alarmRealTimeCallBack(int AlmType, int AlmTime, int AlmChl, void* UserCusto
             ret = thNet_Play((HANDLE) self.model.NetHandle, 1-sub, 0,sub, 0);;//
         }
         
+        
+    });
+    
+    
+}
+-(void)closeVid{
+    @weakify(self)
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        @strongify(self);
+        thNet_Stop((HANDLE) self.model.NetHandle);
+       // thNet_TalkClose(HANDLE) self.model.NetHandle);
         
     });
     

@@ -232,7 +232,8 @@ static const GLfloat kColorConversion709[] = {
     
     // Set up the quad vertices with respect to the orientation and aspect ratio of the video.
     CGRect viewBounds = self.bounds;
-    CGSize contentSize = CGSizeMake(frameWidth, frameWidth*kScreenHeight/kScreenWidth);
+   // CGSize contentSize = CGSizeMake(frameWidth, frameWidth*kScreenHeight/kScreenWidth);
+    CGSize contentSize = CGSizeMake(frameWidth, frameHeight);
     CGRect vertexSamplingRect = AVMakeRectWithAspectRatioInsideRect(contentSize, viewBounds);
     
     // Compute normalized quad coordinates to draw the frame into.
