@@ -79,7 +79,11 @@
 }
 -(instancetype)initWithDict:(NSDictionary *)dict {
     if (self = [super init]) {
+        
         [self setValuesForKeysWithDictionary:dict];//kvc
+        serialQueue = dispatch_queue_create("com.sentry.mlock.get", DISPATCH_QUEUE_SERIAL);
+        _User = @"admin";
+        _Pwd = @"admin";
     }
     return self;
 }

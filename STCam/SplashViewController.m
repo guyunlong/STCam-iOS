@@ -12,6 +12,7 @@
 #import "UIColor+expanded.h"
 #import "UIImage+Common.h"
 #import "PrefixHeader.h"
+#import "libthSDK.h"
 @interface SplashViewController ()
 @property(nonatomic,strong)DevListViewModel * viewModel;
 
@@ -21,6 +22,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    P2P_Init();
     // Do any additional setup after loading the view, typically from a nib.
     //_viewModel = [DevListViewModel new];
    // [_viewModel searchDevice];

@@ -1309,9 +1309,9 @@ bool thNet_Connect(HANDLE NetHandle, u64 SN, char* UserName, char* Password, cha
     Play->hQueueAudio = avQueue_Init(MAX_QUEUE_COUNT, true, true);
     Play->hQueueRec = avQueue_Init(MAX_QUEUE_COUNT, true, true);
 
-    Play->thQueueVideo = ThreadCreate((void*) thread_QueueVideo, Play, false);
-    Play->thQueueAudio = ThreadCreate((void*) thread_QueueAudio, Play, false);
-    Play->thQueueRec = ThreadCreate((void*) thread_QueueRec, Play, false);
+//    Play->thQueueVideo = ThreadCreate((void*) thread_QueueVideo, Play, false);
+//    Play->thQueueAudio = ThreadCreate((void*) thread_QueueAudio, Play, false);
+//    Play->thQueueRec = ThreadCreate((void*) thread_QueueRec, Play, false);
 
     TMediaType MediaType = CODEC_NONE;
     TVideoFormat* vfmt = &Play->DevCfg.VideoCfgPkt.VideoFormat;

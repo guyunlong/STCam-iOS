@@ -14,6 +14,11 @@
 
 @interface LiveVidViewModel : NSObject
 @property(nonatomic,strong)DeviceModel*model;
+
+/**
+ 打开视频
+ @param sub 辅码流
+ */
 -(void)openVid:(int)sub;
 @property (nonatomic, weak) id<VidViewModelDelegate> delegate;
 @end

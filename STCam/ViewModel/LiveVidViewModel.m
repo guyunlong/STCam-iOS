@@ -47,6 +47,8 @@ void alarmRealTimeCallBack(int AlmType, int AlmTime, int AlmChl, void* UserCusto
     self = [super init];
     if (self) {
         vidSelf = (__bridge void *)(self);
+        _parser = [VideoBufferParser new];
+        [_parser setDelegate:self];
     }
     return self;
 }

@@ -66,6 +66,7 @@ void callback_SearchDev(void *UserCustom, u32 SN, int DevType, char *DevModal, c
         [node setDevName:devName];
     }
     free(utf8String);
+    [node threadConnect];
     [myself.searchDeviceArray addObject:node];
     
 }
@@ -79,6 +80,7 @@ void callback_SearchDev(void *UserCustom, u32 SN, int DevType, char *DevModal, c
         _deviceArray = [NSMutableArray new];
         _searchDeviceArray = [NSMutableArray new];
         refSelf = (__bridge void *)(self);
+        
     }
     return self;
 }
@@ -95,6 +97,10 @@ void callback_SearchDev(void *UserCustom, u32 SN, int DevType, char *DevModal, c
                 [self.deviceArray removeAllObjects];
                 for (NSDictionary * dic in data) {
                     DeviceModel * model = [DeviceModel DeviceModelWithDict:dic];
+                    ConnType type = [model getConnectType];
+                    if (type == ConnType_LAN || type == ConnType_DDNS || type == ConnType_P2P) {
+                        [model threadConnect];
+                    }
                     [self.deviceArray addObject:model];
                     
                 }
