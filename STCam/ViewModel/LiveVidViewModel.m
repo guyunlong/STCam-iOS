@@ -50,6 +50,7 @@ void alarmRealTimeCallBack(int AlmType, int AlmTime, int AlmChl, void* UserCusto
         vidSelf = (__bridge void *)(self);
         _parser = [VideoBufferParser new];
         [_parser setDelegate:self];
+        _sub = 1;
     }
     return self;
 }
@@ -63,7 +64,7 @@ void alarmRealTimeCallBack(int AlmType, int AlmTime, int AlmChl, void* UserCusto
         if (ret) {
             ret = thNet_Play((HANDLE) self.model.NetHandle, 1-sub, 0,sub, 0);;//
         }
-        
+        [self.parser clearDecoder];
         
     });
     

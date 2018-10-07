@@ -115,7 +115,7 @@
     [_portButtonView addSubview:_snapShotBtn];
     
     [_fullScreenBtn addTarget:self action:@selector(controlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-    
+    [_hdBtn addTarget:self action:@selector(controlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     /**********landscape buttons*************/
     _exitFullScreenButton = [[UIButton alloc] initWithFrame:CGRectMake(kPadding, kPadding, firstLineWidth, firstLineWidth)];
     [_exitFullScreenButton setImage:[UIImage imageNamed:@"icon_back"] forState:UIControlStateNormal];
@@ -135,6 +135,11 @@
     }
     else if([sender isEqual:_exitFullScreenButton]){
          [self rotateToPortrait];
+    }
+    else if([sender isEqual:_hdBtn]){
+        [_viewModel setSub:1-_viewModel.sub];
+        [_viewModel openVid:_viewModel.sub];
+        [_hdBtn setSelected:1-_viewModel.sub];
     }
 }
 #pragma methods

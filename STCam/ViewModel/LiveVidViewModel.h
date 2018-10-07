@@ -16,6 +16,11 @@
 @property(nonatomic,strong)DeviceModel*model;
 
 /**
+ 默认sub为1，播放辅码流
+ */
+@property(nonatomic,assign)int sub;
+
+/**
  打开视频
  @param sub 辅码流
  */
