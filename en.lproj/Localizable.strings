@@ -123,6 +123,7 @@
 "action_time_stop"="Stoptime";
 "status_online"="Online";
 "status_offline"="Offline";
+"device_status_offline"="Device is offline,can not operate!";
 "action_delete"="Delete";
 "action_select_all"="Select all";
 "action_undelete_all"="Cancel select";

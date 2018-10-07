@@ -74,6 +74,7 @@
 		A442C3D4213199A100198910 /* d3dxmath.inl in Resources */ = {isa = PBXBuildFile; fileRef = A442C229213199A100198910 /* d3dxmath.inl */; };
 		A45934E02164A5320018A61B /* BasicTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = A45934DF2164A5320018A61B /* BasicTextField.m */; };
 		A45934E32164A5FF0018A61B /* LoginBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A45934E22164A5FF0018A61B /* LoginBackgroundView.m */; };
+		A4606929216A4F0500491290 /* AudioSession.m in Sources */ = {isa = PBXBuildFile; fileRef = A4606928216A4F0400491290 /* AudioSession.m */; };
 		A46F7AEC2132CD5100854DB8 /* libavformat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A46F7AE42132CD5100854DB8 /* libavformat.a */; };
 		A46F7AED2132CD5100854DB8 /* libswscale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A46F7AE52132CD5100854DB8 /* libswscale.a */; };
 		A46F7AEE2132CD5100854DB8 /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A46F7AE62132CD5100854DB8 /* libavutil.a */; };
@@ -435,6 +436,8 @@
 		A45934DF2164A5320018A61B /* BasicTextField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BasicTextField.m; sourceTree = "<group>"; };
 		A45934E12164A5FF0018A61B /* LoginBackgroundView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginBackgroundView.h; sourceTree = "<group>"; };
 		A45934E22164A5FF0018A61B /* LoginBackgroundView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginBackgroundView.m; sourceTree = "<group>"; };
+		A4606927216A4F0400491290 /* AudioSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioSession.h; sourceTree = "<group>"; };
+		A4606928216A4F0400491290 /* AudioSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioSession.m; sourceTree = "<group>"; };
 		A46F7AE42132CD5100854DB8 /* libavformat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavformat.a; path = ffmpeg/lib/libavformat.a; sourceTree = "<group>"; };
 		A46F7AE52132CD5100854DB8 /* libswscale.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libswscale.a; path = ffmpeg/lib/libswscale.a; sourceTree = "<group>"; };
 		A46F7AE62132CD5100854DB8 /* libavutil.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavutil.a; path = ffmpeg/lib/libavutil.a; sourceTree = "<group>"; };
@@ -1029,6 +1032,8 @@
 		A46F7B0E2132D25700854DB8 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				A4606927216A4F0400491290 /* AudioSession.h */,
+				A4606928216A4F0400491290 /* AudioSession.m */,
 				A46F7B0F2132D2E400854DB8 /* DevListViewModel.h */,
 				A46F7B102132D2E400854DB8 /* DevListViewModel.m */,
 				A439D82F216506E200FCE7FE /* LoginViewModel.h */,
@@ -1447,6 +1452,7 @@
 				A4F50440216268A6002B71FF /* RootViewController.m in Sources */,
 				A45934E02164A5320018A61B /* BasicTextField.m in Sources */,
 				A43853DB21675A1500B8CC56 /* DeviceModel.m in Sources */,
+				A4606929216A4F0500491290 /* AudioSession.m in Sources */,
 				A439D831216506E200FCE7FE /* LoginViewModel.m in Sources */,
 				A442C2AF213199A100198910 /* av_Queue.c in Sources */,
 				A4AE327621342EFD0036212B /* NSString+Common.m in Sources */,

@@ -27,6 +27,16 @@
 -(void)openVid:(int)sub;
 
 /**
+ 默认openaud为01，关闭音频
+ */
+@property(nonatomic,assign)int openaud;
+/**
+ 打开音频
+ @param openaud 是否打开音频
+ */
+-(void)openAud:(int)openaud;
+
+/**
  关闭视频
  */
 -(void)closeVid;

@@ -19,7 +19,7 @@
 -(id)init{
     self = [super init];
     if (self) {
-        serialQueue = dispatch_queue_create("com.sentry.mlock.get", DISPATCH_QUEUE_SERIAL);
+        serialQueue = dispatch_queue_create("com.southtec.cam", DISPATCH_QUEUE_SERIAL);
         _User = @"admin";
         _Pwd = @"admin";
     }
@@ -54,6 +54,14 @@
         return ConnType_NOWAY;
     }
     return ConnType_OFFLINE;
+}
+
+-(BOOL)isOnline{
+    ConnType type = [self getConnectType];
+    if (type == ConnType_LAN || type == ConnType_DDNS || type == ConnType_P2P) {
+        return YES;
+    }
+    return NO;
 }
 -(UIColor*)getConnectColor{
     switch ([self getConnectType]) {

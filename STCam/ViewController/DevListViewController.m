@@ -141,6 +141,8 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+   
     DevListCell * cell = [DevListCell DevListCellWith:tableView indexPath:indexPath];
     [cell setModel:_viewModel.deviceArray[indexPath.row]];
     return cell;
@@ -157,9 +159,20 @@
 {
     
      [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    DeviceModel * model = _viewModel.deviceArray[indexPath.row];
+    if (![model isOnline]) {
+        [self showHint:@"device_status_offline".localizedString];
+        return ;
+    }
+    else if(![model IsConnect]){
+        [self showHint:@"action_net_not_connect".localizedString];
+        return;
+    }
+    
+    
     LiveVidController * ctl = [LiveVidController new];
     LiveVidViewModel * viewModel = [LiveVidViewModel new];
-    [viewModel setModel:_viewModel.deviceArray[indexPath.row]];
+    [viewModel setModel:model];
     ctl.hidesBottomBarWhenPushed = YES;
     [ctl setViewModel:viewModel];
     [self.navigationController pushViewController:ctl animated:YES];

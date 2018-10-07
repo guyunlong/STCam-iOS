@@ -10,8 +10,10 @@
 #import "VideoBufferParser.h"
 #import "PrefixHeader.h"
 #import "TFun.h"
+#import "AudioSession.h"
 @interface LiveVidViewModel ()<VideoBufferParserDelegate>
 @property (strong, nonatomic)  VideoBufferParser *parser;
+@property (strong, nonatomic)  AudioSession *audioSession;
 @end
 @implementation LiveVidViewModel
 //数据回调
@@ -37,6 +39,12 @@ void avAuddioCallBack(void *UserCustom,         //用户自定义数据
                              i32 Len                   //数据长度
 ){
     printf("aud receive buf len is %d\n",Len);
+    
+    LiveVidViewModel *myself = (__bridge LiveVidViewModel * ) vidSelf;
+    if (myself.openaud) {
+        [myself.audioSession playAudio:Buf length:Len];
+    }
+    
 }
 
 void alarmRealTimeCallBack(int AlmType, int AlmTime, int AlmChl, void* UserCustom)
@@ -51,6 +59,15 @@ void alarmRealTimeCallBack(int AlmType, int AlmTime, int AlmChl, void* UserCusto
         _parser = [VideoBufferParser new];
         [_parser setDelegate:self];
         _sub = 1;
+        _openaud = 0;
+        
+        _audioSession = [[AudioSession alloc] initAudio];
+        UInt32 category = kAudioSessionCategory_PlayAndRecord;
+        OSStatus error;
+        ;
+        error = AudioSessionInitialize(NULL, NULL, NULL, NULL);
+        error =  AudioSessionSetProperty(kAudioSessionProperty_AudioCategory, sizeof(category), &category);
+        if (error) NSLog(@"couldn't set audio category!,error is");
     }
     return self;
 }
@@ -62,13 +79,22 @@ void alarmRealTimeCallBack(int AlmType, int AlmTime, int AlmChl, void* UserCusto
         //
         bool ret = thNet_SetCallBack(self.model.NetHandle, avRealTimeCallBack,avAuddioCallBack, NULL, (void*)self.model.NetHandle);
         if (ret) {
-            ret = thNet_Play((HANDLE) self.model.NetHandle, 1-sub, 0,sub, 0);;//
+            ret = thNet_Play((HANDLE) self.model.NetHandle, 1-sub, self.openaud,sub, 0);;//
         }
         [self.parser clearDecoder];
         
     });
     
     
+}
+
+-(void)openAud:(int)openaud{
+    @weakify(self)
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        @strongify(self);
+        //
+        thNet_Play((HANDLE) self.model.NetHandle,1-self.sub, openaud,self.sub, 0);
+    });
 }
 -(void)closeVid{
     @weakify(self)

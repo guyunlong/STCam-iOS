@@ -94,9 +94,20 @@ void callback_SearchDev(void *UserCustom, u32 SN, int DevType, char *DevModal, c
         [FFHttpTool GET:url parameters:nil success:^(id data){
             @strongify(self)
             if ([data isKindOfClass:[NSArray class]]) {
-                [self.deviceArray removeAllObjects];
+               
                 for (NSDictionary * dic in data) {
                     DeviceModel * model = [DeviceModel DeviceModelWithDict:dic];
+                    
+                    for (DeviceModel * devModel in self.deviceArray) {
+                        if ([model.IPUID isEqualToString:model.IPUID]) {
+                            ConnType type = [model getConnectType];
+                            if (type == ConnType_LAN || type == ConnType_DDNS || type == ConnType_P2P) {
+                                devModel.ConnType = model.ConnType;
+                                [devModel threadConnect];
+                            }
+                            return;
+                        }
+                    }
                     ConnType type = [model getConnectType];
                     if (type == ConnType_LAN || type == ConnType_DDNS || type == ConnType_P2P) {
                         [model threadConnect];

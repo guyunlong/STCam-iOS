@@ -116,6 +116,7 @@
     
     [_fullScreenBtn addTarget:self action:@selector(controlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [_hdBtn addTarget:self action:@selector(controlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [_playAudioBtn addTarget:self action:@selector(controlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     /**********landscape buttons*************/
     _exitFullScreenButton = [[UIButton alloc] initWithFrame:CGRectMake(kPadding, kPadding, firstLineWidth, firstLineWidth)];
     [_exitFullScreenButton setImage:[UIImage imageNamed:@"icon_back"] forState:UIControlStateNormal];
@@ -140,6 +141,11 @@
         [_viewModel setSub:1-_viewModel.sub];
         [_viewModel openVid:_viewModel.sub];
         [_hdBtn setSelected:1-_viewModel.sub];
+    }
+    else if([sender isEqual:_playAudioBtn]){
+        _viewModel.openaud = 1- _viewModel.openaud;
+        [_viewModel openAud:_viewModel.openaud];
+        [_playAudioBtn setSelected:_viewModel.openaud];
     }
 }
 #pragma methods

@@ -118,6 +118,7 @@
 "action_time_stop"="结束时间";
 "status_online"="在线";
 "status_offline"="离线";
+"device_status_offline"="设备离线，无法操作";
 "action_delete"="删除";
 "action_select_all"="全选";
 "action_undelete_all"="取消全选";

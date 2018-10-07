@@ -61,6 +61,13 @@ typedef NS_ENUM(NSInteger, ConnType){
  */
 -(UIColor*)getConnectColor;
 -(ConnType)getConnectType;
+
+/**
+ 是否在线
+
+ @return 如果是 p2p,lan,ddns 返回YES
+ */
+-(BOOL)isOnline;
 -(NSString*)getOnLineDesc;
 +(instancetype)DeviceModelWithDict:(NSDictionary *)dict;
 -(instancetype)initWithDict:(NSDictionary *)dict;
