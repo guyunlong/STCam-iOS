@@ -45,4 +45,8 @@
                inDirectory:(NSString *)directoryName ;
 
 - (BOOL)fileExistsWithName:(NSString *)fileName;
+
+-(NSArray*)getFilesInDirectory:(NSString*)directoryName;
+
+- (BOOL)deleteFileWithName:(NSString *)fileName;
 @end

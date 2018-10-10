@@ -10,6 +10,7 @@
 #import "PrefixHeader.h"
 #import "DevListViewModel.h"
 #import "DevMediaCell.h"
+#import "MediaDetailController.h"
 @interface MediaViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property(nonatomic,strong)UITableView * mTableView;
 @property(nonatomic,strong)DevListViewModel * devListViewModel;
@@ -85,6 +86,10 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    MediaDetailController *ctl = [MediaDetailController new];
+    [ctl setHidesBottomBarWhenPushed:YES];
+    [ctl setModel:_devListViewModel.deviceArray[indexPath.row]];
+    [self.navigationController pushViewController:ctl animated:YES];
 }
 
 @end

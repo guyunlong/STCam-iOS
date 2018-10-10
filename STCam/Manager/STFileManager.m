@@ -19,7 +19,7 @@
 }
 
 -(NSString*)getRootPath{
-   
+    
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     NSString *cachesDirectory = [paths objectAtIndex:0];
     return cachesDirectory;
@@ -74,5 +74,38 @@
 
 - (BOOL)fileExistsWithName:(NSString *)fileName {
     return [self fileExistsWithName:fileName inDirectory:nil];
+}
+
+-(NSArray*)getFilesInDirectory:(NSString*)directoryName{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString *cachesDirectory = [paths objectAtIndex:0];
+    NSString *targetDirectory = [cachesDirectory stringByAppendingPathComponent:directoryName];
+    NSArray *fileList = [[NSArray alloc] init];//fileList便是包含有该文件夹下所有文件的文件名及文件夹名的数组
+    NSError *error = nil;
+    fileList = [fileManager contentsOfDirectoryAtPath:targetDirectory error:&error];
+    NSMutableArray *fileArray = [[NSMutableArray alloc] init];
+    for (NSString *file in fileList) {
+        NSString *path = [targetDirectory stringByAppendingPathComponent:file];
+        [fileArray addObject:path];
+    }
+    return [fileArray copy];
+}
+- (BOOL)deleteFileWithName:(NSString *)fileName{
+    BOOL deleted = NO;
+    
+    NSError *error;
+    NSURL *fileLocation = [NSURL fileURLWithPath:fileName];
+    // Move downloaded item from tmp directory to te caches directory
+    // (not synced with user's iCloud documents)
+    [[NSFileManager defaultManager] removeItemAtURL:fileLocation error:&error];
+    
+    if (error) {
+        deleted = NO;
+        NSLog(@"Error deleting file: %@", error);
+    } else {
+        deleted = YES;
+    }
+    return deleted;
 }
 @end
