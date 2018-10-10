@@ -11,9 +11,11 @@
 #import "PrefixHeader.h"
 #import "TFun.h"
 #import "AudioSession.h"
+#import "STFileManager.h"
 @interface LiveVidViewModel ()<VideoBufferParserDelegate>
 @property (strong, nonatomic)  VideoBufferParser *parser;
 @property (strong, nonatomic)  AudioSession *audioSession;
+@property (assign, nonatomic)  BOOL refreshSnapShot;//每次采集一张图片,用作首页设备图片刷新用,
 @end
 @implementation LiveVidViewModel
 //数据回调
@@ -60,6 +62,8 @@ void alarmRealTimeCallBack(int AlmType, int AlmTime, int AlmChl, void* UserCusto
         [_parser setDelegate:self];
         _sub = 1;
         _openaud = 0;
+        
+        _refreshSnapShot = 0;
         
         _audioSession = [[AudioSession alloc] initAudio];
         UInt32 category = kAudioSessionCategory_PlayAndRecord;
@@ -112,29 +116,37 @@ void alarmRealTimeCallBack(int AlmType, int AlmTime, int AlmChl, void* UserCusto
 - (void)updateVidView:(CVPixelBufferRef)pixelBuffer{
     if (_delegate && [_delegate respondsToSelector:@selector(updateVidView:)]) {
         [_delegate updateVidView:pixelBuffer];
-        //        if (_capture || !_caputureFirst) {
-        //
-        //            CIImage *ciImage = [CIImage imageWithCVPixelBuffer:pixelBuffer];
-        //
-        //            CIContext *temporaryContext = [CIContext contextWithOptions:nil];
-        //            CGImageRef videoImage = [temporaryContext
-        //                                     createCGImage:ciImage
-        //                                     fromRect:CGRectMake(0, 0,
-        //                                                         CVPixelBufferGetWidth(pixelBuffer),
-        //                                                         CVPixelBufferGetHeight(pixelBuffer))];
-        //
-        //            UIImage *image = [UIImage imageWithCGImage:videoImage];
-        //            // UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
-        //            CGImageRelease(videoImage);
-        //            //图片名称
-        //            NSDate * date = [NSDate date];
-        //            NSTimeInterval intever = [[NSDate date] timeIntervalSince1970];
-        //            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        //            [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-        //            NSString *dateString = [dateFormatter stringFromDate:date];
-        //
-        //        }
+        if (!_refreshSnapShot) {
+            STFileManager * manager = [STFileManager sharedManager];
+            if (![manager fileExistsForUrl:@"Thumbnail"]) {
+                [manager createDirectoryNamed:@"Thumbnail"];
+            }
+            NSString * fileName = [manager localPathForFile:[NSString stringWithFormat:@"%@.png",self.model.SN] inDirectory:@"Thumbnail"];
+            BOOL ret = [self snapshot:pixelBuffer fileName:fileName];
+            if (ret) {
+                _refreshSnapShot = YES;
+            }
+        }
     }
+}
+-(BOOL)snapshot:(CVPixelBufferRef)pixelBuffer fileName:(NSString*)fullFileName{
+    CIImage *ciImage = [CIImage imageWithCVPixelBuffer:pixelBuffer];
+    
+    CIContext *temporaryContext = [CIContext contextWithOptions:nil];
+    CGImageRef videoImage = [temporaryContext
+                             createCGImage:ciImage
+                             fromRect:CGRectMake(0, 0,
+                                                 CVPixelBufferGetWidth(pixelBuffer),
+                                                 CVPixelBufferGetHeight(pixelBuffer))];
+    
+    UIImage *image = [UIImage imageWithCGImage:videoImage];
+   
+    CGImageRelease(videoImage);
+    //图片名称
+    
+    NSData *data = UIImageJPEGRepresentation(image,0.8);
+    BOOL result = [data writeToFile: fullFileName    atomically:YES];
+    return result;
 }
 
 @end

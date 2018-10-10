@@ -10,6 +10,7 @@
 #import "PrefixHeader.h"
 #import <Masonry/Masonry.h>
 #import "MASConstraint.h"
+#import "STFileManager.h"
 #define kShadowRadius 20
 @interface DevListCell()
 @property(nonatomic,weak)IBOutlet UIView * backView;
@@ -96,6 +97,22 @@
         [_onlineStatusImageView setBackgroundColor:[_model getConnectColor]];
         [_onlineStatusLb setTextColor:[_model getConnectColor]];
         [_onlineStatusLb setText:[_model getOnLineDesc]];
+        
+        STFileManager * manager = [STFileManager sharedManager];
+        if (![manager fileExistsForUrl:@"Thumbnail"]) {
+            [manager createDirectoryNamed:@"Thumbnail"];
+        }
+        NSString * fileName = [manager localPathForFile:[NSString stringWithFormat:@"%@.png",self.model.SN] inDirectory:@"Thumbnail"];
+        UIImage * image  =[UIImage imageWithContentsOfFile:fileName];
+        if (image) {
+            [_snapImageView setImage:image];
+            _snapImageView.contentMode = UIViewContentModeScaleToFill;
+        }
+        else{
+            [_snapImageView setImage:[UIImage imageNamed:@"imagethumb"]];
+        }
+        
+        
     }
     
   //  _backView.layer.shadowPath = [UIBezierPath bezierPathWithRect:CGRectMake(kShadowRadius, _backView.bounds.size.height/2, _backView.bounds.size.width-(2*kShadowRadius), _backView.bounds.size.height/2)].CGPath;
