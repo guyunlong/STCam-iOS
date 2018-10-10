@@ -60,6 +60,7 @@
 #import "MASConstraint.h"
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import <ReactiveCocoa/RACEXTScope.h>
+#import "UITableView+Common.h"
 
 
 #import "MBProgressHUD+Add.h"

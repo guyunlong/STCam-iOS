@@ -10,6 +10,7 @@
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import <ReactiveCocoa/RACEXTScope.h>
 @interface DevListViewModel : NSObject
++ (DevListViewModel *)sharedDevListViewModel;
 @property(nonatomic,assign)BOOL visitorMode;
 -(RACSignal*)racSearchDevice;
 -(RACSignal *)racGetDeviceList;

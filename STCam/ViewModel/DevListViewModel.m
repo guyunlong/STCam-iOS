@@ -18,6 +18,7 @@
 @end
 
 @implementation DevListViewModel
+
 void * refSelf;
 int code_convert_name(char *from_charset, char *to_charset, char *inbuf, size_t inlen, char *outbuf, size_t outlen) {
     iconv_t cd = NULL;
@@ -72,7 +73,14 @@ void callback_SearchDev(void *UserCustom, u32 SN, int DevType, char *DevModal, c
 }
 
 
-
++ (DevListViewModel *)sharedDevListViewModel{
+    static DevListViewModel *sharedManager = nil;
+    static dispatch_once_t manyiToken;
+    dispatch_once(&manyiToken, ^{
+        sharedManager = [[self alloc] init];
+    });
+    return sharedManager;
+}
 
 -(id)init{
     self = [super init];

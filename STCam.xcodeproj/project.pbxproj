@@ -98,6 +98,8 @@
 		A46F7B0D2132D03500854DB8 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A46F7B0C2132D03500854DB8 /* CoreMedia.framework */; };
 		A46F7B112132D2E400854DB8 /* DevListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A46F7B102132D2E400854DB8 /* DevListViewModel.m */; };
 		A47041AA216DFDD5007163C8 /* STFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A47041A9216DFDD5007163C8 /* STFileManager.m */; };
+		A47041AE216E14FA007163C8 /* DevMediaCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A47041AC216E14FA007163C8 /* DevMediaCell.m */; };
+		A47041AF216E14FA007163C8 /* DevMediaCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A47041AD216E14FA007163C8 /* DevMediaCell.xib */; };
 		A470AA8921636FFC0068AA80 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A470AA8B21636FFC0068AA80 /* Localizable.strings */; };
 		A470AA912163BE050068AA80 /* UIButton+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = A470AA902163BE050068AA80 /* UIButton+Common.m */; };
 		A4946FF6212C5B460015990C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A4946FF5212C5B460015990C /* AppDelegate.m */; };
@@ -464,6 +466,9 @@
 		A46F7B102132D2E400854DB8 /* DevListViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DevListViewModel.m; sourceTree = "<group>"; };
 		A47041A8216DFDD5007163C8 /* STFileManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STFileManager.h; sourceTree = "<group>"; };
 		A47041A9216DFDD5007163C8 /* STFileManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STFileManager.m; sourceTree = "<group>"; };
+		A47041AB216E14FA007163C8 /* DevMediaCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DevMediaCell.h; sourceTree = "<group>"; };
+		A47041AC216E14FA007163C8 /* DevMediaCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DevMediaCell.m; sourceTree = "<group>"; };
+		A47041AD216E14FA007163C8 /* DevMediaCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DevMediaCell.xib; sourceTree = "<group>"; };
 		A470AA8A21636FFC0068AA80 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A470AA8C216371940068AA80 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		A470AA8F2163BE050068AA80 /* UIButton+Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+Common.h"; sourceTree = "<group>"; };
@@ -1181,6 +1186,9 @@
 				A4AE70BA2167AEF600614024 /* DevListCell.h */,
 				A4AE70BB2167AEF600614024 /* DevListCell.m */,
 				A4AE70BC2167AEF600614024 /* DevListCell.xib */,
+				A47041AB216E14FA007163C8 /* DevMediaCell.h */,
+				A47041AC216E14FA007163C8 /* DevMediaCell.m */,
+				A47041AD216E14FA007163C8 /* DevMediaCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1338,6 +1346,7 @@
 				A442C3D1213199A100198910 /* d3dx8math.inl in Resources */,
 				A442C3C4213199A100198910 /* bdaiface.idl in Resources */,
 				A442C3D2213199A100198910 /* msvidctl.tlb in Resources */,
+				A47041AF216E14FA007163C8 /* DevMediaCell.xib in Resources */,
 				A442C3BC213199A100198910 /* dmodshow.idl in Resources */,
 				A442C3C9213199A100198910 /* medparam.idl in Resources */,
 				A442C31E213199A100198910 /* test3 in Resources */,
@@ -1416,6 +1425,7 @@
 				A4CFFE71216865A200A93B72 /* LiveVidViewModel.m in Sources */,
 				A442C322213199A100198910 /* cJSON.c in Sources */,
 				A46F7B112132D2E400854DB8 /* DevListViewModel.m in Sources */,
+				A47041AE216E14FA007163C8 /* DevMediaCell.m in Sources */,
 				A4AE324D2134277D0036212B /* MoreViewController.m in Sources */,
 				A4AE327321342EFD0036212B /* UIView+Common.m in Sources */,
 				A442C2B0213199A100198910 /* TFun.c in Sources */,

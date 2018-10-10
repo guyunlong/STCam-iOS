@@ -39,7 +39,7 @@
         return;
     }
     _devListNav= ( {
-        DevListViewModel * viewModel = [[DevListViewModel alloc] init];
+        DevListViewModel * viewModel = [DevListViewModel sharedDevListViewModel];
         [viewModel setVisitorMode:_visitorMode];
         DevListViewController * ctl = [[DevListViewController alloc] initWithViewModel:viewModel];
         UIImage *image = [UIImage imageNamed:@"tab_device_nor"];
