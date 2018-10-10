@@ -127,6 +127,21 @@ void alarmRealTimeCallBack(int AlmType, int AlmTime, int AlmChl, void* UserCusto
                 _refreshSnapShot = YES;
             }
         }
+        if (_snapShot) {
+            STFileManager * manager = [STFileManager sharedManager];
+            if (![manager fileExistsForUrl:@"snapshot"]) {
+                [manager createDirectoryNamed:@"snapshot"];
+            }
+            if (![manager fileExistsForUrl:[NSString stringWithFormat:@"snapshot/%@",_model.SN]]) {
+                [manager createDirectoryNamed:[NSString stringWithFormat:@"snapshot/%@",_model.SN]];
+            }
+            NSTimeInterval timeInterVal = [[NSDate date] timeIntervalSince1970];
+            NSString * fileName = [manager localPathForFile:[NSString stringWithFormat:@"%ld.png",(NSInteger)timeInterVal] inDirectory:[NSString stringWithFormat:@"snapshot/%@",_model.SN]];
+            BOOL ret = [self snapshot:pixelBuffer fileName:fileName];
+            if (ret) {
+                _snapShot = NO;
+            }
+        }
     }
 }
 -(BOOL)snapshot:(CVPixelBufferRef)pixelBuffer fileName:(NSString*)fullFileName{

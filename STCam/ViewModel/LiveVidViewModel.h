@@ -21,6 +21,10 @@
 @property(nonatomic,assign)int sub;
 
 /**
+ 截屏
+ */
+@property(nonatomic,assign)BOOL snapShot;
+/**
  打开视频
  @param sub 辅码流
  */
