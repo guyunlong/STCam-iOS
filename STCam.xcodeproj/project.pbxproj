@@ -103,6 +103,7 @@
 		A47041B2216E1CAD007163C8 /* MediaDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = A47041B1216E1CAD007163C8 /* MediaDetailController.m */; };
 		A47041B5216E1E2B007163C8 /* MediaDetailCCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A47041B4216E1E2B007163C8 /* MediaDetailCCell.m */; };
 		A47041B8216E1F59007163C8 /* STMediaModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A47041B7216E1F59007163C8 /* STMediaModel.m */; };
+		A47041BB216E2DFB007163C8 /* ImageDisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = A47041BA216E2DFB007163C8 /* ImageDisplayController.m */; };
 		A470AA8921636FFC0068AA80 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A470AA8B21636FFC0068AA80 /* Localizable.strings */; };
 		A470AA912163BE050068AA80 /* UIButton+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = A470AA902163BE050068AA80 /* UIButton+Common.m */; };
 		A4946FF6212C5B460015990C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A4946FF5212C5B460015990C /* AppDelegate.m */; };
@@ -478,6 +479,8 @@
 		A47041B4216E1E2B007163C8 /* MediaDetailCCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MediaDetailCCell.m; sourceTree = "<group>"; };
 		A47041B6216E1F59007163C8 /* STMediaModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STMediaModel.h; sourceTree = "<group>"; };
 		A47041B7216E1F59007163C8 /* STMediaModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STMediaModel.m; sourceTree = "<group>"; };
+		A47041B9216E2DFB007163C8 /* ImageDisplayController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageDisplayController.h; sourceTree = "<group>"; };
+		A47041BA216E2DFB007163C8 /* ImageDisplayController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageDisplayController.m; sourceTree = "<group>"; };
 		A470AA8A21636FFC0068AA80 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A470AA8C216371940068AA80 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		A470AA8F2163BE050068AA80 /* UIButton+Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+Common.h"; sourceTree = "<group>"; };
@@ -1144,6 +1147,8 @@
 				A4CFFE6D2168656000A93B72 /* LiveVidController.m */,
 				A47041B0216E1CAD007163C8 /* MediaDetailController.h */,
 				A47041B1216E1CAD007163C8 /* MediaDetailController.m */,
+				A47041B9216E2DFB007163C8 /* ImageDisplayController.h */,
+				A47041BA216E2DFB007163C8 /* ImageDisplayController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1496,6 +1501,7 @@
 				A4AE327021342EFD0036212B /* UIViewController+HUD.m in Sources */,
 				A4AE327221342EFD0036212B /* UISegmentedControl+Category.m in Sources */,
 				A442C31B213199A100198910 /* thImg.c in Sources */,
+				A47041BB216E2DFB007163C8 /* ImageDisplayController.m in Sources */,
 				A442C313213199A100198910 /* thVideoDec.c in Sources */,
 				A4946FF6212C5B460015990C /* AppDelegate.m in Sources */,
 			);

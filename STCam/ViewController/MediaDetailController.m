@@ -11,6 +11,7 @@
 #import "STFileManager.h"
 #import "STMediaModel.h"
 #import "PrefixHeader.h"
+#import "ImageDisplayController.h"
 @interface MediaDetailController ()<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 @property (strong, nonatomic) UICollectionView *mCollectView;//
 @property (strong, nonatomic) NSMutableArray *mediaArray;//
@@ -187,6 +188,13 @@
 }
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
     return 5;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    NSInteger row = [indexPath row];
+    ImageDisplayController * ctl = [[ImageDisplayController alloc] init];
+    [ctl setModel:_mediaArray[row]];
+    [self.navigationController pushViewController:ctl animated:YES];
 }
 
 @end
