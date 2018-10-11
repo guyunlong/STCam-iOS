@@ -135,6 +135,10 @@
 		A4AE327C21342EFD0036212B /* NSDate+convenience.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE326D21342EFD0036212B /* NSDate+convenience.m */; };
 		A4AE70BD2167AEF600614024 /* DevListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE70BB2167AEF600614024 /* DevListCell.m */; };
 		A4AE70BE2167AEF600614024 /* DevListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4AE70BC2167AEF600614024 /* DevListCell.xib */; };
+		A4BC3656216F959B00FDCBF5 /* AlarmListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4BC3654216F959B00FDCBF5 /* AlarmListCell.m */; };
+		A4BC3657216F959B00FDCBF5 /* AlarmListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4BC3655216F959B00FDCBF5 /* AlarmListCell.xib */; };
+		A4BC365A216F983900FDCBF5 /* AlarmListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A4BC3659216F983900FDCBF5 /* AlarmListViewModel.m */; };
+		A4BC365D216F98A400FDCBF5 /* AlarmImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A4BC365C216F98A400FDCBF5 /* AlarmImageModel.m */; };
 		A4CFFE6E2168656000A93B72 /* LiveVidController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CFFE6D2168656000A93B72 /* LiveVidController.m */; };
 		A4CFFE71216865A200A93B72 /* LiveVidViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CFFE70216865A200A93B72 /* LiveVidViewModel.m */; };
 		A4CFFE742168861A00A93B72 /* thRender.c in Sources */ = {isa = PBXBuildFile; fileRef = A4CFFE732168861A00A93B72 /* thRender.c */; };
@@ -542,6 +546,13 @@
 		A4AE70BA2167AEF600614024 /* DevListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DevListCell.h; sourceTree = "<group>"; };
 		A4AE70BB2167AEF600614024 /* DevListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DevListCell.m; sourceTree = "<group>"; };
 		A4AE70BC2167AEF600614024 /* DevListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DevListCell.xib; sourceTree = "<group>"; };
+		A4BC3653216F959B00FDCBF5 /* AlarmListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlarmListCell.h; sourceTree = "<group>"; };
+		A4BC3654216F959B00FDCBF5 /* AlarmListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlarmListCell.m; sourceTree = "<group>"; };
+		A4BC3655216F959B00FDCBF5 /* AlarmListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlarmListCell.xib; sourceTree = "<group>"; };
+		A4BC3658216F983900FDCBF5 /* AlarmListViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlarmListViewModel.h; sourceTree = "<group>"; };
+		A4BC3659216F983900FDCBF5 /* AlarmListViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlarmListViewModel.m; sourceTree = "<group>"; };
+		A4BC365B216F98A400FDCBF5 /* AlarmImageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlarmImageModel.h; sourceTree = "<group>"; };
+		A4BC365C216F98A400FDCBF5 /* AlarmImageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlarmImageModel.m; sourceTree = "<group>"; };
 		A4CFFE6C2168656000A93B72 /* LiveVidController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LiveVidController.h; sourceTree = "<group>"; };
 		A4CFFE6D2168656000A93B72 /* LiveVidController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LiveVidController.m; sourceTree = "<group>"; };
 		A4CFFE6F216865A200A93B72 /* LiveVidViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LiveVidViewModel.h; sourceTree = "<group>"; };
@@ -638,6 +649,8 @@
 				A43853DA21675A1500B8CC56 /* DeviceModel.m */,
 				A47041B6216E1F59007163C8 /* STMediaModel.h */,
 				A47041B7216E1F59007163C8 /* STMediaModel.m */,
+				A4BC365B216F98A400FDCBF5 /* AlarmImageModel.h */,
+				A4BC365C216F98A400FDCBF5 /* AlarmImageModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1064,6 +1077,8 @@
 				A439D830216506E200FCE7FE /* LoginViewModel.m */,
 				A4CFFE6F216865A200A93B72 /* LiveVidViewModel.h */,
 				A4CFFE70216865A200A93B72 /* LiveVidViewModel.m */,
+				A4BC3658216F983900FDCBF5 /* AlarmListViewModel.h */,
+				A4BC3659216F983900FDCBF5 /* AlarmListViewModel.m */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1209,6 +1224,9 @@
 				A47041AD216E14FA007163C8 /* DevMediaCell.xib */,
 				A47041B3216E1E2B007163C8 /* MediaDetailCCell.h */,
 				A47041B4216E1E2B007163C8 /* MediaDetailCCell.m */,
+				A4BC3653216F959B00FDCBF5 /* AlarmListCell.h */,
+				A4BC3654216F959B00FDCBF5 /* AlarmListCell.m */,
+				A4BC3655216F959B00FDCBF5 /* AlarmListCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1344,6 +1362,7 @@
 				A442C3B0213199A100198910 /* axcore.idl in Resources */,
 				A442C3B5213199A100198910 /* Videoacc.idl in Resources */,
 				A442C3BD213199A100198910 /* control.odl in Resources */,
+				A4BC3657216F959B00FDCBF5 /* AlarmListCell.xib in Resources */,
 				A442C3C1213199A100198910 /* sbe.idl in Resources */,
 				A442C3BB213199A100198910 /* strmif.idl in Resources */,
 				A442C3B2213199A100198910 /* ddstream.idl in Resources */,
@@ -1479,8 +1498,11 @@
 				A45934E02164A5320018A61B /* BasicTextField.m in Sources */,
 				A43853DB21675A1500B8CC56 /* DeviceModel.m in Sources */,
 				A4606929216A4F0500491290 /* AudioSession.m in Sources */,
+				A4BC365A216F983900FDCBF5 /* AlarmListViewModel.m in Sources */,
+				A4BC3656216F959B00FDCBF5 /* AlarmListCell.m in Sources */,
 				A439D831216506E200FCE7FE /* LoginViewModel.m in Sources */,
 				A442C2AF213199A100198910 /* av_Queue.c in Sources */,
+				A4BC365D216F98A400FDCBF5 /* AlarmImageModel.m in Sources */,
 				A4AE327621342EFD0036212B /* NSString+Common.m in Sources */,
 				A439D835216508F300FCE7FE /* FFHttpTool.m in Sources */,
 				A4AE323E2134265B0036212B /* LoginViewController.m in Sources */,

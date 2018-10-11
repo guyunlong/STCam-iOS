@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface AlarmListViewController : UIViewController
+#import "RootViewController.h"
+@interface AlarmListViewController : RootViewController
 
 @end

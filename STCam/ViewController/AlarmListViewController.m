@@ -7,7 +7,7 @@
 //
 
 #import "AlarmListViewController.h"
-
+#import "PrefixHeader.h"
 @interface AlarmListViewController ()
 
 @end
@@ -18,6 +18,16 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.view setBackgroundColor:[UIColor whiteColor]];
+    [self setTitle:@"action_alarm".localizedString];
+    [self initNav];
+}
+
+-(void)initNav{
+    UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btn setTitle:@"action_clear".localizedString forState:UIControlStateNormal];
+    
+    UIBarButtonItem *rightBtnItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
+    self.navigationItem.rightBarButtonItem = rightBtnItem;
 }
 
 - (void)didReceiveMemoryWarning {
