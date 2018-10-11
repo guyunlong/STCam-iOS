@@ -12,7 +12,9 @@
 #import "STMediaModel.h"
 #import "PrefixHeader.h"
 #import "ImageDisplayController.h"
-@interface MediaDetailController ()<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+#import "YBImageBrowser.h"
+
+@interface MediaDetailController ()<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout,YBImageBrowserDataSource>
 @property (strong, nonatomic) UICollectionView *mCollectView;//
 @property (strong, nonatomic) NSMutableArray *mediaArray;//
 @property (strong, nonatomic) UIButton *deleteBtn;//
@@ -155,6 +157,13 @@
 }
 
 #pragma ccell
+
+- (id)sourceObjAtIdx:(NSInteger)idx {
+    MediaDetailCCell *cell = (MediaDetailCCell *)[self.mCollectView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0]];
+    return cell ? cell.imageView : nil;
+}
+
+
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView;{
     return 1;
 }
@@ -192,9 +201,25 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     NSInteger row = [indexPath row];
-    ImageDisplayController * ctl = [[ImageDisplayController alloc] init];
-    [ctl setModel:_mediaArray[row]];
-    [self.navigationController pushViewController:ctl animated:YES];
+//    ImageDisplayController * ctl = [[ImageDisplayController alloc] init];
+//    [ctl setModel:_mediaArray[row]];
+//    [self.navigationController pushViewController:ctl animated:YES];
+    
+    YBImageBrowser *browser = [YBImageBrowser new];
+    browser.dataSource = self;
+    browser.currentIndex = row;
+    [browser show];
+    
 }
-
+// 实现 <YBImageBrowserDataSource> 协议方法配置数据源
+- (NSUInteger)yb_numberOfCellForImageBrowserView:(YBImageBrowserView *)imageBrowserView {
+    return [_mediaArray count];
+}
+- (id<YBImageBrowserCellDataProtocol>)yb_imageBrowserView:(YBImageBrowserView *)imageBrowserView dataForCellAtIndex:(NSUInteger)index {
+    YBImageBrowseCellData *data = [YBImageBrowseCellData new];
+    STMediaModel * model = _mediaArray[index];
+    data.url = [NSURL fileURLWithPath:model.fileName];
+    data.sourceObject = [self sourceObjAtIdx:index];
+    return data;
+}
 @end

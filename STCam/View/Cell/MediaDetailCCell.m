@@ -12,7 +12,7 @@
 #define checkboxwidth 16
 #define ccellWidth (kScreenWidth-4*3)/3
 @interface MediaDetailCCell()<BEMCheckBoxDelegate>
-@property (strong, nonatomic) UIImageView *imageView;
+
 @property (nonatomic, strong) BEMCheckBox* checkBox;
 @end
 

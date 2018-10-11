@@ -7,6 +7,7 @@ def shared_pods
     pod 'Masonry'
     pod 'MBProgressHUD'
     pod 'BEMCheckBox'
+    pod 'YBImageBrowser'
 end
 target 'STCam' do
     shared_pods

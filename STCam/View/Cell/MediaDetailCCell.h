@@ -12,5 +12,6 @@
 @interface MediaDetailCCell : UICollectionViewCell
 +(CGSize)ccellSize;
 @property (strong, nonatomic) STMediaModel *model;
+@property (strong, nonatomic) UIImageView *imageView;
 @property (copy, nonatomic) void (^checkBlock)();
 @end
