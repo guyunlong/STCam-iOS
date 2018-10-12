@@ -9,9 +9,11 @@
 #import <Foundation/Foundation.h>
 
 @interface AccountManager : NSObject
++ (AccountManager *)sharedManager;
 +(void)saveAccount:(NSString*)user pwd:(NSString*)pwd remember:(BOOL)remember;
 +(void)saveRemember:(BOOL)remember;
 +(NSString*)getUser;
 +(NSString*)getPassword;
 +(BOOL)getIsRemember;
+@property(nonatomic,strong)NSString* deviceToken;
 @end

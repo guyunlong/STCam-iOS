@@ -11,6 +11,14 @@
 #define kAccountPassword @"AccountPassword"
 #define kAccountRemember @"AccountRemember"
 @implementation AccountManager
++ (AccountManager *)sharedManager{
+    static AccountManager *sharedManager = nil;
+    static dispatch_once_t manyiToken;
+    dispatch_once(&manyiToken, ^{
+        sharedManager = [[self alloc] init];
+    });
+    return sharedManager;
+}
 +(void)saveAccount:(NSString*)user pwd:(NSString*)pwd remember:(BOOL)remember{
     NSUserDefaults * userDefault = [NSUserDefaults standardUserDefaults];
     [userDefault setObject:user forKey:kAccountUser];

@@ -35,6 +35,7 @@
             if (httpResponse.statusCode == 200) {
                 NSError *error;
                 NSData* uft8Data = [FFHttpTool UTF8WithGB2312Data:data];
+                
                 id dictionary = [NSJSONSerialization JSONObjectWithData:uft8Data options:NSJSONReadingMutableLeaves error:&error];
                 success(dictionary);
                 

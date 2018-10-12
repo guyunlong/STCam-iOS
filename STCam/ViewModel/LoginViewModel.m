@@ -36,8 +36,19 @@
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
         @strongify(self)
         
+//        Observable<com.model.RetModel> app_user_login(@Query("user") String user,
+//                                                      @Query("psd") String psd,
+//                                                      @Query("tokenid") String tokenid,
+//                                                      @Query("mbtype") int mbtype,
+//                                                      @Query("apptype") int apptype,
+//                                                      @Query("pushtype") int pushtype,
+//                                                      @Query("isforce") int isforce
+        
         //http://211.149.199.247:800/app_user_login.asp?user=1257117229@qq.com&psd=12345678
-        NSString * url = [NSString stringWithFormat:@"http://%@:%d/app_user_login.asp?user=%@&psd=%@",serverIP,ServerPort,self.user,self.password];
+//        public static final int mbtype = 1;//手机类型 Android=1 IPhone=2
+//        public static final int apptype = 0;//APP类型，IPCAM=0
+//        public static final int pushtype = 0;//推送服务商 极光(jPush=0)  google=1
+        NSString * url = [NSString stringWithFormat:@"http://%@:%d/app_user_login.asp?user=%@&psd=%@&tokenid=%@&mbtype=2&apptype=0&pushtype=0&isforce=1",serverIP,ServerPort,self.user,self.password,[AccountManager sharedManager].deviceToken];
         [FFHttpTool GET:url parameters:nil success:^(id data){
             @strongify(self)
             NSLog(@"view model response data is %@",data);

@@ -8,6 +8,7 @@ def shared_pods
     pod 'MBProgressHUD'
     pod 'BEMCheckBox'
     pod 'YBImageBrowser'
+    pod 'JPush'
 end
 target 'STCam' do
     shared_pods

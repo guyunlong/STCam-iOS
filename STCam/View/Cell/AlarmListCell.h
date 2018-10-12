@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "AlarmImageModel.h"
 @interface AlarmListCell : UITableViewCell
-
++(instancetype)AlarmListCellWith:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath;
+@property(nonatomic,strong)AlarmImageModel * model;
+@property(nonatomic,weak)IBOutlet UIImageView * alarmImageView;
++(CGFloat)cellHeight;
 @end

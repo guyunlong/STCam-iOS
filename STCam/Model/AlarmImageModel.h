@@ -19,6 +19,7 @@
 @interface AlarmImageModel : NSObject
 @property(nonatomic,assign)  NSInteger ID;
 @property(nonatomic,strong)  NSString* SN;
+@property(nonatomic,strong)  NSString* DevName;
 @property(nonatomic,assign)  NSInteger AlmType;
 @property(nonatomic,strong)  NSString* AlmTime;
 @property(nonatomic,strong)  NSString* Img;

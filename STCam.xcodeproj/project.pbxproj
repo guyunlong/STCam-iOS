@@ -163,6 +163,7 @@
 
 /* Begin PBXFileReference section */
 		02368DE58D9110FCE2D67420 /* Pods-STCam.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-STCam.release.xcconfig"; path = "Pods/Target Support Files/Pods-STCam/Pods-STCam.release.xcconfig"; sourceTree = "<group>"; };
+		9DD31CBA2170411900EB4708 /* STCam.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = STCam.entitlements; sourceTree = "<group>"; };
 		A4134F912165F78500831B8D /* AccountManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccountManager.h; sourceTree = "<group>"; };
 		A4134F922165F78500831B8D /* AccountManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountManager.m; sourceTree = "<group>"; };
 		A43853D921675A1500B8CC56 /* DeviceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceModel.h; sourceTree = "<group>"; };
@@ -1109,6 +1110,7 @@
 		A4946FF3212C5B460015990C /* STCam */ = {
 			isa = PBXGroup;
 			children = (
+				9DD31CBA2170411900EB4708 /* STCam.entitlements */,
 				A4CFFE7B2168C7B600A93B72 /* AVCodec */,
 				A439D83621650DD700FCE7FE /* Model */,
 				A439D832216508DE00FCE7FE /* Manager */,
@@ -1307,6 +1309,11 @@
 				TargetAttributes = {
 					A4946FF0212C5B460015990C = {
 						CreatedOnToolsVersion = 9.4.1;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					A4947008212C5B470015990C = {
 						CreatedOnToolsVersion = 9.4.1;
@@ -1682,6 +1689,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGN_ENTITLEMENTS = STCam/STCam.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G56WQZGP9T;
 				ENABLE_BITCODE = NO;
@@ -1711,6 +1719,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGN_ENTITLEMENTS = STCam/STCam.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G56WQZGP9T;
 				ENABLE_BITCODE = NO;

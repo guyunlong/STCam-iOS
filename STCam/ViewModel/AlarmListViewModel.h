@@ -11,5 +11,6 @@
 #import <ReactiveCocoa/RACEXTScope.h>
 @interface AlarmListViewModel : NSObject
 -(RACSignal *)racGetAlarmList;
+-(RACSignal *)racDeleteAlarm:(BOOL)deleteAll model:(id)model;
 @property(nonatomic,strong)NSMutableArray* alarmArray;
 @end
