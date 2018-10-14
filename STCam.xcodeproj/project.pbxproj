@@ -10,6 +10,9 @@
 		484F64620EFBEC733F2D85B1 /* libPods-STCam.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C18EA7F117ED0291D64659B7 /* libPods-STCam.a */; };
 		A4134F932165F78500831B8D /* AccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A4134F922165F78500831B8D /* AccountManager.m */; };
 		A43853DB21675A1500B8CC56 /* DeviceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A43853DA21675A1500B8CC56 /* DeviceModel.m */; };
+		A4394584217356B40047E00C /* CommonSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4394582217356B40047E00C /* CommonSettingCell.m */; };
+		A4394585217356B40047E00C /* CommonSettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4394583217356B40047E00C /* CommonSettingCell.xib */; };
+		A4394588217358470047E00C /* InfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A4394587217358470047E00C /* InfoModel.m */; };
 		A439D831216506E200FCE7FE /* LoginViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A439D830216506E200FCE7FE /* LoginViewModel.m */; };
 		A439D835216508F300FCE7FE /* FFHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = A439D834216508F300FCE7FE /* FFHttpTool.m */; };
 		A439D83921650DE300FCE7FE /* RetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A439D83821650DE300FCE7FE /* RetModel.m */; };
@@ -168,6 +171,11 @@
 		A4134F922165F78500831B8D /* AccountManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountManager.m; sourceTree = "<group>"; };
 		A43853D921675A1500B8CC56 /* DeviceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceModel.h; sourceTree = "<group>"; };
 		A43853DA21675A1500B8CC56 /* DeviceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceModel.m; sourceTree = "<group>"; };
+		A4394581217356B40047E00C /* CommonSettingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonSettingCell.h; sourceTree = "<group>"; };
+		A4394582217356B40047E00C /* CommonSettingCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonSettingCell.m; sourceTree = "<group>"; };
+		A4394583217356B40047E00C /* CommonSettingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommonSettingCell.xib; sourceTree = "<group>"; };
+		A4394586217358470047E00C /* InfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InfoModel.h; sourceTree = "<group>"; };
+		A4394587217358470047E00C /* InfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InfoModel.m; sourceTree = "<group>"; };
 		A439D82F216506E200FCE7FE /* LoginViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewModel.h; sourceTree = "<group>"; };
 		A439D830216506E200FCE7FE /* LoginViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewModel.m; sourceTree = "<group>"; };
 		A439D833216508F300FCE7FE /* FFHttpTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FFHttpTool.h; sourceTree = "<group>"; };
@@ -652,6 +660,8 @@
 				A47041B7216E1F59007163C8 /* STMediaModel.m */,
 				A4BC365B216F98A400FDCBF5 /* AlarmImageModel.h */,
 				A4BC365C216F98A400FDCBF5 /* AlarmImageModel.m */,
+				A4394586217358470047E00C /* InfoModel.h */,
+				A4394587217358470047E00C /* InfoModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1229,6 +1239,9 @@
 				A4BC3653216F959B00FDCBF5 /* AlarmListCell.h */,
 				A4BC3654216F959B00FDCBF5 /* AlarmListCell.m */,
 				A4BC3655216F959B00FDCBF5 /* AlarmListCell.xib */,
+				A4394581217356B40047E00C /* CommonSettingCell.h */,
+				A4394582217356B40047E00C /* CommonSettingCell.m */,
+				A4394583217356B40047E00C /* CommonSettingCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1354,6 +1367,7 @@
 				A442C320213199A100198910 /* test5 in Resources */,
 				A442C3CF213199A100198910 /* d3dx9math.inl in Resources */,
 				A442C3AD213199A100198910 /* Mstvca.idl in Resources */,
+				A4394585217356B40047E00C /* CommonSettingCell.xib in Resources */,
 				A442C3BE213199A100198910 /* qedit.idl in Resources */,
 				A442C3BA213199A100198910 /* Mpeg2Data.idl in Resources */,
 				A442C3AE213199A100198910 /* mixerocx.idl in Resources */,
@@ -1465,6 +1479,7 @@
 				A46F7B112132D2E400854DB8 /* DevListViewModel.m in Sources */,
 				A47041AE216E14FA007163C8 /* DevMediaCell.m in Sources */,
 				A4AE324D2134277D0036212B /* MoreViewController.m in Sources */,
+				A4394584217356B40047E00C /* CommonSettingCell.m in Sources */,
 				A4AE327321342EFD0036212B /* UIView+Common.m in Sources */,
 				A442C2B0213199A100198910 /* TFun.c in Sources */,
 				A4AE326F21342EFD0036212B /* UITableView+Common.m in Sources */,
@@ -1513,6 +1528,7 @@
 				A4BC365A216F983900FDCBF5 /* AlarmListViewModel.m in Sources */,
 				A4BC3656216F959B00FDCBF5 /* AlarmListCell.m in Sources */,
 				A439D831216506E200FCE7FE /* LoginViewModel.m in Sources */,
+				A4394588217358470047E00C /* InfoModel.m in Sources */,
 				A442C2AF213199A100198910 /* av_Queue.c in Sources */,
 				A4BC365D216F98A400FDCBF5 /* AlarmImageModel.m in Sources */,
 				A4AE327621342EFD0036212B /* NSString+Common.m in Sources */,
