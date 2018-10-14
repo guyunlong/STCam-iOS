@@ -9,6 +9,7 @@
 #import "DeviceModel.h"
 #import "UIColor+expanded.h"
 #import "PrefixHeader.h"
+#import "DevListViewModel.h"
 @interface DeviceModel(){
     dispatch_queue_t serialQueue;
 }
@@ -57,6 +58,7 @@
 }
 
 -(BOOL)isOnline{
+    
     ConnType type = [self getConnectType];
     if (type == ConnType_LAN || type == ConnType_DDNS || type == ConnType_P2P) {
         return YES;
@@ -64,6 +66,9 @@
     return NO;
 }
 -(UIColor*)getConnectColor{
+    if (![self IsConnect]) {
+        return [UIColor colorWithHexString:@"0xff0000"];
+    }
     switch ([self getConnectType]) {
         case ConnType_LAN:
             return [UIColor colorWithHexString:@"0x227711"];
@@ -79,6 +84,10 @@
     }
 }
 -(NSString*)getOnLineDesc{
+    if (![self IsConnect]) {
+        return @"OFFLINE";
+    }
+    
     return [self.ConnType substringFromIndex:@"IS_CONN_".length];
 }
 
@@ -142,14 +151,22 @@
     @weakify(self)
     dispatch_async(serialQueue, ^{
         @strongify(self);
-        BOOL ret = thNet_DisConn((HANDLE)self.NetHandle);
-        if (ret)
-        {
-            thNet_Free(self.NetHandle);
-            self.NetHandle = 0;
-        }
-        NSLog(@"threadDisconnect device end,sn :%@",self.SN);
+        [self disconnect];
     });
+    
+}
+-(void)disconnect{
+    
+    BOOL ret = thNet_DisConn((HANDLE)self.NetHandle);
+    if (ret)
+    {
+        thNet_Free(self.NetHandle);
+        self.NetHandle = 0;
+    }
+    NSLog(@"disconnect device end,sn :%@",self.SN);
+    
+    DevListViewModel * listViewModel = [DevListViewModel sharedDevListViewModel];
+    [listViewModel setRefreshView:YES];
     
 }
 -(void)threadConnect
@@ -166,6 +183,8 @@
         if ([self IsConnect]) {
             
         }
+        DevListViewModel * listViewModel = [DevListViewModel sharedDevListViewModel];
+        [listViewModel setRefreshView:YES];
         NSLog(@"threadConnect device end,sn :%@",self.SN);
     });
     

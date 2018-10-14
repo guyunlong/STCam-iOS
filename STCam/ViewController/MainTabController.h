@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "DevListViewModel.h"
 @interface MainTabController : UITabBarController
--(id)initWithVisitorMode:(BOOL)visitorMode;
-@property(nonatomic,assign)BOOL visitorMode;
+-(id)initWithUserMode:(TUserMode)userMode;
+@property(nonatomic,assign)TUserMode userMode;
 @end

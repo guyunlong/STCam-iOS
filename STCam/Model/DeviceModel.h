@@ -79,7 +79,11 @@ typedef NS_ENUM(NSInteger, ConnType){
 -(void)threadConnect;
 
 /**
- 断开连接
+ 在线程中，调用disconnect
  */
 -(void)threadDisconnect;
+/**
+ 断开连接
+ */
+-(void)disconnect;
 @end

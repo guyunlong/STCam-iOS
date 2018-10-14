@@ -21,10 +21,10 @@
 @end
 
 @implementation MainTabController
--(id)initWithVisitorMode:(BOOL)visitorMode{
+-(id)initWithUserMode:(TUserMode)userMode{
     self = [super init];
     if (self) {
-        [self setVisitorMode:visitorMode];
+        [self setUserMode:userMode];
     }
     return self;
 }
@@ -40,7 +40,7 @@
     }
     _devListNav= ( {
         DevListViewModel * viewModel = [DevListViewModel sharedDevListViewModel];
-        [viewModel setVisitorMode:_visitorMode];
+        [viewModel setUserMode:_userMode];
         DevListViewController * ctl = [[DevListViewController alloc] initWithViewModel:viewModel];
         UIImage *image = [UIImage imageNamed:@"tab_device_nor"];
         UIImage * selectImage = [[UIImage imageNamed:@"tab_device_sel"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];

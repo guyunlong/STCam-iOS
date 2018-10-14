@@ -105,7 +105,7 @@ void callback_SearchDev(void *UserCustom, u32 SN, int DevType, char *DevModal, c
                
                 for (NSDictionary * dic in data) {
                     DeviceModel * model = [DeviceModel DeviceModelWithDict:dic];
-                    
+                    BOOL exist = NO;
                     for (DeviceModel * devModel in self.deviceArray) {
                         if ([devModel.IPUID isEqualToString:model.IPUID]) {
                             ConnType type = [model getConnectType];
@@ -113,14 +113,17 @@ void callback_SearchDev(void *UserCustom, u32 SN, int DevType, char *DevModal, c
                                 devModel.ConnType = model.ConnType;
                                 [devModel threadConnect];
                             }
-                            continue;
+                            exist = YES;
+                            break;
                         }
                     }
-                    ConnType type = [model getConnectType];
-                    if (type == ConnType_LAN || type == ConnType_DDNS || type == ConnType_P2P) {
-                        [model threadConnect];
+                    if (!exist) {
+                        ConnType type = [model getConnectType];
+                        if (type == ConnType_LAN || type == ConnType_DDNS || type == ConnType_P2P) {
+                            [model threadConnect];
+                        }
+                        [self.deviceArray addObject:model];
                     }
-                    [self.deviceArray addObject:model];
                     
                 }
                  [subscriber sendNext:@1];
@@ -136,6 +139,7 @@ void callback_SearchDev(void *UserCustom, u32 SN, int DevType, char *DevModal, c
         return nil;
     }];
 }
+
 -(RACSignal *)racSearchDevice{
     
     @weakify(self)
@@ -143,31 +147,34 @@ void callback_SearchDev(void *UserCustom, u32 SN, int DevType, char *DevModal, c
         @strongify(self)
         dispatch_queue_t quene = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
         dispatch_async(quene, ^{
-            HANDLE SearchHandle;
-            SearchHandle = thSearch_Init(callback_SearchDev, NULL);
-            if (!SearchHandle) {
-                
-            }
-            thSearch_SearchDevice(SearchHandle);
-            time_t dt;
-            dt = time(NULL);
-            while(1)
-            {
-                usleep(1000*100);
-                if (time(NULL) - dt >= 5) break;
-            }
-            
-            thSearch_Free(SearchHandle);
-            SearchHandle = NULL;
-            
-            self.deviceArray = [self.searchDeviceArray mutableCopy];
-             [subscriber sendNext:@1];
+            [self searchDevice];
+            [subscriber sendNext:@1];
         });
         
         return nil;
     }];
     
     
+}
+-(void)searchDevice{
+    HANDLE SearchHandle;
+    SearchHandle = thSearch_Init(callback_SearchDev, NULL);
+    if (!SearchHandle) {
+        
+    }
+    thSearch_SearchDevice(SearchHandle);
+    time_t dt;
+    dt = time(NULL);
+    while(1)
+    {
+        usleep(1000*100);
+        if (time(NULL) - dt >= 5) break;
+    }
+    
+    thSearch_Free(SearchHandle);
+    SearchHandle = NULL;
+    
+    self.deviceArray = [self.searchDeviceArray mutableCopy];
 }
 /**
  app 退到后台，断开所有连接
@@ -192,6 +199,59 @@ void callback_SearchDev(void *UserCustom, u32 SN, int DevType, char *DevModal, c
             NSLog(@"threadConnect device ,sn :%@",devModel.SN);
             [devModel threadConnect];
         }
+    }
+}
+-(void)notifyNetworkStatusChanged:(NetWorkConnType)type{
+    switch (type) {
+        case NetWorkConnType_Break:
+            //断开所有连接
+            [self disConnectAllDevice];
+            break;
+        case NetWorkConnType_Wlan:
+        case NetWorkConnType_WWAN:
+            /*
+             *1、断开所有连接
+             *2、清空deviceArray数组
+             *3、重新初始化p2p
+             *4、重新获得设备信息
+             */
+            {
+                @weakify(self)
+                dispatch_queue_t quene = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+                dispatch_async(quene, ^{
+                    /*1、断开所有连接*/
+                    for (DeviceModel * devModel in self.deviceArray) {
+                        if ([devModel IsConnect]) {
+                            NSLog(@"disconnect device ,sn :%@",devModel.SN);
+                            [devModel disconnect];
+                        }
+                    }
+                    /*2、清空deviceArray数组*/
+                    [self.deviceArray removeAllObjects];
+                    /*3、重新初始化p2p*/
+                    P2P_Free();
+                    P2P_Init();
+                    /*4、重新获得设备信息*/
+                    @strongify(self)
+                    if (self.userMode == TUserMode_Visitor) {
+                        [self searchDevice];
+                        [self setRefreshView:YES];
+                    }
+                    else if (self.userMode == TUserMode_Login){
+                        [[self racGetDeviceList] subscribeNext:^(id x) {
+                            [self setRefreshView:YES];
+                        }];
+                    }
+                });
+            }
+            
+            
+            break;
+        
+            
+            break;
+        default:
+            break;
     }
 }
 @end

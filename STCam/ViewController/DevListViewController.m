@@ -35,10 +35,27 @@
     [self initNav];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self refreshDeviceList:NO];
+        [self refreshDeviceList:NO];
+        [self monitorRefreshViewKVO];
     });
     
     
+}
+
+/**
+ 监听viewModel 中的refreshView变量
+ */
+-(void)monitorRefreshViewKVO{
+   
+    @weakify(self)
+    [[[RACObserve(self.viewModel, refreshView) filter:^BOOL(id value) {
+        return [value integerValue] != 0;
+    }]
+     deliverOn:[RACScheduler mainThreadScheduler]]
+     subscribeNext:^(id x) {
+        @strongify(self);
+        [self.mTableView reloadData];
+    }];
 }
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
@@ -92,7 +109,7 @@
 
 -(void)refreshDeviceList:(BOOL)refresh{
    @weakify(self)
-    if (_viewModel.visitorMode) {
+    if (_viewModel.userMode == TUserMode_Visitor) {
         [[[_viewModel racSearchDevice]
          deliverOn:[RACScheduler mainThreadScheduler]]
          subscribeNext:^(id x) {
@@ -105,7 +122,7 @@
             }
         }];
     }
-    else{
+    else if (_viewModel.userMode == TUserMode_Login){
         
         [[_viewModel racGetDeviceList] subscribeNext:^(id x) {
             @strongify(self)

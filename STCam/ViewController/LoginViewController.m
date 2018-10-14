@@ -224,7 +224,7 @@
         if ([x integerValue] == 1) {
            //跳转到tab页面
             @strongify(self)
-            MainTabController * mainTabController = [[MainTabController alloc] init];
+            MainTabController * mainTabController = [[MainTabController alloc] initWithUserMode:TUserMode_Login];
             [self presentViewController:mainTabController animated:YES completion:^{
                 
             }];
@@ -235,7 +235,7 @@
     }];
 }
 -(void)visitorModeClicked{
-    MainTabController * mainTabController = [[MainTabController alloc] initWithVisitorMode:YES];
+    MainTabController * mainTabController = [[MainTabController alloc] initWithUserMode:TUserMode_Visitor];
     [self presentViewController:mainTabController animated:YES completion:nil];
 }
 #pragma checkbox

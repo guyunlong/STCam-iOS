@@ -10,6 +10,7 @@ def shared_pods
     pod 'YBImageBrowser'
     pod 'JPush'
     pod 'MJRefresh'
+    pod 'RealReachability'
 end
 target 'STCam' do
     shared_pods

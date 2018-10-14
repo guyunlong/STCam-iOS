@@ -10,6 +10,7 @@
 #import "JPUSHService.h"
 #import "AccountManager.h"
 #import "DevListViewModel.h"
+#import "RealReachability.h"
 // iOS10 注册 APNs 所需头文件
 #import <UserNotifications/UserNotifications.h>
 
@@ -45,6 +46,8 @@
                           channel:nil
                  apsForProduction:NO
             advertisingIdentifier:nil];
+    
+    [self listenNetWorkingStatus];
     
     
     
@@ -135,7 +138,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     // Required, For systems with less than or equal to iOS 6
     [JPUSHService handleRemoteNotification:userInfo];
 }
-
+#pragma methods
 -(void)beginBackgroundTask{
     _backIden = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
         NSLog(@"begin  bgend=============");
@@ -149,5 +152,55 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     [[UIApplication sharedApplication] endBackgroundTask:_backIden];
     _backIden = UIBackgroundTaskInvalid;
 }
+
+-(void)listenNetWorkingStatus{
+    
+    [GLobalRealReachability startNotifier];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(networkChanged:)
+                                                 name:kRealReachabilityChangedNotification
+                                               object:nil];
+   
+}
+- (void)networkChanged:(NSNotification *)notification
+{
+    DevListViewModel *viewModel = [DevListViewModel sharedDevListViewModel];
+    
+    RealReachability *reachability = (RealReachability *)notification.object;
+    ReachabilityStatus status = [reachability currentReachabilityStatus];
+    NSLog(@"-----currentStatus:%@",@(status));
+    
+    switch (status)
+    {
+        case RealStatusNotReachable:
+        {
+            //  case NotReachable handler
+            NSLog(@"------------没有联网");
+            [viewModel notifyNetworkStatusChanged:NetWorkConnType_Break];
+            break;
+        }
+            
+        case RealStatusViaWiFi:
+        {
+            //  case WiFi handler
+            NSLog(@"------------无线网");
+            [viewModel notifyNetworkStatusChanged:NetWorkConnType_WWAN];
+            break;
+        }
+            
+        case RealStatusViaWWAN:
+        {
+            //  case WWAN handler
+            NSLog(@"------------蜂窝数据");
+            [viewModel notifyNetworkStatusChanged:NetWorkConnType_WWAN];
+            break;
+        }
+            
+        default:
+            break;
+    }
+    
+}
+
 
 @end
