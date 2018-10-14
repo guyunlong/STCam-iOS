@@ -71,7 +71,15 @@
         ctl.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"action_mine".localizedString image:image selectedImage:selectImage];
         [[STNavigationController alloc] initWithRootViewController:ctl];
     });
-    self.viewControllers = @[_devListNav,_mediaNav,_alarmListNav,_moreNav];
+    if (_userMode == TUserMode_Login) {
+        self.viewControllers = @[_devListNav,_mediaNav,_alarmListNav,_moreNav];
+        self.tabBar.hidden = NO;
+    }
+    else{
+        self.viewControllers = @[_devListNav];
+        self.tabBar.hidden = YES;
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {
