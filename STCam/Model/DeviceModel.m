@@ -137,7 +137,21 @@
     _IsConnecting = false;
     return ret;
 }
-
+-(void)threadDisconnect{
+    
+    @weakify(self)
+    dispatch_async(serialQueue, ^{
+        @strongify(self);
+        BOOL ret = thNet_DisConn((HANDLE)self.NetHandle);
+        if (ret)
+        {
+            thNet_Free(self.NetHandle);
+            self.NetHandle = 0;
+        }
+        NSLog(@"threadDisconnect device end,sn :%@",self.SN);
+    });
+    
+}
 -(void)threadConnect
 {
     @weakify(self)
@@ -152,6 +166,7 @@
         if ([self IsConnect]) {
             
         }
+        NSLog(@"threadConnect device end,sn :%@",self.SN);
     });
     
 //    new Thread()

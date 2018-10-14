@@ -9,10 +9,13 @@
 #import "AppDelegate.h"
 #import "JPUSHService.h"
 #import "AccountManager.h"
+#import "DevListViewModel.h"
 // iOS10 注册 APNs 所需头文件
 #import <UserNotifications/UserNotifications.h>
 
-@interface AppDelegate ()<JPUSHRegisterDelegate>
+@interface AppDelegate ()<JPUSHRegisterDelegate>{
+    UIBackgroundTaskIdentifier _backIden;
+}
 
 @end
 
@@ -74,16 +77,23 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    DevListViewModel * viewModel = [DevListViewModel sharedDevListViewModel];
+    [viewModel disConnectAllDevice];
+    [self beginBackgroundTask];
 }
 
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+    DevListViewModel * viewModel = [DevListViewModel sharedDevListViewModel];
+    [viewModel connectAllDevice];
 }
 
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+    
 }
 
 
@@ -126,5 +136,18 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     [JPUSHService handleRemoteNotification:userInfo];
 }
 
+-(void)beginBackgroundTask{
+    _backIden = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+        NSLog(@"begin  bgend=============");
+     
+        [self endBackgroundBack]; // 如果在系统规定时间内任务还没有完成，在时间到之前会调用到这个方法，一般是10分钟
+    }];
+    
+   
+}
+-(void)endBackgroundBack{
+    [[UIApplication sharedApplication] endBackgroundTask:_backIden];
+    _backIden = UIBackgroundTaskInvalid;
+}
 
 @end

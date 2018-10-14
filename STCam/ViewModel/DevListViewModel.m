@@ -169,4 +169,29 @@ void callback_SearchDev(void *UserCustom, u32 SN, int DevType, char *DevModal, c
     
     
 }
+/**
+ app 退到后台，断开所有连接
+ */
+-(void)disConnectAllDevice{
+    for (DeviceModel * devModel in self.deviceArray) {
+        if ([devModel IsConnect]) {
+            NSLog(@"threadDisconnect device ,sn :%@",devModel.SN);
+            [devModel threadDisconnect];
+        }
+    }
+}
+
+
+/**
+ app 进入前台，进行设备连接
+ */
+-(void)connectAllDevice{
+    for (DeviceModel * devModel in self.deviceArray) {
+        ConnType type = [devModel getConnectType];
+        if (type == ConnType_LAN || type == ConnType_DDNS || type == ConnType_P2P) {
+            NSLog(@"threadConnect device ,sn :%@",devModel.SN);
+            [devModel threadConnect];
+        }
+    }
+}
 @end

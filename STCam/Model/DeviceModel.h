@@ -77,4 +77,9 @@ typedef NS_ENUM(NSInteger, ConnType){
 @property(nonatomic,assign)  THandle NetHandle;
 -(BOOL)IsConnect;
 -(void)threadConnect;
+
+/**
+ 断开连接
+ */
+-(void)threadDisconnect;
 @end

@@ -15,4 +15,15 @@
 -(RACSignal*)racSearchDevice;
 -(RACSignal *)racGetDeviceList;
 @property(nonatomic,strong)NSMutableArray* deviceArray;
+
+/**
+ app 退到后台，断开所有连接
+ */
+-(void)disConnectAllDevice;
+
+
+/**
+ app 进入前台，进行设备连接
+ */
+-(void)connectAllDevice;
 @end
