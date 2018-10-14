@@ -13,6 +13,7 @@
 		A4394584217356B40047E00C /* CommonSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4394582217356B40047E00C /* CommonSettingCell.m */; };
 		A4394585217356B40047E00C /* CommonSettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4394583217356B40047E00C /* CommonSettingCell.xib */; };
 		A4394588217358470047E00C /* InfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A4394587217358470047E00C /* InfoModel.m */; };
+		A439458B217360960047E00C /* DeviceSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = A439458A217360960047E00C /* DeviceSettingController.m */; };
 		A439D831216506E200FCE7FE /* LoginViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A439D830216506E200FCE7FE /* LoginViewModel.m */; };
 		A439D835216508F300FCE7FE /* FFHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = A439D834216508F300FCE7FE /* FFHttpTool.m */; };
 		A439D83921650DE300FCE7FE /* RetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A439D83821650DE300FCE7FE /* RetModel.m */; };
@@ -176,6 +177,8 @@
 		A4394583217356B40047E00C /* CommonSettingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommonSettingCell.xib; sourceTree = "<group>"; };
 		A4394586217358470047E00C /* InfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InfoModel.h; sourceTree = "<group>"; };
 		A4394587217358470047E00C /* InfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InfoModel.m; sourceTree = "<group>"; };
+		A4394589217360960047E00C /* DeviceSettingController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceSettingController.h; sourceTree = "<group>"; };
+		A439458A217360960047E00C /* DeviceSettingController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceSettingController.m; sourceTree = "<group>"; };
 		A439D82F216506E200FCE7FE /* LoginViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewModel.h; sourceTree = "<group>"; };
 		A439D830216506E200FCE7FE /* LoginViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewModel.m; sourceTree = "<group>"; };
 		A439D833216508F300FCE7FE /* FFHttpTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FFHttpTool.h; sourceTree = "<group>"; };
@@ -1166,6 +1169,8 @@
 				A4AE32492134276E0036212B /* MediaViewController.m */,
 				A4AE324B2134277D0036212B /* MoreViewController.h */,
 				A4AE324C2134277D0036212B /* MoreViewController.m */,
+				A4394589217360960047E00C /* DeviceSettingController.h */,
+				A439458A217360960047E00C /* DeviceSettingController.m */,
 				A4F5043E216268A6002B71FF /* RootViewController.h */,
 				A4F5043F216268A6002B71FF /* RootViewController.m */,
 				A439D83A2165149800FCE7FE /* STNavigationController.h */,
@@ -1505,6 +1510,7 @@
 				A4AE327521342EFD0036212B /* UIView+YYAdd.m in Sources */,
 				A4AE70BD2167AEF600614024 /* DevListCell.m in Sources */,
 				A47041B2216E1CAD007163C8 /* MediaDetailController.m in Sources */,
+				A439458B217360960047E00C /* DeviceSettingController.m in Sources */,
 				A47041B5216E1E2B007163C8 /* MediaDetailCCell.m in Sources */,
 				A470AA912163BE050068AA80 /* UIButton+Common.m in Sources */,
 				A4CFFE7A2168BB2E00A93B72 /* CoreDataManager.m in Sources */,

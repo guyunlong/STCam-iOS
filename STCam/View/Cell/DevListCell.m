@@ -83,8 +83,18 @@
     _onlineStatusImageView.layer.cornerRadius = 8;
     _onlineStatusImageView.layer.masksToBounds = YES;
     
+    [_settingBtn addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    
 }
 
+-(void)btnClicked:(id)sender{
+    if (_btnClickBlock) {
+        if (sender == _settingBtn) {
+            _btnClickBlock(1);
+        }
+    }
+    
+}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

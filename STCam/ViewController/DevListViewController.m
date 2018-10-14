@@ -14,6 +14,7 @@
 #import "MASConstraint.h"
 #import "LiveVidController.h"
 #import "MJRefresh.h"
+#import "DeviceSettingController.h"
 @interface DevListViewController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property(nonatomic,strong)UITableView * mTableView;
@@ -158,10 +159,19 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-   
     DevListCell * cell = [DevListCell DevListCellWith:tableView indexPath:indexPath];
     [cell setModel:_viewModel.deviceArray[indexPath.row]];
+    @weakify(self)
+    cell.btnClickBlock = ^(NSInteger channel){
+        @strongify(self)
+        if(1 == channel){
+            @strongify(self)
+            DeviceSettingController * ctl = [DeviceSettingController new];
+            [ctl setModel:self.viewModel.deviceArray[indexPath.row]];
+            ctl.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:ctl animated:YES];
+        }
+    };
     return cell;
 }
 

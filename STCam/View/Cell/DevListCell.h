@@ -11,6 +11,7 @@
 
 @interface DevListCell : UITableViewCell
 @property(nonatomic,strong)DeviceModel * model;
+@property(nonatomic,copy)void (^btnClickBlock)(NSInteger channel);
 + (instancetype)DevListCellWith:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath;
 +(CGFloat)cellHeight;
 @end
