@@ -113,7 +113,7 @@ void callback_SearchDev(void *UserCustom, u32 SN, int DevType, char *DevModal, c
                                 devModel.ConnType = model.ConnType;
                                 [devModel threadConnect];
                             }
-                            return;
+                            continue;
                         }
                     }
                     ConnType type = [model getConnectType];

@@ -35,9 +35,17 @@
             if (httpResponse.statusCode == 200) {
                 NSError *error;
                 NSData* uft8Data = [FFHttpTool UTF8WithGB2312Data:data];
+                // NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:data options:0];
+              
                 
-                id dictionary = [NSJSONSerialization JSONObjectWithData:uft8Data options:NSJSONReadingMutableLeaves error:&error];
-                success(dictionary);
+                if (uft8Data) {
+                    id dictionary = [NSJSONSerialization JSONObjectWithData:uft8Data options:NSJSONReadingMutableLeaves error:&error];
+                    success(dictionary);
+                }
+                else{
+                     failure(nil);
+                }
+               
                 
             } else {
                 failure(nil);
@@ -52,7 +60,11 @@
 +(NSData *)UTF8WithGB2312Data:(NSData *)gb2312Data
 {
     NSStringEncoding enc = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
+    
     NSString *str = [[NSString alloc] initWithData:gb2312Data encoding:enc];
+    if (!str) {
+        str = [[NSString alloc] initWithData:gb2312Data encoding:NSASCIIStringEncoding];
+    }
     NSData *utf8Data = [str dataUsingEncoding:NSUTF8StringEncoding];
     return utf8Data;
 }

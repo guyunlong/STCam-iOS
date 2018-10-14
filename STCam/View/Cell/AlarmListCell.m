@@ -22,19 +22,7 @@
     [super awakeFromNib];
     // Initialization code
     _alarmImageView.contentMode = UIViewContentModeScaleToFill;
-    [_deviceTitleLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.equalTo(@300);
-        make.height.equalTo(@24);
-        make.bottom.mas_equalTo(self.contentView.mas_centerY).with.offset(-kPadding/2);
-        make.left.mas_equalTo(self.alarmImageView.mas_right).with.offset(kPadding);
-    }];
-    
-    [_alarmTimeLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.equalTo(@300);
-        make.height.equalTo(@24);
-        make.top.mas_equalTo(self.contentView.mas_centerY).with.offset(kPadding/2);
-        make.left.mas_equalTo(self.alarmImageView.mas_right).with.offset(kPadding);
-    }];
+ 
     
 }
 
@@ -48,6 +36,16 @@
 -(void)layoutSubviews{
     [super layoutSubviews];
     if (_model) {
+//        NSArray *appLanguages = [[NSUserDefaults standardUserDefaults] objectForKey:@"AppleLanguages"];
+//        NSString *languageName = [appLanguages objectAtIndex:0];
+//       // zh-Hans-CN
+//        if ([languageName isEqualToString:@"zh-Hans-CN"]) {
+//            <#statements#>
+//        }
+//        else{
+//            
+//        }
+        
         [_alarmImageView sd_setImageWithURL:[NSURL URLWithString:_model.Img] placeholderImage:[UIImage imageNamed:@"imagethumb"]];
         [_deviceTitleLb setText:_model.DevName];
         [_alarmTimeLb setText:_model.AlmTime];

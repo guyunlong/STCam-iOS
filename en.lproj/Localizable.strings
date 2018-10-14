@@ -253,5 +253,6 @@
 "string_OperationMustWifi"="You need your phone to connect to WIFi";
 "string_IsSureRouteNotPassword"="Are you sure the router doesn't need a password?";
 "string_ConnectFail"="Device connection failed, please refresh the connection status.";
+"string_emptyimage"="The alarm image is empty ,don't need to clear";
 
 

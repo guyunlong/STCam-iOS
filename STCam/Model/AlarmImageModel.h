@@ -23,6 +23,7 @@
 @property(nonatomic,assign)  NSInteger AlmType;
 @property(nonatomic,strong)  NSString* AlmTime;
 @property(nonatomic,strong)  NSString* Img;
+@property(nonatomic,strong)  NSString* AlmDesc;
 +(instancetype)AlarmImageModelWithDict:(NSDictionary *)dict;
 -(instancetype)initWithDict:(NSDictionary *)dict;
 -(void)setValue:(id)value forUndefinedKey:(NSString *)key;

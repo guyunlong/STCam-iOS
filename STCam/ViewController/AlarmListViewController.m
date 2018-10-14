@@ -11,6 +11,8 @@
 #import "AlarmListViewModel.h"
 #import "AlarmListCell.h"
 #import "YBImageBrowser.h"
+#import "MJRefresh.h"
+
 @interface AlarmListViewController ()<UITableViewDataSource, UITableViewDelegate,YBImageBrowserDataSource>
 @property(nonatomic,strong)AlarmListViewModel * viewModel;
 @property(nonatomic,strong)UITableView * mTableView;
@@ -29,6 +31,15 @@
             [tableView setUserInteractionEnabled:true];
             tableView.dataSource = self;
             tableView.delegate = self;
+            // 下拉刷新
+            @weakify(self)
+            tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+                //
+                @strongify(self)
+                [self getAlarmList:YES];
+            }];
+            // 设置自动切换透明度(在导航栏下面自动隐藏)
+            tableView.mj_header.automaticallyChangeAlpha = YES;
             tableView;
         });
     }
@@ -46,16 +57,19 @@
     [self initNav];
     _viewModel = [AlarmListViewModel new];
     
-    [self getAlarmList];
+    [self getAlarmList:NO];
     
 }
 
--(void)getAlarmList{
+-(void)getAlarmList:(BOOL)refresh{
     @weakify(self)
     [[_viewModel racGetAlarmList] subscribeNext:^(id x) {
         @strongify(self)
         if ([x integerValue] == 1) {
             [self.mTableView reloadData];
+        }
+        if (refresh) {
+            [self.mTableView.mj_header endRefreshing];
         }
     }];
 }
@@ -80,11 +94,23 @@
     
     UIBarButtonItem *rightBtnItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
     self.navigationItem.rightBarButtonItem = rightBtnItem;
+    [btn addTarget:self action:@selector(clearBtnClicked) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma click event
+-(void)clearBtnClicked{
+    //[self.deleteConfirmController ]
+    
+    if ([self.viewModel.alarmArray count] == 0) {
+        [self showHint:@"string_emptyimage".localizedString];
+        return;
+    }
+    [self presentViewController:self.deleteConfirmController animated:YES completion:nil];
 }
 
 #pragma mark - tableView
@@ -136,6 +162,7 @@
     
     AlarmListCell * cell = [AlarmListCell AlarmListCellWith:tableView indexPath:indexPath];
     [cell setModel:_viewModel.alarmArray[indexPath.row]];
+    [cell setFrame:CGRectMake(0, 0, kScreenWidth,[AlarmListCell cellHeight] )];
     [tableView addLineforPlainCell:cell forRowAtIndexPath:indexPath withLeftSpace:0];
     return cell;
 }
@@ -180,7 +207,7 @@
         @weakify(self)
         _deleteConfirmController = [UIAlertController  alertControllerWithTitle:nil message:@"action_clear_alarm_image".localizedString preferredStyle:UIAlertControllerStyleAlert];
         
-        [_deleteConfirmController addAction:[UIAlertAction actionWithTitle:@"action_ok".localizedString style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        [_deleteConfirmController addAction:[UIAlertAction actionWithTitle:@"action_ok".localizedString style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             @strongify(self);
             [self deleteAlarmList:YES model:nil];
             

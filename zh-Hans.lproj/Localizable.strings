@@ -250,4 +250,5 @@
 "string_OperationMustWifi"="此操作需要手机连接到WIFI";
 "string_IsSureRouteNotPassword"="您确认路由器不需要输入密码吗？";
 "string_ConnectFail"="设备连接失败，请刷新连接状态";
+"string_emptyimage"="当前报警图片为空，无需清空";
 

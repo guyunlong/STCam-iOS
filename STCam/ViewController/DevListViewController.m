@@ -13,6 +13,7 @@
 #import <Masonry/Masonry.h>
 #import "MASConstraint.h"
 #import "LiveVidController.h"
+#import "MJRefresh.h"
 @interface DevListViewController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property(nonatomic,strong)UITableView * mTableView;
@@ -34,8 +35,10 @@
     [self initNav];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-          [self initViewModel];
+            [self refreshDeviceList:NO];
     });
+    
+    
 }
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
@@ -66,26 +69,16 @@
             tableView.dataSource = self;
             tableView.delegate = self;
             [tableView setBackgroundColor:[UIColor colorWithHexString:@"0xf7f7f7"]];
-//            // 下拉刷新
-//            @weakify(self)
-//            tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-//                //
-//                [[_viewModel racGetMessgeList:false] subscribeNext:^(id x) {
-//                    @strongify(self)
-//                    [self.myTableView reloadData];
-//                    [self.myTableView.mj_header endRefreshing];
-//                }];
-//            }];
-//            // 设置自动切换透明度(在导航栏下面自动隐藏)
-//            tableView.mj_header.automaticallyChangeAlpha = YES;
-//            // 上拉刷新
-//            tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-//                [[_viewModel racGetMessgeList:true] subscribeNext:^(id x) {
-//                    @strongify(self)
-//                    [self.myTableView reloadData];
-//                    [self.myTableView.mj_footer endRefreshing];
-//                }];
-//            }];
+            // 下拉刷新
+            @weakify(self)
+            tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+                //
+                @strongify(self)
+                [self refreshDeviceList:YES];
+            }];
+            // 设置自动切换透明度(在导航栏下面自动隐藏)
+            tableView.mj_header.automaticallyChangeAlpha = YES;
+           
             tableView;
         });
     }
@@ -97,7 +90,7 @@
     
 }
 
--(void)initViewModel{
+-(void)refreshDeviceList:(BOOL)refresh{
    @weakify(self)
     if (_viewModel.visitorMode) {
         [[[_viewModel racSearchDevice]
@@ -107,6 +100,9 @@
             if ([x integerValue] == 1) {
                 [self.mTableView reloadData];
             }
+            if (refresh) {
+                [self.mTableView.mj_header endRefreshing];
+            }
         }];
     }
     else{
@@ -115,6 +111,10 @@
             @strongify(self)
             if ([x integerValue] == 1) {
                 [self.mTableView reloadData];
+                
+            }
+            if (refresh) {
+                [self.mTableView.mj_header endRefreshing];
             }
         }];
     }
