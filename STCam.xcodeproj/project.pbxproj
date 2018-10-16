@@ -10,6 +10,7 @@
 		484F64620EFBEC733F2D85B1 /* libPods-STCam.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C18EA7F117ED0291D64659B7 /* libPods-STCam.a */; };
 		9DAC4BB22175BC9E00AC8916 /* GenerateShareQRCodeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC4BB12175BC9E00AC8916 /* GenerateShareQRCodeController.m */; };
 		9DAC4BB82175C7EB00AC8916 /* DevShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC4BB72175C7EB00AC8916 /* DevShareModel.m */; };
+		9DAC4BE02175F45800AC8916 /* AddDeviceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC4BDF2175F45800AC8916 /* AddDeviceController.m */; };
 		A4134F932165F78500831B8D /* AccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A4134F922165F78500831B8D /* AccountManager.m */; };
 		A43853DB21675A1500B8CC56 /* DeviceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A43853DA21675A1500B8CC56 /* DeviceModel.m */; };
 		A4394584217356B40047E00C /* CommonSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4394582217356B40047E00C /* CommonSettingCell.m */; };
@@ -173,6 +174,8 @@
 		9DAC4BB12175BC9E00AC8916 /* GenerateShareQRCodeController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GenerateShareQRCodeController.m; sourceTree = "<group>"; };
 		9DAC4BB62175C7EB00AC8916 /* DevShareModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DevShareModel.h; sourceTree = "<group>"; };
 		9DAC4BB72175C7EB00AC8916 /* DevShareModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DevShareModel.m; sourceTree = "<group>"; };
+		9DAC4BDE2175F45800AC8916 /* AddDeviceController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddDeviceController.h; sourceTree = "<group>"; };
+		9DAC4BDF2175F45800AC8916 /* AddDeviceController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddDeviceController.m; sourceTree = "<group>"; };
 		9DD31CBA2170411900EB4708 /* STCam.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = STCam.entitlements; sourceTree = "<group>"; };
 		A4134F912165F78500831B8D /* AccountManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccountManager.h; sourceTree = "<group>"; };
 		A4134F922165F78500831B8D /* AccountManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountManager.m; sourceTree = "<group>"; };
@@ -1191,6 +1194,8 @@
 				A47041BA216E2DFB007163C8 /* ImageDisplayController.m */,
 				9DAC4BB02175BC9E00AC8916 /* GenerateShareQRCodeController.h */,
 				9DAC4BB12175BC9E00AC8916 /* GenerateShareQRCodeController.m */,
+				9DAC4BDE2175F45800AC8916 /* AddDeviceController.h */,
+				9DAC4BDF2175F45800AC8916 /* AddDeviceController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1527,6 +1532,7 @@
 				A47041B5216E1E2B007163C8 /* MediaDetailCCell.m in Sources */,
 				A470AA912163BE050068AA80 /* UIButton+Common.m in Sources */,
 				A4CFFE7A2168BB2E00A93B72 /* CoreDataManager.m in Sources */,
+				9DAC4BE02175F45800AC8916 /* AddDeviceController.m in Sources */,
 				A4AE3241213426BE0036212B /* MainTabController.m in Sources */,
 				A4AE327A21342EFD0036212B /* UIImage+Common.m in Sources */,
 				A4946FF9212C5B460015990C /* SplashViewController.m in Sources */,
