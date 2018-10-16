@@ -11,6 +11,9 @@
 #import <AVFoundation/AVFoundation.h>
 #import "DevShareModel.h"
 #import "WCQRCodeVC.h"
+#import "AccountManager.h"
+#import "FFHttpTool.h"
+#import "RetModel.h"
 #define buttonHeight 1.25*kButtonHeight
 @interface AddDeviceController ()<QRCodeDelegate>
 @property (nonatomic, strong) UIButton *smartAddButton;
@@ -158,13 +161,50 @@
         if([dictionary isKindOfClass:[NSDictionary class]]){
             DevShareModel * model = [DevShareModel DevShareModelWithDict:dictionary];
             if(model){
-                
+                [self showHudInView:self.view hint:@""];
+                @weakify(self)
+                [[self racAppShareAddDev:model] subscribeNext:^(id x) {
+                    @strongify(self)
+                    [self hideHud];
+                    if ([x integerValue] == 1) {
+                        [self.navigationController popViewControllerAnimated:YES];
+                    }
+                    
+                }];
             }
         }
         
     }
 }
 
+-(RACSignal *)racAppShareAddDev:(DevShareModel*)model{
+    //http://xxx.xxx.xxx.xxx:800/app_share_add_dev.asp?user=bbbb@abcdcba.com&psd=admin555&f rom=4719373@qq.com&tokenid=100d85590943116f4c7&mbtype=1&apptype=0&pushtype=0& sn=80007604&video=1&history=0&push=0&setup=1&control=1
+    
+   
+    
+    
+    @weakify(self)
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        @strongify(self)
+        //http://211.149.199.247:800/app_user_get_devlst.asp?user=1257117229@qq.com&psd=12345678
+        NSString * url = [NSString stringWithFormat:@"http://%@:%d/app_share_add_dev.asp?user=%@&psd=%@&tokenid=%@&mbtype=2&apptype=0&pushtype=0&sn=%@&video=%d&history=%d&push=%d&setup=0&control=%d",serverIP,ServerPort,[AccountManager getUser],[AccountManager getPassword],[AccountManager sharedManager].deviceToken,model.SN,model.IsVideo,model.IsHistory,model.IsPush,model.IsControl];
+        [FFHttpTool GET:url parameters:nil success:^(id data){
+            @strongify(self)
+            RetModel * model = [RetModel RetModelWithDict:data];
+            if (model.ret == 1) {
+                [subscriber sendNext:@1];
+            }
+            else{
+                [subscriber sendNext:@(model.ret)];
+            }
+        } failure:^(NSError * error){
+            [subscriber sendNext:@100000];//未知网络错误
+            [subscriber sendCompleted];
+        }];
+        return nil;
+    }];
+    
+}
 
 
 @end

@@ -30,18 +30,18 @@
     }
     return self;
 }
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self refreshDeviceList:NO];
+        [self monitorRefreshViewKVO];
+    });
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view setBackgroundColor:[UIColor whiteColor]];
     [self setTitle:@"title_main_dev_list".localizedString];
     [self initNav];
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self refreshDeviceList:NO];
-        [self monitorRefreshViewKVO];
-    });
-    
     
 }
 
