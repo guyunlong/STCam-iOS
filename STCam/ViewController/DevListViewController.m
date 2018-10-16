@@ -16,6 +16,7 @@
 #import "MJRefresh.h"
 #import "DeviceSettingController.h"
 #import "GenerateShareQRCodeController.h"
+#import "AddDeviceController.h"
 @interface DevListViewController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property(nonatomic,strong)UITableView * mTableView;
@@ -65,11 +66,17 @@
 }
 -(void)initNav{
     UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btn setTitle:@"action_add".localizedString forState:UIControlStateNormal];
-    [btn setImage:[UIImage imageNamed:@"icon_add_nor"] forState:UIControlStateNormal];
-    btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [btn setTitleEdgeInsets:UIEdgeInsetsMake(0, - 36, 0, 36)];
-    [btn setImageEdgeInsets:UIEdgeInsetsMake(0, 30, 0, -30)];
+    if(_viewModel.userMode == TUserMode_Login){
+        [btn setTitle:@"action_add".localizedString forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:@"icon_add_nor"] forState:UIControlStateNormal];
+        btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        [btn setTitleEdgeInsets:UIEdgeInsetsMake(0, - 36, 0, 36)];
+        [btn setImageEdgeInsets:UIEdgeInsetsMake(0, 30, 0, -30)];
+    }
+    else if(_viewModel.userMode == TUserMode_Visitor){
+         [btn setTitle:@"action_search".localizedString forState:UIControlStateNormal];
+    }
+    [btn addTarget:self action:@selector(navBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     
 
     
@@ -110,6 +117,7 @@
 }
 
 -(void)refreshDeviceList:(BOOL)refresh{
+    
    @weakify(self)
     if (_viewModel.userMode == TUserMode_Visitor) {
         [[[_viewModel racSearchDevice]
@@ -146,6 +154,16 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)navBtnClicked{
+    if(_viewModel.userMode == TUserMode_Login){
+        AddDeviceController * ctl = [AddDeviceController new];
+        ctl.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:ctl animated:YES];
+    }
+    else if(_viewModel.userMode == TUserMode_Visitor){
+        [self refreshDeviceList:NO];
+    }
+}
 #pragma mark -
 #pragma mark - tableView
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

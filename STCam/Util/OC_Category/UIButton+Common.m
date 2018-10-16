@@ -25,6 +25,15 @@
             self.layer.borderWidth = 0.5;
             self.layer.borderColor =kLightGrayColor.CGColor;
             break;
+        case ButtonStyleHollowAppTheme:
+            self.layer.cornerRadius = 5;
+            self.layer.masksToBounds = true;
+            [self setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor]] forState:UIControlStateNormal];
+            [self setTitleColor:kLightGrayColor forState:UIControlStateNormal];
+            self.layer.borderWidth = 0.5;
+            self.layer.borderColor =kMainColor.CGColor;
+            break;
+            
         case ButtonStyleText_Blue:
            [self setTitleColor:kMainColor forState:UIControlStateNormal];
             [self setTitleColor:kDeepMainColor forState:UIControlStateHighlighted];

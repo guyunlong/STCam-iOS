@@ -79,6 +79,8 @@
 		A442C3D2213199A100198910 /* msvidctl.tlb in Resources */ = {isa = PBXBuildFile; fileRef = A442C223213199A100198910 /* msvidctl.tlb */; };
 		A442C3D3213199A100198910 /* tuner.tlb in Resources */ = {isa = PBXBuildFile; fileRef = A442C228213199A100198910 /* tuner.tlb */; };
 		A442C3D4213199A100198910 /* d3dxmath.inl in Resources */ = {isa = PBXBuildFile; fileRef = A442C229213199A100198910 /* d3dxmath.inl */; };
+		A452A9AC21762BEF00E40A5F /* WCQRCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A452A9AB21762BEF00E40A5F /* WCQRCodeVC.m */; };
+		A452A9AF21762C4500E40A5F /* MBProgressHUD+SGQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = A452A9AE21762C4500E40A5F /* MBProgressHUD+SGQRCode.m */; };
 		A45934E02164A5320018A61B /* BasicTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = A45934DF2164A5320018A61B /* BasicTextField.m */; };
 		A45934E32164A5FF0018A61B /* LoginBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A45934E22164A5FF0018A61B /* LoginBackgroundView.m */; };
 		A4606929216A4F0500491290 /* AudioSession.m in Sources */ = {isa = PBXBuildFile; fileRef = A4606928216A4F0400491290 /* AudioSession.m */; };
@@ -464,6 +466,10 @@
 		A442C2A4213199A100198910 /* cm_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cm_types.h; sourceTree = "<group>"; };
 		A442C2A5213199A100198910 /* avDecode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = avDecode.h; sourceTree = "<group>"; };
 		A442C2A6213199A100198910 /* libthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libthSDK.h; sourceTree = "<group>"; };
+		A452A9AA21762BEF00E40A5F /* WCQRCodeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WCQRCodeVC.h; sourceTree = "<group>"; };
+		A452A9AB21762BEF00E40A5F /* WCQRCodeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WCQRCodeVC.m; sourceTree = "<group>"; };
+		A452A9AD21762C4500E40A5F /* MBProgressHUD+SGQRCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+SGQRCode.h"; sourceTree = "<group>"; };
+		A452A9AE21762C4500E40A5F /* MBProgressHUD+SGQRCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+SGQRCode.m"; sourceTree = "<group>"; };
 		A45934DE2164A5320018A61B /* BasicTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BasicTextField.h; sourceTree = "<group>"; };
 		A45934DF2164A5320018A61B /* BasicTextField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BasicTextField.m; sourceTree = "<group>"; };
 		A45934E12164A5FF0018A61B /* LoginBackgroundView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginBackgroundView.h; sourceTree = "<group>"; };
@@ -1196,6 +1202,8 @@
 				9DAC4BB12175BC9E00AC8916 /* GenerateShareQRCodeController.m */,
 				9DAC4BDE2175F45800AC8916 /* AddDeviceController.h */,
 				9DAC4BDF2175F45800AC8916 /* AddDeviceController.m */,
+				A452A9AA21762BEF00E40A5F /* WCQRCodeVC.h */,
+				A452A9AB21762BEF00E40A5F /* WCQRCodeVC.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1211,6 +1219,8 @@
 		A4AE324F21342EFD0036212B /* OC_Category */ = {
 			isa = PBXGroup;
 			children = (
+				A452A9AD21762C4500E40A5F /* MBProgressHUD+SGQRCode.h */,
+				A452A9AE21762C4500E40A5F /* MBProgressHUD+SGQRCode.m */,
 				A4AE325021342EFD0036212B /* NSDate+Helper.m */,
 				A4AE325121342EFD0036212B /* UITableView+Common.m */,
 				A4AE325221342EFD0036212B /* UIViewController+HUD.m */,
@@ -1520,6 +1530,7 @@
 				A442C2AC213199A100198910 /* List.c in Sources */,
 				A4AE327921342EFD0036212B /* UIColor+expanded.m in Sources */,
 				A442C2B2213199A100198910 /* audio_g711.c in Sources */,
+				A452A9AF21762C4500E40A5F /* MBProgressHUD+SGQRCode.m in Sources */,
 				A4CFFE6E2168656000A93B72 /* LiveVidController.m in Sources */,
 				A4AE324A2134276E0036212B /* MediaViewController.m in Sources */,
 				A45934E32164A5FF0018A61B /* LoginBackgroundView.m in Sources */,
@@ -1530,6 +1541,7 @@
 				A47041B2216E1CAD007163C8 /* MediaDetailController.m in Sources */,
 				A439458B217360960047E00C /* DeviceSettingController.m in Sources */,
 				A47041B5216E1E2B007163C8 /* MediaDetailCCell.m in Sources */,
+				A452A9AC21762BEF00E40A5F /* WCQRCodeVC.m in Sources */,
 				A470AA912163BE050068AA80 /* UIButton+Common.m in Sources */,
 				A4CFFE7A2168BB2E00A93B72 /* CoreDataManager.m in Sources */,
 				9DAC4BE02175F45800AC8916 /* AddDeviceController.m in Sources */,

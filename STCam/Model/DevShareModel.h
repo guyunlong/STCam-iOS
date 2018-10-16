@@ -17,4 +17,9 @@
 @property(nonatomic,assign) BOOL IsPush;
 @property(nonatomic,assign) BOOL IsControl;
 -(NSString*)localDescription;
+
++(instancetype)DevShareModelWithDict:(NSDictionary *)dict;
+-(instancetype)initWithDict:(NSDictionary *)dict;
+-(void)setValue:(id)value forUndefinedKey:(NSString *)key;
+
 @end
