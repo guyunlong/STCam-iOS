@@ -11,6 +11,7 @@ def shared_pods
     pod 'JPush'
     pod 'MJRefresh'
     pod 'RealReachability'
+    pod 'SGQRCode', '~> 2.5.4'
 end
 target 'STCam' do
     shared_pods

@@ -84,12 +84,20 @@
     _onlineStatusImageView.layer.masksToBounds = YES;
     
     [_settingBtn addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [_shareBtn addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [_playBackBtn addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
     
 }
 
 -(void)btnClicked:(id)sender{
     if (_btnClickBlock) {
         if (sender == _settingBtn) {
+            _btnClickBlock(1);
+        }
+        else if (sender == _shareBtn) {
+            _btnClickBlock(2);
+        }
+        else if (sender == _playBackBtn) {
             _btnClickBlock(1);
         }
     }

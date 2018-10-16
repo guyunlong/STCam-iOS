@@ -15,6 +15,7 @@
 #import "LiveVidController.h"
 #import "MJRefresh.h"
 #import "DeviceSettingController.h"
+#import "GenerateShareQRCodeController.h"
 @interface DevListViewController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property(nonatomic,strong)UITableView * mTableView;
@@ -165,8 +166,15 @@
     cell.btnClickBlock = ^(NSInteger channel){
         @strongify(self)
         if(1 == channel){
-            @strongify(self)
+            
             DeviceSettingController * ctl = [DeviceSettingController new];
+            [ctl setModel:self.viewModel.deviceArray[indexPath.row]];
+            ctl.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:ctl animated:YES];
+        }
+        if(2 == channel){
+            
+            GenerateShareQRCodeController * ctl = [GenerateShareQRCodeController new];
             [ctl setModel:self.viewModel.deviceArray[indexPath.row]];
             ctl.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:ctl animated:YES];

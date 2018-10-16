@@ -12,5 +12,6 @@
 -(UIImage*)scaledToSize:(CGSize)targetSize highQuality:(BOOL)highQuality;
 + (UIImage *)fullResolutionImageFromALAsset:(ALAsset *)asset;
 - (UIImage *) renderAtSize:(const CGSize) size;
++ (UIImage *)creatNonInterpolatedUIImageFormCIImage:(CIImage *)image withSize:(CGFloat)size;
 
 @end

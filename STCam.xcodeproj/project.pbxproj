@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		484F64620EFBEC733F2D85B1 /* libPods-STCam.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C18EA7F117ED0291D64659B7 /* libPods-STCam.a */; };
+		9DAC4BB22175BC9E00AC8916 /* GenerateShareQRCodeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC4BB12175BC9E00AC8916 /* GenerateShareQRCodeController.m */; };
+		9DAC4BB82175C7EB00AC8916 /* DevShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC4BB72175C7EB00AC8916 /* DevShareModel.m */; };
 		A4134F932165F78500831B8D /* AccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A4134F922165F78500831B8D /* AccountManager.m */; };
 		A43853DB21675A1500B8CC56 /* DeviceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A43853DA21675A1500B8CC56 /* DeviceModel.m */; };
 		A4394584217356B40047E00C /* CommonSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4394582217356B40047E00C /* CommonSettingCell.m */; };
@@ -167,6 +169,10 @@
 
 /* Begin PBXFileReference section */
 		02368DE58D9110FCE2D67420 /* Pods-STCam.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-STCam.release.xcconfig"; path = "Pods/Target Support Files/Pods-STCam/Pods-STCam.release.xcconfig"; sourceTree = "<group>"; };
+		9DAC4BB02175BC9E00AC8916 /* GenerateShareQRCodeController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GenerateShareQRCodeController.h; sourceTree = "<group>"; };
+		9DAC4BB12175BC9E00AC8916 /* GenerateShareQRCodeController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GenerateShareQRCodeController.m; sourceTree = "<group>"; };
+		9DAC4BB62175C7EB00AC8916 /* DevShareModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DevShareModel.h; sourceTree = "<group>"; };
+		9DAC4BB72175C7EB00AC8916 /* DevShareModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DevShareModel.m; sourceTree = "<group>"; };
 		9DD31CBA2170411900EB4708 /* STCam.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = STCam.entitlements; sourceTree = "<group>"; };
 		A4134F912165F78500831B8D /* AccountManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccountManager.h; sourceTree = "<group>"; };
 		A4134F922165F78500831B8D /* AccountManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountManager.m; sourceTree = "<group>"; };
@@ -665,6 +671,8 @@
 				A4BC365C216F98A400FDCBF5 /* AlarmImageModel.m */,
 				A4394586217358470047E00C /* InfoModel.h */,
 				A4394587217358470047E00C /* InfoModel.m */,
+				9DAC4BB62175C7EB00AC8916 /* DevShareModel.h */,
+				9DAC4BB72175C7EB00AC8916 /* DevShareModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1181,6 +1189,8 @@
 				A47041B1216E1CAD007163C8 /* MediaDetailController.m */,
 				A47041B9216E2DFB007163C8 /* ImageDisplayController.h */,
 				A47041BA216E2DFB007163C8 /* ImageDisplayController.m */,
+				9DAC4BB02175BC9E00AC8916 /* GenerateShareQRCodeController.h */,
+				9DAC4BB12175BC9E00AC8916 /* GenerateShareQRCodeController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1459,11 +1469,13 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-STCam/Pods-STCam-resources.sh",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
+				"${PODS_ROOT}/SGQRCode/SGQRCode/SGQRCode.bundle",
 				"${PODS_ROOT}/YBImageBrowser/YBImageBrowser/YBImageBrowser.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SGQRCode.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/YBImageBrowser.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1488,6 +1500,7 @@
 				A4AE327321342EFD0036212B /* UIView+Common.m in Sources */,
 				A442C2B0213199A100198910 /* TFun.c in Sources */,
 				A4AE326F21342EFD0036212B /* UITableView+Common.m in Sources */,
+				9DAC4BB22175BC9E00AC8916 /* GenerateShareQRCodeController.m in Sources */,
 				A442C31A213199A100198910 /* thRec.c in Sources */,
 				A4CFFE822168C7B600A93B72 /* VideoDecoder.m in Sources */,
 				A4AE32472134275C0036212B /* AlarmListViewController.m in Sources */,
@@ -1532,6 +1545,7 @@
 				A43853DB21675A1500B8CC56 /* DeviceModel.m in Sources */,
 				A4606929216A4F0500491290 /* AudioSession.m in Sources */,
 				A4BC365A216F983900FDCBF5 /* AlarmListViewModel.m in Sources */,
+				9DAC4BB82175C7EB00AC8916 /* DevShareModel.m in Sources */,
 				A4BC3656216F959B00FDCBF5 /* AlarmListCell.m in Sources */,
 				A439D831216506E200FCE7FE /* LoginViewModel.m in Sources */,
 				A4394588217358470047E00C /* InfoModel.m in Sources */,
