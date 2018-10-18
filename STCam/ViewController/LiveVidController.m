@@ -22,6 +22,16 @@
 @property (strong, nonatomic)  UIView * portButtonView;
 
 @property (strong, nonatomic)  UIButton * exitFullScreenButton;
+
+
+@property (strong, nonatomic)  UIButton * ledBtn_land;
+@property (strong, nonatomic)  UIButton * settingBtn_land;
+@property (strong, nonatomic)  UIButton * playAudioBtn_land;
+@property (strong, nonatomic)  UIButton * speechBtn_land;
+@property (strong, nonatomic)  UIButton * hdBtn_land;
+@property (strong, nonatomic)  UIButton * recordBtn_land;
+@property (strong, nonatomic)  UIButton * snapShotBtn_land;
+
 @end
 
 @implementation LiveVidController
@@ -118,6 +128,8 @@
     [_hdBtn addTarget:self action:@selector(controlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [_playAudioBtn addTarget:self action:@selector(controlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [_snapShotBtn addTarget:self action:@selector(controlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
     /**********landscape buttons*************/
     _exitFullScreenButton = [[UIButton alloc] initWithFrame:CGRectMake(kPadding, kPadding, firstLineWidth, firstLineWidth)];
     [_exitFullScreenButton setImage:[UIImage imageNamed:@"icon_back"] forState:UIControlStateNormal];
@@ -138,17 +150,18 @@
     else if([sender isEqual:_exitFullScreenButton]){
          [self rotateToPortrait];
     }
-    else if([sender isEqual:_hdBtn]){
+    else if([sender isEqual:_hdBtn] || [sender isEqual:_hdBtn_land]){
         [_viewModel setSub:1-_viewModel.sub];
         [_viewModel openVid:_viewModel.sub];
         [_hdBtn setSelected:1-_viewModel.sub];
+        [_hdBtn_land setSelected:1-_viewModel.sub];
     }
-    else if([sender isEqual:_playAudioBtn]){
+    else if([sender isEqual:_playAudioBtn] || [sender isEqual:_playAudioBtn_land]){
         _viewModel.openaud = 1- _viewModel.openaud;
         [_viewModel openAud:_viewModel.openaud];
         [_playAudioBtn setSelected:_viewModel.openaud];
     }
-    else if([sender isEqual:_snapShotBtn]){
+    else if([sender isEqual:_snapShotBtn] || [sender isEqual:_snapShotBtn_land]){
         _viewModel.snapShot = YES;
     }
 }
@@ -164,6 +177,87 @@
     [UIView commitAnimations];
     [_glLayer setFrame:CGRectMake(0, 0, kScreenHeight, kScreenWidth)];
     
+    
+//    @property (strong, nonatomic)  UIButton * ledBtn_land;
+//    @property (strong, nonatomic)  UIButton * settingBtn_land;
+//    @property (strong, nonatomic)  UIButton * playAudioBtn_land;
+//    @property (strong, nonatomic)  UIButton * speechBtn_land;
+//    @property (strong, nonatomic)  UIButton * hdBtn_land;
+//    @property (strong, nonatomic)  UIButton * recordBtn_land;
+//    @property (strong, nonatomic)  UIButton * snapShotBtn_land;
+    
+    if (!_ledBtn_land) {
+        CGFloat firstLineWidth = 50*kWidthCoefficient;
+        CGFloat secondLineWidth = 60*kWidthCoefficient;
+        CGFloat speechWidth = 80*kWidthCoefficient;
+        CGFloat firstLineSpan =(kScreenWidth- firstLineWidth*5)/6;
+       
+        CGFloat y = kScreenWidth - kPadding - firstLineWidth;
+        _ledBtn_land = [[UIButton alloc] initWithFrame:CGRectMake(firstLineSpan, y, firstLineWidth, firstLineWidth)];
+        _playAudioBtn_land = [[UIButton alloc] initWithFrame:CGRectMake(firstLineSpan*2+firstLineWidth, y, firstLineWidth, firstLineWidth)];
+        _hdBtn_land = [[UIButton alloc] initWithFrame:CGRectMake(firstLineSpan*3+firstLineWidth*2, y, firstLineWidth, firstLineWidth)];
+        _settingBtn_land = [[UIButton alloc] initWithFrame:CGRectMake(firstLineSpan*4+firstLineWidth*3, y, firstLineWidth, firstLineWidth)];
+        
+        [_ledBtn_land setImage:[UIImage imageNamed:@"liveled_nor"] forState:UIControlStateNormal];
+        [_ledBtn_land setImage:[UIImage imageNamed:@"liveled_sel"] forState:UIControlStateHighlighted];
+        
+        [_playAudioBtn_land setImage:[UIImage imageNamed:@"livetalkoff_nor"] forState:UIControlStateNormal];
+        [_playAudioBtn_land setImage:[UIImage imageNamed:@"livetalkoff_sel"] forState:UIControlStateHighlighted];
+        [_playAudioBtn setImage:[UIImage imageNamed:@"livetalkon_sel"] forState:UIControlStateSelected];
+        
+        [_hdBtn_land setImage:[UIImage imageNamed:@"livehd_nor"] forState:UIControlStateNormal];
+        [_hdBtn_land setImage:[UIImage imageNamed:@"livehd_sel"] forState:UIControlStateSelected];
+        
+        [_settingBtn_land setImage:[UIImage imageNamed:@"livesetting_nor"] forState:UIControlStateNormal];
+        [_settingBtn_land setImage:[UIImage imageNamed:@"livesetting_sel"] forState:UIControlStateHighlighted];
+        
+        
+        [self.view addSubview:_ledBtn_land];
+        [self.view addSubview:_playAudioBtn_land];
+        [self.view addSubview:_hdBtn_land];
+        [self.view addSubview:_settingBtn_land];
+       
+        
+        _recordBtn_land = [[UIButton alloc] initWithFrame:CGRectMake(kScreenHeight - 2*kPadding - secondLineWidth, 2*kPadding, secondLineWidth, secondLineWidth)];
+        _speechBtn_land = [[UIButton alloc] initWithFrame:CGRectMake(kScreenHeight - 2*kPadding - secondLineWidth-(speechWidth-secondLineWidth)/2, kScreenWidth/2-speechWidth/2, speechWidth, speechWidth)];
+        _snapShotBtn_land = [[UIButton alloc] initWithFrame:CGRectMake(kScreenHeight - 2*kPadding - secondLineWidth, kScreenWidth-2*kPadding-secondLineWidth, secondLineWidth, secondLineWidth)];
+        
+        [self.view addSubview:_recordBtn_land];
+        [self.view addSubview:_speechBtn_land];
+        [self.view addSubview:_snapShotBtn_land];
+        
+        [_recordBtn_land setImage:[UIImage imageNamed:@"liverecord_nor"] forState:UIControlStateNormal];
+        [_recordBtn_land setImage:[UIImage imageNamed:@"liverecord_sel"] forState:UIControlStateSelected];
+        [_speechBtn_land setBackgroundImage:[UIImage imageNamed:@"livespeech_nor"] forState:UIControlStateNormal];
+        [_speechBtn_land setBackgroundImage:[UIImage imageNamed:@"livespeech_sel"] forState:UIControlStateSelected];
+        [_snapShotBtn_land setImage:[UIImage imageNamed:@"livesnapshot_nor"] forState:UIControlStateNormal];
+        [_snapShotBtn_land setImage:[UIImage imageNamed:@"livesnapshot_sel"] forState:UIControlStateHighlighted];
+        
+        [_ledBtn_land addTarget:self action:@selector(controlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [_playAudioBtn_land addTarget:self action:@selector(controlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [_settingBtn_land addTarget:self action:@selector(controlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [_hdBtn_land addTarget:self action:@selector(controlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [_recordBtn_land addTarget:self action:@selector(controlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [_speechBtn_land addTarget:self action:@selector(controlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [_snapShotBtn_land addTarget:self action:@selector(controlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
+    [_ledBtn_land setHidden:NO];
+    [_playAudioBtn_land setHidden:NO];
+    [_hdBtn_land setHidden:NO];
+    [_settingBtn_land setHidden:NO];
+    [_recordBtn_land setHidden:NO];
+    [_speechBtn_land setHidden:NO];
+    [_snapShotBtn_land setHidden:NO];
+    
+   
+    
+    [_hdBtn_land setSelected:1-_viewModel.sub];
+    
+   
+  
+    
+   
 }
 -(void)rotateToPortrait{
      [self.navigationController setNavigationBarHidden:NO animated:YES];
@@ -175,6 +269,18 @@
     [UIView beginAnimations:nil context:nil];
     [UIView commitAnimations];
     [_glLayer setFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-kSafeAreaBottomHeight-kSafeAreaHeaderHeight-64-250*kWidthCoefficient)];
+    
+    [_ledBtn_land setHidden:YES];
+    [_playAudioBtn_land setHidden:YES];
+    [_hdBtn_land setHidden:YES];
+    [_settingBtn_land setHidden:YES];
+    [_recordBtn_land setHidden:YES];
+    [_speechBtn_land setHidden:YES];
+    [_snapShotBtn_land setHidden:YES];
+    
+    [_hdBtn setSelected:1-_viewModel.sub];
+    
+    
 }
 
 # pragma  delegate
