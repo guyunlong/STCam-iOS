@@ -187,7 +187,7 @@
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
         @strongify(self)
         //http://211.149.199.247:800/app_user_get_devlst.asp?user=1257117229@qq.com&psd=12345678
-        NSString * url = [NSString stringWithFormat:@"http://%@:%d/app_share_add_dev.asp?user=%@&psd=%@&tokenid=%@&mbtype=2&apptype=0&pushtype=0&sn=%@&video=%d&history=%d&push=%d&setup=0&control=%d",serverIP,ServerPort,[AccountManager getUser],[AccountManager getPassword],[AccountManager sharedManager].deviceToken,model.SN,model.IsVideo,model.IsHistory,model.IsPush,model.IsControl];
+        NSString * url = [NSString stringWithFormat:@"http://%@:%d/app_share_add_dev.asp?user=%@&psd=%@&tokenid=%@&mbtype=2&apptype=0&pushtype=0&from=%@&sn=%@&video=%d&history=%d&push=%d&setup=0&control=%d",serverIP,ServerPort,[AccountManager getUser],[AccountManager getPassword],[AccountManager sharedManager].deviceToken,model.From,model.SN,model.IsVideo,model.IsHistory,model.IsPush,model.IsControl];
         [FFHttpTool GET:url parameters:nil success:^(id data){
             @strongify(self)
             RetModel * model = [RetModel RetModelWithDict:data];
