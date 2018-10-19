@@ -160,6 +160,7 @@
         _viewModel.openaud = 1- _viewModel.openaud;
         [_viewModel openAud:_viewModel.openaud];
         [_playAudioBtn setSelected:_viewModel.openaud];
+        [_playAudioBtn_land setSelected:_viewModel.openaud];
     }
     else if([sender isEqual:_snapShotBtn] || [sender isEqual:_snapShotBtn_land]){
         _viewModel.snapShot = YES;
@@ -203,7 +204,8 @@
         
         [_playAudioBtn_land setImage:[UIImage imageNamed:@"livetalkoff_nor"] forState:UIControlStateNormal];
         [_playAudioBtn_land setImage:[UIImage imageNamed:@"livetalkoff_sel"] forState:UIControlStateHighlighted];
-        [_playAudioBtn setImage:[UIImage imageNamed:@"livetalkon_sel"] forState:UIControlStateSelected];
+        [_playAudioBtn_land setImage:[UIImage imageNamed:@"livetalkon_sel"] forState:UIControlStateSelected];
+        
         
         [_hdBtn_land setImage:[UIImage imageNamed:@"livehd_nor"] forState:UIControlStateNormal];
         [_hdBtn_land setImage:[UIImage imageNamed:@"livehd_sel"] forState:UIControlStateSelected];
