@@ -49,6 +49,8 @@
     
     [self listenNetWorkingStatus];
     
+    [application setApplicationIconBadgeNumber:0]; //清除角标
+    
     
     
     return YES;
@@ -90,6 +92,8 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
     DevListViewModel * viewModel = [DevListViewModel sharedDevListViewModel];
     [viewModel connectAllDevice];
+    
+    [application setApplicationIconBadgeNumber:0]; //清除角标
 }
 
 
