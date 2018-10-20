@@ -41,7 +41,6 @@
 
 /**
  根据设备的sn返回设备信息
-
  @param sn 序列号
  @return model
  */

@@ -9,6 +9,7 @@
 #import "DeviceSettingViewModel.h"
 #import "PrefixHeader.h"
 #import "RetModel.h"
+#import "CoreDataManager.h"
 @implementation DeviceSettingViewModel
 -(RACSignal*)racChangeDeviceName:(NSString*)deviceName{
     @weakify(self)
@@ -28,6 +29,59 @@
                 }
                 else{
                      [subscriber sendNext:@(model.ret)];
+                }
+            }
+            
+        });
+        
+        return nil;
+    }];
+}
+-(RACSignal*)racChangeDevicePassword:(NSString*)devicePassword{
+    @weakify(self)
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber){
+        @strongify(self)
+        dispatch_queue_t quene = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(quene, ^{
+            
+            NSString * url = [NSString stringWithFormat:@"%@&&UserName0=admin&Password0=%@",[self.model getDevURL:Msg_SetUserLst],devicePassword];
+            
+            id data = [self.model thNetHttpGet:url];
+            if([data isKindOfClass:[NSDictionary class]]){
+                RetModel * model = [RetModel RetModelWithDict:data];
+                if (model.ret == 1 || model.ret == 2) {
+                    [self.model setPwd:devicePassword];
+                    [[CoreDataManager sharedManager] saveDevice:self.model];
+                    [subscriber sendNext:@(model.ret)];
+                }
+                else{
+                    [subscriber sendNext:@(model.ret)];
+                }
+            }
+            
+        });
+        
+        return nil;
+    }];
+}
+-(RACSignal*)racRebootDevice{
+    @weakify(self)
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber){
+        @strongify(self)
+        dispatch_queue_t quene = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(quene, ^{
+            
+            NSString * url = [NSString stringWithFormat:@"%@",[self.model getDevURL:Msg_SetDevReboot]];
+            
+            id data = [self.model thNetHttpGet:url];
+            if([data isKindOfClass:[NSDictionary class]]){
+                RetModel * model = [RetModel RetModelWithDict:data];
+                if (model.ret == 1) {
+                    
+                    [subscriber sendNext:@1];
+                }
+                else{
+                    [subscriber sendNext:@(model.ret)];
                 }
             }
             

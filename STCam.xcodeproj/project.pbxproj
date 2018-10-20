@@ -12,6 +12,7 @@
 		9DAC4BB82175C7EB00AC8916 /* DevShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC4BB72175C7EB00AC8916 /* DevShareModel.m */; };
 		9DAC4BE02175F45800AC8916 /* AddDeviceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC4BDF2175F45800AC8916 /* AddDeviceController.m */; };
 		A40C8693217B6DD800D82B6B /* DeviceSettingViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A40C8692217B6DD800D82B6B /* DeviceSettingViewModel.m */; };
+		A40C8696217B778700D82B6B /* ChangeDevicePwdController.m in Sources */ = {isa = PBXBuildFile; fileRef = A40C8695217B778700D82B6B /* ChangeDevicePwdController.m */; };
 		A4134F932165F78500831B8D /* AccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A4134F922165F78500831B8D /* AccountManager.m */; };
 		A43853DB21675A1500B8CC56 /* DeviceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A43853DA21675A1500B8CC56 /* DeviceModel.m */; };
 		A4394584217356B40047E00C /* CommonSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4394582217356B40047E00C /* CommonSettingCell.m */; };
@@ -190,6 +191,8 @@
 		9DD31CBA2170411900EB4708 /* STCam.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = STCam.entitlements; sourceTree = "<group>"; };
 		A40C8691217B6DD800D82B6B /* DeviceSettingViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceSettingViewModel.h; sourceTree = "<group>"; };
 		A40C8692217B6DD800D82B6B /* DeviceSettingViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceSettingViewModel.m; sourceTree = "<group>"; };
+		A40C8694217B778700D82B6B /* ChangeDevicePwdController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangeDevicePwdController.h; sourceTree = "<group>"; };
+		A40C8695217B778700D82B6B /* ChangeDevicePwdController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangeDevicePwdController.m; sourceTree = "<group>"; };
 		A4134F912165F78500831B8D /* AccountManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccountManager.h; sourceTree = "<group>"; };
 		A4134F922165F78500831B8D /* AccountManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountManager.m; sourceTree = "<group>"; };
 		A43853D921675A1500B8CC56 /* DeviceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceModel.h; sourceTree = "<group>"; };
@@ -1244,6 +1247,8 @@
 				A4434D96217AE62C00BDA9F2 /* RecordListController.m */,
 				A4434DA3217B140B00BDA9F2 /* PlayBackController.h */,
 				A4434DA4217B140B00BDA9F2 /* PlayBackController.m */,
+				A40C8694217B778700D82B6B /* ChangeDevicePwdController.h */,
+				A40C8695217B778700D82B6B /* ChangeDevicePwdController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1554,6 +1559,7 @@
 				A442C322213199A100198910 /* cJSON.c in Sources */,
 				A46F7B112132D2E400854DB8 /* DevListViewModel.m in Sources */,
 				A47041AE216E14FA007163C8 /* DevMediaCell.m in Sources */,
+				A40C8696217B778700D82B6B /* ChangeDevicePwdController.m in Sources */,
 				A4AE324D2134277D0036212B /* MoreViewController.m in Sources */,
 				A4394584217356B40047E00C /* CommonSettingCell.m in Sources */,
 				A4AE327321342EFD0036212B /* UIView+Common.m in Sources */,

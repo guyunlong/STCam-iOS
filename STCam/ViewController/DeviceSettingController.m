@@ -10,6 +10,7 @@
 #import "PrefixHeader.h"
 #import "STFileManager.h"
 #import "CommonSettingCell.h"
+#import "ChangeDevicePwdController.h"
 @interface DeviceSettingController ()<UITableViewDataSource, UITableViewDelegate>
 @property(nonatomic,strong)UIImageView * devThumbView;//设备缩略图
 @property(nonatomic,strong)UILabel * snLabel;
@@ -197,13 +198,21 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSInteger row = indexPath.row;
-    if (0 == row) {
+    if(0 == row || 1 == row){
         if (![_viewModel.model IsConnect])
         {
             [self showHint:@"action_net_not_connect".localizedString];
             return;
         }
+    }
+    if (0 == row) {
+        
         [self presentViewController:self.changeDeviceNameAlert animated:YES completion:nil];
+    }
+    else if(1 == row){
+        ChangeDevicePwdController * ctl = [ChangeDevicePwdController new];
+        [ctl setViewModel:_viewModel];
+        [self.navigationController pushViewController:ctl animated:YES];
     }
   
 }

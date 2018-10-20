@@ -10,6 +10,7 @@
 #import "UIColor+expanded.h"
 #import "PrefixHeader.h"
 #import "DevListViewModel.h"
+#import "CoreDataManager.h"
 @interface DeviceModel(){
     dispatch_queue_t serialQueue;
 }
@@ -98,9 +99,16 @@
     if (self = [super init]) {
         
         [self setValuesForKeysWithDictionary:dict];//kvc
-        serialQueue = dispatch_queue_create("com.sentry.mlock.get", DISPATCH_QUEUE_SERIAL);
         _User = @"admin";
         _Pwd = @"admin";
+        CoreDataManager * manager = [CoreDataManager sharedManager];
+        DeviceModel * model = [manager getDeviceModel:_SN];
+        if (model) {
+            _Pwd = model.Pwd;
+        }
+        
+        serialQueue = dispatch_queue_create("com.sentry.mlock.get", DISPATCH_QUEUE_SERIAL);
+        
     }
     return self;
 }
@@ -137,8 +145,8 @@
     //thNet_Connect(HANDLE NetHandle, u64 SN, char* UserName, char* Password, char* IPUID, i32 DataPort, u32 TimeOut)
     ret = thNet_Connect(self.NetHandle,
                            [_SN integerValue],
-                           [@"admin" UTF8String],
-                           [@"admin" UTF8String],
+                           [self.User UTF8String],
+                           [self.Pwd UTF8String],
                            [self.IPUID UTF8String],
                            self.DataPort,
                            10 * 1000);

@@ -13,4 +13,6 @@
 @interface DeviceSettingViewModel : NSObject
 @property(nonatomic,strong)DeviceModel * model;
 -(RACSignal*)racChangeDeviceName:(NSString*)deviceName;
+-(RACSignal*)racChangeDevicePassword:(NSString*)devicePassword;
+-(RACSignal*)racRebootDevice;
 @end
