@@ -9,15 +9,25 @@
 #import "RecordListController.h"
 #import "PrefixHeader.h"
 #import "MJRefresh.h"
-@interface RecordListController ()
+#import "RecordListCell.h"
+@interface RecordListController ()<UITableViewDataSource, UITableViewDelegate>
 @property(nonatomic,strong)UITableView * mTableView;
 @end
 
 @implementation RecordListController
 
+-(void)viewWillAppear:(BOOL)animated{
+    if ([_viewModel.recordFileArray count] == 0) {
+        [self getRecordFileList:NO];
+    }
+    else{
+        [self.mTableView reloadData];
+    }
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
 }
 
 -(void)loadView{
@@ -38,7 +48,12 @@
             tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
                 //
                 @strongify(self)
-               
+                [self getRecordFileList:NO];
+            }];
+            // 上拉刷新
+            tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+               @strongify(self)
+                [self getRecordFileList:YES];
             }];
             // 设置自动切换透明度(在导航栏下面自动隐藏)
             tableView.mj_header.automaticallyChangeAlpha = YES;
@@ -52,6 +67,18 @@
     
 }
 
+-(void)getRecordFileList:(BOOL)loadMore{
+    @weakify(self)
+    [[[self.viewModel racGetRecordFileList:loadMore]
+        deliverOn:[RACScheduler mainThreadScheduler]]
+        subscribeNext:^(id x) {
+            @strongify(self)
+            [self.mTableView.mj_header endRefreshing];
+            [self.mTableView.mj_footer endRefreshing];
+            [self.mTableView reloadData];
+        }
+     ];
+}
 -(void)initNav{
     [self setTitle:@"string_record_list".localizedString];
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -80,19 +107,20 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 0;
+    return [self.viewModel.recordFileArray count];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    
-   
-    return nil;
+    RecordListCell * cell = [RecordListCell RecordListCellWith:tableView indexPath:indexPath];
+    [cell setModel:_viewModel.recordFileArray[indexPath.row]];
+    [cell setFrame:CGRectMake(0, 0, kScreenWidth,[RecordListCell cellHeight] )];
+    [tableView addLineforPlainCell:cell forRowAtIndexPath:indexPath withLeftSpace:0];
+    return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 0;
+    return [RecordListCell cellHeight];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
