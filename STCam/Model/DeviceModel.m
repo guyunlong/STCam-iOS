@@ -187,7 +187,7 @@
             tmpBuf = thNet_GetAllCfg((HANDLE) self.NetHandle);
             code_convert_name("gb2312", "utf8", tmpBuf,strlen(tmpBuf), conv, sizeof(conv));
             NSString * deviceInfoStr  = [[NSString alloc] initWithUTF8String:conv];
-            
+            NSLog(@"deviceInfoStr is %@",deviceInfoStr);
             NSData *utf8Data = [deviceInfoStr dataUsingEncoding:NSUTF8StringEncoding];
             NSError *error;
             id deviceInfoDic = [NSJSONSerialization JSONObjectWithData:utf8Data options:NSJSONReadingMutableLeaves error:&error];

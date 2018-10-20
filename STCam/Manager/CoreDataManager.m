@@ -131,6 +131,99 @@
     [self saveContext];
     return true;
 }
+
+/**
+ *保存录像
+ */
+-(BOOL)saveSDVideo:(SDVideoModel*)model{
+    //获取应用程序委托的引用，再用引用获取创建好的托管对象上下文。
+    NSError *error;
+    //创建提取请求
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    
+    //为已创建好的实体利用检索到的上下文创建一个实体描述
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Video"
+                                                         inManagedObjectContext:self.managedObjectContext];
+    //创建好了以后发送给提取请求，以便请求能够知道要查找的实体类型
+    [request setEntity:entityDescription];
+    
+    //确定持久库中是否存在与此字段相对应的托管对象，所以穿件一个谓词来确定字段的正确对象：
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"url == %@",model.url];
+    [request setPredicate:pred];
+    
+    
+    //由于我们还不知道是从持久库中加载托管对象还是创建新的托管对象，
+    //所以声明一个指向NSManagedObject的指针并将他设置为nil
+    NSManagedObject *object = nil;
+    
+    //再次在上下文中执行提取请求
+    NSArray *objects = [self.managedObjectContext executeFetchRequest:request error:&error];
+    
+    if (objects == nil)
+    {
+        NSLog(@"There was an error!");
+        return false;
+    }
+    
+    //检查示范返回了标准匹配的对象，若果有则加载它，如果没有则创建一个新的托管对象来保存此字段的文本
+    if ([objects count] > 0)
+    {
+        object = [objects objectAtIndex:0];
+    }
+    else
+    {
+        object= [NSEntityDescription insertNewObjectForEntityForName:@"Video"
+                                              inManagedObjectContext:self.managedObjectContext];
+    }
+    //使用键值编码来设置行号以及托管对象的文本
+    [object setValue:model.url forKey:@"url"];
+    [object setValue:model.sdVideo forKey:@"name"];
+    [object setValue:@1 forKey:@"viewed"];
+    //完成循环之后要通知上下文保存其更改
+    [self saveContext];
+    return true;
+}
+
+/**
+ *录像是否存在数据库中
+ */
+-(BOOL)isVideoExist:(SDVideoModel*)model{
+    //获取应用程序委托的引用，再用引用获取创建好的托管对象上下文。
+    NSError *error;
+    //创建提取请求
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    
+    //为已创建好的实体利用检索到的上下文创建一个实体描述
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Video"
+                                                         inManagedObjectContext:self.managedObjectContext];
+    //创建好了以后发送给提取请求，以便请求能够知道要查找的实体类型
+    [request setEntity:entityDescription];
+    
+    //确定持久库中是否存在与此字段相对应的托管对象，所以穿件一个谓词来确定字段的正确对象：
+    //(tid == %ld) AND (dte==%@)
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"url == %@",model.url];
+    [request setPredicate:pred];
+    
+    
+    //再次在上下文中执行提取请求
+    NSArray *objects = [self.managedObjectContext executeFetchRequest:request error:&error];
+    
+    if (objects == nil)
+    {
+        NSLog(@"There was an error!");
+        return NO;
+    }
+    else{
+        if ([objects count]>0) {
+            return YES;
+        }
+        else{
+            return NO;
+        }
+        
+    }
+}
+
 -(BOOL)isDeviceExist:(DeviceModel*)model{
     //获取应用程序委托的引用，再用引用获取创建好的托管对象上下文。
     NSError *error;

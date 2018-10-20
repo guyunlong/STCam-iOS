@@ -10,6 +10,7 @@
 #import "PrefixHeader.h"
 #import "MJRefresh.h"
 #import "RecordListCell.h"
+#import "PlayBackController.h"
 @interface RecordListController ()<UITableViewDataSource, UITableViewDelegate>
 @property(nonatomic,strong)UITableView * mTableView;
 @end
@@ -98,8 +99,6 @@
 
 
 
-
-
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -128,8 +127,17 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    if (![_viewModel.model IsConnect]) {
+        [self showHint:@"string_ConnectFail".localizedString];
+        return;
+    }
     
-    
+    PlayBackController * ctl = [PlayBackController new];
+    PlayBackViewModel * viewModel = [PlayBackViewModel new];
+    [viewModel setVideoModel:_viewModel.recordFileArray[indexPath.row]];
+    [viewModel setDeviceModel:_viewModel.model];
+    [ctl setViewModel:viewModel];
+    [self.navigationController pushViewController:ctl animated:YES];
     
     
 }

@@ -85,6 +85,8 @@
 		A4434D9D217AFC6C00BDA9F2 /* SDVideoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A4434D9C217AFC6C00BDA9F2 /* SDVideoModel.m */; };
 		A4434DA1217B009A00BDA9F2 /* RecordListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4434D9F217B009A00BDA9F2 /* RecordListCell.m */; };
 		A4434DA2217B009A00BDA9F2 /* RecordListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4434DA0217B009A00BDA9F2 /* RecordListCell.xib */; };
+		A4434DA5217B140B00BDA9F2 /* PlayBackController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4434DA4217B140B00BDA9F2 /* PlayBackController.m */; };
+		A4434DA8217B144F00BDA9F2 /* PlayBackViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A4434DA7217B144F00BDA9F2 /* PlayBackViewModel.m */; };
 		A452A9AC21762BEF00E40A5F /* WCQRCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A452A9AB21762BEF00E40A5F /* WCQRCodeVC.m */; };
 		A452A9AF21762C4500E40A5F /* MBProgressHUD+SGQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = A452A9AE21762C4500E40A5F /* MBProgressHUD+SGQRCode.m */; };
 		A45934E02164A5320018A61B /* BasicTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = A45934DF2164A5320018A61B /* BasicTextField.m */; };
@@ -483,6 +485,10 @@
 		A4434D9E217B009A00BDA9F2 /* RecordListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecordListCell.h; sourceTree = "<group>"; };
 		A4434D9F217B009A00BDA9F2 /* RecordListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecordListCell.m; sourceTree = "<group>"; };
 		A4434DA0217B009A00BDA9F2 /* RecordListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecordListCell.xib; sourceTree = "<group>"; };
+		A4434DA3217B140B00BDA9F2 /* PlayBackController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayBackController.h; sourceTree = "<group>"; };
+		A4434DA4217B140B00BDA9F2 /* PlayBackController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayBackController.m; sourceTree = "<group>"; };
+		A4434DA6217B144F00BDA9F2 /* PlayBackViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayBackViewModel.h; sourceTree = "<group>"; };
+		A4434DA7217B144F00BDA9F2 /* PlayBackViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayBackViewModel.m; sourceTree = "<group>"; };
 		A452A9AA21762BEF00E40A5F /* WCQRCodeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WCQRCodeVC.h; sourceTree = "<group>"; };
 		A452A9AB21762BEF00E40A5F /* WCQRCodeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WCQRCodeVC.m; sourceTree = "<group>"; };
 		A452A9AD21762C4500E40A5F /* MBProgressHUD+SGQRCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+SGQRCode.h"; sourceTree = "<group>"; };
@@ -1133,6 +1139,8 @@
 				A4BC3659216F983900FDCBF5 /* AlarmListViewModel.m */,
 				A4434D98217AE68A00BDA9F2 /* RecordListViewModel.h */,
 				A4434D99217AE68A00BDA9F2 /* RecordListViewModel.m */,
+				A4434DA6217B144F00BDA9F2 /* PlayBackViewModel.h */,
+				A4434DA7217B144F00BDA9F2 /* PlayBackViewModel.m */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1229,6 +1237,8 @@
 				A452A9AB21762BEF00E40A5F /* WCQRCodeVC.m */,
 				A4434D95217AE62C00BDA9F2 /* RecordListController.h */,
 				A4434D96217AE62C00BDA9F2 /* RecordListController.m */,
+				A4434DA3217B140B00BDA9F2 /* PlayBackController.h */,
+				A4434DA4217B140B00BDA9F2 /* PlayBackController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1560,6 +1570,7 @@
 				A4AE327421342EFD0036212B /* UIView+Layout.m in Sources */,
 				A442C2AC213199A100198910 /* List.c in Sources */,
 				A4AE327921342EFD0036212B /* UIColor+expanded.m in Sources */,
+				A4434DA5217B140B00BDA9F2 /* PlayBackController.m in Sources */,
 				A442C2B2213199A100198910 /* audio_g711.c in Sources */,
 				A452A9AF21762C4500E40A5F /* MBProgressHUD+SGQRCode.m in Sources */,
 				A4CFFE6E2168656000A93B72 /* LiveVidController.m in Sources */,
@@ -1571,6 +1582,7 @@
 				A4AE70BD2167AEF600614024 /* DevListCell.m in Sources */,
 				A4434D94217AD99200BDA9F2 /* SoundButton.m in Sources */,
 				A47041B2216E1CAD007163C8 /* MediaDetailController.m in Sources */,
+				A4434DA8217B144F00BDA9F2 /* PlayBackViewModel.m in Sources */,
 				A4434D9A217AE68A00BDA9F2 /* RecordListViewModel.m in Sources */,
 				A439458B217360960047E00C /* DeviceSettingController.m in Sources */,
 				A47041B5216E1E2B007163C8 /* MediaDetailCCell.m in Sources */,
