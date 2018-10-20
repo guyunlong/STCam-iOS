@@ -17,6 +17,7 @@
 @property(nonatomic,strong)UITableView * mTableView;
 @property(nonatomic,strong)UIButton  * deleteButton;//删除按钮
 @property(nonatomic,strong)NSMutableArray  * rowsArray;//列表数据
+@property(nonatomic,strong)UIAlertController  *changeDeviceNameAlert;//列表数据
 @end
 
 @implementation DeviceSettingController
@@ -57,12 +58,12 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    if(_model){
+    if(self.viewModel){
         STFileManager * manager = [STFileManager sharedManager];
         if (![manager fileExistsForUrl:@"Thumbnail"]) {
             [manager createDirectoryNamed:@"Thumbnail"];
         }
-        NSString * fileName = [manager localPathForFile:[NSString stringWithFormat:@"%@.png",self.model.SN] inDirectory:@"Thumbnail"];
+        NSString * fileName = [manager localPathForFile:[NSString stringWithFormat:@"%@.png",self.viewModel.model.SN] inDirectory:@"Thumbnail"];
         UIImage * image  =[UIImage imageWithContentsOfFile:fileName];
         if (image) {
             [_devThumbView setImage:image];
@@ -72,9 +73,9 @@
             [_devThumbView setImage:[UIImage imageNamed:@"imagethumb"]];
         }
         
-        [_snLabel setText:[NSString stringWithFormat:@"SN:%@",self.model.SN]];
-        if ([self.model.IPUID length] == 20) {
-             [_uidLabel setText:[NSString stringWithFormat:@"UID:%@",self.model.IPUID]];
+        [_snLabel setText:[NSString stringWithFormat:@"SN:%@",self.viewModel.model.SN]];
+        if ([self.viewModel.model.IPUID length] == 20) {
+             [_uidLabel setText:[NSString stringWithFormat:@"UID:%@",self.viewModel.model.IPUID]];
             [_snLabel mas_updateConstraints:^(MASConstraintMaker *make) {
                 make.bottom.mas_equalTo(self.devThumbView.mas_centerY).with.offset(-kPadding/3);
             }];
@@ -88,7 +89,7 @@
         }
         
         InfoModel * model0 = [_rowsArray objectAtIndex:0];
-        [model0 setInfo:_model.DevName];
+        [model0 setInfo:_viewModel.model.DevName];
         [self.mTableView reloadData];
        
     }
@@ -123,9 +124,7 @@
     
     _mTableView = ({
         UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-        
         tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        [tableView setUserInteractionEnabled:NO];
         tableView.dataSource = self;
         tableView.delegate = self;
         tableView;
@@ -197,11 +196,70 @@
 {
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    //    MediaDetailController *ctl = [MediaDetailController new];
-    //    [ctl setHidesBottomBarWhenPushed:YES];
-    //    [ctl setModel:_devListViewModel.deviceArray[indexPath.row]];
-    //    [self.navigationController pushViewController:ctl animated:YES];
+    NSInteger row = indexPath.row;
+    if (0 == row) {
+        if (![_viewModel.model IsConnect])
+        {
+            [self showHint:@"action_net_not_connect".localizedString];
+            return;
+        }
+        [self presentViewController:self.changeDeviceNameAlert animated:YES completion:nil];
+    }
+  
+}
+
+#pragma Methods
+-(void)changeDeviceName:(NSString*)deviceName{
+    @weakify(self)
+    [self showHudInView:self.view hint:@""];
+    [[[self.viewModel racChangeDeviceName:deviceName]
+      deliverOn:[RACScheduler mainThreadScheduler]]
+     subscribeNext:^(id x) {
+         @strongify(self)
+         [self hideHud];
+         if([x integerValue] == 1){
+             [self showHint:@"action_Success".localizedString];
+             InfoModel * model0 = [self.rowsArray objectAtIndex:0];
+             [model0 setInfo:self.viewModel.model.DevName];
+             [self.mTableView reloadData];
+         }
+         else{
+             [self showHint:@"action_Failed".localizedString];
+         }
+     }];
+}
+#pragma getter
+-(UIAlertController*)changeDeviceNameAlert{
+    if (!_changeDeviceNameAlert) {
+        @weakify(self)
+        _changeDeviceNameAlert = [UIAlertController alertControllerWithTitle:@"action_change_device_name".localizedString message:nil preferredStyle:UIAlertControllerStyleAlert];
+        [_changeDeviceNameAlert addTextFieldWithConfigurationHandler:^(UITextField *textField){
+            @strongify(self)
+            textField.placeholder = @"device_name".localizedString;
+            textField.text = self.viewModel.model.DevName;
+        }];
+        
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"cancel".localizedString style:UIAlertActionStyleCancel handler:nil];
+        
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK".localizedString style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            @strongify(self)
+            UITextField *inputInfo = self.changeDeviceNameAlert.textFields.firstObject;
+            
+            NSString * devName =inputInfo.text;
+            if ([devName length] == 0) {
+                [self showHint:@"error_field_required".localizedString];
+                return ;
+            }
+            
+            [self changeDeviceName:devName];
+            
+        }];
+        
+        [_changeDeviceNameAlert addAction:cancelAction];
+        [_changeDeviceNameAlert addAction:okAction];
+     
+    }
+    return _changeDeviceNameAlert;
 }
 
 @end

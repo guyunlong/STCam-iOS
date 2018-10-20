@@ -11,6 +11,7 @@
 		9DAC4BB22175BC9E00AC8916 /* GenerateShareQRCodeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC4BB12175BC9E00AC8916 /* GenerateShareQRCodeController.m */; };
 		9DAC4BB82175C7EB00AC8916 /* DevShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC4BB72175C7EB00AC8916 /* DevShareModel.m */; };
 		9DAC4BE02175F45800AC8916 /* AddDeviceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC4BDF2175F45800AC8916 /* AddDeviceController.m */; };
+		A40C8693217B6DD800D82B6B /* DeviceSettingViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A40C8692217B6DD800D82B6B /* DeviceSettingViewModel.m */; };
 		A4134F932165F78500831B8D /* AccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A4134F922165F78500831B8D /* AccountManager.m */; };
 		A43853DB21675A1500B8CC56 /* DeviceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A43853DA21675A1500B8CC56 /* DeviceModel.m */; };
 		A4394584217356B40047E00C /* CommonSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4394582217356B40047E00C /* CommonSettingCell.m */; };
@@ -187,6 +188,8 @@
 		9DAC4BDE2175F45800AC8916 /* AddDeviceController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddDeviceController.h; sourceTree = "<group>"; };
 		9DAC4BDF2175F45800AC8916 /* AddDeviceController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddDeviceController.m; sourceTree = "<group>"; };
 		9DD31CBA2170411900EB4708 /* STCam.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = STCam.entitlements; sourceTree = "<group>"; };
+		A40C8691217B6DD800D82B6B /* DeviceSettingViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceSettingViewModel.h; sourceTree = "<group>"; };
+		A40C8692217B6DD800D82B6B /* DeviceSettingViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceSettingViewModel.m; sourceTree = "<group>"; };
 		A4134F912165F78500831B8D /* AccountManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccountManager.h; sourceTree = "<group>"; };
 		A4134F922165F78500831B8D /* AccountManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountManager.m; sourceTree = "<group>"; };
 		A43853D921675A1500B8CC56 /* DeviceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceModel.h; sourceTree = "<group>"; };
@@ -1141,6 +1144,8 @@
 				A4434D99217AE68A00BDA9F2 /* RecordListViewModel.m */,
 				A4434DA6217B144F00BDA9F2 /* PlayBackViewModel.h */,
 				A4434DA7217B144F00BDA9F2 /* PlayBackViewModel.m */,
+				A40C8691217B6DD800D82B6B /* DeviceSettingViewModel.h */,
+				A40C8692217B6DD800D82B6B /* DeviceSettingViewModel.m */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1585,6 +1590,7 @@
 				A4434DA8217B144F00BDA9F2 /* PlayBackViewModel.m in Sources */,
 				A4434D9A217AE68A00BDA9F2 /* RecordListViewModel.m in Sources */,
 				A439458B217360960047E00C /* DeviceSettingController.m in Sources */,
+				A40C8693217B6DD800D82B6B /* DeviceSettingViewModel.m in Sources */,
 				A47041B5216E1E2B007163C8 /* MediaDetailCCell.m in Sources */,
 				A452A9AC21762BEF00E40A5F /* WCQRCodeVC.m in Sources */,
 				A470AA912163BE050068AA80 /* UIButton+Common.m in Sources */,

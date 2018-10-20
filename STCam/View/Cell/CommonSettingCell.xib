@@ -39,9 +39,9 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lcu-ma-70I">
-                        <rect key="frame" x="247" y="35" width="100" height="21"/>
+                        <rect key="frame" x="147" y="35" width="200" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="100" id="2sq-Ut-OUA"/>
+                            <constraint firstAttribute="width" constant="200" id="2sq-Ut-OUA"/>
                             <constraint firstAttribute="height" constant="21" id="Fdz-BD-kqZ"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>

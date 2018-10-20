@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "RootViewController.h"
-#import "DeviceModel.h"
+#import "DeviceSettingViewModel.h"
 @interface DeviceSettingController : UIViewController
-@property(nonatomic,strong)DeviceModel * model;
+@property(nonatomic,strong)DeviceSettingViewModel * viewModel;
 @end

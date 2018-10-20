@@ -202,7 +202,9 @@
         if(type == DeviceListBtnType_Setting){
             
             DeviceSettingController * ctl = [DeviceSettingController new];
-            [ctl setModel:self.viewModel.deviceArray[indexPath.row]];
+            DeviceSettingViewModel * viewModel = [DeviceSettingViewModel new];
+            [viewModel setModel:self.viewModel.deviceArray[indexPath.row]];
+            [ctl setViewModel:viewModel];
             ctl.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:ctl animated:YES];
         }
