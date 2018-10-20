@@ -17,6 +17,8 @@
 #import "DeviceSettingController.h"
 #import "GenerateShareQRCodeController.h"
 #import "AddDeviceController.h"
+
+#import "RecordListController.h"
 @interface DevListViewController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property(nonatomic,strong)UITableView * mTableView;
@@ -179,21 +181,47 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     DevListCell * cell = [DevListCell DevListCellWith:tableView indexPath:indexPath];
+    
     [cell setModel:_viewModel.deviceArray[indexPath.row]];
+    
     @weakify(self)
-    cell.btnClickBlock = ^(NSInteger channel){
+    cell.btnClickBlock = ^(DeviceListBtnType type){
+        
         @strongify(self)
-        if(1 == channel){
+        DeviceModel * blockModel = self.viewModel.deviceArray[indexPath.row];
+        if (type != DeviceListBtnType_Setting) {
+            if (![blockModel isOnline]) {
+                [self showHint:@"device_status_offline".localizedString];
+                return ;
+            }
+            else if(![blockModel IsConnect]){
+                [self showHint:@"action_net_not_connect".localizedString];
+                return;
+            }
+        }
+        if(type == DeviceListBtnType_Setting){
             
             DeviceSettingController * ctl = [DeviceSettingController new];
             [ctl setModel:self.viewModel.deviceArray[indexPath.row]];
             ctl.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:ctl animated:YES];
         }
-        if(2 == channel){
+        else if(type == DeviceListBtnType_Share){
             
             GenerateShareQRCodeController * ctl = [GenerateShareQRCodeController new];
             [ctl setModel:self.viewModel.deviceArray[indexPath.row]];
+            ctl.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:ctl animated:YES];
+        }
+        else if(type == DeviceListBtnType_Playback){
+            if (!blockModel.ExistSD) {
+                [self showHint:@"action_not_exist_sd".localizedString];
+                return;
+            }
+            RecordListController * ctl = [RecordListController new];
+            RecordListViewModel * viewModel = [RecordListViewModel new];
+            [viewModel setModel:blockModel];
+            [ctl setViewModel:viewModel];
             ctl.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:ctl animated:YES];
         }
@@ -211,7 +239,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     DeviceModel * model = _viewModel.deviceArray[indexPath.row];
     if (![model isOnline]) {
         [self showHint:@"device_status_offline".localizedString];

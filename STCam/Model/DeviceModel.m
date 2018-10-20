@@ -181,6 +181,18 @@
             [self Connect];
         }
         if ([self IsConnect]) {
+            char conv[1024 * 64];
+            char* tmpBuf = NULL;
+            conv[0] = 0x00;
+            tmpBuf = thNet_GetAllCfg((HANDLE) self.NetHandle);
+            code_convert_name("gb2312", "utf8", tmpBuf,strlen(tmpBuf), conv, sizeof(conv));
+            NSString * deviceInfoStr  = [[NSString alloc] initWithUTF8String:conv];
+            
+            NSData *utf8Data = [deviceInfoStr dataUsingEncoding:NSUTF8StringEncoding];
+            NSError *error;
+            id deviceInfoDic = [NSJSONSerialization JSONObjectWithData:utf8Data options:NSJSONReadingMutableLeaves error:&error];
+            
+            self.ExistSD = [[[deviceInfoDic objectForKey:@"DevInfo"] objectForKey:@"ExistSD"] boolValue];
             
         }
         DevListViewModel * listViewModel = [DevListViewModel sharedDevListViewModel];

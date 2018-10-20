@@ -53,7 +53,7 @@ typedef NS_ENUM(NSInteger, ConnType){
 @property(nonatomic,assign)  BOOL IsShare;
 @property(nonatomic,assign)  BOOL IsRec;
 @property(nonatomic,assign)  BOOL IsSnapshot;
-
+@property(nonatomic,assign)  BOOL ExistSD;
 /**
  根据不同的连接类型返回对应的颜色
 

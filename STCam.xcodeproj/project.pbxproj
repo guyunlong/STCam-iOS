@@ -79,9 +79,9 @@
 		A442C3D2213199A100198910 /* msvidctl.tlb in Resources */ = {isa = PBXBuildFile; fileRef = A442C223213199A100198910 /* msvidctl.tlb */; };
 		A442C3D3213199A100198910 /* tuner.tlb in Resources */ = {isa = PBXBuildFile; fileRef = A442C228213199A100198910 /* tuner.tlb */; };
 		A442C3D4213199A100198910 /* d3dxmath.inl in Resources */ = {isa = PBXBuildFile; fileRef = A442C229213199A100198910 /* d3dxmath.inl */; };
-		A4434D90217AD7A800BDA9F2 /* soundsnapshot.wav in Resources */ = {isa = PBXBuildFile; fileRef = A4434D8E217AD7A800BDA9F2 /* soundsnapshot.wav */; };
-		A4434D91217AD7A800BDA9F2 /* soundkeypress.wav in Resources */ = {isa = PBXBuildFile; fileRef = A4434D8F217AD7A800BDA9F2 /* soundkeypress.wav */; };
 		A4434D94217AD99200BDA9F2 /* SoundButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A4434D93217AD99200BDA9F2 /* SoundButton.m */; };
+		A4434D97217AE62C00BDA9F2 /* RecordListController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4434D96217AE62C00BDA9F2 /* RecordListController.m */; };
+		A4434D9A217AE68A00BDA9F2 /* RecordListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A4434D99217AE68A00BDA9F2 /* RecordListViewModel.m */; };
 		A452A9AC21762BEF00E40A5F /* WCQRCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A452A9AB21762BEF00E40A5F /* WCQRCodeVC.m */; };
 		A452A9AF21762C4500E40A5F /* MBProgressHUD+SGQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = A452A9AE21762C4500E40A5F /* MBProgressHUD+SGQRCode.m */; };
 		A45934E02164A5320018A61B /* BasicTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = A45934DF2164A5320018A61B /* BasicTextField.m */; };
@@ -469,10 +469,12 @@
 		A442C2A4213199A100198910 /* cm_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cm_types.h; sourceTree = "<group>"; };
 		A442C2A5213199A100198910 /* avDecode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = avDecode.h; sourceTree = "<group>"; };
 		A442C2A6213199A100198910 /* libthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libthSDK.h; sourceTree = "<group>"; };
-		A4434D8E217AD7A800BDA9F2 /* soundsnapshot.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = soundsnapshot.wav; sourceTree = "<group>"; };
-		A4434D8F217AD7A800BDA9F2 /* soundkeypress.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = soundkeypress.wav; sourceTree = "<group>"; };
 		A4434D92217AD99200BDA9F2 /* SoundButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SoundButton.h; sourceTree = "<group>"; };
 		A4434D93217AD99200BDA9F2 /* SoundButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SoundButton.m; sourceTree = "<group>"; };
+		A4434D95217AE62C00BDA9F2 /* RecordListController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecordListController.h; sourceTree = "<group>"; };
+		A4434D96217AE62C00BDA9F2 /* RecordListController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecordListController.m; sourceTree = "<group>"; };
+		A4434D98217AE68A00BDA9F2 /* RecordListViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecordListViewModel.h; sourceTree = "<group>"; };
+		A4434D99217AE68A00BDA9F2 /* RecordListViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecordListViewModel.m; sourceTree = "<group>"; };
 		A452A9AA21762BEF00E40A5F /* WCQRCodeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WCQRCodeVC.h; sourceTree = "<group>"; };
 		A452A9AB21762BEF00E40A5F /* WCQRCodeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WCQRCodeVC.m; sourceTree = "<group>"; };
 		A452A9AD21762C4500E40A5F /* MBProgressHUD+SGQRCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+SGQRCode.h"; sourceTree = "<group>"; };
@@ -1054,16 +1056,6 @@
 			path = dshowidl;
 			sourceTree = "<group>";
 		};
-		A4434D8D217AD7A800BDA9F2 /* Raw */ = {
-			isa = PBXGroup;
-			children = (
-				A4434D8E217AD7A800BDA9F2 /* soundsnapshot.wav */,
-				A4434D8F217AD7A800BDA9F2 /* soundkeypress.wav */,
-			);
-			name = Raw;
-			path = STCam/Raw;
-			sourceTree = "<group>";
-		};
 		A45934DC2164A4FA0018A61B /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -1129,6 +1121,8 @@
 				A4CFFE70216865A200A93B72 /* LiveVidViewModel.m */,
 				A4BC3658216F983900FDCBF5 /* AlarmListViewModel.h */,
 				A4BC3659216F983900FDCBF5 /* AlarmListViewModel.m */,
+				A4434D98217AE68A00BDA9F2 /* RecordListViewModel.h */,
+				A4434D99217AE68A00BDA9F2 /* RecordListViewModel.m */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1138,7 +1132,6 @@
 			children = (
 				A470AA8B21636FFC0068AA80 /* Localizable.strings */,
 				A4AE327D21342FDB0036212B /* PrefixHeader.h */,
-				A4434D8D217AD7A800BDA9F2 /* Raw */,
 				A4DC4229212C5B83005663F3 /* thSDK */,
 				A4946FF3212C5B460015990C /* STCam */,
 				A494700C212C5B470015990C /* STCamTests */,
@@ -1224,6 +1217,8 @@
 				9DAC4BDF2175F45800AC8916 /* AddDeviceController.m */,
 				A452A9AA21762BEF00E40A5F /* WCQRCodeVC.h */,
 				A452A9AB21762BEF00E40A5F /* WCQRCodeVC.m */,
+				A4434D95217AE62C00BDA9F2 /* RecordListController.h */,
+				A4434D96217AE62C00BDA9F2 /* RecordListController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1419,7 +1414,6 @@
 				A442C3AD213199A100198910 /* Mstvca.idl in Resources */,
 				A4394585217356B40047E00C /* CommonSettingCell.xib in Resources */,
 				A442C3BE213199A100198910 /* qedit.idl in Resources */,
-				A4434D91217AD7A800BDA9F2 /* soundkeypress.wav in Resources */,
 				A442C3BA213199A100198910 /* Mpeg2Data.idl in Resources */,
 				A442C3AE213199A100198910 /* mixerocx.idl in Resources */,
 				A442C3CE213199A100198910 /* devenum.idl in Resources */,
@@ -1459,7 +1453,6 @@
 				A442C3D1213199A100198910 /* d3dx8math.inl in Resources */,
 				A442C3C4213199A100198910 /* bdaiface.idl in Resources */,
 				A442C3D2213199A100198910 /* msvidctl.tlb in Resources */,
-				A4434D90217AD7A800BDA9F2 /* soundsnapshot.wav in Resources */,
 				A47041AF216E14FA007163C8 /* DevMediaCell.xib in Resources */,
 				A442C3BC213199A100198910 /* dmodshow.idl in Resources */,
 				A442C3C9213199A100198910 /* medparam.idl in Resources */,
@@ -1543,6 +1536,7 @@
 				A4AE32472134275C0036212B /* AlarmListViewController.m in Sources */,
 				A4AE327C21342EFD0036212B /* NSDate+convenience.m in Sources */,
 				A4134F932165F78500831B8D /* AccountManager.m in Sources */,
+				A4434D97217AE62C00BDA9F2 /* RecordListController.m in Sources */,
 				A4CFFE772168BAB100A93B72 /* Model.xcdatamodeld in Sources */,
 				A4CFFE832168C7B600A93B72 /* VideoBufferParser.m in Sources */,
 				A4CFFE842168C7B600A93B72 /* AAPLEAGLLayer.m in Sources */,
@@ -1562,6 +1556,7 @@
 				A4AE70BD2167AEF600614024 /* DevListCell.m in Sources */,
 				A4434D94217AD99200BDA9F2 /* SoundButton.m in Sources */,
 				A47041B2216E1CAD007163C8 /* MediaDetailController.m in Sources */,
+				A4434D9A217AE68A00BDA9F2 /* RecordListViewModel.m in Sources */,
 				A439458B217360960047E00C /* DeviceSettingController.m in Sources */,
 				A47041B5216E1E2B007163C8 /* MediaDetailCCell.m in Sources */,
 				A452A9AC21762BEF00E40A5F /* WCQRCodeVC.m in Sources */,

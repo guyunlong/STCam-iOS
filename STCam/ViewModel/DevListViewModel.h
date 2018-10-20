@@ -49,4 +49,6 @@ typedef NS_ENUM(NSInteger, TUserMode){
  @param type 网络连接类型
  */
 -(void)notifyNetworkStatusChanged:(NetWorkConnType)type;
+
+int code_convert_name(char *from_charset, char *to_charset, char *inbuf, size_t inlen, char *outbuf, size_t outlen);
 @end

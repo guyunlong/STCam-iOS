@@ -8,10 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "DeviceModel.h"
-
+typedef NS_ENUM(NSInteger, DeviceListBtnType){
+    DeviceListBtnType_None,
+    DeviceListBtnType_Playback,
+    DeviceListBtnType_Setting,
+    DeviceListBtnType_Share
+};
 @interface DevListCell : UITableViewCell
 @property(nonatomic,strong)DeviceModel * model;
-@property(nonatomic,copy)void (^btnClickBlock)(NSInteger channel);
+@property(nonatomic,copy)void (^btnClickBlock)(DeviceListBtnType type);
 + (instancetype)DevListCellWith:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath;
 +(CGFloat)cellHeight;
 @end

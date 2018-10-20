@@ -92,13 +92,13 @@
 -(void)btnClicked:(id)sender{
     if (_btnClickBlock) {
         if (sender == _settingBtn) {
-            _btnClickBlock(1);
+            _btnClickBlock(DeviceListBtnType_Setting);
         }
         else if (sender == _shareBtn) {
-            _btnClickBlock(2);
+            _btnClickBlock(DeviceListBtnType_Share);
         }
         else if (sender == _playBackBtn) {
-            _btnClickBlock(1);
+            _btnClickBlock(DeviceListBtnType_Playback);
         }
     }
     
