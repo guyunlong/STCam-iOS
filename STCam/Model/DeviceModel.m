@@ -255,4 +255,40 @@
 //        }
 //    }.start();
 }
+
+-(NSString*)getDevURL:(int)MsgID{
+    // return String.format("http://%s:%d/cfg1.cgi?User=%s&Psd=%s&MsgID=%d", IPUID, WebPort, usr, pwd, MsgID);
+    return [NSString stringWithFormat:@"http://%@:%ld/cfg1.cgi?User=%@&Psd=%@&MsgID=%d", _IPUID, _WebPort, _User, _Pwd, MsgID];
+}
+
+-(id)thNetHttpGet:(NSString*)url{
+    int ret;
+    int BufLen = 0;
+    char Buf[1024 * 64];
+    char conv[1024 * 64];
+    Buf[0] = 0x00;
+    conv[0] = 0x00;
+    
+    code_convert_name("utf8", "gb2312",(char *) [url UTF8String],strlen([url UTF8String]), conv, sizeof(conv));
+    //UcnvConvert_UTF8toGB2312(conv, sizeof(conv), url, &pnErrC);
+    
+   
+    ret = thNet_HttpGet(_NetHandle, conv, Buf, &BufLen);
+    if (ret)
+    {
+        memset(conv, 0, sizeof(conv));
+        //UcnvConvert_GB2312toUTF8(conv, sizeof(conv), Buf, &pnErrC);
+        
+        code_convert_name("gb2312", "utf8",Buf,strlen(Buf), conv, sizeof(conv));
+        
+        NSString * retStr  = [[NSString alloc] initWithUTF8String:conv];
+        
+        NSData *utf8Data = [retStr dataUsingEncoding:NSUTF8StringEncoding];
+        NSError *error;
+        id retDic = [NSJSONSerialization JSONObjectWithData:utf8Data options:NSJSONReadingMutableLeaves error:&error];
+        return retDic;
+        
+    }
+    return nil;
+}
 @end

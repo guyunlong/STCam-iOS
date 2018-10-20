@@ -86,4 +86,19 @@ typedef NS_ENUM(NSInteger, ConnType){
  断开连接
  */
 -(void)disconnect;
+
+/**
+ 获得设备请求链接
+
+ @param MsgID 消息id
+ */
+-(NSString*)getDevURL:(int)MsgID;
+
+/**
+ 向设备进行http请求
+
+ @param url url
+ @return 返回数据类型
+ */
+-(id)thNetHttpGet:(NSString*)url;
 @end
