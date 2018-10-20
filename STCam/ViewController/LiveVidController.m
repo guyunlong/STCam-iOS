@@ -9,6 +9,8 @@
 #import "LiveVidController.h"
 #import "PrefixHeader.h"
 #import "AAPLEAGLLayer.h"
+#import "SoundButton.h"
+#import <AudioToolbox/AudioToolbox.h>
 @interface LiveVidController ()<VidViewModelDelegate>
 @property (strong, nonatomic)  AAPLEAGLLayer *glLayer;//视频播放控件
 @property (strong, nonatomic)  UIButton * ledBtn;
@@ -114,6 +116,7 @@
     _recordBtn = [[UIButton alloc] initWithFrame:CGRectMake(secondLineSpan, y+kPadding, secondLineWidth, secondLineWidth)];
     _speechBtn = [[UIButton alloc] initWithFrame:CGRectMake(secondLineSpan*2+secondLineWidth, y+kPadding, speechWidth, speechWidth)];
     _snapShotBtn = [[UIButton alloc] initWithFrame:CGRectMake(secondLineSpan*3+secondLineWidth+speechWidth, y+kPadding, secondLineWidth, secondLineWidth)];
+   
     [_recordBtn setImage:[UIImage imageNamed:@"liverecord_nor"] forState:UIControlStateNormal];
     [_recordBtn setImage:[UIImage imageNamed:@"liverecord_sel"] forState:UIControlStateSelected];
     [_speechBtn setBackgroundImage:[UIImage imageNamed:@"livespeech_nor"] forState:UIControlStateNormal];
@@ -128,6 +131,7 @@
     [_hdBtn addTarget:self action:@selector(controlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [_playAudioBtn addTarget:self action:@selector(controlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [_snapShotBtn addTarget:self action:@selector(controlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+     [_recordBtn addTarget:self action:@selector(controlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     
     /**********landscape buttons*************/
@@ -157,13 +161,28 @@
         [_hdBtn_land setSelected:1-_viewModel.sub];
     }
     else if([sender isEqual:_playAudioBtn] || [sender isEqual:_playAudioBtn_land]){
+       
         _viewModel.openaud = 1- _viewModel.openaud;
         [_viewModel openAud:_viewModel.openaud];
         [_playAudioBtn setSelected:_viewModel.openaud];
         [_playAudioBtn_land setSelected:_viewModel.openaud];
+        
+        
     }
     else if([sender isEqual:_snapShotBtn] || [sender isEqual:_snapShotBtn_land]){
         _viewModel.snapShot = YES;
+        AudioServicesPlaySystemSound(1108);
+    }
+    else if([sender isEqual:_recordBtn] || [sender isEqual:_recordBtn_land]){
+        _viewModel.isRcord = !_viewModel.isRcord;
+        if (_viewModel.isRcord) {
+            AudioServicesPlaySystemSound(1117);
+        }
+        else{
+            AudioServicesPlaySystemSound(1118);
+        }
+        
+        
     }
 }
 #pragma methods
@@ -224,6 +243,8 @@
         _speechBtn_land = [[UIButton alloc] initWithFrame:CGRectMake(kScreenHeight - 2*kPadding - secondLineWidth-(speechWidth-secondLineWidth)/2, kScreenWidth/2-speechWidth/2, speechWidth, speechWidth)];
         _snapShotBtn_land = [[UIButton alloc] initWithFrame:CGRectMake(kScreenHeight - 2*kPadding - secondLineWidth, kScreenWidth-2*kPadding-secondLineWidth, secondLineWidth, secondLineWidth)];
         
+      
+        
         [self.view addSubview:_recordBtn_land];
         [self.view addSubview:_speechBtn_land];
         [self.view addSubview:_snapShotBtn_land];
@@ -242,6 +263,7 @@
         [_recordBtn_land addTarget:self action:@selector(controlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         [_speechBtn_land addTarget:self action:@selector(controlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         [_snapShotBtn_land addTarget:self action:@selector(controlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        
     }
     
     [_ledBtn_land setHidden:NO];

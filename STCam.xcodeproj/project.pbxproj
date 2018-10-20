@@ -79,6 +79,9 @@
 		A442C3D2213199A100198910 /* msvidctl.tlb in Resources */ = {isa = PBXBuildFile; fileRef = A442C223213199A100198910 /* msvidctl.tlb */; };
 		A442C3D3213199A100198910 /* tuner.tlb in Resources */ = {isa = PBXBuildFile; fileRef = A442C228213199A100198910 /* tuner.tlb */; };
 		A442C3D4213199A100198910 /* d3dxmath.inl in Resources */ = {isa = PBXBuildFile; fileRef = A442C229213199A100198910 /* d3dxmath.inl */; };
+		A4434D90217AD7A800BDA9F2 /* soundsnapshot.wav in Resources */ = {isa = PBXBuildFile; fileRef = A4434D8E217AD7A800BDA9F2 /* soundsnapshot.wav */; };
+		A4434D91217AD7A800BDA9F2 /* soundkeypress.wav in Resources */ = {isa = PBXBuildFile; fileRef = A4434D8F217AD7A800BDA9F2 /* soundkeypress.wav */; };
+		A4434D94217AD99200BDA9F2 /* SoundButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A4434D93217AD99200BDA9F2 /* SoundButton.m */; };
 		A452A9AC21762BEF00E40A5F /* WCQRCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A452A9AB21762BEF00E40A5F /* WCQRCodeVC.m */; };
 		A452A9AF21762C4500E40A5F /* MBProgressHUD+SGQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = A452A9AE21762C4500E40A5F /* MBProgressHUD+SGQRCode.m */; };
 		A45934E02164A5320018A61B /* BasicTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = A45934DF2164A5320018A61B /* BasicTextField.m */; };
@@ -466,6 +469,10 @@
 		A442C2A4213199A100198910 /* cm_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cm_types.h; sourceTree = "<group>"; };
 		A442C2A5213199A100198910 /* avDecode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = avDecode.h; sourceTree = "<group>"; };
 		A442C2A6213199A100198910 /* libthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libthSDK.h; sourceTree = "<group>"; };
+		A4434D8E217AD7A800BDA9F2 /* soundsnapshot.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = soundsnapshot.wav; sourceTree = "<group>"; };
+		A4434D8F217AD7A800BDA9F2 /* soundkeypress.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = soundkeypress.wav; sourceTree = "<group>"; };
+		A4434D92217AD99200BDA9F2 /* SoundButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SoundButton.h; sourceTree = "<group>"; };
+		A4434D93217AD99200BDA9F2 /* SoundButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SoundButton.m; sourceTree = "<group>"; };
 		A452A9AA21762BEF00E40A5F /* WCQRCodeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WCQRCodeVC.h; sourceTree = "<group>"; };
 		A452A9AB21762BEF00E40A5F /* WCQRCodeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WCQRCodeVC.m; sourceTree = "<group>"; };
 		A452A9AD21762C4500E40A5F /* MBProgressHUD+SGQRCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+SGQRCode.h"; sourceTree = "<group>"; };
@@ -607,11 +614,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A46F7B092132CF5400854DB8 /* AudioToolbox.framework in Frameworks */,
 				A46F7AF92132CD8C00854DB8 /* libiconv.tbd in Frameworks */,
 				A4CFFE862168C7D500A93B72 /* AVKit.framework in Frameworks */,
 				A46F7B0D2132D03500854DB8 /* CoreMedia.framework in Frameworks */,
 				A46F7B0B2132CF9100854DB8 /* AVFoundation.framework in Frameworks */,
-				A46F7B092132CF5400854DB8 /* AudioToolbox.framework in Frameworks */,
 				A46F7B072132CF2300854DB8 /* libiconv.2.tbd in Frameworks */,
 				A46F7B022132CEDC00854DB8 /* libIOTCAPIs_P2PTunnelT.a in Frameworks */,
 				A46F7B032132CEDC00854DB8 /* libIOTCAPIs_P2PTunnel.a in Frameworks */,
@@ -1047,6 +1054,16 @@
 			path = dshowidl;
 			sourceTree = "<group>";
 		};
+		A4434D8D217AD7A800BDA9F2 /* Raw */ = {
+			isa = PBXGroup;
+			children = (
+				A4434D8E217AD7A800BDA9F2 /* soundsnapshot.wav */,
+				A4434D8F217AD7A800BDA9F2 /* soundkeypress.wav */,
+			);
+			name = Raw;
+			path = STCam/Raw;
+			sourceTree = "<group>";
+		};
 		A45934DC2164A4FA0018A61B /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -1063,6 +1080,8 @@
 				A45934DF2164A5320018A61B /* BasicTextField.m */,
 				A45934E12164A5FF0018A61B /* LoginBackgroundView.h */,
 				A45934E22164A5FF0018A61B /* LoginBackgroundView.m */,
+				A4434D92217AD99200BDA9F2 /* SoundButton.h */,
+				A4434D93217AD99200BDA9F2 /* SoundButton.m */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -1119,6 +1138,7 @@
 			children = (
 				A470AA8B21636FFC0068AA80 /* Localizable.strings */,
 				A4AE327D21342FDB0036212B /* PrefixHeader.h */,
+				A4434D8D217AD7A800BDA9F2 /* Raw */,
 				A4DC4229212C5B83005663F3 /* thSDK */,
 				A4946FF3212C5B460015990C /* STCam */,
 				A494700C212C5B470015990C /* STCamTests */,
@@ -1399,6 +1419,7 @@
 				A442C3AD213199A100198910 /* Mstvca.idl in Resources */,
 				A4394585217356B40047E00C /* CommonSettingCell.xib in Resources */,
 				A442C3BE213199A100198910 /* qedit.idl in Resources */,
+				A4434D91217AD7A800BDA9F2 /* soundkeypress.wav in Resources */,
 				A442C3BA213199A100198910 /* Mpeg2Data.idl in Resources */,
 				A442C3AE213199A100198910 /* mixerocx.idl in Resources */,
 				A442C3CE213199A100198910 /* devenum.idl in Resources */,
@@ -1438,6 +1459,7 @@
 				A442C3D1213199A100198910 /* d3dx8math.inl in Resources */,
 				A442C3C4213199A100198910 /* bdaiface.idl in Resources */,
 				A442C3D2213199A100198910 /* msvidctl.tlb in Resources */,
+				A4434D90217AD7A800BDA9F2 /* soundsnapshot.wav in Resources */,
 				A47041AF216E14FA007163C8 /* DevMediaCell.xib in Resources */,
 				A442C3BC213199A100198910 /* dmodshow.idl in Resources */,
 				A442C3C9213199A100198910 /* medparam.idl in Resources */,
@@ -1538,6 +1560,7 @@
 				A442C2A8213199A100198910 /* Makefile in Sources */,
 				A4AE327521342EFD0036212B /* UIView+YYAdd.m in Sources */,
 				A4AE70BD2167AEF600614024 /* DevListCell.m in Sources */,
+				A4434D94217AD99200BDA9F2 /* SoundButton.m in Sources */,
 				A47041B2216E1CAD007163C8 /* MediaDetailController.m in Sources */,
 				A439458B217360960047E00C /* DeviceSettingController.m in Sources */,
 				A47041B5216E1E2B007163C8 /* MediaDetailCCell.m in Sources */,

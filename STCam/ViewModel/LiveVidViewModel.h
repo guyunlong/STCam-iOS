@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "DeviceModel.h"
+
+
 @protocol VidViewModelDelegate <NSObject>
 - (void)updateVidView:(CVPixelBufferRef)pixelBuffer;
 @end
@@ -24,6 +26,12 @@
  截屏
  */
 @property(nonatomic,assign)BOOL snapShot;
+
+/**
+ 截屏
+ */
+@property(nonatomic,assign)BOOL isRcord;
+
 /**
  打开视频
  @param sub 辅码流
@@ -45,4 +53,5 @@
  */
 -(void)closeVid;
 @property (nonatomic, weak) id<VidViewModelDelegate> delegate;
+
 @end
