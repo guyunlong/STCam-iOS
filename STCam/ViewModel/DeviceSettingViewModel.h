@@ -40,4 +40,6 @@
 /*************sd卡***************/
 @property(nonatomic,strong)SDInfoModel *mSDInfoModel;//sd卡信息
 -(RACSignal*)racGetDiskCfg;
+-(RACSignal*)racFormattfCard;
+
 @end

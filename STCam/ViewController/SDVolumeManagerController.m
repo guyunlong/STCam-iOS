@@ -10,9 +10,12 @@
 #import "PrefixHeader.h"
 #import "CommonInfoCell.h"
 #import "CommonSwitchCell.h"
+
 @interface SDVolumeManagerController ()<UITableViewDataSource, UITableViewDelegate>
 @property(nonatomic,strong)UITableView * mTableView;
 @property(nonatomic,strong)NSMutableArray  * rowsArray;//列表数据
+@property(nonatomic,strong)UIButton  * formatButton;//格式化按钮
+@property(nonatomic,strong)UIAlertController  *formatConfirmAlertController;//确认格式化按钮
 @end
 
 @implementation SDVolumeManagerController
@@ -83,6 +86,12 @@
     [_mTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
+    
+    _formatButton = [[UIButton alloc] initWithFrame:CGRectMake(2*kPadding, kScreenHeight-250*kWidthCoefficient, kScreenWidth-4*kPadding, kButtonHeight)];
+    [_formatButton setTitle:@"action_sd_format".localizedString forState:UIControlStateNormal];
+    [_formatButton setAppThemeType:ButtonStyleStyleAppTheme];
+    [self.view addSubview:_formatButton];
+    [_formatButton addTarget:self action:@selector(formatButtonClick) forControlEvents:UIControlEventTouchUpInside];
 }
 -(void)initNav{
     [self setTitle:@"string_DevAdvancedSettings_TFManage".localizedString];
@@ -104,6 +113,44 @@
 }
 -(void)back{
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark- method
+
+-(void)formatButtonClick{
+    [self presentViewController:self.formatConfirmAlertController animated:YES completion:nil];
+}
+
+-(void)changeAlarmRecordConfig{
+    
+    [[[self.viewModel racSetRecCfg] filter:^BOOL(id value) {
+        return [value integerValue] == 1;
+    }]
+     
+     subscribeNext:^(id x) {
+         
+     }];
+    
+}
+-(void)formattfCard{
+    [self showHudInView:self.view hint:nil];
+    @weakify(self)
+    [[[self.viewModel racSetPushConfig]
+      deliverOn:[RACScheduler mainThreadScheduler]]
+     subscribeNext:^(id x) {
+         @strongify(self)
+         [self hideHud];;
+         if ([x integerValue] == 1) {
+             [self showHint:@"action_Success".localizedString];
+         }
+         else if([x integerValue] == 2){
+             [self showHint:@"action_Success_Reboot".localizedString];
+         }
+         else{
+             [self showHint:@"action_Failed".localizedString];
+         }
+         
+     }];
 }
 
 #pragma mark - tableView
@@ -131,10 +178,16 @@
     }
     else{
         CommonSwitchCell * cell = [CommonSwitchCell CommonSwitchCellWith:tableView indexPath:indexPath];
+        [cell setOpen:_viewModel.mRecConfigModel.Rec_RecStyle];
         [cell setModel:_rowsArray[indexPath.row]];
+       
         [cell setFrame:CGRectMake(0, 0, kScreenWidth, [CommonInfoCell cellHeight])];
         [tableView addLineforPlainCell:cell forRowAtIndexPath:indexPath withLeftSpace:0];
+        @weakify(self)
         cell.switchValueChangeBlock = ^(BOOL open) {
+            @strongify(self)
+            self.viewModel.mRecConfigModel.Rec_RecStyle = open;
+            [self changeAlarmRecordConfig];
         
         };
         return cell;
@@ -161,10 +214,28 @@
 {
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    
-   
-    
+}
+#pragma getter
+
+-(UIAlertController*)formatConfirmAlertController{
+    if (!_formatConfirmAlertController) {
+        @weakify(self)
+        _formatConfirmAlertController = [UIAlertController alertControllerWithTitle:@"action_format_sd_ask".localizedString message:nil preferredStyle:UIAlertControllerStyleAlert];
+       
+        
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"cancel".localizedString style:UIAlertActionStyleCancel handler:nil];
+        
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK".localizedString style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            @strongify(self)
+            
+            
+        }];
+        
+        [_formatConfirmAlertController addAction:cancelAction];
+        [_formatConfirmAlertController addAction:okAction];
+        
+    }
+    return _formatConfirmAlertController;
 }
 
 @end

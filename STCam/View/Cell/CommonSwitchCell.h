@@ -12,5 +12,6 @@
 @property(nonatomic,strong)InfoModel*model;
 + (instancetype)CommonSwitchCellWith:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath;
 @property(nonatomic,copy)void (^switchValueChangeBlock)(BOOL open);
+@property (nonatomic,assign)BOOL open;
 +(CGFloat)cellHeight;
 @end

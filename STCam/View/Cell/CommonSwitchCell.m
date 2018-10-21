@@ -30,7 +30,7 @@
     [super layoutSubviews];
     if (_model) {
         [_titleLb setText:_model.title];
-        
+        [_swichW setOn:_open];
     }
     
 }
