@@ -10,6 +10,7 @@
 #import "PrefixHeader.h"
 #import "RetModel.h"
 #import "CoreDataManager.h"
+
 @implementation DeviceSettingViewModel
 -(RACSignal*)racChangeDeviceName:(NSString*)deviceName{
     @weakify(self)
@@ -124,6 +125,57 @@
         dispatch_async(quene, ^{
             
             NSString * url = [NSString stringWithFormat:@"%@&PushActive=%d&PushInterval=%ld&PIRSensitive=%ld",[self.model getDevURL:Msg_SetPushCfg],self.mPushSettingModel.PushActive,self.mPushSettingModel.PushInterval,self.mPushSettingModel.PIRSensitive];
+            
+            id data = [self.model thNetHttpGet:url];
+            if([data isKindOfClass:[NSDictionary class]]){
+                RetModel * model = [RetModel RetModelWithDict:data];
+                if (model.ret) {
+                    [subscriber sendNext:@1];
+                }
+                else{
+                    [subscriber sendNext:@0];
+                }
+            }
+            
+        });
+        
+        return nil;
+    }];
+}
+-(RACSignal*)racGetMotionCfg{
+    @weakify(self)
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber){
+        @strongify(self)
+        dispatch_queue_t quene = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(quene, ^{
+            
+            NSString * url = [NSString stringWithFormat:@"%@",[self.model getDevURL:Msg_GetMDCfg]];
+            
+            id data = [self.model thNetHttpGet:url];
+            if([data isKindOfClass:[NSDictionary class]]){
+                MotionCfgModel * model = [MotionCfgModel MotionCfgModelWithDict:data];
+                if (model) {
+                    self.motionCfgModel = model;
+                    [subscriber sendNext:@1];
+                }
+                else{
+                    [subscriber sendNext:@0];
+                }
+            }
+            
+        });
+        
+        return nil;
+    }];
+}
+-(RACSignal*)racSetMotionCfg{
+    @weakify(self)
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber){
+        @strongify(self)
+        dispatch_queue_t quene = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(quene, ^{
+            
+            NSString * url = [NSString stringWithFormat:@"%@&MD_Sensitive=%ld&MD_Active=%ld",[self.model getDevURL:Msg_SetMDCfg],self.motionCfgModel.MD_Sensitive,self.motionCfgModel.MD_Active];
             
             id data = [self.model thNetHttpGet:url];
             if([data isKindOfClass:[NSDictionary class]]){

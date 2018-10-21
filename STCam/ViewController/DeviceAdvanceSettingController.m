@@ -13,6 +13,7 @@
 @property(nonatomic,strong)NSMutableArray  * rowsArray;//列表数据
 @property(nonatomic,strong)UITableView * mTableView;
 @property(nonatomic,strong)UIAlertController  *changePushIntervalSheet;//推送间隔
+@property(nonatomic,strong)UIAlertController  *changeMotionConfigSheet;//图像侦测灵明度
 @end
 
 @implementation DeviceAdvanceSettingController
@@ -29,6 +30,9 @@
     if(self.viewModel){
         InfoModel * model0 = _rowsArray[0];
         [model0 setInfo:[_viewModel.mPushSettingModel getPushIntervalDesc]];
+        
+        InfoModel * model1 = _rowsArray[1];
+        [model1 setInfo:[_viewModel.motionCfgModel getMotionDesc]];
         
         [_mTableView reloadData];
     }
@@ -151,6 +155,9 @@
     if (0 == row) {
         [self presentViewController:self.changePushIntervalSheet animated:YES completion:nil];
     }
+    else if(1 == row){
+         [self presentViewController:self.changeMotionConfigSheet animated:YES completion:nil];
+    }
     
 }
 #pragma methods
@@ -167,6 +174,44 @@
          if ([x integerValue] == 1) {
              InfoModel * model0 = self.rowsArray[0];
              [model0 setInfo:[self.viewModel.mPushSettingModel getPushIntervalDesc]];
+             [self.mTableView reloadData];
+         }
+     }];
+    
+}
+
+-(void)changeMotionConfig:(NSInteger)index{
+    switch (index) {
+        case 0:
+            _viewModel.motionCfgModel.MD_Active = 0;
+            break;
+        case 1:
+            _viewModel.motionCfgModel.MD_Sensitive = 200;//low
+            _viewModel.motionCfgModel.MD_Active = 1;
+            break;
+        case 2:
+            _viewModel.motionCfgModel.MD_Sensitive = 150;//middle
+            _viewModel.motionCfgModel.MD_Active = 1;
+            break;
+        case 3:
+            _viewModel.motionCfgModel.MD_Sensitive = 100;//high
+            _viewModel.motionCfgModel.MD_Active = 1;
+            break;
+        default:
+            break;
+    }
+    [self.viewModel.mPushSettingModel setPushIntervalLevel:index];
+    
+    @weakify(self)
+    [[[[self.viewModel racSetMotionCfg] filter:^BOOL(id value) {
+        return [value integerValue] == 1;
+    }]
+      deliverOn:[RACScheduler mainThreadScheduler]]
+     subscribeNext:^(id x) {
+         @strongify(self)
+         if ([x integerValue] == 1) {
+             InfoModel * model1 = self.rowsArray[1];
+             [model1 setInfo:[self.viewModel.motionCfgModel getMotionDesc]];
              [self.mTableView reloadData];
          }
      }];
@@ -215,4 +260,43 @@
     return _changePushIntervalSheet;
 }
 
+
+//changeMotionConfigSheet
+-(UIAlertController*)changeMotionConfigSheet{
+    if (!_changeMotionConfigSheet) {
+        @weakify(self)
+        _changeMotionConfigSheet = [UIAlertController alertControllerWithTitle:@"string_DevAdvancedSettings_PushInterval".localizedString message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+        
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"cancel".localizedString style:UIAlertActionStyleCancel handler:nil];
+        
+        
+        UIAlertAction *lowdAction = [UIAlertAction actionWithTitle:@"action_level_low".localizedString style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            @strongify(self)
+            [self changeMotionConfig:1];
+        }];
+        
+        UIAlertAction *middleAction = [UIAlertAction actionWithTitle:@"action_level_middle".localizedString style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            @strongify(self)
+            [self changeMotionConfig:2];
+        }];
+        
+        UIAlertAction *highAction = [UIAlertAction actionWithTitle:@"action_level_high".localizedString style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            @strongify(self)
+            [self changeMotionConfig:3];
+        }];
+        UIAlertAction *closeAction = [UIAlertAction actionWithTitle:@"action_close".localizedString style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            @strongify(self)
+            [self changeMotionConfig:0];
+        }];
+       
+        
+        [_changeMotionConfigSheet addAction:cancelAction];
+        [_changeMotionConfigSheet addAction:lowdAction];
+        [_changeMotionConfigSheet addAction:middleAction];
+        [_changeMotionConfigSheet addAction:highAction];
+        [_changeMotionConfigSheet addAction:closeAction];
+        
+    }
+    return _changeMotionConfigSheet;
+}
 @end

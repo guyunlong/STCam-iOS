@@ -12,6 +12,7 @@
 #import "CommonSettingCell.h"
 #import "ChangeDevicePwdController.h"
 #import "DeviceAdvanceSettingController.h"
+#import "MJRefresh.h"
 @interface DeviceSettingController ()<UITableViewDataSource, UITableViewDelegate>
 @property(nonatomic,strong)UIImageView * devThumbView;//设备缩略图
 @property(nonatomic,strong)UILabel * snLabel;
@@ -104,18 +105,38 @@
         }
         [model1 setInfo:info];
         
-        @weakify(self)
-        [[[_viewModel racGetPushSetting]
-          deliverOn:[RACScheduler mainThreadScheduler]]
-         subscribeNext:^(id x) {
-             @strongify(self)
-             InfoModel * model2 = [self.rowsArray objectAtIndex:2];
-             [model2 setInfo:[self.viewModel.mPushSettingModel getPushActiveDes]];
-             [self.mTableView reloadData];
-         }];
+        [self refreshDeviceConfig];
+       
        
     }
     
+}
+-(void)refreshDeviceConfig{
+    @weakify(self)
+    
+    RACSignal *sign0  = [_viewModel racGetPushSetting];
+    RACSignal *sign1  = [_viewModel racGetMotionCfg];
+//   // RACSignal *combined = [RACSignal
+//                           combineLatest:@[ sign0,sign1]
+//                           reduce:^id(id val0, id val1){
+//                               return val0;
+//                           }];
+    
+    
+    [[sign0
+      deliverOn:[RACScheduler mainThreadScheduler]]
+     subscribeNext:^(id x) {
+         @strongify(self)
+         InfoModel * model2 = [self.rowsArray objectAtIndex:2];
+         [model2 setInfo:[self.viewModel.mPushSettingModel getPushActiveDes]];
+         [self.mTableView reloadData];
+     }];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [sign1 subscribeNext:^(id x) {
+        }];
+    });
+   
 }
 -(void)loadView{
     [super loadView];
@@ -173,6 +194,14 @@
     [backButton setImage:[UIImage imageNamed:@"icon_back"] forState:UIControlStateNormal];
     UIBarButtonItem *backBarItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     self.navigationItem.leftBarButtonItem = backBarItem;
+    
+    UIButton *refreshButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    refreshButton.frame = CGRectMake(0, 0, 80, 28);
+    refreshButton.contentHorizontalAlignment =  UIControlContentHorizontalAlignmentRight;
+    [refreshButton addTarget:self action:@selector(refreshDeviceConfig) forControlEvents:UIControlEventTouchUpInside];
+    [refreshButton setTitle:@"action_refresh".localizedString forState:UIControlStateNormal];
+    UIBarButtonItem *rightBarItem = [[UIBarButtonItem alloc] initWithCustomView:refreshButton];
+    self.navigationItem.rightBarButtonItem = rightBarItem;
     
     
 }
