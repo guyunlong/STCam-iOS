@@ -25,7 +25,7 @@
 @property(nonatomic,strong)UIAlertController  *changePushSheet;//推送开关
 
 @property(nonatomic,strong)UIAlertController  *deleteConfirmAlertController;//确认删除设备
-
+@property(nonatomic,strong)UIAlertController  *updateConfirmAlertController;//提示升级
 @end
 
 @implementation DeviceSettingController
@@ -98,7 +98,7 @@
         
         InfoModel * model0 = [_rowsArray objectAtIndex:0];
         [model0 setInfo:_viewModel.model.DevName];
-        [self.mTableView reloadData];
+        
         
         
         InfoModel * model1 = [_rowsArray objectAtIndex:1];
@@ -108,6 +108,11 @@
             [info appendString:@"*"];
         }
         [model1 setInfo:info];
+        
+        InfoModel * model4 = [_rowsArray objectAtIndex:4];
+        [model4 setInfo:_viewModel.model.SoftVersion];
+        
+        [self.mTableView reloadData];
         
         [self refreshDeviceConfig];
        
@@ -187,6 +192,8 @@
     [_deleteButton setAppThemeType:ButtonStyleStyleAppTheme];
     [self.view addSubview:_deleteButton];
     
+    [_deleteButton addTarget:self action:@selector(deleteClicked) forControlEvents:UIControlEventTouchUpInside];
+    
     
 }
 
@@ -207,12 +214,14 @@
     UIBarButtonItem *rightBarItem = [[UIBarButtonItem alloc] initWithCustomView:refreshButton];
     self.navigationItem.rightBarButtonItem = rightBarItem;
     
-    
 }
 -(void)back{
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+-(void)deleteClicked{
+    [self presentViewController:self.deleteConfirmAlertController animated:YES completion:nil];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -253,7 +262,7 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSInteger row = indexPath.row;
-    if(0 == row || 1 == row || 2 == row || 3 == row){
+    if(0 == row || 1 == row || 2 == row || 3 == row || 4 == row ){
         if (![_viewModel.model IsConnect])
         {
             [self showHint:@"action_net_not_connect".localizedString];
@@ -277,6 +286,10 @@
         [ctl setViewModel:_viewModel];
         [self.navigationController pushViewController:ctl animated:YES];
     }
+    else if(4 == row){
+        [self checkUpdateSoftVersion];
+    }
+    
   
 }
 
@@ -329,6 +342,43 @@
             [self showHint:@"string_delfail".localizedString];
         }
     }];
+}
+-(void)checkUpdateSoftVersion{
+    [self showHudInView:self.view hint:nil];
+    @weakify(self);
+    [[self.viewModel racAppUpgradeDevCheck] subscribeNext:^(id x) {
+        @strongify(self);
+        [self hideHud];
+        if ([x integerValue] == 1) {
+            //对比版本号
+            NSString * oldVersion = [self.viewModel.model.SoftVersion substringToIndex:11];
+            NSString * newVersion = [self.viewModel.mUpdateDevModel.ver substringToIndex:11];
+            if ([oldVersion isEqualToString:newVersion]) {
+                [self showHint:@"tip_version_new".localizedString];
+            }
+            else{
+                //提示升级
+                [self presentViewController:self.updateConfirmAlertController animated:YES completion:nil];
+            }
+        }
+        else{
+            [self showHint:@"action_send_pws_failed".localizedString];
+        }
+    }];
+}
+-(void)checkUpdateBin{
+    @weakify(self)
+    [[[self.viewModel racCheckUpgradeBin]
+      deliverOn:[RACScheduler mainThreadScheduler]]
+     subscribeNext:^(id x) {
+         @strongify(self)
+         if ([x integerValue] == 1) {
+             [self showHint:@"action_updating_device".localizedString];
+         }
+         else{
+             [self showHint:@"action_Failed".localizedString];
+         }
+     }] ;
 }
 #pragma getter
 -(UIAlertController*)changeDeviceNameAlert{
@@ -408,6 +458,25 @@
         
     }
     return _deleteConfirmAlertController;
+}
+-(UIAlertController*)updateConfirmAlertController{
+    if (!_updateConfirmAlertController) {
+        @weakify(self)
+        _updateConfirmAlertController = [UIAlertController alertControllerWithTitle:@"tip_version_old".localizedString message:nil preferredStyle:UIAlertControllerStyleAlert];
+        
+        
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"cancel".localizedString style:UIAlertActionStyleCancel handler:nil];
+        
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK".localizedString style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            @strongify(self)
+            [self checkUpdateBin];
+        }];
+        
+        [_updateConfirmAlertController addAction:cancelAction];
+        [_updateConfirmAlertController addAction:okAction];
+        
+    }
+    return _updateConfirmAlertController;
 }
 
 @end

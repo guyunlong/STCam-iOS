@@ -201,7 +201,8 @@
             id deviceInfoDic = [NSJSONSerialization JSONObjectWithData:utf8Data options:NSJSONReadingMutableLeaves error:&error];
             
             self.ExistSD = [[[deviceInfoDic objectForKey:@"DevInfo"] objectForKey:@"ExistSD"] boolValue];
-            
+            self.SoftVersion = [[deviceInfoDic objectForKey:@"DevInfo"] objectForKey:@"SoftVersion"];
+            self.DevType =[[[deviceInfoDic objectForKey:@"DevInfo"] objectForKey:@"DevType"] integerValue];
         }
         DevListViewModel * listViewModel = [DevListViewModel sharedDevListViewModel];
         [listViewModel setRefreshView:YES];

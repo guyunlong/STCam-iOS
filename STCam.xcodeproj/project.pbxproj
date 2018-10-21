@@ -89,6 +89,7 @@
 		A4434DA2217B009A00BDA9F2 /* RecordListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4434DA0217B009A00BDA9F2 /* RecordListCell.xib */; };
 		A4434DA5217B140B00BDA9F2 /* PlayBackController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4434DA4217B140B00BDA9F2 /* PlayBackController.m */; };
 		A4434DA8217B144F00BDA9F2 /* PlayBackViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A4434DA7217B144F00BDA9F2 /* PlayBackViewModel.m */; };
+		A452A912217CC2A4008222F2 /* UpdateDevModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A452A911217CC2A4008222F2 /* UpdateDevModel.m */; };
 		A452A9AC21762BEF00E40A5F /* WCQRCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A452A9AB21762BEF00E40A5F /* WCQRCodeVC.m */; };
 		A452A9AF21762C4500E40A5F /* MBProgressHUD+SGQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = A452A9AE21762C4500E40A5F /* MBProgressHUD+SGQRCode.m */; };
 		A45934E02164A5320018A61B /* BasicTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = A45934DF2164A5320018A61B /* BasicTextField.m */; };
@@ -505,6 +506,8 @@
 		A4434DA4217B140B00BDA9F2 /* PlayBackController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayBackController.m; sourceTree = "<group>"; };
 		A4434DA6217B144F00BDA9F2 /* PlayBackViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayBackViewModel.h; sourceTree = "<group>"; };
 		A4434DA7217B144F00BDA9F2 /* PlayBackViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayBackViewModel.m; sourceTree = "<group>"; };
+		A452A910217CC2A4008222F2 /* UpdateDevModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpdateDevModel.h; sourceTree = "<group>"; };
+		A452A911217CC2A4008222F2 /* UpdateDevModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpdateDevModel.m; sourceTree = "<group>"; };
 		A452A9AA21762BEF00E40A5F /* WCQRCodeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WCQRCodeVC.h; sourceTree = "<group>"; };
 		A452A9AB21762BEF00E40A5F /* WCQRCodeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WCQRCodeVC.m; sourceTree = "<group>"; };
 		A452A9AD21762C4500E40A5F /* MBProgressHUD+SGQRCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+SGQRCode.h"; sourceTree = "<group>"; };
@@ -749,6 +752,8 @@
 				A48C32EB217C691600CDF2D2 /* RecConfigModel.m */,
 				A48C32F0217C700200CDF2D2 /* SDInfoModel.h */,
 				A48C32F1217C700200CDF2D2 /* SDInfoModel.m */,
+				A452A910217CC2A4008222F2 /* UpdateDevModel.h */,
+				A452A911217CC2A4008222F2 /* UpdateDevModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1660,6 +1665,7 @@
 				A4AE326E21342EFD0036212B /* NSDate+Helper.m in Sources */,
 				A48C32E9217C4B8A00CDF2D2 /* MotionCfgModel.m in Sources */,
 				A4AE327721342EFD0036212B /* NSDate+Common.m in Sources */,
+				A452A912217CC2A4008222F2 /* UpdateDevModel.m in Sources */,
 				A442C315213199A100198910 /* thVideoEnc.c in Sources */,
 				A4AE327821342EFD0036212B /* UIControl+YYAdd.m in Sources */,
 				A439D83921650DE300FCE7FE /* RetModel.m in Sources */,

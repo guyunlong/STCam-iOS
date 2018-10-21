@@ -54,6 +54,8 @@ typedef NS_ENUM(NSInteger, ConnType){
 @property(nonatomic,assign)  BOOL IsRec;
 @property(nonatomic,assign)  BOOL IsSnapshot;
 @property(nonatomic,assign)  BOOL ExistSD;
+@property(nonatomic,strong) NSString* SoftVersion;
+@property(nonatomic,assign)  NSInteger  DevType;
 /**
  根据不同的连接类型返回对应的颜色
 

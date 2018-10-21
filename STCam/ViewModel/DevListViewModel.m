@@ -151,13 +151,13 @@ void callback_SearchDev(void *UserCustom, u32 SN, int DevType, char *DevModal, c
         [FFHttpTool GET:url parameters:nil success:^(id data){
             @strongify(self)
             if ([data isKindOfClass:[NSDictionary class]]) {
-                RetModel * model = [RetModel RetModelWithDict:data];
-                if (model.ret == 1) {
+                RetModel * retModel = [RetModel RetModelWithDict:data];
+                if (retModel.ret == 1) {
                     //删除设备
                     [model threadDisconnect];
                     [self.deviceArray removeObject:model];
                 }
-                [subscriber sendNext:@(model.ret)];
+                [subscriber sendNext:@(retModel.ret)];
             }
             else{
                 [subscriber sendNext:0];//

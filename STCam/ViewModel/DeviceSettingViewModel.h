@@ -15,6 +15,7 @@
 #import "RecConfigModel.h"
 #import "SDInfoModel.h"
 #import "DevListViewModel.h"
+#import "UpdateDevModel.h"
 @interface DeviceSettingViewModel : NSObject
 @property(nonatomic,strong)DeviceModel * model;
 @property(nonatomic,strong)PushSettingModel * mPushSettingModel;
@@ -47,5 +48,15 @@
  恢复出厂设置
  */
 -(RACSignal*)racSetDevLoadDefault;
+
+/**
+ 获取最新设备固件版本
+
+ @return signal
+ */
+-(RACSignal *)racAppUpgradeDevCheck;
+@property(nonatomic,strong)UpdateDevModel * mUpdateDevModel;
+
+-(RACSignal *)racCheckUpgradeBin;
 
 @end

@@ -36,6 +36,8 @@ typedef NS_ENUM(NSInteger, TUserMode){
  */
 -(RACSignal *)racDeleteDevice:(DeviceModel*)model;
 
+
+
 @property(nonatomic,strong)NSMutableArray* deviceArray;
 
 /**

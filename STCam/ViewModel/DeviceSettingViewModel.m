@@ -10,7 +10,7 @@
 #import "PrefixHeader.h"
 #import "RetModel.h"
 #import "CoreDataManager.h"
-
+#import "FFHttpTool.h"
 
 @implementation DeviceSettingViewModel
 -(RACSignal*)racChangeDeviceName:(NSString*)deviceName{
@@ -350,6 +350,61 @@
         dispatch_async(quene, ^{
             
             NSString * url = [NSString stringWithFormat:@"%@",[self.model getDevURL:Msg_SetDevLoadDefault]];
+            
+            id data = [self.model thNetHttpGet:url];
+            if([data isKindOfClass:[NSDictionary class]]){
+                RetModel * model = [RetModel RetModelWithDict:data];
+                [subscriber sendNext:@(model.ret)];
+            }
+            else{
+                [subscriber sendNext:@0];
+            }
+            
+        });
+        
+        return nil;
+    }];
+}
+-(RACSignal *)racAppUpgradeDevCheck{
+    @weakify(self)
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        @strongify(self)
+        
+        //http://211.149.199.247:800/app_user_get_devlst.asp?user=1257117229@qq.com&psd=12345678
+        NSString * url = [NSString stringWithFormat:@"http://%@:%d/app_upgrade_dev_check.asp?devtype=%ld",serverIP,ServerPort,self.model.DevType];
+        [FFHttpTool GET:url parameters:nil success:^(id data){
+            @strongify(self)
+            if ([data isKindOfClass:[NSDictionary class]]) {
+                UpdateDevModel * model = [UpdateDevModel UpdateDevModelWithDict:data];
+                if (model) {
+                    //设备版本
+                    self.mUpdateDevModel = model;
+                    [subscriber sendNext:@1];
+                }
+                else{
+                    [subscriber sendNext:@0];
+                }
+                
+            }
+            else{
+                [subscriber sendNext:0];//
+            }
+            [subscriber sendCompleted];
+        } failure:^(NSError * error){
+            [subscriber sendNext:@100000];//未知网络错误
+            [subscriber sendCompleted];
+        }];
+        return nil;
+    }];
+}
+-(RACSignal *)racCheckUpgradeBin{
+    @weakify(self)
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber){
+        @strongify(self)
+        dispatch_queue_t quene = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(quene, ^{
+            
+            NSString * url = [NSString stringWithFormat:@"%@&ver=%@&crc=%ld&url=%@",[self.model getDevURL:Msg_CheckUpgradeBin],self.mUpdateDevModel.ver,self.mUpdateDevModel.crc,self.mUpdateDevModel.url];
             
             id data = [self.model thNetHttpGet:url];
             if([data isKindOfClass:[NSDictionary class]]){
