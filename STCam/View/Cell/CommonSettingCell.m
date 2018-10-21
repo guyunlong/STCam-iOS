@@ -25,6 +25,12 @@
 
     // Configure the view for the selected state
 }
+-(void)setModel:(InfoModel *)model{
+    if (_model != model && model) {
+        _model = model;
+    }
+    [self setNeedsLayout];
+}
 -(void)layoutSubviews{
     [super layoutSubviews];
     if (_model) {

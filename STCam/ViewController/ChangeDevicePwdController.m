@@ -36,11 +36,15 @@
     if (_viewModel) {
         [_oldPwdFd setText:_viewModel.model.Pwd];
     }
+    
+    
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+   
 }
+
 
 -(void)initNav{
     [self setTitle:@"action_device_password_manager".localizedString];

@@ -10,8 +10,11 @@
 #import "PrefixHeader.h"
 #import "AAPLEAGLLayer.h"
 #import "SoundButton.h"
+#import "DeviceSettingController.h"
 #import <AudioToolbox/AudioToolbox.h>
-@interface LiveVidController ()<VidViewModelDelegate>
+@interface LiveVidController ()<VidViewModelDelegate>{
+    BOOL isLandscape;
+}
 @property (strong, nonatomic)  AAPLEAGLLayer *glLayer;//视频播放控件
 @property (strong, nonatomic)  UIButton * ledBtn;
 @property (strong, nonatomic)  UIButton * settingBtn;
@@ -34,6 +37,8 @@
 @property (strong, nonatomic)  UIButton * recordBtn_land;
 @property (strong, nonatomic)  UIButton * snapShotBtn_land;
 
+
+
 @end
 
 @implementation LiveVidController
@@ -41,10 +46,14 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [_viewModel openVid:1];
+    if(isLandscape){
+        [self.navigationController setNavigationBarHidden:YES];
+    }
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [_viewModel closeVid];
+    [self.navigationController setNavigationBarHidden:NO];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -132,12 +141,13 @@
     [_playAudioBtn addTarget:self action:@selector(controlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [_snapShotBtn addTarget:self action:@selector(controlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
      [_recordBtn addTarget:self action:@selector(controlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-    
+     [_settingBtn addTarget:self action:@selector(controlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     /**********landscape buttons*************/
     _exitFullScreenButton = [[UIButton alloc] initWithFrame:CGRectMake(kPadding, kPadding, firstLineWidth, firstLineWidth)];
     [_exitFullScreenButton setImage:[UIImage imageNamed:@"icon_back"] forState:UIControlStateNormal];
     [_exitFullScreenButton addTarget:self action:@selector(controlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    
     [_exitFullScreenButton setHidden:YES];
     [self.view addSubview:_exitFullScreenButton];
 }
@@ -183,6 +193,13 @@
         }
         
         
+    }
+    else if([sender isEqual:_settingBtn] || [sender isEqual:_settingBtn_land]){
+        DeviceSettingController * ctl = [DeviceSettingController new];
+        DeviceSettingViewModel * viewModel = [DeviceSettingViewModel new];
+        [viewModel setModel:self.viewModel.model];
+        [ctl setViewModel:viewModel];
+        [self.navigationController pushViewController:ctl animated:YES];
     }
 }
 #pragma methods
@@ -277,10 +294,7 @@
    
     
     [_hdBtn_land setSelected:1-_viewModel.sub];
-    
-   
-  
-    
+    isLandscape = YES;
    
 }
 -(void)rotateToPortrait{
@@ -303,6 +317,8 @@
     [_snapShotBtn_land setHidden:YES];
     
     [_hdBtn setSelected:1-_viewModel.sub];
+    
+    isLandscape = NO;
     
     
 }

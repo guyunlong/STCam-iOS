@@ -10,9 +10,13 @@
 #import "DeviceModel.h"
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import <ReactiveCocoa/RACEXTScope.h>
+#import "PushSettingModel.h"
 @interface DeviceSettingViewModel : NSObject
 @property(nonatomic,strong)DeviceModel * model;
+@property(nonatomic,strong)PushSettingModel * mPushSettingModel;
 -(RACSignal*)racChangeDeviceName:(NSString*)deviceName;
 -(RACSignal*)racChangeDevicePassword:(NSString*)devicePassword;
+-(RACSignal*)racGetPushSetting;
 -(RACSignal*)racRebootDevice;
+-(RACSignal*)racSetPushConfig;
 @end

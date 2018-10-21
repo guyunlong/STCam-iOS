@@ -125,6 +125,7 @@
 		A47041BB216E2DFB007163C8 /* ImageDisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = A47041BA216E2DFB007163C8 /* ImageDisplayController.m */; };
 		A470AA8921636FFC0068AA80 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A470AA8B21636FFC0068AA80 /* Localizable.strings */; };
 		A470AA912163BE050068AA80 /* UIButton+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = A470AA902163BE050068AA80 /* UIButton+Common.m */; };
+		A48C32E3217C24EF00CDF2D2 /* PushSettingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A48C32E2217C24EF00CDF2D2 /* PushSettingModel.m */; };
 		A4946FF6212C5B460015990C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A4946FF5212C5B460015990C /* AppDelegate.m */; };
 		A4946FF9212C5B460015990C /* SplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4946FF8212C5B460015990C /* SplashViewController.m */; };
 		A4946FFC212C5B460015990C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4946FFA212C5B460015990C /* Main.storyboard */; };
@@ -545,6 +546,8 @@
 		A470AA8C216371940068AA80 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		A470AA8F2163BE050068AA80 /* UIButton+Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+Common.h"; sourceTree = "<group>"; };
 		A470AA902163BE050068AA80 /* UIButton+Common.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Common.m"; sourceTree = "<group>"; };
+		A48C32E1217C24EF00CDF2D2 /* PushSettingModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PushSettingModel.h; sourceTree = "<group>"; };
+		A48C32E2217C24EF00CDF2D2 /* PushSettingModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PushSettingModel.m; sourceTree = "<group>"; };
 		A4946FF1212C5B460015990C /* STCam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = STCam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4946FF4212C5B460015990C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A4946FF5212C5B460015990C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -713,6 +716,8 @@
 				9DAC4BB72175C7EB00AC8916 /* DevShareModel.m */,
 				A4434D9B217AFC6C00BDA9F2 /* SDVideoModel.h */,
 				A4434D9C217AFC6C00BDA9F2 /* SDVideoModel.m */,
+				A48C32E1217C24EF00CDF2D2 /* PushSettingModel.h */,
+				A48C32E2217C24EF00CDF2D2 /* PushSettingModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1622,6 +1627,7 @@
 				A4606929216A4F0500491290 /* AudioSession.m in Sources */,
 				A4BC365A216F983900FDCBF5 /* AlarmListViewModel.m in Sources */,
 				9DAC4BB82175C7EB00AC8916 /* DevShareModel.m in Sources */,
+				A48C32E3217C24EF00CDF2D2 /* PushSettingModel.m in Sources */,
 				A4BC3656216F959B00FDCBF5 /* AlarmListCell.m in Sources */,
 				A439D831216506E200FCE7FE /* LoginViewModel.m in Sources */,
 				A4394588217358470047E00C /* InfoModel.m in Sources */,

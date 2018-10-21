@@ -18,7 +18,8 @@
 @property(nonatomic,strong)UITableView * mTableView;
 @property(nonatomic,strong)UIButton  * deleteButton;//删除按钮
 @property(nonatomic,strong)NSMutableArray  * rowsArray;//列表数据
-@property(nonatomic,strong)UIAlertController  *changeDeviceNameAlert;//列表数据
+@property(nonatomic,strong)UIAlertController  *changeDeviceNameAlert;//修改设备名称
+@property(nonatomic,strong)UIAlertController  *changePushSheet;//推送开关
 @end
 
 @implementation DeviceSettingController
@@ -92,6 +93,25 @@
         InfoModel * model0 = [_rowsArray objectAtIndex:0];
         [model0 setInfo:_viewModel.model.DevName];
         [self.mTableView reloadData];
+        
+        
+        InfoModel * model1 = [_rowsArray objectAtIndex:1];
+        NSMutableString * info  = [NSMutableString new];
+        NSInteger length = [self.viewModel.model.Pwd length];
+        for (int i = 0; i<length; ++i) {
+            [info appendString:@"*"];
+        }
+        [model1 setInfo:info];
+        
+        @weakify(self)
+        [[[_viewModel racGetPushSetting]
+          deliverOn:[RACScheduler mainThreadScheduler]]
+         subscribeNext:^(id x) {
+             @strongify(self)
+             InfoModel * model2 = [self.rowsArray objectAtIndex:2];
+             [model2 setInfo:[self.viewModel.mPushSettingModel getPushActiveDes]];
+             [self.mTableView reloadData];
+         }];
        
     }
     
@@ -126,6 +146,7 @@
     _mTableView = ({
         UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        tableView.scrollEnabled = NO;
         tableView.dataSource = self;
         tableView.delegate = self;
         tableView;
@@ -198,7 +219,7 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSInteger row = indexPath.row;
-    if(0 == row || 1 == row){
+    if(0 == row || 1 == row || 2 == row){
         if (![_viewModel.model IsConnect])
         {
             [self showHint:@"action_net_not_connect".localizedString];
@@ -213,6 +234,9 @@
         ChangeDevicePwdController * ctl = [ChangeDevicePwdController new];
         [ctl setViewModel:_viewModel];
         [self.navigationController pushViewController:ctl animated:YES];
+    }
+    else if(2 == row){
+         [self presentViewController:self.changePushSheet animated:YES completion:nil];
     }
   
 }
@@ -235,6 +259,26 @@
          else{
              [self showHint:@"action_Failed".localizedString];
          }
+     }];
+}
+
+-(void)setPushConfig:(BOOL)open{
+    [self.viewModel.mPushSettingModel setPushActive:open];
+    @weakify(self)
+    [[[[[self.viewModel racSetPushConfig] filter:^BOOL(id value) {
+        return [value integerValue] == 1;
+    }]
+      flattenMap:^RACStream *(id value) {
+          @strongify(self)
+          return [self.viewModel racGetPushSetting];
+      }]
+    deliverOn:[RACScheduler mainThreadScheduler]]
+     subscribeNext:^(id x) {
+         @strongify(self)
+         InfoModel * model2 = [self.rowsArray objectAtIndex:2];
+         [model2 setInfo:[self.viewModel.mPushSettingModel getPushActiveDes]];
+         [self.mTableView reloadData];
+         
      }];
 }
 #pragma getter
@@ -270,5 +314,33 @@
     }
     return _changeDeviceNameAlert;
 }
+-(UIAlertController*)changePushSheet{
+    if (!_changePushSheet) {
+        @weakify(self)
+        _changePushSheet = [UIAlertController alertControllerWithTitle:@"action_push".localizedString message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+       
+      UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"cancel".localizedString style:UIAlertActionStyleCancel handler:nil];
+        
+        
+        UIAlertAction *closeAction = [UIAlertAction actionWithTitle:@"action_close".localizedString style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            @strongify(self)
+            [self setPushConfig:NO];
+        }];
+        
+        UIAlertAction *openAction = [UIAlertAction actionWithTitle:@"action_open".localizedString style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            @strongify(self)
+           [self setPushConfig:YES];
+            
+        }];
+        
+        [_changePushSheet addAction:openAction];
+        [_changePushSheet addAction:closeAction];
+        [_changePushSheet addAction:cancelAction];
+        
+    }
+    return _changePushSheet;
+}
+
+//
 
 @end

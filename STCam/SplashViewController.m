@@ -15,7 +15,7 @@
 #import "libthSDK.h"
 @interface SplashViewController ()
 @property(nonatomic,strong)DevListViewModel * viewModel;
-
+@property(nonatomic,strong)UILabel * versionLb;
 @end
 
 @implementation SplashViewController
@@ -26,6 +26,14 @@
     // Do any additional setup after loading the view, typically from a nib.
     //_viewModel = [DevListViewModel new];
    // [_viewModel searchDevice];
+    
+    _versionLb = [[UILabel alloc] initWithFrame:CGRectMake(0, kScreenHeight-100, kScreenWidth-kPadding, 24)];
+    [self.view addSubview:_versionLb];
+    [_versionLb setTextAlignment:NSTextAlignmentRight];
+    [_versionLb setTextColor:[UIColor redColor]];
+    [_versionLb setFont:[UIFont boldSystemFontOfSize:20]];
+    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    [_versionLb setText:[infoDictionary objectForKey:@"CFBundleVersion"]];
     
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -42,7 +50,7 @@
     //跳转到LoginViewController
     
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         LoginViewController * ctl  = [[LoginViewController alloc] init];
         [self.navigationController pushViewController:ctl animated:YES];
     });
