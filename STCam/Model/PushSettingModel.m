@@ -88,7 +88,7 @@
 }
 -(void)setPushIntervalLevel:(NSInteger)PushIntervalLevel
 {
-    self.PushIntervalLevel = PushIntervalLevel;
+    _PushIntervalLevel = PushIntervalLevel;
     switch (PushIntervalLevel)
     {
         case 0:

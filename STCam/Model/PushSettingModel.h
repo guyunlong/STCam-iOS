@@ -19,4 +19,10 @@
 
 -(NSString*)getPushActiveDes;
 
+-(NSString*)getPushIntervalDesc;
+
+-(NSString*)getPIRSensitiveDesc;
+
+-(NSInteger)getPushIntervalLevel;
+-(void)setPushIntervalLevel:(NSInteger)PushIntervalLevel;
 @end

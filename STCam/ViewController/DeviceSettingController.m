@@ -11,6 +11,7 @@
 #import "STFileManager.h"
 #import "CommonSettingCell.h"
 #import "ChangeDevicePwdController.h"
+#import "DeviceAdvanceSettingController.h"
 @interface DeviceSettingController ()<UITableViewDataSource, UITableViewDelegate>
 @property(nonatomic,strong)UIImageView * devThumbView;//设备缩略图
 @property(nonatomic,strong)UILabel * snLabel;
@@ -219,7 +220,7 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSInteger row = indexPath.row;
-    if(0 == row || 1 == row || 2 == row){
+    if(0 == row || 1 == row || 2 == row || 3 == row){
         if (![_viewModel.model IsConnect])
         {
             [self showHint:@"action_net_not_connect".localizedString];
@@ -237,6 +238,11 @@
     }
     else if(2 == row){
          [self presentViewController:self.changePushSheet animated:YES completion:nil];
+    }
+    else if(3 == row){
+        DeviceAdvanceSettingController * ctl =  [DeviceAdvanceSettingController new];
+        [ctl setViewModel:_viewModel];
+        [self.navigationController pushViewController:ctl animated:YES];
     }
   
 }
@@ -265,19 +271,16 @@
 -(void)setPushConfig:(BOOL)open{
     [self.viewModel.mPushSettingModel setPushActive:open];
     @weakify(self)
-    [[[[[self.viewModel racSetPushConfig] filter:^BOOL(id value) {
-        return [value integerValue] == 1;
-    }]
-      flattenMap:^RACStream *(id value) {
-          @strongify(self)
-          return [self.viewModel racGetPushSetting];
-      }]
+    [[[self.viewModel racSetPushConfig]
     deliverOn:[RACScheduler mainThreadScheduler]]
      subscribeNext:^(id x) {
          @strongify(self)
-         InfoModel * model2 = [self.rowsArray objectAtIndex:2];
-         [model2 setInfo:[self.viewModel.mPushSettingModel getPushActiveDes]];
-         [self.mTableView reloadData];
+         if ([x integerValue] == 1) {
+             InfoModel * model2 = [self.rowsArray objectAtIndex:2];
+             [model2 setInfo:[self.viewModel.mPushSettingModel getPushActiveDes]];
+             [self.mTableView reloadData];
+         }
+         
          
      }];
 }

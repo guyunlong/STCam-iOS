@@ -126,6 +126,7 @@
 		A470AA8921636FFC0068AA80 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A470AA8B21636FFC0068AA80 /* Localizable.strings */; };
 		A470AA912163BE050068AA80 /* UIButton+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = A470AA902163BE050068AA80 /* UIButton+Common.m */; };
 		A48C32E3217C24EF00CDF2D2 /* PushSettingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A48C32E2217C24EF00CDF2D2 /* PushSettingModel.m */; };
+		A48C32E6217C36CA00CDF2D2 /* DeviceAdvanceSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = A48C32E5217C36CA00CDF2D2 /* DeviceAdvanceSettingController.m */; };
 		A4946FF6212C5B460015990C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A4946FF5212C5B460015990C /* AppDelegate.m */; };
 		A4946FF9212C5B460015990C /* SplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4946FF8212C5B460015990C /* SplashViewController.m */; };
 		A4946FFC212C5B460015990C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4946FFA212C5B460015990C /* Main.storyboard */; };
@@ -548,6 +549,8 @@
 		A470AA902163BE050068AA80 /* UIButton+Common.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Common.m"; sourceTree = "<group>"; };
 		A48C32E1217C24EF00CDF2D2 /* PushSettingModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PushSettingModel.h; sourceTree = "<group>"; };
 		A48C32E2217C24EF00CDF2D2 /* PushSettingModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PushSettingModel.m; sourceTree = "<group>"; };
+		A48C32E4217C36CA00CDF2D2 /* DeviceAdvanceSettingController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceAdvanceSettingController.h; sourceTree = "<group>"; };
+		A48C32E5217C36CA00CDF2D2 /* DeviceAdvanceSettingController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceAdvanceSettingController.m; sourceTree = "<group>"; };
 		A4946FF1212C5B460015990C /* STCam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = STCam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4946FF4212C5B460015990C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A4946FF5212C5B460015990C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -1232,6 +1235,8 @@
 				A4AE324C2134277D0036212B /* MoreViewController.m */,
 				A4394589217360960047E00C /* DeviceSettingController.h */,
 				A439458A217360960047E00C /* DeviceSettingController.m */,
+				A48C32E4217C36CA00CDF2D2 /* DeviceAdvanceSettingController.h */,
+				A48C32E5217C36CA00CDF2D2 /* DeviceAdvanceSettingController.m */,
 				A4F5043E216268A6002B71FF /* RootViewController.h */,
 				A4F5043F216268A6002B71FF /* RootViewController.m */,
 				A439D83A2165149800FCE7FE /* STNavigationController.h */,
@@ -1619,6 +1624,7 @@
 				A442C2AA213199A100198910 /* axdllEx.c in Sources */,
 				A4AE3244213427480036212B /* DevListViewController.m in Sources */,
 				A4434D9D217AFC6C00BDA9F2 /* SDVideoModel.m in Sources */,
+				A48C32E6217C36CA00CDF2D2 /* DeviceAdvanceSettingController.m in Sources */,
 				A4947004212C5B470015990C /* main.m in Sources */,
 				A442C2AD213199A100198910 /* skt.c in Sources */,
 				A4F50440216268A6002B71FF /* RootViewController.m in Sources */,
