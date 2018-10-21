@@ -128,6 +128,7 @@
 		A48C32E3217C24EF00CDF2D2 /* PushSettingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A48C32E2217C24EF00CDF2D2 /* PushSettingModel.m */; };
 		A48C32E6217C36CA00CDF2D2 /* DeviceAdvanceSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = A48C32E5217C36CA00CDF2D2 /* DeviceAdvanceSettingController.m */; };
 		A48C32E9217C4B8A00CDF2D2 /* MotionCfgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A48C32E8217C4B8A00CDF2D2 /* MotionCfgModel.m */; };
+		A48C32EC217C691600CDF2D2 /* RecConfigModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A48C32EB217C691600CDF2D2 /* RecConfigModel.m */; };
 		A4946FF6212C5B460015990C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A4946FF5212C5B460015990C /* AppDelegate.m */; };
 		A4946FF9212C5B460015990C /* SplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4946FF8212C5B460015990C /* SplashViewController.m */; };
 		A4946FFC212C5B460015990C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4946FFA212C5B460015990C /* Main.storyboard */; };
@@ -554,6 +555,8 @@
 		A48C32E5217C36CA00CDF2D2 /* DeviceAdvanceSettingController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceAdvanceSettingController.m; sourceTree = "<group>"; };
 		A48C32E7217C4B8A00CDF2D2 /* MotionCfgModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MotionCfgModel.h; sourceTree = "<group>"; };
 		A48C32E8217C4B8A00CDF2D2 /* MotionCfgModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MotionCfgModel.m; sourceTree = "<group>"; };
+		A48C32EA217C691600CDF2D2 /* RecConfigModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecConfigModel.h; sourceTree = "<group>"; };
+		A48C32EB217C691600CDF2D2 /* RecConfigModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecConfigModel.m; sourceTree = "<group>"; };
 		A4946FF1212C5B460015990C /* STCam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = STCam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4946FF4212C5B460015990C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A4946FF5212C5B460015990C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -726,6 +729,8 @@
 				A48C32E2217C24EF00CDF2D2 /* PushSettingModel.m */,
 				A48C32E7217C4B8A00CDF2D2 /* MotionCfgModel.h */,
 				A48C32E8217C4B8A00CDF2D2 /* MotionCfgModel.m */,
+				A48C32EA217C691600CDF2D2 /* RecConfigModel.h */,
+				A48C32EB217C691600CDF2D2 /* RecConfigModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1604,6 +1609,7 @@
 				A45934E32164A5FF0018A61B /* LoginBackgroundView.m in Sources */,
 				A47041B8216E1F59007163C8 /* STMediaModel.m in Sources */,
 				A442C2A8213199A100198910 /* Makefile in Sources */,
+				A48C32EC217C691600CDF2D2 /* RecConfigModel.m in Sources */,
 				A4AE327521342EFD0036212B /* UIView+YYAdd.m in Sources */,
 				A4AE70BD2167AEF600614024 /* DevListCell.m in Sources */,
 				A4434D94217AD99200BDA9F2 /* SoundButton.m in Sources */,

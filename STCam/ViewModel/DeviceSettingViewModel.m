@@ -241,4 +241,55 @@
         return nil;
     }];
 }
+-(RACSignal*)racGetRecCfg{
+    @weakify(self)
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber){
+        @strongify(self)
+        dispatch_queue_t quene = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(quene, ^{
+            
+            NSString * url = [NSString stringWithFormat:@"%@",[self.model getDevURL:Msg_GetRecCfg]];
+            
+            id data = [self.model thNetHttpGet:url];
+            if([data isKindOfClass:[NSDictionary class]]){
+                RecConfigModel * model = [RecConfigModel RecConfigModelWithDict:data];
+                if (model) {
+                    self.mRecConfigModel = model;
+                    [subscriber sendNext:@1];
+                }
+                else{
+                    [subscriber sendNext:@0];
+                }
+            }
+            
+        });
+        
+        return nil;
+    }];
+}
+-(RACSignal*)racSetRecCfg{
+    @weakify(self)
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber){
+        @strongify(self)
+        dispatch_queue_t quene = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(quene, ^{
+            
+            NSString * url = [NSString stringWithFormat:@"%@&Rec_AlmTimeLen=%ld",[self.model getDevURL:Msg_SetRecCfg],self.mRecConfigModel.Rec_AlmTimeLen];
+            
+            id data = [self.model thNetHttpGet:url];
+            if([data isKindOfClass:[NSDictionary class]]){
+                RetModel * model = [RetModel RetModelWithDict:data];
+                if (model.ret) {
+                    [subscriber sendNext:@1];
+                }
+                else{
+                    [subscriber sendNext:@0];
+                }
+            }
+            
+        });
+        
+        return nil;
+    }];
+}
 @end

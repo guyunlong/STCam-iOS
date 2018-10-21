@@ -12,6 +12,7 @@
 #import <ReactiveCocoa/RACEXTScope.h>
 #import "PushSettingModel.h"
 #import "MotionCfgModel.h"
+#import "RecConfigModel.h"
 @interface DeviceSettingViewModel : NSObject
 @property(nonatomic,strong)DeviceModel * model;
 @property(nonatomic,strong)PushSettingModel * mPushSettingModel;
@@ -29,4 +30,9 @@
 -(RACSignal*)racGetAudioCfg;
 -(RACSignal*)racSetAudioCfg;
 @property(nonatomic,assign)BOOL AUDIO_IsPlayPromptSound;//设备提示音开关
+
+/*************录像***************/
+-(RACSignal*)racGetRecCfg;
+-(RACSignal*)racSetRecCfg;
+@property(nonatomic,strong)RecConfigModel *mRecConfigModel;//录像
 @end

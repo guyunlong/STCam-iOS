@@ -16,6 +16,7 @@
 @property(nonatomic,strong)UIAlertController  *changeMotionConfigSheet;//图像侦测灵明度
 @property(nonatomic,strong)UIAlertController  *changePIRConfigSheet;//PIR灵明度
 @property(nonatomic,strong)UIAlertController  *deviceAudioConfigSheet;//设备提示音开关
+@property(nonatomic,strong)UIAlertController  *alarmRecordDurationConfigSheet;//报警录像时常
 @end
 
 @implementation DeviceAdvanceSettingController
@@ -40,19 +41,41 @@
         [model2 setInfo:[_viewModel.mPushSettingModel getPIRSensitiveDesc]];
         
         [_mTableView reloadData];
-        @weakify(self)
-        [[[self.viewModel racGetAudioCfg]
+       
+        
+        
+    }
+    
+}
+
+-(void)refreshDeviceAdvanceConfig{
+    
+    @weakify(self)
+    [[[self.viewModel racGetAudioCfg]
+      deliverOn:[RACScheduler mainThreadScheduler]]
+     subscribeNext:^(id x) {
+         if([x integerValue] == 1){
+             @strongify(self)
+             NSString * soundDesc = self.viewModel.AUDIO_IsPlayPromptSound?@"action_open".localizedString:@"action_close".localizedString;
+             InfoModel * model3 = self.rowsArray[3];
+             [model3 setInfo:soundDesc];
+             [self.mTableView reloadData];
+         }
+     }];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [[[self.viewModel racGetRecCfg]
           deliverOn:[RACScheduler mainThreadScheduler]]
          subscribeNext:^(id x) {
              if([x integerValue] == 1){
                  @strongify(self)
-                 NSString * soundDesc = self.viewModel.AUDIO_IsPlayPromptSound?@"action_open".localizedString:@"action_close".localizedString;
-                 InfoModel * model3 = self.rowsArray[3];
-                 [model3 setInfo:soundDesc];
+                 
+                 InfoModel * model4 = self.rowsArray[4];
+                 [model4 setInfo:[self.viewModel.mRecConfigModel getRecordLenDesc]];
                  [self.mTableView reloadData];
              }
          }];
-    }
+    });
     
 }
 
@@ -83,6 +106,14 @@
     [backButton setImage:[UIImage imageNamed:@"icon_back"] forState:UIControlStateNormal];
     UIBarButtonItem *backBarItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     self.navigationItem.leftBarButtonItem = backBarItem;
+    
+    UIButton *refreshButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    refreshButton.frame = CGRectMake(0, 0, 80, 28);
+    refreshButton.contentHorizontalAlignment =  UIControlContentHorizontalAlignmentRight;
+    [refreshButton addTarget:self action:@selector(refreshDeviceAdvanceConfig) forControlEvents:UIControlEventTouchUpInside];
+    [refreshButton setTitle:@"action_refresh".localizedString forState:UIControlStateNormal];
+    UIBarButtonItem *rightBarItem = [[UIBarButtonItem alloc] initWithCustomView:refreshButton];
+    self.navigationItem.rightBarButtonItem = rightBarItem;
     
     
 }
@@ -181,6 +212,9 @@
     else if(3 == row){
         [self presentViewController:self.deviceAudioConfigSheet animated:YES completion:nil];
     }
+    else if(4 == row){
+        [self presentViewController:self.alarmRecordDurationConfigSheet animated:YES completion:nil];
+    }
     
 }
 #pragma methods
@@ -272,6 +306,26 @@
              NSString * soundDesc = self.viewModel.AUDIO_IsPlayPromptSound?@"action_open".localizedString:@"action_close".localizedString;
              InfoModel * model3 = self.rowsArray[3];
              [model3 setInfo:soundDesc];
+             [self.mTableView reloadData];
+         }
+     }];
+    
+}
+
+
+
+-(void)changeAlarmRecordDurationConfig:(NSInteger)index{
+    [self.viewModel.mRecConfigModel setRec_AlmTimeLenChoice:index];
+    @weakify(self)
+    [[[[self.viewModel racSetRecCfg] filter:^BOOL(id value) {
+        return [value integerValue] == 1;
+    }]
+      deliverOn:[RACScheduler mainThreadScheduler]]
+     subscribeNext:^(id x) {
+         @strongify(self)
+         if ([x integerValue] == 1) {
+             InfoModel * model4 = self.rowsArray[4];
+             [model4 setInfo:[self.viewModel.mRecConfigModel getRecordLenDesc]];
              [self.mTableView reloadData];
          }
      }];
@@ -420,5 +474,47 @@
         
     }
     return _deviceAudioConfigSheet;
+}
+-(UIAlertController*)alarmRecordDurationConfigSheet{
+    if (!_alarmRecordDurationConfigSheet) {
+        @weakify(self)
+        _alarmRecordDurationConfigSheet = [UIAlertController alertControllerWithTitle:@"string_DevAdvancedSettings_AlmTimeLen".localizedString message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+        
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"cancel".localizedString style:UIAlertActionStyleCancel handler:nil];
+        
+        
+        UIAlertAction *fiveSecondAction = [UIAlertAction actionWithTitle:[NSString stringWithFormat:@"5%@",@"string_second".localizedString] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            @strongify(self)
+            [self changeAlarmRecordDurationConfig:0];
+        }];
+        
+        UIAlertAction *tenSecondAction = [UIAlertAction actionWithTitle:[NSString stringWithFormat:@"10%@",@"string_second".localizedString] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            @strongify(self)
+            [self changeAlarmRecordDurationConfig:1];
+        }];
+        
+        UIAlertAction *twentySecondAction = [UIAlertAction actionWithTitle:[NSString stringWithFormat:@"20%@",@"string_second".localizedString] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            @strongify(self)
+            [self changeAlarmRecordDurationConfig:2];
+        }];
+        UIAlertAction *thirtySecondAction = [UIAlertAction actionWithTitle:[NSString stringWithFormat:@"30%@",@"string_second".localizedString] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            @strongify(self)
+            [self changeAlarmRecordDurationConfig:3];
+        }];
+        UIAlertAction *sixtySecondAction = [UIAlertAction actionWithTitle:[NSString stringWithFormat:@"60%@",@"string_second".localizedString] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            @strongify(self)
+            [self changeAlarmRecordDurationConfig:4];
+        }];
+        
+        [_alarmRecordDurationConfigSheet addAction:cancelAction];
+        [_alarmRecordDurationConfigSheet addAction:fiveSecondAction];
+        [_alarmRecordDurationConfigSheet addAction:tenSecondAction];
+        [_alarmRecordDurationConfigSheet addAction:twentySecondAction];
+        [_alarmRecordDurationConfigSheet addAction:thirtySecondAction];
+        [_alarmRecordDurationConfigSheet addAction:sixtySecondAction];
+       
+        
+    }
+    return _alarmRecordDurationConfigSheet;
 }
 @end
