@@ -148,7 +148,7 @@
     [request setEntity:entityDescription];
     
     //确定持久库中是否存在与此字段相对应的托管对象，所以穿件一个谓词来确定字段的正确对象：
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"url == %@",model.url];
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"name == %@",model.sdVideo];
     [request setPredicate:pred];
     
     
@@ -201,7 +201,7 @@
     
     //确定持久库中是否存在与此字段相对应的托管对象，所以穿件一个谓词来确定字段的正确对象：
     //(tid == %ld) AND (dte==%@)
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"url == %@",model.url];
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"name == %@",model.sdVideo];
     [request setPredicate:pred];
     
     

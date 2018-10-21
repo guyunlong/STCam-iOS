@@ -11,6 +11,7 @@
 #import "MJRefresh.h"
 #import "RecordListCell.h"
 #import "PlayBackController.h"
+#import "CoreDataManager.h"
 @interface RecordListController ()<UITableViewDataSource, UITableViewDelegate>
 @property(nonatomic,strong)UITableView * mTableView;
 @end
@@ -136,6 +137,7 @@
     PlayBackViewModel * viewModel = [PlayBackViewModel new];
     [viewModel setVideoModel:_viewModel.recordFileArray[indexPath.row]];
     [viewModel setDeviceModel:_viewModel.model];
+    [[CoreDataManager sharedManager] saveSDVideo:_viewModel.recordFileArray[indexPath.row]];
     [ctl setViewModel:viewModel];
     [self.navigationController pushViewController:ctl animated:YES];
     
