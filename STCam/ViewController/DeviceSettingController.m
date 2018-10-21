@@ -13,6 +13,7 @@
 #import "ChangeDevicePwdController.h"
 #import "DeviceAdvanceSettingController.h"
 #import "MJRefresh.h"
+#import "DevListViewModel.h"
 @interface DeviceSettingController ()<UITableViewDataSource, UITableViewDelegate>
 @property(nonatomic,strong)UIImageView * devThumbView;//设备缩略图
 @property(nonatomic,strong)UILabel * snLabel;
@@ -22,6 +23,9 @@
 @property(nonatomic,strong)NSMutableArray  * rowsArray;//列表数据
 @property(nonatomic,strong)UIAlertController  *changeDeviceNameAlert;//修改设备名称
 @property(nonatomic,strong)UIAlertController  *changePushSheet;//推送开关
+
+@property(nonatomic,strong)UIAlertController  *deleteConfirmAlertController;//确认删除设备
+
 @end
 
 @implementation DeviceSettingController
@@ -313,6 +317,19 @@
          
      }];
 }
+-(void)deleteDevice{
+    @weakify(self);
+    [[[DevListViewModel sharedDevListViewModel] racDeleteDevice:self.viewModel.model] subscribeNext:^(id x) {
+         @strongify(self);
+        if ([x integerValue] == 1) {
+            [self showHint:@"string_delsuccess".localizedString];
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
+        else{
+            [self showHint:@"string_delfail".localizedString];
+        }
+    }];
+}
 #pragma getter
 -(UIAlertController*)changeDeviceNameAlert{
     if (!_changeDeviceNameAlert) {
@@ -373,6 +390,24 @@
     return _changePushSheet;
 }
 
-//
+-(UIAlertController*)deleteConfirmAlertController{
+    if (!_deleteConfirmAlertController) {
+        @weakify(self)
+        _deleteConfirmAlertController = [UIAlertController alertControllerWithTitle:@"action_delete_device_ask".localizedString message:nil preferredStyle:UIAlertControllerStyleAlert];
+        
+        
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"cancel".localizedString style:UIAlertActionStyleCancel handler:nil];
+        
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK".localizedString style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            @strongify(self)
+            [self deleteDevice];
+        }];
+        
+        [_deleteConfirmAlertController addAction:cancelAction];
+        [_deleteConfirmAlertController addAction:okAction];
+        
+    }
+    return _deleteConfirmAlertController;
+}
 
 @end

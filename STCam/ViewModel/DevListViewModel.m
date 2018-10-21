@@ -13,6 +13,7 @@
 #import "FFHttpTool.h"
 #import "AccountManager.h"
 #import "iconv.h"
+#import "RetModel.h"
 @interface DevListViewModel ()
 @property (strong, nonatomic)  NSMutableArray *searchDeviceArray;
 @end
@@ -150,7 +151,13 @@ void callback_SearchDev(void *UserCustom, u32 SN, int DevType, char *DevModal, c
         [FFHttpTool GET:url parameters:nil success:^(id data){
             @strongify(self)
             if ([data isKindOfClass:[NSDictionary class]]) {
-                [subscriber sendNext:@1];
+                RetModel * model = [RetModel RetModelWithDict:data];
+                if (model.ret == 1) {
+                    //删除设备
+                    [model threadDisconnect];
+                    [self.deviceArray removeObject:model];
+                }
+                [subscriber sendNext:@(model.ret)];
             }
             else{
                 [subscriber sendNext:0];//
