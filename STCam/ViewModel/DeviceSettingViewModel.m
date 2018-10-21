@@ -193,4 +193,52 @@
         return nil;
     }];
 }
+-(RACSignal*)racGetAudioCfg{
+    @weakify(self)
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber){
+        @strongify(self)
+        dispatch_queue_t quene = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(quene, ^{
+            
+            NSString * url = [NSString stringWithFormat:@"%@",[self.model getDevURL:Msg_GetAudioCfg]];
+            
+            id data = [self.model thNetHttpGet:url];
+            if([data isKindOfClass:[NSDictionary class]]){
+                self.AUDIO_IsPlayPromptSound = [[data objectForKey:@"AUDIO_IsPlayPromptSound"] boolValue];
+                [subscriber sendNext:@1];
+            }
+            else{
+                [subscriber sendNext:@0];
+            }
+            
+        });
+        
+        return nil;
+    }];
+}
+-(RACSignal*)racSetAudioCfg{
+    @weakify(self)
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber){
+        @strongify(self)
+        dispatch_queue_t quene = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(quene, ^{
+            
+            NSString * url = [NSString stringWithFormat:@"%@&AUDIO_IsPlayPromptSound=%d",[self.model getDevURL:Msg_SetAudioCfg],self.AUDIO_IsPlayPromptSound];
+            
+            id data = [self.model thNetHttpGet:url];
+            if([data isKindOfClass:[NSDictionary class]]){
+                RetModel * model = [RetModel RetModelWithDict:data];
+                if (model.ret) {
+                    [subscriber sendNext:@1];
+                }
+                else{
+                    [subscriber sendNext:@0];
+                }
+            }
+            
+        });
+        
+        return nil;
+    }];
+}
 @end

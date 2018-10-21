@@ -14,6 +14,8 @@
 @property(nonatomic,strong)UITableView * mTableView;
 @property(nonatomic,strong)UIAlertController  *changePushIntervalSheet;//推送间隔
 @property(nonatomic,strong)UIAlertController  *changeMotionConfigSheet;//图像侦测灵明度
+@property(nonatomic,strong)UIAlertController  *changePIRConfigSheet;//PIR灵明度
+@property(nonatomic,strong)UIAlertController  *deviceAudioConfigSheet;//设备提示音开关
 @end
 
 @implementation DeviceAdvanceSettingController
@@ -34,7 +36,22 @@
         InfoModel * model1 = _rowsArray[1];
         [model1 setInfo:[_viewModel.motionCfgModel getMotionDesc]];
         
+        InfoModel * model2 = _rowsArray[2];
+        [model2 setInfo:[_viewModel.mPushSettingModel getPIRSensitiveDesc]];
+        
         [_mTableView reloadData];
+        @weakify(self)
+        [[[self.viewModel racGetAudioCfg]
+          deliverOn:[RACScheduler mainThreadScheduler]]
+         subscribeNext:^(id x) {
+             if([x integerValue] == 1){
+                 @strongify(self)
+                 NSString * soundDesc = self.viewModel.AUDIO_IsPlayPromptSound?@"action_open".localizedString:@"action_close".localizedString;
+                 InfoModel * model3 = self.rowsArray[3];
+                 [model3 setInfo:soundDesc];
+                 [self.mTableView reloadData];
+             }
+         }];
     }
     
 }
@@ -158,6 +175,12 @@
     else if(1 == row){
          [self presentViewController:self.changeMotionConfigSheet animated:YES completion:nil];
     }
+    else if(2 == row){
+        [self presentViewController:self.changePIRConfigSheet animated:YES completion:nil];
+    }
+    else if(3 == row){
+        [self presentViewController:self.deviceAudioConfigSheet animated:YES completion:nil];
+    }
     
 }
 #pragma methods
@@ -217,6 +240,44 @@
      }];
     
 }
+
+-(void)setPirConfig:(NSInteger)index{
+    [self.viewModel.mPushSettingModel setPIRSensitive:index];
+    
+    @weakify(self)
+    [[[self.viewModel racSetPushConfig]
+      deliverOn:[RACScheduler mainThreadScheduler]]
+     subscribeNext:^(id x) {
+         @strongify(self)
+         if ([x integerValue] == 1) {
+             InfoModel * model2 = self.rowsArray[2];
+             [model2 setInfo:[self.viewModel.mPushSettingModel getPIRSensitiveDesc]];
+             [self.mTableView reloadData];
+         }
+         
+         
+     }];
+}
+-(void)changeSoundPlayConfig:(BOOL)open{
+    [self.viewModel setAUDIO_IsPlayPromptSound:open];
+    
+    @weakify(self)
+    [[[[self.viewModel racSetAudioCfg] filter:^BOOL(id value) {
+        return [value integerValue] == 1;
+    }]
+      deliverOn:[RACScheduler mainThreadScheduler]]
+     subscribeNext:^(id x) {
+         @strongify(self)
+         if ([x integerValue] == 1) {
+             NSString * soundDesc = self.viewModel.AUDIO_IsPlayPromptSound?@"action_open".localizedString:@"action_close".localizedString;
+             InfoModel * model3 = self.rowsArray[3];
+             [model3 setInfo:soundDesc];
+             [self.mTableView reloadData];
+         }
+     }];
+    
+}
+
 #pragma getter
 -(UIAlertController*)changePushIntervalSheet{
     if (!_changePushIntervalSheet) {
@@ -298,5 +359,66 @@
         
     }
     return _changeMotionConfigSheet;
+}
+
+-(UIAlertController*)changePIRConfigSheet{
+    if (!_changePIRConfigSheet) {
+        @weakify(self)
+        _changePIRConfigSheet = [UIAlertController alertControllerWithTitle:@"string_DevAdvancedSettings_PIRSensitivity".localizedString message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+        
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"cancel".localizedString style:UIAlertActionStyleCancel handler:nil];
+        
+        
+        UIAlertAction *lowdAction = [UIAlertAction actionWithTitle:@"action_level_low".localizedString style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            @strongify(self)
+            [self setPirConfig:0];
+           
+        }];
+        
+        UIAlertAction *middleAction = [UIAlertAction actionWithTitle:@"action_level_middle".localizedString style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            @strongify(self)
+            [self setPirConfig:1];
+        }];
+        
+        UIAlertAction *highAction = [UIAlertAction actionWithTitle:@"action_level_high".localizedString style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            @strongify(self)
+            [self setPirConfig:2];
+        }];
+        
+        [_changePIRConfigSheet addAction:lowdAction];
+        [_changePIRConfigSheet addAction:middleAction];
+        [_changePIRConfigSheet addAction:highAction];
+        [_changePIRConfigSheet addAction:cancelAction];
+        
+    }
+    return _changePIRConfigSheet;
+}
+
+
+-(UIAlertController*)deviceAudioConfigSheet{
+    if (!_deviceAudioConfigSheet) {
+        @weakify(self)
+        _deviceAudioConfigSheet = [UIAlertController alertControllerWithTitle:@"string_DevAdvancedSettings_IsSoundPlay".localizedString message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+        
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"cancel".localizedString style:UIAlertActionStyleCancel handler:nil];
+        
+        
+        UIAlertAction *closeAction = [UIAlertAction actionWithTitle:@"action_close".localizedString style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            @strongify(self)
+            [self changeSoundPlayConfig:NO];
+        }];
+        
+        UIAlertAction *openAction = [UIAlertAction actionWithTitle:@"action_open".localizedString style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            @strongify(self)
+            [self changeSoundPlayConfig:YES];
+            
+        }];
+        
+        [_deviceAudioConfigSheet addAction:openAction];
+        [_deviceAudioConfigSheet addAction:closeAction];
+        [_deviceAudioConfigSheet addAction:cancelAction];
+        
+    }
+    return _deviceAudioConfigSheet;
 }
 @end

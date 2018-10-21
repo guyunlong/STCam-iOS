@@ -23,4 +23,10 @@
 -(RACSignal*)racSetPushConfig;
 -(RACSignal*)racGetMotionCfg;
 -(RACSignal*)racSetMotionCfg;
+
+
+/*************设备提示音开关***************/
+-(RACSignal*)racGetAudioCfg;
+-(RACSignal*)racSetAudioCfg;
+@property(nonatomic,assign)BOOL AUDIO_IsPlayPromptSound;//设备提示音开关
 @end
