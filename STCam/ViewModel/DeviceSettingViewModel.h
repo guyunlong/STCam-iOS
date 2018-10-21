@@ -14,6 +14,7 @@
 #import "MotionCfgModel.h"
 #import "RecConfigModel.h"
 #import "SDInfoModel.h"
+#import "DevListViewModel.h"
 @interface DeviceSettingViewModel : NSObject
 @property(nonatomic,strong)DeviceModel * model;
 @property(nonatomic,strong)PushSettingModel * mPushSettingModel;
@@ -40,6 +41,11 @@
 /*************sd卡***************/
 @property(nonatomic,strong)SDInfoModel *mSDInfoModel;//sd卡信息
 -(RACSignal*)racGetDiskCfg;
--(RACSignal*)racFormattfCard;
+
+
+/**
+ 恢复出厂设置
+ */
+-(RACSignal*)racSetDevLoadDefault;
 
 @end

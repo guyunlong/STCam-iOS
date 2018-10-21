@@ -18,6 +18,8 @@
 @property(nonatomic,strong)UIAlertController  *changePIRConfigSheet;//PIR灵明度
 @property(nonatomic,strong)UIAlertController  *deviceAudioConfigSheet;//设备提示音开关
 @property(nonatomic,strong)UIAlertController  *alarmRecordDurationConfigSheet;//报警录像时常
+@property(nonatomic,strong)UIButton  * resetButton;//恢复出厂设置按钮
+@property(nonatomic,strong)UIAlertController  *resetConfirmAlertController;//确认恢复出厂设置
 @end
 
 @implementation DeviceAdvanceSettingController
@@ -97,6 +99,16 @@
     [_mTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
+    
+    _resetButton = [[UIButton alloc] initWithFrame:CGRectMake(2*kPadding, kScreenHeight-200*kWidthCoefficient, kScreenWidth-4*kPadding, kButtonHeight)];
+    [_resetButton setTitle:@"action_reset_origin".localizedString forState:UIControlStateNormal];
+    [_resetButton setAppThemeType:ButtonStyleStyleAppTheme];
+    [self.view addSubview:_resetButton];
+    [_resetButton addTarget:self action:@selector(resetButtonClick) forControlEvents:UIControlEventTouchUpInside];
+}
+
+-(void)resetButtonClick{
+    [self presentViewController:self.resetConfirmAlertController animated:YES completion:nil];
 }
 
 -(void)initNav{
@@ -341,7 +353,31 @@
      }];
     
 }
-
+-(void)resetDevice{
+    [self showHudInView:self.view hint:nil];
+    @weakify(self);
+    [[[[[[_viewModel racSetDevLoadDefault]
+         deliverOn:[RACScheduler mainThreadScheduler]]
+        filter:^BOOL(id value) {
+            if ([value integerValue] == 0) {
+               // action_Failed
+                [self showHint:@"action_Failed".localizedString];
+            }
+            else{
+                 [self showHint:@"action_Success".localizedString];
+            }
+            return [value integerValue] != 0;
+        }]
+       flattenMap:^RACStream *(id value) {
+          return  [[DevListViewModel sharedDevListViewModel] racDeleteDevice:self.viewModel.model];
+       }]
+      deliverOn:[RACScheduler mainThreadScheduler]]
+     subscribeNext:^(id x) {
+         @strongify(self);
+         [self.navigationController popToRootViewControllerAnimated:YES];
+     }];
+    
+}
 #pragma getter
 -(UIAlertController*)changePushIntervalSheet{
     if (!_changePushIntervalSheet) {
@@ -527,4 +563,25 @@
     }
     return _alarmRecordDurationConfigSheet;
 }
+
+-(UIAlertController*)resetConfirmAlertController{
+    if (!_resetConfirmAlertController) {
+        @weakify(self)
+        _resetConfirmAlertController = [UIAlertController alertControllerWithTitle:@"action_reset_origin_ask".localizedString message:nil preferredStyle:UIAlertControllerStyleAlert];
+        
+        
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"cancel".localizedString style:UIAlertActionStyleCancel handler:nil];
+        
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK".localizedString style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            @strongify(self)
+            [self resetDevice];
+        }];
+        
+        [_resetConfirmAlertController addAction:cancelAction];
+        [_resetConfirmAlertController addAction:okAction];
+        
+    }
+    return _resetConfirmAlertController;
+}
+
 @end

@@ -11,6 +11,7 @@
 #import "RetModel.h"
 #import "CoreDataManager.h"
 
+
 @implementation DeviceSettingViewModel
 -(RACSignal*)racChangeDeviceName:(NSString*)deviceName{
     @weakify(self)
@@ -326,6 +327,29 @@
         dispatch_async(quene, ^{
             
             NSString * url = [NSString stringWithFormat:@"%@",[self.model getDevURL:Msg_FormattfCard]];
+            
+            id data = [self.model thNetHttpGet:url];
+            if([data isKindOfClass:[NSDictionary class]]){
+                RetModel * model = [RetModel RetModelWithDict:data];
+                [subscriber sendNext:@(model.ret)];
+            }
+            else{
+                [subscriber sendNext:@0];
+            }
+            
+        });
+        
+        return nil;
+    }];
+}
+-(RACSignal*)racSetDevLoadDefault{
+    @weakify(self)
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber){
+        @strongify(self)
+        dispatch_queue_t quene = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(quene, ^{
+            
+            NSString * url = [NSString stringWithFormat:@"%@",[self.model getDevURL:Msg_SetDevLoadDefault]];
             
             id data = [self.model thNetHttpGet:url];
             if([data isKindOfClass:[NSDictionary class]]){

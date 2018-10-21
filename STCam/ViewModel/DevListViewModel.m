@@ -140,6 +140,30 @@ void callback_SearchDev(void *UserCustom, u32 SN, int DevType, char *DevModal, c
     }];
 }
 
+-(RACSignal *)racDeleteDevice:(DeviceModel*)model{
+    @weakify(self)
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        @strongify(self)
+        
+        //http://211.149.199.247:800/app_user_get_devlst.asp?user=1257117229@qq.com&psd=12345678
+        NSString * url = [NSString stringWithFormat:@"http://%@:%d/app_user_del_dev.asp?user=%@&psd=%@&sn=%@",serverIP,ServerPort,[AccountManager getUser],[AccountManager getPassword],model.SN];
+        [FFHttpTool GET:url parameters:nil success:^(id data){
+            @strongify(self)
+            if ([data isKindOfClass:[NSDictionary class]]) {
+                [subscriber sendNext:@1];
+            }
+            else{
+                [subscriber sendNext:0];//
+            }
+            [subscriber sendCompleted];
+        } failure:^(NSError * error){
+            [subscriber sendNext:@100000];//未知网络错误
+            [subscriber sendCompleted];
+        }];
+        return nil;
+    }];
+}
+
 -(RACSignal *)racSearchDevice{
     
     @weakify(self)

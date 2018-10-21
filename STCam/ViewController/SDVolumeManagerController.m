@@ -87,7 +87,7 @@
         make.edges.equalTo(self.view);
     }];
     
-    _formatButton = [[UIButton alloc] initWithFrame:CGRectMake(2*kPadding, kScreenHeight-250*kWidthCoefficient, kScreenWidth-4*kPadding, kButtonHeight)];
+    _formatButton = [[UIButton alloc] initWithFrame:CGRectMake(2*kPadding, kScreenHeight-200*kWidthCoefficient, kScreenWidth-4*kPadding, kButtonHeight)];
     [_formatButton setTitle:@"action_sd_format".localizedString forState:UIControlStateNormal];
     [_formatButton setAppThemeType:ButtonStyleStyleAppTheme];
     [self.view addSubview:_formatButton];
@@ -227,7 +227,7 @@
         
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK".localizedString style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             @strongify(self)
-            
+            [self formattfCard];
             
         }];
         

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import <ReactiveCocoa/RACEXTScope.h>
+#import "DeviceModel.h"
 typedef NS_ENUM(NSInteger, NetWorkConnType){
     NetWorkConnType_Break,//没有连接
     NetWorkConnType_Wlan,//无线连接
@@ -26,6 +27,15 @@ typedef NS_ENUM(NSInteger, TUserMode){
 @property(nonatomic,assign)TUserMode userMode;
 -(RACSignal*)racSearchDevice;
 -(RACSignal *)racGetDeviceList;
+
+/**
+ 删除用户列表中的设备
+
+ @param model 设备
+ @return 信号量
+ */
+-(RACSignal *)racDeleteDevice:(DeviceModel*)model;
+
 @property(nonatomic,strong)NSMutableArray* deviceArray;
 
 /**
