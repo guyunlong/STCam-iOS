@@ -8,6 +8,7 @@
 
 #import "DeviceAdvanceSettingController.h"
 #import "CommonSettingCell.h"
+#import "SDVolumeManagerController.h"
 #import "PrefixHeader.h"
 @interface DeviceAdvanceSettingController ()<UITableViewDataSource, UITableViewDelegate>
 @property(nonatomic,strong)NSMutableArray  * rowsArray;//列表数据
@@ -42,7 +43,7 @@
         
         [_mTableView reloadData];
        
-        
+        [self refreshDeviceAdvanceConfig];
         
     }
     
@@ -214,6 +215,15 @@
     }
     else if(4 == row){
         [self presentViewController:self.alarmRecordDurationConfigSheet animated:YES completion:nil];
+    }
+    else if(5 == row){
+        if (!_viewModel.model.ExistSD) {
+            [self showHint:@"action_not_exist_sd".localizedString];
+            return;
+        }
+        SDVolumeManagerController * ctl = [SDVolumeManagerController new];
+        [ctl setViewModel:_viewModel];
+        [self.navigationController pushViewController:ctl animated:YES];
     }
     
 }

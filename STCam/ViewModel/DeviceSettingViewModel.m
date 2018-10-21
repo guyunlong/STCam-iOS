@@ -292,4 +292,30 @@
         return nil;
     }];
 }
+-(RACSignal*)racGetDiskCfg{
+    @weakify(self)
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber){
+        @strongify(self)
+        dispatch_queue_t quene = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(quene, ^{
+            
+            NSString * url = [NSString stringWithFormat:@"%@",[self.model getDevURL:Msg_GetDiskCfg]];
+            
+            id data = [self.model thNetHttpGet:url];
+            if([data isKindOfClass:[NSDictionary class]]){
+                SDInfoModel * model = [SDInfoModel SDInfoModelWithDict:data];
+                if (model) {
+                    self.mSDInfoModel = model;
+                    [subscriber sendNext:@1];
+                }
+                else{
+                    [subscriber sendNext:@0];
+                }
+            }
+            
+        });
+        
+        return nil;
+    }];
+}
 @end

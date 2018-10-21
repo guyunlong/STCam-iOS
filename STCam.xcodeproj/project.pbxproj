@@ -129,6 +129,12 @@
 		A48C32E6217C36CA00CDF2D2 /* DeviceAdvanceSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = A48C32E5217C36CA00CDF2D2 /* DeviceAdvanceSettingController.m */; };
 		A48C32E9217C4B8A00CDF2D2 /* MotionCfgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A48C32E8217C4B8A00CDF2D2 /* MotionCfgModel.m */; };
 		A48C32EC217C691600CDF2D2 /* RecConfigModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A48C32EB217C691600CDF2D2 /* RecConfigModel.m */; };
+		A48C32EF217C6E2F00CDF2D2 /* SDVolumeManagerController.m in Sources */ = {isa = PBXBuildFile; fileRef = A48C32EE217C6E2F00CDF2D2 /* SDVolumeManagerController.m */; };
+		A48C32F2217C700200CDF2D2 /* SDInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A48C32F1217C700200CDF2D2 /* SDInfoModel.m */; };
+		A48C32F6217C713600CDF2D2 /* CommonInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A48C32F4217C713600CDF2D2 /* CommonInfoCell.m */; };
+		A48C32F7217C713600CDF2D2 /* CommonInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A48C32F5217C713600CDF2D2 /* CommonInfoCell.xib */; };
+		A48C32FB217C716A00CDF2D2 /* CommonSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A48C32F9217C716A00CDF2D2 /* CommonSwitchCell.m */; };
+		A48C32FC217C716A00CDF2D2 /* CommonSwitchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A48C32FA217C716A00CDF2D2 /* CommonSwitchCell.xib */; };
 		A4946FF6212C5B460015990C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A4946FF5212C5B460015990C /* AppDelegate.m */; };
 		A4946FF9212C5B460015990C /* SplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4946FF8212C5B460015990C /* SplashViewController.m */; };
 		A4946FFC212C5B460015990C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4946FFA212C5B460015990C /* Main.storyboard */; };
@@ -557,6 +563,16 @@
 		A48C32E8217C4B8A00CDF2D2 /* MotionCfgModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MotionCfgModel.m; sourceTree = "<group>"; };
 		A48C32EA217C691600CDF2D2 /* RecConfigModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecConfigModel.h; sourceTree = "<group>"; };
 		A48C32EB217C691600CDF2D2 /* RecConfigModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecConfigModel.m; sourceTree = "<group>"; };
+		A48C32ED217C6E2F00CDF2D2 /* SDVolumeManagerController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDVolumeManagerController.h; sourceTree = "<group>"; };
+		A48C32EE217C6E2F00CDF2D2 /* SDVolumeManagerController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SDVolumeManagerController.m; sourceTree = "<group>"; };
+		A48C32F0217C700200CDF2D2 /* SDInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDInfoModel.h; sourceTree = "<group>"; };
+		A48C32F1217C700200CDF2D2 /* SDInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SDInfoModel.m; sourceTree = "<group>"; };
+		A48C32F3217C713600CDF2D2 /* CommonInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonInfoCell.h; sourceTree = "<group>"; };
+		A48C32F4217C713600CDF2D2 /* CommonInfoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonInfoCell.m; sourceTree = "<group>"; };
+		A48C32F5217C713600CDF2D2 /* CommonInfoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommonInfoCell.xib; sourceTree = "<group>"; };
+		A48C32F8217C716A00CDF2D2 /* CommonSwitchCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonSwitchCell.h; sourceTree = "<group>"; };
+		A48C32F9217C716A00CDF2D2 /* CommonSwitchCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonSwitchCell.m; sourceTree = "<group>"; };
+		A48C32FA217C716A00CDF2D2 /* CommonSwitchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommonSwitchCell.xib; sourceTree = "<group>"; };
 		A4946FF1212C5B460015990C /* STCam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = STCam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4946FF4212C5B460015990C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A4946FF5212C5B460015990C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -731,6 +747,8 @@
 				A48C32E8217C4B8A00CDF2D2 /* MotionCfgModel.m */,
 				A48C32EA217C691600CDF2D2 /* RecConfigModel.h */,
 				A48C32EB217C691600CDF2D2 /* RecConfigModel.m */,
+				A48C32F0217C700200CDF2D2 /* SDInfoModel.h */,
+				A48C32F1217C700200CDF2D2 /* SDInfoModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1247,6 +1265,8 @@
 				A439458A217360960047E00C /* DeviceSettingController.m */,
 				A48C32E4217C36CA00CDF2D2 /* DeviceAdvanceSettingController.h */,
 				A48C32E5217C36CA00CDF2D2 /* DeviceAdvanceSettingController.m */,
+				A48C32ED217C6E2F00CDF2D2 /* SDVolumeManagerController.h */,
+				A48C32EE217C6E2F00CDF2D2 /* SDVolumeManagerController.m */,
 				A4F5043E216268A6002B71FF /* RootViewController.h */,
 				A4F5043F216268A6002B71FF /* RootViewController.m */,
 				A439D83A2165149800FCE7FE /* STNavigationController.h */,
@@ -1337,6 +1357,12 @@
 				A4394581217356B40047E00C /* CommonSettingCell.h */,
 				A4394582217356B40047E00C /* CommonSettingCell.m */,
 				A4394583217356B40047E00C /* CommonSettingCell.xib */,
+				A48C32F3217C713600CDF2D2 /* CommonInfoCell.h */,
+				A48C32F4217C713600CDF2D2 /* CommonInfoCell.m */,
+				A48C32F5217C713600CDF2D2 /* CommonInfoCell.xib */,
+				A48C32F8217C716A00CDF2D2 /* CommonSwitchCell.h */,
+				A48C32F9217C716A00CDF2D2 /* CommonSwitchCell.m */,
+				A48C32FA217C716A00CDF2D2 /* CommonSwitchCell.xib */,
 				A4434D9E217B009A00BDA9F2 /* RecordListCell.h */,
 				A4434D9F217B009A00BDA9F2 /* RecordListCell.m */,
 				A4434DA0217B009A00BDA9F2 /* RecordListCell.xib */,
@@ -1500,6 +1526,7 @@
 				A442C3CA213199A100198910 /* Vmrender.idl in Resources */,
 				A4AE70BE2167AEF600614024 /* DevListCell.xib in Resources */,
 				A442C3C0213199A100198910 /* Mstvgs.idl in Resources */,
+				A48C32FC217C716A00CDF2D2 /* CommonSwitchCell.xib in Resources */,
 				A442C3C6213199A100198910 /* dshowasf.idl in Resources */,
 				A442C3CB213199A100198910 /* tvratings.idl in Resources */,
 				A442C3B8213199A100198910 /* mmstream.idl in Resources */,
@@ -1512,6 +1539,7 @@
 				A442C3C9213199A100198910 /* medparam.idl in Resources */,
 				A442C31E213199A100198910 /* test3 in Resources */,
 				A442C3B1213199A100198910 /* dxtrans.idl in Resources */,
+				A48C32F7217C713600CDF2D2 /* CommonInfoCell.xib in Resources */,
 				A442C3CC213199A100198910 /* mediaobj.idl in Resources */,
 				A442C3B6213199A100198910 /* mstve.idl in Resources */,
 			);
@@ -1586,6 +1614,8 @@
 				A442C2B0213199A100198910 /* TFun.c in Sources */,
 				A4AE326F21342EFD0036212B /* UITableView+Common.m in Sources */,
 				9DAC4BB22175BC9E00AC8916 /* GenerateShareQRCodeController.m in Sources */,
+				A48C32F2217C700200CDF2D2 /* SDInfoModel.m in Sources */,
+				A48C32EF217C6E2F00CDF2D2 /* SDVolumeManagerController.m in Sources */,
 				A442C31A213199A100198910 /* thRec.c in Sources */,
 				A4434DA1217B009A00BDA9F2 /* RecordListCell.m in Sources */,
 				A4CFFE822168C7B600A93B72 /* VideoDecoder.m in Sources */,
@@ -1606,6 +1636,7 @@
 				A452A9AF21762C4500E40A5F /* MBProgressHUD+SGQRCode.m in Sources */,
 				A4CFFE6E2168656000A93B72 /* LiveVidController.m in Sources */,
 				A4AE324A2134276E0036212B /* MediaViewController.m in Sources */,
+				A48C32F6217C713600CDF2D2 /* CommonInfoCell.m in Sources */,
 				A45934E32164A5FF0018A61B /* LoginBackgroundView.m in Sources */,
 				A47041B8216E1F59007163C8 /* STMediaModel.m in Sources */,
 				A442C2A8213199A100198910 /* Makefile in Sources */,
@@ -1659,6 +1690,7 @@
 				A4AE327221342EFD0036212B /* UISegmentedControl+Category.m in Sources */,
 				A442C31B213199A100198910 /* thImg.c in Sources */,
 				A47041BB216E2DFB007163C8 /* ImageDisplayController.m in Sources */,
+				A48C32FB217C716A00CDF2D2 /* CommonSwitchCell.m in Sources */,
 				A442C313213199A100198910 /* thVideoDec.c in Sources */,
 				A4946FF6212C5B460015990C /* AppDelegate.m in Sources */,
 			);

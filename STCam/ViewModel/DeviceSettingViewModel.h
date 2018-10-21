@@ -13,6 +13,7 @@
 #import "PushSettingModel.h"
 #import "MotionCfgModel.h"
 #import "RecConfigModel.h"
+#import "SDInfoModel.h"
 @interface DeviceSettingViewModel : NSObject
 @property(nonatomic,strong)DeviceModel * model;
 @property(nonatomic,strong)PushSettingModel * mPushSettingModel;
@@ -35,4 +36,8 @@
 -(RACSignal*)racGetRecCfg;
 -(RACSignal*)racSetRecCfg;
 @property(nonatomic,strong)RecConfigModel *mRecConfigModel;//录像
+
+/*************sd卡***************/
+@property(nonatomic,strong)SDInfoModel *mSDInfoModel;//sd卡信息
+-(RACSignal*)racGetDiskCfg;
 @end
