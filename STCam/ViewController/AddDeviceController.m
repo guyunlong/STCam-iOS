@@ -14,6 +14,10 @@
 #import "AccountManager.h"
 #import "FFHttpTool.h"
 #import "RetModel.h"
+#import "DevListViewModel.h"
+#import "AddDeviceSmartLinkController.h"
+#import "WifiManager.h"
+
 #define buttonHeight 1.25*kButtonHeight
 @interface AddDeviceController ()<QRCodeDelegate>
 @property (nonatomic, strong) UIButton *smartAddButton;
@@ -80,7 +84,12 @@
 
 -(void)addBtnClicked:(id)sender{
     if(sender == _smartAddButton){
-        
+        if([[WifiManager ssid] length] == 0){
+            [self showHint:@"string_OperationMustWifi".localizedString];
+            return;
+        }
+        AddDeviceSmartLinkController *ctl  = [AddDeviceSmartLinkController new];
+        [self.navigationController pushViewController:ctl animated:YES];
     }
     else if(sender == _apTStaAddButton){
         

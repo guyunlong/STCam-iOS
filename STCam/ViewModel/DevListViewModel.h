@@ -28,6 +28,7 @@ typedef NS_ENUM(NSInteger, TUserMode){
 -(RACSignal*)racSearchDevice;
 -(RACSignal *)racGetDeviceList;
 
+@property(nonatomic,assign)NetWorkConnType connType;
 /**
  删除用户列表中的设备
 

@@ -233,6 +233,7 @@ void callback_SearchDev(void *UserCustom, u32 SN, int DevType, char *DevModal, c
     }
 }
 -(void)notifyNetworkStatusChanged:(NetWorkConnType)type{
+    _connType = type;
     switch (type) {
         case NetWorkConnType_Break:
             //断开所有连接

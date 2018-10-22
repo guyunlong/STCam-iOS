@@ -90,6 +90,9 @@
 		A4434DA5217B140B00BDA9F2 /* PlayBackController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4434DA4217B140B00BDA9F2 /* PlayBackController.m */; };
 		A4434DA8217B144F00BDA9F2 /* PlayBackViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A4434DA7217B144F00BDA9F2 /* PlayBackViewModel.m */; };
 		A452A912217CC2A4008222F2 /* UpdateDevModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A452A911217CC2A4008222F2 /* UpdateDevModel.m */; };
+		A452A915217E025F008222F2 /* AddDeviceSmartLinkController.m in Sources */ = {isa = PBXBuildFile; fileRef = A452A914217E025F008222F2 /* AddDeviceSmartLinkController.m */; };
+		A452A918217E19CD008222F2 /* WifiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A452A917217E19CD008222F2 /* WifiManager.m */; };
+		A452A91B217E1B5F008222F2 /* AddDeviceSmartLinkNextController.m in Sources */ = {isa = PBXBuildFile; fileRef = A452A91A217E1B5F008222F2 /* AddDeviceSmartLinkNextController.m */; };
 		A452A9AC21762BEF00E40A5F /* WCQRCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A452A9AB21762BEF00E40A5F /* WCQRCodeVC.m */; };
 		A452A9AF21762C4500E40A5F /* MBProgressHUD+SGQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = A452A9AE21762C4500E40A5F /* MBProgressHUD+SGQRCode.m */; };
 		A45934E02164A5320018A61B /* BasicTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = A45934DF2164A5320018A61B /* BasicTextField.m */; };
@@ -508,6 +511,12 @@
 		A4434DA7217B144F00BDA9F2 /* PlayBackViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayBackViewModel.m; sourceTree = "<group>"; };
 		A452A910217CC2A4008222F2 /* UpdateDevModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpdateDevModel.h; sourceTree = "<group>"; };
 		A452A911217CC2A4008222F2 /* UpdateDevModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpdateDevModel.m; sourceTree = "<group>"; };
+		A452A913217E025F008222F2 /* AddDeviceSmartLinkController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddDeviceSmartLinkController.h; sourceTree = "<group>"; };
+		A452A914217E025F008222F2 /* AddDeviceSmartLinkController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddDeviceSmartLinkController.m; sourceTree = "<group>"; };
+		A452A916217E19CD008222F2 /* WifiManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WifiManager.h; sourceTree = "<group>"; };
+		A452A917217E19CD008222F2 /* WifiManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WifiManager.m; sourceTree = "<group>"; };
+		A452A919217E1B5F008222F2 /* AddDeviceSmartLinkNextController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddDeviceSmartLinkNextController.h; sourceTree = "<group>"; };
+		A452A91A217E1B5F008222F2 /* AddDeviceSmartLinkNextController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddDeviceSmartLinkNextController.m; sourceTree = "<group>"; };
 		A452A9AA21762BEF00E40A5F /* WCQRCodeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WCQRCodeVC.h; sourceTree = "<group>"; };
 		A452A9AB21762BEF00E40A5F /* WCQRCodeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WCQRCodeVC.m; sourceTree = "<group>"; };
 		A452A9AD21762C4500E40A5F /* MBProgressHUD+SGQRCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+SGQRCode.h"; sourceTree = "<group>"; };
@@ -723,6 +732,8 @@
 				A4134F922165F78500831B8D /* AccountManager.m */,
 				A47041A8216DFDD5007163C8 /* STFileManager.h */,
 				A47041A9216DFDD5007163C8 /* STFileManager.m */,
+				A452A916217E19CD008222F2 /* WifiManager.h */,
+				A452A917217E19CD008222F2 /* WifiManager.m */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -1286,6 +1297,10 @@
 				9DAC4BB12175BC9E00AC8916 /* GenerateShareQRCodeController.m */,
 				9DAC4BDE2175F45800AC8916 /* AddDeviceController.h */,
 				9DAC4BDF2175F45800AC8916 /* AddDeviceController.m */,
+				A452A913217E025F008222F2 /* AddDeviceSmartLinkController.h */,
+				A452A914217E025F008222F2 /* AddDeviceSmartLinkController.m */,
+				A452A919217E1B5F008222F2 /* AddDeviceSmartLinkNextController.h */,
+				A452A91A217E1B5F008222F2 /* AddDeviceSmartLinkNextController.m */,
 				A452A9AA21762BEF00E40A5F /* WCQRCodeVC.h */,
 				A452A9AB21762BEF00E40A5F /* WCQRCodeVC.m */,
 				A4434D95217AE62C00BDA9F2 /* RecordListController.h */,
@@ -1643,6 +1658,7 @@
 				A4AE324A2134276E0036212B /* MediaViewController.m in Sources */,
 				A48C32F6217C713600CDF2D2 /* CommonInfoCell.m in Sources */,
 				A45934E32164A5FF0018A61B /* LoginBackgroundView.m in Sources */,
+				A452A91B217E1B5F008222F2 /* AddDeviceSmartLinkNextController.m in Sources */,
 				A47041B8216E1F59007163C8 /* STMediaModel.m in Sources */,
 				A442C2A8213199A100198910 /* Makefile in Sources */,
 				A48C32EC217C691600CDF2D2 /* RecConfigModel.m in Sources */,
@@ -1663,6 +1679,7 @@
 				A4AE327A21342EFD0036212B /* UIImage+Common.m in Sources */,
 				A4946FF9212C5B460015990C /* SplashViewController.m in Sources */,
 				A4AE326E21342EFD0036212B /* NSDate+Helper.m in Sources */,
+				A452A918217E19CD008222F2 /* WifiManager.m in Sources */,
 				A48C32E9217C4B8A00CDF2D2 /* MotionCfgModel.m in Sources */,
 				A4AE327721342EFD0036212B /* NSDate+Common.m in Sources */,
 				A452A912217CC2A4008222F2 /* UpdateDevModel.m in Sources */,
@@ -1686,6 +1703,7 @@
 				A4BC3656216F959B00FDCBF5 /* AlarmListCell.m in Sources */,
 				A439D831216506E200FCE7FE /* LoginViewModel.m in Sources */,
 				A4394588217358470047E00C /* InfoModel.m in Sources */,
+				A452A915217E025F008222F2 /* AddDeviceSmartLinkController.m in Sources */,
 				A442C2AF213199A100198910 /* av_Queue.c in Sources */,
 				A4BC365D216F98A400FDCBF5 /* AlarmImageModel.m in Sources */,
 				A4AE327621342EFD0036212B /* NSString+Common.m in Sources */,
