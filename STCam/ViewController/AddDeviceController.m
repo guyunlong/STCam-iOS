@@ -17,7 +17,7 @@
 #import "DevListViewModel.h"
 #import "AddDeviceSmartLinkController.h"
 #import "WifiManager.h"
-
+#import "AddDeviceAPToStaController.h"
 #define buttonHeight 1.25*kButtonHeight
 @interface AddDeviceController ()<QRCodeDelegate>
 @property (nonatomic, strong) UIButton *smartAddButton;
@@ -92,7 +92,8 @@
         [self.navigationController pushViewController:ctl animated:YES];
     }
     else if(sender == _apTStaAddButton){
-        
+        AddDeviceAPToStaController * ctl = [AddDeviceAPToStaController new];
+        [self.navigationController pushViewController:ctl animated:YES];
     }
     else if(sender == _wifiAddButton){
         

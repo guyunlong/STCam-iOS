@@ -111,10 +111,6 @@
     
     [_nextButton addTarget:self action:@selector(cancelButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     
-    
-    
-   
-    
 }
 -(void)cancelButtonClicked{
     
