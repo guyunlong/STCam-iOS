@@ -8,6 +8,7 @@
 
 #import "AddDeviceSmartLinkNextController.h"
 #import "PrefixHeader.h"
+#include "mtk_SmartConfig.h"
 #import <SpinKit/RTSpinKitView.h>
 @interface AddDeviceSmartLinkNextController ()
 @property(nonatomic,strong)UIView * topBackView;
@@ -23,6 +24,14 @@
 
 @implementation AddDeviceSmartLinkNextController
 
+-(void)viewWillAppear:(BOOL)animated{
+     [super viewWillAppear:animated];
+    [self startSmartConfig];
+}
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self stopSmartConfig];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -113,9 +122,11 @@
     
 }
 -(void)cancelButtonClicked{
-    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)back{
+    [self.fireTimer invalidate];
+    self.fireTimer = nil;
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -124,14 +135,11 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void)startSmartConfig{
+    //int ret = StartSmartConnection([_ssid UTF8String], [_ssidPwd UTF8String], "", 0, "", 0);
 }
-*/
+-(void)stopSmartConfig{
+    //StopSmartConnection();
+}
 
 @end

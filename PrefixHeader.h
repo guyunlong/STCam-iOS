@@ -184,5 +184,9 @@ static int Msg_SetPushCfg = 99;
 static int Msg_PlayWavFile = 100;
 
 
+ static  int RESULT_FAIL = 0;//失败
+ static  int RESULT_SUCCESS = 1;//成功
+ static  int RESULT_SUCCESS_REBOOT = 2;//成功，需要重启
+
 #endif
 

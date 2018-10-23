@@ -38,7 +38,7 @@
     [self.view setBackgroundColor:[UIColor colorWithHexString:@"0xf0f0f0"]];
     [self initNav];
     
-    _titleLb = [[UILabel alloc] initWithFrame:CGRectMake(0, kPadding, kScreenWidth, 21*kPadding)];
+    _titleLb = [[UILabel alloc] initWithFrame:CGRectMake(0, kPadding, kScreenWidth, 25*kWidthCoefficient)];
     [_titleLb setTextAlignment:NSTextAlignmentCenter];
     [_titleLb setText:@"action_selectdevice".localizedString];
     [self.view addSubview:_titleLb];
@@ -47,13 +47,21 @@
     
     _mTableView = ({
         UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-        
         tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [tableView setBackgroundColor:[UIColor colorWithHexString:@"0xf0f0f0"]];
         [tableView setUserInteractionEnabled:NO];
         tableView.dataSource = self;
         tableView.delegate = self;
         tableView;
     });
+    [self.view addSubview:_mTableView];
+    
+    [_mTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.titleLb.mas_bottom).with.offset(kPadding/2);
+        make.bottom.mas_equalTo(self.view.mas_bottom);
+        make.right.mas_equalTo(self.view.mas_right);
+        make.left.mas_equalTo(self.view.mas_left);
+    }];
     
     
 }
@@ -140,7 +148,7 @@
     SearchDeviceCell * cell = [SearchDeviceCell SearchDeviceCellWith:tableView indexPath:indexPath];
     
     [cell setModel:_viewModel.searchDeviceArray[indexPath.row]];
-    
+    [cell setFrame:CGRectMake(0, 0, kScreenWidth,[SearchDeviceCell cellHeight])];
    
     return cell;
 }

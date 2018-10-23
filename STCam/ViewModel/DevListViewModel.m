@@ -170,8 +170,7 @@ void callback_SearchDev(void *UserCustom, u32 SN, int DevType, char *DevModal, c
         return nil;
     }];
 }
-
--(RACSignal *)racSearchDeviceInMainView:(BOOL)inMainView{
+-(RACSignal *)racSearchDeviceinMainView:(BOOL)inMainView{
     
     @weakify(self)
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber){
@@ -266,7 +265,7 @@ void callback_SearchDev(void *UserCustom, u32 SN, int DevType, char *DevModal, c
                     /*4、重新获得设备信息*/
                     @strongify(self)
                     if (self.userMode == TUserMode_Visitor) {
-                        [self searchDevice];
+                        [self searchDeviceInMainView:YES];
                         [self setRefreshView:YES];
                     }
                     else if (self.userMode == TUserMode_Login){

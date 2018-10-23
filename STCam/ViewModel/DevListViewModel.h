@@ -25,7 +25,7 @@ typedef NS_ENUM(NSInteger, TUserMode){
 @interface DevListViewModel : NSObject
 + (DevListViewModel *)sharedDevListViewModel;
 @property(nonatomic,assign)TUserMode userMode;
--(RACSignal*)racSearchDeviceinMainView:(bool)inMainView;
+-(RACSignal *)racSearchDeviceinMainView:(BOOL)inMainView;
 -(RACSignal *)racGetDeviceList;
 
 @property(nonatomic,assign)NetWorkConnType connType;

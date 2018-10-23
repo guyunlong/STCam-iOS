@@ -132,6 +132,8 @@
 		A47041BB216E2DFB007163C8 /* ImageDisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = A47041BA216E2DFB007163C8 /* ImageDisplayController.m */; };
 		A470AA8921636FFC0068AA80 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A470AA8B21636FFC0068AA80 /* Localizable.strings */; };
 		A470AA912163BE050068AA80 /* UIButton+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = A470AA902163BE050068AA80 /* UIButton+Common.m */; };
+		A47CD3F7217F6505000E3C2A /* AddDeviceApToStaNextController.m in Sources */ = {isa = PBXBuildFile; fileRef = A47CD3F6217F6505000E3C2A /* AddDeviceApToStaNextController.m */; };
+		A47CD3FA217F68A4000E3C2A /* SSIDModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A47CD3F9217F68A4000E3C2A /* SSIDModel.m */; };
 		A48C32E3217C24EF00CDF2D2 /* PushSettingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A48C32E2217C24EF00CDF2D2 /* PushSettingModel.m */; };
 		A48C32E6217C36CA00CDF2D2 /* DeviceAdvanceSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = A48C32E5217C36CA00CDF2D2 /* DeviceAdvanceSettingController.m */; };
 		A48C32E9217C4B8A00CDF2D2 /* MotionCfgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A48C32E8217C4B8A00CDF2D2 /* MotionCfgModel.m */; };
@@ -575,6 +577,10 @@
 		A470AA8C216371940068AA80 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		A470AA8F2163BE050068AA80 /* UIButton+Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+Common.h"; sourceTree = "<group>"; };
 		A470AA902163BE050068AA80 /* UIButton+Common.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Common.m"; sourceTree = "<group>"; };
+		A47CD3F5217F6505000E3C2A /* AddDeviceApToStaNextController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddDeviceApToStaNextController.h; sourceTree = "<group>"; };
+		A47CD3F6217F6505000E3C2A /* AddDeviceApToStaNextController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddDeviceApToStaNextController.m; sourceTree = "<group>"; };
+		A47CD3F8217F68A4000E3C2A /* SSIDModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSIDModel.h; sourceTree = "<group>"; };
+		A47CD3F9217F68A4000E3C2A /* SSIDModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSIDModel.m; sourceTree = "<group>"; };
 		A48C32E1217C24EF00CDF2D2 /* PushSettingModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PushSettingModel.h; sourceTree = "<group>"; };
 		A48C32E2217C24EF00CDF2D2 /* PushSettingModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PushSettingModel.m; sourceTree = "<group>"; };
 		A48C32E4217C36CA00CDF2D2 /* DeviceAdvanceSettingController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceAdvanceSettingController.h; sourceTree = "<group>"; };
@@ -773,6 +779,8 @@
 				A48C32F1217C700200CDF2D2 /* SDInfoModel.m */,
 				A452A910217CC2A4008222F2 /* UpdateDevModel.h */,
 				A452A911217CC2A4008222F2 /* UpdateDevModel.m */,
+				A47CD3F8217F68A4000E3C2A /* SSIDModel.h */,
+				A47CD3F9217F68A4000E3C2A /* SSIDModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1311,6 +1319,8 @@
 				A452A91A217E1B5F008222F2 /* AddDeviceSmartLinkNextController.m */,
 				9D7CDAD6217EF317000274E5 /* AddDeviceAPToStaController.h */,
 				9D7CDAD7217EF317000274E5 /* AddDeviceAPToStaController.m */,
+				A47CD3F5217F6505000E3C2A /* AddDeviceApToStaNextController.h */,
+				A47CD3F6217F6505000E3C2A /* AddDeviceApToStaNextController.m */,
 				A452A9AA21762BEF00E40A5F /* WCQRCodeVC.h */,
 				A452A9AB21762BEF00E40A5F /* WCQRCodeVC.m */,
 				A4434D95217AE62C00BDA9F2 /* RecordListController.h */,
@@ -1661,6 +1671,7 @@
 				A4CFFE832168C7B600A93B72 /* VideoBufferParser.m in Sources */,
 				A4CFFE842168C7B600A93B72 /* AAPLEAGLLayer.m in Sources */,
 				9DFEF157217F1F4E00FD28E1 /* SearchDeviceCell.m in Sources */,
+				A47CD3FA217F68A4000E3C2A /* SSIDModel.m in Sources */,
 				A439D83C2165149800FCE7FE /* STNavigationController.m in Sources */,
 				A4CFFE742168861A00A93B72 /* thRender.c in Sources */,
 				A4AE327421342EFD0036212B /* UIView+Layout.m in Sources */,
@@ -1718,6 +1729,7 @@
 				A4BC3656216F959B00FDCBF5 /* AlarmListCell.m in Sources */,
 				A439D831216506E200FCE7FE /* LoginViewModel.m in Sources */,
 				9D7CDAD8217EF317000274E5 /* AddDeviceAPToStaController.m in Sources */,
+				A47CD3F7217F6505000E3C2A /* AddDeviceApToStaNextController.m in Sources */,
 				A4394588217358470047E00C /* InfoModel.m in Sources */,
 				A452A915217E025F008222F2 /* AddDeviceSmartLinkController.m in Sources */,
 				A442C2AF213199A100198910 /* av_Queue.c in Sources */,
