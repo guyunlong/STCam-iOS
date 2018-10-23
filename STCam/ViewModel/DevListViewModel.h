@@ -25,7 +25,7 @@ typedef NS_ENUM(NSInteger, TUserMode){
 @interface DevListViewModel : NSObject
 + (DevListViewModel *)sharedDevListViewModel;
 @property(nonatomic,assign)TUserMode userMode;
--(RACSignal*)racSearchDevice;
+-(RACSignal*)racSearchDeviceinMainView:(bool)inMainView;
 -(RACSignal *)racGetDeviceList;
 
 @property(nonatomic,assign)NetWorkConnType connType;
@@ -38,6 +38,8 @@ typedef NS_ENUM(NSInteger, TUserMode){
 -(RACSignal *)racDeleteDevice:(DeviceModel*)model;
 
 
+
+@property (strong, nonatomic)  NSMutableArray *searchDeviceArray;
 
 @property(nonatomic,strong)NSMutableArray* deviceArray;
 

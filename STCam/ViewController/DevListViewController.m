@@ -122,7 +122,7 @@
     
    @weakify(self)
     if (_viewModel.userMode == TUserMode_Visitor) {
-        [[[_viewModel racSearchDevice]
+        [[[_viewModel racSearchDeviceinMainView:YES]
          deliverOn:[RACScheduler mainThreadScheduler]]
          subscribeNext:^(id x) {
             @strongify(self)

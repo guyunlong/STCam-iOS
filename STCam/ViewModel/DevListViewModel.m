@@ -15,7 +15,7 @@
 #import "iconv.h"
 #import "RetModel.h"
 @interface DevListViewModel ()
-@property (strong, nonatomic)  NSMutableArray *searchDeviceArray;
+
 @end
 
 @implementation DevListViewModel
@@ -171,14 +171,14 @@ void callback_SearchDev(void *UserCustom, u32 SN, int DevType, char *DevModal, c
     }];
 }
 
--(RACSignal *)racSearchDevice{
+-(RACSignal *)racSearchDeviceInMainView:(BOOL)inMainView{
     
     @weakify(self)
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber){
         @strongify(self)
         dispatch_queue_t quene = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
         dispatch_async(quene, ^{
-            [self searchDevice];
+            [self searchDeviceInMainView:inMainView];
             [subscriber sendNext:@1];
         });
         
@@ -187,7 +187,7 @@ void callback_SearchDev(void *UserCustom, u32 SN, int DevType, char *DevModal, c
     
     
 }
--(void)searchDevice{
+-(void)searchDeviceInMainView:(BOOL)inMainView{
     HANDLE SearchHandle;
     SearchHandle = thSearch_Init(callback_SearchDev, NULL);
     if (!SearchHandle) {

@@ -12,6 +12,8 @@
 		9DAC4BB22175BC9E00AC8916 /* GenerateShareQRCodeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC4BB12175BC9E00AC8916 /* GenerateShareQRCodeController.m */; };
 		9DAC4BB82175C7EB00AC8916 /* DevShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC4BB72175C7EB00AC8916 /* DevShareModel.m */; };
 		9DAC4BE02175F45800AC8916 /* AddDeviceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC4BDF2175F45800AC8916 /* AddDeviceController.m */; };
+		9DFEF157217F1F4E00FD28E1 /* SearchDeviceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DFEF155217F1F4E00FD28E1 /* SearchDeviceCell.m */; };
+		9DFEF158217F1F4E00FD28E1 /* SearchDeviceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DFEF156217F1F4E00FD28E1 /* SearchDeviceCell.xib */; };
 		A40C8693217B6DD800D82B6B /* DeviceSettingViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A40C8692217B6DD800D82B6B /* DeviceSettingViewModel.m */; };
 		A40C8696217B778700D82B6B /* ChangeDevicePwdController.m in Sources */ = {isa = PBXBuildFile; fileRef = A40C8695217B778700D82B6B /* ChangeDevicePwdController.m */; };
 		A4134F932165F78500831B8D /* AccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A4134F922165F78500831B8D /* AccountManager.m */; };
@@ -206,6 +208,9 @@
 		9DAC4BDE2175F45800AC8916 /* AddDeviceController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddDeviceController.h; sourceTree = "<group>"; };
 		9DAC4BDF2175F45800AC8916 /* AddDeviceController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddDeviceController.m; sourceTree = "<group>"; };
 		9DD31CBA2170411900EB4708 /* STCam.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = STCam.entitlements; sourceTree = "<group>"; };
+		9DFEF154217F1F4E00FD28E1 /* SearchDeviceCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchDeviceCell.h; sourceTree = "<group>"; };
+		9DFEF155217F1F4E00FD28E1 /* SearchDeviceCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchDeviceCell.m; sourceTree = "<group>"; };
+		9DFEF156217F1F4E00FD28E1 /* SearchDeviceCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchDeviceCell.xib; sourceTree = "<group>"; };
 		A40C8691217B6DD800D82B6B /* DeviceSettingViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceSettingViewModel.h; sourceTree = "<group>"; };
 		A40C8692217B6DD800D82B6B /* DeviceSettingViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceSettingViewModel.m; sourceTree = "<group>"; };
 		A40C8694217B778700D82B6B /* ChangeDevicePwdController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangeDevicePwdController.h; sourceTree = "<group>"; };
@@ -1391,6 +1396,9 @@
 				A4434D9E217B009A00BDA9F2 /* RecordListCell.h */,
 				A4434D9F217B009A00BDA9F2 /* RecordListCell.m */,
 				A4434DA0217B009A00BDA9F2 /* RecordListCell.xib */,
+				9DFEF154217F1F4E00FD28E1 /* SearchDeviceCell.h */,
+				9DFEF155217F1F4E00FD28E1 /* SearchDeviceCell.m */,
+				9DFEF156217F1F4E00FD28E1 /* SearchDeviceCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1558,6 +1566,7 @@
 				A442C31F213199A100198910 /* test2 in Resources */,
 				A442C3D1213199A100198910 /* d3dx8math.inl in Resources */,
 				A442C3C4213199A100198910 /* bdaiface.idl in Resources */,
+				9DFEF158217F1F4E00FD28E1 /* SearchDeviceCell.xib in Resources */,
 				A442C3D2213199A100198910 /* msvidctl.tlb in Resources */,
 				A47041AF216E14FA007163C8 /* DevMediaCell.xib in Resources */,
 				A442C3BC213199A100198910 /* dmodshow.idl in Resources */,
@@ -1651,6 +1660,7 @@
 				A4CFFE772168BAB100A93B72 /* Model.xcdatamodeld in Sources */,
 				A4CFFE832168C7B600A93B72 /* VideoBufferParser.m in Sources */,
 				A4CFFE842168C7B600A93B72 /* AAPLEAGLLayer.m in Sources */,
+				9DFEF157217F1F4E00FD28E1 /* SearchDeviceCell.m in Sources */,
 				A439D83C2165149800FCE7FE /* STNavigationController.m in Sources */,
 				A4CFFE742168861A00A93B72 /* thRender.c in Sources */,
 				A4AE327421342EFD0036212B /* UIView+Layout.m in Sources */,
