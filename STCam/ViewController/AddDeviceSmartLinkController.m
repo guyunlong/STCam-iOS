@@ -154,8 +154,10 @@
     }
 }
 -(void)setpToNextSetCtl{
+    
     AddDeviceSmartLinkNextController * ctl  = [AddDeviceSmartLinkNextController new];
     [self.navigationController pushViewController:ctl animated:YES];
+    
 }
 
 -(UIAlertController*)confirmAlertController{

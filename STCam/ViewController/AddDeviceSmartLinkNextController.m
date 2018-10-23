@@ -33,7 +33,7 @@
         if (self.timeLeft <= 0) {
             [self.fireTimer invalidate];
             self.fireTimer = nil;
-            [self.navigationController popViewControllerAnimated:YES];
+            [self.navigationController popToViewController:self.navigationController.viewControllers[self.navigationController.viewControllers.count-3] animated:YES];
         }
         [self.timeLeftLb setText:[NSString stringWithFormat:@"string_finish_timeleft_%ld".localizedString,self.timeLeft]];
         

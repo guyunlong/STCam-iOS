@@ -62,9 +62,7 @@
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:urlString]]) {
         if ([[UIDevice currentDevice].systemVersion doubleValue] >= 10.0) {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString] options:@{} completionHandler:nil];
-        } else {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
-        }
+        } 
     }
 }
 #pragma getter
