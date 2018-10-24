@@ -215,7 +215,7 @@
         dispatch_queue_t quene = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
         dispatch_async(quene, ^{
             @strongify(self)
-            NSString * url = [NSString stringWithFormat:@"%@",[self.model getDevURL:Msg_GetPushCfg]];
+            NSString * url = [NSString stringWithFormat:@"%@",[self.model getDevURL:Msg_WiFiSearch]];
             
             id data = [self.model thNetHttpGet:url];
             

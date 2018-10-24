@@ -11,6 +11,7 @@
 #import "DevListViewModel.h"
 #import "SearchDeviceCell.h"
 #import "AddDeviceApToStaNextController.h"
+#import "WifiManager.h"
 @interface AddDeviceAPToStaController ()<UITableViewDataSource, UITableViewDelegate>
 @property(nonatomic,strong)UIAlertController  *joinAPAlertController;//提示加入ap网络
 @property(nonatomic,strong)DevListViewModel *viewModel;
@@ -22,7 +23,9 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [self presentViewController:self.joinAPAlertController animated:YES completion:nil];
+    if (![[WifiManager ssid] hasPrefix:@"IPCAM_AP"]) {
+         [self presentViewController:self.joinAPAlertController animated:YES completion:nil];
+    }
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -88,11 +91,13 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)refreshApDevList{
+    [self showHudInView:self.view hint:@""];
     @weakify(self)
     [[[_viewModel racSearchDeviceinMainView:NO]
       deliverOn:[RACScheduler mainThreadScheduler]]
      subscribeNext:^(id x) {
          @strongify(self)
+         [self hideHud];
          if ([x integerValue] == 1) {
              [self.mTableView reloadData];
          }

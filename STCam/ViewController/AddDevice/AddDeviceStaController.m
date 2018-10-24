@@ -10,6 +10,10 @@
 #import "PrefixHeader.h"
 #import "DevListViewModel.h"
 #import "SearchDeviceCell.h"
+#import "CoreDataManager.h"
+#import "FFHttpTool.h"
+#import "AccountManager.h"
+#import "RetModel.h"
 @interface AddDeviceStaController ()<UITableViewDataSource, UITableViewDelegate>
 @property(nonatomic,strong)UIAlertController  *fillDevicePwdAlertController;//输入设备密码提示框
 @property(nonatomic,strong)DevListViewModel *viewModel;
@@ -131,19 +135,116 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     _selectIndex = indexPath.row;
+     DeviceModel * model  = self.viewModel.searchDeviceArray[self.selectIndex];
+    if ([_viewModel isSearchDevExistInDeviceArray:model]) {
+        [self showHint:@"error_device_added".localizedString];
+        return;
+    }
 }
 
 -(void)addDevice:(NSString*)devpwd{
-     DeviceModel * model  = self.viewModel.searchDeviceArray[self.selectIndex];
+    DeviceModel * model  = self.viewModel.searchDeviceArray[self.selectIndex];
+    model.Pwd = devpwd;
+    [[CoreDataManager sharedManager] saveDevice:model];
+    
+    /******************1、向设备内执行任意http指令，如果又返回，则说明设备密码正确*********************/
+    /******************2、添加设备*********************/
+    [self showHudInView:self.view hint:nil];
+    @weakify(self);
+    [[[[self racExcuteDeviceHttpCmd:model] filter:^BOOL(id value) {
+        if ([value integerValue] != 1) {
+            @strongify(self);
+            [self hideHud];
+            [self showHint:@"error_dev_pass".localizedString];
+        }
+        return [value integerValue] == 1;
+    }]
+      flattenMap:^RACStream *(id value) {
+          return [self racAddDevice:model];
+      }]
+     subscribeNext:^(id x) {
+         @strongify(self);
+         [self hideHud];
+         if ([x integerValue] == RESULT_SUCCESS) {
+             [self showHint:@"string_devAddSuccess".localizedString];
+             [self.navigationController popToRootViewControllerAnimated:YES];
+         }
+         else if([x integerValue] == RESULT_USER_ISBIND){
+             [self showHint:@"string_user_IsBind".localizedString];
+         }
+         else{
+             [self showHint:@"string_devAddFail".localizedString];
+         }
+         
+     }];
+    
 }
+
+-(RACSignal *)racExcuteDeviceHttpCmd:(DeviceModel*)model{
+    @weakify(self)
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        @strongify(self)
+        
+        //http://211.149.199.247:800/app_user_get_devlst.asp?user=1257117229@qq.com&psd=12345678
+        NSString * url = [NSString stringWithFormat:@"http://%@:%ld/cfg1.cgi?User=%@&Psd=%@&MsgID=%d",model.IPUID,model.WebPort,model.User,model.Pwd,Msg_WiFiSearch];
+        [FFHttpTool GET:url parameters:nil success:^(id data){
+            @strongify(self)
+            if (data) {
+               [subscriber sendNext:@1];//
+            }
+            else{
+                [subscriber sendNext:@0];//
+            }
+            [subscriber sendCompleted];
+        } failure:^(NSError * error){
+            [subscriber sendNext:@0];////未知网络错误
+            [subscriber sendCompleted];
+        }];
+        return nil;
+    }];
+}
+
+-(RACSignal *)racAddDevice:(DeviceModel*)model{
+    @weakify(self)
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        @strongify(self)
+        
+        //http://211.149.199.247:800/app_user_get_devlst.asp?user=1257117229@qq.com&psd=12345678
+        NSString * url = [NSString stringWithFormat:@"http://%@:%d/app_user_add_dev?User=%@&Psd=%@&tokenid=%@&mbtype=2&apptype=0&pushtype=0&sn=%@",serverIP,ServerPort,[AccountManager getUser],[AccountManager getPassword],[AccountManager sharedManager].deviceToken,model.SN];
+        [FFHttpTool GET:url parameters:nil success:^(id data){
+            @strongify(self)
+            if ([data isKindOfClass:[NSDictionary class]]) {
+                RetModel * model =[RetModel RetModelWithDict:data];
+                if (model.ret == RESULT_SUCCESS) {
+                    [subscriber sendNext:@1];//
+                }
+                else{
+                     [subscriber sendNext:@(model.ret)];//
+                }
+                
+            }
+            else{
+                [subscriber sendNext:@0];//
+            }
+            [subscriber sendCompleted];
+        } failure:^(NSError * error){
+            [subscriber sendNext:@0];////未知网络错误
+            [subscriber sendCompleted];
+        }];
+        return nil;
+    }];
+}
+
+
+
 
 #pragma getter
 -(UIAlertController*)fillDevicePwdAlertController{
     if (!_fillDevicePwdAlertController) {
         @weakify(self)
-        _fillDevicePwdAlertController = [UIAlertController alertControllerWithTitle:@"action_change_device_name".localizedString message:nil preferredStyle:UIAlertControllerStyleAlert];
+        _fillDevicePwdAlertController = [UIAlertController alertControllerWithTitle:@"action_add_device_search".localizedString message:nil preferredStyle:UIAlertControllerStyleAlert];
         [_fillDevicePwdAlertController addTextFieldWithConfigurationHandler:^(UITextField *textField){
-           // @strongify(self)
+            @strongify(self)
             textField.placeholder = @"device_pwd".localizedString;
             DeviceModel * model  = self.viewModel.searchDeviceArray[self.selectIndex];
             textField.text =model.Pwd;
@@ -156,12 +257,15 @@
             UITextField *inputInfo = self.fillDevicePwdAlertController.textFields.firstObject;
             
             NSString * devPwd =inputInfo.text;
-            if ([devPwd length] == 0) {
-                [self showHint:@"error_field_required".localizedString];
+            if ([devPwd length] < 4) {
+                [self showHint:@"error_invalid_password".localizedString];
                 return ;
             }
+            else{
+                [self addDevice:devPwd];
+            }
             
-            [self addDevice:devPwd];
+            
             
         }];
         

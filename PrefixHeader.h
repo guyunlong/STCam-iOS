@@ -188,5 +188,15 @@ static int Msg_PlayWavFile = 100;
  static  int RESULT_SUCCESS = 1;//成功
  static  int RESULT_SUCCESS_REBOOT = 2;//成功，需要重启
 
+ static  int RESULT_USER_EXISTS = -1;//用户已存在
+ static  int RESULT_USER_VERIFYCODE_ERROR = -2;//验证码错误
+ static  int RESULT_USER_VERIFYCODE_TIMEOUT = -3;//验证码超时
+ static  int RESULT_USER_ISBIND = -4;//用户已绑定
+ static  int RESULT_USER_NOTEXISTS = -5;//用户不存在
+ static  int RESULT_USER_LOGINED = -6;//已有用户登录
+ static  int RESULT_USER_LOGOUT = -7;//强制用户退出登录
+
+
+
 #endif
 
