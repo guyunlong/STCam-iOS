@@ -21,4 +21,7 @@
 -(void)setValue:(id)value forUndefinedKey:(NSString *)key{
     NSLog(@"%s---%@",__func__,key);
 }
+-(NSString *)getSSIDSignalDesc{
+    return [NSString stringWithFormat:@"%@(%ld)",self.SSID,self.Siganl];
+}
 @end

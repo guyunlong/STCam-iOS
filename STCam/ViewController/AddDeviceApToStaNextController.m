@@ -12,14 +12,17 @@
 #import "TPKeyboardAvoidingScrollView.h"
 #import "SSIDModel.h"
 #import "RetModel.h"
-@interface AddDeviceApToStaNextController ()
+#import "IGLDropDownMenu.h"
+@interface AddDeviceApToStaNextController ()<IGLDropDownMenuDelegate>
 @property(nonatomic,strong)TPKeyboardAvoidingScrollView * mainScrollView;
 @property(nonatomic,strong)UIView * topBackView;
 @property(nonatomic,strong)UIView * middleBackView;
 @property(nonatomic,strong)UIButton * nextButton;
 @property(nonatomic,strong)UILabel * devNameLb;
 @property(nonatomic,strong)UILabel * devAdressLb;
-@property (nonatomic, strong) BasicTextField *ssidField;
+@property (nonatomic, strong) IGLDropDownMenu *ssidMenu;
+//@property (nonatomic, strong) BasicTextField *ssidField;
+@property(nonatomic,strong)UIImageView * ssidIconImageView;
 @property (nonatomic, strong) BasicTextField *ssidPwdField;
 @property(nonatomic,strong)NSString * ssid;
 @property(nonatomic,strong)NSString * ssidPwd;
@@ -34,7 +37,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    RAC(self, ssid)  = self.ssidField.rac_textSignal;
+    //RAC(self, ssid)  = self.ssidField.rac_textSignal;
     RAC(self, ssidPwd)  = self.ssidPwdField.rac_textSignal;
     
 }
@@ -42,8 +45,7 @@
     [super viewDidAppear:animated];
     [_devNameLb setText:_model.DevName];
     [_devAdressLb setText:_model.IPUID];
-    
-    
+    [self searchWiFi];
 }
 
 
@@ -90,17 +92,13 @@
     [self.middleBackView.layer setBorderColor:[UIColor colorWithHexString:@"0xcfcfcf"].CGColor];
     [_mainScrollView addSubview:_middleBackView];
     
-    self.ssidField = [[BasicTextField alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth-4*kPadding, fieldHeight)];
-    [self.ssidField setUserInteractionEnabled:NO];
-    self.ssidField.placeholder = @"ssid".localizedString;
-    [self.ssidField setFont:[UIFont systemFontOfSize:14]];
-    UIImageView *userTextFieldImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_wifi"]];
-    self.ssidField.leftView = userTextFieldImage;
-    self.ssidField.leftViewMode = UITextFieldViewModeAlways;
-    //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userTextFieldDidChange) name:UITextFieldTextDidChangeNotification object:self.userTextField];
-   
-    [self.middleBackView addSubview:self.ssidField];
+    self.ssidMenu = [[IGLDropDownMenu alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth-4*kPadding, fieldHeight)];
+    [self.middleBackView addSubview:self.ssidMenu];
     
+    
+    _ssidIconImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_wifi"]];
+    [_ssidIconImageView setFrame:CGRectMake(8*kWidthCoefficient, 8*kWidthCoefficient, 24*kWidthCoefficient, 24*kWidthCoefficient)];
+     [self.middleBackView addSubview:self.ssidIconImageView];
     
     UIView * middleSpilt = [[UIView alloc] initWithFrame:CGRectMake(0, fieldHeight,kScreenWidth-4*kPadding , 1)];
     [middleSpilt setBackgroundColor:[UIColor colorWithHexString:@"0xcfcfcf"]];
@@ -129,7 +127,29 @@
     [_nextButton addTarget:self action:@selector(nextButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     
 }
-
+-(void)reSetUpSSIDMenu{
+    if ([_ssidArray count] == 0) {
+        return;
+    }
+    NSMutableArray *dropdownItems = [[NSMutableArray alloc] init];
+    for (int i = 0; i < self.ssidArray.count; i++) {
+        SSIDModel * model = self.ssidArray[i];
+        IGLDropDownItem *item = [[IGLDropDownItem alloc] init];
+        [item setText:[model getSSIDSignalDesc]];
+        [dropdownItems addObject:item];
+    }
+    
+    self.ssidMenu.dropDownItems = dropdownItems;
+    self.ssidMenu.delegate = self;
+    self.ssidMenu = [[IGLDropDownMenu alloc] init];
+    SSIDModel * model = self.ssidArray[0];
+    _ssid = model.SSID;
+    self.ssidMenu.menuText = [model getSSIDSignalDesc];
+    self.ssidMenu.dropDownItems = dropdownItems;
+    //self.ssidMenu.paddingLeft = 15;
+    
+    [self.ssidMenu reloadView];
+}
 -(void)initNav{
     [self setTitle:@"action_add_ap_sta".localizedString];
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -210,8 +230,7 @@
                         [self.ssidArray addObject:model];
                     }
                     if (self.ssidArray.count > 0) {
-                        SSIDModel * model  =self.ssidArray[0];
-                        [self.ssidField setText:model.SSID];
+                        [self reSetUpSSIDMenu];
                     }
                 }
             });
@@ -251,6 +270,27 @@
         
     });
 }
+
+#pragma mark - IGLDropDownMenuDelegate
+
+- (void)dropDownMenu:(IGLDropDownMenu *)dropDownMenu selectedItemAtIndex:(NSInteger)index
+{
+   IGLDropDownItem *item = dropDownMenu.dropDownItems[index];
+    SSIDModel * model = _ssidArray[index];
+    _ssid =model.SSID;
+}
+
+- (void)dropDownMenu:(IGLDropDownMenu *)dropDownMenu expandingChanged:(BOOL)isExpanding
+{
+    NSLog(@"Expending changed to: %@", isExpanding? @"expand" : @"fold");
+    
+}
+
+- (void)dropDownMenu:(IGLDropDownMenu *)dropDownMenu expandingChangedWithAnimationCompledted:(BOOL)isExpanding
+{
+    NSLog(@"IGLDropDownMenu size: %@", NSStringFromCGSize(dropDownMenu.bounds.size));
+}
+
 
 -(UIAlertController*)confirmAlertController{
     if (!_confirmAlertController) {

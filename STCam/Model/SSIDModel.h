@@ -11,6 +11,7 @@
 @interface SSIDModel : NSObject
 @property(nonatomic,strong) NSString* SSID;
 @property(nonatomic,assign) NSInteger Siganl;
+-(NSString *)getSSIDSignalDesc;
 +(instancetype)SSIDModelWithDict:(NSDictionary *)dict;
 -(instancetype)initWithDict:(NSDictionary *)dict;
 -(void)setValue:(id)value forUndefinedKey:(NSString *)key;

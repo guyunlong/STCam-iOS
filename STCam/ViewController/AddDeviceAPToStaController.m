@@ -10,6 +10,7 @@
 #import "PrefixHeader.h"
 #import "DevListViewModel.h"
 #import "SearchDeviceCell.h"
+#import "AddDeviceApToStaNextController.h"
 @interface AddDeviceAPToStaController ()<UITableViewDataSource, UITableViewDelegate>
 @property(nonatomic,strong)UIAlertController  *joinAPAlertController;//提示加入ap网络
 @property(nonatomic,strong)DevListViewModel *viewModel;
@@ -157,7 +158,9 @@
 {
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+    AddDeviceApToStaNextController * ctl = [AddDeviceApToStaNextController new];
+    [ctl setModel:_viewModel.searchDeviceArray[indexPath.row]];
+    [self.navigationController pushViewController:ctl animated:YES];
 }
 
 

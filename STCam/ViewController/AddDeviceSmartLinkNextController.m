@@ -92,7 +92,7 @@
     topY = CGRectGetMaxY(_infoLb.frame);
     topY+=2*kPadding;
     
-    _timeLeft = 10;
+    _timeLeft = 45;
     _timeLeftLb = [[UILabel alloc] initWithFrame:CGRectMake(0, topY, kScreenWidth-4*kPadding, 21*kWidthCoefficient)];
     [_timeLeftLb setTextAlignment:NSTextAlignmentCenter];
     [_timeLeftLb setTextColor:kMainColor];
@@ -135,7 +135,13 @@
 }
 
 -(void)startSmartConfig{
-    int ret = StartSmartConnection([_ssid UTF8String], [_ssidPwd UTF8String], "", 0, "", 0);
+    const char* SSID = [self.ssid cStringUsingEncoding:NSASCIIStringEncoding];
+    const char* Password = [self.ssidPwd cStringUsingEncoding:NSASCIIStringEncoding];
+    
+    InitSmartConnection();
+    StartSmartConnection(SSID, Password, (unsigned char*)"", 0, "", 0);
+    
+    
 }
 -(void)stopSmartConfig{
     StopSmartConnection();
