@@ -58,6 +58,12 @@ typedef NS_ENUM(NSInteger, TUserMode){
  */
 -(void)connectAllDevice;
 
+
+/**
+ 搜索到的设备是否存于用户的设备中
+ */
+-(BOOL)isSearchDevExistInDeviceArray:(DeviceModel*)model;
+
 /**
  网络连接状态改变
 

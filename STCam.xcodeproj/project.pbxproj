@@ -8,11 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		484F64620EFBEC733F2D85B1 /* libPods-STCam.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C18EA7F117ED0291D64659B7 /* libPods-STCam.a */; };
-		9D7CDAD8217EF317000274E5 /* AddDeviceAPToStaController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D7CDAD7217EF317000274E5 /* AddDeviceAPToStaController.m */; };
 		9DAC4BB22175BC9E00AC8916 /* GenerateShareQRCodeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC4BB12175BC9E00AC8916 /* GenerateShareQRCodeController.m */; };
 		9DAC4BB82175C7EB00AC8916 /* DevShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC4BB72175C7EB00AC8916 /* DevShareModel.m */; };
-		9DAC4BE02175F45800AC8916 /* AddDeviceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC4BDF2175F45800AC8916 /* AddDeviceController.m */; };
 		9DE76476218003DC00373090 /* libiot.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DE76475218003DC00373090 /* libiot.a */; };
+		9DE7648521806FD500373090 /* AddDeviceApToStaNextController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE7647B21806FD500373090 /* AddDeviceApToStaNextController.m */; };
+		9DE7648621806FD500373090 /* AddDeviceSmartLinkController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE7648121806FD500373090 /* AddDeviceSmartLinkController.m */; };
+		9DE7648721806FD500373090 /* AddDeviceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE7648221806FD500373090 /* AddDeviceController.m */; };
+		9DE7648821806FD500373090 /* AddDeviceSmartLinkNextController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE7648321806FD500373090 /* AddDeviceSmartLinkNextController.m */; };
+		9DE7648921806FD500373090 /* AddDeviceAPToStaController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE7648421806FD500373090 /* AddDeviceAPToStaController.m */; };
+		9DE7648C2180707F00373090 /* AddDeviceStaController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE7648B2180707F00373090 /* AddDeviceStaController.m */; };
 		9DFEF157217F1F4E00FD28E1 /* SearchDeviceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DFEF155217F1F4E00FD28E1 /* SearchDeviceCell.m */; };
 		9DFEF158217F1F4E00FD28E1 /* SearchDeviceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DFEF156217F1F4E00FD28E1 /* SearchDeviceCell.xib */; };
 		A40C8693217B6DD800D82B6B /* DeviceSettingViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A40C8692217B6DD800D82B6B /* DeviceSettingViewModel.m */; };
@@ -94,9 +98,7 @@
 		A4434DA5217B140B00BDA9F2 /* PlayBackController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4434DA4217B140B00BDA9F2 /* PlayBackController.m */; };
 		A4434DA8217B144F00BDA9F2 /* PlayBackViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A4434DA7217B144F00BDA9F2 /* PlayBackViewModel.m */; };
 		A452A912217CC2A4008222F2 /* UpdateDevModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A452A911217CC2A4008222F2 /* UpdateDevModel.m */; };
-		A452A915217E025F008222F2 /* AddDeviceSmartLinkController.m in Sources */ = {isa = PBXBuildFile; fileRef = A452A914217E025F008222F2 /* AddDeviceSmartLinkController.m */; };
 		A452A918217E19CD008222F2 /* WifiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A452A917217E19CD008222F2 /* WifiManager.m */; };
-		A452A91B217E1B5F008222F2 /* AddDeviceSmartLinkNextController.m in Sources */ = {isa = PBXBuildFile; fileRef = A452A91A217E1B5F008222F2 /* AddDeviceSmartLinkNextController.m */; };
 		A452A9AC21762BEF00E40A5F /* WCQRCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A452A9AB21762BEF00E40A5F /* WCQRCodeVC.m */; };
 		A452A9AF21762C4500E40A5F /* MBProgressHUD+SGQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = A452A9AE21762C4500E40A5F /* MBProgressHUD+SGQRCode.m */; };
 		A45934E02164A5320018A61B /* BasicTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = A45934DF2164A5320018A61B /* BasicTextField.m */; };
@@ -133,7 +135,6 @@
 		A47041BB216E2DFB007163C8 /* ImageDisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = A47041BA216E2DFB007163C8 /* ImageDisplayController.m */; };
 		A470AA8921636FFC0068AA80 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A470AA8B21636FFC0068AA80 /* Localizable.strings */; };
 		A470AA912163BE050068AA80 /* UIButton+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = A470AA902163BE050068AA80 /* UIButton+Common.m */; };
-		A47CD3F7217F6505000E3C2A /* AddDeviceApToStaNextController.m in Sources */ = {isa = PBXBuildFile; fileRef = A47CD3F6217F6505000E3C2A /* AddDeviceApToStaNextController.m */; };
 		A47CD3FA217F68A4000E3C2A /* SSIDModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A47CD3F9217F68A4000E3C2A /* SSIDModel.m */; };
 		A48C32E3217C24EF00CDF2D2 /* PushSettingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A48C32E2217C24EF00CDF2D2 /* PushSettingModel.m */; };
 		A48C32E6217C36CA00CDF2D2 /* DeviceAdvanceSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = A48C32E5217C36CA00CDF2D2 /* DeviceAdvanceSettingController.m */; };
@@ -202,16 +203,24 @@
 
 /* Begin PBXFileReference section */
 		02368DE58D9110FCE2D67420 /* Pods-STCam.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-STCam.release.xcconfig"; path = "Pods/Target Support Files/Pods-STCam/Pods-STCam.release.xcconfig"; sourceTree = "<group>"; };
-		9D7CDAD6217EF317000274E5 /* AddDeviceAPToStaController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddDeviceAPToStaController.h; sourceTree = "<group>"; };
-		9D7CDAD7217EF317000274E5 /* AddDeviceAPToStaController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddDeviceAPToStaController.m; sourceTree = "<group>"; };
 		9DAC4BB02175BC9E00AC8916 /* GenerateShareQRCodeController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GenerateShareQRCodeController.h; sourceTree = "<group>"; };
 		9DAC4BB12175BC9E00AC8916 /* GenerateShareQRCodeController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GenerateShareQRCodeController.m; sourceTree = "<group>"; };
 		9DAC4BB62175C7EB00AC8916 /* DevShareModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DevShareModel.h; sourceTree = "<group>"; };
 		9DAC4BB72175C7EB00AC8916 /* DevShareModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DevShareModel.m; sourceTree = "<group>"; };
-		9DAC4BDE2175F45800AC8916 /* AddDeviceController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddDeviceController.h; sourceTree = "<group>"; };
-		9DAC4BDF2175F45800AC8916 /* AddDeviceController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddDeviceController.m; sourceTree = "<group>"; };
 		9DD31CBA2170411900EB4708 /* STCam.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = STCam.entitlements; sourceTree = "<group>"; };
 		9DE76475218003DC00373090 /* libiot.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libiot.a; path = ffmpeg/lib/libiot.a; sourceTree = "<group>"; };
+		9DE7647B21806FD500373090 /* AddDeviceApToStaNextController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddDeviceApToStaNextController.m; sourceTree = "<group>"; };
+		9DE7647C21806FD500373090 /* AddDeviceSmartLinkController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddDeviceSmartLinkController.h; sourceTree = "<group>"; };
+		9DE7647D21806FD500373090 /* AddDeviceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddDeviceController.h; sourceTree = "<group>"; };
+		9DE7647E21806FD500373090 /* AddDeviceAPToStaController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddDeviceAPToStaController.h; sourceTree = "<group>"; };
+		9DE7647F21806FD500373090 /* AddDeviceSmartLinkNextController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddDeviceSmartLinkNextController.h; sourceTree = "<group>"; };
+		9DE7648021806FD500373090 /* AddDeviceApToStaNextController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddDeviceApToStaNextController.h; sourceTree = "<group>"; };
+		9DE7648121806FD500373090 /* AddDeviceSmartLinkController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddDeviceSmartLinkController.m; sourceTree = "<group>"; };
+		9DE7648221806FD500373090 /* AddDeviceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddDeviceController.m; sourceTree = "<group>"; };
+		9DE7648321806FD500373090 /* AddDeviceSmartLinkNextController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddDeviceSmartLinkNextController.m; sourceTree = "<group>"; };
+		9DE7648421806FD500373090 /* AddDeviceAPToStaController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddDeviceAPToStaController.m; sourceTree = "<group>"; };
+		9DE7648A2180707F00373090 /* AddDeviceStaController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddDeviceStaController.h; sourceTree = "<group>"; };
+		9DE7648B2180707F00373090 /* AddDeviceStaController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddDeviceStaController.m; sourceTree = "<group>"; };
 		9DFEF154217F1F4E00FD28E1 /* SearchDeviceCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchDeviceCell.h; sourceTree = "<group>"; };
 		9DFEF155217F1F4E00FD28E1 /* SearchDeviceCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchDeviceCell.m; sourceTree = "<group>"; };
 		9DFEF156217F1F4E00FD28E1 /* SearchDeviceCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchDeviceCell.xib; sourceTree = "<group>"; };
@@ -523,12 +532,8 @@
 		A4434DA7217B144F00BDA9F2 /* PlayBackViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayBackViewModel.m; sourceTree = "<group>"; };
 		A452A910217CC2A4008222F2 /* UpdateDevModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpdateDevModel.h; sourceTree = "<group>"; };
 		A452A911217CC2A4008222F2 /* UpdateDevModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpdateDevModel.m; sourceTree = "<group>"; };
-		A452A913217E025F008222F2 /* AddDeviceSmartLinkController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddDeviceSmartLinkController.h; sourceTree = "<group>"; };
-		A452A914217E025F008222F2 /* AddDeviceSmartLinkController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddDeviceSmartLinkController.m; sourceTree = "<group>"; };
 		A452A916217E19CD008222F2 /* WifiManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WifiManager.h; sourceTree = "<group>"; };
 		A452A917217E19CD008222F2 /* WifiManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WifiManager.m; sourceTree = "<group>"; };
-		A452A919217E1B5F008222F2 /* AddDeviceSmartLinkNextController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddDeviceSmartLinkNextController.h; sourceTree = "<group>"; };
-		A452A91A217E1B5F008222F2 /* AddDeviceSmartLinkNextController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddDeviceSmartLinkNextController.m; sourceTree = "<group>"; };
 		A452A9AA21762BEF00E40A5F /* WCQRCodeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WCQRCodeVC.h; sourceTree = "<group>"; };
 		A452A9AB21762BEF00E40A5F /* WCQRCodeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WCQRCodeVC.m; sourceTree = "<group>"; };
 		A452A9AD21762C4500E40A5F /* MBProgressHUD+SGQRCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+SGQRCode.h"; sourceTree = "<group>"; };
@@ -579,8 +584,6 @@
 		A470AA8C216371940068AA80 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		A470AA8F2163BE050068AA80 /* UIButton+Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+Common.h"; sourceTree = "<group>"; };
 		A470AA902163BE050068AA80 /* UIButton+Common.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Common.m"; sourceTree = "<group>"; };
-		A47CD3F5217F6505000E3C2A /* AddDeviceApToStaNextController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddDeviceApToStaNextController.h; sourceTree = "<group>"; };
-		A47CD3F6217F6505000E3C2A /* AddDeviceApToStaNextController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddDeviceApToStaNextController.m; sourceTree = "<group>"; };
 		A47CD3F8217F68A4000E3C2A /* SSIDModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSIDModel.h; sourceTree = "<group>"; };
 		A47CD3F9217F68A4000E3C2A /* SSIDModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSIDModel.m; sourceTree = "<group>"; };
 		A48C32E1217C24EF00CDF2D2 /* PushSettingModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PushSettingModel.h; sourceTree = "<group>"; };
@@ -736,6 +739,25 @@
 				02368DE58D9110FCE2D67420 /* Pods-STCam.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		9DE7647A21806FD500373090 /* AddDevice */ = {
+			isa = PBXGroup;
+			children = (
+				9DE7647C21806FD500373090 /* AddDeviceSmartLinkController.h */,
+				9DE7648121806FD500373090 /* AddDeviceSmartLinkController.m */,
+				9DE7647D21806FD500373090 /* AddDeviceController.h */,
+				9DE7648221806FD500373090 /* AddDeviceController.m */,
+				9DE7647F21806FD500373090 /* AddDeviceSmartLinkNextController.h */,
+				9DE7648321806FD500373090 /* AddDeviceSmartLinkNextController.m */,
+				9DE7647E21806FD500373090 /* AddDeviceAPToStaController.h */,
+				9DE7648421806FD500373090 /* AddDeviceAPToStaController.m */,
+				9DE7648021806FD500373090 /* AddDeviceApToStaNextController.h */,
+				9DE7647B21806FD500373090 /* AddDeviceApToStaNextController.m */,
+				9DE7648A2180707F00373090 /* AddDeviceStaController.h */,
+				9DE7648B2180707F00373090 /* AddDeviceStaController.m */,
+			);
+			path = AddDevice;
 			sourceTree = "<group>";
 		};
 		A439D832216508DE00FCE7FE /* Manager */ = {
@@ -1285,6 +1307,7 @@
 		A4AE323B213426090036212B /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				9DE7647A21806FD500373090 /* AddDevice */,
 				A4AE323C2134265B0036212B /* LoginViewController.h */,
 				A4AE323D2134265B0036212B /* LoginViewController.m */,
 				A4AE323F213426BE0036212B /* MainTabController.h */,
@@ -1315,16 +1338,6 @@
 				A47041BA216E2DFB007163C8 /* ImageDisplayController.m */,
 				9DAC4BB02175BC9E00AC8916 /* GenerateShareQRCodeController.h */,
 				9DAC4BB12175BC9E00AC8916 /* GenerateShareQRCodeController.m */,
-				9DAC4BDE2175F45800AC8916 /* AddDeviceController.h */,
-				9DAC4BDF2175F45800AC8916 /* AddDeviceController.m */,
-				A452A913217E025F008222F2 /* AddDeviceSmartLinkController.h */,
-				A452A914217E025F008222F2 /* AddDeviceSmartLinkController.m */,
-				A452A919217E1B5F008222F2 /* AddDeviceSmartLinkNextController.h */,
-				A452A91A217E1B5F008222F2 /* AddDeviceSmartLinkNextController.m */,
-				9D7CDAD6217EF317000274E5 /* AddDeviceAPToStaController.h */,
-				9D7CDAD7217EF317000274E5 /* AddDeviceAPToStaController.m */,
-				A47CD3F5217F6505000E3C2A /* AddDeviceApToStaNextController.h */,
-				A47CD3F6217F6505000E3C2A /* AddDeviceApToStaNextController.m */,
 				A452A9AA21762BEF00E40A5F /* WCQRCodeVC.h */,
 				A452A9AB21762BEF00E40A5F /* WCQRCodeVC.m */,
 				A4434D95217AE62C00BDA9F2 /* RecordListController.h */,
@@ -1688,12 +1701,14 @@
 				A4AE324A2134276E0036212B /* MediaViewController.m in Sources */,
 				A48C32F6217C713600CDF2D2 /* CommonInfoCell.m in Sources */,
 				A45934E32164A5FF0018A61B /* LoginBackgroundView.m in Sources */,
-				A452A91B217E1B5F008222F2 /* AddDeviceSmartLinkNextController.m in Sources */,
 				A47041B8216E1F59007163C8 /* STMediaModel.m in Sources */,
 				A442C2A8213199A100198910 /* Makefile in Sources */,
+				9DE7648821806FD500373090 /* AddDeviceSmartLinkNextController.m in Sources */,
 				A48C32EC217C691600CDF2D2 /* RecConfigModel.m in Sources */,
+				9DE7648721806FD500373090 /* AddDeviceController.m in Sources */,
 				A4AE327521342EFD0036212B /* UIView+YYAdd.m in Sources */,
 				A4AE70BD2167AEF600614024 /* DevListCell.m in Sources */,
+				9DE7648621806FD500373090 /* AddDeviceSmartLinkController.m in Sources */,
 				A4434D94217AD99200BDA9F2 /* SoundButton.m in Sources */,
 				A47041B2216E1CAD007163C8 /* MediaDetailController.m in Sources */,
 				A4434DA8217B144F00BDA9F2 /* PlayBackViewModel.m in Sources */,
@@ -1704,11 +1719,11 @@
 				A452A9AC21762BEF00E40A5F /* WCQRCodeVC.m in Sources */,
 				A470AA912163BE050068AA80 /* UIButton+Common.m in Sources */,
 				A4CFFE7A2168BB2E00A93B72 /* CoreDataManager.m in Sources */,
-				9DAC4BE02175F45800AC8916 /* AddDeviceController.m in Sources */,
 				A4AE3241213426BE0036212B /* MainTabController.m in Sources */,
 				A4AE327A21342EFD0036212B /* UIImage+Common.m in Sources */,
 				A4946FF9212C5B460015990C /* SplashViewController.m in Sources */,
 				A4AE326E21342EFD0036212B /* NSDate+Helper.m in Sources */,
+				9DE7648C2180707F00373090 /* AddDeviceStaController.m in Sources */,
 				A452A918217E19CD008222F2 /* WifiManager.m in Sources */,
 				A48C32E9217C4B8A00CDF2D2 /* MotionCfgModel.m in Sources */,
 				A4AE327721342EFD0036212B /* NSDate+Common.m in Sources */,
@@ -1720,22 +1735,21 @@
 				A442C2AA213199A100198910 /* axdllEx.c in Sources */,
 				A4AE3244213427480036212B /* DevListViewController.m in Sources */,
 				A4434D9D217AFC6C00BDA9F2 /* SDVideoModel.m in Sources */,
+				9DE7648921806FD500373090 /* AddDeviceAPToStaController.m in Sources */,
 				A48C32E6217C36CA00CDF2D2 /* DeviceAdvanceSettingController.m in Sources */,
 				A4947004212C5B470015990C /* main.m in Sources */,
 				A442C2AD213199A100198910 /* skt.c in Sources */,
 				A4F50440216268A6002B71FF /* RootViewController.m in Sources */,
 				A45934E02164A5320018A61B /* BasicTextField.m in Sources */,
 				A43853DB21675A1500B8CC56 /* DeviceModel.m in Sources */,
+				9DE7648521806FD500373090 /* AddDeviceApToStaNextController.m in Sources */,
 				A4606929216A4F0500491290 /* AudioSession.m in Sources */,
 				A4BC365A216F983900FDCBF5 /* AlarmListViewModel.m in Sources */,
 				9DAC4BB82175C7EB00AC8916 /* DevShareModel.m in Sources */,
 				A48C32E3217C24EF00CDF2D2 /* PushSettingModel.m in Sources */,
 				A4BC3656216F959B00FDCBF5 /* AlarmListCell.m in Sources */,
 				A439D831216506E200FCE7FE /* LoginViewModel.m in Sources */,
-				9D7CDAD8217EF317000274E5 /* AddDeviceAPToStaController.m in Sources */,
-				A47CD3F7217F6505000E3C2A /* AddDeviceApToStaNextController.m in Sources */,
 				A4394588217358470047E00C /* InfoModel.m in Sources */,
-				A452A915217E025F008222F2 /* AddDeviceSmartLinkController.m in Sources */,
 				A442C2AF213199A100198910 /* av_Queue.c in Sources */,
 				A4BC365D216F98A400FDCBF5 /* AlarmImageModel.m in Sources */,
 				A4AE327621342EFD0036212B /* NSString+Common.m in Sources */,

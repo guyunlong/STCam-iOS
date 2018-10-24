@@ -8,6 +8,7 @@
 
 #import "SearchDeviceCell.h"
 #import "PrefixHeader.h"
+#import "DevListViewModel.h"
 #define kShadowRadius 20
 @interface SearchDeviceCell()
 @property(nonatomic,weak)IBOutlet UIView * backView;
@@ -41,6 +42,16 @@
     if (_model) {
         [_titleLb setText:_model.DevName];
         [_ipaddressLb setText:_model.IPUID];
+        
+        DevListViewModel * viewModel = [DevListViewModel sharedDevListViewModel];
+        if ([viewModel isSearchDevExistInDeviceArray:_model]) {
+            [_titleLb setTextColor:[UIColor colorWithHexString:@"0x0000ff"]];
+            [_ipaddressLb setTextColor:[UIColor colorWithHexString:@"0x0000ff"]];
+        }
+        else{
+            [_titleLb setTextColor:[UIColor blackColor]];
+            [_ipaddressLb setTextColor:[UIColor blackColor]];
+        }
     }
 }
 

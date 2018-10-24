@@ -69,7 +69,15 @@ void callback_SearchDev(void *UserCustom, u32 SN, int DevType, char *DevModal, c
     }
     free(utf8String);
     [node threadConnect];
-    [myself.searchDeviceArray addObject:node];
+    if ([myself isSearchDevExistInDeviceArray:node]){
+        [myself.searchDeviceArray addObject:node];
+        NSInteger count  = [myself.searchDeviceArray count];
+        [myself.searchDeviceArray insertObject:node atIndex:count];
+    }
+    else{
+        [myself.searchDeviceArray addObject:node];
+    }
+    
     
 }
 
@@ -218,6 +226,14 @@ void callback_SearchDev(void *UserCustom, u32 SN, int DevType, char *DevModal, c
     }
 }
 
+-(BOOL)isSearchDevExistInDeviceArray:(DeviceModel*)model{
+    for (DeviceModel * devModel in self.deviceArray) {
+        if ([devModel.SN isEqualToString:model.SN]) {
+            return YES;
+        }
+    }
+    return NO;
+}
 
 /**
  app 进入前台，进行设备连接

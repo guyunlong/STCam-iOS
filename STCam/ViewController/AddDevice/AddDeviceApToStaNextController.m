@@ -75,6 +75,7 @@
    
     
     _devAdressLb = [[UILabel alloc] initWithFrame:CGRectMake(2*kPadding, topY, kScreenWidth-4*kPadding-4*kPadding, 25*kWidthCoefficient)];
+    [_devAdressLb setTextAlignment:NSTextAlignmentCenter];
     [_topBackView addSubview:_devAdressLb];
   
     [_devAdressLb setTextColor:[UIColor colorWithHexString:@"0x969696"]];

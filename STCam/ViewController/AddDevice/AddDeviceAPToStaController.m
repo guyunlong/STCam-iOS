@@ -50,7 +50,6 @@
         UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [tableView setBackgroundColor:[UIColor colorWithHexString:@"0xf0f0f0"]];
-        [tableView setUserInteractionEnabled:NO];
         tableView.dataSource = self;
         tableView.delegate = self;
         tableView;

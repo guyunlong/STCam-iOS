@@ -18,6 +18,7 @@
 #import "AddDeviceSmartLinkController.h"
 #import "WifiManager.h"
 #import "AddDeviceAPToStaController.h"
+#import "AddDeviceStaController.h"
 #define buttonHeight 1.25*kButtonHeight
 @interface AddDeviceController ()<QRCodeDelegate>
 @property (nonatomic, strong) UIButton *smartAddButton;
@@ -96,7 +97,13 @@
         [self.navigationController pushViewController:ctl animated:YES];
     }
     else if(sender == _wifiAddButton){
-        
+        if([[WifiManager ssid] length] == 0){
+            [self showHint:@"string_OperationMustWifi".localizedString];
+            return;
+        }
+        AddDeviceStaController *ctl  = [AddDeviceStaController new];
+        [self.navigationController pushViewController:ctl animated:YES];
+       //
     }
     else if(sender == _qrCodeAddButton){
         WCQRCodeVC * vc = [WCQRCodeVC new];
