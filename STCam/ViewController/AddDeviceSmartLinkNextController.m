@@ -13,7 +13,6 @@
 @interface AddDeviceSmartLinkNextController ()
 @property(nonatomic,strong)UIView * topBackView;
 @property(nonatomic,strong)UIView * middleBackView;
-@property(nonatomic,strong)UIButton * nextButton;
 @property(nonatomic,strong)UILabel * tipLb;
 @property(nonatomic,strong)UILabel * infoLb;
 @property(nonatomic,strong)UILabel * timeLeftLb;
@@ -118,11 +117,11 @@
     [_cancelButton setAppThemeType:ButtonStyleStyleAppTheme];
     [self.view addSubview:_cancelButton];
     
-    [_nextButton addTarget:self action:@selector(cancelButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    [_cancelButton addTarget:self action:@selector(cancelButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     
 }
 -(void)cancelButtonClicked{
-    [self.navigationController popViewControllerAnimated:YES];
+    [self back];
 }
 -(void)back{
     [self.fireTimer invalidate];
@@ -136,10 +135,10 @@
 }
 
 -(void)startSmartConfig{
-    //int ret = StartSmartConnection([_ssid UTF8String], [_ssidPwd UTF8String], "", 0, "", 0);
+    int ret = StartSmartConnection([_ssid UTF8String], [_ssidPwd UTF8String], "", 0, "", 0);
 }
 -(void)stopSmartConfig{
-    //StopSmartConnection();
+    StopSmartConnection();
 }
 
 @end

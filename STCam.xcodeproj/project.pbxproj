@@ -12,6 +12,7 @@
 		9DAC4BB22175BC9E00AC8916 /* GenerateShareQRCodeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC4BB12175BC9E00AC8916 /* GenerateShareQRCodeController.m */; };
 		9DAC4BB82175C7EB00AC8916 /* DevShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC4BB72175C7EB00AC8916 /* DevShareModel.m */; };
 		9DAC4BE02175F45800AC8916 /* AddDeviceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC4BDF2175F45800AC8916 /* AddDeviceController.m */; };
+		9DE76476218003DC00373090 /* libiot.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DE76475218003DC00373090 /* libiot.a */; };
 		9DFEF157217F1F4E00FD28E1 /* SearchDeviceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DFEF155217F1F4E00FD28E1 /* SearchDeviceCell.m */; };
 		9DFEF158217F1F4E00FD28E1 /* SearchDeviceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DFEF156217F1F4E00FD28E1 /* SearchDeviceCell.xib */; };
 		A40C8693217B6DD800D82B6B /* DeviceSettingViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A40C8692217B6DD800D82B6B /* DeviceSettingViewModel.m */; };
@@ -210,6 +211,7 @@
 		9DAC4BDE2175F45800AC8916 /* AddDeviceController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddDeviceController.h; sourceTree = "<group>"; };
 		9DAC4BDF2175F45800AC8916 /* AddDeviceController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddDeviceController.m; sourceTree = "<group>"; };
 		9DD31CBA2170411900EB4708 /* STCam.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = STCam.entitlements; sourceTree = "<group>"; };
+		9DE76475218003DC00373090 /* libiot.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libiot.a; path = ffmpeg/lib/libiot.a; sourceTree = "<group>"; };
 		9DFEF154217F1F4E00FD28E1 /* SearchDeviceCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchDeviceCell.h; sourceTree = "<group>"; };
 		9DFEF155217F1F4E00FD28E1 /* SearchDeviceCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchDeviceCell.m; sourceTree = "<group>"; };
 		9DFEF156217F1F4E00FD28E1 /* SearchDeviceCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchDeviceCell.xib; sourceTree = "<group>"; };
@@ -692,6 +694,7 @@
 			files = (
 				A46F7B092132CF5400854DB8 /* AudioToolbox.framework in Frameworks */,
 				A46F7AF92132CD8C00854DB8 /* libiconv.tbd in Frameworks */,
+				9DE76476218003DC00373090 /* libiot.a in Frameworks */,
 				A4CFFE862168C7D500A93B72 /* AVKit.framework in Frameworks */,
 				A46F7B0D2132D03500854DB8 /* CoreMedia.framework in Frameworks */,
 				A46F7B0B2132CF9100854DB8 /* AVFoundation.framework in Frameworks */,
@@ -1194,6 +1197,7 @@
 				A46F7AE92132CD5100854DB8 /* libswresample.a */,
 				A46F7AE52132CD5100854DB8 /* libswscale.a */,
 				C18EA7F117ED0291D64659B7 /* libPods-STCam.a */,
+				9DE76475218003DC00373090 /* libiot.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

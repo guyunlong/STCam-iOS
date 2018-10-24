@@ -47,6 +47,7 @@
     [self setupObserve];
 }
 -(void)setupObserve{
+    _ssidPwd = @"";
     RAC(self, ssid)  = self.ssidField.rac_textSignal;
     RAC(self, ssidPwd)  = self.ssidPwdField.rac_textSignal;
 }
@@ -156,6 +157,8 @@
 -(void)setpToNextSetCtl{
     
     AddDeviceSmartLinkNextController * ctl  = [AddDeviceSmartLinkNextController new];
+    [ctl setSsid:_ssid];
+    [ctl setSsidPwd:_ssidPwd];
     [self.navigationController pushViewController:ctl animated:YES];
     
 }
