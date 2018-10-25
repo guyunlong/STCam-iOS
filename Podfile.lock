@@ -1,6 +1,5 @@
 PODS:
   - BEMCheckBox (1.4.1)
-  - IGLDropDownMenu (1.6.2)
   - JCore (1.2.2)
   - JPush (3.1.0):
     - JCore (~> 1.2.0)
@@ -34,7 +33,6 @@ PODS:
 
 DEPENDENCIES:
   - BEMCheckBox
-  - IGLDropDownMenu
   - JPush
   - Masonry
   - MBProgressHUD
@@ -47,9 +45,8 @@ DEPENDENCIES:
   - YBImageBrowser
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - BEMCheckBox
-    - IGLDropDownMenu
     - JCore
     - JPush
     - Masonry
@@ -66,7 +63,6 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   BEMCheckBox: 5ba6e37ade3d3657b36caecc35c8b75c6c2b1a4e
-  IGLDropDownMenu: ae118618ae858fa66ce7c2ac80ed9124a710b228
   JCore: f14c0549968a63c22e246a4875aa9d428446f373
   JPush: 5921e25ad13e0386351079217b009f2039084eac
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
@@ -81,6 +77,6 @@ SPEC CHECKSUMS:
   YBImageBrowser: c131d640e4a7b66f78cc3297e0d075279cba74a7
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
 
-PODFILE CHECKSUM: aaee4311ca04646cf4297748f646f0f1d51c43db
+PODFILE CHECKSUM: 56913d1fc216b38828b19264328877259a6c622e
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.3

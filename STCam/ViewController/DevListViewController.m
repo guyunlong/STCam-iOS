@@ -157,6 +157,7 @@
 }
 
 -(void)navBtnClicked{
+    
     if(_viewModel.userMode == TUserMode_Login){
         AddDeviceController * ctl = [AddDeviceController new];
         ctl.hidesBottomBarWhenPushed = YES;

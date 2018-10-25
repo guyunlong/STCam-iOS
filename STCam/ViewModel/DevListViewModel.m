@@ -195,6 +195,9 @@ void callback_SearchDev(void *UserCustom, u32 SN, int DevType, char *DevModal, c
     
 }
 -(void)searchDeviceInMainView:(BOOL)inMainView{
+    
+  
+    
     HANDLE SearchHandle;
     SearchHandle = thSearch_Init(callback_SearchDev, NULL);
     if (!SearchHandle) {

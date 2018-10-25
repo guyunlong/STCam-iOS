@@ -12,9 +12,10 @@
 #import "TPKeyboardAvoidingScrollView.h"
 #import "SSIDModel.h"
 #import "RetModel.h"
-#import "IGLDropDownMenu.h"
 #import "FFHttpTool.h"
 #import "LMJDropdownMenu.h"
+#import "AddDeviceStaController.h"
+#import "AddDeviceAPToStaController.h"
 @interface AddDeviceApToStaNextController ()<LMJDropdownMenuDelegate>
 @property(nonatomic,strong)TPKeyboardAvoidingScrollView * mainScrollView;
 @property(nonatomic,strong)UIView * topBackView;
@@ -217,7 +218,24 @@
     
 }
 -(void)backToAddControllerIM{
-    [self.navigationController popToViewController:self.navigationController.viewControllers[self.navigationController.viewControllers.count-3] animated:YES];
+    
+    
+    NSMutableArray *controllerArray = [[NSMutableArray alloc]initWithArray:self.navigationController.viewControllers];
+    NSInteger count = [controllerArray count];
+    for (NSInteger index = count-1;index>=0;index--) {
+        UIViewController * tmpCtl  = [controllerArray objectAtIndex:index];
+        if([tmpCtl isKindOfClass:[AddDeviceApToStaNextController class]] || [tmpCtl isKindOfClass:[AddDeviceAPToStaController class]]){
+            [controllerArray removeObject:tmpCtl];
+           
+        }
+    }
+    
+    
+    AddDeviceStaController *addDeviceStaController  = [AddDeviceStaController new];
+    
+    [controllerArray addObject:addDeviceStaController];
+    [self.navigationController setViewControllers:controllerArray animated:YES];
+  
 }
 /**/
 
@@ -284,6 +302,9 @@
 }
 */
 -(void)Handle_APSTA_OnNext{
+    
+   
+    
     [self showHudInView:self.view hint:@""];
     @weakify(self);
     

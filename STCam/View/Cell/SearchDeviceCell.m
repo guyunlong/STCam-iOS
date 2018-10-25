@@ -20,12 +20,14 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    [self.contentView setBackgroundColor:[UIColor colorWithHexString:@"0xf0f0f0"]];
     UIColor *clr = [UIColor colorWithHexString:@"0xaaaaaa"];
 //    _backView.layer.shadowColor = clr.CGColor;
     _backView.layer.cornerRadius = 5;
     _backView.layer.masksToBounds = YES;
     _backView.layer.borderColor =clr.CGColor;
     _backView.layer.borderWidth = 0.5;
+    [_backView setBackgroundColor:[UIColor whiteColor]];
 //    _backView.layer.shadowOffset = CGSizeMake(0,0);
 //    _backView.layer.shadowOpacity = 1.0;
 //    _backView.layer.shadowRadius = kShadowRadius;

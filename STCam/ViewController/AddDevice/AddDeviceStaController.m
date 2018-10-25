@@ -32,6 +32,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    _viewModel = [DevListViewModel sharedDevListViewModel];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -140,6 +141,7 @@
         [self showHint:@"error_device_added".localizedString];
         return;
     }
+    [self presentViewController:self.fillDevicePwdAlertController animated:YES completion:nil];
 }
 
 -(void)addDevice:(NSString*)devpwd{
@@ -186,7 +188,7 @@
         @strongify(self)
         
         //http://211.149.199.247:800/app_user_get_devlst.asp?user=1257117229@qq.com&psd=12345678
-        NSString * url = [NSString stringWithFormat:@"http://%@:%ld/cfg1.cgi?User=%@&Psd=%@&MsgID=%d",model.IPUID,model.WebPort,model.User,model.Pwd,Msg_WiFiSearch];
+        NSString * url = [NSString stringWithFormat:@"http://%@:%ld/cfg1.cgi?User=%@&Psd=%@&MsgID=%d",model.IPUID,model.WebPort,model.User,model.Pwd,Msg_GetTime];
         [FFHttpTool GET:url parameters:nil success:^(id data){
             @strongify(self)
             if (data) {
