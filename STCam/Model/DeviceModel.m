@@ -289,9 +289,9 @@
         //UcnvConvert_GB2312toUTF8(conv, sizeof(conv), Buf, &pnErrC);
         
         code_convert_name("gb2312", "utf8",Buf,strlen(Buf), conv, sizeof(conv));
-        
+        //const char* SSID = [self.ssid cStringUsingEncoding:NSASCIIStringEncoding];
         NSString * retStr  = [[NSString alloc] initWithUTF8String:conv];
-        
+        NSLog(@"retstr is %@",retStr);
         NSData *utf8Data = [retStr dataUsingEncoding:NSUTF8StringEncoding];
         NSError *error;
         id retDic = [NSJSONSerialization JSONObjectWithData:utf8Data options:NSJSONReadingMutableLeaves error:&error];

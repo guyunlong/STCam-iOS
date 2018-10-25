@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		484F64620EFBEC733F2D85B1 /* libPods-STCam.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C18EA7F117ED0291D64659B7 /* libPods-STCam.a */; };
+		9D47FCC321819BC500E7E8DB /* dropdownMenu_cornerIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D47FCC021819BC500E7E8DB /* dropdownMenu_cornerIcon.png */; };
+		9D47FCC421819BC500E7E8DB /* LMJDropdownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D47FCC121819BC500E7E8DB /* LMJDropdownMenu.m */; };
 		9DAC4BB22175BC9E00AC8916 /* GenerateShareQRCodeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC4BB12175BC9E00AC8916 /* GenerateShareQRCodeController.m */; };
 		9DAC4BB82175C7EB00AC8916 /* DevShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC4BB72175C7EB00AC8916 /* DevShareModel.m */; };
 		9DE76476218003DC00373090 /* libiot.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DE76475218003DC00373090 /* libiot.a */; };
@@ -203,6 +205,9 @@
 
 /* Begin PBXFileReference section */
 		02368DE58D9110FCE2D67420 /* Pods-STCam.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-STCam.release.xcconfig"; path = "Pods/Target Support Files/Pods-STCam/Pods-STCam.release.xcconfig"; sourceTree = "<group>"; };
+		9D47FCC021819BC500E7E8DB /* dropdownMenu_cornerIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dropdownMenu_cornerIcon.png; sourceTree = "<group>"; };
+		9D47FCC121819BC500E7E8DB /* LMJDropdownMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMJDropdownMenu.m; sourceTree = "<group>"; };
+		9D47FCC221819BC500E7E8DB /* LMJDropdownMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMJDropdownMenu.h; sourceTree = "<group>"; };
 		9DAC4BB02175BC9E00AC8916 /* GenerateShareQRCodeController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GenerateShareQRCodeController.h; sourceTree = "<group>"; };
 		9DAC4BB12175BC9E00AC8916 /* GenerateShareQRCodeController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GenerateShareQRCodeController.m; sourceTree = "<group>"; };
 		9DAC4BB62175C7EB00AC8916 /* DevShareModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DevShareModel.h; sourceTree = "<group>"; };
@@ -741,6 +746,16 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		9D47FCBF21819BC500E7E8DB /* LMJDropdownMenu */ = {
+			isa = PBXGroup;
+			children = (
+				9D47FCC021819BC500E7E8DB /* dropdownMenu_cornerIcon.png */,
+				9D47FCC121819BC500E7E8DB /* LMJDropdownMenu.m */,
+				9D47FCC221819BC500E7E8DB /* LMJDropdownMenu.h */,
+			);
+			path = LMJDropdownMenu;
+			sourceTree = "<group>";
+		};
 		9DE7647A21806FD500373090 /* AddDevice */ = {
 			isa = PBXGroup;
 			children = (
@@ -1183,6 +1198,7 @@
 		A45934DD2164A51A0018A61B /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
+				9D47FCBF21819BC500E7E8DB /* LMJDropdownMenu */,
 				A45934DE2164A5320018A61B /* BasicTextField.h */,
 				A45934DF2164A5320018A61B /* BasicTextField.m */,
 				A45934E12164A5FF0018A61B /* LoginBackgroundView.h */,
@@ -1567,6 +1583,7 @@
 				A442C3D3213199A100198910 /* tuner.tlb in Resources */,
 				A442C3BF213199A100198910 /* Msvidctl.idl in Resources */,
 				A4946FFE212C5B470015990C /* Assets.xcassets in Resources */,
+				9D47FCC321819BC500E7E8DB /* dropdownMenu_cornerIcon.png in Resources */,
 				A442C3C2213199A100198910 /* axextend.idl in Resources */,
 				A442C3B0213199A100198910 /* axcore.idl in Resources */,
 				A442C3B5213199A100198910 /* Videoacc.idl in Resources */,
@@ -1734,6 +1751,7 @@
 				A442C2AB213199A100198910 /* thPlay.c in Sources */,
 				A442C2AA213199A100198910 /* axdllEx.c in Sources */,
 				A4AE3244213427480036212B /* DevListViewController.m in Sources */,
+				9D47FCC421819BC500E7E8DB /* LMJDropdownMenu.m in Sources */,
 				A4434D9D217AFC6C00BDA9F2 /* SDVideoModel.m in Sources */,
 				9DE7648921806FD500373090 /* AddDeviceAPToStaController.m in Sources */,
 				A48C32E6217C36CA00CDF2D2 /* DeviceAdvanceSettingController.m in Sources */,

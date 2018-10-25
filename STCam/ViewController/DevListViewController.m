@@ -17,7 +17,7 @@
 #import "DeviceSettingController.h"
 #import "GenerateShareQRCodeController.h"
 #import "AddDeviceController.h"
-
+#import "AddDeviceApToStaNextController.h"
 #import "RecordListController.h"
 @interface DevListViewController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -259,6 +259,7 @@
     ctl.hidesBottomBarWhenPushed = YES;
     [ctl setViewModel:viewModel];
     [self.navigationController pushViewController:ctl animated:YES];
+   
 }
 
 @end

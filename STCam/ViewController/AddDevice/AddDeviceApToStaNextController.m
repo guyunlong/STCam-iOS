@@ -13,14 +13,16 @@
 #import "SSIDModel.h"
 #import "RetModel.h"
 #import "IGLDropDownMenu.h"
-@interface AddDeviceApToStaNextController ()<IGLDropDownMenuDelegate>
+#import "FFHttpTool.h"
+#import "LMJDropdownMenu.h"
+@interface AddDeviceApToStaNextController ()<LMJDropdownMenuDelegate>
 @property(nonatomic,strong)TPKeyboardAvoidingScrollView * mainScrollView;
 @property(nonatomic,strong)UIView * topBackView;
 @property(nonatomic,strong)UIView * middleBackView;
 @property(nonatomic,strong)UIButton * nextButton;
 @property(nonatomic,strong)UILabel * devNameLb;
 @property(nonatomic,strong)UILabel * devAdressLb;
-@property (nonatomic, strong) IGLDropDownMenu *ssidMenu;
+@property (nonatomic, strong) LMJDropdownMenu *ssidMenu;
 //@property (nonatomic, strong) BasicTextField *ssidField;
 @property(nonatomic,strong)UIImageView * ssidIconImageView;
 @property (nonatomic, strong) BasicTextField *ssidPwdField;
@@ -39,6 +41,8 @@
     
     //RAC(self, ssid)  = self.ssidField.rac_textSignal;
     RAC(self, ssidPwd)  = self.ssidPwdField.rac_textSignal;
+    
+    
     
 }
 -(void)viewDidAppear:(BOOL)animated{
@@ -93,8 +97,10 @@
     [self.middleBackView.layer setBorderColor:[UIColor colorWithHexString:@"0xcfcfcf"].CGColor];
     [_mainScrollView addSubview:_middleBackView];
     
-    self.ssidMenu = [[IGLDropDownMenu alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth-4*kPadding, fieldHeight)];
-    [self.middleBackView addSubview:self.ssidMenu];
+    self.ssidMenu = [[LMJDropdownMenu alloc] init];
+    self.ssidMenu.delegate = self;
+    [self.ssidMenu setFrame:CGRectMake(40*kWidthCoefficient+kPadding*2,y+1, kScreenWidth-4*kPadding-40*kWidthCoefficient-kPadding, fieldHeight-2)];
+    [self.view addSubview:self.ssidMenu];
     
     
     _ssidIconImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_wifi"]];
@@ -127,29 +133,35 @@
     
     [_nextButton addTarget:self action:@selector(nextButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     
+   
+    
 }
 -(void)reSetUpSSIDMenu{
-    if ([_ssidArray count] == 0) {
-        return;
-    }
-    NSMutableArray *dropdownItems = [[NSMutableArray alloc] init];
-    for (int i = 0; i < self.ssidArray.count; i++) {
-        SSIDModel * model = self.ssidArray[i];
-        IGLDropDownItem *item = [[IGLDropDownItem alloc] init];
-        [item setText:[model getSSIDSignalDesc]];
-        [dropdownItems addObject:item];
-    }
     
-    self.ssidMenu.dropDownItems = dropdownItems;
-    self.ssidMenu.delegate = self;
-    self.ssidMenu = [[IGLDropDownMenu alloc] init];
-    SSIDModel * model = self.ssidArray[0];
-    _ssid = model.SSID;
-    self.ssidMenu.menuText = [model getSSIDSignalDesc];
-    self.ssidMenu.dropDownItems = dropdownItems;
-    //self.ssidMenu.paddingLeft = 15;
+    dispatch_async(dispatch_get_main_queue(), ^(){
+        
+        
+        
+        
+        if ([_ssidArray count] == 0) {
+            return;
+        }
+        NSMutableArray *dropdownItems = [[NSMutableArray alloc] init];
+        for (int i = 0; i < self.ssidArray.count; i++) {
+            SSIDModel * model = self.ssidArray[i];
+            [dropdownItems addObject:[model getSSIDSignalDesc]];
+        }
+        SSIDModel * model = self.ssidArray[0];
+        _ssid =model.SSID;
+        [_ssidMenu setMenuTitles:dropdownItems rowHeight:40*kWidthCoefficient];
+        
+      
+        
+    });
     
-    [self.ssidMenu reloadView];
+    
+   
+ 
 }
 -(void)initNav{
     [self setTitle:@"action_add_ap_sta".localizedString];
@@ -208,6 +220,36 @@
     [self.navigationController popToViewController:self.navigationController.viewControllers[self.navigationController.viewControllers.count-3] animated:YES];
 }
 /**/
+
+-(void)searchWiFi{
+    @weakify(self)
+   [self showHudInView:self.view hint:@""];
+        
+        //http://211.149.199.247:800/app_user_get_devlst.asp?user=1257117229@qq.com&psd=12345678
+        NSString * url = [NSString stringWithFormat:@"http://%@:%ld/cfg1.cgi?User=%@&Psd=%@&MsgID=%d",self.model.IPUID,self.model.WebPort,self.model.User,self.model.Pwd,Msg_WiFiSearch];
+        [FFHttpTool GET:url parameters:nil success:^(id data){
+            @strongify(self)
+             [self hideHud];
+            if([data isKindOfClass:[NSArray class]]){
+                if (!self.ssidArray) {
+                    self.ssidArray = [NSMutableArray new];
+                }
+                [self.ssidArray removeAllObjects];
+                for (NSDictionary * dic in data) {
+                    SSIDModel * model = [SSIDModel SSIDModelWithDict:dic];
+                    [self.ssidArray addObject:model];
+                }
+                if (self.ssidArray.count > 0) {
+                    [self reSetUpSSIDMenu];
+                }
+            }
+        } failure:^(NSError * error){
+            @strongify(self)
+             [self hideHud];
+        }];
+}
+
+/*
 -(void)searchWiFi{
     [self showHudInView:self.view hint:@""];
     @weakify(self);
@@ -240,7 +282,7 @@
         });
     
 }
-
+*/
 -(void)Handle_APSTA_OnNext{
     [self showHudInView:self.view hint:@""];
     @weakify(self);
@@ -273,25 +315,27 @@
 }
 
 #pragma mark - IGLDropDownMenuDelegate
+#pragma mark - LMJDropdownMenu Delegate
 
-- (void)dropDownMenu:(IGLDropDownMenu *)dropDownMenu selectedItemAtIndex:(NSInteger)index
-{
-   IGLDropDownItem *item = dropDownMenu.dropDownItems[index];
-    SSIDModel * model = _ssidArray[index];
+- (void)dropdownMenu:(LMJDropdownMenu *)menu selectedCellNumber:(NSInteger)number{
+    NSLog(@"你选择了：%ld",number);
+    SSIDModel * model = _ssidArray[number];
     _ssid =model.SSID;
 }
 
-- (void)dropDownMenu:(IGLDropDownMenu *)dropDownMenu expandingChanged:(BOOL)isExpanding
-{
-    NSLog(@"Expending changed to: %@", isExpanding? @"expand" : @"fold");
-    
+- (void)dropdownMenuWillShow:(LMJDropdownMenu *)menu{
+    NSLog(@"--将要显示--");
+}
+- (void)dropdownMenuDidShow:(LMJDropdownMenu *)menu{
+    NSLog(@"--已经显示--");
 }
 
-- (void)dropDownMenu:(IGLDropDownMenu *)dropDownMenu expandingChangedWithAnimationCompledted:(BOOL)isExpanding
-{
-    NSLog(@"IGLDropDownMenu size: %@", NSStringFromCGSize(dropDownMenu.bounds.size));
+- (void)dropdownMenuWillHidden:(LMJDropdownMenu *)menu{
+    NSLog(@"--将要隐藏--");
 }
-
+- (void)dropdownMenuDidHidden:(LMJDropdownMenu *)menu{
+    NSLog(@"--已经隐藏--");
+}
 
 -(UIAlertController*)confirmAlertController{
     if (!_confirmAlertController) {
