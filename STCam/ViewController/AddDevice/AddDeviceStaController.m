@@ -2,7 +2,7 @@
 //  AddDeviceStaController.m
 //  STCam
 //
-//  Created by coverme on 2018/10/24.
+//  Created by cc on 2018/10/24.
 //  Copyright © 2018 South. All rights reserved.
 //
 

@@ -12,6 +12,8 @@
 #import "SoundButton.h"
 #import "DeviceSettingController.h"
 #import <AudioToolbox/AudioToolbox.h>
+#import "LedControlController.h"
+
 @interface LiveVidController ()<VidViewModelDelegate>{
     BOOL isLandscape;
 }
@@ -142,6 +144,7 @@
     [_snapShotBtn addTarget:self action:@selector(controlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
      [_recordBtn addTarget:self action:@selector(controlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
      [_settingBtn addTarget:self action:@selector(controlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+     [_ledBtn addTarget:self action:@selector(controlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     /**********landscape buttons*************/
     _exitFullScreenButton = [[UIButton alloc] initWithFrame:CGRectMake(kPadding, kPadding, firstLineWidth, firstLineWidth)];
@@ -198,6 +201,13 @@
         DeviceSettingController * ctl = [DeviceSettingController new];
         DeviceSettingViewModel * viewModel = [DeviceSettingViewModel new];
         [viewModel setModel:self.viewModel.model];
+        [ctl setViewModel:viewModel];
+        [self.navigationController pushViewController:ctl animated:YES];
+    }
+    else if(sender == _ledBtn || sender == _ledBtn_land){
+        LedControlViewModel *viewModel = [LedControlViewModel new];
+        [viewModel setModel:_viewModel.model];
+        LedControlController * ctl = [LedControlController new];
         [ctl setViewModel:viewModel];
         [self.navigationController pushViewController:ctl animated:YES];
     }

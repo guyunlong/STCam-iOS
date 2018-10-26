@@ -2,7 +2,7 @@
 //  AddDeviceController.h
 //  STCam
 //
-//  Created by coverme on 10/16/18.
+//  Created by cc on 10/16/18.
 //  Copyright © 2018 South. All rights reserved.
 //
 

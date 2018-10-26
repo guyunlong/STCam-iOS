@@ -49,6 +49,12 @@
             [self setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
             self.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
             break;
+        case ButtonStyleText_Time_button:
+            self.layer.cornerRadius = 5;
+            self.layer.masksToBounds = true;
+            [self setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithHexString:@"0xbbbbbb"]] forState:UIControlStateNormal];
+            [self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            break;
         default:
             break;
     }

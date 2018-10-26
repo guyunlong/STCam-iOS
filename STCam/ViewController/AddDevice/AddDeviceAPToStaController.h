@@ -2,7 +2,7 @@
 //  AddDeviceAPToStaController.h
 //  STCam
 //
-//  Created by coverme on 2018/10/23.
+//  Created by cc on 2018/10/23.
 //  Copyright © 2018 South. All rights reserved.
 //
 
