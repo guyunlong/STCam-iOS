@@ -215,7 +215,10 @@ void callback_SearchDev(void *UserCustom, u32 SN, int DevType, char *DevModal, c
     thSearch_Free(SearchHandle);
     SearchHandle = NULL;
     
-    self.deviceArray = [self.searchDeviceArray mutableCopy];
+    if (inMainView) {
+        self.deviceArray = [self.searchDeviceArray mutableCopy];
+    }
+    
 }
 /**
  app 退到后台，断开所有连接

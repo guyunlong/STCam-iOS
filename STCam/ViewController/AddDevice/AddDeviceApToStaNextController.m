@@ -16,6 +16,7 @@
 #import "LMJDropdownMenu.h"
 #import "AddDeviceStaController.h"
 #import "AddDeviceAPToStaController.h"
+#import "DevListViewModel.h"
 @interface AddDeviceApToStaNextController ()<LMJDropdownMenuDelegate>
 @property(nonatomic,strong)TPKeyboardAvoidingScrollView * mainScrollView;
 @property(nonatomic,strong)UIView * topBackView;
@@ -197,6 +198,9 @@
 }
 
 -(void)backToAddController:(BOOL)wait{
+    DevListViewModel * viewModel = [DevListViewModel sharedDevListViewModel];
+    [self.model threadDisconnect];
+    [viewModel.searchDeviceArray removeAllObjects];
     if(wait){
         __block NSInteger count = 45;
         [self showHudInView:self.view hint:[NSString stringWithFormat:@"%ld%@",count,@"action_reboot_seconds".localizedString]];
@@ -304,14 +308,14 @@
 -(void)Handle_APSTA_OnNext{
     
    
-    
+    [self.view endEditing:YES];
     [self showHudInView:self.view hint:@""];
     @weakify(self);
     
     dispatch_queue_t quene = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(quene, ^{
         @strongify(self)
-        NSString * url = [NSString stringWithFormat:@"%@&wifi_Active=1&wifi_IsAPMode=0&wifi_SSID_STA=%@&wifi_Password_STA=%@",[self.model getDevURL:Msg_GetPushCfg],self.ssid,self.ssidPwd];
+        NSString * url = [NSString stringWithFormat:@"%@&wifi_Active=1&wifi_IsAPMode=0&wifi_SSID_STA=%@&wifi_Password_STA=%@",[self.model getDevURL:Msg_SetWiFiCfg],self.ssid,self.ssidPwd];
         
         id data = [self.model thNetHttpGet:url];
         dispatch_async(dispatch_get_main_queue(), ^(){
@@ -319,6 +323,11 @@
             if([data isKindOfClass:[NSDictionary class]]){
                 RetModel * model = [RetModel RetModelWithDict:data];
                 if (model.ret == RESULT_SUCCESS_REBOOT) {
+                    [self.model threadDisconnect];
+                    [self showHint:@"action_AP_T_STA_Success".localizedString];
+                    [self backToAddController:YES];
+                }
+                if (model.ret == RESULT_SUCCESS) {
                     [self.model threadDisconnect];
                     [self showHint:@"action_AP_T_STA_Success".localizedString];
                     [self backToAddController:YES];

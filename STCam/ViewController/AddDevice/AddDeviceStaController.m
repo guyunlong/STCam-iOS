@@ -95,11 +95,13 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)refreshStaDevList{
+    [self showHudInView:self.view hint:nil];
     @weakify(self)
     [[[_viewModel racSearchDeviceinMainView:NO]
       deliverOn:[RACScheduler mainThreadScheduler]]
      subscribeNext:^(id x) {
          @strongify(self)
+         [self hideHud];
          if ([x integerValue] == 1) {
              [self.mTableView reloadData];
          }
@@ -212,7 +214,7 @@
         @strongify(self)
         
         //http://211.149.199.247:800/app_user_get_devlst.asp?user=1257117229@qq.com&psd=12345678
-        NSString * url = [NSString stringWithFormat:@"http://%@:%d/app_user_add_dev?User=%@&Psd=%@&tokenid=%@&mbtype=2&apptype=0&pushtype=0&sn=%@",serverIP,ServerPort,[AccountManager getUser],[AccountManager getPassword],[AccountManager sharedManager].deviceToken,model.SN];
+        NSString * url = [NSString stringWithFormat:@"http://%@:%d/app_user_add_dev.asp?user=%@&psd=%@&tokenid=%@&mbtype=2&apptype=0&pushtype=0&sn=%@",serverIP,ServerPort,[AccountManager getUser],[AccountManager getPassword],[AccountManager sharedManager].deviceToken,model.SN];
         [FFHttpTool GET:url parameters:nil success:^(id data){
             @strongify(self)
             if ([data isKindOfClass:[NSDictionary class]]) {

@@ -9,6 +9,8 @@
 #import "AddDeviceSmartLinkNextController.h"
 #import "PrefixHeader.h"
 #include "mtk_SmartConfig.h"
+#import "AddDeviceStaController.h"
+#import "AddDeviceSmartLinkController.h"
 #import <SpinKit/RTSpinKitView.h>
 @interface AddDeviceSmartLinkNextController ()
 @property(nonatomic,strong)UIView * topBackView;
@@ -41,12 +43,31 @@
         if (self.timeLeft <= 0) {
             [self.fireTimer invalidate];
             self.fireTimer = nil;
-            [self.navigationController popToViewController:self.navigationController.viewControllers[self.navigationController.viewControllers.count-3] animated:YES];
+            [self backToAddStaController];
         }
         [self.timeLeftLb setText:[NSString stringWithFormat:@"string_finish_timeleft_%ld".localizedString,self.timeLeft]];
         
     }];
 }
+-(void)backToAddStaController{
+    
+    
+    NSMutableArray *controllerArray = [[NSMutableArray alloc]initWithArray:self.navigationController.viewControllers];
+    NSInteger count = [controllerArray count];
+    for (NSInteger index = count-1;index>=0;index--) {
+        UIViewController * tmpCtl  = [controllerArray objectAtIndex:index];
+        if([tmpCtl isKindOfClass:[AddDeviceSmartLinkNextController class]] || [tmpCtl isKindOfClass:[AddDeviceSmartLinkController class]]){
+            [controllerArray removeObject:tmpCtl];
+            
+        }
+    }
+    AddDeviceStaController *addDeviceStaController  = [AddDeviceStaController new];
+    
+    [controllerArray addObject:addDeviceStaController];
+    [self.navigationController setViewControllers:controllerArray animated:YES];
+    
+}
+
 -(void)loadView{
     [super loadView];
     [self.view setBackgroundColor:[UIColor whiteColor]];

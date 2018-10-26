@@ -281,7 +281,12 @@
     code_convert_name("utf8", "gb2312",(char *) [url UTF8String],strlen([url UTF8String]), conv, sizeof(conv));
     //UcnvConvert_UTF8toGB2312(conv, sizeof(conv), url, &pnErrC);
     
-   
+    if (![self IsConnect]) {
+        [self Connect];
+    }
+    if (![self IsConnect]) {
+        return nil;
+    }
     ret = thNet_HttpGet(_NetHandle, conv, Buf, &BufLen);
     if (ret)
     {
