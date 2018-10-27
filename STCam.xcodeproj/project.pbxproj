@@ -184,6 +184,7 @@
 		A4AE327C21342EFD0036212B /* NSDate+convenience.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE326D21342EFD0036212B /* NSDate+convenience.m */; };
 		A4AE70BD2167AEF600614024 /* DevListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE70BB2167AEF600614024 /* DevListCell.m */; };
 		A4AE70BE2167AEF600614024 /* DevListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4AE70BC2167AEF600614024 /* DevListCell.xib */; };
+		A4B25F142184A9EE00D69521 /* LedStatusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A4B25F132184A9EE00D69521 /* LedStatusModel.m */; };
 		A4BC3656216F959B00FDCBF5 /* AlarmListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4BC3654216F959B00FDCBF5 /* AlarmListCell.m */; };
 		A4BC3657216F959B00FDCBF5 /* AlarmListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4BC3655216F959B00FDCBF5 /* AlarmListCell.xib */; };
 		A4BC365A216F983900FDCBF5 /* AlarmListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A4BC3659216F983900FDCBF5 /* AlarmListViewModel.m */; };
@@ -686,6 +687,8 @@
 		A4AE70BA2167AEF600614024 /* DevListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DevListCell.h; sourceTree = "<group>"; };
 		A4AE70BB2167AEF600614024 /* DevListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DevListCell.m; sourceTree = "<group>"; };
 		A4AE70BC2167AEF600614024 /* DevListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DevListCell.xib; sourceTree = "<group>"; };
+		A4B25F122184A9EE00D69521 /* LedStatusModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LedStatusModel.h; sourceTree = "<group>"; };
+		A4B25F132184A9EE00D69521 /* LedStatusModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LedStatusModel.m; sourceTree = "<group>"; };
 		A4BC3653216F959B00FDCBF5 /* AlarmListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlarmListCell.h; sourceTree = "<group>"; };
 		A4BC3654216F959B00FDCBF5 /* AlarmListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlarmListCell.m; sourceTree = "<group>"; };
 		A4BC3655216F959B00FDCBF5 /* AlarmListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlarmListCell.xib; sourceTree = "<group>"; };
@@ -896,6 +899,8 @@
 				A452A911217CC2A4008222F2 /* UpdateDevModel.m */,
 				A47CD3F8217F68A4000E3C2A /* SSIDModel.h */,
 				A47CD3F9217F68A4000E3C2A /* SSIDModel.m */,
+				A4B25F122184A9EE00D69521 /* LedStatusModel.h */,
+				A4B25F132184A9EE00D69521 /* LedStatusModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1831,6 +1836,7 @@
 				A43853DB21675A1500B8CC56 /* DeviceModel.m in Sources */,
 				9DBBD6A62183051E003B4DB0 /* LedControlViewModel.m in Sources */,
 				9DE7648521806FD500373090 /* AddDeviceApToStaNextController.m in Sources */,
+				A4B25F142184A9EE00D69521 /* LedStatusModel.m in Sources */,
 				A4606929216A4F0500491290 /* AudioSession.m in Sources */,
 				A4BC365A216F983900FDCBF5 /* AlarmListViewModel.m in Sources */,
 				9DAC4BB82175C7EB00AC8916 /* DevShareModel.m in Sources */,

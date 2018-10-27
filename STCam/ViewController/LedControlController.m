@@ -10,6 +10,7 @@
 #import "PrefixHeader.h"
 #import "STSlider.h"
 #import "WSDatePickerView.h"
+
 #define Segment1Width 60*kWidthCoefficient
 #define Segment2Width 50*kWidthCoefficient
 #define  StatusLedWidth 60*kWidthCoefficient
@@ -19,7 +20,7 @@
 #define timeButtonHeigth 40*kWidthCoefficient
 #define timeButtonWidth 80*kWidthCoefficient
 @interface LedControlController ()
-@property(nonatomic,strong)UIImageView * ledStatusImageView;
+@property(nonatomic,strong)UIButton * ledStatusImageView;
 @property(nonatomic,strong)UIView* backView; //背景
 @property(nonatomic,strong)UISegmentedControl* modeSegment; //模式选择
 /**********亮灯时间 单位s 进度条**************/
@@ -46,6 +47,7 @@
 
 @property(nonatomic,strong)NSDate* dateStart;
 @property(nonatomic,strong)NSDate* dateEnd;
+
 @end
 
 @implementation LedControlController
@@ -57,6 +59,7 @@
     [self reloadViewForAuto];
     
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     _dateStart  = [NSDate date];
@@ -69,8 +72,10 @@
     [self initNav];
     
     CGFloat y = 2*kPadding;
-    _ledStatusImageView = [[UIImageView alloc] initWithFrame:CGRectMake(kScreenWidth/2-StatusLedWidth/2, y, StatusLedWidth, StatusLedWidth)];
-    [_ledStatusImageView setImage:[UIImage imageNamed:@"light_close"]];
+    _ledStatusImageView = [[UIButton alloc] initWithFrame:CGRectMake(kScreenWidth/2-StatusLedWidth/2, y, StatusLedWidth, StatusLedWidth)];
+    [_ledStatusImageView setUserInteractionEnabled:NO];
+    [_ledStatusImageView setImage:[UIImage imageNamed:@"light_close"] forState:UIControlStateNormal];
+     [_ledStatusImageView setImage:[UIImage imageNamed:@"light_open"] forState:UIControlStateSelected];
     [self.view addSubview:_ledStatusImageView];
     
     y += StatusLedWidth+kPadding;
@@ -165,6 +170,15 @@
     [_timeStartBtn addTarget:self action:@selector(timeButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [_timeEndBtn addTarget:self action:@selector(timeButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
+    
+    [_ledTurnOnTimeSlider setMaximumValue:600];
+    [_ledTurnOnTimeSlider setMinimumValue:20];
+    
+    [_ledBrightnessSlider setMaximumValue:100];
+    [_ledBrightnessSlider setMinimumValue:10];
+    
+    [_ledTurnOnTimeSlider addTarget:self action:@selector(sliderChange:) forControlEvents:UIControlEventValueChanged];
+    [_ledBrightnessSlider addTarget:self action:@selector(sliderChange:) forControlEvents:UIControlEventValueChanged];
 }
 
 -(void)initNav{
@@ -218,6 +232,13 @@
     y+= SegmengHeight +kPadding;
     [_backView setHeight:y];
     
+    [_ledTurnOnTimeSlider setValue:self.viewModel.ledStatusModel.autoModel.Delay];
+    [_ledTurnOnTimeLb setText:[NSString stringWithFormat:@"%ld",self.viewModel.ledStatusModel.autoModel.Delay]];
+    
+    [_ledBrightnessSlider setValue:self.viewModel.ledStatusModel.autoModel.Brightness];
+    [_ledBrightnessLb setText:[NSString stringWithFormat:@"%ld",self.viewModel.ledStatusModel.autoModel.Brightness]];
+    
+    [_ledSensitiveSegmented setSelectedSegmentIndex:self.viewModel.ledStatusModel.autoModel.Lux];
     
 }
 -(void)reloadViewForByHand{
@@ -246,6 +267,10 @@
     [_ledBrightnessValueLb setY:y];
     y+= sliderHeight +kPadding;
     [_backView setHeight:y];
+    
+    [_ledBrightnessSlider setValue:self.viewModel.ledStatusModel.manualModel.Brightness];
+    [_ledBrightnessLb setText:[NSString stringWithFormat:@"%ld",self.viewModel.ledStatusModel.manualModel.Brightness]];
+    
     
     
 }
@@ -282,6 +307,16 @@
     y+= sliderHeight +kPadding;
     [_backView setHeight:y];
     
+    //亮灯时间
+    //_timeStartBtn =[self.viewModel.ledStatusModel.timerModel getStartTimeDesc];
+   // _timeStartBtn =[self.viewModel.ledStatusModel.timerModel getStopTimeDesc];
+    
+    [_timeStartBtn setTitle:[self.viewModel.ledStatusModel.timerModel getStartTimeDesc] forState:UIControlStateNormal];
+    [_timeEndBtn setTitle:[self.viewModel.ledStatusModel.timerModel getStopTimeDesc] forState:UIControlStateNormal];
+    [_ledBrightnessSlider setValue:self.viewModel.ledStatusModel.timerModel.Brightness];
+    [_ledBrightnessLb setText:[NSString stringWithFormat:@"%ld",self.viewModel.ledStatusModel.timerModel.Brightness]];
+    
+    
 }
 -(void)reloadViewForD2D{
     /**********亮灯时间 单位s 进度条**************/
@@ -314,33 +349,73 @@
     y+= SegmengHeight +kPadding;
     [_backView setHeight:y];
     
+    [_ledBrightnessSlider setValue:self.viewModel.ledStatusModel.d2dModel.Brightness];
+    [_ledBrightnessLb setText:[NSString stringWithFormat:@"%ld",self.viewModel.ledStatusModel.d2dModel.Brightness]];
+    
+    [_ledSensitiveSegmented setSelectedSegmentIndex:self.viewModel.ledStatusModel.d2dModel.Lux];
     
 }
 
--(void)selectChanged:(id)sender{
-    UISegmentedControl* control = (UISegmentedControl*)sender;
-    if (sender == _modeSegment) {
-        switch (control.selectedSegmentIndex) {
-            case 0://自动
-                NSLog(@"0");
-                [self reloadViewForAuto];
-                break;
-            case 1://手动
-                [self reloadViewForByHand];
-                NSLog(@"1");
-                break;
-            case 2://定时
-                [self reloadViewForTimer];
-                NSLog(@"2");
-                break;
-            case 3://d2d
-                [self reloadViewForD2D];
-                NSLog(@"2");
-                break;
-            default:
-                NSLog(@"3");
-                break;
+
+
+#pragma methods
+-(void)loadValue{
+    @weakify(self);
+    [[[self.viewModel racGetLightCfg]
+      deliverOn:[RACScheduler mainThreadScheduler]]
+     subscribeNext:^(id x) {
+         @strongify(self);
+         [self reloadView];
+     }];
+}
+-(void)reloadView{
+    if (self.viewModel.ledStatusModel) {
+        _dateStart = [NSDate dateFromString:[NSString stringWithFormat:@"2018-01-01 %@:00",[self.self.viewModel.ledStatusModel.timerModel getStartTimeDesc]]];
+        
+        _dateEnd = [NSDate dateFromString:[NSString stringWithFormat:@"2018-01-01 %@:00",[self.self.viewModel.ledStatusModel.timerModel getStopTimeDesc]]];
+        
+        [_ledStatusImageView setSelected:self.viewModel.ledStatusModel.Status];
+        if (self.viewModel.ledStatusModel.Mode == 1) {
+            [self reloadViewForAuto];
         }
+        else if (self.viewModel.ledStatusModel.Mode == 2) {
+            [self reloadViewForByHand];
+        }
+        else if (self.viewModel.ledStatusModel.Mode == 3) {
+            [self reloadViewForTimer];
+        }
+        else if (self.viewModel.ledStatusModel.Mode == 4) {
+            [self reloadViewForD2D];
+        }
+    }
+}
+
+#pragma mark event
+-(void)sliderChange:(id)sender{
+    UISlider * slider = sender;
+    NSInteger value = (NSInteger)slider.value;
+    if (sender == _ledBrightnessSlider) {
+        //亮度调节
+        [_ledBrightnessLb setText:[NSString stringWithFormat:@"%ld",value]];
+        NSInteger mode = self.viewModel.ledStatusModel.Mode;
+        if (1 == mode) {
+            self.viewModel.ledStatusModel.autoModel.Brightness = value;
+            
+        }
+        else if (2 == mode) {
+            self.viewModel.ledStatusModel.manualModel.Brightness = value;
+        }
+        else if (3 == mode) {
+            self.viewModel.ledStatusModel.timerModel.Brightness = value;
+        }
+        else if (4 == mode) {
+            self.viewModel.ledStatusModel.d2dModel.Brightness = value;
+        }
+    }
+    else if(sender == _ledTurnOnTimeSlider){
+        //亮灯时间
+        [_ledTurnOnTimeLb setText:[NSString stringWithFormat:@"%ld",value]];
+        self.viewModel.ledStatusModel.autoModel.Delay = value;
     }
 }
 -(void)timeButtonClicked:(id)sender{
@@ -353,8 +428,11 @@
                 self.dateStart = startDate;
                 NSString *date = [startDate stringWithFormat:@"HH:mm"];
                 NSLog(@"时间： %@",date);
+                NSString *dateH = [startDate stringWithFormat:@"HH"];
+                NSString *dateM = [startDate stringWithFormat:@"mm"];
+                [self.viewModel.ledStatusModel.timerModel setStartH:[dateH integerValue]];
+                 [self.viewModel.ledStatusModel.timerModel setStartM:[dateM integerValue]];
                 [btn setTitle:date forState:UIControlStateNormal];
-                
             }];
             _datePickerViewStart.doneButtonColor = kMainColor;//确定按钮的颜色
             
@@ -362,17 +440,57 @@
     }
     else if(sender == _timeEndBtn){
         if (!_datePickerViewStart) {
-             @weakify(self)
+            @weakify(self)
             _datePickerViewStart =  [[WSDatePickerView alloc] initWithDateStyle:DateStyleShowHourMinute scrollToDate:_dateEnd CompleteBlock:^(NSDate *startDate) {
                 @strongify(self)
                 self.dateEnd = startDate;
                 NSString *date = [startDate stringWithFormat:@"HH:mm"];
                 NSLog(@"时间： %@",date);
+                NSLog(@"时间： %@",date);
+                NSString *dateH = [startDate stringWithFormat:@"HH"];
+                NSString *dateM = [startDate stringWithFormat:@"mm"];
+                [self.viewModel.ledStatusModel.timerModel setStopH:[dateH integerValue]];
+                [self.viewModel.ledStatusModel.timerModel setStopM:[dateM integerValue]];
                 [btn setTitle:date forState:UIControlStateNormal];
                 
             }];
             _datePickerViewStart.doneButtonColor = kMainColor;//确定按钮的颜色
             
+        }
+    }
+}
+
+-(void)selectChanged:(id)sender{
+    UISegmentedControl* control = (UISegmentedControl*)sender;
+    if (sender == _modeSegment) {
+        switch (control.selectedSegmentIndex) {
+            case 0://自动
+                self.viewModel.ledStatusModel.Mode = 1;
+                [self reloadViewForAuto];
+                break;
+            case 1://手动
+                self.viewModel.ledStatusModel.Mode = 2;
+                [self reloadViewForByHand];
+                break;
+            case 2://定时
+                self.viewModel.ledStatusModel.Mode = 3;
+                [self reloadViewForTimer];
+                break;
+            case 3://d2d
+                self.viewModel.ledStatusModel.Mode = 4;
+                [self reloadViewForD2D];
+                break;
+            default:
+                break;
+        }
+    }
+    else if(sender ==_ledSensitiveSegmented){
+        NSInteger mode = self.viewModel.ledStatusModel.Mode;
+        if (1 == mode) {
+            self.viewModel.ledStatusModel.autoModel.Lux = control.selectedSegmentIndex;
+        }
+        else if (4 == mode) {
+            self.viewModel.ledStatusModel.d2dModel.Lux = control.selectedSegmentIndex;
         }
     }
 }

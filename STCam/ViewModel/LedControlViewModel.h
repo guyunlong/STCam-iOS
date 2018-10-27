@@ -8,6 +8,23 @@
 
 #import <Foundation/Foundation.h>
 #import "DeviceModel.h"
+#import "LedStatusModel.h"
+#import <ReactiveCocoa/ReactiveCocoa.h>
+#import <ReactiveCocoa/RACEXTScope.h>
 @interface LedControlViewModel : NSObject
 @property(nonatomic,strong)DeviceModel * model;
+@property(nonatomic,strong)LedStatusModel * ledStatusModel;
+
+/**
+ 获得灯光配置
+ */
+-(RACSignal*)racGetLightCfg;
+
+/**
+ 设置灯光配置
+ */
+-(RACSignal*)racSetLightCfg;
+
+@property(nonatomic,assign)BOOL changeValue;
+@property(nonatomic,strong)NSTimer * refreshTimer;
 @end
