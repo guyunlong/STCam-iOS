@@ -24,7 +24,8 @@
  设置灯光配置
  */
 -(RACSignal*)racSetLightCfg;
-
+-(void)destoryTimer;
+-(void)setupTimer;
 @property(nonatomic,assign)BOOL changeValue;
 @property(nonatomic,strong)NSTimer * refreshTimer;
 @end

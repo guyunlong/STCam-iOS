@@ -55,8 +55,15 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    [_viewModel setupTimer];
     [_modeSegment setSelectedSegmentIndex:0];
     [self reloadViewForAuto];
+    [self loadValue];
+    
+}
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [_viewModel destoryTimer];
     
 }
 
@@ -144,6 +151,7 @@
     [_ledSensitiveSegmented setFrame:CGRectMake(kPadding+ledSensitiveLbWidth+kPadding, 0, Segment2Width*3, SegmengHeight)];
     [_backView addSubview:_ledSensitiveSegmented];
     
+    [_ledSensitiveSegmented addTarget:self action:@selector(selectChanged:) forControlEvents:UIControlEventValueChanged];
     
     /**********亮灯时间 时间间隔**************/
     _ledTurnOnStartEndLb = [[UILabel alloc] initWithFrame:CGRectMake(kPadding, 0, contentWidth,timeButtonHeigth)];
@@ -233,10 +241,10 @@
     [_backView setHeight:y];
     
     [_ledTurnOnTimeSlider setValue:self.viewModel.ledStatusModel.autoModel.Delay];
-    [_ledTurnOnTimeLb setText:[NSString stringWithFormat:@"%ld",self.viewModel.ledStatusModel.autoModel.Delay]];
+    [_ledTurnOnTimeValueLb setText:[NSString stringWithFormat:@"%ld",self.viewModel.ledStatusModel.autoModel.Delay]];
     
     [_ledBrightnessSlider setValue:self.viewModel.ledStatusModel.autoModel.Brightness];
-    [_ledBrightnessLb setText:[NSString stringWithFormat:@"%ld",self.viewModel.ledStatusModel.autoModel.Brightness]];
+    [_ledBrightnessValueLb setText:[NSString stringWithFormat:@"%ld",self.viewModel.ledStatusModel.autoModel.Brightness]];
     
     [_ledSensitiveSegmented setSelectedSegmentIndex:self.viewModel.ledStatusModel.autoModel.Lux];
     
@@ -269,7 +277,7 @@
     [_backView setHeight:y];
     
     [_ledBrightnessSlider setValue:self.viewModel.ledStatusModel.manualModel.Brightness];
-    [_ledBrightnessLb setText:[NSString stringWithFormat:@"%ld",self.viewModel.ledStatusModel.manualModel.Brightness]];
+    [_ledBrightnessValueLb setText:[NSString stringWithFormat:@"%ld",self.viewModel.ledStatusModel.manualModel.Brightness]];
     
     
     
@@ -314,7 +322,7 @@
     [_timeStartBtn setTitle:[self.viewModel.ledStatusModel.timerModel getStartTimeDesc] forState:UIControlStateNormal];
     [_timeEndBtn setTitle:[self.viewModel.ledStatusModel.timerModel getStopTimeDesc] forState:UIControlStateNormal];
     [_ledBrightnessSlider setValue:self.viewModel.ledStatusModel.timerModel.Brightness];
-    [_ledBrightnessLb setText:[NSString stringWithFormat:@"%ld",self.viewModel.ledStatusModel.timerModel.Brightness]];
+    [_ledBrightnessValueLb setText:[NSString stringWithFormat:@"%ld",self.viewModel.ledStatusModel.timerModel.Brightness]];
     
     
 }
@@ -350,7 +358,7 @@
     [_backView setHeight:y];
     
     [_ledBrightnessSlider setValue:self.viewModel.ledStatusModel.d2dModel.Brightness];
-    [_ledBrightnessLb setText:[NSString stringWithFormat:@"%ld",self.viewModel.ledStatusModel.d2dModel.Brightness]];
+    [_ledBrightnessValueLb setText:[NSString stringWithFormat:@"%ld",self.viewModel.ledStatusModel.d2dModel.Brightness]];
     
     [_ledSensitiveSegmented setSelectedSegmentIndex:self.viewModel.ledStatusModel.d2dModel.Lux];
     
@@ -375,6 +383,7 @@
         _dateEnd = [NSDate dateFromString:[NSString stringWithFormat:@"2018-01-01 %@:00",[self.self.viewModel.ledStatusModel.timerModel getStopTimeDesc]]];
         
         [_ledStatusImageView setSelected:self.viewModel.ledStatusModel.Status];
+        [_modeSegment setSelectedSegmentIndex:self.viewModel.ledStatusModel.Mode-1];
         if (self.viewModel.ledStatusModel.Mode == 1) {
             [self reloadViewForAuto];
         }
@@ -392,11 +401,12 @@
 
 #pragma mark event
 -(void)sliderChange:(id)sender{
+     self.viewModel.changeValue = YES;
     UISlider * slider = sender;
     NSInteger value = (NSInteger)slider.value;
     if (sender == _ledBrightnessSlider) {
         //亮度调节
-        [_ledBrightnessLb setText:[NSString stringWithFormat:@"%ld",value]];
+        [_ledBrightnessValueLb setText:[NSString stringWithFormat:@"%ld",value]];
         NSInteger mode = self.viewModel.ledStatusModel.Mode;
         if (1 == mode) {
             self.viewModel.ledStatusModel.autoModel.Brightness = value;
@@ -414,7 +424,7 @@
     }
     else if(sender == _ledTurnOnTimeSlider){
         //亮灯时间
-        [_ledTurnOnTimeLb setText:[NSString stringWithFormat:@"%ld",value]];
+        [_ledTurnOnTimeValueLb setText:[NSString stringWithFormat:@"%ld",value]];
         self.viewModel.ledStatusModel.autoModel.Delay = value;
     }
 }
@@ -425,6 +435,7 @@
         if (!_datePickerViewStart) {
             _datePickerViewStart =  [[WSDatePickerView alloc] initWithDateStyle:DateStyleShowHourMinute scrollToDate:_dateStart CompleteBlock:^(NSDate *startDate) {
                 @strongify(self)
+                 self.viewModel.changeValue = YES;
                 self.dateStart = startDate;
                 NSString *date = [startDate stringWithFormat:@"HH:mm"];
                 NSLog(@"时间： %@",date);
@@ -437,12 +448,14 @@
             _datePickerViewStart.doneButtonColor = kMainColor;//确定按钮的颜色
             
         }
+        [_datePickerViewStart show];
     }
     else if(sender == _timeEndBtn){
-        if (!_datePickerViewStart) {
+        if (!_datePickerViewEnd) {
             @weakify(self)
-            _datePickerViewStart =  [[WSDatePickerView alloc] initWithDateStyle:DateStyleShowHourMinute scrollToDate:_dateEnd CompleteBlock:^(NSDate *startDate) {
+            _datePickerViewEnd =  [[WSDatePickerView alloc] initWithDateStyle:DateStyleShowHourMinute scrollToDate:_dateEnd CompleteBlock:^(NSDate *startDate) {
                 @strongify(self)
+                 self.viewModel.changeValue = YES;
                 self.dateEnd = startDate;
                 NSString *date = [startDate stringWithFormat:@"HH:mm"];
                 NSLog(@"时间： %@",date);
@@ -454,13 +467,15 @@
                 [btn setTitle:date forState:UIControlStateNormal];
                 
             }];
-            _datePickerViewStart.doneButtonColor = kMainColor;//确定按钮的颜色
+            _datePickerViewEnd.doneButtonColor = kMainColor;//确定按钮的颜色
             
         }
+        [_datePickerViewEnd show];
     }
 }
 
 -(void)selectChanged:(id)sender{
+    _viewModel.changeValue = YES;
     UISegmentedControl* control = (UISegmentedControl*)sender;
     if (sender == _modeSegment) {
         switch (control.selectedSegmentIndex) {

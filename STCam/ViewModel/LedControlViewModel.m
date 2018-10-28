@@ -14,6 +14,7 @@
 -(id)init{
     self = [super init];
     if (self) {
+        
     }
     return self;
 }
@@ -75,14 +76,14 @@
             if (self.ledStatusModel.Mode == 1) {
                 params = [NSString stringWithFormat:@"&Mode=1&Delay=%ld&Lux=%ld&Brightness=%ld",self.ledStatusModel.autoModel.Delay,self.ledStatusModel.autoModel.Lux,self.ledStatusModel.autoModel.Brightness];
             }
-            else if (self.ledStatusModel.Mode == 1) {
+            else if (self.ledStatusModel.Mode == 2) {
                 params = [NSString stringWithFormat:@"&Mode=2&Brightness=%ld",self.ledStatusModel.manualModel.Brightness];
             }
-            else if (self.ledStatusModel.Mode == 1) {
+            else if (self.ledStatusModel.Mode == 3) {
                 params = [NSString stringWithFormat:@"&Mode=3&Brightness=%ld&StartH=%ld&StartM=%ld&StopH=%ld&StopM=%ld",self.ledStatusModel.timerModel.Brightness,self.ledStatusModel.timerModel.StartH,self.ledStatusModel.timerModel.StartM,self.ledStatusModel.timerModel.StopH,self.ledStatusModel.timerModel.StopM];
                 
             }
-            else if (self.ledStatusModel.Mode == 1) {
+            else if (self.ledStatusModel.Mode == 4) {
                 params = [NSString stringWithFormat:@"&Mode=4&Brightness=%ld&Lux=%ld",self.ledStatusModel.d2dModel.Brightness,self.ledStatusModel.d2dModel.Lux];
             }
             url = [NSString stringWithFormat:@"%@%@",url,params];
