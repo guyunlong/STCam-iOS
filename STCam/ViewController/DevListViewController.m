@@ -45,6 +45,7 @@
     [self setTitle:@"title_main_dev_list".localizedString];
     [self initNav];
     
+    
 }
 
 /**
