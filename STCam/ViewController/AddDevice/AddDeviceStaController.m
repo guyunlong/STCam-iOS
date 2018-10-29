@@ -193,8 +193,15 @@
         NSString * url = [NSString stringWithFormat:@"http://%@:%ld/cfg1.cgi?User=%@&Psd=%@&MsgID=%d",model.IPUID,model.WebPort,model.User,model.Pwd,Msg_GetTime];
         [FFHttpTool GET:url parameters:nil success:^(id data){
             @strongify(self)
-            if (data) {
-               [subscriber sendNext:@1];//
+            if ([data isKindOfClass:[NSDictionary class]]) {
+                RetModel * model = [RetModel RetModelWithDict:data];
+                if (model.ret > 0) {
+                    [subscriber sendNext:@1];//
+                }
+                else{
+                    [subscriber sendNext:@0];//
+                }
+               
             }
             else{
                 [subscriber sendNext:@0];//

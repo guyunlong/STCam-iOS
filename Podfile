@@ -13,6 +13,7 @@ def shared_pods
     pod 'RealReachability'
     pod 'SGQRCode', '~> 2.5.4'
     pod 'SpinKit', '~> 1.1'
+    pod 'Bugly'
 end
 target 'STCam' do
     shared_pods

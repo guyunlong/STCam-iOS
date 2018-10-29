@@ -11,6 +11,7 @@
 #import "AccountManager.h"
 #import "DevListViewModel.h"
 #import "RealReachability.h"
+#import <Bugly/Bugly.h>
 // iOS10 注册 APNs 所需头文件
 #import <UserNotifications/UserNotifications.h>
 
@@ -51,6 +52,8 @@
     
     [application setApplicationIconBadgeNumber:0]; //清除角标
     
+    
+    [Bugly startWithAppId:@"b27ed1377f"];
     
     
     return YES;
