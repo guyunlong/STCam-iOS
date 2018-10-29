@@ -31,6 +31,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     _viewModel =[DevListViewModel sharedDevListViewModel];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshApDevList) name:AppDidBecomeActive object:nil];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -88,6 +92,12 @@
     
 }
 -(void)back{
+    DevListViewModel * viewModel = [DevListViewModel sharedDevListViewModel];
+    for (DeviceModel* model in viewModel.searchDeviceArray) {
+        [model threadDisconnect];
+    }
+    [viewModel.searchDeviceArray removeAllObjects];
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)refreshApDevList{

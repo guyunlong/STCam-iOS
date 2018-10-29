@@ -70,7 +70,6 @@ void callback_SearchDev(void *UserCustom, u32 SN, int DevType, char *DevModal, c
     free(utf8String);
     [node threadConnect];
     if ([myself isSearchDevExistInDeviceArray:node]){
-        [myself.searchDeviceArray addObject:node];
         NSInteger count  = [myself.searchDeviceArray count];
         [myself.searchDeviceArray insertObject:node atIndex:count];
     }

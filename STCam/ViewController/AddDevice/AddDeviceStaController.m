@@ -194,8 +194,8 @@
         [FFHttpTool GET:url parameters:nil success:^(id data){
             @strongify(self)
             if ([data isKindOfClass:[NSDictionary class]]) {
-                RetModel * model = [RetModel RetModelWithDict:data];
-                if (model.ret > 0) {
+                NSInteger time = [[data objectForKey:@"time"] integerValue];
+                if (time > 0) {
                     [subscriber sendNext:@1];//
                 }
                 else{

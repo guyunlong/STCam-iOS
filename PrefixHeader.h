@@ -47,6 +47,8 @@
  */
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
 
+#define AppDidBecomeActive @"applicationDidBecomeActive"
+
 #import "MBProgressHUD.h"
 #import "UIColor+Expanded.h"
 #import "UIImage+Common.h"

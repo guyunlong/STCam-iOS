@@ -11,6 +11,7 @@
 #import "AccountManager.h"
 #import "DevListViewModel.h"
 #import "RealReachability.h"
+#import "PrefixHeader.h"
 #import <Bugly/Bugly.h>
 // iOS10 注册 APNs 所需头文件
 #import <UserNotifications/UserNotifications.h>
@@ -103,6 +104,8 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backupFinish) name:CS_MANUAL_BACKUP_FINISHED object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:AppDidBecomeActive object:nil];
     
 }
 
