@@ -221,7 +221,9 @@
 -(void)loginClicked{
     @weakify(self)
     [[_viewModel racLogin] subscribeNext:^(id x) {
-        if ([x integerValue] == 1) {
+        if ([x integerValue] == 1)
+       // if(YES)
+        {
            //跳转到tab页面
             @strongify(self)
             MainTabController * mainTabController = [[MainTabController alloc] initWithUserMode:TUserMode_Login];

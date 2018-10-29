@@ -126,6 +126,7 @@
 
     
     // 下拉列表背景View
+    [_listView removeFromSuperview];
     _listView = [[UIView alloc] init];
     _listView.frame = CGRectMake(VIEW_X(self) , VIEW_Y_Bottom(self), VIEW_WIDTH(self),  0);
     _listView.clipsToBounds       = YES;
@@ -169,7 +170,7 @@
     [UIView animateWithDuration:AnimateTime animations:^{
         
         _arrowMark.transform = CGAffineTransformMakeRotation(M_PI);
-        _listView.frame  = CGRectMake(VIEW_X(_listView), VIEW_Y(_listView), VIEW_WIDTH(_listView), _rowHeight *_titleArr.count);
+        _listView.frame  = CGRectMake(VIEW_X(_listView), VIEW_Y(_listView), VIEW_WIDTH(_listView), _rowHeight *MIN(_titleArr.count, 10) );
         _tableView.frame = CGRectMake(0, 0, VIEW_WIDTH(_listView), VIEW_HEIGHT(_listView));
         
     }completion:^(BOOL finished) {
