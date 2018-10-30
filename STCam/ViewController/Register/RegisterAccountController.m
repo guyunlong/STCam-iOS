@@ -10,7 +10,10 @@
 #import "TPKeyboardAvoidingScrollView.h"
 #import "PrefixHeader.h"
 #import "BasicTextField.h"
-@interface RegisterAccountController ()
+#import "FFHttpTool.h"
+#import "RetModel.h"
+@interface RegisterAccountController (){
+}
 @property(nonatomic,strong)TPKeyboardAvoidingScrollView * mainScrollView;
 @property(nonatomic,strong)UIView * topBackView;
 @property (nonatomic, strong) BasicTextField *userField;
@@ -19,6 +22,9 @@
 @property (nonatomic, strong) BasicTextField *checkNumField;
 @property (nonatomic, strong) UIButton *getCheckNumButton;
 @property (nonatomic, strong) UIButton *registerButton;
+@property (nonatomic,strong) NSTimer *coolDownTimer;
+@property (nonatomic, assign) NSInteger code;
+@property (nonatomic, assign) NSInteger leftTime;
 @end
 @implementation RegisterAccountController
 
@@ -140,12 +146,88 @@
 }
 
 -(void)buttonClick:(id)sender{
+    NSString* email = [_userField text];
+    NSString*  password = [_pwdField text];
+    NSString*  confirmPassword = [_confirmPwdField text];
     if (sender == _registerButton) {
+        if ([email length] == 0) {
+            [self showHint:@"error_field_required".localizedString];
+            return;
+        }
+        else if([self validateEmail:email]){
+            [self showHint:@"error_invalid_email".localizedString];
+            return;
+        }
+        else if([password length] < 4 || [password length] > 16){
+            [self showHint:@"error_invalid_password".localizedString];
+            return;
+        }
+        else if([password isEqualToString:confirmPassword]){
+            [self showHint:@"error_invalid_confirm_password".localizedString];
+            return;
+        }
+//        subscription = ServerNetWork.getCommandApi()
+//        .app_user_reg_send_verifycode(email)
+//        .subscribeOn(Schedulers.io())
+//        .observeOn(AndroidSchedulers.mainThread())
+//        .subscribe(observer_getCheckNum);
+        
+        NSString * url = [NSString stringWithFormat:@"http://%@:%d/app_user_reg_send_verifycode.asp?email=%@",serverIP,ServerPort,email];
+        @weakify(self);
+        [FFHttpTool GET:url parameters:nil success:^(id data){
+            @strongify(self)
+            [self hideHud];
+            if ([data isKindOfClass:[NSDictionary class]]) {
+                RetModel * retModel = [RetModel RetModelWithDict:data];
+                if ([retModel ret] > RESULT_SUCCESS) {
+                    self.code = retModel.ret;
+                    [self.getCheckNumButton setEnabled:NO];
+                    [self coolDownTimer];
+                }
+                else if ([retModel ret] == RESULT_USER_EXISTS){
+                    [self showHint:@"action_get_register_failed1".localizedString];
+                }
+                else{
+                    [self showHint:@"action_get_register_failed0".localizedString];
+                }
+                
+            }
+            else{
+                [self showHint:@"action_get_register_failed0".localizedString];
+            }
+            
+        } failure:^(NSError * error){
+            [self showHint:@"action_get_register_failed0".localizedString];
+        }];
         
     }
     else if(sender == _getCheckNumButton){
         
     }
+}
+- (BOOL) validateEmail: (NSString *) strEmail {
+    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    return [emailTest evaluateWithObject:strEmail];
+}
+
+-(NSTimer*)coolDownTimer{
+    if (!_coolDownTimer) {
+        @weakify(self)
+        _coolDownTimer = [NSTimer scheduledTimerWithTimeInterval:1 repeats:YES block:^(NSTimer * _Nonnull timer) {
+            @strongify(self)
+            if (--self.leftTime >0) {
+                [self.getCheckNumButton setTitle:[NSString stringWithFormat:@"%lds",self.leftTime] forState:UIControlStateNormal];
+            }
+            else{
+                [self.coolDownTimer invalidate];
+                self.coolDownTimer = nil;
+                 [self.getCheckNumButton setTitle:@"action_get_verify_code".localizedString forState:UIControlStateNormal];
+                [self.getCheckNumButton setEnabled:YES];
+            }
+        }];
+    }
+    return _coolDownTimer;
 }
 
 
