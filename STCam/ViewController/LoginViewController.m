@@ -14,6 +14,7 @@
 #import "BEMCheckBox.h"
 #import "LoginViewModel.h"
 #import "MainTabController.h"
+#import "RegisterAccountController.h"
 #define checkboxwidth 16
 #define TextColor [UIColor colorWithHexString:@"0x535353"]
 #define TextFont [UIFont systemFontOfSize:14]
@@ -164,6 +165,9 @@
     [_mainScrollView addSubview:_visitorButton];
     
      [_visitorButton addTarget:self action:@selector(visitorModeClicked) forControlEvents:UIControlEventTouchUpInside];
+    
+    [_registerButton addTarget:self action:@selector(registerClicked) forControlEvents:UIControlEventTouchUpInside];
+    
 }
 
 - (void)addLoginBackgroundView:(CGFloat)y{
@@ -218,6 +222,11 @@
 }
 
 #pragma methods
+-(void)registerClicked{
+    
+    RegisterAccountController * ctl  = [[RegisterAccountController alloc] init];
+    [self.navigationController pushViewController:ctl animated:YES];
+}
 -(void)loginClicked{
     [self.view endEditing:YES];
     @weakify(self)

@@ -15,6 +15,7 @@
 		9D7E9D6E21882C3800DE53E2 /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D7E9D6D21882C3800DE53E2 /* UserModel.m */; };
 		9D7E9D7121883A4F00DE53E2 /* AboutAppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D7E9D7021883A4F00DE53E2 /* AboutAppController.m */; };
 		9D7E9D742188405500DE53E2 /* UpdateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D7E9D732188405500DE53E2 /* UpdateModel.m */; };
+		9D7E9D7821884E3100DE53E2 /* RegisterAccountController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D7E9D7721884E3100DE53E2 /* RegisterAccountController.m */; };
 		9DAC4BB82175C7EB00AC8916 /* DevShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC4BB72175C7EB00AC8916 /* DevShareModel.m */; };
 		9DBBD6762182B3E1003B4DB0 /* PlayBackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DBBD6722182B3E1003B4DB0 /* PlayBackController.m */; };
 		9DBBD6772182B3E1003B4DB0 /* RecordListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DBBD6732182B3E1003B4DB0 /* RecordListController.m */; };
@@ -231,6 +232,8 @@
 		9D7E9D7021883A4F00DE53E2 /* AboutAppController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AboutAppController.m; sourceTree = "<group>"; };
 		9D7E9D722188405500DE53E2 /* UpdateModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpdateModel.h; sourceTree = "<group>"; };
 		9D7E9D732188405500DE53E2 /* UpdateModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpdateModel.m; sourceTree = "<group>"; };
+		9D7E9D7621884E3100DE53E2 /* RegisterAccountController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegisterAccountController.h; sourceTree = "<group>"; };
+		9D7E9D7721884E3100DE53E2 /* RegisterAccountController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegisterAccountController.m; sourceTree = "<group>"; };
 		9DAC4BB62175C7EB00AC8916 /* DevShareModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DevShareModel.h; sourceTree = "<group>"; };
 		9DAC4BB72175C7EB00AC8916 /* DevShareModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DevShareModel.m; sourceTree = "<group>"; };
 		9DBBD6722182B3E1003B4DB0 /* PlayBackController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayBackController.m; sourceTree = "<group>"; };
@@ -807,6 +810,15 @@
 				9D7E9D7021883A4F00DE53E2 /* AboutAppController.m */,
 			);
 			path = SystemSetting;
+			sourceTree = "<group>";
+		};
+		9D7E9D7521884E1700DE53E2 /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				9D7E9D7621884E3100DE53E2 /* RegisterAccountController.h */,
+				9D7E9D7721884E3100DE53E2 /* RegisterAccountController.m */,
+			);
+			path = Register;
 			sourceTree = "<group>";
 		};
 		9DBBD6712182B3E1003B4DB0 /* playback */ = {
@@ -1442,6 +1454,7 @@
 		A4AE323B213426090036212B /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				9D7E9D7521884E1700DE53E2 /* Register */,
 				9D5C2F092188013200094FAB /* SystemSetting */,
 				9DBBD6822182B3F0003B4DB0 /* DeviceSetting */,
 				9DBBD6782182B3E7003B4DB0 /* Media */,
@@ -1906,6 +1919,7 @@
 				A4AE327121342EFD0036212B /* MBProgressHUD+Add.m in Sources */,
 				A4AE327021342EFD0036212B /* UIViewController+HUD.m in Sources */,
 				A4AE327221342EFD0036212B /* UISegmentedControl+Category.m in Sources */,
+				9D7E9D7821884E3100DE53E2 /* RegisterAccountController.m in Sources */,
 				A442C31B213199A100198910 /* thImg.c in Sources */,
 				A48C32FB217C716A00CDF2D2 /* CommonSwitchCell.m in Sources */,
 				A442C313213199A100198910 /* thVideoDec.c in Sources */,
