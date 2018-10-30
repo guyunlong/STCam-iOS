@@ -219,10 +219,11 @@
 
 #pragma methods
 -(void)loginClicked{
+    [self.view endEditing:YES];
     @weakify(self)
     [[_viewModel racLogin] subscribeNext:^(id x) {
         if ([x integerValue] == 1)
-       // if(YES)
+       //if(YES)
         {
            //跳转到tab页面
             @strongify(self)

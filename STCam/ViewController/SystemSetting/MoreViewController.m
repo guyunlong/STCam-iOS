@@ -11,6 +11,7 @@
 #import "AccountManager.h"
 #import "InfoModel.h"
 #import "CommonSettingCell.h"
+#import "ChangeAccountPwdController.h"
 @interface MoreViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property(nonatomic,strong)UIView * topBgView;//顶部蓝色背景
 @property(nonatomic,strong)UIImageView * appIconImageView;
@@ -18,13 +19,13 @@
 @property(nonatomic,strong)UITableView * mTableView;
 @property(nonatomic,strong)UIButton  * exitButton;//退出登录按钮
 @property(nonatomic,strong)NSMutableArray  * rowsArray;//列表数据
+@property(nonatomic,strong)UIAlertController * alarmSoundSheetController;
 @end
 
 @implementation MoreViewController
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES];
-    
     [_userLb setText:[AccountManager getUser]];
    
 }
@@ -57,7 +58,8 @@
         UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         
         tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        [tableView setUserInteractionEnabled:NO];
+        [tableView setUserInteractionEnabled:YES];
+        [tableView setScrollEnabled:NO];
         tableView.dataSource = self;
         tableView.delegate = self;
         tableView;
@@ -148,9 +150,47 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    NSInteger row = [indexPath row];
+    if (1 == row) {
+        ChangeAccountPwdController * ctl = [ChangeAccountPwdController new];
+        ctl.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:ctl animated:YES];
+    }
 //    MediaDetailController *ctl = [MediaDetailController new];
 //    [ctl setHidesBottomBarWhenPushed:YES];
 //    [ctl setModel:_devListViewModel.deviceArray[indexPath.row]];
 //    [self.navigationController pushViewController:ctl animated:YES];
 }
+
+#pragma getter
+
+-(UIAlertController*)alarmSoundSheetController{
+    if (!_alarmSoundSheetController) {
+        @weakify(self)
+        _alarmSoundSheetController = [UIAlertController alertControllerWithTitle:@"action_alarm_sound".localizedString message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+        
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"cancel".localizedString style:UIAlertActionStyleCancel handler:nil];
+        
+        
+        UIAlertAction *closeAction = [UIAlertAction actionWithTitle:@"action_close".localizedString style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            @strongify(self)
+           // [self changeSoundPlayConfig:NO];
+        }];
+        
+        UIAlertAction *openAction = [UIAlertAction actionWithTitle:@"action_open".localizedString style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            @strongify(self)
+           // [self changeSoundPlayConfig:YES];
+            
+        }];
+        
+        [_alarmSoundSheetController addAction:openAction];
+        [_alarmSoundSheetController addAction:closeAction];
+        [_alarmSoundSheetController addAction:cancelAction];
+        
+    }
+    return _alarmSoundSheetController;
+}
+
+
+
 @end

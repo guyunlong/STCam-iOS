@@ -186,8 +186,8 @@
 "string_pwd_span2"="密&#160;&#8195;&#160;码:";
 "string_new_pwd_title"="密     码";
 "string_confirm_pwd_title"="确认密码";
-"string_old_pwd"="原&#160;&#160;密&#160;&#160;码:";
-"string_new_pwd"="新&#160;&#160;密&#160;&#160;码:";
+"string_old_pwd"="原密码:";
+"string_new_pwd"="新密码:";
 "string_confirm_pwd_title2"="确认密码:";
 "string_input_old_password"="请输入原密码";
 "string_input_new_password"="请输入新密码";
