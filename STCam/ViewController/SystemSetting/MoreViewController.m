@@ -12,6 +12,10 @@
 #import "InfoModel.h"
 #import "CommonSettingCell.h"
 #import "ChangeAccountPwdController.h"
+#import "FFHttpTool.h"
+#import "UpdateModel.h"
+#import "AboutAppController.h"
+#import "ShareAccountManager.h"
 @interface MoreViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property(nonatomic,strong)UIView * topBgView;//顶部蓝色背景
 @property(nonatomic,strong)UIImageView * appIconImageView;
@@ -20,6 +24,7 @@
 @property(nonatomic,strong)UIButton  * exitButton;//退出登录按钮
 @property(nonatomic,strong)NSMutableArray  * rowsArray;//列表数据
 @property(nonatomic,strong)UIAlertController * alarmSoundSheetController;
+@property(nonatomic,strong)UIAlertController  *updateConfirmAlertController;//提示升级
 @end
 
 @implementation MoreViewController
@@ -100,6 +105,7 @@
     
     NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
     NSString *app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+    
     [model3 setInfo:app_Version];
     
     [_rowsArray addObject:model0];
@@ -156,13 +162,71 @@
         ctl.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:ctl animated:YES];
     }
+    else if(2 == row){
+        ShareAccountManager * ctl = [ShareAccountManager new];
+        ctl.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:ctl animated:YES];
+    }
+    else if(3 == row){
+        [self checkUpdateClicked];
+    }
+    else if(4 == row){
+        AboutAppController * ctl = [AboutAppController new];
+        ctl.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:ctl animated:YES];
+    }
 //    MediaDetailController *ctl = [MediaDetailController new];
 //    [ctl setHidesBottomBarWhenPushed:YES];
 //    [ctl setModel:_devListViewModel.deviceArray[indexPath.row]];
 //    [self.navigationController pushViewController:ctl animated:YES];
 }
+-(void)checkUpdateClicked{
+    [self showHudInView:self.view hint:nil];
+    NSString * url = [NSString stringWithFormat:@"http://%@:%d/app_upgrade_app_check.asp?apptype=1&ostype=ios",serverIP,ServerPort];
+    @weakify(self);
+    [FFHttpTool GET:url parameters:nil success:^(id data){
+        @strongify(self)
+        [self hideHud];
+        if ([data isKindOfClass:[NSDictionary class]]) {
+            UpdateModel * model = [UpdateModel UpdateModelWithDict:data];
+            if (model) {
+                if(![model checkIsLocalAlreadyNewerVersion]){
+                    [self presentViewController:self.updateConfirmAlertController animated:YES completion:nil];
+                }
+                else{
+                    [self showHint:@"string_current_newer".localizedString];
+                }
+            }
+        }
+        
+    } failure:^(NSError * error){
+        [self hideHud];
+    }];
+}
 
 #pragma getter
+
+-(UIAlertController*)updateConfirmAlertController{
+    if (!_updateConfirmAlertController) {
+        @weakify(self)
+        _updateConfirmAlertController = [UIAlertController alertControllerWithTitle:@"string_current_older".localizedString message:nil preferredStyle:UIAlertControllerStyleAlert];
+        
+        
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"cancel".localizedString style:UIAlertActionStyleCancel handler:nil];
+        
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK".localizedString style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            @strongify(self)
+            
+        }];
+        
+        [_updateConfirmAlertController addAction:cancelAction];
+        [_updateConfirmAlertController addAction:okAction];
+        
+    }
+    return _updateConfirmAlertController;
+}
+
+
 
 -(UIAlertController*)alarmSoundSheetController{
     if (!_alarmSoundSheetController) {

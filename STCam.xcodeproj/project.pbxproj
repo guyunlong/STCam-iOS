@@ -13,6 +13,8 @@
 		9D5C2F0C2188015700094FAB /* ChangeAccountPwdController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D5C2F0B2188015700094FAB /* ChangeAccountPwdController.m */; };
 		9D7E9D6B21882B3700DE53E2 /* ShareAccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D7E9D6A21882B3700DE53E2 /* ShareAccountManager.m */; };
 		9D7E9D6E21882C3800DE53E2 /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D7E9D6D21882C3800DE53E2 /* UserModel.m */; };
+		9D7E9D7121883A4F00DE53E2 /* AboutAppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D7E9D7021883A4F00DE53E2 /* AboutAppController.m */; };
+		9D7E9D742188405500DE53E2 /* UpdateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D7E9D732188405500DE53E2 /* UpdateModel.m */; };
 		9DAC4BB82175C7EB00AC8916 /* DevShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC4BB72175C7EB00AC8916 /* DevShareModel.m */; };
 		9DBBD6762182B3E1003B4DB0 /* PlayBackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DBBD6722182B3E1003B4DB0 /* PlayBackController.m */; };
 		9DBBD6772182B3E1003B4DB0 /* RecordListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DBBD6732182B3E1003B4DB0 /* RecordListController.m */; };
@@ -225,6 +227,10 @@
 		9D7E9D6A21882B3700DE53E2 /* ShareAccountManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareAccountManager.m; sourceTree = "<group>"; };
 		9D7E9D6C21882C3800DE53E2 /* UserModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserModel.h; sourceTree = "<group>"; };
 		9D7E9D6D21882C3800DE53E2 /* UserModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserModel.m; sourceTree = "<group>"; };
+		9D7E9D6F21883A4F00DE53E2 /* AboutAppController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AboutAppController.h; sourceTree = "<group>"; };
+		9D7E9D7021883A4F00DE53E2 /* AboutAppController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AboutAppController.m; sourceTree = "<group>"; };
+		9D7E9D722188405500DE53E2 /* UpdateModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpdateModel.h; sourceTree = "<group>"; };
+		9D7E9D732188405500DE53E2 /* UpdateModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpdateModel.m; sourceTree = "<group>"; };
 		9DAC4BB62175C7EB00AC8916 /* DevShareModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DevShareModel.h; sourceTree = "<group>"; };
 		9DAC4BB72175C7EB00AC8916 /* DevShareModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DevShareModel.m; sourceTree = "<group>"; };
 		9DBBD6722182B3E1003B4DB0 /* PlayBackController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayBackController.m; sourceTree = "<group>"; };
@@ -797,6 +803,8 @@
 				9D5C2F0B2188015700094FAB /* ChangeAccountPwdController.m */,
 				9D7E9D6921882B3700DE53E2 /* ShareAccountManager.h */,
 				9D7E9D6A21882B3700DE53E2 /* ShareAccountManager.m */,
+				9D7E9D6F21883A4F00DE53E2 /* AboutAppController.h */,
+				9D7E9D7021883A4F00DE53E2 /* AboutAppController.m */,
 			);
 			path = SystemSetting;
 			sourceTree = "<group>";
@@ -925,6 +933,8 @@
 				A4B25F132184A9EE00D69521 /* LedStatusModel.m */,
 				9D7E9D6C21882C3800DE53E2 /* UserModel.h */,
 				9D7E9D6D21882C3800DE53E2 /* UserModel.m */,
+				9D7E9D722188405500DE53E2 /* UpdateModel.h */,
+				9D7E9D732188405500DE53E2 /* UpdateModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1883,7 +1893,9 @@
 				9DBBD68D2182B3F0003B4DB0 /* SDVolumeManagerController.m in Sources */,
 				A48C32E3217C24EF00CDF2D2 /* PushSettingModel.m in Sources */,
 				A4BC3656216F959B00FDCBF5 /* AlarmListCell.m in Sources */,
+				9D7E9D7121883A4F00DE53E2 /* AboutAppController.m in Sources */,
 				9DBBD6802182B3E7003B4DB0 /* MediaViewController.m in Sources */,
+				9D7E9D742188405500DE53E2 /* UpdateModel.m in Sources */,
 				A439D831216506E200FCE7FE /* LoginViewModel.m in Sources */,
 				A4394588217358470047E00C /* InfoModel.m in Sources */,
 				A442C2AF213199A100198910 /* av_Queue.c in Sources */,
