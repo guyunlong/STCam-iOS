@@ -10,6 +10,7 @@
 #define kAccountUser @"AccountUser"
 #define kAccountPassword @"AccountPassword"
 #define kAccountRemember @"AccountRemember"
+#define kDeviceToken @"deviceToken"
 @implementation AccountManager
 + (AccountManager *)sharedManager{
     static AccountManager *sharedManager = nil;
@@ -18,6 +19,26 @@
         sharedManager = [[self alloc] init];
     });
     return sharedManager;
+}
+-(id)init{
+    self = [super init];
+    if (self) {
+        NSUserDefaults * userDefault = [NSUserDefaults standardUserDefaults];
+        NSString * deviceToken =[userDefault objectForKey:kDeviceToken];
+        if (deviceToken) {
+            _deviceToken = deviceToken;
+        }
+    }
+    return self;
+    
+}
+-(void)setDeviceToken:(NSString *)deviceToken{
+    if (deviceToken) {
+        NSUserDefaults * userDefault = [NSUserDefaults standardUserDefaults];
+        [userDefault setObject:deviceToken forKey:kDeviceToken];
+        _deviceToken = deviceToken;
+    }
+    
 }
 +(void)saveAccount:(NSString*)user pwd:(NSString*)pwd remember:(BOOL)remember{
     NSUserDefaults * userDefault = [NSUserDefaults standardUserDefaults];

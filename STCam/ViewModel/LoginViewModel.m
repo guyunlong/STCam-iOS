@@ -48,7 +48,7 @@
 //        public static final int mbtype = 1;//手机类型 Android=1 IPhone=2
 //        public static final int apptype = 0;//APP类型，IPCAM=0
 //        public static final int pushtype = 0;//推送服务商 极光(jPush=0)  google=1
-        NSString * url = [NSString stringWithFormat:@"http://%@:%d/app_user_login.asp?user=%@&psd=%@&tokenid=%@&mbtype=2&apptype=0&pushtype=0&isforce=%d",serverIP,ServerPort,self.user,self.password,[AccountManager sharedManager].deviceToken,forceLogin];
+        NSString * url = [NSString stringWithFormat:@"http://%@:%d/app_user_login.asp?user=%@&psd=%@&tokenid=%@&mbtype=2&apptype=0&pushtype=0&isforce=%d",serverIP,ServerPort,self.user,self.password,[[AccountManager sharedManager] deviceToken],forceLogin];
         [FFHttpTool GET:url parameters:nil success:^(id data){
             @strongify(self)
             NSLog(@"view model response data is %@",data);
