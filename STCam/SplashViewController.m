@@ -13,8 +13,11 @@
 #import "UIImage+Common.h"
 #import "PrefixHeader.h"
 #import "libthSDK.h"
+#import "LoginViewModel.h"
+#import "AccountManager.h"
+#import "MainTabController.h"
 @interface SplashViewController ()
-@property(nonatomic,strong)DevListViewModel * viewModel;
+@property(nonatomic,strong)LoginViewModel * viewModel;
 @property(nonatomic,strong)UILabel * versionLb;
 @end
 
@@ -48,14 +51,45 @@
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     //跳转到LoginViewController
+    NSString* user = [AccountManager getUser];
+    NSString* password = [AccountManager getPassword];
+    BOOL remember =[AccountManager getIsRemember];
+    if ([user length] > 0 && [password length] > 0 && remember) {
+        _viewModel =[LoginViewModel new];
+        @weakify(self);
+        [[_viewModel racLogin] subscribeNext:^(id x) {
+            if ([x integerValue] == 1)
+                //if(YES)
+            {
+                //跳转到tab页面
+                @strongify(self)
+                MainTabController * mainTabController = [[MainTabController alloc] initWithUserMode:TUserMode_Login];
+                [self presentViewController:mainTabController animated:YES completion:^{
+                    
+                }];
+            }
+            else{
+                @strongify(self)
+                [self stepToLoginView];
+                
+            }
+        }];
+    }
+    else{
+        @weakify(self)
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            @strongify(self)
+            [self stepToLoginView];
+        });
+    }
     
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        LoginViewController * ctl  = [[LoginViewController alloc] init];
-        [self.navigationController pushViewController:ctl animated:YES];
-    });
     
-    
+}
+
+-(void)stepToLoginView{
+    LoginViewController * ctl  = [[LoginViewController alloc] init];
+    [self.navigationController pushViewController:ctl animated:YES];
 }
 
 
