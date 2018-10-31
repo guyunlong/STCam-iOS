@@ -30,6 +30,7 @@
 }
 -(void)loadView{
     [super loadView];
+    [self initNav];
     [self.view setBackgroundColor:[UIColor colorWithHexString:@"0xf0f0f0"]];
     
     CGFloat y = 2*kPadding;
@@ -57,6 +58,7 @@
     [_checkUpdateButton setAppThemeType:ButtonStyleHollow];
     [_checkUpdateButton setTitle:@"action_check_update".localizedString forState:UIControlStateNormal];
     [_checkUpdateButton addTarget:self action:@selector(checkUpdateClicked) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_checkUpdateButton];
     
     
 }

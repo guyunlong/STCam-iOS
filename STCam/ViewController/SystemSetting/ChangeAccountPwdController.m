@@ -130,7 +130,7 @@
     NSString *PasswordOld = [_oriPwdField text];
     NSString *PasswordNew = [_newerPwdField text];
     NSString *PasswordNew1 = [_confirmPwdField text];
-    if (![PasswordNew isEqualToString:[AccountManager getPassword]]) {
+    if (![PasswordOld isEqualToString:[AccountManager getPassword]]) {
         [self showHint:@"old_password_wrong".localizedString];
         return;
     }
@@ -150,7 +150,7 @@
     [self showHudInView:self.view hint:nil];
     
   
-    NSString * url = [NSString stringWithFormat:@"http://%@:%d/app_user_changepsd.asp?user=%@&psd=%@tokenid=%@&newpsd=%@",serverIP,ServerPort,[AccountManager getUser],[AccountManager getPassword],[[AccountManager sharedManager] deviceToken],PasswordNew];
+    NSString * url = [NSString stringWithFormat:@"http://%@:%d/app_user_changepsd.asp?user=%@&psd=%@&tokenid=%@&newpsd=%@",serverIP,ServerPort,[AccountManager getUser],[AccountManager getPassword],[[AccountManager sharedManager] deviceToken],PasswordNew];
     @weakify(self);
     [FFHttpTool GET:url parameters:nil success:^(id data){
         @strongify(self)
