@@ -16,6 +16,8 @@
 #import "UpdateModel.h"
 #import "AboutAppController.h"
 #import "ShareAccountManager.h"
+#import "LoginViewController.h"
+#import "STNavigationController.h"
 @interface MoreViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property(nonatomic,strong)UIView * topBgView;//顶部蓝色背景
 @property(nonatomic,strong)UIImageView * appIconImageView;
@@ -25,6 +27,7 @@
 @property(nonatomic,strong)NSMutableArray  * rowsArray;//列表数据
 @property(nonatomic,strong)UIAlertController * alarmSoundSheetController;
 @property(nonatomic,strong)UIAlertController  *updateConfirmAlertController;//提示升级
+@property(nonatomic,strong)UIAlertController  *existAlertController;//退出登录
 @end
 
 @implementation MoreViewController
@@ -78,6 +81,7 @@
     [_exitButton setTitle:@"action_exit".localizedString forState:UIControlStateNormal];
     [_exitButton setAppThemeType:ButtonStyleStyleAppTheme];
     [self.view addSubview:_exitButton];
+    [_exitButton addTarget:self action:@selector(existButtonClicked) forControlEvents:UIControlEventTouchUpInside];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -180,6 +184,10 @@
 //    [ctl setModel:_devListViewModel.deviceArray[indexPath.row]];
 //    [self.navigationController pushViewController:ctl animated:YES];
 }
+
+-(void)existButtonClicked{
+    [self presentViewController:self.existAlertController animated:YES completion:nil];
+}
 -(void)checkUpdateClicked{
     [self showHudInView:self.view hint:nil];
     NSString * url = [NSString stringWithFormat:@"http://%@:%d/app_upgrade_app_check.asp?apptype=1&ostype=ios",serverIP,ServerPort];
@@ -254,6 +262,30 @@
     }
     return _alarmSoundSheetController;
 }
+-(UIAlertController*)existAlertController{
+    if (!_existAlertController) {
+        @weakify(self)
+        _existAlertController = [UIAlertController alertControllerWithTitle:@"action_exit_ask".localizedString message:nil preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"action_cancel".localizedString style:UIAlertActionStyleCancel handler:nil];
+        
+        
+        UIAlertAction *existction = [UIAlertAction actionWithTitle:@"action_ok".localizedString style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            @strongify(self)
+            [AccountManager saveRemember:NO];
+            
+             LoginViewController * ctl  = [[LoginViewController alloc] init];
+            STNavigationController *loginNav =   [[STNavigationController alloc] initWithRootViewController:ctl];
+            [self presentViewController:loginNav animated:YES completion:nil];
+            
+        }];
+        [_existAlertController addAction:existction];
+        [_existAlertController addAction:cancelAction];
+        
+    }
+    return _existAlertController;
+}
+
 
 
 
