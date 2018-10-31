@@ -7,7 +7,11 @@
 //
 
 #import "FFHttpTool.h"
-
+#import "RetModel.h"
+#import "PrefixHeader.h"
+#import "UIViewController+Utils.h"
+#import "LoginViewController.h"
+#import "STNavigationController.h"
 @implementation FFHttpTool
 + (void)GET:(NSString *)URLString parameters:(id)parameters success:(void (^)(id))success failure:(void (^)(NSError *))failure {
     
@@ -40,6 +44,22 @@
                 
                 if (uft8Data) {
                     id dictionary = [NSJSONSerialization JSONObjectWithData:uft8Data options:NSJSONReadingMutableLeaves error:&error];
+                    if ([dictionary isKindOfClass:[NSDictionary class]]) {
+                        RetModel * model = [RetModel RetModelWithDict:dictionary];
+                        //if (model.ret == RESULT_USER_LOGOUT)
+                        {
+                            //当前页面如果是登录页面，弹出强制登录框，如果不是登录页面，跳转到登录页面，弹出强制登录框
+                            UIViewController * ctl  =[UIViewController currentViewController];
+                            if (![ctl isKindOfClass:[LoginViewController class]]) {
+                                NSLog(@"current view controller is LoginViewController");
+                                LoginViewController * loginCtl  = [[LoginViewController alloc] init];
+                                [loginCtl setLogout:YES];
+                                STNavigationController *loginNav =   [[STNavigationController alloc] initWithRootViewController:loginCtl];
+                                [ctl presentViewController:loginNav animated:YES completion:nil];
+                                
+                            }
+                        }
+                    }
                     success(dictionary);
                 }
                 else{

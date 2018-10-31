@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 #import "RootViewController.h"
 @interface LoginViewController : RootViewController
-
+@property(nonatomic,assign)BOOL logout;
 @end

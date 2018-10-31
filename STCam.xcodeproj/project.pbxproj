@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		484F64620EFBEC733F2D85B1 /* libPods-STCam.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C18EA7F117ED0291D64659B7 /* libPods-STCam.a */; };
 		9D07DF35218948C5006DDBB8 /* ForgetPwdControlle.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D07DF33218948C4006DDBB8 /* ForgetPwdControlle.m */; };
+		9D07DF3821895B8F006DDBB8 /* UIViewController+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D07DF3721895B8F006DDBB8 /* UIViewController+Utils.m */; };
 		9D47FCC321819BC500E7E8DB /* dropdownMenu_cornerIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D47FCC021819BC500E7E8DB /* dropdownMenu_cornerIcon.png */; };
 		9D47FCC421819BC500E7E8DB /* LMJDropdownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D47FCC121819BC500E7E8DB /* LMJDropdownMenu.m */; };
 		9D5C2F0C2188015700094FAB /* ChangeAccountPwdController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D5C2F0B2188015700094FAB /* ChangeAccountPwdController.m */; };
@@ -222,6 +223,8 @@
 		02368DE58D9110FCE2D67420 /* Pods-STCam.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-STCam.release.xcconfig"; path = "Pods/Target Support Files/Pods-STCam/Pods-STCam.release.xcconfig"; sourceTree = "<group>"; };
 		9D07DF33218948C4006DDBB8 /* ForgetPwdControlle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPwdControlle.m; sourceTree = "<group>"; };
 		9D07DF34218948C4006DDBB8 /* ForgetPwdController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetPwdController.h; sourceTree = "<group>"; };
+		9D07DF3621895B8E006DDBB8 /* UIViewController+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Utils.h"; sourceTree = "<group>"; };
+		9D07DF3721895B8F006DDBB8 /* UIViewController+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Utils.m"; sourceTree = "<group>"; };
 		9D47FCC021819BC500E7E8DB /* dropdownMenu_cornerIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dropdownMenu_cornerIcon.png; sourceTree = "<group>"; };
 		9D47FCC121819BC500E7E8DB /* LMJDropdownMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMJDropdownMenu.m; sourceTree = "<group>"; };
 		9D47FCC221819BC500E7E8DB /* LMJDropdownMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMJDropdownMenu.h; sourceTree = "<group>"; };
@@ -1530,6 +1533,8 @@
 				A4AE326D21342EFD0036212B /* NSDate+convenience.m */,
 				A470AA8F2163BE050068AA80 /* UIButton+Common.h */,
 				A470AA902163BE050068AA80 /* UIButton+Common.m */,
+				9D07DF3621895B8E006DDBB8 /* UIViewController+Utils.h */,
+				9D07DF3721895B8F006DDBB8 /* UIViewController+Utils.m */,
 			);
 			path = OC_Category;
 			sourceTree = "<group>";
@@ -1852,6 +1857,7 @@
 				A442C2B2213199A100198910 /* audio_g711.c in Sources */,
 				A452A9AF21762C4500E40A5F /* MBProgressHUD+SGQRCode.m in Sources */,
 				A4CFFE6E2168656000A93B72 /* LiveVidController.m in Sources */,
+				9D07DF3821895B8F006DDBB8 /* UIViewController+Utils.m in Sources */,
 				A48C32F6217C713600CDF2D2 /* CommonInfoCell.m in Sources */,
 				A45934E32164A5FF0018A61B /* LoginBackgroundView.m in Sources */,
 				9DBBD6A32182F0A2003B4DB0 /* STSlider.m in Sources */,
