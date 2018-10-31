@@ -47,7 +47,7 @@ DEPENDENCIES:
   - YBImageBrowser
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - BEMCheckBox
     - Bugly
     - JCore
@@ -83,4 +83,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 220da32c7c42caceb6c67cd4aac975d92ef7e3f8
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.3

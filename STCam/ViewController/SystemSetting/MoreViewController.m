@@ -18,6 +18,7 @@
 #import "ShareAccountManager.h"
 #import "LoginViewController.h"
 #import "STNavigationController.h"
+#import "DevListViewModel.h"
 @interface MoreViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property(nonatomic,strong)UIView * topBgView;//顶部蓝色背景
 @property(nonatomic,strong)UIImageView * appIconImageView;
@@ -273,7 +274,11 @@
         UIAlertAction *existction = [UIAlertAction actionWithTitle:@"action_ok".localizedString style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             @strongify(self)
             [AccountManager saveRemember:NO];
-            
+            DevListViewModel * viewModel = [DevListViewModel sharedDevListViewModel];
+            for (DeviceModel * model in viewModel.deviceArray) {
+                [model threadDisconnect];
+            }
+            [viewModel.deviceArray removeAllObjects];
              LoginViewController * ctl  = [[LoginViewController alloc] init];
             STNavigationController *loginNav =   [[STNavigationController alloc] initWithRootViewController:ctl];
             [self presentViewController:loginNav animated:YES completion:nil];

@@ -73,11 +73,11 @@
     });
     if (_userMode == TUserMode_Login) {
         self.viewControllers = @[_devListNav,_mediaNav,_alarmListNav,_moreNav];
-        self.tabBar.hidden = NO;
+       // self.tabBar.hidden = NO;
     }
     else{
-        self.viewControllers = @[_devListNav];
-        self.tabBar.hidden = YES;
+        self.viewControllers = @[_devListNav,_mediaNav];
+       // self.tabBar.hidden = YES;
     }
     
 }

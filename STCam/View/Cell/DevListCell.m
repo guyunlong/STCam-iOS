@@ -11,6 +11,7 @@
 #import <Masonry/Masonry.h>
 #import "MASConstraint.h"
 #import "STFileManager.h"
+#import "DevListViewModel.h"
 #define kShadowRadius 20
 @interface DevListCell()
 @property(nonatomic,weak)IBOutlet UIView * backView;
@@ -130,6 +131,10 @@
             [_snapImageView setImage:[UIImage imageNamed:@"imagethumb"]];
         }
         
+        DevListViewModel * viewModel = [DevListViewModel sharedDevListViewModel];
+        if(viewModel.userMode == TUserMode_Visitor){
+            [_shareBtn setHidden:YES];
+        }
         
     }
     

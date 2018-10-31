@@ -211,6 +211,11 @@
             [self.navigationController pushViewController:ctl animated:YES];
         }
         else if(type == DeviceListBtnType_Share){
+            DeviceModel * model =self.viewModel.deviceArray[indexPath.row];
+            if(!model.IsShare){
+                [self showHint:@"string_device_is_share".localizedString];
+                return;
+            }
             
             GenerateShareQRCodeController * ctl = [GenerateShareQRCodeController new];
             [ctl setModel:self.viewModel.deviceArray[indexPath.row]];
@@ -218,6 +223,11 @@
             [self.navigationController pushViewController:ctl animated:YES];
         }
         else if(type == DeviceListBtnType_Playback){
+            DeviceModel * model = self.viewModel.deviceArray[indexPath.row];
+            if(!model.IsHistory){
+                [self showHint:@"string_no_record_permisson".localizedString];
+                return;
+            }
             if (!blockModel.ExistSD) {
                 [self showHint:@"action_not_exist_sd".localizedString];
                 return;

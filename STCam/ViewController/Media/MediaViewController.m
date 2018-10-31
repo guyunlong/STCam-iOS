@@ -70,6 +70,7 @@
     
     DevMediaCell * cell = [DevMediaCell DevMediaCellWith:tableView indexPath:indexPath];
     [cell setModel:_devListViewModel.deviceArray[indexPath.row]];
+    [cell setFrame:CGRectMake(0, 0, kScreenWidth, [DevMediaCell cellHeight])];
     [tableView addLineforPlainCell:cell forRowAtIndexPath:indexPath withLeftSpace:0];
     return cell;
 }

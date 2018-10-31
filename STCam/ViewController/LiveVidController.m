@@ -301,6 +301,16 @@
     [_speechBtn_land setHidden:NO];
     [_snapShotBtn_land setHidden:NO];
     
+    
+  //  UserMode_Visitor
+    DevListViewModel * viewModel = [DevListViewModel sharedDevListViewModel];
+    if(viewModel.userMode == TUserMode_Login && !_viewModel.model.IsVideo){
+        [_recordBtn_land setHidden:YES];
+        [_speechBtn_land setHidden:YES];
+    }
+    if(viewModel.userMode == TUserMode_Login && !_viewModel.model.IsControl){
+        [_ledBtn_land setHidden:YES];
+    }
    
     
     [_hdBtn_land setSelected:1-_viewModel.sub];
@@ -329,6 +339,16 @@
     [_hdBtn setSelected:1-_viewModel.sub];
     
     isLandscape = NO;
+    
+    
+    DevListViewModel * viewModel = [DevListViewModel sharedDevListViewModel];
+    if(viewModel.userMode == TUserMode_Login && !_viewModel.model.IsVideo){
+        [_recordBtn setHidden:YES];
+        [_speechBtn setHidden:YES];
+    }
+    if(viewModel.userMode == TUserMode_Login && !_viewModel.model.IsControl){
+        [_ledBtn setHidden:YES];
+    }
     
     
 }

@@ -35,6 +35,11 @@
     // Do any additional setup after loading the view.
     [self initValue];
     [self.mTableView reloadData];
+     DevListViewModel * viewModel = [DevListViewModel sharedDevListViewModel];
+    if (viewModel.userMode == TUserMode_Visitor)
+    {
+        [_deleteButton setHidden:YES];
+    }
 }
 
 -(void)initValue{
@@ -262,6 +267,15 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSInteger row = indexPath.row;
+    
+    DevListViewModel * viewModel = [DevListViewModel sharedDevListViewModel];
+    if (viewModel.userMode == TUserMode_Visitor)
+    {
+        [self showHint:@"string_mode_visitor".localizedString];
+        return;
+    }
+    
+    
     if(0 == row || 1 == row || 2 == row || 3 == row || 4 == row ){
         if (![_viewModel.model IsConnect])
         {
