@@ -252,7 +252,7 @@
                 
             }];
         }
-        else if([x integerValue] == RESULT_USER_LOGOUT){
+        else if([x integerValue] == RESULT_USER_LOGOUT || [x integerValue] == RESULT_USER_LOGINED){
             //
             [self presentViewController:self.forceLoginAlertController animated:YES completion:nil];
         }
@@ -274,7 +274,7 @@
                 
             }];
         }
-        else if([x integerValue] == RESULT_USER_LOGOUT){
+        else if([x integerValue] == RESULT_USER_LOGOUT || [x integerValue] == RESULT_USER_LOGINED){
             //
             [self presentViewController:self.forceLoginAlertController animated:YES completion:nil];
         }

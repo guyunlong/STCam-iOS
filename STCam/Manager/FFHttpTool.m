@@ -46,7 +46,7 @@
                     id dictionary = [NSJSONSerialization JSONObjectWithData:uft8Data options:NSJSONReadingMutableLeaves error:&error];
                     if ([dictionary isKindOfClass:[NSDictionary class]]) {
                         RetModel * model = [RetModel RetModelWithDict:dictionary];
-                        if (model.ret == RESULT_USER_LOGOUT)
+                        if (model.ret == RESULT_USER_LOGOUT || model.ret == RESULT_USER_LOGINED)
                         {
                             //当前页面如果是登录页面，弹出强制登录框，如果不是登录页面，跳转到登录页面，弹出强制登录框
                             UIViewController * ctl  =[UIViewController currentViewController];
