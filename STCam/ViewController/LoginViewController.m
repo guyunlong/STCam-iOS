@@ -15,6 +15,7 @@
 #import "LoginViewModel.h"
 #import "MainTabController.h"
 #import "RegisterAccountController.h"
+#import "ForgetPwdController.h"
 #define checkboxwidth 16
 #define TextColor [UIColor colorWithHexString:@"0x535353"]
 #define TextFont [UIFont systemFontOfSize:14]
@@ -167,6 +168,7 @@
      [_visitorButton addTarget:self action:@selector(visitorModeClicked) forControlEvents:UIControlEventTouchUpInside];
     
     [_registerButton addTarget:self action:@selector(registerClicked) forControlEvents:UIControlEventTouchUpInside];
+    [_forgotButton addTarget:self action:@selector(forgotClicked) forControlEvents:UIControlEventTouchUpInside];
     
 }
 
@@ -225,6 +227,10 @@
 -(void)registerClicked{
     
     RegisterAccountController * ctl  = [[RegisterAccountController alloc] init];
+    [self.navigationController pushViewController:ctl animated:YES];
+}
+-(void)forgotClicked{
+    ForgetPwdController * ctl  = [[ForgetPwdController alloc] init];
     [self.navigationController pushViewController:ctl animated:YES];
 }
 -(void)loginClicked{

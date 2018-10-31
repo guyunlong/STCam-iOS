@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		484F64620EFBEC733F2D85B1 /* libPods-STCam.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C18EA7F117ED0291D64659B7 /* libPods-STCam.a */; };
+		9D07DF35218948C5006DDBB8 /* ForgetPwdControlle.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D07DF33218948C4006DDBB8 /* ForgetPwdControlle.m */; };
 		9D47FCC321819BC500E7E8DB /* dropdownMenu_cornerIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D47FCC021819BC500E7E8DB /* dropdownMenu_cornerIcon.png */; };
 		9D47FCC421819BC500E7E8DB /* LMJDropdownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D47FCC121819BC500E7E8DB /* LMJDropdownMenu.m */; };
 		9D5C2F0C2188015700094FAB /* ChangeAccountPwdController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D5C2F0B2188015700094FAB /* ChangeAccountPwdController.m */; };
@@ -219,6 +220,8 @@
 
 /* Begin PBXFileReference section */
 		02368DE58D9110FCE2D67420 /* Pods-STCam.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-STCam.release.xcconfig"; path = "Pods/Target Support Files/Pods-STCam/Pods-STCam.release.xcconfig"; sourceTree = "<group>"; };
+		9D07DF33218948C4006DDBB8 /* ForgetPwdControlle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPwdControlle.m; sourceTree = "<group>"; };
+		9D07DF34218948C4006DDBB8 /* ForgetPwdController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetPwdController.h; sourceTree = "<group>"; };
 		9D47FCC021819BC500E7E8DB /* dropdownMenu_cornerIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dropdownMenu_cornerIcon.png; sourceTree = "<group>"; };
 		9D47FCC121819BC500E7E8DB /* LMJDropdownMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMJDropdownMenu.m; sourceTree = "<group>"; };
 		9D47FCC221819BC500E7E8DB /* LMJDropdownMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMJDropdownMenu.h; sourceTree = "<group>"; };
@@ -817,6 +820,8 @@
 			children = (
 				9D7E9D7621884E3100DE53E2 /* RegisterAccountController.h */,
 				9D7E9D7721884E3100DE53E2 /* RegisterAccountController.m */,
+				9D07DF34218948C4006DDBB8 /* ForgetPwdController.h */,
+				9D07DF33218948C4006DDBB8 /* ForgetPwdControlle.m */,
 			);
 			path = Register;
 			sourceTree = "<group>";
@@ -1852,6 +1857,7 @@
 				9DBBD6A32182F0A2003B4DB0 /* STSlider.m in Sources */,
 				A47041B8216E1F59007163C8 /* STMediaModel.m in Sources */,
 				A442C2A8213199A100198910 /* Makefile in Sources */,
+				9D07DF35218948C5006DDBB8 /* ForgetPwdControlle.m in Sources */,
 				9DBBD69E2182EB45003B4DB0 /* WSDatePickerView.m in Sources */,
 				9DBBD6762182B3E1003B4DB0 /* PlayBackController.m in Sources */,
 				9DE7648821806FD500373090 /* AddDeviceSmartLinkNextController.m in Sources */,

@@ -6,13 +6,13 @@
 //  Copyright © 2018 South. All rights reserved.
 //
 
-#import "RegisterAccountController.h"
+#import "ForgetPwdController.h"
 #import "TPKeyboardAvoidingScrollView.h"
 #import "PrefixHeader.h"
 #import "BasicTextField.h"
 #import "FFHttpTool.h"
 #import "RetModel.h"
-@interface RegisterAccountController (){
+@interface ForgetPwdController (){
 }
 @property(nonatomic,strong)TPKeyboardAvoidingScrollView * mainScrollView;
 @property(nonatomic,strong)UIView * topBackView;
@@ -21,15 +21,15 @@
 @property (nonatomic, strong) BasicTextField *confirmPwdField;
 @property (nonatomic, strong) BasicTextField *checkNumField;
 @property (nonatomic, strong) UIButton *getCheckNumButton;
-@property (nonatomic, strong) UIButton *registerButton;
+@property (nonatomic, strong) UIButton *forgotButton;
 @property (nonatomic,strong) NSTimer *coolDownTimer;
 @property (nonatomic, assign) NSInteger code;
 @property (nonatomic, assign) NSInteger leftTime;
 @end
-@implementation RegisterAccountController
+@implementation ForgetPwdController
 
 -(void)initNav{
-    [self setTitle:@"action_Register".localizedString];
+    [self setTitle:@"action_Forgetpwd".localizedString];
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     backButton.frame = CGRectMake(0, 0, 28, 28);
     [backButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
@@ -135,16 +135,16 @@
     [self.topBackView  addSubview:_getCheckNumButton];
     /******************registerButton*********************/
     y = CGRectGetMaxY(_topBackView.frame) + 3*kPadding;
-    _registerButton = [[UIButton alloc] initWithFrame:CGRectMake(2*kPadding, y, kScreenWidth-4*kPadding, kButtonHeight)];
-    [_registerButton setTitle:@"action_Register".localizedString forState:UIControlStateNormal];
-    [_registerButton setAppThemeType:ButtonStyleStyleAppTheme];
-    [self.view addSubview:_registerButton];
+    _forgotButton = [[UIButton alloc] initWithFrame:CGRectMake(2*kPadding, y, kScreenWidth-4*kPadding, kButtonHeight)];
+    [_forgotButton setTitle:@"action_change_login_password".localizedString forState:UIControlStateNormal];
+    [_forgotButton setAppThemeType:ButtonStyleStyleAppTheme];
+    [self.view addSubview:_forgotButton];
     
-    [_registerButton addTarget:self action:@selector(registerButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    [_forgotButton addTarget:self action:@selector(forgetButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [_getCheckNumButton addTarget:self action:@selector(getCheckCodeButtonClick) forControlEvents:UIControlEventTouchUpInside];
     
 }
--(void)registerButtonClick{
+-(void)forgetButtonClick{
     [self.view endEditing:YES];
     NSString* email = [_userField text];
     NSString*  password = [_pwdField text];
@@ -172,7 +172,7 @@
         [self showHint:@"error_invalid_checknum".localizedString];
         return;
     }
-    NSString * url = [NSString stringWithFormat:@"http://%@:%d/app_user_reg.asp?user=%@&psd=%@&verifycode=%@",serverIP,ServerPort,email,password,check];
+    NSString * url = [NSString stringWithFormat:@"http://%@:%d/app_user_forgotpsd.asp?user=%@&newpsd=%@&verifycode=%@",serverIP,ServerPort,email,password,check];
     @weakify(self);
     [FFHttpTool GET:url parameters:nil success:^(id data){
         @strongify(self)
@@ -181,33 +181,33 @@
             RetModel * m = [RetModel RetModelWithDict:data];
             if (m.ret == RESULT_FAIL)
             {
-                [self showHint:@"action_get_register_failed0".localizedString];
+                [self showHint:@"action_reset_pwdr_failed0".localizedString];
             }
             else if (m.ret == RESULT_USER_EXISTS)
             {
-                [self showHint:@"action_get_register_failed1".localizedString];
+                [self showHint:@"action_reset_pwd_failed1".localizedString];
             }
             else if (m.ret == RESULT_USER_VERIFYCODE_ERROR)
             {
-                [self showHint:@"action_get_register_failed2".localizedString];
+                [self showHint:@"action_reset_pwd_failed2".localizedString];
             }
             else if (m.ret == RESULT_USER_VERIFYCODE_TIMEOUT)
             {
-                [self showHint:@"action_get_register_failed3".localizedString];
+                 [self showHint:@"action_reset_pwd_failed3".localizedString];
             }
             else if (m.ret == RESULT_SUCCESS)
             {
-                [self showHint:@"action_get_register_success".localizedString];
+                [self showHint:@"action_reset_pwd_success".localizedString];
                 [self.navigationController popViewControllerAnimated:YES];
             }
             
         }
         else{
-            [self showHint:@"action_get_register_failed0".localizedString];
+            [self showHint:@"action_reset_pwdr_failed0".localizedString];
         }
         
     } failure:^(NSError * error){
-        [self showHint:@"action_get_register_failed0".localizedString];
+        [self showHint:@"action_reset_pwdr_failed0".localizedString];
     }];
     
 }
@@ -233,7 +233,7 @@
 //            [self showHint:@"error_invalid_confirm_password".localizedString];
 //            return;
 //        }
-        NSString * url = [NSString stringWithFormat:@"http://%@:%d/app_user_reg_send_verifycode.asp?user=%@",serverIP,ServerPort,email];
+        NSString * url = [NSString stringWithFormat:@"http://%@:%d/app_user_forgotpsd_send_verifycode.asp?user=%@",serverIP,ServerPort,email];
         @weakify(self);
         [FFHttpTool GET:url parameters:nil success:^(id data){
             @strongify(self)
@@ -247,20 +247,22 @@
                     self.leftTime = 60;
                     [self coolDownTimer];
                 }
-                else if ([retModel ret] == RESULT_USER_EXISTS){
-                    [self showHint:@"action_get_register_failed1".localizedString];
+                if (retModel.ret == RESULT_USER_NOTEXISTS)
+                {
+                    [self showHint:@"action_no_user".localizedString];
                 }
-                else{
-                    [self showHint:@"action_get_register_failed0".localizedString];
+                else if (retModel.ret == RESULT_USER_EXISTS)
+                {
+                    [self showHint:@"action_get_checknum_aleady_register".localizedString];
                 }
                 
             }
             else{
-                [self showHint:@"action_get_register_failed0".localizedString];
+                [self showHint:@"action_get_checknum_sent_failed".localizedString];
             }
             
         } failure:^(NSError * error){
-            [self showHint:@"action_get_register_failed0".localizedString];
+            [self showHint:@"action_get_checknum_sent_failed".localizedString];
         }];
         
    
