@@ -57,7 +57,7 @@
     if ([user length] > 0 && [password length] > 0 && remember) {
         _viewModel =[LoginViewModel new];
         @weakify(self);
-        [[_viewModel racLogin] subscribeNext:^(id x) {
+        [[_viewModel racLogin:NO] subscribeNext:^(id x) {
             if ([x integerValue] == 1)
                 //if(YES)
             {

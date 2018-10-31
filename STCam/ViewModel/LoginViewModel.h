@@ -15,5 +15,5 @@
 @property(nonatomic,strong)NSString* password;
 @property(nonatomic,assign)BOOL remember;
 @property (nonatomic, strong) RACSignal *validLoginSignal;
--(RACSignal *)racLogin;
+-(RACSignal *)racLogin:(BOOL)forceLogin;
 @end

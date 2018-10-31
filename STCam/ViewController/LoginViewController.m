@@ -40,7 +40,7 @@
 @property (nonatomic, assign) BOOL isPasswordEmpty;
 
 @property (nonatomic,strong) LoginViewModel * viewModel;
-
+@property(nonatomic,strong)UIAlertController  *forceLoginAlertController;//强制登录
 @end
 
 @implementation LoginViewController
@@ -79,9 +79,14 @@
     {
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     }
+    if (_logout) {
+        _logout = NO;
+        [self presentViewController:self.forceLoginAlertController animated:YES completion:nil];
+    }
     
     
 }
+
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
     // 开启返回手势
@@ -236,7 +241,7 @@
 -(void)loginClicked{
     [self.view endEditing:YES];
     @weakify(self)
-    [[_viewModel racLogin] subscribeNext:^(id x) {
+    [[_viewModel racLogin:NO] subscribeNext:^(id x) {
         if ([x integerValue] == 1)
        //if(YES)
         {
@@ -247,6 +252,32 @@
                 
             }];
         }
+        else if([x integerValue] == RESULT_USER_LOGOUT){
+            //
+            [self presentViewController:self.forceLoginAlertController animated:YES completion:nil];
+        }
+        else{
+            [self showHint:@"error_login_failed".localizedString];
+        }
+    }];
+}
+-(void)forceLogin{
+    @weakify(self)
+    [[_viewModel racLogin:YES] subscribeNext:^(id x) {
+        if ([x integerValue] == 1)
+            //if(YES)
+        {
+            //跳转到tab页面
+            @strongify(self)
+            MainTabController * mainTabController = [[MainTabController alloc] initWithUserMode:TUserMode_Login];
+            [self presentViewController:mainTabController animated:YES completion:^{
+                
+            }];
+        }
+        else if([x integerValue] == RESULT_USER_LOGOUT){
+            //
+            [self presentViewController:self.forceLoginAlertController animated:YES completion:nil];
+        }
         else{
             [self showHint:@"error_login_failed".localizedString];
         }
@@ -256,6 +287,29 @@
     MainTabController * mainTabController = [[MainTabController alloc] initWithUserMode:TUserMode_Visitor];
     [self presentViewController:mainTabController animated:YES completion:nil];
 }
+
+-(UIAlertController*)forceLoginAlertController{
+    if (!_forceLoginAlertController) {
+        @weakify(self)
+        _forceLoginAlertController = [UIAlertController alertControllerWithTitle:@"string_user_logined1".localizedString message:nil preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"action_cancel".localizedString style:UIAlertActionStyleCancel handler:nil];
+        
+        
+        UIAlertAction *existction = [UIAlertAction actionWithTitle:@"action_ok".localizedString style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            @strongify(self)
+            [self forceLogin];
+           
+            
+        }];
+        [_forceLoginAlertController addAction:existction];
+        [_forceLoginAlertController addAction:cancelAction];
+        
+    }
+    return _forceLoginAlertController;
+}
+
+
 #pragma checkbox
 - (void)didTapCheckBox:(BEMCheckBox*)checkBox{
     BOOL value = checkBox.on;
