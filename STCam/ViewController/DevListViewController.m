@@ -78,6 +78,15 @@
     }
     else if(_viewModel.userMode == TUserMode_Visitor){
          [btn setTitle:@"action_search".localizedString forState:UIControlStateNormal];
+        
+        UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        backButton.frame = CGRectMake(0, 0, 28, 28);
+        [backButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+        [backButton setImage:[UIImage imageNamed:@"icon_back"] forState:UIControlStateNormal];
+        UIBarButtonItem *backBarItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+        self.navigationItem.leftBarButtonItem = backBarItem;
+        
+        
     }
     [btn addTarget:self action:@selector(navBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     
@@ -86,6 +95,15 @@
     UIBarButtonItem *rightBtnItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
     self.navigationItem.rightBarButtonItem = rightBtnItem;
 }
+
+-(void)back{
+    for (DeviceModel * model in _viewModel.deviceArray) {
+        [model threadDisconnect];
+    }
+    [_viewModel.deviceArray removeAllObjects];
+    [self.tabBarController dismissViewControllerAnimated:YES completion:nil];
+}
+
 -(void)loadView{
     [super loadView];
     
