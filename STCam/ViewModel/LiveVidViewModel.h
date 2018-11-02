@@ -54,4 +54,20 @@
 -(void)closeVid;
 @property (nonatomic, weak) id<VidViewModelDelegate> delegate;
 
+
+/**
+ 开始对讲
+ */
+-(void)talkBegin;
+
+/**
+ 结束对讲
+ */
+-(void)talkEnd;
+
+
+/**
+ 是否正在对讲标志位
+ */
+@property(nonatomic,assign)BOOL isTalking;
 @end

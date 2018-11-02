@@ -251,7 +251,7 @@ kAudioSessionOverrideAudioRoute_None:kAudioSessionOverrideAudioRoute_Speaker;
         AudioQueueEnqueueBuffer(audioRecordQueue, audioRecordQueueBuffers[i], 0, NULL);
     }
     
-    inrb = create_circular_buffer(2048*sizeof(short)*2000);
+ //   inrb = create_circular_buffer(2048*sizeof(short)*2000);
     
     
 }
@@ -262,7 +262,7 @@ static void MyInputBufferHandler(	void *								inUserData,
                                  UInt32								inNumPackets,
                                  const AudioStreamPacketDescription*	inPacketDesc)
 {
-  //  Audio* player=(Audio*)inUserData;
+    AudioSession* session=(__bridge AudioSession*)inUserData;
    // static FILE* f = NULL;
    //  if (!f) f = fopen("/Users/ky/Desktop/bbbb.pcm", "w+b");
     
@@ -270,9 +270,9 @@ static void MyInputBufferHandler(	void *								inUserData,
     uint8_t *data=(uint8_t*)inBuffer->mAudioData;
      NSLog(@"-------record size:%d",len);
     //fwrite(data, len, 1, f);
-    //thNet_SetTalk([player NetHandle],(char*) data,len);
+    net_SetTalk((HANDLE)session.NetHandle,(char*) data,len);
     
-    int size = write_circular_buffer_bytes(inrb, data,len);
+   // int size = write_circular_buffer_bytes(inrb, data,len);
     AudioQueueEnqueueBuffer(inAQ, inBuffer, 0, NULL);
 }
 -(int)readbuf:(char*)Buf length:(int)len

@@ -358,6 +358,9 @@
     }];
 }
 -(void)checkUpdateSoftVersion{
+    if ([_viewModel.model.SoftVersion length] < 11) {
+        return;
+    }
     [self showHudInView:self.view hint:nil];
     @weakify(self);
     [[self.viewModel racAppUpgradeDevCheck] subscribeNext:^(id x) {

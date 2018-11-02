@@ -131,7 +131,22 @@
     [_recordBtn setImage:[UIImage imageNamed:@"liverecord_nor"] forState:UIControlStateNormal];
     [_recordBtn setImage:[UIImage imageNamed:@"liverecord_sel"] forState:UIControlStateSelected];
     [_speechBtn setBackgroundImage:[UIImage imageNamed:@"livespeech_nor"] forState:UIControlStateNormal];
-    [_speechBtn setBackgroundImage:[UIImage imageNamed:@"livespeech_sel"] forState:UIControlStateSelected];
+    [_speechBtn setBackgroundImage:[UIImage imageNamed:@"livespeech_sel"] forState:UIControlStateHighlighted];
+    @weakify(self)
+    [[_speechBtn rac_signalForControlEvents:UIControlEventTouchDown] subscribeNext:^(id x) {
+        @strongify(self)
+        [self.viewModel talkBegin];
+    }];
+    [[_speechBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        @strongify(self)
+        [self.viewModel talkEnd];
+    }];
+    [[_speechBtn rac_signalForControlEvents:UIControlEventTouchUpOutside] subscribeNext:^(id x) {
+        @strongify(self)
+        [self.viewModel talkEnd];
+    }];
+    
+    
     [_snapShotBtn setImage:[UIImage imageNamed:@"livesnapshot_nor"] forState:UIControlStateNormal];
     [_snapShotBtn setImage:[UIImage imageNamed:@"livesnapshot_sel"] forState:UIControlStateHighlighted];
     [_portButtonView addSubview:_recordBtn];
@@ -279,7 +294,7 @@
         [_recordBtn_land setImage:[UIImage imageNamed:@"liverecord_nor"] forState:UIControlStateNormal];
         [_recordBtn_land setImage:[UIImage imageNamed:@"liverecord_sel"] forState:UIControlStateSelected];
         [_speechBtn_land setBackgroundImage:[UIImage imageNamed:@"livespeech_nor"] forState:UIControlStateNormal];
-        [_speechBtn_land setBackgroundImage:[UIImage imageNamed:@"livespeech_sel"] forState:UIControlStateSelected];
+        [_speechBtn_land setBackgroundImage:[UIImage imageNamed:@"livespeech_sel"] forState:UIControlStateHighlighted];
         [_snapShotBtn_land setImage:[UIImage imageNamed:@"livesnapshot_nor"] forState:UIControlStateNormal];
         [_snapShotBtn_land setImage:[UIImage imageNamed:@"livesnapshot_sel"] forState:UIControlStateHighlighted];
         
@@ -290,7 +305,19 @@
         [_recordBtn_land addTarget:self action:@selector(controlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         [_speechBtn_land addTarget:self action:@selector(controlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         [_snapShotBtn_land addTarget:self action:@selector(controlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-        
+        @weakify(self)
+        [[_speechBtn_land rac_signalForControlEvents:UIControlEventTouchDown] subscribeNext:^(id x) {
+            @strongify(self)
+            [self.viewModel talkBegin];
+        }];
+        [[_speechBtn_land rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+            @strongify(self)
+            [self.viewModel talkEnd];
+        }];
+        [[_speechBtn_land rac_signalForControlEvents:UIControlEventTouchUpOutside] subscribeNext:^(id x) {
+            @strongify(self)
+            [self.viewModel talkEnd];
+        }];
     }
     
     [_ledBtn_land setHidden:NO];

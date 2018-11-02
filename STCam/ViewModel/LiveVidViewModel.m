@@ -43,7 +43,7 @@ void avAuddioCallBack(void *UserCustom,         //用户自定义数据
     printf("aud receive buf len is %d\n",Len);
     
     LiveVidViewModel *myself = (__bridge LiveVidViewModel * ) vidSelf;
-    if (myself.openaud) {
+    if (myself.openaud && !myself.isTalking) {
         [myself.audioSession playAudio:Buf length:Len];
     }
     
@@ -71,6 +71,7 @@ void alarmRealTimeCallBack(int AlmType, int AlmTime, int AlmChl, void* UserCusto
         ;
         error = AudioSessionInitialize(NULL, NULL, NULL, NULL);
         error =  AudioSessionSetProperty(kAudioSessionProperty_AudioCategory, sizeof(category), &category);
+        [_audioSession initRecordAudio];
         if (error) NSLog(@"couldn't set audio category!,error is");
     }
     return self;
@@ -162,6 +163,22 @@ void alarmRealTimeCallBack(int AlmType, int AlmTime, int AlmChl, void* UserCusto
     NSData *data = UIImageJPEGRepresentation(image,0.8);
     BOOL result = [data writeToFile: fullFileName    atomically:YES];
     return result;
+}
+/**
+ 开始对讲
+ */
+-(void)talkBegin{
+    _isTalking = YES;
+    [_audioSession setNetHandle:_model.NetHandle];
+    [_audioSession reStartRecord];
+}
+
+/**
+ 结束对讲
+ */
+-(void)talkEnd{
+    _isTalking = NO;
+    [_audioSession pauseRecord];
 }
 
 @end
