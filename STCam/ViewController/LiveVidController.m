@@ -39,7 +39,9 @@
 @property (strong, nonatomic)  UIButton * recordBtn_land;
 @property (strong, nonatomic)  UIButton * snapShotBtn_land;
 
+@property (strong, nonatomic) UILabel * recordTimeLabel;
 
+@property (strong, nonatomic) NSTimer * recordTime;
 
 @end
 
@@ -72,6 +74,34 @@
     [_glLayer setBackgroundColor:[[UIColor blackColor] CGColor]];
     [self.view.layer addSublayer:_glLayer];
     [self layoutButtons];
+    
+    /***********录像时间***********/
+    _recordTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 30*kWidthCoefficient, kScreenWidth, 40*kWidthCoefficient)];
+    [_recordTimeLabel setTextAlignment:NSTextAlignmentCenter];
+    [_recordTimeLabel setFont:[UIFont systemFontOfSize:22]];
+    [_recordTimeLabel setTextColor:[UIColor redColor]];
+    [_recordTimeLabel setText:@"REC\040\04000:00"];
+    [_recordTimeLabel setHidden:YES];
+    [self.view addSubview:_recordTimeLabel];
+}
+-(void)startRecordTime{
+    __block NSInteger timeCount = 0;
+    [_recordTimeLabel setHidden:NO];
+    @weakify(self)
+    _recordTime = [NSTimer scheduledTimerWithTimeInterval:1 repeats:YES block:^(NSTimer * _Nonnull timer) {
+        ++timeCount;
+        @strongify(self)
+         [self.recordTimeLabel setText:[NSString stringWithFormat:@"REC\040\040%02ld:%02ld",timeCount/60,timeCount%60]];
+        
+    }];
+}
+-(void)stopRecordTime{
+    [_recordTime invalidate];
+    _recordTime = nil;
+    [_recordTimeLabel setHidden:YES];
+    [_recordTimeLabel setText:@"REC\040\04000:00"];
+    
+    
 }
 -(void)initNav{
     [self setTitle:_viewModel.model.DevName];
@@ -183,10 +213,18 @@
          [self rotateToPortrait];
     }
     else if([sender isEqual:_hdBtn] || [sender isEqual:_hdBtn_land]){
+        if (thNet_IsRec(_viewModel.model.NetHandle)) {
+            //停止录像
+            BOOL ret = [_viewModel changeRecordStatus];
+            [_recordBtn setSelected:ret];
+            [_recordBtn_land setSelected:ret];
+            [self stopRecordTime];
+        }
         [_viewModel setSub:1-_viewModel.sub];
         [_viewModel openVid:_viewModel.sub];
         [_hdBtn setSelected:1-_viewModel.sub];
         [_hdBtn_land setSelected:1-_viewModel.sub];
+        
     }
     else if([sender isEqual:_playAudioBtn] || [sender isEqual:_playAudioBtn_land]){
        
@@ -205,9 +243,18 @@
         _viewModel.isRcord = !_viewModel.isRcord;
         if (_viewModel.isRcord) {
             AudioServicesPlaySystemSound(1117);
+            BOOL ret = [_viewModel changeRecordStatus];
+           [_recordBtn setSelected:ret];
+           [_recordBtn_land setSelected:ret];
+            [self startRecordTime];
+            
         }
         else{
             AudioServicesPlaySystemSound(1118);
+            BOOL ret = [_viewModel changeRecordStatus];
+             [_recordBtn setSelected:ret];
+             [_recordBtn_land setSelected:ret];
+             [self stopRecordTime];
         }
         
         
@@ -238,6 +285,9 @@
     [UIView beginAnimations:nil context:nil];
     [UIView commitAnimations];
     [_glLayer setFrame:CGRectMake(0, 0, kScreenHeight, kScreenWidth)];
+    
+    [_recordTimeLabel setFrame:CGRectMake(0, 30*kWidthCoefficient, kScreenHeight, 40*kWidthCoefficient)];
+    
     
     
 //    @property (strong, nonatomic)  UIButton * ledBtn_land;
@@ -341,6 +391,12 @@
    
     
     [_hdBtn_land setSelected:1-_viewModel.sub];
+    
+    BOOL ret = thNet_IsRec(_viewModel.model.NetHandle);
+    
+    [_recordBtn setSelected:ret];
+    [_recordBtn_land setSelected:ret];
+    
     isLandscape = YES;
    
 }
@@ -355,6 +411,9 @@
     [UIView commitAnimations];
     [_glLayer setFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-kSafeAreaBottomHeight-kSafeAreaHeaderHeight-64-250*kWidthCoefficient)];
     
+    [_recordTimeLabel setFrame:CGRectMake(0, 30*kWidthCoefficient, kScreenWidth, 40*kWidthCoefficient)];
+    
+    
     [_ledBtn_land setHidden:YES];
     [_playAudioBtn_land setHidden:YES];
     [_hdBtn_land setHidden:YES];
@@ -364,6 +423,7 @@
     [_snapShotBtn_land setHidden:YES];
     
     [_hdBtn setSelected:1-_viewModel.sub];
+    
     
     isLandscape = NO;
     

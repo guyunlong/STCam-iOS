@@ -20,4 +20,6 @@ typedef NS_ENUM(NSInteger,ButtonStyle) {
 };
 @interface UIButton (Common)
 - (void)setAppThemeType:(ButtonStyle)style;
+
+
 @end

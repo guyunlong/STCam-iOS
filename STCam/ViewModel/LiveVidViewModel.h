@@ -70,4 +70,13 @@
  是否正在对讲标志位
  */
 @property(nonatomic,assign)BOOL isTalking;
+
+/****************录像***********************/
+
+/**
+ 改变录像状态
+
+ @return YES-正在录像 NO-停止录像
+ */
+-(BOOL)changeRecordStatus;
 @end

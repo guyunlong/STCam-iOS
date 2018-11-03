@@ -244,7 +244,7 @@ kAudioSessionOverrideAudioRoute_None:kAudioSessionOverrideAudioRoute_Speaker;
         int result =  AudioQueueAllocateBuffer(audioRecordQueue, MIN_SIZE_PER_FRAME, &audioRecordQueueBuffers[i]);///创建buffer区，MIN_SIZE_PER_FRAME为每一侦所需要的最小的大小，该大小
     }
     
-    AudioQueueStart(audioRecordQueue, NULL);
+   // AudioQueueStart(audioRecordQueue, NULL);
     
     for(int i=0;i<NUM_RECBUFFERS;i++)
     {

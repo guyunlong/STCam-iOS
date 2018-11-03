@@ -104,6 +104,14 @@
         [model setFileName:file];
         [_mediaArray addObject:model];
     }
+    
+    NSString * snRecord = [NSString stringWithFormat:@"record/%@",_model.SN];
+    NSArray * recordfileArray =[manager getFilesInDirectory:snRecord];
+    for (NSString * file in recordfileArray) {
+        STMediaModel * model  = [STMediaModel new];
+        [model setFileName:file];
+        [_mediaArray addObject:model];
+    }
 }
 
 -(void)back{
@@ -216,10 +224,21 @@
     return [_mediaArray count];
 }
 - (id<YBImageBrowserCellDataProtocol>)yb_imageBrowserView:(YBImageBrowserView *)imageBrowserView dataForCellAtIndex:(NSUInteger)index {
-    YBImageBrowseCellData *data = [YBImageBrowseCellData new];
     STMediaModel * model = _mediaArray[index];
-    data.url = [NSURL fileURLWithPath:model.fileName];
-    data.sourceObject = [self sourceObjAtIdx:index];
-    return data;
+    if ([model getMediaType] == MediaType_IMG) {
+        YBImageBrowseCellData *data = [YBImageBrowseCellData new];
+        data.url = [NSURL fileURLWithPath:model.fileName];
+        data.sourceObject = [self sourceObjAtIdx:index];
+        return data;
+    }
+    else if([model getMediaType] == MediaType_VID){
+        YBVideoBrowseCellData *data = [YBVideoBrowseCellData new];
+        data.url = [NSURL fileURLWithPath:model.fileName];
+        data.sourceObject = [self sourceObjAtIdx:index];
+        return data;
+    }
+    return nil;
+    
 }
+
 @end

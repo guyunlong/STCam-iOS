@@ -1,5 +1,5 @@
 #import "UIImage+Common.h"
-
+#import <AVFoundation/AVFoundation.h>
 @implementation UIImage (Common)
 +(UIImage *)imageWithColor:(UIColor *)aColor{
     return [UIImage imageWithColor:aColor withFrame:CGRectMake(0, 0, 1, 1)];
@@ -104,6 +104,40 @@
     CGContextRelease(bitmapRef);
     CGImageRelease(bitmapImage);
     return [UIImage imageWithCGImage:scaledImage];
+}
+/**
+ *  获取视频的缩略图方法
+ *
+ *  @param filePath 视频的本地路径
+ *
+ *  @return 视频截图
+ */
++(UIImage *)getScreenShotImageFromVideoPath:(NSString *)filePath{
+    
+    UIImage *shotImage;
+    //视频路径URL
+    NSURL *fileURL = [NSURL fileURLWithPath:filePath];
+    
+    AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:fileURL options:nil];
+    
+    AVAssetImageGenerator *gen = [[AVAssetImageGenerator alloc] initWithAsset:asset];
+    
+    gen.appliesPreferredTrackTransform = YES;
+    
+    CMTime time = CMTimeMakeWithSeconds(0.0, 600);
+    
+    NSError *error = nil;
+    
+    CMTime actualTime;
+    
+    CGImageRef image = [gen copyCGImageAtTime:time actualTime:&actualTime error:&error];
+    
+    shotImage = [[UIImage alloc] initWithCGImage:image];
+    
+    CGImageRelease(image);
+    
+    return shotImage;
+    
 }
 
 

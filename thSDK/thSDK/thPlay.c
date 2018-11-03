@@ -391,7 +391,7 @@ void Handle_DisplayStreamTypeChange(HANDLE NetHandle)
   if (thNet_IsRec(NetHandle))
   {
     thNet_StopRec(NetHandle);
-    thNet_StartRec(NetHandle, NULL);
+    //thNet_StartRec(NetHandle, NULL);
   }
 
   iCount = avQueue_GetCount(Play->hQueueVideo);
@@ -612,12 +612,13 @@ void thread_QueueRec(HANDLE NetHandle)
       continue;
     }
 
-    PInfo = (TDataFrameInfo*) tmpNode->Buf1;
-    if (PInfo)
+    //PInfo = (TDataFrameInfo*) tmpNode->Buf1;
+    //if (PInfo)
     {
-      if (PInfo->Head.VerifyCode == Head_VideoPkt)
+      //if (PInfo->Head.VerifyCode == Head_VideoPkt)
+      if(1)
       {
-        u64 pts = PInfo->Frame.FrameTime / 1000 * 90;
+        //u64 pts = PInfo->Frame.FrameTime / 1000 * 90;
         if (Play->RecHandle) thRecordWriteVideo(Play->RecHandle, tmpNode->Buf, tmpNode->BufLen, -1);
       }
       else if (PInfo->Head.VerifyCode == Head_AudioPkt)
@@ -655,8 +656,8 @@ void OnRecvDataNotify_av(HANDLE NetHandle, TDataFrameInfo* PInfo, char* Buf, int
   {
     if (Play->audioEvent) Play->audioEvent(Play->UserCustom, PInfo->Frame.StreamType, Buf, BufLen);
 
-    avQueue_Write(Play->hQueueRec, Buf, BufLen, (char*) PInfo, sizeof(TDataFrameInfo));
-    avQueue_Write(Play->hQueueAudio, Buf, BufLen, (char*) PInfo, sizeof(TDataFrameInfo));
+    //avQueue_Write(Play->hQueueRec, Buf, BufLen, (char*) PInfo, sizeof(TDataFrameInfo));
+    //avQueue_Write(Play->hQueueAudio, Buf, BufLen, (char*) PInfo, sizeof(TDataFrameInfo));
   }
 }
 //-----------------------------------------------------------------------------
@@ -1309,9 +1310,9 @@ bool thNet_Connect(HANDLE NetHandle, u64 SN, char* UserName, char* Password, cha
     Play->hQueueAudio = avQueue_Init(MAX_QUEUE_COUNT, true, true);
     Play->hQueueRec = avQueue_Init(MAX_QUEUE_COUNT, true, true);
 
-//    Play->thQueueVideo = ThreadCreate((void*) thread_QueueVideo, Play, false);
+ //  Play->thQueueVideo = ThreadCreate((void*) thread_QueueVideo, Play, false);
 //    Play->thQueueAudio = ThreadCreate((void*) thread_QueueAudio, Play, false);
-//    Play->thQueueRec = ThreadCreate((void*) thread_QueueRec, Play, false);
+   Play->thQueueRec = ThreadCreate((void*) thread_QueueRec, Play, false);
 
     TMediaType MediaType = CODEC_NONE;
     TVideoFormat* vfmt = &Play->DevCfg.VideoCfgPkt.VideoFormat;
@@ -1566,7 +1567,7 @@ bool thNet_Play(HANDLE NetHandle, u32 VideoChlMask, u32 AudioChlMask, u32 SubVid
     if (Play->IsTaskRec && Play->RecHandle == NULL)
     {
       Play->IsTaskRec = false;
-      thNet_StartRec(NetHandle, NULL);
+     // thNet_StartRec(NetHandle, NULL);
     }
   }
   return Result;
@@ -2081,8 +2082,8 @@ bool thNet_SetRecPath(HANDLE NetHandle, char* RecPath)
 #endif
   return true;
 }
-//-----------------------------------------------------------------------------
-bool thNet_StartRec(HANDLE NetHandle, char* RecFileName/*FileName=NULL,配合thNet_SetRecPath使用*/)
+//------------------------------------width height 硬件解码器传来-----------------------------------------
+bool thNet_StartRec(HANDLE NetHandle, char* RecFileName,int width,int height/*FileName=NULL,配合thNet_SetRecPath使用*/)
 {
   TPlayParam* Play = (TPlayParam*) NetHandle;
   TVideoFormat* vfmt;
@@ -2117,9 +2118,9 @@ bool thNet_StartRec(HANDLE NetHandle, char* RecFileName/*FileName=NULL,配合thN
     strcpy(PathFileName, RecFileName);
   }
 
-  if (Play->ImgWidth > 0 && Play->ImgHeight > 0)//一开始没有thNet_Play之前，ImgWidth=0 ImgHeight=0
+  if (vfmt->Width > 0 && vfmt->Height > 0)//一开始没有thNet_Play之前，ImgWidth=0 ImgHeight=0
   {
-    Play->RecHandle = thRecordStart(PathFileName, MediaType, Play->ImgWidth, Play->ImgHeight, Play->FrameRate,//主 次码流 是否要分开？
+    Play->RecHandle = thRecordStart(PathFileName, MediaType, width, height, vfmt->FrameRate,//主 次码流 是否要分开？
                                     CODEC_PCM, afmt->nChannels, afmt->nSamplesPerSec, afmt->wBitsPerSample);
     PRINTF("%s(%d) Play->RecHandle:%p\n", __FUNCTION__, __LINE__, Play->RecHandle);
     return (Play->RecHandle != NULL);

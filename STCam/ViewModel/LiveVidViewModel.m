@@ -16,6 +16,8 @@
 @property (strong, nonatomic)  VideoBufferParser *parser;
 @property (strong, nonatomic)  AudioSession *audioSession;
 @property (assign, nonatomic)  BOOL refreshSnapShot;//每次采集一张图片,用作首页设备图片刷新用,
+@property(assign,nonatomic)int screenWidth;
+@property(assign,nonatomic)int screenHeight;
 @end
 @implementation LiveVidViewModel
 //数据回调
@@ -115,6 +117,9 @@ void alarmRealTimeCallBack(int AlmType, int AlmTime, int AlmChl, void* UserCusto
 
 #pragma mark - VideoBufferParserDelegate
 - (void)updateVidView:(CVPixelBufferRef)pixelBuffer{
+    _screenWidth =(int)CVPixelBufferGetWidth(pixelBuffer);
+    _screenHeight =(int)CVPixelBufferGetHeight(pixelBuffer);
+    
     if (_delegate && [_delegate respondsToSelector:@selector(updateVidView:)]) {
         [_delegate updateVidView:pixelBuffer];
         if (!_refreshSnapShot) {
@@ -146,6 +151,7 @@ void alarmRealTimeCallBack(int AlmType, int AlmTime, int AlmChl, void* UserCusto
     }
 }
 -(BOOL)snapshot:(CVPixelBufferRef)pixelBuffer fileName:(NSString*)fullFileName{
+
     CIImage *ciImage = [CIImage imageWithCVPixelBuffer:pixelBuffer];
     
     CIContext *temporaryContext = [CIContext contextWithOptions:nil];
@@ -180,5 +186,35 @@ void alarmRealTimeCallBack(int AlmType, int AlmTime, int AlmChl, void* UserCusto
     _isTalking = NO;
     [_audioSession pauseRecord];
 }
+
+/**
+ 改变录像状态
+ 
+ @return YES-正在录像 NO-停止录像
+ */
+-(BOOL)changeRecordStatus{
+    if (thNet_IsRec(_model.NetHandle)) {
+        //停止录像
+        thNet_StopRec(_model.NetHandle);
+        return NO;
+    }
+    else{
+        //打开录像
+        STFileManager * manager = [STFileManager sharedManager];
+        //录像文件名称
+        if (![manager fileExistsForUrl:@"record"]) {
+            [manager createDirectoryNamed:@"record"];
+        }
+        if (![manager fileExistsForUrl:[NSString stringWithFormat:@"record/%@",_model.SN]]) {
+            [manager createDirectoryNamed:[NSString stringWithFormat:@"record/%@",_model.SN]];
+        }
+        NSTimeInterval timeInterVal = [[NSDate date] timeIntervalSince1970];
+        NSString * fileName = [manager localPathForFile:[NSString stringWithFormat:@"%ld.mp4",(NSInteger)timeInterVal] inDirectory:[NSString stringWithFormat:@"record/%@",_model.SN]];
+        thNet_Play_OnlySend(_model.NetHandle);
+        thNet_StartRec(_model.NetHandle, [fileName UTF8String],_screenWidth,_screenHeight);
+        return YES;
+    }
+}
+
 
 @end

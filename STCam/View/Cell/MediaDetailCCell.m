@@ -9,6 +9,7 @@
 #import "MediaDetailCCell.h"
 #import "PrefixHeader.h"
 #import "BEMCheckBox.h"
+#import "UIImage+Common.h"
 #define checkboxwidth 16
 #define ccellWidth (kScreenWidth-4*3)/3
 @interface MediaDetailCCell()<BEMCheckBoxDelegate>
@@ -56,8 +57,14 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
     if (_model) {
+        UIImage * image;
+        if ([_model getMediaType] == MediaType_IMG) {
+           image  =[UIImage imageWithContentsOfFile:_model.fileName];
+        }
+        else{
+            image = [UIImage getScreenShotImageFromVideoPath:_model.fileName];
+        }
         
-        UIImage * image  =[UIImage imageWithContentsOfFile:_model.fileName];
         if (image) {
             [_imageView setImage:image];
             _imageView.contentMode = UIViewContentModeScaleToFill;
@@ -81,6 +88,7 @@
     CGSize  size =CGSizeMake(ccellWidth, ccellWidth*3/5);
     return size;
 }
+
 
 
 @end

@@ -282,7 +282,7 @@ EXPORT bool thNet_HttpGet(HANDLE NetHandle, char *url, char *Buf, i32 *BufLen);
 EXPORT bool thNet_HttpGetStop(HANDLE NetHandle);
 
 EXPORT bool thNet_SetRecPath(HANDLE NetHandle, char *RecPath);//linux 以"/"结束，windows以 "\"结束
-EXPORT bool thNet_StartRec(HANDLE NetHandle, char *RecFileName/*RecFileName=NULL,配合thNet_SetRecPath使用*/);
+EXPORT bool thNet_StartRec(HANDLE NetHandle, char *RecFileName,int width,int height/*RecFileName=NULL,配合thNet_SetRecPath使用*/);
 
 EXPORT bool thNet_IsRec(HANDLE NetHandle);
 
