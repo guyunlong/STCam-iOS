@@ -42,7 +42,7 @@
 @property (strong, nonatomic) UILabel * recordTimeLabel;
 
 @property (strong, nonatomic) NSTimer * recordTime;
-
+@property (strong, nonatomic)  UIView *gestureControlView;//手势控制
 @end
 
 @implementation LiveVidController
@@ -73,6 +73,16 @@
     _glLayer = [[AAPLEAGLLayer alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-kSafeAreaBottomHeight-kSafeAreaHeaderHeight-64-250*kWidthCoefficient)];
     [_glLayer setBackgroundColor:[[UIColor blackColor] CGColor]];
     [self.view.layer addSublayer:_glLayer];
+   
+    _gestureControlView = [[UIView alloc] initWithFrame:self.view.bounds];
+    [_gestureControlView setBackgroundColor:[UIColor clearColor]];
+    [_gestureControlView setUserInteractionEnabled:YES];
+    
+    [self.view addSubview:_gestureControlView];
+    
+     [self initGesture];
+    
+    
     [self layoutButtons];
     
     /***********录像时间***********/
@@ -199,8 +209,80 @@
     [_exitFullScreenButton setHidden:YES];
     [self.view addSubview:_exitFullScreenButton];
 }
+
+-(void)initGesture{
+    UISwipeGestureRecognizer *recognizerRight = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
+    [recognizerRight setDirection:(UISwipeGestureRecognizerDirectionRight)];
+    [_gestureControlView addGestureRecognizer:recognizerRight];
+    
+    
+    UISwipeGestureRecognizer *recognizerLeft = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
+    
+    [recognizerLeft setDirection:(UISwipeGestureRecognizerDirectionLeft)];
+    [_gestureControlView addGestureRecognizer:recognizerLeft];
+    
+    
+    UISwipeGestureRecognizer *recognizerUp = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
+    
+    [recognizerUp setDirection:(UISwipeGestureRecognizerDirectionUp)];
+    [_gestureControlView addGestureRecognizer:recognizerUp];
+    
+    
+    UISwipeGestureRecognizer *recognizerDown = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
+    [recognizerDown setDirection:(UISwipeGestureRecognizerDirectionDown)];
+    [_gestureControlView addGestureRecognizer:recognizerDown];
+    
+   
+    UIPinchGestureRecognizer *pinchGestureRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinch:)];
+    
+    [_gestureControlView addGestureRecognizer:pinchGestureRecognizer];
+    
+
+    
+    
+}
+
+- (void) handlePinch:(UIPinchGestureRecognizer*) recognizer {
+    
+    if (recognizer.state== UIGestureRecognizerStateEnded) {
+        CGFloat zoomSize = recognizer.scale;
+        if ( zoomSize > 1 ) { // 放大
+            [_viewModel ptzControl:PtzControlType_Zoom0];
+        } else { // 缩小
+            [_viewModel ptzControl:PtzControlType_Zoom1];
+        }
+    }
+    
+}
+
+
+
+-(void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer{
+    
+    if(recognizer.direction==UISwipeGestureRecognizerDirectionDown) {
+        NSLog(@"DirectionDown");
+        [_viewModel ptzControl:PtzControlType_Down];
+        
+    }
+    if(recognizer.direction==UISwipeGestureRecognizerDirectionUp) {
+         [_viewModel ptzControl:PtzControlType_Up];
+        NSLog(@"DirectionUp");
+    }
+    
+    if(recognizer.direction==UISwipeGestureRecognizerDirectionLeft) {
+        NSLog(@"DirectionLeft");
+         [_viewModel ptzControl:PtzControlType_Left];
+    }
+    
+    if(recognizer.direction==UISwipeGestureRecognizerDirectionRight) {
+        NSLog(@"DirectionRight");
+         [_viewModel ptzControl:PtzControlType_Right];
+    }
+}
+
 #pragma click event
 -(void)back{
+    [_viewModel destroyVidSelfPoint];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -398,6 +480,8 @@
     [_recordBtn_land setSelected:ret];
     
     isLandscape = YES;
+    
+    [_gestureControlView setFrame:CGRectMake(0, 0, kScreenHeight, kScreenWidth)];
    
 }
 -(void)rotateToPortrait{
@@ -437,6 +521,8 @@
         [_ledBtn setHidden:YES];
     }
     
+    
+    [_gestureControlView setFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
     
 }
 

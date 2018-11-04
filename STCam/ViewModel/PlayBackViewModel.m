@@ -65,8 +65,13 @@ void avRemoteAuddioCallBack(void *UserCustom,         //用户自定义数据
     }
     return self;
 }
+-(void)dealloc{
+    playbackVidSelf = NULL;
+}
 
-
+-(void)destoryVidSelfPoint{
+     playbackVidSelf = NULL;
+}
 -(void)stopPlayRemoteFile{
     @weakify(self)
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{

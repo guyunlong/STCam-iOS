@@ -20,5 +20,6 @@
 -(void)playRemoteFile;
 -(void)stopPlayRemoteFile;
 -(void)playControlRemoteFile:(BOOL)play;
+-(void)destoryVidSelfPoint;
 @property (nonatomic, weak) id<PlayBackVidViewModelDelegate> delegate;
 @end

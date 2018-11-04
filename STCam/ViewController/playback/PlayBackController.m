@@ -122,6 +122,7 @@
     
 }
 -(void)back{
+    [_viewModel destoryVidSelfPoint];
     [self.navigationController popViewControllerAnimated:YES];
 }
 #pragma methods

@@ -8,7 +8,15 @@
 
 #import <Foundation/Foundation.h>
 #import "DeviceModel.h"
-
+typedef NS_ENUM(NSInteger, PtzControlType){
+    PtzControlType_None,
+    PtzControlType_Up = 1,
+    PtzControlType_Down = 3,
+    PtzControlType_Left = 5,
+    PtzControlType_Right = 7,
+    PtzControlType_Zoom0,
+    PtzControlType_Zoom1
+};
 
 @protocol VidViewModelDelegate <NSObject>
 - (void)updateVidView:(CVPixelBufferRef)pixelBuffer;
@@ -79,4 +87,12 @@
  @return YES-正在录像 NO-停止录像
  */
 -(BOOL)changeRecordStatus;
+
+/**
+ 云台控制
+
+ @param ptzType <#ptzType description#>
+ */
+-(void)ptzControl:(PtzControlType)ptzType;
+-(void)destroyVidSelfPoint;
 @end

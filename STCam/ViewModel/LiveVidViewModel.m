@@ -12,6 +12,7 @@
 #import "TFun.h"
 #import "AudioSession.h"
 #import "STFileManager.h"
+#import "RetModel.h"
 @interface LiveVidViewModel ()<VideoBufferParserDelegate>
 @property (strong, nonatomic)  VideoBufferParser *parser;
 @property (strong, nonatomic)  AudioSession *audioSession;
@@ -94,7 +95,12 @@ void alarmRealTimeCallBack(int AlmType, int AlmTime, int AlmChl, void* UserCusto
     
     
 }
-
+-(void)destroyVidSelfPoint{
+    vidSelf = NULL;
+}
+-(void)dealloc{
+    vidSelf = NULL;
+}
 -(void)openAud:(int)openaud{
     @weakify(self)
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -216,5 +222,18 @@ void alarmRealTimeCallBack(int AlmType, int AlmTime, int AlmChl, void* UserCusto
     }
 }
 
-
+-(void)ptzControl:(PtzControlType)ptzType{
+    NSString * url = [NSString stringWithFormat:@"%@&cmd=%d&sleep=500",[self.model getDevURL:Msg_PTZControl],(int)ptzType];
+    
+    id data = [self.model thNetHttpGet:url];
+    if([data isKindOfClass:[NSDictionary class]]){
+        RetModel * model = [RetModel RetModelWithDict:data];
+        if (model.ret == 1) {
+            NSLog(@"ptz ctl succtss");
+        }
+        else{
+            NSLog(@"ptz ctl failed");
+        }
+    }
+}
 @end
