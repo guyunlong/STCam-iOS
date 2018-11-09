@@ -43,7 +43,7 @@
 @property(nonatomic,strong)SDInfoModel *mSDInfoModel;//sd卡信息
 -(RACSignal*)racGetDiskCfg;
 
-
+-(RACSignal*)racFormattfCard;
 /**
  恢复出厂设置
  */

@@ -214,6 +214,7 @@
 //    [self.navigationController pushViewController:ctl animated:YES];
     
     YBImageBrowser *browser = [YBImageBrowser new];
+    browser.supportedOrientations = UIInterfaceOrientationMaskLandscapeRight;
     browser.dataSource = self;
     browser.currentIndex = row;
     [browser show];

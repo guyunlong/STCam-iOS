@@ -135,7 +135,7 @@
     CGFloat firstLineSpan =(kScreenWidth- firstLineWidth*5)/6;
      CGFloat secondLineSpan =(kScreenWidth- 2*secondLineWidth-speechWidth)/4;
     
-    y = 2*kPadding;
+    y = 5*kPadding;
     _ledBtn = [[UIButton alloc] initWithFrame:CGRectMake(firstLineSpan, y, firstLineWidth, firstLineWidth)];
     _playAudioBtn = [[UIButton alloc] initWithFrame:CGRectMake(firstLineSpan*2+firstLineWidth, y, firstLineWidth, firstLineWidth)];
     _hdBtn = [[UIButton alloc] initWithFrame:CGRectMake(firstLineSpan*3+firstLineWidth*2, y, firstLineWidth, firstLineWidth)];
@@ -470,8 +470,7 @@
     if(viewModel.userMode == TUserMode_Login && !_viewModel.model.IsControl){
         [_ledBtn_land setHidden:YES];
     }
-   
-    
+   [_playAudioBtn_land setSelected:_viewModel.openaud];
     [_hdBtn_land setSelected:1-_viewModel.sub];
     
     BOOL ret = thNet_IsRec(_viewModel.model.NetHandle);

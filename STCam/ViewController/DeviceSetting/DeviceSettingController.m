@@ -369,7 +369,11 @@
         if ([x integerValue] == 1) {
             //对比版本号
             NSString * oldVersion = [self.viewModel.model.SoftVersion substringToIndex:11];
+            if ([self.viewModel.mUpdateDevModel.ver length] < 11) {
+                return ;
+            }
             NSString * newVersion = [self.viewModel.mUpdateDevModel.ver substringToIndex:11];
+            
           /*NSOrderedDescending 判断两对象值的大小(按字母顺序进行比较，astring02小于astring01为真)
             NSString *astring01 = @"this is a String!";
             NSString *astring02 = @"This is a String!";

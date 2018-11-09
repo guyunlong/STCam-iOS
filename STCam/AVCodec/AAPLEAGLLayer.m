@@ -255,11 +255,17 @@ static const GLfloat kColorConversion709[] = {
      The quad vertex data defines the region of 2D plane onto which we draw our pixel buffers.
      Vertex data formed using (-1,-1) and (1,1) as the bottom left and top right coordinates respectively, covers the entire screen.
      */
+//    GLfloat quadVertexData [] = {
+//        -1 * normalizedSamplingSize.width, -1 * normalizedSamplingSize.height,
+//        normalizedSamplingSize.width, -1 * normalizedSamplingSize.height,
+//        -1 * normalizedSamplingSize.width, normalizedSamplingSize.height,
+//        normalizedSamplingSize.width, normalizedSamplingSize.height,
+//    };
     GLfloat quadVertexData [] = {
-        -1 * normalizedSamplingSize.width, -1 * normalizedSamplingSize.height,
-        normalizedSamplingSize.width, -1 * normalizedSamplingSize.height,
-        -1 * normalizedSamplingSize.width, normalizedSamplingSize.height,
-        normalizedSamplingSize.width, normalizedSamplingSize.height,
+        -1 , -1 ,
+        1, -1 ,
+        -1 ,1,
+       1,1
     };
     
     // Update attribute values.

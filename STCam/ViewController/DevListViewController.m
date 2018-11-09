@@ -141,10 +141,12 @@
     
    @weakify(self)
     if (_viewModel.userMode == TUserMode_Visitor) {
+        [self showHudInView:self.view hint:nil];
         [[[_viewModel racSearchDeviceinMainView:YES]
          deliverOn:[RACScheduler mainThreadScheduler]]
          subscribeNext:^(id x) {
             @strongify(self)
+             [self hideHud];
             if ([x integerValue] == 1) {
                 [self.mTableView reloadData];
             }
@@ -154,8 +156,9 @@
         }];
     }
     else if (_viewModel.userMode == TUserMode_Login){
-        
+         [self showHudInView:self.view hint:nil];
         [[_viewModel racGetDeviceList] subscribeNext:^(id x) {
+             [self hideHud];
             @strongify(self)
             if ([x integerValue] == 1) {
                 [self.mTableView reloadData];

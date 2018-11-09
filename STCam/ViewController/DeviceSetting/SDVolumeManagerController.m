@@ -135,7 +135,7 @@
 -(void)formattfCard{
     [self showHudInView:self.view hint:nil];
     @weakify(self)
-    [[[self.viewModel racSetPushConfig]
+    [[[self.viewModel racFormattfCard]
       deliverOn:[RACScheduler mainThreadScheduler]]
      subscribeNext:^(id x) {
          @strongify(self)
