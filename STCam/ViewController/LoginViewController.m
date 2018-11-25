@@ -238,6 +238,17 @@
     ForgetPwdController * ctl  = [[ForgetPwdController alloc] init];
     [self.navigationController pushViewController:ctl animated:YES];
 }
+//支持旋转
+-(BOOL)shouldAutorotate{
+    return YES;
+}
+
+//支持的方向 因为界面A我们只需要支持竖屏
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
+//一开始的方向  很重要
+
 -(void)loginClicked{
     [self.view endEditing:YES];
     @weakify(self)

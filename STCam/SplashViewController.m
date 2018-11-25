@@ -22,6 +22,10 @@
 @end
 
 @implementation SplashViewController
+- (BOOL)prefersStatusBarHidden
+{
+    return YES;//隐藏为YES，显示为NO
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

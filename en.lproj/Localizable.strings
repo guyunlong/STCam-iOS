@@ -6,7 +6,7 @@
   Copyright © 2018 South. All rights reserved.
 */
 
-"app_name"="CAMLS";
+"app_name"="GRAVE";
 "title_activity_login"="Register";
 
 "prompt_email"="Email";
@@ -245,7 +245,7 @@
 "error_device_added"="The device has been added,can not add again.";
 "string_DeleteRecordCount"="%d records were deleted!";
 "string_DeleteRecordCount1"="Existing sharing devices, only %d records were deleted!";
-"string_Info_APToSTA"="1.commect to the Camera device on your mobie device, go to setings=\"wifi and select“IPCAM_AP_XXXXXXXX”network\n2.Open the CAMLS app and follow the installation wizard to complete the rest of the steps.";
+"string_Info_APToSTA"="1.commect to the Camera device on your mobie device, go to setings=\"wifi and select“IPCAM_AP_XXXXXXXX”network\n2.Open the GRAVE app and follow the installation wizard to complete the rest of the steps.";
 "string_gotoSetup"="go to setings";
 "action_selectdevice"="Select Camera Device";
 "string_Recording"="Recording, Do you want to stop record?";

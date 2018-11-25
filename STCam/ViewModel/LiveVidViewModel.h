@@ -21,7 +21,8 @@ typedef NS_ENUM(NSInteger, PtzControlType){
 @protocol VidViewModelDelegate <NSObject>
 - (void)updateVidView:(CVPixelBufferRef)pixelBuffer;
 @end
-
+@interface LiveVidBufferModel : NSObject
+@end
 @interface LiveVidViewModel : NSObject
 @property(nonatomic,strong)DeviceModel*model;
 

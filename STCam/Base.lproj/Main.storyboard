@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash" translatesAutoresizingMaskIntoConstraints="NO" id="kdU-jW-Fqy">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="grave" translatesAutoresizingMaskIntoConstraints="NO" id="kdU-jW-Fqy">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </imageView>
                         </subviews>
@@ -52,6 +52,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="splash" width="720" height="1280"/>
+        <image name="grave" width="720" height="1280"/>
     </resources>
 </document>

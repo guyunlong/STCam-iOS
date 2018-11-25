@@ -29,6 +29,19 @@
     // Dispose of any resources that can be recreated.
 }
 
+//是否可以旋转
+-(BOOL)shouldAutorotate {
+    return [[self.viewControllers lastObject] shouldAutorotate];
+}
+
+-(UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return [[self.viewControllers lastObject] supportedInterfaceOrientations];
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+    return UIInterfaceOrientationPortrait;
+}
+
 /*
 #pragma mark - Navigation
 

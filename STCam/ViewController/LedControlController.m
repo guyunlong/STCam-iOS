@@ -98,7 +98,7 @@
     
     NSArray * modeSegmentArray =  [[NSArray alloc]initWithObjects:@"action_led_model_1".localizedString,@"action_led_model_2".localizedString,@"action_led_model_3".localizedString,@"action_led_model_4".localizedString, nil];
     _modeSegment = [[UISegmentedControl alloc] initWithItems:modeSegmentArray];
-    [_modeSegment setFrame:CGRectMake(kPadding, kPadding, Segment1Width*4, SegmengHeight)];
+    [_modeSegment setFrame:CGRectMake(contentWidth/2-Segment1Width*2, kPadding, Segment1Width*4, SegmengHeight)];
     [_backView addSubview:_modeSegment];
     [_modeSegment addTarget:self action:@selector(selectChanged:) forControlEvents:UIControlEventValueChanged];
     

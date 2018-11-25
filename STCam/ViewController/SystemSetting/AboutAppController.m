@@ -50,7 +50,7 @@
     [_appVersionLb setTextColor:[UIColor colorWithHexString:@"0x969696"]];
     [_appVersionLb setTextAlignment:NSTextAlignmentCenter];
     [self.view addSubview:_appVersionLb];
-    [_appVersionLb setText:[NSString stringWithFormat:@"CAMLS:v%@",app_Version]];
+    [_appVersionLb setText:[NSString stringWithFormat:@"GRAVE:v%@",app_Version]];
     
      y+=22*kWidthCoefficient+5*kPadding;
     

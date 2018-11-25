@@ -13,16 +13,45 @@
 #import "AudioSession.h"
 #import "STFileManager.h"
 #import "RetModel.h"
+
+@interface LiveVidBufferModel(){
+    char * buf;
+    int len;
+}
+@end
+@implementation LiveVidBufferModel
+-(void)setBuffer:(char*)buffer size:(int)size{
+    len = size;
+    buf = malloc(size);
+    memcpy(buf, buffer, size);
+}
+-(char*)getBuffer{
+    return buf;
+}
+-(int)getBufLen{
+    return len;
+}
+-(void)deallocBuf{
+    free(buf);
+    buf = nil;
+    len = 0;
+}
+
+@end
+
+
 @interface LiveVidViewModel ()<VideoBufferParserDelegate>
 @property (strong, nonatomic)  VideoBufferParser *parser;
 @property (strong, nonatomic)  AudioSession *audioSession;
 @property (assign, nonatomic)  BOOL refreshSnapShot;//每次采集一张图片,用作首页设备图片刷新用,
 @property(assign,nonatomic)int screenWidth;
 @property(assign,nonatomic)int screenHeight;
+@property (strong, nonatomic)  NSMutableArray *queneArray;
+@property(nonatomic,assign)BOOL getQueneBufferStauts;
 @end
 @implementation LiveVidViewModel
 //数据回调
-
+pthread_mutex_t th_mutex_lock;
 void * vidSelf;
 
 void avRealTimeCallBack(void *UserCustom,         //用户自定义数据
@@ -33,7 +62,15 @@ void avRealTimeCallBack(void *UserCustom,         //用户自定义数据
     if (vidSelf != NULL){
         LiveVidViewModel *myself = (__bridge LiveVidViewModel * ) vidSelf;
         printf("vid receive buf len is %d\n",Len);
-         [myself.parser parseFrame:(uint8_t*)Buf len:Len];
+       //  [myself.parser parseFrame:(uint8_t*)Buf len:Len];
+        LiveVidBufferModel * model  = [LiveVidBufferModel new];
+        [model setBuffer:Buf size:Len];
+        
+            pthread_mutex_lock(&th_mutex_lock);
+        NSInteger length  =[myself.queneArray count];
+            [myself.queneArray insertObject:model atIndex:length];
+            pthread_mutex_unlock(&th_mutex_lock);
+        
     }
    
     
@@ -75,6 +112,8 @@ void alarmRealTimeCallBack(int AlmType, int AlmTime, int AlmChl, void* UserCusto
         error = AudioSessionInitialize(NULL, NULL, NULL, NULL);
         error =  AudioSessionSetProperty(kAudioSessionProperty_AudioCategory, sizeof(category), &category);
         [_audioSession initRecordAudio];
+        _queneArray = [NSMutableArray new];
+        pthread_mutex_init(&th_mutex_lock, NULL);
         if (error) NSLog(@"couldn't set audio category!,error is");
     }
     return self;
@@ -87,16 +126,43 @@ void alarmRealTimeCallBack(int AlmType, int AlmTime, int AlmChl, void* UserCusto
         //
         bool ret = thNet_SetCallBack(self.model.NetHandle, avRealTimeCallBack,avAuddioCallBack, NULL, (void*)self.model.NetHandle);
         if (ret) {
+            pthread_mutex_lock(&th_mutex_lock);
+            [self.queneArray removeAllObjects];
+            [self.parser clearDecoder];
+            pthread_mutex_unlock(&th_mutex_lock);
             ret = thNet_Play((HANDLE) self.model.NetHandle, 1-sub, self.openaud,sub, 0);;//
         }
-        [self.parser clearDecoder];
+       
         
     });
     
+    [self startGetQueneBuffer];
+    
+}
+-(void)startGetQueneBuffer{
+    _getQueneBufferStauts = YES;
+    @weakify(self)
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        @strongify(self);
+        //
+        while (self.getQueneBufferStauts) {
+            if ([self.queneArray count] > 0) {
+                LiveVidBufferModel * model =self.queneArray[0];
+                [self.parser parseFrame:(uint8_t*)[model getBuffer] len:[model getBufLen]];
+                pthread_mutex_lock(&th_mutex_lock);
+                NSLog(@"queneArray count is %ld",[self.queneArray count]);
+                [self.queneArray removeObject:model];
+                [model deallocBuf];
+                pthread_mutex_unlock(&th_mutex_lock);
+                
+            }
+        }
+    });
     
 }
 -(void)destroyVidSelfPoint{
     vidSelf = NULL;
+    _getQueneBufferStauts = NO;
 }
 -(void)dealloc{
     vidSelf = NULL;

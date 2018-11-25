@@ -33,6 +33,17 @@
      [[UITabBar appearance] setTintColor:kMainColor];
     
 }
+// 跟控制器是tabBar控制器，那么在这个tabBar控制器中实现下面三个方法
+-(BOOL)shouldAutorotate {
+    return [self.selectedViewController shouldAutorotate];
+}
+
+-(UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return [self.selectedViewController supportedInterfaceOrientations];
+}
+
+
+
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     if(_devListNav){

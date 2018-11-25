@@ -23,6 +23,25 @@
 
 @implementation MediaDetailController
 
+//支持的方向
+-(UIInterfaceOrientationMask)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskLandscapeLeft;
+}
+
+//是否可以旋转
+-(BOOL)shouldAutorotate
+{
+    return YES;
+}
+-(void)viewWillAppear:(BOOL)animated{
+    NSNumber *orientationUnknown = [NSNumber numberWithInt:UIInterfaceOrientationUnknown];
+    [[UIDevice currentDevice] setValue:orientationUnknown forKey:@"orientation"];
+    
+    NSNumber *orientationTarget = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeLeft];
+    [[UIDevice currentDevice] setValue:orientationTarget forKey:@"orientation"];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -214,10 +233,11 @@
 //    [self.navigationController pushViewController:ctl animated:YES];
     
     YBImageBrowser *browser = [YBImageBrowser new];
-    browser.supportedOrientations = UIInterfaceOrientationMaskLandscapeRight;
+    
     browser.dataSource = self;
     browser.currentIndex = row;
     [browser show];
+    
     
 }
 // 实现 <YBImageBrowserDataSource> 协议方法配置数据源

@@ -91,6 +91,7 @@ static void didDecompress( void *decompressionOutputRefCon, void *sourceFrameRef
 }
 -(void)clearH264Deocder {
     if(_deocderSession) {
+        NSLog(@"clearH264Deocder");
         VTDecompressionSessionInvalidate(_deocderSession);
         CFRelease(_deocderSession);
         _deocderSession = NULL;
@@ -141,9 +142,12 @@ static void didDecompress( void *decompressionOutputRefCon, void *sourceFrameRef
                                            _decoderFormatDescription ,
                                            1, 0, NULL, 1, sampleSizeArray,
                                            &sampleBuffer);
-        if (status == kCMBlockBufferNoErr && sampleBuffer && _deocderSession) {
+        if (status == kCMBlockBufferNoErr && sampleBuffer && _deocderSession != NULL) {
             VTDecodeFrameFlags flags = 0;
             VTDecodeInfoFlags flagOut = 0;
+            if (!_deocderSession) {
+                return nil;
+            }
             OSStatus decodeStatus = VTDecompressionSessionDecodeFrame(_deocderSession,
                                                                       sampleBuffer,
                                                                       flags,

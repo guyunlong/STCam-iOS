@@ -17,6 +17,16 @@
 @end
 
 @implementation MediaViewController
+//是否可以旋转
+- (BOOL)shouldAutorotate
+{
+    return YES;
+}
+//支持的方向
+-(UIInterfaceOrientationMask)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskPortrait;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
