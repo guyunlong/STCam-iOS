@@ -62,14 +62,14 @@ void avRealTimeCallBack(void *UserCustom,         //用户自定义数据
     if (vidSelf != NULL){
         LiveVidViewModel *myself = (__bridge LiveVidViewModel * ) vidSelf;
         printf("vid receive buf len is %d\n",Len);
-       //  [myself.parser parseFrame:(uint8_t*)Buf len:Len];
-        LiveVidBufferModel * model  = [LiveVidBufferModel new];
-        [model setBuffer:Buf size:Len];
-        
-            pthread_mutex_lock(&th_mutex_lock);
-        NSInteger length  =[myself.queneArray count];
-            [myself.queneArray insertObject:model atIndex:length];
-            pthread_mutex_unlock(&th_mutex_lock);
+         [myself.parser parseFrame:(uint8_t*)Buf len:Len];
+//        LiveVidBufferModel * model  = [LiveVidBufferModel new];
+//        [model setBuffer:Buf size:Len];
+//
+//            pthread_mutex_lock(&th_mutex_lock);
+//        NSInteger length  =[myself.queneArray count];
+//            [myself.queneArray insertObject:model atIndex:length];
+//            pthread_mutex_unlock(&th_mutex_lock);
         
     }
    
@@ -128,6 +128,7 @@ void alarmRealTimeCallBack(int AlmType, int AlmTime, int AlmChl, void* UserCusto
         if (ret) {
             pthread_mutex_lock(&th_mutex_lock);
             [self.queneArray removeAllObjects];
+            NSLog(@"clearH264Deocder --------- from openVid");
             [self.parser clearDecoder];
             pthread_mutex_unlock(&th_mutex_lock);
             ret = thNet_Play((HANDLE) self.model.NetHandle, 1-sub, self.openaud,sub, 0);;//
@@ -136,7 +137,7 @@ void alarmRealTimeCallBack(int AlmType, int AlmTime, int AlmChl, void* UserCusto
         
     });
     
-    [self startGetQueneBuffer];
+    //[self startGetQueneBuffer];
     
 }
 -(void)startGetQueneBuffer{

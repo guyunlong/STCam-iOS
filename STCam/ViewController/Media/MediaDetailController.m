@@ -62,8 +62,7 @@
         [_mCollectView registerClass:[MediaDetailCCell class] forCellWithReuseIdentifier:MediaDetailCCellIdentify];
         _mCollectView.dataSource = self;
         _mCollectView.delegate = self;
-       
-        
+        [self.mCollectView performSelector:@selector(flashScrollIndicators) withObject:nil afterDelay:0];
         [self.view addSubview:_mCollectView];
        
     }

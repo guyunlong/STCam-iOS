@@ -13,7 +13,7 @@
 
 #define NUM_BUFFERS 3
 #define NUM_RECBUFFERS 2
-#define MIN_SIZE_PER_FRAME 1024*4 //每侦最小数据长度
+#define MIN_SIZE_PER_FRAME 512 //每侦最小数据长度
 typedef struct _circular_buffer {
     char *buffer;
     int  wp;

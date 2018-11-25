@@ -268,9 +268,9 @@ static void MyInputBufferHandler(	void *								inUserData,
     
     NSInteger len=inBuffer->mAudioDataByteSize;
     uint8_t *data=(uint8_t*)inBuffer->mAudioData;
-     NSLog(@"-------record size:%d",len);
+     NSLog(@"-------record size:%ld",len);
     //fwrite(data, len, 1, f);
-    net_SetTalk((HANDLE)session.NetHandle,(char*) data,len);
+    net_SetTalk((HANDLE)session.NetHandle,(char*) data,(int32_t)len);
     
    // int size = write_circular_buffer_bytes(inrb, data,len);
     AudioQueueEnqueueBuffer(inAQ, inBuffer, 0, NULL);

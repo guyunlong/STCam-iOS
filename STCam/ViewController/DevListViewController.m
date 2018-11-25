@@ -36,7 +36,6 @@
     [super viewWillAppear:animated];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self refreshDeviceList:NO];
-        [self monitorRefreshViewKVO];
     });
 }
 - (void)viewDidLoad {
@@ -44,6 +43,7 @@
     [self.view setBackgroundColor:[UIColor whiteColor]];
     [self setTitle:@"title_main_dev_list".localizedString];
     [self initNav];
+    [self monitorRefreshViewKVO];
     
     
 }
@@ -52,7 +52,7 @@
  监听viewModel 中的refreshView变量
  */
 -(void)monitorRefreshViewKVO{
-   
+    
     @weakify(self)
     [[[RACObserve(self.viewModel, refreshView) filter:^BOOL(id value) {
         return [value integerValue] != 0;
@@ -60,12 +60,13 @@
      deliverOn:[RACScheduler mainThreadScheduler]]
      subscribeNext:^(id x) {
         @strongify(self);
-        [self.mTableView reloadData];
+       [self.mTableView reloadData];
     }];
 }
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     [self.mTableView reloadData];
+    
 }
 -(void)initNav{
     UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -118,6 +119,9 @@
             [tableView setUserInteractionEnabled:true];
             tableView.dataSource = self;
             tableView.delegate = self;
+            tableView.estimatedRowHeight = 0;
+            tableView.estimatedSectionHeaderHeight = 0;
+            tableView.estimatedSectionFooterHeight = 0;
             [tableView setBackgroundColor:[UIColor colorWithHexString:@"0xf7f7f7"]];
             // 下拉刷新
             @weakify(self)
@@ -160,11 +164,13 @@
     }
     else if (_viewModel.userMode == TUserMode_Login){
          [self showHudInView:self.view hint:nil];
-        [[_viewModel racGetDeviceList] subscribeNext:^(id x) {
+        [[[_viewModel racGetDeviceList]
+          deliverOn:[RACScheduler mainThreadScheduler]]
+    subscribeNext:^(id x) {
              [self hideHud];
             @strongify(self)
             if ([x integerValue] == 1) {
-                [self.mTableView reloadData];
+               [self.mTableView reloadData];
                 
             }
             if (refresh) {
@@ -264,6 +270,7 @@
             [self.navigationController pushViewController:ctl animated:YES];
         }
     };
+    [cell setFrame:CGRectMake(0, 0, kScreenWidth, [DevListCell cellHeight])];
     return cell;
 }
 

@@ -106,7 +106,7 @@ void callback_SearchDev(void *UserCustom, u32 SN, int DevType, char *DevModal, c
         @strongify(self)
         
         //http://211.149.199.247:800/app_user_get_devlst.asp?user=1257117229@qq.com&psd=12345678
-        NSString * url = [NSString stringWithFormat:@"http://%@:%d/app_user_get_devlst.asp?user=%@&psd=%@",serverIP,ServerPort,[AccountManager getUser],[AccountManager getPassword]];
+        NSString * url = [NSString stringWithFormat:@"http://%@:%d/app_user_get_devlst.asp?user=%@&psd=%@&tokenid=%@",serverIP,ServerPort,[AccountManager getUser],[AccountManager getPassword],[AccountManager sharedManager].deviceToken];
         [FFHttpTool GET:url parameters:nil success:^(id data){
             @strongify(self)
             if ([data isKindOfClass:[NSArray class]]) {

@@ -187,7 +187,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
         {
             //  case NotReachable handler
             NSLog(@"------------没有联网");
-            [viewModel notifyNetworkStatusChanged:NetWorkConnType_Break];
+           // [viewModel notifyNetworkStatusChanged:NetWorkConnType_Break];
             break;
         }
             

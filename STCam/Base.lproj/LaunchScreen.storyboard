@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash_grave_01.png" translatesAutoresizingMaskIntoConstraints="NO" id="xB1-05-cSJ">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launchscreen01.png" highlightedImage="launchscreen01.png" translatesAutoresizingMaskIntoConstraints="NO" id="xB1-05-cSJ">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                         </subviews>
@@ -37,6 +37,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="splash_grave_01.png" width="720" height="1280"/>
+        <image name="launchscreen01.png" width="720" height="1280"/>
     </resources>
 </document>

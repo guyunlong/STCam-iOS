@@ -48,14 +48,14 @@
 }
 
 -(void)refreshDeviceAdvanceConfig{
-    
+    [self showHudInView:self.view hint:nil];
     @weakify(self)
     [[[self.viewModel racGetDiskCfg]
       deliverOn:[RACScheduler mainThreadScheduler]]
      subscribeNext:^(id x) {
          if([x integerValue] == 1){
              @strongify(self)
-            
+             [self hideHud];
              InfoModel * model0= self.rowsArray[0];
              [model0 setInfo:[self.viewModel.mSDInfoModel getTotalSizeDesc]];
              

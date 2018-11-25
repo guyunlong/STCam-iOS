@@ -90,27 +90,30 @@ static void didDecompress( void *decompressionOutputRefCon, void *sourceFrameRef
     return YES;
 }
 -(void)clearH264Deocder {
-    if(_deocderSession) {
-        NSLog(@"clearH264Deocder");
-        VTDecompressionSessionInvalidate(_deocderSession);
-        CFRelease(_deocderSession);
-        _deocderSession = NULL;
+    @synchronized(self){
+        NSLog(@"clearH264Deocder -------- 0 ");
+        if(_deocderSession) {
+            NSLog(@"clearH264Deocder ------ 1");
+            
+            VTDecompressionSessionInvalidate(_deocderSession);
+            CFRelease(_deocderSession);
+            _deocderSession = NULL;
+        }
+        if(_decoderFormatDescription) {
+            CFRelease(_decoderFormatDescription);
+            _decoderFormatDescription = NULL;
+        }
+        if (_sps && _spsSize > 0) {
+            free(_sps);
+            _sps = NULL;
+        }
+        if (_pps && _ppsSize > 0) {
+            free(_pps);
+            _pps = NULL;
+        }
+        _spsSize = _ppsSize = 0;
     }
-    if(_decoderFormatDescription) {
-        CFRelease(_decoderFormatDescription);
-        _decoderFormatDescription = NULL;
-    }
-    if (_sps && _spsSize > 0) {
-        free(_sps);
-        _sps = NULL;
-    }
-    if (_pps && _ppsSize > 0) {
-        free(_pps);
-        _pps = NULL;
-    }
-    
-    
-    _spsSize = _ppsSize = 0;
+   
 }
 -(CVPixelBufferRef)decode:(uint8_t*)buffer size:(int)size {
     if (!_deocderSession) {

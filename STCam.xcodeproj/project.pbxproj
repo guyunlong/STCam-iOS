@@ -207,6 +207,7 @@
 		A4CFFE842168C7B600A93B72 /* AAPLEAGLLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CFFE7E2168C7B600A93B72 /* AAPLEAGLLayer.m */; };
 		A4CFFE862168C7D500A93B72 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4CFFE852168C7D500A93B72 /* AVKit.framework */; };
 		A4DAA3BA21AA63FF007E4600 /* splash_grave_01.png in Resources */ = {isa = PBXBuildFile; fileRef = A4DAA3B921AA63FF007E4600 /* splash_grave_01.png */; };
+		A4DAA3BC21AAAC94007E4600 /* launchscreen01.png in Resources */ = {isa = PBXBuildFile; fileRef = A4DAA3BB21AAAC94007E4600 /* launchscreen01.png */; };
 		A4F50440216268A6002B71FF /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4F5043F216268A6002B71FF /* RootViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -737,8 +738,8 @@
 		A4CFFE802168C7B600A93B72 /* AAPLEAGLLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAPLEAGLLayer.h; sourceTree = "<group>"; };
 		A4CFFE812168C7B600A93B72 /* VideoBufferParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoBufferParser.h; sourceTree = "<group>"; };
 		A4CFFE852168C7D500A93B72 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
-		A4DAA3B721AA63C5007E4600 /* grave01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grave01.png; sourceTree = SOURCE_ROOT; };
 		A4DAA3B921AA63FF007E4600 /* splash_grave_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash_grave_01.png; sourceTree = SOURCE_ROOT; };
+		A4DAA3BB21AAAC94007E4600 /* launchscreen01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launchscreen01.png; sourceTree = SOURCE_ROOT; };
 		A4F5043E216268A6002B71FF /* RootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		A4F5043F216268A6002B71FF /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		C18EA7F117ED0291D64659B7 /* libPods-STCam.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-STCam.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -847,11 +848,11 @@
 			isa = PBXGroup;
 			children = (
 				9DBBD6792182B3E7003B4DB0 /* MediaViewController.h */,
-				9DBBD67A2182B3E7003B4DB0 /* ImageDisplayController.m */,
-				9DBBD67B2182B3E7003B4DB0 /* MediaDetailController.h */,
-				9DBBD67C2182B3E7003B4DB0 /* ImageDisplayController.h */,
 				9DBBD67D2182B3E7003B4DB0 /* MediaViewController.m */,
+				9DBBD67B2182B3E7003B4DB0 /* MediaDetailController.h */,
 				9DBBD67E2182B3E7003B4DB0 /* MediaDetailController.m */,
+				9DBBD67C2182B3E7003B4DB0 /* ImageDisplayController.h */,
+				9DBBD67A2182B3E7003B4DB0 /* ImageDisplayController.m */,
 			);
 			path = Media;
 			sourceTree = "<group>";
@@ -1383,7 +1384,6 @@
 		A46F7B0E2132D25700854DB8 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				A4DAA3B721AA63C5007E4600 /* grave01.png */,
 				A4606927216A4F0400491290 /* AudioSession.h */,
 				A4606928216A4F0400491290 /* AudioSession.m */,
 				A46F7B0F2132D2E400854DB8 /* DevListViewModel.h */,
@@ -1445,6 +1445,7 @@
 				A4946FF7212C5B460015990C /* SplashViewController.h */,
 				A4946FF8212C5B460015990C /* SplashViewController.m */,
 				A4946FFA212C5B460015990C /* Main.storyboard */,
+				A4DAA3BB21AAAC94007E4600 /* launchscreen01.png */,
 				A4DAA3B921AA63FF007E4600 /* splash_grave_01.png */,
 				A4946FFD212C5B470015990C /* Assets.xcassets */,
 				A4946FFF212C5B470015990C /* LaunchScreen.storyboard */,
@@ -1745,6 +1746,7 @@
 				A442C3C4213199A100198910 /* bdaiface.idl in Resources */,
 				9DFEF158217F1F4E00FD28E1 /* SearchDeviceCell.xib in Resources */,
 				A442C3D2213199A100198910 /* msvidctl.tlb in Resources */,
+				A4DAA3BC21AAAC94007E4600 /* launchscreen01.png in Resources */,
 				9DBBD69D2182EB45003B4DB0 /* WSDatePickerView.xib in Resources */,
 				A47041AF216E14FA007163C8 /* DevMediaCell.xib in Resources */,
 				A442C3BC213199A100198910 /* dmodshow.idl in Resources */,
