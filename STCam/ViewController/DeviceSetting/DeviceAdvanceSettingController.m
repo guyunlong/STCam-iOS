@@ -124,6 +124,9 @@
     refreshButton.frame = CGRectMake(0, 0, 80, 28);
     refreshButton.contentHorizontalAlignment =  UIControlContentHorizontalAlignmentRight;
     [refreshButton addTarget:self action:@selector(refreshDeviceAdvanceConfig) forControlEvents:UIControlEventTouchUpInside];
+    [refreshButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [refreshButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
+    
     [refreshButton setTitle:@"action_refresh".localizedString forState:UIControlStateNormal];
     UIBarButtonItem *rightBarItem = [[UIBarButtonItem alloc] initWithCustomView:refreshButton];
     self.navigationItem.rightBarButtonItem = rightBarItem;

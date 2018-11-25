@@ -72,13 +72,16 @@
     if(_viewModel.userMode == TUserMode_Login){
         [btn setTitle:@"action_add".localizedString forState:UIControlStateNormal];
         [btn setImage:[UIImage imageNamed:@"icon_add_nor"] forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
         btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         [btn setTitleEdgeInsets:UIEdgeInsetsMake(0, - 36, 0, 36)];
         [btn setImageEdgeInsets:UIEdgeInsetsMake(0, 30, 0, -30)];
     }
     else if(_viewModel.userMode == TUserMode_Visitor){
          [btn setTitle:@"action_search".localizedString forState:UIControlStateNormal];
-        
+        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
         UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
         backButton.frame = CGRectMake(0, 0, 28, 28);
         [backButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
