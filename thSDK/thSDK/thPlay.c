@@ -1557,7 +1557,9 @@ bool thNet_Play(HANDLE NetHandle, u32 VideoChlMask, u32 AudioChlMask, u32 SubVid
     Pkt.LivePkt.ExtraChl = ExtraChl;
 
     ret = avSendIOCtrl(Play->p2p_avIndex, Head_CmdPkt, (char*) &Pkt, 8 + Pkt.PktSize);
-    if (ret < 0) return false;
+      if (ret < 0) {
+          return false;
+      }
     Result = true;
 #endif
   }
@@ -1612,8 +1614,12 @@ bool net_SetTalk(HANDLE NetHandle, char* Buf, i32 BufLen)
     i32 i, idiv, imod, iMaxSize, ret;
     FRAMEINFO_t framInfo;
 
-    if (Play->p2p_SessionID < 0) return false;
-    if (Play->p2p_talkIndex < 0) return false;
+      if (Play->p2p_SessionID < 0) {
+          return false;
+      }
+      if (Play->p2p_talkIndex < 0){
+          return false;
+      }
 
     memset(&framInfo, 0, sizeof(FRAMEINFO_t));
     framInfo.timestamp = 0;

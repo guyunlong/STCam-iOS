@@ -12,6 +12,9 @@
 #import "DevListViewModel.h"
 #import "RealReachability.h"
 #import "PrefixHeader.h"
+#import "UIViewController+Utils.h"
+#import "LoginViewController.h"
+#import "STNavigationController.h"
 #import <Bugly/Bugly.h>
 // iOS10 注册 APNs 所需头文件
 #import <UserNotifications/UserNotifications.h>
@@ -70,8 +73,12 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     NSString *deviceTokenStr = [[[[deviceToken description] stringByReplacingOccurrencesOfString:@"<"withString:@""]                                                 stringByReplacingOccurrencesOfString:@">" withString:@""]                                              stringByReplacingOccurrencesOfString:@" "withString:@""];
   
 
+    /// Required - 注册 DeviceToken
+    [JPUSHService registerDeviceToken:deviceToken];
+    if ([[JPUSHService registrationID] length]> 0) {
+        [[AccountManager sharedManager] setDeviceToken:[JPUSHService registrationID]];
+    }
     
-    [[AccountManager sharedManager] setDeviceToken:deviceTokenStr];
 }
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
     //Optional
@@ -121,12 +128,15 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 - (void)jpushNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(NSInteger))completionHandler {
     // Required
     NSDictionary * userInfo = notification.request.content.userInfo;
+    [self processNotification:userInfo];
     if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         [JPUSHService handleRemoteNotification:userInfo];
     }
+    
     completionHandler(UNNotificationPresentationOptionAlert); // 需要执行这个方法，选择是否提醒用户，有 Badge、Sound、Alert 三种类型可以选择设置
 }
 
+         
 // iOS 10 Support
 - (void)jpushNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler {
     // Required
@@ -134,11 +144,13 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         [JPUSHService handleRemoteNotification:userInfo];
     }
+    [self processNotification:userInfo];
     completionHandler();  // 系统要求执行这个方法
 }
 
+         
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
-    
+    [self processNotification:userInfo];
     // Required, iOS 7 Support
     [JPUSHService handleRemoteNotification:userInfo];
     completionHandler(UIBackgroundFetchResultNewData);
@@ -159,6 +171,23 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     
    
 }
+-(void)processNotification:(NSDictionary *) userInfo{
+    NSString *alert  = userInfo[@"aps"][@"alert"];
+    if ([alert isEqualToString:@"USER_LOGOUT"]) {
+        UIViewController * ctl  =[UIViewController currentViewController];
+        if (![ctl isKindOfClass:[LoginViewController class]]) {
+            NSLog(@"current view controller is LoginViewController");
+            LoginViewController * loginCtl  = [[LoginViewController alloc] init];
+            [loginCtl setLogout:YES];
+            STNavigationController *loginNav =   [[STNavigationController alloc] initWithRootViewController:loginCtl];
+            [ctl presentViewController:loginNav animated:YES completion:nil];
+            
+        }
+    }
+    else if([alert isEqualToString:@""]){
+        
+    }
+ }
 -(void)endBackgroundBack{
     [[UIApplication sharedApplication] endBackgroundTask:_backIden];
     _backIden = UIBackgroundTaskInvalid;

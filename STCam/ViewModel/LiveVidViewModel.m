@@ -248,6 +248,7 @@ void alarmRealTimeCallBack(int AlmType, int AlmTime, int AlmChl, void* UserCusto
  */
 -(void)talkBegin{
     _isTalking = YES;
+    thNet_TalkOpen(_model.NetHandle);
     [_audioSession setNetHandle:_model.NetHandle];
     [_audioSession reStartRecord];
 }
@@ -256,6 +257,7 @@ void alarmRealTimeCallBack(int AlmType, int AlmTime, int AlmChl, void* UserCusto
  结束对讲
  */
 -(void)talkEnd{
+    thNet_TalkClose(_model.NetHandle);
     _isTalking = NO;
     [_audioSession pauseRecord];
 }
