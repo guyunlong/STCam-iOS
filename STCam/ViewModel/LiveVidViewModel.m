@@ -62,15 +62,15 @@ void avRealTimeCallBack(void *UserCustom,         //用户自定义数据
     if (vidSelf != NULL){
         LiveVidViewModel *myself = (__bridge LiveVidViewModel * ) vidSelf;
         printf("vid receive buf len is %d\n",Len);
-         [myself.parser parseFrame:(uint8_t*)Buf len:Len];
-//        LiveVidBufferModel * model  = [LiveVidBufferModel new];
-//        [model setBuffer:Buf size:Len];
-//
-//            pthread_mutex_lock(&th_mutex_lock);
-//        NSInteger length  =[myself.queneArray count];
-//            [myself.queneArray insertObject:model atIndex:length];
-//            pthread_mutex_unlock(&th_mutex_lock);
-        
+      //   [myself.parser parseFrame:(uint8_t*)Buf len:Len];
+        LiveVidBufferModel * model  = [LiveVidBufferModel new];
+        [model setBuffer:Buf size:Len];
+       // NSLog(@"pthread_mutex_lock begin 2");
+            pthread_mutex_lock(&th_mutex_lock);
+        NSInteger length  =[myself.queneArray count];
+            [myself.queneArray insertObject:model atIndex:length];
+            pthread_mutex_unlock(&th_mutex_lock);
+       // NSLog(@"pthread_mutex_lock end 2");
     }
    
     
@@ -126,18 +126,20 @@ void alarmRealTimeCallBack(int AlmType, int AlmTime, int AlmChl, void* UserCusto
         //
         bool ret = thNet_SetCallBack(self.model.NetHandle, avRealTimeCallBack,avAuddioCallBack, NULL, (void*)self.model.NetHandle);
         if (ret) {
+            // NSLog(@"pthread_mutex_lock begin 1");
             pthread_mutex_lock(&th_mutex_lock);
             [self.queneArray removeAllObjects];
             NSLog(@"clearH264Deocder --------- from openVid");
             [self.parser clearDecoder];
             pthread_mutex_unlock(&th_mutex_lock);
+           //  NSLog(@"pthread_mutex_lock end 1");
             ret = thNet_Play((HANDLE) self.model.NetHandle, 1-sub, self.openaud,sub, 0);;//
         }
        
         
     });
     
-    //[self startGetQueneBuffer];
+    [self startGetQueneBuffer];
     
 }
 -(void)startGetQueneBuffer{
@@ -147,16 +149,20 @@ void alarmRealTimeCallBack(int AlmType, int AlmTime, int AlmChl, void* UserCusto
         @strongify(self);
         //
         while (self.getQueneBufferStauts) {
+            NSLog(@"pthread_mutex_lock begin 0");
+           // pthread_mutex_lock(&th_mutex_lock);
             if ([self.queneArray count] > 0) {
+                
                 LiveVidBufferModel * model =self.queneArray[0];
                 [self.parser parseFrame:(uint8_t*)[model getBuffer] len:[model getBufLen]];
-                pthread_mutex_lock(&th_mutex_lock);
                 NSLog(@"queneArray count is %ld",[self.queneArray count]);
                 [self.queneArray removeObject:model];
                 [model deallocBuf];
-                pthread_mutex_unlock(&th_mutex_lock);
+                
                 
             }
+            pthread_mutex_unlock(&th_mutex_lock);
+           // NSLog(@"pthread_mutex_lock end 0");
         }
     });
     
