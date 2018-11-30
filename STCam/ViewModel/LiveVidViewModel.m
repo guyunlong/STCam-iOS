@@ -149,8 +149,8 @@ void alarmRealTimeCallBack(int AlmType, int AlmTime, int AlmChl, void* UserCusto
         @strongify(self);
         //
         while (self.getQueneBufferStauts) {
-            NSLog(@"pthread_mutex_lock begin 0");
-           // pthread_mutex_lock(&th_mutex_lock);
+           // NSLog(@"pthread_mutex_lock begin 0");
+           pthread_mutex_lock(&th_mutex_lock);
             if ([self.queneArray count] > 0) {
                 
                 LiveVidBufferModel * model =self.queneArray[0];

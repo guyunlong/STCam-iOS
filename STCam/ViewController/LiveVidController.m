@@ -63,6 +63,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     _viewModel.delegate = self;
+    
+     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidEnterbackground) name:AppDidEnterbackground object:nil];
+    
+    
+}
+-(void)appDidEnterbackground{
+    [_viewModel closeVid];
+    [self back];
 }
 -(void)loadView{
     [super loadView];

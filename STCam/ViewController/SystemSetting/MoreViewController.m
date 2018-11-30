@@ -23,6 +23,7 @@
 @property(nonatomic,strong)UIView * topBgView;//顶部蓝色背景
 @property(nonatomic,strong)UIImageView * appIconImageView;
 @property(nonatomic,strong)UILabel * userLb;
+@property(nonatomic,strong)UILabel * tokenLb;
 @property(nonatomic,strong)UITableView * mTableView;
 @property(nonatomic,strong)UIButton  * exitButton;//退出登录按钮
 @property(nonatomic,strong)NSMutableArray  * rowsArray;//列表数据
@@ -36,6 +37,7 @@
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES];
     [_userLb setText:[AccountManager getUser]];
+    [_tokenLb setText:[AccountManager sharedManager].deviceToken];
    
 }
 -(void)viewWillDisappear:(BOOL)animated{
@@ -61,6 +63,12 @@
     [_userLb setTextColor:[UIColor colorWithHexString:@"0x333333"]];
     [_userLb setTextAlignment:NSTextAlignmentCenter];
     [_topBgView addSubview:_userLb];
+    
+    _tokenLb = [[UILabel alloc] initWithFrame:CGRectMake(0, kPadding, kScreenWidth, 24*kWidthCoefficient)];
+    [_tokenLb setTextColor:[UIColor colorWithHexString:@"0x333333"]];
+    [_tokenLb setTextAlignment:NSTextAlignmentCenter];
+    [_topBgView addSubview:_tokenLb];
+    
     
     y += topHeight;
     _mTableView = ({
