@@ -279,7 +279,7 @@ void callback_SearchDev(void *UserCustom, u32 SN, int DevType, char *DevModal, c
                     for (DeviceModel * devModel in self.deviceArray) {
                         if ([devModel IsConnect]) {
                             NSLog(@"disconnect device ,sn :%@",devModel.SN);
-                            [devModel disconnect];
+                            [devModel threadDisconnect];
                         }
                     }
                     /*2、清空deviceArray数组*/
