@@ -104,6 +104,7 @@
     for (DeviceModel * model in _viewModel.deviceArray) {
         [model threadDisconnect];
     }
+    _viewModel.userMode = TUserMode_Unknown;
     [_viewModel.deviceArray removeAllObjects];
     [self.tabBarController dismissViewControllerAnimated:YES completion:nil];
 }

@@ -217,7 +217,7 @@
     CIImage *outputImage = [filter outputImage];
     
     // 5. 显示二维码
-    self.qrImageView.image = [UIImage creatNonInterpolatedUIImageFormCIImage:outputImage withSize:200];
+    self.qrImageView.image = [UIImage creatNonInterpolatedUIImageFormCIImage:outputImage withSize:300];
 }
 
 #pragma checkbox

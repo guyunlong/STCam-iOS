@@ -44,6 +44,9 @@ void callback_SearchDev(void *UserCustom, u32 SN, int DevType, char *DevModal, c
     //设置 DevIP 的设备
     for (DeviceModel * model in myself.searchDeviceArray) {
         if ([model.IPUID isEqualToString:[NSString stringWithUTF8String:DevIP]]) {
+            if (![model IsConnect]) {
+                [model threadConnect];
+            }
             return;
         }
     }
@@ -52,6 +55,7 @@ void callback_SearchDev(void *UserCustom, u32 SN, int DevType, char *DevModal, c
     [node setSN:[NSString stringWithFormat:@"%0.8x", SN]];
     [node setDataPort:DataPort];
     [node setWebPort: HttpPort];
+    [node setIsHistory:YES];
     [node setConnType:@"IS_CONN_LAN"];
     NSString *devName = nil;
     NSInteger ansiLen = strlen(DevName);
@@ -214,7 +218,7 @@ void callback_SearchDev(void *UserCustom, u32 SN, int DevType, char *DevModal, c
     thSearch_Free(SearchHandle);
     SearchHandle = NULL;
     
-    if (inMainView) {
+    if (inMainView && _userMode == TUserMode_Visitor) {
         self.deviceArray = [self.searchDeviceArray mutableCopy];
     }
     
@@ -270,7 +274,7 @@ void callback_SearchDev(void *UserCustom, u32 SN, int DevType, char *DevModal, c
             {
                 @weakify(self)
                 dispatch_queue_t quene = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-                dispatch_async(quene, ^{
+                dispatch_sync(quene, ^{
                     /*1、断开所有连接*/
                     for (DeviceModel * devModel in self.deviceArray) {
                         if ([devModel IsConnect]) {
@@ -280,6 +284,7 @@ void callback_SearchDev(void *UserCustom, u32 SN, int DevType, char *DevModal, c
                     }
                     /*2、清空deviceArray数组*/
                     [self.deviceArray removeAllObjects];
+                    [self setRefreshView:YES];
                     /*3、重新初始化p2p*/
                     P2P_Free();
                     P2P_Init();
