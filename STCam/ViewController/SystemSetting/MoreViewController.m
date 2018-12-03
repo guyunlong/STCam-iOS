@@ -37,7 +37,7 @@
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES];
     [_userLb setText:[AccountManager getUser]];
-    [_tokenLb setText:[AccountManager sharedManager].deviceToken];
+ //   [_tokenLb setText:[AccountManager sharedManager].deviceToken];
    
 }
 -(void)viewWillDisappear:(BOOL)animated{
@@ -104,13 +104,13 @@
 -(void)initValue{
     _rowsArray = [NSMutableArray new];
     
-    InfoModel * model0 = [InfoModel new];
+  //  InfoModel * model0 = [InfoModel new];
     InfoModel * model1 = [InfoModel new];
     InfoModel * model2 = [InfoModel new];
     InfoModel * model3 = [InfoModel new];
     InfoModel * model4 = [InfoModel new];
     
-    [model0 setTitle:@"action_alarm_sound".localizedString];
+  //  [model0 setTitle:@"action_alarm_sound".localizedString];
     [model1 setTitle:@"action_change_system_password".localizedString];
     [model2 setTitle:@"action_share_manager".localizedString];
     [model3 setTitle:@"action_app_version".localizedString];
@@ -121,7 +121,7 @@
     
     [model3 setInfo:app_Version];
     
-    [_rowsArray addObject:model0];
+   // [_rowsArray addObject:model0];
     [_rowsArray addObject:model1];
     [_rowsArray addObject:model2];
     [_rowsArray addObject:model3];
@@ -170,20 +170,20 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     NSInteger row = [indexPath row];
-    if (1 == row) {
+    if (0 == row) {
         ChangeAccountPwdController * ctl = [ChangeAccountPwdController new];
         ctl.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:ctl animated:YES];
     }
-    else if(2 == row){
+    else if(1 == row){
         ShareAccountManager * ctl = [ShareAccountManager new];
         ctl.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:ctl animated:YES];
     }
-    else if(3 == row){
+    else if(2 == row){
         [self checkUpdateClicked];
     }
-    else if(4 == row){
+    else if(3 == row){
         AboutAppController * ctl = [AboutAppController new];
         ctl.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:ctl animated:YES];

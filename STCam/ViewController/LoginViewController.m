@@ -251,13 +251,16 @@
 
 -(void)loginClicked{
     [self.view endEditing:YES];
+    [self showHudInView:self.view hint:nil];
     @weakify(self)
     [[_viewModel racLogin:NO] subscribeNext:^(id x) {
+        @strongify(self)
+        [self hideHud];
         if ([x integerValue] == 1)
        //if(YES)
         {
            //跳转到tab页面
-            @strongify(self)
+            
             MainTabController * mainTabController = [[MainTabController alloc] initWithUserMode:TUserMode_Login];
             [self presentViewController:mainTabController animated:YES completion:^{
                 
@@ -273,13 +276,16 @@
     }];
 }
 -(void)forceLogin{
+     [self showHudInView:self.view hint:nil];
     @weakify(self)
     [[_viewModel racLogin:YES] subscribeNext:^(id x) {
+         @strongify(self)
+        [self hideHud];
         if ([x integerValue] == 1)
             //if(YES)
         {
             //跳转到tab页面
-            @strongify(self)
+           
             MainTabController * mainTabController = [[MainTabController alloc] initWithUserMode:TUserMode_Login];
             [self presentViewController:mainTabController animated:YES completion:^{
                 

@@ -26,6 +26,8 @@ typedef NS_ENUM(NSInteger, PtzControlType){
 @interface LiveVidViewModel : NSObject
 @property(nonatomic,strong)DeviceModel*model;
 
+
+
 /**
  默认sub为1，播放辅码流
  */

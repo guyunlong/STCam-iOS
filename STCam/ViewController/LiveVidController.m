@@ -43,6 +43,8 @@
 
 @property (strong, nonatomic) NSTimer * recordTime;
 @property (strong, nonatomic)  UIView *gestureControlView;//手势控制
+
+@property(nonatomic,assign) BOOL showHud;//是否已经获得第一帧视频
 @end
 
 @implementation LiveVidController
@@ -50,6 +52,8 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [_viewModel openVid:1];
+    [self showHudInViewOffset:self.view hint:nil offset:-kScreenHeight/6];
+    _showHud = YES;
     if(isLandscape){
         [self.navigationController setNavigationBarHidden:YES];
     }
@@ -541,6 +545,11 @@
 # pragma  delegate
 - (void)updateVidView:(CVPixelBufferRef)pixelBuffer{
     _glLayer.pixelBuffer = pixelBuffer;
+    if (_showHud) {
+        _showHud = NO;
+        [self hideHud];
+    }
+    
 }
 
 @end

@@ -67,6 +67,7 @@
             break;
     }
     if(pixelBuffer) {
+    
         dispatch_sync(dispatch_get_main_queue(), ^{
             if (_delegate && [_delegate respondsToSelector:@selector(updateVidView:)]) {
                 [_delegate updateVidView:pixelBuffer];

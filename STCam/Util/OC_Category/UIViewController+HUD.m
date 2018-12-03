@@ -32,8 +32,19 @@ static const void *HttpRequestHUDKey = &HttpRequestHUDKey;
     HUD.labelText = hint;
     [view addSubview:HUD];
     [HUD show:YES];
+    
     [self setHUD:HUD];
 }
+
+- (void)showHudInViewOffset:(UIView *)view hint:(NSString *)hint offset:(float)yOffset{
+    MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:view];
+    HUD.labelText = hint;
+    HUD.yOffset = yOffset;
+    [view addSubview:HUD];
+    [HUD show:YES];
+    [self setHUD:HUD];
+}
+
 
 - (void)showHint:(NSString *)hint
 {

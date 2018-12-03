@@ -33,7 +33,7 @@
     if (!dragToFresh) {
         [self showHudInView:self.view hint:nil];
     }
-    NSString * url = [NSString stringWithFormat:@"http://%@:%d/app_share_get_lst.asp?user=%@&psd=%@tokenid=%@",serverIP,ServerPort,[AccountManager getUser],[AccountManager getPassword],[[AccountManager sharedManager] deviceToken]];
+    NSString * url = [NSString stringWithFormat:@"http://%@:%d/app_share_get_lst.asp?user=%@&psd=%@&tokenid=%@",serverIP,ServerPort,[AccountManager getUser],[AccountManager getPassword],[[AccountManager sharedManager] deviceToken]];
     @weakify(self);
     [FFHttpTool GET:url parameters:nil success:^(id data){
         @strongify(self)
@@ -99,7 +99,7 @@
 
 -(void)deleteSubUser:(NSInteger)index{
     UserModel * model = [_sharedUserArray objectAtIndex:index];
-    NSString * url = [NSString stringWithFormat:@"http://%@:%d/app_share_del_sub.asp?user=%@&psd=%@tokenid=%@&sub=%@",serverIP,ServerPort,[AccountManager getUser],[AccountManager getPassword],[[AccountManager sharedManager] deviceToken],model.User];
+    NSString * url = [NSString stringWithFormat:@"http://%@:%d/app_share_del_sub.asp?user=%@&psd=%@&tokenid=%@&sub=%@",serverIP,ServerPort,[AccountManager getUser],[AccountManager getPassword],[[AccountManager sharedManager] deviceToken],model.User];
     @weakify(self);
     [FFHttpTool GET:url parameters:nil success:^(id data){
         @strongify(self)

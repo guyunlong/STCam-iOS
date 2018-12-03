@@ -135,6 +135,12 @@
         if(viewModel.userMode == TUserMode_Visitor){
             [_shareBtn setHidden:YES];
         }
+        else if(!_model.IsShare){
+            [_shareBtn setHidden:YES];
+        }
+        else{
+            [_shareBtn setHidden:NO];
+        }
         
     }
     
