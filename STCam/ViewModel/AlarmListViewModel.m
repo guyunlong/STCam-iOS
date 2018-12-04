@@ -27,7 +27,7 @@
         
         NSString * dateStr = [NSDate stringFromDate:[NSDate date] withFormat:@"yyyyMMdd"];
         //http://211.149.199.247:800/app_user_get_devlst.asp?user=1257117229@qq.com&psd=12345678
-        NSString * url = [NSString stringWithFormat:@"http://%@:%d/app_user_getalmfilelst.asp?user=%@&psd=%@&tokenid=%@&dt=%@&line=100&page=0",serverIP,ServerPort,[AccountManager getUser],[AccountManager getPassword],[AccountManager sharedManager].deviceToken,dateStr];
+        NSString * url = [NSString stringWithFormat:@"http://%@:%d/app_user_getalmfilelst.asp?user=%@&psd=%@&dt=%@&line=100&page=0",serverIP,ServerPort,[AccountManager getUser],[AccountManager getPassword],dateStr];
         [FFHttpTool GET:url parameters:nil success:^(id data){
             @strongify(self)
             
@@ -69,7 +69,7 @@
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
         @strongify(self)
         //http://211.149.199.247:800/app_user_get_devlst.asp?user=1257117229@qq.com&psd=12345678
-        NSString * url = [NSString stringWithFormat:@"http://%@:%d/app_user_delalmfile.asp?user=%@&psd=%@&tokenid=%@&id=%@",serverIP,ServerPort,[AccountManager getUser],[AccountManager getPassword],[AccountManager sharedManager].deviceToken,mutaleString];
+        NSString * url = [NSString stringWithFormat:@"http://%@:%d/app_user_delalmfile.asp?user=%@&psd=%@&id=%@",serverIP,ServerPort,[AccountManager getUser],[AccountManager getPassword],mutaleString];
         [FFHttpTool GET:url parameters:nil success:^(id data){
             @strongify(self)
             [subscriber sendNext:@1];

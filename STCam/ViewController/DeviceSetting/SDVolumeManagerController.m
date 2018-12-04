@@ -148,6 +148,9 @@
          else if([x integerValue] == 2){
              [self showHint:@"action_Success_Reboot".localizedString];
          }
+         else if([x integerValue] == 10000){
+             [self showHint:@"action_Success_Reboot".localizedString];
+         }
          else{
              [self showHint:@"action_Failed".localizedString];
          }

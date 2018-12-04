@@ -10,6 +10,8 @@
 
 @interface UserModel : NSObject
 @property(nonatomic,strong) NSString* User;
+@property(nonatomic,strong) NSString* SN;
+@property(nonatomic,strong) NSString* DevName;
 +(instancetype)UserModelWithDict:(NSDictionary *)dict;
 -(instancetype)initWithDict:(NSDictionary *)dict;
 -(void)setValue:(id)value forUndefinedKey:(NSString *)key;

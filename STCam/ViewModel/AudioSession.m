@@ -23,52 +23,62 @@ bool _isplay[NUM_BUFFERS];
 circular_buffer *inrb;
 bool audioset;
 
+void * audSelf;
 static void BufferCallback(void *inUserData,AudioQueueRef inAQ,                         AudioQueueBufferRef buffer){
-    
-    AudioSession* player=(__bridge AudioSession*)inUserData;
-    if (!audioset) {
-        audioset = true;
-        [player resetOutputTarget];
-    }
-    
-    //printf("=================== %d\n",[player bufferByteSize]);
-  	UInt32 numBytes;
-	//写进buffer
-	
-    int index;
-    for(int i=0;i<NUM_BUFFERS;i++)
-    {
-        if(player->buffers[i] == buffer)
-            index = i;
+   
+   
+        if (audSelf == NULL) {
+            return;
+        }
+        AudioSession* player=(__bridge AudioSession*)audSelf;
+        if (!audioset) {
+            audioset = true;
+            [player resetOutputTarget];
+        }
         
-    }
-    
-    int len = read_circular_buffer_bytes(outrb, nextBuffer,nextSize);
-    NSLog(@"333333333333333333 read buf is %d,circle size is %d",len,outrb->wp);
-    if (len > 0) {
-       // NSLog(@"back 1111111111111");
-        memcpy(buffer->mAudioData, nextBuffer, nextSize);
-        buffer->mAudioDataByteSize = len;
-        AudioQueueEnqueueBuffer(inAQ, buffer, 0, NULL);
-    } else {
-        _isplay[index] = false;
-        int cnt = 0;
-        for (int i=0; i<NUM_BUFFERS; i++) {
-            if (!_isplay[i]) {
-                cnt++;
+        //printf("=================== %d\n",[player bufferByteSize]);
+        UInt32 numBytes;
+        //写进buffer
+        
+        int index;
+        for(int i=0;i<NUM_BUFFERS;i++)
+        {
+            if(player->buffers[i] == buffer)
+                index = i;
+            
+        }
+        
+        int len = read_circular_buffer_bytes(outrb, nextBuffer,nextSize);
+        NSLog(@"333333333333333333 read buf is %d,circle size is %d",len,outrb->wp);
+        if (len > 0) {
+            // NSLog(@"back 1111111111111");
+            memcpy(buffer->mAudioData, nextBuffer, nextSize);
+            buffer->mAudioDataByteSize = len;
+            AudioQueueEnqueueBuffer(inAQ, buffer, 0, NULL);
+        } else {
+            _isplay[index] = false;
+            int cnt = 0;
+            for (int i=0; i<NUM_BUFFERS; i++) {
+                if (!_isplay[i]) {
+                    cnt++;
+                }
             }
+            
+            // NSLog(@"back 2222222222222");
+            if (cnt == NUM_BUFFERS) {
+                AudioQueueStop(inAQ, true);
+            }
+            
         }
-        
-       // NSLog(@"back 2222222222222");
-        if (cnt == NUM_BUFFERS) {
-            AudioQueueStop(inAQ, true);
-        }
-        
-    }
+    
+    
     
     
 }
 
+-(void)dealloc{
+    audSelf = NULL;
+}
 
 - (BOOL)hasHeadset {
 #if TARGET_IPHONE_SIMULATOR
@@ -117,7 +127,7 @@ kAudioSessionOverrideAudioRoute_None:kAudioSessionOverrideAudioRoute_Speaker;
     if (!(self=[super init])) return nil;
     int i;
     audioset = false;
-    
+    audSelf = (__bridge void *)(self);
     //取得音频数据格式
 //    {
 //        dataFormat.mSampleRate=8000;//采样频率

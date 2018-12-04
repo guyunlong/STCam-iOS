@@ -150,7 +150,7 @@
     [self showHudInView:self.view hint:nil];
     
   
-    NSString * url = [NSString stringWithFormat:@"http://%@:%d/app_user_changepsd.asp?user=%@&psd=%@&tokenid=%@&newpsd=%@",serverIP,ServerPort,[AccountManager getUser],[AccountManager getPassword],[[AccountManager sharedManager] deviceToken],PasswordNew];
+    NSString * url = [NSString stringWithFormat:@"http://%@:%d/app_user_changepsd.asp?user=%@&psd=%@&newpsd=%@",serverIP,ServerPort,[AccountManager getUser],[AccountManager getPassword],PasswordNew];
     @weakify(self);
     [FFHttpTool GET:url parameters:nil success:^(id data){
         @strongify(self)
