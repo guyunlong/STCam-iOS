@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface RecConfigModel : NSObject
-@property(nonatomic,assign) BOOL Rec_RecStyle;
+@property(nonatomic,assign) NSInteger Rec_RecStyle;
 @property(nonatomic,assign) NSInteger Rec_IsRecAudio;
 @property(nonatomic,assign) NSInteger Rec_RecStreamType;
 @property(nonatomic,assign) NSInteger Rec_AlmTimeLen;

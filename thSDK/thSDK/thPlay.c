@@ -269,7 +269,7 @@ bool thNet_Free(HANDLE NetHandle)
   u32 SN;
   if (NetHandle == 0) return false;
 //  SN = Play->SN;
-  PRINTF("%s(%s)(%s)\n", __FUNCTION__, Play->IPUID, Play->LocalIP);
+  PRINTF("=======%s(%s)(%s)\n", __FUNCTION__, Play->IPUID, Play->LocalIP);
   thNet_DisConn(NetHandle);
 
   ThreadLockFree(&Play->Lock);
@@ -1343,6 +1343,10 @@ bool thNet_DisConn(HANDLE NetHandle)
   if (!Play->IsConnect) return true;
   PRINTF("%s(%s)(%s)\n", __FUNCTION__, Play->IPUID, Play->LocalIP);
 
+    ThreadLock(&Play->Lock);
+    Play->IsExit = true;
+    ThreadUnlock(&Play->Lock);
+    
   memset(Play->LocalIP, 0, sizeof(Play->LocalIP));
 
   thNet_Stop(NetHandle);
@@ -1352,9 +1356,7 @@ bool thNet_DisConn(HANDLE NetHandle)
   thNet_StopRec(NetHandle);
 
   //if (Play->semHttpDownload) sem_destroy(&Play->semHttpDownload);
-  ThreadLock(&Play->Lock);
-  Play->IsExit = true;
-  ThreadUnlock(&Play->Lock);
+ 
   if (!Play->Isp2pConn)
   {
     ThreadExit(Play->thRecv, 0);//1000;

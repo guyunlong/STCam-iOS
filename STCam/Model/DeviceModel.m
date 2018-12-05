@@ -12,7 +12,8 @@
 #import "DevListViewModel.h"
 #import "CoreDataManager.h"
 @interface DeviceModel(){
-    dispatch_queue_t serialQueue;
+    dispatch_queue_t conSerialQueue;
+    dispatch_queue_t disConSerialQueue;
 }
 @property(assign)BOOL IsConnecting;
 @end
@@ -21,7 +22,8 @@
 -(id)init{
     self = [super init];
     if (self) {
-        serialQueue = dispatch_queue_create("com.southtec.cam", DISPATCH_QUEUE_SERIAL);
+        conSerialQueue = dispatch_queue_create("com.southtec.cam", DISPATCH_QUEUE_SERIAL);
+        disConSerialQueue = dispatch_queue_create("com.southtec.camdis", DISPATCH_QUEUE_SERIAL);
         _User = @"admin";
         _Pwd = @"admin";
     }
@@ -107,7 +109,8 @@
             _Pwd = model.Pwd;
         }
         
-        serialQueue = dispatch_queue_create("com.sentry.mlock.get", DISPATCH_QUEUE_SERIAL);
+        conSerialQueue = dispatch_queue_create("com.southtec.cam", DISPATCH_QUEUE_SERIAL);
+        disConSerialQueue = dispatch_queue_create("com.southtec.camdis", DISPATCH_QUEUE_SERIAL);
         
     }
     return self;
@@ -157,19 +160,20 @@
 -(void)threadDisconnect{
     
     @weakify(self)
-    dispatch_async(serialQueue, ^{
+    dispatch_sync(disConSerialQueue, ^{
         @strongify(self);
         [self disconnect];
     });
     
 }
 -(void)disconnect{
-    
-    BOOL ret = thNet_DisConn((HANDLE)self.NetHandle);
+    THandle NetHandle = self.NetHandle;
+    self.NetHandle = 0;
+    BOOL ret = thNet_DisConn(NetHandle);
     if (ret)
     {
-        thNet_Free(self.NetHandle);
-        self.NetHandle = 0;
+        thNet_Free(NetHandle);
+        
     }
     NSLog(@"disconnect device end,sn :%@",self.SN);
     
@@ -180,7 +184,7 @@
 -(void)threadConnect
 {
     @weakify(self)
-    dispatch_async(serialQueue, ^{
+    dispatch_sync(conSerialQueue, ^{
         @strongify(self);
         if (self.NetHandle == 0) {
             self.NetHandle = thNet_Init(true, false);

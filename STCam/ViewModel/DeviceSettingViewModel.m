@@ -313,7 +313,6 @@
                     [subscriber sendNext:@0];
                 }
             }
-            
         });
         
         return nil;

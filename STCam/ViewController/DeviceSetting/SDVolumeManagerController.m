@@ -183,7 +183,7 @@
     }
     else{
         CommonSwitchCell * cell = [CommonSwitchCell CommonSwitchCellWith:tableView indexPath:indexPath];
-        [cell setOpen:_viewModel.mRecConfigModel.Rec_RecStyle];
+        [cell setOpen:(_viewModel.mRecConfigModel.Rec_RecStyle == 1)];
         [cell setModel:_rowsArray[indexPath.row]];
        
         [cell setFrame:CGRectMake(0, 0, kScreenWidth, [CommonInfoCell cellHeight])];
@@ -191,7 +191,7 @@
         @weakify(self)
         cell.switchValueChangeBlock = ^(BOOL open) {
             @strongify(self)
-            self.viewModel.mRecConfigModel.Rec_RecStyle = open;
+            self.viewModel.mRecConfigModel.Rec_RecStyle = open?1:0;
             [self changeAlarmRecordConfig];
         
         };
