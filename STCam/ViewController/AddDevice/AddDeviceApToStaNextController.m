@@ -326,12 +326,12 @@
             if([data isKindOfClass:[NSDictionary class]]){
                 RetModel * model = [RetModel RetModelWithDict:data];
                 if (model.ret == RESULT_SUCCESS_REBOOT) {
-                    [self.model threadDisconnect];
+                  // [self.model threadDisconnect];
                     [self showHint:@"action_AP_T_STA_Success".localizedString];
                     [self backToAddController:YES];
                 }
                 if (model.ret == RESULT_SUCCESS) {
-                    [self.model threadDisconnect];
+                   // [self.model threadDisconnect];
                     [self showHint:@"action_AP_T_STA_Success".localizedString];
                     [self backToAddController:YES];
                 }
