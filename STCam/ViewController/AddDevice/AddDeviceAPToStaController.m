@@ -12,11 +12,14 @@
 #import "SearchDeviceCell.h"
 #import "AddDeviceApToStaNextController.h"
 #import "WifiManager.h"
-@interface AddDeviceAPToStaController ()<UITableViewDataSource, UITableViewDelegate>
+@interface AddDeviceAPToStaController ()<UITableViewDataSource, UITableViewDelegate>{
+    BOOL isSearchingDevice;
+}
 @property(nonatomic,strong)UIAlertController  *joinAPAlertController;//提示加入ap网络
 @property(nonatomic,strong)DevListViewModel *viewModel;
 @property(nonatomic,strong)UILabel * titleLb;
 @property(nonatomic,strong)UITableView * mTableView;
+@property(nonatomic,strong)UIButton *refreshButton;
 @end
 
 @implementation AddDeviceAPToStaController
@@ -81,14 +84,14 @@
     UIBarButtonItem *backBarItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     self.navigationItem.leftBarButtonItem = backBarItem;
     
-    UIButton *refreshButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    refreshButton.frame = CGRectMake(0, 0, 80, 28);
-    refreshButton.contentHorizontalAlignment =  UIControlContentHorizontalAlignmentRight;
-    [refreshButton addTarget:self action:@selector(refreshApDevList) forControlEvents:UIControlEventTouchUpInside];
-    [refreshButton setTitle:@"action_refresh".localizedString forState:UIControlStateNormal];
-    [refreshButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [refreshButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
-    UIBarButtonItem *rightBarItem = [[UIBarButtonItem alloc] initWithCustomView:refreshButton];
+    _refreshButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    _refreshButton.frame = CGRectMake(0, 0, 80, 28);
+    _refreshButton.contentHorizontalAlignment =  UIControlContentHorizontalAlignmentRight;
+    [_refreshButton addTarget:self action:@selector(refreshApDevList) forControlEvents:UIControlEventTouchUpInside];
+    [_refreshButton setTitle:@"action_refresh".localizedString forState:UIControlStateNormal];
+    [_refreshButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [_refreshButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
+    UIBarButtonItem *rightBarItem = [[UIBarButtonItem alloc] initWithCustomView:_refreshButton];
     self.navigationItem.rightBarButtonItem = rightBarItem;
     
     
@@ -103,13 +106,20 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)refreshApDevList{
+    if (isSearchingDevice) {
+        return;
+    }
+    isSearchingDevice = YES;
+    
     [self showHudInView:self.view hint:@""];
+    
     @weakify(self)
     [[[_viewModel racSearchDeviceinMainView:NO]
       deliverOn:[RACScheduler mainThreadScheduler]]
      subscribeNext:^(id x) {
          @strongify(self)
          [self hideHud];
+         isSearchingDevice = NO;
          if ([x integerValue] == 1) {
              [self.mTableView reloadData];
          }

@@ -52,11 +52,24 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [_viewModel openVid:1];
-    [self showHudInViewOffset:self.view hint:nil offset:-kScreenHeight/6];
+    
     _showHud = YES;
     if(isLandscape){
         [self.navigationController setNavigationBarHidden:YES];
+        [self showHudInView:self.view hint:nil];
     }
+    else{
+        [self showHudInViewOffset:self.view hint:nil offset:-kScreenHeight/6];
+    }
+    @weakify(self)
+    [NSTimer scheduledTimerWithTimeInterval:3 repeats:NO block:^(NSTimer * _Nonnull timer) {
+        @strongify(self)
+        if (self.showHud)
+        {
+            [self showHint:@"Network_error".localizedString];
+            [self back];
+        }
+    }];
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];

@@ -160,7 +160,8 @@
 -(void)threadDisconnect{
     
     @weakify(self)
-    dispatch_sync(disConSerialQueue, ^{
+   
+    dispatch_async(disConSerialQueue, ^{
         @strongify(self);
         [self disconnect];
     });
@@ -172,10 +173,13 @@
     BOOL ret = thNet_DisConn(NetHandle);
     if (ret)
     {
+//        NSLog(@"------------disconnect sleep before");
+        usleep(200000);
+//        NSLog(@"------------disconnect sleep after");
         thNet_Free(NetHandle);
-        
+
     }
-    NSLog(@"disconnect device end,sn :%@",self.SN);
+    
     
     DevListViewModel * listViewModel = [DevListViewModel sharedDevListViewModel];
     [listViewModel setRefreshView:YES];
@@ -183,16 +187,19 @@
 }
 -(void)threadConnect
 {
+    NSLog(@"-------------------------- connect before,DeviceModel sn %@",[self SN]);
     @weakify(self)
-    dispatch_sync(conSerialQueue, ^{
+    dispatch_async(conSerialQueue, ^{
         @strongify(self);
         if (self.NetHandle == 0) {
             self.NetHandle = thNet_Init(true, false);
         }
         if (![self IsConnect]) {
             [self Connect];
+            DevListViewModel * listViewModel = [DevListViewModel sharedDevListViewModel];
+            [listViewModel setRefreshView:YES];
         }
-        if ([self IsConnect]) {
+        if ([self IsConnect] && !self.SoftVersion) {
             char conv[1024 * 64];
             char* tmpBuf = NULL;
             conv[0] = 0x00;
@@ -208,65 +215,11 @@
             self.SoftVersion = [[deviceInfoDic objectForKey:@"DevInfo"] objectForKey:@"SoftVersion"];
             self.DevType =[[[deviceInfoDic objectForKey:@"DevInfo"] objectForKey:@"DevType"] integerValue];
         }
-        DevListViewModel * listViewModel = [DevListViewModel sharedDevListViewModel];
-        [listViewModel setRefreshView:YES];
+        
         NSLog(@"threadConnect device end,sn :%@",self.SN);
     });
     
-//    new Thread()
-//    {
-//        @Override
-//        public void run()
-//        {
-//            try
-//            {
-//                if (tmpNode.NetHandle == 0)
-//                {
-//                    tmpNode.NetHandle = lib.thNetInit(
-//                                                      true,
-//                                                      false
-//                                                      );
-//                }
-//
-//                if (!tmpNode.IsConnect())
-//                {
-//                    tmpNode.Connect();
-//                }
-//
-//                if (tmpNode.IsConnect())
-//                {
-//                    if (ipc != null)
-//                    {
-//                        ipc.sendMessage(Message.obtain(ipc, TMsg.Msg_NetConnSucceed, tmpNode.Index, 0, tmpNode));
-//                    }
-//                    String tmpStr = tmpNode.GetAllCfg();
-//                    JSONObject json = new JSONObject(tmpStr);
-//                    tmpNode.DevCfg = json;
-//                    tmpNode.ExistSD = json.getJSONObject("DevInfo").getInt("ExistSD");
-//                    tmpNode.DevType = json.getJSONObject("DevInfo").getInt("DevType");
-//                    tmpNode.Brightness = json.getJSONObject("Video").getInt("Brightness");
-//                    tmpNode.Contrast = json.getJSONObject("Video").getInt("Contrast");
-//                    tmpNode.Sharpness = json.getJSONObject("Video").getInt("Sharpness");
-//                    //tmpNode.UID = json.getJSONObject("P2P").getString("P2P_UID");
-//                    tmpNode.DevName = json.getJSONObject("DevInfo").getString("DevName");
-//                    tmpNode.SoftVersion = json.getJSONObject("DevInfo").getString("SoftVersion");
-//                    //Log.e("java", "SoftVersion is :" + tmpNode.SoftVersion + ",uid is " + tmpNode.UID);
-//                }
-//                else
-//                {
-//                    if (ipc != null)
-//                    {
-//                        ipc.sendMessage(Message.obtain(ipc, TMsg.Msg_NetConnFail, tmpNode.Index, 0, tmpNode));
-//                    }
-//                    return;
-//                }
-//            }
-//            catch (Exception e)
-//            {
-//                return;
-//            }
-//        }
-//    }.start();
+    NSLog(@"-------------------------- connect after,DeviceModel sn %@",[self SN]);
 }
 
 -(NSString*)getDevURL:(int)MsgID{

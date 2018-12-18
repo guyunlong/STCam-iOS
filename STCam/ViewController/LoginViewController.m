@@ -271,7 +271,7 @@
             [self presentViewController:self.forceLoginAlertController animated:YES completion:nil];
         }
         else if([x integerValue] == 100000){
-            [self showHint:@"Network error".localizedString];
+            [self showHint:@"Network_error".localizedString];
         }
         else{
             [self showHint:@"error_login_failed".localizedString];

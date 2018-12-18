@@ -255,5 +255,5 @@
 "string_ConnectFail"="Device connection failed, please refresh the connection status.";
 "string_emptyimage"="The alarm image is empty ,don't need to clear";
 "string_finish_timeleft_%ld"="%lds left for finish setting";
-
+"Network_error"="Network Error";
 

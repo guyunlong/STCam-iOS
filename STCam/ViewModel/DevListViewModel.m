@@ -119,11 +119,17 @@ void callback_SearchDev(void *UserCustom, u32 SN, int DevType, char *DevModal, c
                     DeviceModel * model = [DeviceModel DeviceModelWithDict:dic];
                     BOOL exist = NO;
                     for (DeviceModel * devModel in self.deviceArray) {
-                        if ([devModel.IPUID isEqualToString:model.IPUID]) {
+                        if (/*[devModel.IPUID isEqualToString:model.IPUID] || */[devModel.SN isEqualToString:model.SN]) {
                             ConnType type = [model getConnectType];
                             if (type == ConnType_LAN || type == ConnType_DDNS || type == ConnType_P2P) {
                                 devModel.ConnType = model.ConnType;
                                 [devModel threadConnect];
+                            }
+                            else{
+                                 devModel.ConnType = model.ConnType;
+                                if ([devModel IsConnect]) {
+                                    [devModel threadDisconnect];
+                                }
                             }
                             exist = YES;
                             break;
@@ -272,24 +278,29 @@ void callback_SearchDev(void *UserCustom, u32 SN, int DevType, char *DevModal, c
              *4、重新获得设备信息
              */
             {
+                //切换网络，视频页面返回到列表页面
+                 [[NSNotificationCenter defaultCenter] postNotificationName:AppDidEnterbackground object:nil];
                 @weakify(self)
                 dispatch_queue_t quene = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-                dispatch_sync(quene, ^{
+                dispatch_async(quene, ^{
                     /*1、断开所有连接*/
-                    for (DeviceModel * devModel in self.deviceArray) {
-                        if ([devModel IsConnect]) {
-                            NSLog(@"disconnect device ,sn :%@",devModel.SN);
-                            [devModel threadDisconnect];
+                    @strongify(self)
+                    @synchronized(self){
+                        for (DeviceModel * devModel in self.deviceArray) {
+                            if ([devModel IsConnect]) {
+                                NSLog(@"disconnect device ,sn :%@",devModel.SN);
+                                [devModel disconnect];
+                            }
                         }
+                        /*2、清空deviceArray数组*/
+                        [self.deviceArray removeAllObjects];
                     }
-                    /*2、清空deviceArray数组*/
-                    [self.deviceArray removeAllObjects];
+                   
                     [self setRefreshView:YES];
                     /*3、重新初始化p2p*/
                     P2P_Free();
                     P2P_Init();
                     /*4、重新获得设备信息*/
-                    @strongify(self)
                     if (self.userMode == TUserMode_Visitor) {
                         [self searchDeviceInMainView:YES];
                         [self setRefreshView:YES];
@@ -302,9 +313,6 @@ void callback_SearchDev(void *UserCustom, u32 SN, int DevType, char *DevModal, c
                 });
             }
             
-            
-            break;
-        
             
             break;
         default:

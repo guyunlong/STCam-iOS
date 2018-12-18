@@ -214,7 +214,9 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     DevListCell * cell = [DevListCell DevListCellWith:tableView indexPath:indexPath];
-    
+    if ([_viewModel.deviceArray count] < indexPath.row+1) {
+        return cell;
+    }
     [cell setModel:_viewModel.deviceArray[indexPath.row]];
     
     @weakify(self)
@@ -286,6 +288,9 @@
 {
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if ([_viewModel.deviceArray count] < indexPath.row+1) {
+        return ;
+    }
     DeviceModel * model = _viewModel.deviceArray[indexPath.row];
     if (![model isOnline]) {
         [self showHint:@"device_status_offline".localizedString];

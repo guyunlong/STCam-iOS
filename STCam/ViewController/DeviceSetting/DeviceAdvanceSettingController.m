@@ -362,8 +362,10 @@
     [[[[[[_viewModel racSetDevLoadDefault]
          deliverOn:[RACScheduler mainThreadScheduler]]
         filter:^BOOL(id value) {
+            @strongify(self)
             if ([value integerValue] == 0) {
                // action_Failed
+                [self hideHud];
                 [self showHint:@"action_Failed".localizedString];
             }
             else{
@@ -372,11 +374,13 @@
             return [value integerValue] != 0;
         }]
        flattenMap:^RACStream *(id value) {
+           
           return  [[DevListViewModel sharedDevListViewModel] racDeleteDevice:self.viewModel.model];
        }]
       deliverOn:[RACScheduler mainThreadScheduler]]
      subscribeNext:^(id x) {
          @strongify(self);
+         [self hideHud];
          [self.navigationController popToRootViewControllerAnimated:YES];
      }];
     

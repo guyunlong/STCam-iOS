@@ -358,6 +358,9 @@
                 RetModel * model = [RetModel RetModelWithDict:data];
                 [subscriber sendNext:@(model.ret)];
             }
+            else if(!data){
+                [subscriber sendNext:@10000];
+            }
             else{
                 [subscriber sendNext:@0];
             }

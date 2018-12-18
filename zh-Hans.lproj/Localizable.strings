@@ -252,4 +252,4 @@
 "string_ConnectFail"="设备连接失败，请刷新连接状态";
 "string_emptyimage"="当前报警图片为空，无需清空";
 "string_finish_timeleft_%ld"="离设置完成还有 %ld 秒";
-
+"Network_error"="网络异常";
