@@ -253,3 +253,12 @@
 "string_emptyimage"="当前报警图片为空，无需清空";
 "string_finish_timeleft_%ld"="离设置完成还有 %ld 秒";
 "Network_error"="网络异常";
+"string_DevAdvancedSettings_PowerTimerCfg"="定时开关机设置";
+"txtTimePowerOn"="开机时间";
+"txtTimePowerOff"="关机时间";
+"txtActive"="开启";
+"txtchk00"="不关机";
+"txtchk30"="30分钟";
+"txtchk60"="60分钟";
+"txtchk90"="90分钟";
+"txtchk120"="120分钟";

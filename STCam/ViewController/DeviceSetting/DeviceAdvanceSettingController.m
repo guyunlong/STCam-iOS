@@ -147,6 +147,7 @@
     InfoModel * model3 = [InfoModel new];
     InfoModel * model4 = [InfoModel new];
     InfoModel * model5 = [InfoModel new];
+    InfoModel * model6 = [InfoModel new];
     
     
     
@@ -156,7 +157,7 @@
     [model3 setTitle:@"string_DevAdvancedSettings_IsSoundPlay".localizedString];
     [model4 setTitle:@"string_DevAdvancedSettings_AlmTimeLen".localizedString];
     [model5 setTitle:@"string_DevAdvancedSettings_TFManage".localizedString];
-    
+    [model6 setTitle:@"string_DevAdvancedSettings_PowerTimerCfg".localizedString];
     
     
     [_rowsArray addObject:model0];
@@ -165,6 +166,9 @@
     [_rowsArray addObject:model3];
     [_rowsArray addObject:model4];
     [_rowsArray addObject:model5];
+    if([self.viewModel.model FunctionExistsTimerPowerOnOff]){
+         [_rowsArray addObject:model6];
+    }
     
 }
 

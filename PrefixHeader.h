@@ -199,7 +199,15 @@ static int Msg_PlayWavFile = 100;
  static  int RESULT_USER_LOGINED = -6;//已有用户登录
  static  int RESULT_USER_LOGOUT = -7;//强制用户退出登录
 
-
-
+//FunctionMask
+static int FunctionExistsOld = 0;
+static int FunctionExistsVideo = 1;
+static int FunctionExistsAudioMIC = 2;
+static int FunctionExistsAudioHorn = 3;
+static int FunctionExistsPTZ = 4;
+static int FunctionExistsLight = 5;
+static int FunctionExistsPIR = 6;
+static int FunctionExistsTimerPowerOnOff = 7;
+static int FunctionExistsDoorControl = 8;
 #endif
 

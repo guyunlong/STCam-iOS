@@ -54,6 +54,7 @@ typedef NS_ENUM(NSInteger, ConnType){
 @property(nonatomic,assign)  BOOL IsRec;
 @property(nonatomic,assign)  BOOL IsSnapshot;
 @property(nonatomic,assign)  BOOL ExistSD;
+@property(nonatomic,assign)  NSInteger FunctionMask;
 @property(nonatomic,strong) NSString* SoftVersion;
 @property(nonatomic,assign)  NSInteger  DevType;
 /**
@@ -103,4 +104,31 @@ typedef NS_ENUM(NSInteger, ConnType){
  @return 返回数据类型
  */
 -(id)thNetHttpGet:(NSString*)url;
+
+/**
+ 灯光控制功能
+ 
+ @return YES
+ */
+-(BOOL)FunctionExistsLight;
+
+/**
+ 定时开关机控制功能
+ 
+ @return YES
+ */
+-(BOOL)FunctionExistsTimerPowerOnOff;
+/**
+ 门控制功能
+ 
+ @return YES
+ */
+-(BOOL)FunctionExistsDoorControl;
+/**
+ PTZ
+ 
+ @return YES
+ */
+-(BOOL)FunctionExistsPTZ;
+-(BOOL)FunctionExistsAudio;
 @end

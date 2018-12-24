@@ -156,16 +156,36 @@
     [self.view addSubview:_portButtonView];
     CGFloat firstLineWidth = 50*kWidthCoefficient;
     CGFloat secondLineWidth = 60*kWidthCoefficient;
+    if(![_viewModel.model FunctionExistsLight]){
+        secondLineWidth = firstLineWidth;
+    }
+   
     CGFloat speechWidth = 80*kWidthCoefficient;
+    if(![_viewModel.model FunctionExistsLight]){
+        speechWidth = firstLineWidth;
+    }
     CGFloat firstLineSpan =(kScreenWidth- firstLineWidth*5)/6;
-     CGFloat secondLineSpan =(kScreenWidth- 2*secondLineWidth-speechWidth)/4;
+    CGFloat secondLineSpan =(kScreenWidth- 2*secondLineWidth-speechWidth)/4;
+    if(![_viewModel.model FunctionExistsLight]){
+        firstLineSpan =(kScreenWidth- firstLineWidth*4)/5;
+        secondLineSpan = firstLineSpan;
+    }
     
     y = 5*kPadding;
-    _ledBtn = [[UIButton alloc] initWithFrame:CGRectMake(firstLineSpan, y, firstLineWidth, firstLineWidth)];
-    _playAudioBtn = [[UIButton alloc] initWithFrame:CGRectMake(firstLineSpan*2+firstLineWidth, y, firstLineWidth, firstLineWidth)];
-    _hdBtn = [[UIButton alloc] initWithFrame:CGRectMake(firstLineSpan*3+firstLineWidth*2, y, firstLineWidth, firstLineWidth)];
-    _settingBtn = [[UIButton alloc] initWithFrame:CGRectMake(firstLineSpan*4+firstLineWidth*3, y, firstLineWidth, firstLineWidth)];
-    _fullScreenBtn = [[UIButton alloc] initWithFrame:CGRectMake(firstLineSpan*5+firstLineWidth*4, y, firstLineWidth, firstLineWidth)];
+    CGFloat x = firstLineSpan;
+    if([_viewModel.model FunctionExistsLight]){
+        _ledBtn = [[UIButton alloc] initWithFrame:CGRectMake(firstLineSpan, y, firstLineWidth, firstLineWidth)];
+        x += firstLineWidth +firstLineSpan;
+    }
+    
+    
+    _playAudioBtn = [[UIButton alloc] initWithFrame:CGRectMake(x, y, firstLineWidth, firstLineWidth)];
+     x += firstLineWidth +firstLineSpan;
+    _hdBtn = [[UIButton alloc] initWithFrame:CGRectMake(x, y, firstLineWidth, firstLineWidth)];
+     x += firstLineWidth +firstLineSpan;
+    _settingBtn = [[UIButton alloc] initWithFrame:CGRectMake(x, y, firstLineWidth, firstLineWidth)];
+     x += firstLineWidth +firstLineSpan;
+    _fullScreenBtn = [[UIButton alloc] initWithFrame:CGRectMake(x, y, firstLineWidth, firstLineWidth)];
     [_ledBtn setImage:[UIImage imageNamed:@"liveled_nor"] forState:UIControlStateNormal];
     [_ledBtn setImage:[UIImage imageNamed:@"liveled_sel"] forState:UIControlStateHighlighted];
     
@@ -227,12 +247,7 @@
      [_ledBtn addTarget:self action:@selector(controlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     /**********landscape buttons*************/
-    _exitFullScreenButton = [[UIButton alloc] initWithFrame:CGRectMake(kPadding, kPadding, firstLineWidth, firstLineWidth)];
-    [_exitFullScreenButton setImage:[UIImage imageNamed:@"icon_back"] forState:UIControlStateNormal];
-    [_exitFullScreenButton addTarget:self action:@selector(controlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [_exitFullScreenButton setHidden:YES];
-    [self.view addSubview:_exitFullScreenButton];
+   
 }
 
 -(void)initGesture{
@@ -389,7 +404,10 @@
 #pragma methods
 -(void)rotateToLandscape{
      [self.navigationController setNavigationBarHidden:YES animated:YES];
-    [_exitFullScreenButton setHidden:NO];
+    if(_exitFullScreenButton){
+         [_exitFullScreenButton setHidden:NO];
+    }
+   
     [_portButtonView setHidden:YES];
     
     self.view.bounds = CGRectMake(0, 0,kScreenHeight , kScreenWidth);
@@ -401,26 +419,54 @@
     [_recordTimeLabel setFrame:CGRectMake(0, 30*kWidthCoefficient, kScreenHeight, 40*kWidthCoefficient)];
     
     
-    
-//    @property (strong, nonatomic)  UIButton * ledBtn_land;
-//    @property (strong, nonatomic)  UIButton * settingBtn_land;
-//    @property (strong, nonatomic)  UIButton * playAudioBtn_land;
-//    @property (strong, nonatomic)  UIButton * speechBtn_land;
-//    @property (strong, nonatomic)  UIButton * hdBtn_land;
-//    @property (strong, nonatomic)  UIButton * recordBtn_land;
-//    @property (strong, nonatomic)  UIButton * snapShotBtn_land;
+
     
     if (!_ledBtn_land) {
+        
         CGFloat firstLineWidth = 50*kWidthCoefficient;
         CGFloat secondLineWidth = 60*kWidthCoefficient;
         CGFloat speechWidth = 80*kWidthCoefficient;
         CGFloat firstLineSpan =(kScreenWidth- firstLineWidth*5)/6;
+         CGFloat secondLineSpan =(kScreenWidth- secondLineWidth*4)/5;
        
-        CGFloat y = kScreenWidth - kPadding - firstLineWidth;
-        _ledBtn_land = [[UIButton alloc] initWithFrame:CGRectMake(firstLineSpan, y, firstLineWidth, firstLineWidth)];
-        _playAudioBtn_land = [[UIButton alloc] initWithFrame:CGRectMake(firstLineSpan*2+firstLineWidth, y, firstLineWidth, firstLineWidth)];
-        _hdBtn_land = [[UIButton alloc] initWithFrame:CGRectMake(firstLineSpan*3+firstLineWidth*2, y, firstLineWidth, firstLineWidth)];
-        _settingBtn_land = [[UIButton alloc] initWithFrame:CGRectMake(firstLineSpan*4+firstLineWidth*3, y, firstLineWidth, firstLineWidth)];
+        _exitFullScreenButton = [[UIButton alloc] initWithFrame:CGRectMake(kScreenHeight - 2*kPadding - secondLineWidth, secondLineSpan, secondLineWidth, secondLineWidth)];
+        [_exitFullScreenButton setImage:[UIImage imageNamed:@"icon_back"] forState:UIControlStateNormal];
+        [_exitFullScreenButton addTarget:self action:@selector(controlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [_exitFullScreenButton setHidden:NO];
+        [self.view addSubview:_exitFullScreenButton];
+        
+        if(![_viewModel.model FunctionExistsLight]){
+            CGFloat y = kScreenWidth - kPadding - firstLineWidth;
+            
+            _playAudioBtn_land = [[UIButton alloc] initWithFrame:CGRectMake(firstLineSpan*1, y, firstLineWidth, firstLineWidth)];
+            _hdBtn_land = [[UIButton alloc] initWithFrame:CGRectMake(firstLineSpan*2+firstLineWidth*1, y, firstLineWidth, firstLineWidth)];
+            _settingBtn_land = [[UIButton alloc] initWithFrame:CGRectMake(firstLineSpan*3+firstLineWidth*2, y, firstLineWidth, firstLineWidth)];
+            _recordBtn_land = [[UIButton alloc] initWithFrame:CGRectMake(firstLineSpan*4+firstLineWidth*3, y, firstLineWidth, firstLineWidth)];
+            _speechBtn_land =  [[UIButton alloc] initWithFrame:CGRectMake(firstLineSpan*5+firstLineWidth*4, y, firstLineWidth, firstLineWidth)];
+            _snapShotBtn_land = [[UIButton alloc] initWithFrame:CGRectMake(firstLineSpan*6+firstLineWidth*5, y, firstLineWidth, firstLineWidth)];
+        }
+        else{
+            CGFloat y = kScreenWidth - kPadding - firstLineWidth;
+           
+             _ledBtn_land = [[UIButton alloc] initWithFrame:CGRectMake(firstLineSpan, y, firstLineWidth, firstLineWidth)];
+            
+             _playAudioBtn_land = [[UIButton alloc] initWithFrame:CGRectMake(firstLineSpan*2+firstLineWidth, y, firstLineWidth, firstLineWidth)];
+            
+             _hdBtn_land = [[UIButton alloc] initWithFrame:CGRectMake(firstLineSpan*3+firstLineWidth*2, y, firstLineWidth, firstLineWidth)];
+            
+            _settingBtn_land = [[UIButton alloc] initWithFrame:CGRectMake(firstLineSpan*4+firstLineWidth*3, y, firstLineWidth, firstLineWidth)];
+            
+           
+            
+          
+            
+            _recordBtn_land = [[UIButton alloc] initWithFrame:CGRectMake(kScreenHeight - 2*kPadding - secondLineWidth, secondLineSpan*2+secondLineWidth, secondLineWidth, secondLineWidth)];
+            _speechBtn_land = [[UIButton alloc] initWithFrame:CGRectMake(kScreenHeight - 2*kPadding - secondLineWidth, secondLineSpan*3+secondLineWidth*2, secondLineWidth, secondLineWidth)];
+            _snapShotBtn_land = [[UIButton alloc] initWithFrame:CGRectMake(kScreenHeight - 2*kPadding - secondLineWidth, secondLineSpan*4+secondLineWidth*3, secondLineWidth, secondLineWidth)];
+        }
+        
+       
         
         [_ledBtn_land setImage:[UIImage imageNamed:@"liveled_nor"] forState:UIControlStateNormal];
         [_ledBtn_land setImage:[UIImage imageNamed:@"liveled_sel"] forState:UIControlStateHighlighted];
@@ -443,9 +489,7 @@
         [self.view addSubview:_settingBtn_land];
        
         
-        _recordBtn_land = [[UIButton alloc] initWithFrame:CGRectMake(kScreenHeight - 2*kPadding - secondLineWidth, 2*kPadding, secondLineWidth, secondLineWidth)];
-        _speechBtn_land = [[UIButton alloc] initWithFrame:CGRectMake(kScreenHeight - 2*kPadding - secondLineWidth-(speechWidth-secondLineWidth)/2, kScreenWidth/2-speechWidth/2, speechWidth, speechWidth)];
-        _snapShotBtn_land = [[UIButton alloc] initWithFrame:CGRectMake(kScreenHeight - 2*kPadding - secondLineWidth, kScreenWidth-2*kPadding-secondLineWidth, secondLineWidth, secondLineWidth)];
+        
         
       
         
@@ -480,6 +524,9 @@
             @strongify(self)
             [self.viewModel talkEnd];
         }];
+        
+        
+        
     }
     
     [_ledBtn_land setHidden:NO];

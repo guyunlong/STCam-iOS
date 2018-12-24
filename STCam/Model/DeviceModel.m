@@ -26,6 +26,7 @@
         disConSerialQueue = dispatch_queue_create("com.southtec.camdis", DISPATCH_QUEUE_SERIAL);
         _User = @"admin";
         _Pwd = @"admin";
+        _FunctionMask = 0xfffffffe;
     }
     return self;
 }
@@ -214,6 +215,9 @@
             self.ExistSD = [[[deviceInfoDic objectForKey:@"DevInfo"] objectForKey:@"ExistSD"] boolValue];
             self.SoftVersion = [[deviceInfoDic objectForKey:@"DevInfo"] objectForKey:@"SoftVersion"];
             self.DevType =[[[deviceInfoDic objectForKey:@"DevInfo"] objectForKey:@"DevType"] integerValue];
+            if([[deviceInfoDic objectForKey:@"DevInfo"] objectForKey:@"FunctionMask"]){
+                self.FunctionMask = [[[deviceInfoDic objectForKey:@"DevInfo"] objectForKey:@"FunctionMask"] integerValue];
+            }
         }
         
         NSLog(@"threadConnect device end,sn :%@",self.SN);
@@ -261,5 +265,59 @@
         
     }
     return nil;
+}
+    
+- (BOOL)BitValue:(NSInteger )s  bit:(int)Bits
+{
+    return ((s & (1 << Bits)) != 0);
+}
+    
+/**
+ 灯光控制功能
+
+ @return YES
+ */
+-(BOOL)FunctionExistsLight
+{
+    return  [self BitValue:_FunctionMask  bit:FunctionExistsLight];
+}
+    
+/**
+ 定时开关机控制功能
+ 
+ @return YES
+ */
+-(BOOL)FunctionExistsTimerPowerOnOff
+{
+    return  [self BitValue:_FunctionMask  bit:FunctionExistsTimerPowerOnOff];
+}
+    
+/**
+门控制功能
+ 
+ @return YES
+ */
+-(BOOL)FunctionExistsDoorControl
+{
+    return  [self BitValue:_FunctionMask  bit:FunctionExistsDoorControl];
+}
+    
+/**
+ PTZ
+ 
+ @return YES
+ */
+-(BOOL)FunctionExistsPTZ
+{
+    return  [self BitValue:_FunctionMask  bit:FunctionExistsPTZ];
+}
+/**
+ AUD
+ 
+ @return YE
+ */
+-(BOOL)FunctionExistsAudio
+{
+    return  [self BitValue:_FunctionMask  bit:FunctionExistsAudioMIC] || [self BitValue:_FunctionMask  bit:FunctionExistsAudioHorn];
 }
 @end

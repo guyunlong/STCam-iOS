@@ -256,4 +256,12 @@
 "string_emptyimage"="The alarm image is empty ,don't need to clear";
 "string_finish_timeleft_%ld"="%lds left for finish setting";
 "Network_error"="Network Error";
-
+"string_DevAdvancedSettings_PowerTimerCfg"="Timer PowerOn/Off";
+"txtTimePowerOn"="PowerOn Time";
+"txtTimePowerOff"="PowerOff Time";
+"txtActive"="Active";
+"txtchk00"="Disable";
+"txtchk30"="30 Minutes later";
+"txtchk60"="60 Minutes later";
+"txtchk90"="90 Minutes later";
+"txtchk120"="120 Minutes later";
