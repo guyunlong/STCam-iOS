@@ -345,6 +345,7 @@
             BOOL ret = [_viewModel changeRecordStatus];
             [_recordBtn setSelected:ret];
             [_recordBtn_land setSelected:ret];
+            _viewModel.isRcord = NO;
             [self stopRecordTime];
         }
         [_viewModel setSub:1-_viewModel.sub];

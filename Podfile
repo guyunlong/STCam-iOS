@@ -14,8 +14,9 @@ def shared_pods
     pod 'SGQRCode', '~> 2.5.4'
     pod 'SpinKit', '~> 1.1'
     pod 'Bugly'
+    pod 'CustomIOSAlertView'
 end
-target 'STCam' do
+target 'GRAVE' do
     shared_pods
 end
 

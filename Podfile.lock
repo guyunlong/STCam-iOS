@@ -1,6 +1,7 @@
 PODS:
   - BEMCheckBox (1.4.1)
   - Bugly (2.5.0)
+  - CustomIOSAlertView (0.9.5)
   - JCore (1.2.2)
   - JPush (3.1.0):
     - JCore (~> 1.2.0)
@@ -35,6 +36,7 @@ PODS:
 DEPENDENCIES:
   - BEMCheckBox
   - Bugly
+  - CustomIOSAlertView
   - JPush
   - Masonry
   - MBProgressHUD
@@ -50,6 +52,7 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - BEMCheckBox
     - Bugly
+    - CustomIOSAlertView
     - JCore
     - JPush
     - Masonry
@@ -67,6 +70,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   BEMCheckBox: 5ba6e37ade3d3657b36caecc35c8b75c6c2b1a4e
   Bugly: 3ca9f255c01025582df26f9222893b383c7e4b4e
+  CustomIOSAlertView: cc4fa8e36219be3fd5ebcd40789f5b4aaae0f38e
   JCore: f14c0549968a63c22e246a4875aa9d428446f373
   JPush: 5921e25ad13e0386351079217b009f2039084eac
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
@@ -81,6 +85,6 @@ SPEC CHECKSUMS:
   YBImageBrowser: c131d640e4a7b66f78cc3297e0d075279cba74a7
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
 
-PODFILE CHECKSUM: 220da32c7c42caceb6c67cd4aac975d92ef7e3f8
+PODFILE CHECKSUM: fdb2591020e50abdfa48c04534cc229d00a5d17a
 
 COCOAPODS: 1.5.3

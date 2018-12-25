@@ -10,6 +10,8 @@
 #import "CommonSettingCell.h"
 #import "SDVolumeManagerController.h"
 #import "PrefixHeader.h"
+#import "CustomIOSAlertView.h"
+#import "PowerOnOffAlertView.h"
 @interface DeviceAdvanceSettingController ()<UITableViewDataSource, UITableViewDelegate>
 @property(nonatomic,strong)NSMutableArray  * rowsArray;//列表数据
 @property(nonatomic,strong)UITableView * mTableView;
@@ -20,6 +22,8 @@
 @property(nonatomic,strong)UIAlertController  *alarmRecordDurationConfigSheet;//报警录像时常
 @property(nonatomic,strong)UIButton  * resetButton;//恢复出厂设置按钮
 @property(nonatomic,strong)UIAlertController  *resetConfirmAlertController;//确认恢复出厂设置
+@property(nonatomic ,strong) PowerOnOffAlertView *powerOnOffAlertView;
+@property(nonatomic ,strong) CustomIOSAlertView *powerOnOffContainer;
 @end
 
 @implementation DeviceAdvanceSettingController
@@ -166,7 +170,8 @@
     [_rowsArray addObject:model3];
     [_rowsArray addObject:model4];
     [_rowsArray addObject:model5];
-    if([self.viewModel.model FunctionExistsTimerPowerOnOff]){
+   // if([self.viewModel.model FunctionExistsTimerPowerOnOff])
+    {
          [_rowsArray addObject:model6];
     }
     
@@ -243,6 +248,9 @@
         SDVolumeManagerController * ctl = [SDVolumeManagerController new];
         [ctl setViewModel:_viewModel];
         [self.navigationController pushViewController:ctl animated:YES];
+    }
+    else if(6 == row){
+        [self.powerOnOffContainer show];
     }
     
 }
@@ -594,5 +602,33 @@
     }
     return _resetConfirmAlertController;
 }
+
+#pragma mark custom alert view
+-(CustomIOSAlertView*)powerOnOffContainer{
+    if (!_powerOnOffContainer) {
+        _powerOnOffContainer = [[CustomIOSAlertView alloc] init];
+        [_powerOnOffContainer setContainerView:[self powerOnOffAlertView]];
+        [_powerOnOffContainer setButtonTitles:nil];
+        [_powerOnOffContainer setUseMotionEffects:true];
+    }
+    return _powerOnOffContainer;
+}
+-(PowerOnOffAlertView*)powerOnOffAlertView{
+    if (!_powerOnOffAlertView) {
+        CGRect frame = CGRectMake(0, 0,[PowerOnOffAlertView viewSize].width , [PowerOnOffAlertView viewSize].height);
+        _powerOnOffAlertView = [[PowerOnOffAlertView alloc] initWithFrame:frame];
+        
+        @weakify(self)
+        _powerOnOffAlertView.btnClickBlock = ^(NSInteger channel){
+            @strongify(self)
+            if (0 == channel) {
+                [self.powerOnOffContainer close];
+            }
+        };
+    }
+    return _powerOnOffAlertView;
+}
+
+
 
 @end

@@ -45,6 +45,7 @@
 		9DE7648C2180707F00373090 /* AddDeviceStaController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE7648B2180707F00373090 /* AddDeviceStaController.m */; };
 		9DFEF157217F1F4E00FD28E1 /* SearchDeviceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DFEF155217F1F4E00FD28E1 /* SearchDeviceCell.m */; };
 		9DFEF158217F1F4E00FD28E1 /* SearchDeviceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DFEF156217F1F4E00FD28E1 /* SearchDeviceCell.xib */; };
+		9FC3ACD3785983CCD073CBE1 /* libPods-GRAVE.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B4C56BD2FE6F48D777CF9CBD /* libPods-GRAVE.a */; };
 		A40C8693217B6DD800D82B6B /* DeviceSettingViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A40C8692217B6DD800D82B6B /* DeviceSettingViewModel.m */; };
 		A4134F932165F78500831B8D /* AccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A4134F922165F78500831B8D /* AccountManager.m */; };
 		A43853DB21675A1500B8CC56 /* DeviceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A43853DA21675A1500B8CC56 /* DeviceModel.m */; };
@@ -155,6 +156,7 @@
 		A47041B8216E1F59007163C8 /* STMediaModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A47041B7216E1F59007163C8 /* STMediaModel.m */; };
 		A470AA8921636FFC0068AA80 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A470AA8B21636FFC0068AA80 /* Localizable.strings */; };
 		A470AA912163BE050068AA80 /* UIButton+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = A470AA902163BE050068AA80 /* UIButton+Common.m */; };
+		A4722B0121D234E3002B8F59 /* PowerOnOffAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4722B0021D234E3002B8F59 /* PowerOnOffAlertView.m */; };
 		A47CD3FA217F68A4000E3C2A /* SSIDModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A47CD3F9217F68A4000E3C2A /* SSIDModel.m */; };
 		A48C32E3217C24EF00CDF2D2 /* PushSettingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A48C32E2217C24EF00CDF2D2 /* PushSettingModel.m */; };
 		A48C32E9217C4B8A00CDF2D2 /* MotionCfgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A48C32E8217C4B8A00CDF2D2 /* MotionCfgModel.m */; };
@@ -223,6 +225,8 @@
 
 /* Begin PBXFileReference section */
 		02368DE58D9110FCE2D67420 /* Pods-STCam.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-STCam.release.xcconfig"; path = "Pods/Target Support Files/Pods-STCam/Pods-STCam.release.xcconfig"; sourceTree = "<group>"; };
+		10316DF948407CA76D04A351 /* Pods-GRAVE.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GRAVE.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GRAVE/Pods-GRAVE.debug.xcconfig"; sourceTree = "<group>"; };
+		47411A4140359C9380A0FB84 /* Pods-GRAVE.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GRAVE.release.xcconfig"; path = "Pods/Target Support Files/Pods-GRAVE/Pods-GRAVE.release.xcconfig"; sourceTree = "<group>"; };
 		9D07DF33218948C4006DDBB8 /* ForgetPwdControlle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPwdControlle.m; sourceTree = "<group>"; };
 		9D07DF34218948C4006DDBB8 /* ForgetPwdController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetPwdController.h; sourceTree = "<group>"; };
 		9D07DF3621895B8E006DDBB8 /* UIViewController+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Utils.h"; sourceTree = "<group>"; };
@@ -642,6 +646,8 @@
 		A470AA8C216371940068AA80 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		A470AA8F2163BE050068AA80 /* UIButton+Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+Common.h"; sourceTree = "<group>"; };
 		A470AA902163BE050068AA80 /* UIButton+Common.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Common.m"; sourceTree = "<group>"; };
+		A4722AFF21D234E3002B8F59 /* PowerOnOffAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PowerOnOffAlertView.h; sourceTree = "<group>"; };
+		A4722B0021D234E3002B8F59 /* PowerOnOffAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PowerOnOffAlertView.m; sourceTree = "<group>"; };
 		A47CD3F8217F68A4000E3C2A /* SSIDModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSIDModel.h; sourceTree = "<group>"; };
 		A47CD3F9217F68A4000E3C2A /* SSIDModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSIDModel.m; sourceTree = "<group>"; };
 		A48C32E1217C24EF00CDF2D2 /* PushSettingModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PushSettingModel.h; sourceTree = "<group>"; };
@@ -742,6 +748,7 @@
 		A4DAA3BB21AAAC94007E4600 /* launchscreen01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launchscreen01.png; sourceTree = SOURCE_ROOT; };
 		A4F5043E216268A6002B71FF /* RootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		A4F5043F216268A6002B71FF /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		B4C56BD2FE6F48D777CF9CBD /* libPods-GRAVE.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GRAVE.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C18EA7F117ED0291D64659B7 /* libPods-STCam.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-STCam.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C99CB2FCE47F51F123C0F082 /* Pods-STCam.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-STCam.debug.xcconfig"; path = "Pods/Target Support Files/Pods-STCam/Pods-STCam.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -775,6 +782,7 @@
 				A46F7AF22132CD5100854DB8 /* libavdevice.a in Frameworks */,
 				A46F7AF32132CD5100854DB8 /* libavfilter.a in Frameworks */,
 				484F64620EFBEC733F2D85B1 /* libPods-STCam.a in Frameworks */,
+				9FC3ACD3785983CCD073CBE1 /* libPods-GRAVE.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -793,6 +801,8 @@
 			children = (
 				C99CB2FCE47F51F123C0F082 /* Pods-STCam.debug.xcconfig */,
 				02368DE58D9110FCE2D67420 /* Pods-STCam.release.xcconfig */,
+				10316DF948407CA76D04A351 /* Pods-GRAVE.debug.xcconfig */,
+				47411A4140359C9380A0FB84 /* Pods-GRAVE.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1346,6 +1356,8 @@
 				A4434D93217AD99200BDA9F2 /* SoundButton.m */,
 				9DBBD6A12182F0A2003B4DB0 /* STSlider.h */,
 				9DBBD6A22182F0A2003B4DB0 /* STSlider.m */,
+				A4722AFF21D234E3002B8F59 /* PowerOnOffAlertView.h */,
+				A4722B0021D234E3002B8F59 /* PowerOnOffAlertView.m */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -1377,6 +1389,7 @@
 				A46F7AE52132CD5100854DB8 /* libswscale.a */,
 				C18EA7F117ED0291D64659B7 /* libPods-STCam.a */,
 				9DE76475218003DC00373090 /* libiot.a */,
+				B4C56BD2FE6F48D777CF9CBD /* libPods-GRAVE.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1780,7 +1793,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-STCam-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-GRAVE-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1806,7 +1819,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-STCam/Pods-STCam-resources.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-GRAVE/Pods-GRAVE-resources.sh",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 				"${PODS_ROOT}/SGQRCode/SGQRCode/SGQRCode.bundle",
 				"${PODS_ROOT}/YBImageBrowser/YBImageBrowser/YBImageBrowser.bundle",
@@ -1819,7 +1832,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-STCam/Pods-STCam-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GRAVE/Pods-GRAVE-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1912,6 +1925,7 @@
 				A4434D9D217AFC6C00BDA9F2 /* SDVideoModel.m in Sources */,
 				9DE7648921806FD500373090 /* AddDeviceAPToStaController.m in Sources */,
 				A4947004212C5B470015990C /* main.m in Sources */,
+				A4722B0121D234E3002B8F59 /* PowerOnOffAlertView.m in Sources */,
 				9DBBD69F2182EB45003B4DB0 /* NSDate+Extension.m in Sources */,
 				A442C2AD213199A100198910 /* skt.c in Sources */,
 				A4F50440216268A6002B71FF /* RootViewController.m in Sources */,
@@ -2109,7 +2123,7 @@
 		};
 		A4947013212C5B470015990C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C99CB2FCE47F51F123C0F082 /* Pods-STCam.debug.xcconfig */;
+			baseConfigurationReference = 10316DF948407CA76D04A351 /* Pods-GRAVE.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -2140,7 +2154,7 @@
 		};
 		A4947014212C5B470015990C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 02368DE58D9110FCE2D67420 /* Pods-STCam.release.xcconfig */;
+			baseConfigurationReference = 47411A4140359C9380A0FB84 /* Pods-GRAVE.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

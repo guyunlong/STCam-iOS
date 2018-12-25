@@ -21,8 +21,9 @@
 
 @interface AppDelegate ()<JPUSHRegisterDelegate>{
     UIBackgroundTaskIdentifier _backIden;
+    
 }
-
+@property(nonatomic,assign) ReachabilityStatus netWorkStatus;
 @end
 
 @implementation AppDelegate
@@ -56,7 +57,7 @@
     [self listenNetWorkingStatus];
     
     [application setApplicationIconBadgeNumber:0]; //清除角标
-    
+    [self setNetWorkStatus:RealStatusNotReachable];
     
     [Bugly startWithAppId:@"b27ed1377f"];
     
@@ -211,7 +212,9 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     RealReachability *reachability = (RealReachability *)notification.object;
     ReachabilityStatus status = [reachability currentReachabilityStatus];
     NSLog(@"-----currentStatus:%@",@(status));
-    
+    if (status == _netWorkStatus) {
+        return;
+    }
     switch (status)
     {
         case RealStatusNotReachable:
@@ -224,6 +227,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
             
         case RealStatusViaWiFi:
         {
+            _netWorkStatus = status;
             //  case WiFi handler
             NSLog(@"------------无线网");
             [viewModel notifyNetworkStatusChanged:NetWorkConnType_WWAN];
@@ -233,6 +237,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
         case RealStatusViaWWAN:
         {
             //  case WWAN handler
+            _netWorkStatus = status;
             NSLog(@"------------蜂窝数据");
             [viewModel notifyNetworkStatusChanged:NetWorkConnType_WWAN];
             break;
