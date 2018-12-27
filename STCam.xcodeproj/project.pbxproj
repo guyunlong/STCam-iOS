@@ -48,6 +48,7 @@
 		9FC3ACD3785983CCD073CBE1 /* libPods-GRAVE.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B4C56BD2FE6F48D777CF9CBD /* libPods-GRAVE.a */; };
 		A40C8693217B6DD800D82B6B /* DeviceSettingViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A40C8692217B6DD800D82B6B /* DeviceSettingViewModel.m */; };
 		A4134F932165F78500831B8D /* AccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A4134F922165F78500831B8D /* AccountManager.m */; };
+		A41391ED21D51916008F3116 /* PowerConfigModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A41391EC21D51916008F3116 /* PowerConfigModel.m */; };
 		A43853DB21675A1500B8CC56 /* DeviceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A43853DA21675A1500B8CC56 /* DeviceModel.m */; };
 		A4394584217356B40047E00C /* CommonSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4394582217356B40047E00C /* CommonSettingCell.m */; };
 		A4394585217356B40047E00C /* CommonSettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4394583217356B40047E00C /* CommonSettingCell.xib */; };
@@ -302,6 +303,8 @@
 		A40C8692217B6DD800D82B6B /* DeviceSettingViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceSettingViewModel.m; sourceTree = "<group>"; };
 		A4134F912165F78500831B8D /* AccountManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccountManager.h; sourceTree = "<group>"; };
 		A4134F922165F78500831B8D /* AccountManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountManager.m; sourceTree = "<group>"; };
+		A41391EB21D51916008F3116 /* PowerConfigModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PowerConfigModel.h; sourceTree = "<group>"; };
+		A41391EC21D51916008F3116 /* PowerConfigModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PowerConfigModel.m; sourceTree = "<group>"; };
 		A43853D921675A1500B8CC56 /* DeviceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceModel.h; sourceTree = "<group>"; };
 		A43853DA21675A1500B8CC56 /* DeviceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceModel.m; sourceTree = "<group>"; };
 		A4394581217356B40047E00C /* CommonSettingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonSettingCell.h; sourceTree = "<group>"; };
@@ -969,6 +972,8 @@
 				9D7E9D6D21882C3800DE53E2 /* UserModel.m */,
 				9D7E9D722188405500DE53E2 /* UpdateModel.h */,
 				9D7E9D732188405500DE53E2 /* UpdateModel.m */,
+				A41391EB21D51916008F3116 /* PowerConfigModel.h */,
+				A41391EC21D51916008F3116 /* PowerConfigModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1913,6 +1918,7 @@
 				A452A918217E19CD008222F2 /* WifiManager.m in Sources */,
 				A48C32E9217C4B8A00CDF2D2 /* MotionCfgModel.m in Sources */,
 				A4AE327721342EFD0036212B /* NSDate+Common.m in Sources */,
+				A41391ED21D51916008F3116 /* PowerConfigModel.m in Sources */,
 				A452A912217CC2A4008222F2 /* UpdateDevModel.m in Sources */,
 				9DBBD6772182B3E1003B4DB0 /* RecordListController.m in Sources */,
 				A442C315213199A100198910 /* thVideoEnc.c in Sources */,

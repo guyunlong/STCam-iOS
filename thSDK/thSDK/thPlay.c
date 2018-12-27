@@ -2309,6 +2309,10 @@ char* thNet_GetAllCfg(HANDLE NetHandle)
   if (NetHandle == 0) return NULL;
   if (!Play->IsConnect) return NULL;
   PRINTF("%s(%s)\n", __FUNCTION__, Play->IPUID);
+    if (Play->DevCfg.DevInfoPkt.FunctionMask.IsOld)
+    {
+        Play->DevCfg.DevInfoPkt.FunctionMask.Value = 0x7ffffffe;
+    }
   return DevCfg_to_Json(&Play->DevCfg);
 }
 

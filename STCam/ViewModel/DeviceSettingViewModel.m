@@ -425,4 +425,64 @@
         return nil;
     }];
 }
+
+/**
+ 获取定时开关机配置
+ */
+-(RACSignal *)racGetPowerOnConfig{
+    @weakify(self)
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber){
+        @strongify(self)
+        dispatch_queue_t quene = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(quene, ^{
+            
+            NSString * url = [NSString stringWithFormat:@"%@",[self.model getDevURL:Msg_GetPowerTimerCfg]];
+            
+            id data = [self.model thNetHttpGet:url];
+            if([data isKindOfClass:[NSDictionary class]]){
+                PowerConfigModel * model = [PowerConfigModel PowerConfigModelWithDict:data];
+                if (model) {
+                    self.powerConfigModel = model;
+                    [subscriber sendNext:@1];
+                }
+                else{
+                    [subscriber sendNext:@0];
+                }
+            }
+        });
+        
+        return nil;
+    }];
+}
+
+/**
+ 设置定时开关机配置
+ */
+-(RACSignal *)racSetPowerOnConfig{
+    @weakify(self)
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber){
+        @strongify(self)
+        dispatch_queue_t quene = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(quene, ^{
+            
+             NSString * url = [NSString stringWithFormat:@"%@&PowerOnActive=%ld&PowerOnHour=%ld&PowerOnMinute=%ld&PowerOffDelayMinute=%ld",[self.model getDevURL:Msg_SetPowerTimerCfg],(NSInteger)self.powerConfigModel.PowerOnActive,self.powerConfigModel.PowerOnHour,self.powerConfigModel.PowerOnMinute,self.powerConfigModel.PowerOffDelayMinute];
+            
+            id data = [self.model thNetHttpGet:url];
+            if([data isKindOfClass:[NSDictionary class]]){
+                RetModel * model = [RetModel RetModelWithDict:data];
+                [subscriber sendNext:@(model.ret)];
+            }
+            else if(!data){
+                [subscriber sendNext:@10000];
+            }
+            else{
+                [subscriber sendNext:@0];
+            }
+            
+        });
+        
+        return nil;
+    }];
+}
+
 @end

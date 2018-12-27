@@ -16,10 +16,12 @@
 #import "SDInfoModel.h"
 #import "DevListViewModel.h"
 #import "UpdateDevModel.h"
+#import "PowerConfigModel.h"
 @interface DeviceSettingViewModel : NSObject
 @property(nonatomic,strong)DeviceModel * model;
 @property(nonatomic,strong)PushSettingModel * mPushSettingModel;
 @property(nonatomic,strong)MotionCfgModel * motionCfgModel;//图像侦测灵明度
+@property(nonatomic,strong)PowerConfigModel * powerConfigModel;//定时开关机配置
 -(RACSignal*)racChangeDeviceName:(NSString*)deviceName;
 -(RACSignal*)racChangeDevicePassword:(NSString*)devicePassword;
 -(RACSignal*)racGetPushSetting;
@@ -59,4 +61,13 @@
 
 -(RACSignal *)racCheckUpgradeBin;
 
+/**
+ 获取定时开关机配置
+ */
+-(RACSignal *)racGetPowerOnConfig;
+
+/**
+ 设置定时开关机配置
+ */
+-(RACSignal *)racSetPowerOnConfig;
 @end

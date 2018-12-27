@@ -185,7 +185,8 @@ static int Msg_SetLightCfg = 97;
 static int Msg_GetPushCfg = 98;
 static int Msg_SetPushCfg = 99;
 static int Msg_PlayWavFile = 100;
-
+static int Msg_GetPowerTimerCfg = 101;
+static int Msg_SetPowerTimerCfg = 102;
 
  static  int RESULT_FAIL = 0;//失败
  static  int RESULT_SUCCESS = 1;//成功
