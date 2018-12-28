@@ -16,6 +16,9 @@ def shared_pods
     pod 'Bugly'
     pod 'CustomIOSAlertView'
 end
+target 'STCam' do
+    shared_pods
+end
 target 'GRAVE' do
     shared_pods
 end

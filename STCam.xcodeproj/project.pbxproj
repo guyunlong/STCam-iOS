@@ -196,6 +196,210 @@
 		A4AE70BD2167AEF600614024 /* DevListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE70BB2167AEF600614024 /* DevListCell.m */; };
 		A4AE70BE2167AEF600614024 /* DevListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4AE70BC2167AEF600614024 /* DevListCell.xib */; };
 		A4B25F142184A9EE00D69521 /* LedStatusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A4B25F132184A9EE00D69521 /* LedStatusModel.m */; };
+		A4BBBBDE21D5FCC900CF311C /* STFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A47041A9216DFDD5007163C8 /* STFileManager.m */; };
+		A4BBBBDF21D5FCC900CF311C /* LiveVidViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CFFE70216865A200A93B72 /* LiveVidViewModel.m */; };
+		A4BBBBE021D5FCC900CF311C /* cJSON.c in Sources */ = {isa = PBXBuildFile; fileRef = A442C04F213199A000198910 /* cJSON.c */; };
+		A4BBBBE121D5FCC900CF311C /* ChangeAccountPwdController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D5C2F0B2188015700094FAB /* ChangeAccountPwdController.m */; };
+		A4BBBBE221D5FCC900CF311C /* DeviceSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DBBD68A2182B3F0003B4DB0 /* DeviceSettingController.m */; };
+		A4BBBBE321D5FCC900CF311C /* DevListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A46F7B102132D2E400854DB8 /* DevListViewModel.m */; };
+		A4BBBBE421D5FCC900CF311C /* DevMediaCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A47041AC216E14FA007163C8 /* DevMediaCell.m */; };
+		A4BBBBE521D5FCC900CF311C /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE324C2134277D0036212B /* MoreViewController.m */; };
+		A4BBBBE621D5FCC900CF311C /* CommonSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4394582217356B40047E00C /* CommonSettingCell.m */; };
+		A4BBBBE721D5FCC900CF311C /* ShareAccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D7E9D6A21882B3700DE53E2 /* ShareAccountManager.m */; };
+		A4BBBBE821D5FCC900CF311C /* UIView+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE325821342EFD0036212B /* UIView+Common.m */; };
+		A4BBBBE921D5FCC900CF311C /* TFun.c in Sources */ = {isa = PBXBuildFile; fileRef = A442BFBE213199A000198910 /* TFun.c */; };
+		A4BBBBEA21D5FCC900CF311C /* UITableView+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE325121342EFD0036212B /* UITableView+Common.m */; };
+		A4BBBBEB21D5FCC900CF311C /* DeviceAdvanceSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DBBD6892182B3F0003B4DB0 /* DeviceAdvanceSettingController.m */; };
+		A4BBBBEC21D5FCC900CF311C /* SDInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A48C32F1217C700200CDF2D2 /* SDInfoModel.m */; };
+		A4BBBBED21D5FCC900CF311C /* thRec.c in Sources */ = {isa = PBXBuildFile; fileRef = A442C03F213199A000198910 /* thRec.c */; };
+		A4BBBBEE21D5FCC900CF311C /* RecordListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4434D9F217B009A00BDA9F2 /* RecordListCell.m */; };
+		A4BBBBEF21D5FCC900CF311C /* VideoDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CFFE7C2168C7B600A93B72 /* VideoDecoder.m */; };
+		A4BBBBF021D5FCC900CF311C /* AlarmListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE32462134275C0036212B /* AlarmListViewController.m */; };
+		A4BBBBF121D5FCC900CF311C /* NSDate+convenience.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE326D21342EFD0036212B /* NSDate+convenience.m */; };
+		A4BBBBF221D5FCC900CF311C /* AccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A4134F922165F78500831B8D /* AccountManager.m */; };
+		A4BBBBF321D5FCC900CF311C /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A4CFFE752168BAB100A93B72 /* Model.xcdatamodeld */; };
+		A4BBBBF421D5FCC900CF311C /* VideoBufferParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CFFE7D2168C7B600A93B72 /* VideoBufferParser.m */; };
+		A4BBBBF521D5FCC900CF311C /* AAPLEAGLLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CFFE7E2168C7B600A93B72 /* AAPLEAGLLayer.m */; };
+		A4BBBBF621D5FCC900CF311C /* SearchDeviceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DFEF155217F1F4E00FD28E1 /* SearchDeviceCell.m */; };
+		A4BBBBF721D5FCC900CF311C /* LedControlController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DBBD6932182B596003B4DB0 /* LedControlController.m */; };
+		A4BBBBF821D5FCC900CF311C /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D7E9D6D21882C3800DE53E2 /* UserModel.m */; };
+		A4BBBBF921D5FCC900CF311C /* SSIDModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A47CD3F9217F68A4000E3C2A /* SSIDModel.m */; };
+		A4BBBBFA21D5FCC900CF311C /* STNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A439D83B2165149800FCE7FE /* STNavigationController.m */; };
+		A4BBBBFB21D5FCC900CF311C /* thRender.c in Sources */ = {isa = PBXBuildFile; fileRef = A4CFFE732168861A00A93B72 /* thRender.c */; };
+		A4BBBBFC21D5FCC900CF311C /* UIView+Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE325921342EFD0036212B /* UIView+Layout.m */; };
+		A4BBBBFD21D5FCC900CF311C /* List.c in Sources */ = {isa = PBXBuildFile; fileRef = A442BFB9213199A000198910 /* List.c */; };
+		A4BBBBFE21D5FCC900CF311C /* UIColor+expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE326921342EFD0036212B /* UIColor+expanded.m */; };
+		A4BBBBFF21D5FCC900CF311C /* audio_g711.c in Sources */ = {isa = PBXBuildFile; fileRef = A442BFC2213199A000198910 /* audio_g711.c */; };
+		A4BBBC0021D5FCC900CF311C /* MBProgressHUD+SGQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = A452A9AE21762C4500E40A5F /* MBProgressHUD+SGQRCode.m */; };
+		A4BBBC0121D5FCC900CF311C /* LiveVidController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CFFE6D2168656000A93B72 /* LiveVidController.m */; };
+		A4BBBC0221D5FCC900CF311C /* UIViewController+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D07DF3721895B8F006DDBB8 /* UIViewController+Utils.m */; };
+		A4BBBC0321D5FCC900CF311C /* CommonInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A48C32F4217C713600CDF2D2 /* CommonInfoCell.m */; };
+		A4BBBC0421D5FCC900CF311C /* LoginBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A45934E22164A5FF0018A61B /* LoginBackgroundView.m */; };
+		A4BBBC0521D5FCC900CF311C /* STSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DBBD6A22182F0A2003B4DB0 /* STSlider.m */; };
+		A4BBBC0621D5FCC900CF311C /* STMediaModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A47041B7216E1F59007163C8 /* STMediaModel.m */; };
+		A4BBBC0721D5FCC900CF311C /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = A442BFB3213199A000198910 /* Makefile */; };
+		A4BBBC0821D5FCC900CF311C /* ForgetPwdControlle.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D07DF33218948C4006DDBB8 /* ForgetPwdControlle.m */; };
+		A4BBBC0921D5FCC900CF311C /* WSDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DBBD69A2182EB45003B4DB0 /* WSDatePickerView.m */; };
+		A4BBBC0A21D5FCC900CF311C /* PlayBackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DBBD6722182B3E1003B4DB0 /* PlayBackController.m */; };
+		A4BBBC0B21D5FCC900CF311C /* AddDeviceSmartLinkNextController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE7648321806FD500373090 /* AddDeviceSmartLinkNextController.m */; };
+		A4BBBC0C21D5FCC900CF311C /* RecConfigModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A48C32EB217C691600CDF2D2 /* RecConfigModel.m */; };
+		A4BBBC0D21D5FCC900CF311C /* AddDeviceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE7648221806FD500373090 /* AddDeviceController.m */; };
+		A4BBBC0E21D5FCC900CF311C /* GenerateShareQRCodeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DBBD6862182B3F0003B4DB0 /* GenerateShareQRCodeController.m */; };
+		A4BBBC0F21D5FCC900CF311C /* UIView+YYAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE325B21342EFD0036212B /* UIView+YYAdd.m */; };
+		A4BBBC1021D5FCC900CF311C /* DevListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE70BB2167AEF600614024 /* DevListCell.m */; };
+		A4BBBC1121D5FCC900CF311C /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DBBD69C2182EB45003B4DB0 /* UIView+Extension.m */; };
+		A4BBBC1221D5FCC900CF311C /* AddDeviceSmartLinkController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE7648121806FD500373090 /* AddDeviceSmartLinkController.m */; };
+		A4BBBC1321D5FCC900CF311C /* MediaDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DBBD67E2182B3E7003B4DB0 /* MediaDetailController.m */; };
+		A4BBBC1421D5FCC900CF311C /* SoundButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A4434D93217AD99200BDA9F2 /* SoundButton.m */; };
+		A4BBBC1521D5FCC900CF311C /* PlayBackViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A4434DA7217B144F00BDA9F2 /* PlayBackViewModel.m */; };
+		A4BBBC1621D5FCC900CF311C /* RecordListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A4434D99217AE68A00BDA9F2 /* RecordListViewModel.m */; };
+		A4BBBC1721D5FCC900CF311C /* DeviceSettingViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A40C8692217B6DD800D82B6B /* DeviceSettingViewModel.m */; };
+		A4BBBC1821D5FCC900CF311C /* MediaDetailCCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A47041B4216E1E2B007163C8 /* MediaDetailCCell.m */; };
+		A4BBBC1921D5FCC900CF311C /* WCQRCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A452A9AB21762BEF00E40A5F /* WCQRCodeVC.m */; };
+		A4BBBC1A21D5FCC900CF311C /* UIButton+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = A470AA902163BE050068AA80 /* UIButton+Common.m */; };
+		A4BBBC1B21D5FCC900CF311C /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CFFE792168BB2E00A93B72 /* CoreDataManager.m */; };
+		A4BBBC1C21D5FCC900CF311C /* MainTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE3240213426BE0036212B /* MainTabController.m */; };
+		A4BBBC1D21D5FCC900CF311C /* UIImage+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE326A21342EFD0036212B /* UIImage+Common.m */; };
+		A4BBBC1E21D5FCC900CF311C /* SplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4946FF8212C5B460015990C /* SplashViewController.m */; };
+		A4BBBC1F21D5FCC900CF311C /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE325021342EFD0036212B /* NSDate+Helper.m */; };
+		A4BBBC2021D5FCC900CF311C /* AddDeviceStaController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE7648B2180707F00373090 /* AddDeviceStaController.m */; };
+		A4BBBC2121D5FCC900CF311C /* ChangeDevicePwdController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DBBD6872182B3F0003B4DB0 /* ChangeDevicePwdController.m */; };
+		A4BBBC2221D5FCC900CF311C /* WifiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A452A917217E19CD008222F2 /* WifiManager.m */; };
+		A4BBBC2321D5FCC900CF311C /* MotionCfgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A48C32E8217C4B8A00CDF2D2 /* MotionCfgModel.m */; };
+		A4BBBC2421D5FCC900CF311C /* NSDate+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE326021342EFD0036212B /* NSDate+Common.m */; };
+		A4BBBC2521D5FCC900CF311C /* PowerConfigModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A41391EC21D51916008F3116 /* PowerConfigModel.m */; };
+		A4BBBC2621D5FCC900CF311C /* UpdateDevModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A452A911217CC2A4008222F2 /* UpdateDevModel.m */; };
+		A4BBBC2721D5FCC900CF311C /* RecordListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DBBD6732182B3E1003B4DB0 /* RecordListController.m */; };
+		A4BBBC2821D5FCC900CF311C /* thVideoEnc.c in Sources */ = {isa = PBXBuildFile; fileRef = A442C035213199A000198910 /* thVideoEnc.c */; };
+		A4BBBC2921D5FCC900CF311C /* UIControl+YYAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE326821342EFD0036212B /* UIControl+YYAdd.m */; };
+		A4BBBC2A21D5FCC900CF311C /* RetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A439D83821650DE300FCE7FE /* RetModel.m */; };
+		A4BBBC2B21D5FCC900CF311C /* thPlay.c in Sources */ = {isa = PBXBuildFile; fileRef = A442BFB7213199A000198910 /* thPlay.c */; };
+		A4BBBC2C21D5FCC900CF311C /* axdllEx.c in Sources */ = {isa = PBXBuildFile; fileRef = A442BFB5213199A000198910 /* axdllEx.c */; };
+		A4BBBC2D21D5FCC900CF311C /* DevListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE3243213427480036212B /* DevListViewController.m */; };
+		A4BBBC2E21D5FCC900CF311C /* LMJDropdownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D47FCC121819BC500E7E8DB /* LMJDropdownMenu.m */; };
+		A4BBBC2F21D5FCC900CF311C /* SDVideoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A4434D9C217AFC6C00BDA9F2 /* SDVideoModel.m */; };
+		A4BBBC3021D5FCC900CF311C /* AddDeviceAPToStaController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE7648421806FD500373090 /* AddDeviceAPToStaController.m */; };
+		A4BBBC3121D5FCC900CF311C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A4947003212C5B470015990C /* main.m */; };
+		A4BBBC3221D5FCC900CF311C /* PowerOnOffAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4722B0021D234E3002B8F59 /* PowerOnOffAlertView.m */; };
+		A4BBBC3321D5FCC900CF311C /* NSDate+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DBBD69B2182EB45003B4DB0 /* NSDate+Extension.m */; };
+		A4BBBC3421D5FCC900CF311C /* skt.c in Sources */ = {isa = PBXBuildFile; fileRef = A442BFBA213199A000198910 /* skt.c */; };
+		A4BBBC3521D5FCC900CF311C /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4F5043F216268A6002B71FF /* RootViewController.m */; };
+		A4BBBC3621D5FCC900CF311C /* BasicTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = A45934DF2164A5320018A61B /* BasicTextField.m */; };
+		A4BBBC3721D5FCC900CF311C /* DeviceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A43853DA21675A1500B8CC56 /* DeviceModel.m */; };
+		A4BBBC3821D5FCC900CF311C /* LedControlViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DBBD6A52183051E003B4DB0 /* LedControlViewModel.m */; };
+		A4BBBC3921D5FCC900CF311C /* AddDeviceApToStaNextController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE7647B21806FD500373090 /* AddDeviceApToStaNextController.m */; };
+		A4BBBC3A21D5FCC900CF311C /* LedStatusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A4B25F132184A9EE00D69521 /* LedStatusModel.m */; };
+		A4BBBC3B21D5FCC900CF311C /* AudioSession.m in Sources */ = {isa = PBXBuildFile; fileRef = A4606928216A4F0400491290 /* AudioSession.m */; };
+		A4BBBC3C21D5FCC900CF311C /* AlarmListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A4BC3659216F983900FDCBF5 /* AlarmListViewModel.m */; };
+		A4BBBC3D21D5FCC900CF311C /* DevShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC4BB72175C7EB00AC8916 /* DevShareModel.m */; };
+		A4BBBC3E21D5FCC900CF311C /* SDVolumeManagerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DBBD6832182B3F0003B4DB0 /* SDVolumeManagerController.m */; };
+		A4BBBC3F21D5FCC900CF311C /* PushSettingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A48C32E2217C24EF00CDF2D2 /* PushSettingModel.m */; };
+		A4BBBC4021D5FCC900CF311C /* AlarmListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4BC3654216F959B00FDCBF5 /* AlarmListCell.m */; };
+		A4BBBC4121D5FCC900CF311C /* AboutAppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D7E9D7021883A4F00DE53E2 /* AboutAppController.m */; };
+		A4BBBC4221D5FCC900CF311C /* MediaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DBBD67D2182B3E7003B4DB0 /* MediaViewController.m */; };
+		A4BBBC4321D5FCC900CF311C /* UpdateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D7E9D732188405500DE53E2 /* UpdateModel.m */; };
+		A4BBBC4421D5FCC900CF311C /* LoginViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A439D830216506E200FCE7FE /* LoginViewModel.m */; };
+		A4BBBC4521D5FCC900CF311C /* InfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A4394587217358470047E00C /* InfoModel.m */; };
+		A4BBBC4621D5FCC900CF311C /* av_Queue.c in Sources */ = {isa = PBXBuildFile; fileRef = A442BFBC213199A000198910 /* av_Queue.c */; };
+		A4BBBC4721D5FCC900CF311C /* AlarmImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A4BC365C216F98A400FDCBF5 /* AlarmImageModel.m */; };
+		A4BBBC4821D5FCC900CF311C /* NSString+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE325F21342EFD0036212B /* NSString+Common.m */; };
+		A4BBBC4921D5FCC900CF311C /* FFHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = A439D834216508F300FCE7FE /* FFHttpTool.m */; };
+		A4BBBC4A21D5FCC900CF311C /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE323D2134265B0036212B /* LoginViewController.m */; };
+		A4BBBC4B21D5FCC900CF311C /* MBProgressHUD+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE325521342EFD0036212B /* MBProgressHUD+Add.m */; };
+		A4BBBC4C21D5FCC900CF311C /* UIViewController+HUD.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE325221342EFD0036212B /* UIViewController+HUD.m */; };
+		A4BBBC4D21D5FCC900CF311C /* UISegmentedControl+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AE325621342EFD0036212B /* UISegmentedControl+Category.m */; };
+		A4BBBC4E21D5FCC900CF311C /* RegisterAccountController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D7E9D7721884E3100DE53E2 /* RegisterAccountController.m */; };
+		A4BBBC4F21D5FCC900CF311C /* thImg.c in Sources */ = {isa = PBXBuildFile; fileRef = A442C043213199A000198910 /* thImg.c */; };
+		A4BBBC5021D5FCC900CF311C /* CommonSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A48C32F9217C716A00CDF2D2 /* CommonSwitchCell.m */; };
+		A4BBBC5121D5FCC900CF311C /* thVideoDec.c in Sources */ = {isa = PBXBuildFile; fileRef = A442C033213199A000198910 /* thVideoDec.c */; };
+		A4BBBC5221D5FCC900CF311C /* ImageDisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DBBD67A2182B3E7003B4DB0 /* ImageDisplayController.m */; };
+		A4BBBC5321D5FCC900CF311C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A4946FF5212C5B460015990C /* AppDelegate.m */; };
+		A4BBBC5521D5FCC900CF311C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A46F7B082132CF5400854DB8 /* AudioToolbox.framework */; };
+		A4BBBC5621D5FCC900CF311C /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A46F7AF82132CD8C00854DB8 /* libiconv.tbd */; };
+		A4BBBC5721D5FCC900CF311C /* libiot.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DE76475218003DC00373090 /* libiot.a */; };
+		A4BBBC5821D5FCC900CF311C /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4CFFE852168C7D500A93B72 /* AVKit.framework */; };
+		A4BBBC5921D5FCC900CF311C /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A46F7B0C2132D03500854DB8 /* CoreMedia.framework */; };
+		A4BBBC5A21D5FCC900CF311C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A46F7B0A2132CF9100854DB8 /* AVFoundation.framework */; };
+		A4BBBC5B21D5FCC900CF311C /* libiconv.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A46F7B062132CF2300854DB8 /* libiconv.2.tbd */; };
+		A4BBBC5C21D5FCC900CF311C /* libIOTCAPIs_P2PTunnelT.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A46F7AFE2132CEDC00854DB8 /* libIOTCAPIs_P2PTunnelT.a */; };
+		A4BBBC5D21D5FCC900CF311C /* libIOTCAPIs_P2PTunnel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A46F7AFF2132CEDC00854DB8 /* libIOTCAPIs_P2PTunnel.a */; };
+		A4BBBC5E21D5FCC900CF311C /* libIOTCAPIs_ALL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A46F7B002132CEDC00854DB8 /* libIOTCAPIs_ALL.a */; };
+		A4BBBC5F21D5FCC900CF311C /* libIOTCAPIs_ALLT.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A46F7B012132CEDC00854DB8 /* libIOTCAPIs_ALLT.a */; };
+		A4BBBC6021D5FCC900CF311C /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A46F7AFC2132CE6100854DB8 /* VideoToolbox.framework */; };
+		A4BBBC6121D5FCC900CF311C /* libx264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A46F7AFA2132CE1E00854DB8 /* libx264.a */; };
+		A4BBBC6221D5FCC900CF311C /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A46F7AF62132CD8500854DB8 /* libbz2.tbd */; };
+		A4BBBC6321D5FCC900CF311C /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A46F7AF42132CD7B00854DB8 /* libz.tbd */; };
+		A4BBBC6421D5FCC900CF311C /* libavformat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A46F7AE42132CD5100854DB8 /* libavformat.a */; };
+		A4BBBC6521D5FCC900CF311C /* libswscale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A46F7AE52132CD5100854DB8 /* libswscale.a */; };
+		A4BBBC6621D5FCC900CF311C /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A46F7AE62132CD5100854DB8 /* libavutil.a */; };
+		A4BBBC6721D5FCC900CF311C /* libpostproc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A46F7AE72132CD5100854DB8 /* libpostproc.a */; };
+		A4BBBC6821D5FCC900CF311C /* libavcodec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A46F7AE82132CD5100854DB8 /* libavcodec.a */; };
+		A4BBBC6921D5FCC900CF311C /* libswresample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A46F7AE92132CD5100854DB8 /* libswresample.a */; };
+		A4BBBC6A21D5FCC900CF311C /* libavdevice.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A46F7AEA2132CD5100854DB8 /* libavdevice.a */; };
+		A4BBBC6B21D5FCC900CF311C /* libavfilter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A46F7AEB2132CD5100854DB8 /* libavfilter.a */; };
+		A4BBBC6C21D5FCC900CF311C /* libPods-STCam.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C18EA7F117ED0291D64659B7 /* libPods-STCam.a */; };
+		A4BBBC6D21D5FCC900CF311C /* libPods-GRAVE.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B4C56BD2FE6F48D777CF9CBD /* libPods-GRAVE.a */; };
+		A4BBBC6F21D5FCC900CF311C /* RecordListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4434DA0217B009A00BDA9F2 /* RecordListCell.xib */; };
+		A4BBBC7021D5FCC900CF311C /* dyngraph.idl in Resources */ = {isa = PBXBuildFile; fileRef = A442C1CB213199A100198910 /* dyngraph.idl */; };
+		A4BBBC7121D5FCC900CF311C /* d3dxmath.inl in Resources */ = {isa = PBXBuildFile; fileRef = A442C229213199A100198910 /* d3dxmath.inl */; };
+		A4BBBC7221D5FCC900CF311C /* test5 in Resources */ = {isa = PBXBuildFile; fileRef = A442C04D213199A000198910 /* test5 */; };
+		A4BBBC7321D5FCC900CF311C /* d3dx9math.inl in Resources */ = {isa = PBXBuildFile; fileRef = A442C1ED213199A100198910 /* d3dx9math.inl */; };
+		A4BBBC7421D5FCC900CF311C /* Mstvca.idl in Resources */ = {isa = PBXBuildFile; fileRef = A442C1C9213199A100198910 /* Mstvca.idl */; };
+		A4BBBC7521D5FCC900CF311C /* CommonSettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4394583217356B40047E00C /* CommonSettingCell.xib */; };
+		A4BBBC7621D5FCC900CF311C /* qedit.idl in Resources */ = {isa = PBXBuildFile; fileRef = A442C1DA213199A100198910 /* qedit.idl */; };
+		A4BBBC7721D5FCC900CF311C /* Mpeg2Data.idl in Resources */ = {isa = PBXBuildFile; fileRef = A442C1D6213199A100198910 /* Mpeg2Data.idl */; };
+		A4BBBC7821D5FCC900CF311C /* mixerocx.idl in Resources */ = {isa = PBXBuildFile; fileRef = A442C1CA213199A100198910 /* mixerocx.idl */; };
+		A4BBBC7921D5FCC900CF311C /* devenum.idl in Resources */ = {isa = PBXBuildFile; fileRef = A442C1EA213199A100198910 /* devenum.idl */; };
+		A4BBBC7A21D5FCC900CF311C /* austream.idl in Resources */ = {isa = PBXBuildFile; fileRef = A442C1E3213199A100198910 /* austream.idl */; };
+		A4BBBC7B21D5FCC900CF311C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A470AA8B21636FFC0068AA80 /* Localizable.strings */; };
+		A4BBBC7C21D5FCC900CF311C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4946FFF212C5B470015990C /* LaunchScreen.storyboard */; };
+		A4BBBC7D21D5FCC900CF311C /* tuner.idl in Resources */ = {isa = PBXBuildFile; fileRef = A442C1E4213199A100198910 /* tuner.idl */; };
+		A4BBBC7E21D5FCC900CF311C /* test4 in Resources */ = {isa = PBXBuildFile; fileRef = A442C04A213199A000198910 /* test4 */; };
+		A4BBBC7F21D5FCC900CF311C /* Segment.idl in Resources */ = {isa = PBXBuildFile; fileRef = A442C1D3213199A100198910 /* Segment.idl */; };
+		A4BBBC8021D5FCC900CF311C /* regbag.idl in Resources */ = {isa = PBXBuildFile; fileRef = A442C1E9213199A100198910 /* regbag.idl */; };
+		A4BBBC8121D5FCC900CF311C /* tuner.tlb in Resources */ = {isa = PBXBuildFile; fileRef = A442C228213199A100198910 /* tuner.tlb */; };
+		A4BBBC8221D5FCC900CF311C /* Msvidctl.idl in Resources */ = {isa = PBXBuildFile; fileRef = A442C1DB213199A100198910 /* Msvidctl.idl */; };
+		A4BBBC8321D5FCC900CF311C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4946FFD212C5B470015990C /* Assets.xcassets */; };
+		A4BBBC8421D5FCC900CF311C /* dropdownMenu_cornerIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D47FCC021819BC500E7E8DB /* dropdownMenu_cornerIcon.png */; };
+		A4BBBC8521D5FCC900CF311C /* axextend.idl in Resources */ = {isa = PBXBuildFile; fileRef = A442C1DE213199A100198910 /* axextend.idl */; };
+		A4BBBC8621D5FCC900CF311C /* axcore.idl in Resources */ = {isa = PBXBuildFile; fileRef = A442C1CC213199A100198910 /* axcore.idl */; };
+		A4BBBC8721D5FCC900CF311C /* Videoacc.idl in Resources */ = {isa = PBXBuildFile; fileRef = A442C1D1213199A100198910 /* Videoacc.idl */; };
+		A4BBBC8821D5FCC900CF311C /* control.odl in Resources */ = {isa = PBXBuildFile; fileRef = A442C1D9213199A100198910 /* control.odl */; };
+		A4BBBC8921D5FCC900CF311C /* AlarmListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4BC3655216F959B00FDCBF5 /* AlarmListCell.xib */; };
+		A4BBBC8A21D5FCC900CF311C /* sbe.idl in Resources */ = {isa = PBXBuildFile; fileRef = A442C1DD213199A100198910 /* sbe.idl */; };
+		A4BBBC8B21D5FCC900CF311C /* strmif.idl in Resources */ = {isa = PBXBuildFile; fileRef = A442C1D7213199A100198910 /* strmif.idl */; };
+		A4BBBC8C21D5FCC900CF311C /* ddstream.idl in Resources */ = {isa = PBXBuildFile; fileRef = A442C1CE213199A100198910 /* ddstream.idl */; };
+		A4BBBC8D21D5FCC900CF311C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4946FFA212C5B460015990C /* Main.storyboard */; };
+		A4BBBC8E21D5FCC900CF311C /* test1 in Resources */ = {isa = PBXBuildFile; fileRef = A442C049213199A000198910 /* test1 */; };
+		A4BBBC8F21D5FCC900CF311C /* Bdatif.idl in Resources */ = {isa = PBXBuildFile; fileRef = A442C1CF213199A100198910 /* Bdatif.idl */; };
+		A4BBBC9021D5FCC900CF311C /* dvdif.idl in Resources */ = {isa = PBXBuildFile; fileRef = A442C1D0213199A100198910 /* dvdif.idl */; };
+		A4BBBC9121D5FCC900CF311C /* d3dvec.inl in Resources */ = {isa = PBXBuildFile; fileRef = A442C209213199A100198910 /* d3dvec.inl */; };
+		A4BBBC9221D5FCC900CF311C /* amstream.idl in Resources */ = {isa = PBXBuildFile; fileRef = A442C1DF213199A100198910 /* amstream.idl */; };
+		A4BBBC9321D5FCC900CF311C /* vmr9.idl in Resources */ = {isa = PBXBuildFile; fileRef = A442C1E1213199A100198910 /* vmr9.idl */; };
+		A4BBBC9421D5FCC900CF311C /* Mpeg2Structs.idl in Resources */ = {isa = PBXBuildFile; fileRef = A442C1D5213199A100198910 /* Mpeg2Structs.idl */; };
+		A4BBBC9521D5FCC900CF311C /* splash_grave_01.png in Resources */ = {isa = PBXBuildFile; fileRef = A4DAA3B921AA63FF007E4600 /* splash_grave_01.png */; };
+		A4BBBC9621D5FCC900CF311C /* Vmrender.idl in Resources */ = {isa = PBXBuildFile; fileRef = A442C1E6213199A100198910 /* Vmrender.idl */; };
+		A4BBBC9721D5FCC900CF311C /* DevListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4AE70BC2167AEF600614024 /* DevListCell.xib */; };
+		A4BBBC9821D5FCC900CF311C /* Mstvgs.idl in Resources */ = {isa = PBXBuildFile; fileRef = A442C1DC213199A100198910 /* Mstvgs.idl */; };
+		A4BBBC9921D5FCC900CF311C /* CommonSwitchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A48C32FA217C716A00CDF2D2 /* CommonSwitchCell.xib */; };
+		A4BBBC9A21D5FCC900CF311C /* dshowasf.idl in Resources */ = {isa = PBXBuildFile; fileRef = A442C1E2213199A100198910 /* dshowasf.idl */; };
+		A4BBBC9B21D5FCC900CF311C /* tvratings.idl in Resources */ = {isa = PBXBuildFile; fileRef = A442C1E7213199A100198910 /* tvratings.idl */; };
+		A4BBBC9C21D5FCC900CF311C /* mmstream.idl in Resources */ = {isa = PBXBuildFile; fileRef = A442C1D4213199A100198910 /* mmstream.idl */; };
+		A4BBBC9D21D5FCC900CF311C /* test2 in Resources */ = {isa = PBXBuildFile; fileRef = A442C04C213199A000198910 /* test2 */; };
+		A4BBBC9E21D5FCC900CF311C /* d3dx8math.inl in Resources */ = {isa = PBXBuildFile; fileRef = A442C20E213199A100198910 /* d3dx8math.inl */; };
+		A4BBBC9F21D5FCC900CF311C /* bdaiface.idl in Resources */ = {isa = PBXBuildFile; fileRef = A442C1E0213199A100198910 /* bdaiface.idl */; };
+		A4BBBCA021D5FCC900CF311C /* SearchDeviceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DFEF156217F1F4E00FD28E1 /* SearchDeviceCell.xib */; };
+		A4BBBCA121D5FCC900CF311C /* msvidctl.tlb in Resources */ = {isa = PBXBuildFile; fileRef = A442C223213199A100198910 /* msvidctl.tlb */; };
+		A4BBBCA221D5FCC900CF311C /* launchscreen01.png in Resources */ = {isa = PBXBuildFile; fileRef = A4DAA3BB21AAAC94007E4600 /* launchscreen01.png */; };
+		A4BBBCA321D5FCC900CF311C /* WSDatePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DBBD6992182EB45003B4DB0 /* WSDatePickerView.xib */; };
+		A4BBBCA421D5FCC900CF311C /* DevMediaCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A47041AD216E14FA007163C8 /* DevMediaCell.xib */; };
+		A4BBBCA521D5FCC900CF311C /* dmodshow.idl in Resources */ = {isa = PBXBuildFile; fileRef = A442C1D8213199A100198910 /* dmodshow.idl */; };
+		A4BBBCA621D5FCC900CF311C /* medparam.idl in Resources */ = {isa = PBXBuildFile; fileRef = A442C1E5213199A100198910 /* medparam.idl */; };
+		A4BBBCA721D5FCC900CF311C /* test3 in Resources */ = {isa = PBXBuildFile; fileRef = A442C04B213199A000198910 /* test3 */; };
+		A4BBBCA821D5FCC900CF311C /* dxtrans.idl in Resources */ = {isa = PBXBuildFile; fileRef = A442C1CD213199A100198910 /* dxtrans.idl */; };
+		A4BBBCA921D5FCC900CF311C /* CommonInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A48C32F5217C713600CDF2D2 /* CommonInfoCell.xib */; };
+		A4BBBCAA21D5FCC900CF311C /* mediaobj.idl in Resources */ = {isa = PBXBuildFile; fileRef = A442C1E8213199A100198910 /* mediaobj.idl */; };
+		A4BBBCAB21D5FCC900CF311C /* mstve.idl in Resources */ = {isa = PBXBuildFile; fileRef = A442C1D2213199A100198910 /* mstve.idl */; };
 		A4BC3656216F959B00FDCBF5 /* AlarmListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4BC3654216F959B00FDCBF5 /* AlarmListCell.m */; };
 		A4BC3657216F959B00FDCBF5 /* AlarmListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4BC3655216F959B00FDCBF5 /* AlarmListCell.xib */; };
 		A4BC365A216F983900FDCBF5 /* AlarmListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A4BC3659216F983900FDCBF5 /* AlarmListViewModel.m */; };
@@ -667,7 +871,7 @@
 		A48C32F8217C716A00CDF2D2 /* CommonSwitchCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonSwitchCell.h; sourceTree = "<group>"; };
 		A48C32F9217C716A00CDF2D2 /* CommonSwitchCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonSwitchCell.m; sourceTree = "<group>"; };
 		A48C32FA217C716A00CDF2D2 /* CommonSwitchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommonSwitchCell.xib; sourceTree = "<group>"; };
-		A4946FF1212C5B460015990C /* GRAVE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GRAVE.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A4946FF1212C5B460015990C /* STCam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = STCam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4946FF4212C5B460015990C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A4946FF5212C5B460015990C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		A4946FF7212C5B460015990C /* SplashViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SplashViewController.h; sourceTree = "<group>"; };
@@ -724,6 +928,8 @@
 		A4AE70BC2167AEF600614024 /* DevListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DevListCell.xib; sourceTree = "<group>"; };
 		A4B25F122184A9EE00D69521 /* LedStatusModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LedStatusModel.h; sourceTree = "<group>"; };
 		A4B25F132184A9EE00D69521 /* LedStatusModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LedStatusModel.m; sourceTree = "<group>"; };
+		A4BBBCB121D5FCC900CF311C /* GRAVE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GRAVE.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A4BBBCB221D5FCCA00CF311C /* STCam copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "STCam copy-Info.plist"; path = "/opt/android/android_studio/SouthSmartCamProject/STCam-iOS/STCam copy-Info.plist"; sourceTree = "<absolute>"; };
 		A4BC3653216F959B00FDCBF5 /* AlarmListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlarmListCell.h; sourceTree = "<group>"; };
 		A4BC3654216F959B00FDCBF5 /* AlarmListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlarmListCell.m; sourceTree = "<group>"; };
 		A4BC3655216F959B00FDCBF5 /* AlarmListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlarmListCell.xib; sourceTree = "<group>"; };
@@ -793,6 +999,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A4BBBC5421D5FCC900CF311C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A4BBBC5521D5FCC900CF311C /* AudioToolbox.framework in Frameworks */,
+				A4BBBC5621D5FCC900CF311C /* libiconv.tbd in Frameworks */,
+				A4BBBC5721D5FCC900CF311C /* libiot.a in Frameworks */,
+				A4BBBC5821D5FCC900CF311C /* AVKit.framework in Frameworks */,
+				A4BBBC5921D5FCC900CF311C /* CoreMedia.framework in Frameworks */,
+				A4BBBC5A21D5FCC900CF311C /* AVFoundation.framework in Frameworks */,
+				A4BBBC5B21D5FCC900CF311C /* libiconv.2.tbd in Frameworks */,
+				A4BBBC5C21D5FCC900CF311C /* libIOTCAPIs_P2PTunnelT.a in Frameworks */,
+				A4BBBC5D21D5FCC900CF311C /* libIOTCAPIs_P2PTunnel.a in Frameworks */,
+				A4BBBC5E21D5FCC900CF311C /* libIOTCAPIs_ALL.a in Frameworks */,
+				A4BBBC5F21D5FCC900CF311C /* libIOTCAPIs_ALLT.a in Frameworks */,
+				A4BBBC6021D5FCC900CF311C /* VideoToolbox.framework in Frameworks */,
+				A4BBBC6121D5FCC900CF311C /* libx264.a in Frameworks */,
+				A4BBBC6221D5FCC900CF311C /* libbz2.tbd in Frameworks */,
+				A4BBBC6321D5FCC900CF311C /* libz.tbd in Frameworks */,
+				A4BBBC6421D5FCC900CF311C /* libavformat.a in Frameworks */,
+				A4BBBC6521D5FCC900CF311C /* libswscale.a in Frameworks */,
+				A4BBBC6621D5FCC900CF311C /* libavutil.a in Frameworks */,
+				A4BBBC6721D5FCC900CF311C /* libpostproc.a in Frameworks */,
+				A4BBBC6821D5FCC900CF311C /* libavcodec.a in Frameworks */,
+				A4BBBC6921D5FCC900CF311C /* libswresample.a in Frameworks */,
+				A4BBBC6A21D5FCC900CF311C /* libavdevice.a in Frameworks */,
+				A4BBBC6B21D5FCC900CF311C /* libavfilter.a in Frameworks */,
+				A4BBBC6C21D5FCC900CF311C /* libPods-STCam.a in Frameworks */,
+				A4BBBC6D21D5FCC900CF311C /* libPods-GRAVE.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1435,14 +1673,16 @@
 				A4946FF2212C5B460015990C /* Products */,
 				A46F7AE32132CD5100854DB8 /* Frameworks */,
 				8B530263E64BCD781E06B7DA /* Pods */,
+				A4BBBCB221D5FCCA00CF311C /* STCam copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
 		A4946FF2212C5B460015990C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A4946FF1212C5B460015990C /* GRAVE.app */,
+				A4946FF1212C5B460015990C /* STCam.app */,
 				A4947009212C5B470015990C /* STCamTests.xctest */,
+				A4BBBCB121D5FCC900CF311C /* GRAVE.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1624,9 +1864,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A4946FF0212C5B460015990C /* GRAVE */ = {
+		A4946FF0212C5B460015990C /* STCam */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A4947012212C5B470015990C /* Build configuration list for PBXNativeTarget "GRAVE" */;
+			buildConfigurationList = A4947012212C5B470015990C /* Build configuration list for PBXNativeTarget "STCam" */;
 			buildPhases = (
 				21637F7E53F13B03379D19A9 /* [CP] Check Pods Manifest.lock */,
 				A4946FED212C5B460015990C /* Sources */,
@@ -1639,9 +1879,9 @@
 			);
 			dependencies = (
 			);
-			name = GRAVE;
+			name = STCam;
 			productName = STCam;
-			productReference = A4946FF1212C5B460015990C /* GRAVE.app */;
+			productReference = A4946FF1212C5B460015990C /* STCam.app */;
 			productType = "com.apple.product-type.application";
 		};
 		A4947008212C5B470015990C /* STCamTests */ = {
@@ -1661,6 +1901,26 @@
 			productName = STCamTests;
 			productReference = A4947009212C5B470015990C /* STCamTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A4BBBBDB21D5FCC900CF311C /* GRAVE */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A4BBBCAE21D5FCC900CF311C /* Build configuration list for PBXNativeTarget "GRAVE" */;
+			buildPhases = (
+				A4BBBBDC21D5FCC900CF311C /* [CP] Check Pods Manifest.lock */,
+				A4BBBBDD21D5FCC900CF311C /* Sources */,
+				A4BBBC5421D5FCC900CF311C /* Frameworks */,
+				A4BBBC6E21D5FCC900CF311C /* Resources */,
+				A4BBBCAC21D5FCC900CF311C /* [CP] Copy Pods Resources */,
+				A4BBBCAD21D5FCC900CF311C /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GRAVE;
+			productName = STCam;
+			productReference = A4BBBCB121D5FCC900CF311C /* GRAVE.app */;
+			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
@@ -1702,8 +1962,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A4946FF0212C5B460015990C /* GRAVE */,
+				A4946FF0212C5B460015990C /* STCam */,
 				A4947008212C5B470015990C /* STCamTests */,
+				A4BBBBDB21D5FCC900CF311C /* GRAVE */,
 			);
 		};
 /* End PBXProject section */
@@ -1784,6 +2045,74 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A4BBBC6E21D5FCC900CF311C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A4BBBC6F21D5FCC900CF311C /* RecordListCell.xib in Resources */,
+				A4BBBC7021D5FCC900CF311C /* dyngraph.idl in Resources */,
+				A4BBBC7121D5FCC900CF311C /* d3dxmath.inl in Resources */,
+				A4BBBC7221D5FCC900CF311C /* test5 in Resources */,
+				A4BBBC7321D5FCC900CF311C /* d3dx9math.inl in Resources */,
+				A4BBBC7421D5FCC900CF311C /* Mstvca.idl in Resources */,
+				A4BBBC7521D5FCC900CF311C /* CommonSettingCell.xib in Resources */,
+				A4BBBC7621D5FCC900CF311C /* qedit.idl in Resources */,
+				A4BBBC7721D5FCC900CF311C /* Mpeg2Data.idl in Resources */,
+				A4BBBC7821D5FCC900CF311C /* mixerocx.idl in Resources */,
+				A4BBBC7921D5FCC900CF311C /* devenum.idl in Resources */,
+				A4BBBC7A21D5FCC900CF311C /* austream.idl in Resources */,
+				A4BBBC7B21D5FCC900CF311C /* Localizable.strings in Resources */,
+				A4BBBC7C21D5FCC900CF311C /* LaunchScreen.storyboard in Resources */,
+				A4BBBC7D21D5FCC900CF311C /* tuner.idl in Resources */,
+				A4BBBC7E21D5FCC900CF311C /* test4 in Resources */,
+				A4BBBC7F21D5FCC900CF311C /* Segment.idl in Resources */,
+				A4BBBC8021D5FCC900CF311C /* regbag.idl in Resources */,
+				A4BBBC8121D5FCC900CF311C /* tuner.tlb in Resources */,
+				A4BBBC8221D5FCC900CF311C /* Msvidctl.idl in Resources */,
+				A4BBBC8321D5FCC900CF311C /* Assets.xcassets in Resources */,
+				A4BBBC8421D5FCC900CF311C /* dropdownMenu_cornerIcon.png in Resources */,
+				A4BBBC8521D5FCC900CF311C /* axextend.idl in Resources */,
+				A4BBBC8621D5FCC900CF311C /* axcore.idl in Resources */,
+				A4BBBC8721D5FCC900CF311C /* Videoacc.idl in Resources */,
+				A4BBBC8821D5FCC900CF311C /* control.odl in Resources */,
+				A4BBBC8921D5FCC900CF311C /* AlarmListCell.xib in Resources */,
+				A4BBBC8A21D5FCC900CF311C /* sbe.idl in Resources */,
+				A4BBBC8B21D5FCC900CF311C /* strmif.idl in Resources */,
+				A4BBBC8C21D5FCC900CF311C /* ddstream.idl in Resources */,
+				A4BBBC8D21D5FCC900CF311C /* Main.storyboard in Resources */,
+				A4BBBC8E21D5FCC900CF311C /* test1 in Resources */,
+				A4BBBC8F21D5FCC900CF311C /* Bdatif.idl in Resources */,
+				A4BBBC9021D5FCC900CF311C /* dvdif.idl in Resources */,
+				A4BBBC9121D5FCC900CF311C /* d3dvec.inl in Resources */,
+				A4BBBC9221D5FCC900CF311C /* amstream.idl in Resources */,
+				A4BBBC9321D5FCC900CF311C /* vmr9.idl in Resources */,
+				A4BBBC9421D5FCC900CF311C /* Mpeg2Structs.idl in Resources */,
+				A4BBBC9521D5FCC900CF311C /* splash_grave_01.png in Resources */,
+				A4BBBC9621D5FCC900CF311C /* Vmrender.idl in Resources */,
+				A4BBBC9721D5FCC900CF311C /* DevListCell.xib in Resources */,
+				A4BBBC9821D5FCC900CF311C /* Mstvgs.idl in Resources */,
+				A4BBBC9921D5FCC900CF311C /* CommonSwitchCell.xib in Resources */,
+				A4BBBC9A21D5FCC900CF311C /* dshowasf.idl in Resources */,
+				A4BBBC9B21D5FCC900CF311C /* tvratings.idl in Resources */,
+				A4BBBC9C21D5FCC900CF311C /* mmstream.idl in Resources */,
+				A4BBBC9D21D5FCC900CF311C /* test2 in Resources */,
+				A4BBBC9E21D5FCC900CF311C /* d3dx8math.inl in Resources */,
+				A4BBBC9F21D5FCC900CF311C /* bdaiface.idl in Resources */,
+				A4BBBCA021D5FCC900CF311C /* SearchDeviceCell.xib in Resources */,
+				A4BBBCA121D5FCC900CF311C /* msvidctl.tlb in Resources */,
+				A4BBBCA221D5FCC900CF311C /* launchscreen01.png in Resources */,
+				A4BBBCA321D5FCC900CF311C /* WSDatePickerView.xib in Resources */,
+				A4BBBCA421D5FCC900CF311C /* DevMediaCell.xib in Resources */,
+				A4BBBCA521D5FCC900CF311C /* dmodshow.idl in Resources */,
+				A4BBBCA621D5FCC900CF311C /* medparam.idl in Resources */,
+				A4BBBCA721D5FCC900CF311C /* test3 in Resources */,
+				A4BBBCA821D5FCC900CF311C /* dxtrans.idl in Resources */,
+				A4BBBCA921D5FCC900CF311C /* CommonInfoCell.xib in Resources */,
+				A4BBBCAA21D5FCC900CF311C /* mediaobj.idl in Resources */,
+				A4BBBCAB21D5FCC900CF311C /* mstve.idl in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -1798,7 +2127,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-GRAVE-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-STCam-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1818,7 +2147,25 @@
 			shellPath = /bin/sh;
 			shellScript = "#!/bin/sh\n#\n# Copyright 2016 Bugly, Tencent. All rights reserved.\n#\n# V1.4.0\n#\n# 2016.08.03\n#\n#\n#\n######################################################\n# 1. 脚本集成到Xcode工程的Target\n######################################################\n#\n# --- Copy the SCRIPT to the Run Script of Build Phases in the Xcode project ---\n#\n# #\nBUGLY_APP_ID=\"b27ed1377f\"\n# #\nBUGLY_APP_KEY=\"982e52bf-f534-4e79-97d2-3bf48ffcae50\"\n# #\nBUNDLE_IDENTIFIER=\"com.south.STCam\"\n# #\nUPLOAD_DSYM_ONLY=1\n#\n# # 脚本默认配置的版本格式为CFBundleShortVersionString(CFBundleVersion),  如果你修改默认的版本格式, 请设置此变量, 如果不想修改, 请忽略此设置\n# CUSTOMIZED_APP_VERSION=\"\"\n#\n# # Debug模式编译是否上传，1＝上传 0＝不上传，默认不上传\nUPLOAD_DEBUG_SYMBOLS=0\n#\n# # 模拟器编译是否上传，1=上传 0=不上传，默认不上传\n# UPLOAD_SIMULATOR_SYMBOLS=0\n#\n# #只有Archive操作时上传, 1=支持Archive上传 0=所有Release模式编译都上传\n# UPLOAD_ARCHIVE_ONLY=0\n#\n# #\n# source dSYMUpload.sh\n#\n# --- END OF SCRIPT ---\n#\n#\n#\n#\n#######################################################\n# 2. 脚本根据输入参数处理\n#######################################################\n#\n# #命令行下输入应用基本信息, .dSYM文件的父目录路径, 输出文件目录即可\n#\n# sh dSYMUpload.sh <bugly_app_id> <bugly_app_key> <app_bundle_identifier> <app_version> <dSYM_src_dir> <bSYMBOL_dest_dir>\n#\n# #\n#\n# #注意:\n# # 1. dSYMUpload.sh会调用buglySymboliOS.jar进行.dSYM解析，所以依赖Java运行时环境\n# # 2. dSYMUpload.sh和buglySymboliOS.jar的文件路径需一致\n#\n#\n\n#\n# --- CONTENT OF SCRIPT ---\n#\n\n# Bugly服务域名\nBUGLY_DSYM_UPLOAD_DOMAIN=\"api.bugly.qq.com\"\n\n# 注意jar工具的路径跟dSYMUpload.sh脚本路径一致, 请务必保证jar路径的正确性\nBUGLY_SYMBOL_JAR_PATH=\"dsymtool/buglySymboliOS.jar\"\n# 查找添加到系统目录的jar工具\nif [ ! -f \"${BUGLY_SYMBOL_JAR_PATH}\" ]; then\nBUGLY_SYMBOL_JAR_PATH=\"$HOME/bin/buglySymboliOS.jar\"\nfi\n\n# 打印错误信息\nfunction exitWithMessage(){\n    echo \"--------------------------------\"\n    echo \"${1}\"\n    echo \"--------------------------------\"\n    exit ${2}\n}\n\n# 上传bSYMBOL文件\nfunction dSYMUpload() {\n    P_APP_ID=\"$1\"\n    P_APP_KEY=\"$2\"\n    P_APP_BUNDLE_ID=\"$3\"\n    P_APP_VERSION=\"$4\"\n    P_BSYMBOL_ZIP_FILE=\"$5\"\n    \n    #\n    P_BSYMBOL_ZIP_FILE_NAME=${P_BSYMBOL_ZIP_FILE##*/}\n        P_BSYMBOL_ZIP_FILE_NAME=${P_BSYMBOL_ZIP_FILE_NAME//&/_}\n            P_BSYMBOL_ZIP_FILE_NAME=\"${P_BSYMBOL_ZIP_FILE_NAME// /_}\"\n            \n            DSYM_UPLOAD_URL=\"https://${BUGLY_DSYM_UPLOAD_DOMAIN}/openapi/file/upload/symbol?app_id=${P_APP_ID}&app_key=${P_APP_KEY}\"\n            echo \"dSYM upload url: ${DSYM_UPLOAD_URL}\"\n            \n            echo \"-----------------------------\"\n            STATUS=$(/usr/bin/curl -k \"${DSYM_UPLOAD_URL}\" --form \"api_version=1\" --form \"app_id=${P_APP_ID}\" --form \"app_key=${P_APP_KEY}\" --form \"symbolType=2\"  --form \"bundleId=${BUNDLE_IDENTIFIER}\" --form \"productVersion=${BUGLY_APP_VERSION}\" --form \"fileName=${P_BSYMBOL_ZIP_FILE_NAME}\" --form \"file=@${P_BSYMBOL_ZIP_FILE}\" --verbose)\n            echo \"-----------------------------\"\n            \n            UPLOAD_RESULT=\"FAILTURE\"\n            echo \"Bugly server response: ${STATUS}\"\n            if [ ! \"${STATUS}\" ]; then\n            echo \"Error: Failed to upload the zip archive file.\"\n            elif [[ \"${STATUS}\" == *\"{\\\"reponseCode\\\":\\\"0\\\"}\"* ]]; then\n            echo \"Success to upload the dSYM for the app [${BUNDLE_IDENTIFIER} ${BUGLY_APP_VERSION}]\"\n            UPLOAD_RESULT=\"SUCCESS\"\n            else\n            echo \"Error: Failed to upload the zip archive file to Bugly.\"\n            fi\n            \n            #Remove temp dSYM archive\n            #echo \"Remove temporary zip archive: ${DSYM_ZIP_FPATH}\"\n            #/bin/rm -f \"${DSYM_ZIP_FPATH}\"\n            \n            if [ \"$?\" -ne 0 ]; then\n            exitWithMessage \"Error: Failed to remove temporary zip archive.\" 0\n            fi\n            \n            echo \"--------------------------------\"\n            echo \"${UPLOAD_RESULT} - dSYM upload complete.\"\n            \n            if [[ \"${UPLOAD_RESULT}\" == \"FAILTURE\" ]]; then\n            echo \"--------------------------------\"\n            echo \"Failed to upload the dSYM\"\n            echo \"Please check the script and try it again.\"\n            fi\n        }\n        \n        # .dSYM解析为bSYMBOL文件\n        function dSYMParse() {\n            DSYM_FILE=\"$1\"\n            DSYM_SYMBOL_FILE=\"$2\"\n            \n            echo \"--------------------------------\"\n            echo \"Extract symbol info from .dSYM file. to ${DSYM_SYMBOL_FILE}\"\n            (/usr/bin/java -Xms512m -Xmx1024m -Dfile.encoding=UTF8 -jar \"${BUGLY_SYMBOL_JAR_PATH}\" -i \"${DSYM_FILE}\" -o \"${DSYM_SYMBOL_FILE}\" ) || exitWithMessage \"Error: Failed to extract symbols.\" 1\n            echo \"--------------------------------\"\n            \n        }\n        \n        # 执行\n        function run() {\n            \n            CONFIG_BUGLY_APP_ID=\"$1\"\n            CONFIG_BUGLY_APP_KEY=\"$2\"\n            \n            CONFIG_BUGLY_APP_BUNDLE_IDENTIFIER=\"$3\"\n            CONFIG_BUGLY_APP_VERSION=\"$4\"\n            CONFIG_DSYM_SOURCE_DIR=\"$5\"\n            CONFIG_DSYM_DEST_DIR=\"$6\"\n            CONFIG_UPLOAD_DSYM_ONLY=\"$7\"\n            \n            # 检查必须参数是否设置\n            if [ ! \"${CONFIG_BUGLY_APP_ID}\" ]; then\n            exitWithMessage \"Error: Bugly App ID not defined. Please set 'BUGLY_APP_ID' \" 0\n            fi\n            \n            if [[ \"${CONFIG_BUGLY_APP_ID}\" == *\"App ID\"* ]]; then\n            exitWithMessage \"Error: Bugly App ID not defined.\" 0\n            fi\n            \n            if [ ! \"${CONFIG_BUGLY_APP_KEY}\" ]; then\n            exitWithMessage \"Error: Bugly App Key not defined.\" 0\n            fi\n            \n            if [ ! \"${CONFIG_BUGLY_APP_BUNDLE_IDENTIFIER}\" ]; then\n            exitWithMessage \"Error: Bundle Identifier not defined.\" 0\n            fi\n            \n            if [ ! \"${CONFIG_BUGLY_APP_VERSION}\" ]; then\n            exitWithMessage \"Error: App Version not defined.\" 0\n            fi\n            \n            if [ ! -e \"${CONFIG_DSYM_SOURCE_DIR}\" ]; then\n            exitWithMessage \"Error: Invalid dir ${CONFIG_DSYM_SOURCE_DIR}\" 0\n            fi\n            \n            if [ ! \"${CONFIG_DSYM_DEST_DIR}\" ]; then\n            exitWithMessage \"Error: Invalid dir ${CONFIG_DSYM_DEST_DIR}\" 0\n            fi\n            \n            if [ ! -e \"${CONFIG_DSYM_DEST_DIR}\" ]; then\n            mkdir ${CONFIG_DSYM_DEST_DIR}\n            fi\n            \n            DSYM_FOLDER=\"${CONFIG_DSYM_SOURCE_DIR}\"\n            IFS=$'\\n'\n            \n            echo \"Scaning dSYM FOLDER: ${DSYM_FOLDER} ...\"\n            RET=\"F\"\n            \n            #\n            for dsymFile in $(find \"$DSYM_FOLDER\" -name '*.dSYM'); do\n            RET=\"T\"\n            echo \"Found dSYM file: $dsymFile\"\n            \n            DSYM_FILE_NAME=${dsymFile##*/}\n                DSYM_SYMBOL_ZIP_FILE_NAME=\"${DSYM_FILE_NAME}.zip\"\n                DSYM_SYMBOL_ZIP_FILE_NAME=\"${DSYM_SYMBOL_ZIP_FILE_NAME// /_}\"\n                DSYM_SYMBOL_ZIP_FILE=${CONFIG_DSYM_DEST_DIR}/${DSYM_SYMBOL_ZIP_FILE_NAME}\n                \n                if [ $CONFIG_UPLOAD_DSYM_ONLY -eq 1 ]; then\n                if [ -e $DSYM_SYMBOL_ZIP_FILE ]; then\n                rm -f $DSYM_SYMBOL_ZIP_FILE\n                fi\n                # 如果只上传dSYM，直接压缩dSYM目录\n                zip -r -j $DSYM_SYMBOL_ZIP_FILE $dsymFile -x *.plist\n                else\n                # 使用符号表工具来生成Symbol文件\n                dSYMParse $dsymFile $DSYM_SYMBOL_ZIP_FILE\n                fi\n                \n                # 上传\n                dSYMUpload $CONFIG_BUGLY_APP_ID $CONFIG_BUGLY_APP_KEY $CONFIG_BUGLY_APP_BUNDLE_IDENTIFIER $CONFIG_BUGLY_APP_VERSION $DSYM_SYMBOL_ZIP_FILE\n                done\n                \n                if [ $RET = \"F\" ]; then\n                exitWithMessage \"No .dSYM found in ${DSYM_FOLDER}\" 0\n                fi\n            }\n            \n            # 在Xcode工程中执行\n            function runInXcode(){\n                echo \"Uploading dSYM to Bugly in Xcode ...\"\n                \n                echo \"Info.Plist : ${INFOPLIST_FILE}\"\n                \n                BUNDLE_VERSION=$(/usr/libexec/PlistBuddy -c 'Print CFBundleVersion' \"${INFOPLIST_FILE}\")\n                BUNDLE_SHORT_VERSION=$(/usr/libexec/PlistBuddy -c 'Print CFBundleShortVersionString' \"${INFOPLIST_FILE}\")\n                \n                # 组装Bugly默认识别的版本信息(格式为CFBundleShortVersionString(CFBundleVersion), 例如: 1.0(1))\n                if [ ! \"${CUSTOMIZED_APP_VERSION}\" ]; then\n                BUGLY_APP_VERSION=\"${BUNDLE_SHORT_VERSION}(${BUNDLE_VERSION})\"\n                else\n                BUGLY_APP_VERSION=\"${CUSTOMIZED_APP_VERSION}\"\n                fi\n                \n                echo \"--------------------------------\"\n                echo \"Prepare application information.\"\n                echo \"--------------------------------\"\n                \n                echo \"Product Name: ${PRODUCT_NAME}\"\n                echo \"Bundle Identifier: ${BUNDLE_IDENTIFIER}\"\n                echo \"Version: ${BUNDLE_SHORT_VERSION}\"\n                echo \"Build: ${BUNDLE_VERSION}\"\n                \n                echo \"Bugly App ID: ${BUGLY_APP_ID}\"\n                echo \"Bugly App key: ${BUGLY_APP_KEY}\"\n                echo \"Bugly App Version: ${BUGLY_APP_VERSION}\"\n                \n                echo \"--------------------------------\"\n                echo \"Check the arguments ...\"\n                \n                ##检查模拟器编译是否允许上传符号\n                if [ \"$EFFECTIVE_PLATFORM_NAME\" == \"-iphonesimulator\" ]; then\n                if [ $UPLOAD_SIMULATOR_SYMBOLS -eq 0 ]; then\n                exitWithMessage \"Warning: Build for simulator and skipping to upload. \\nYou can modify 'UPLOAD_SIMULATOR_SYMBOLS' to 1 in the script.\" 0\n                fi\n                fi\n                \n                ##检查是否是Release模式编译\n                if [ \"${CONFIGURATION=}\" == \"Debug\" ]; then\n                if [ $UPLOAD_DEBUG_SYMBOLS -eq 0 ]; then\n                exitWithMessage \"Warning: Build for debug mode and skipping to upload. \\nYou can modify 'UPLOAD_DEBUG_SYMBOLS' to 1 in the script.\" 0\n                fi\n                fi\n                \n                ##检查是否Archive操作\n                if [ $UPLOAD_ARCHIVE_ONLY -eq 1 ]; then\n                if [[ \"$TARGET_BUILD_DIR\" == *\"/Archive\"* ]]; then\n                echo \"Archive the package\"\n                else\n                exitWithMessage \"Warning: Build for NOT Archive mode and skipping to upload. \\nYou can modify 'UPLOAD_ARCHIVE_ONLY' to 0 in the script.\" 0\n                fi\n                fi\n                \n                #\n                run ${BUGLY_APP_ID} ${BUGLY_APP_KEY} ${BUNDLE_IDENTIFIER} ${BUGLY_APP_VERSION} ${DWARF_DSYM_FOLDER_PATH} ${BUILD_DIR}/BuglySymbolTemp ${UPLOAD_DSYM_ONLY}\n            }\n            \n            # 根据Xcode的环境变量判断是否处于Xcode环境\n            INFO_PLIST_FILE=\"${INFOPLIST_FILE}\"\n            \n            BuildInXcode=\"F\"\n            if [ -f \"${INFO_PLIST_FILE}\" ]; then\n            BuildInXcode=\"T\"\n            fi\n            \n            if [ $BuildInXcode = \"T\" ]; then\n            runInXcode\n            else\n            echo \"\\nUsage: dSYMUpload.sh <bugly_app_id> <bugly_app_key> <app_bundle_identifier> <app_version> <dSYM_src_dir> <bSYMBOL_dest_dir> [upload_dsym_only]\\n\"\n            # 你可以在此处直接设置BuglyAppID和BuglyAppKey，排除不常变参数的输入\n            BUGLY_APP_ID=\"$1\"\n            BUGLY_APP_KEY=\"$2\"\n            BUNDLE_IDENTIFIER=\"$3\"\n            BUGLY_APP_VERSION=\"$4\"\n            DWARF_DSYM_FOLDER_PATH=\"$5\"\n            SYMBOL_OUTPUT_PATH=\"$6\"\n            UPLOAD_DSYM_ONLY=$7\n            run ${BUGLY_APP_ID} ${BUGLY_APP_KEY} ${BUNDLE_IDENTIFIER} ${BUGLY_APP_VERSION} ${DWARF_DSYM_FOLDER_PATH} ${SYMBOL_OUTPUT_PATH} ${UPLOAD_DSYM_ONLY}\n            fi";
 		};
-		DBCC0125FDE4986C44950802 /* [CP] Copy Pods Resources */ = {
+		A4BBBBDC21D5FCC900CF311C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-GRAVE-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A4BBBCAC21D5FCC900CF311C /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1838,6 +2185,41 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GRAVE/Pods-GRAVE-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A4BBBCAD21D5FCC900CF311C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/sh\n#\n# Copyright 2016 Bugly, Tencent. All rights reserved.\n#\n# V1.4.0\n#\n# 2016.08.03\n#\n#\n#\n######################################################\n# 1. 脚本集成到Xcode工程的Target\n######################################################\n#\n# --- Copy the SCRIPT to the Run Script of Build Phases in the Xcode project ---\n#\n# #\nBUGLY_APP_ID=\"b27ed1377f\"\n# #\nBUGLY_APP_KEY=\"982e52bf-f534-4e79-97d2-3bf48ffcae50\"\n# #\nBUNDLE_IDENTIFIER=\"com.south.STCam\"\n# #\nUPLOAD_DSYM_ONLY=1\n#\n# # 脚本默认配置的版本格式为CFBundleShortVersionString(CFBundleVersion),  如果你修改默认的版本格式, 请设置此变量, 如果不想修改, 请忽略此设置\n# CUSTOMIZED_APP_VERSION=\"\"\n#\n# # Debug模式编译是否上传，1＝上传 0＝不上传，默认不上传\nUPLOAD_DEBUG_SYMBOLS=0\n#\n# # 模拟器编译是否上传，1=上传 0=不上传，默认不上传\n# UPLOAD_SIMULATOR_SYMBOLS=0\n#\n# #只有Archive操作时上传, 1=支持Archive上传 0=所有Release模式编译都上传\n# UPLOAD_ARCHIVE_ONLY=0\n#\n# #\n# source dSYMUpload.sh\n#\n# --- END OF SCRIPT ---\n#\n#\n#\n#\n#######################################################\n# 2. 脚本根据输入参数处理\n#######################################################\n#\n# #命令行下输入应用基本信息, .dSYM文件的父目录路径, 输出文件目录即可\n#\n# sh dSYMUpload.sh <bugly_app_id> <bugly_app_key> <app_bundle_identifier> <app_version> <dSYM_src_dir> <bSYMBOL_dest_dir>\n#\n# #\n#\n# #注意:\n# # 1. dSYMUpload.sh会调用buglySymboliOS.jar进行.dSYM解析，所以依赖Java运行时环境\n# # 2. dSYMUpload.sh和buglySymboliOS.jar的文件路径需一致\n#\n#\n\n#\n# --- CONTENT OF SCRIPT ---\n#\n\n# Bugly服务域名\nBUGLY_DSYM_UPLOAD_DOMAIN=\"api.bugly.qq.com\"\n\n# 注意jar工具的路径跟dSYMUpload.sh脚本路径一致, 请务必保证jar路径的正确性\nBUGLY_SYMBOL_JAR_PATH=\"dsymtool/buglySymboliOS.jar\"\n# 查找添加到系统目录的jar工具\nif [ ! -f \"${BUGLY_SYMBOL_JAR_PATH}\" ]; then\nBUGLY_SYMBOL_JAR_PATH=\"$HOME/bin/buglySymboliOS.jar\"\nfi\n\n# 打印错误信息\nfunction exitWithMessage(){\n    echo \"--------------------------------\"\n    echo \"${1}\"\n    echo \"--------------------------------\"\n    exit ${2}\n}\n\n# 上传bSYMBOL文件\nfunction dSYMUpload() {\n    P_APP_ID=\"$1\"\n    P_APP_KEY=\"$2\"\n    P_APP_BUNDLE_ID=\"$3\"\n    P_APP_VERSION=\"$4\"\n    P_BSYMBOL_ZIP_FILE=\"$5\"\n    \n    #\n    P_BSYMBOL_ZIP_FILE_NAME=${P_BSYMBOL_ZIP_FILE##*/}\n        P_BSYMBOL_ZIP_FILE_NAME=${P_BSYMBOL_ZIP_FILE_NAME//&/_}\n            P_BSYMBOL_ZIP_FILE_NAME=\"${P_BSYMBOL_ZIP_FILE_NAME// /_}\"\n            \n            DSYM_UPLOAD_URL=\"https://${BUGLY_DSYM_UPLOAD_DOMAIN}/openapi/file/upload/symbol?app_id=${P_APP_ID}&app_key=${P_APP_KEY}\"\n            echo \"dSYM upload url: ${DSYM_UPLOAD_URL}\"\n            \n            echo \"-----------------------------\"\n            STATUS=$(/usr/bin/curl -k \"${DSYM_UPLOAD_URL}\" --form \"api_version=1\" --form \"app_id=${P_APP_ID}\" --form \"app_key=${P_APP_KEY}\" --form \"symbolType=2\"  --form \"bundleId=${BUNDLE_IDENTIFIER}\" --form \"productVersion=${BUGLY_APP_VERSION}\" --form \"fileName=${P_BSYMBOL_ZIP_FILE_NAME}\" --form \"file=@${P_BSYMBOL_ZIP_FILE}\" --verbose)\n            echo \"-----------------------------\"\n            \n            UPLOAD_RESULT=\"FAILTURE\"\n            echo \"Bugly server response: ${STATUS}\"\n            if [ ! \"${STATUS}\" ]; then\n            echo \"Error: Failed to upload the zip archive file.\"\n            elif [[ \"${STATUS}\" == *\"{\\\"reponseCode\\\":\\\"0\\\"}\"* ]]; then\n            echo \"Success to upload the dSYM for the app [${BUNDLE_IDENTIFIER} ${BUGLY_APP_VERSION}]\"\n            UPLOAD_RESULT=\"SUCCESS\"\n            else\n            echo \"Error: Failed to upload the zip archive file to Bugly.\"\n            fi\n            \n            #Remove temp dSYM archive\n            #echo \"Remove temporary zip archive: ${DSYM_ZIP_FPATH}\"\n            #/bin/rm -f \"${DSYM_ZIP_FPATH}\"\n            \n            if [ \"$?\" -ne 0 ]; then\n            exitWithMessage \"Error: Failed to remove temporary zip archive.\" 0\n            fi\n            \n            echo \"--------------------------------\"\n            echo \"${UPLOAD_RESULT} - dSYM upload complete.\"\n            \n            if [[ \"${UPLOAD_RESULT}\" == \"FAILTURE\" ]]; then\n            echo \"--------------------------------\"\n            echo \"Failed to upload the dSYM\"\n            echo \"Please check the script and try it again.\"\n            fi\n        }\n        \n        # .dSYM解析为bSYMBOL文件\n        function dSYMParse() {\n            DSYM_FILE=\"$1\"\n            DSYM_SYMBOL_FILE=\"$2\"\n            \n            echo \"--------------------------------\"\n            echo \"Extract symbol info from .dSYM file. to ${DSYM_SYMBOL_FILE}\"\n            (/usr/bin/java -Xms512m -Xmx1024m -Dfile.encoding=UTF8 -jar \"${BUGLY_SYMBOL_JAR_PATH}\" -i \"${DSYM_FILE}\" -o \"${DSYM_SYMBOL_FILE}\" ) || exitWithMessage \"Error: Failed to extract symbols.\" 1\n            echo \"--------------------------------\"\n            \n        }\n        \n        # 执行\n        function run() {\n            \n            CONFIG_BUGLY_APP_ID=\"$1\"\n            CONFIG_BUGLY_APP_KEY=\"$2\"\n            \n            CONFIG_BUGLY_APP_BUNDLE_IDENTIFIER=\"$3\"\n            CONFIG_BUGLY_APP_VERSION=\"$4\"\n            CONFIG_DSYM_SOURCE_DIR=\"$5\"\n            CONFIG_DSYM_DEST_DIR=\"$6\"\n            CONFIG_UPLOAD_DSYM_ONLY=\"$7\"\n            \n            # 检查必须参数是否设置\n            if [ ! \"${CONFIG_BUGLY_APP_ID}\" ]; then\n            exitWithMessage \"Error: Bugly App ID not defined. Please set 'BUGLY_APP_ID' \" 0\n            fi\n            \n            if [[ \"${CONFIG_BUGLY_APP_ID}\" == *\"App ID\"* ]]; then\n            exitWithMessage \"Error: Bugly App ID not defined.\" 0\n            fi\n            \n            if [ ! \"${CONFIG_BUGLY_APP_KEY}\" ]; then\n            exitWithMessage \"Error: Bugly App Key not defined.\" 0\n            fi\n            \n            if [ ! \"${CONFIG_BUGLY_APP_BUNDLE_IDENTIFIER}\" ]; then\n            exitWithMessage \"Error: Bundle Identifier not defined.\" 0\n            fi\n            \n            if [ ! \"${CONFIG_BUGLY_APP_VERSION}\" ]; then\n            exitWithMessage \"Error: App Version not defined.\" 0\n            fi\n            \n            if [ ! -e \"${CONFIG_DSYM_SOURCE_DIR}\" ]; then\n            exitWithMessage \"Error: Invalid dir ${CONFIG_DSYM_SOURCE_DIR}\" 0\n            fi\n            \n            if [ ! \"${CONFIG_DSYM_DEST_DIR}\" ]; then\n            exitWithMessage \"Error: Invalid dir ${CONFIG_DSYM_DEST_DIR}\" 0\n            fi\n            \n            if [ ! -e \"${CONFIG_DSYM_DEST_DIR}\" ]; then\n            mkdir ${CONFIG_DSYM_DEST_DIR}\n            fi\n            \n            DSYM_FOLDER=\"${CONFIG_DSYM_SOURCE_DIR}\"\n            IFS=$'\\n'\n            \n            echo \"Scaning dSYM FOLDER: ${DSYM_FOLDER} ...\"\n            RET=\"F\"\n            \n            #\n            for dsymFile in $(find \"$DSYM_FOLDER\" -name '*.dSYM'); do\n            RET=\"T\"\n            echo \"Found dSYM file: $dsymFile\"\n            \n            DSYM_FILE_NAME=${dsymFile##*/}\n                DSYM_SYMBOL_ZIP_FILE_NAME=\"${DSYM_FILE_NAME}.zip\"\n                DSYM_SYMBOL_ZIP_FILE_NAME=\"${DSYM_SYMBOL_ZIP_FILE_NAME// /_}\"\n                DSYM_SYMBOL_ZIP_FILE=${CONFIG_DSYM_DEST_DIR}/${DSYM_SYMBOL_ZIP_FILE_NAME}\n                \n                if [ $CONFIG_UPLOAD_DSYM_ONLY -eq 1 ]; then\n                if [ -e $DSYM_SYMBOL_ZIP_FILE ]; then\n                rm -f $DSYM_SYMBOL_ZIP_FILE\n                fi\n                # 如果只上传dSYM，直接压缩dSYM目录\n                zip -r -j $DSYM_SYMBOL_ZIP_FILE $dsymFile -x *.plist\n                else\n                # 使用符号表工具来生成Symbol文件\n                dSYMParse $dsymFile $DSYM_SYMBOL_ZIP_FILE\n                fi\n                \n                # 上传\n                dSYMUpload $CONFIG_BUGLY_APP_ID $CONFIG_BUGLY_APP_KEY $CONFIG_BUGLY_APP_BUNDLE_IDENTIFIER $CONFIG_BUGLY_APP_VERSION $DSYM_SYMBOL_ZIP_FILE\n                done\n                \n                if [ $RET = \"F\" ]; then\n                exitWithMessage \"No .dSYM found in ${DSYM_FOLDER}\" 0\n                fi\n            }\n            \n            # 在Xcode工程中执行\n            function runInXcode(){\n                echo \"Uploading dSYM to Bugly in Xcode ...\"\n                \n                echo \"Info.Plist : ${INFOPLIST_FILE}\"\n                \n                BUNDLE_VERSION=$(/usr/libexec/PlistBuddy -c 'Print CFBundleVersion' \"${INFOPLIST_FILE}\")\n                BUNDLE_SHORT_VERSION=$(/usr/libexec/PlistBuddy -c 'Print CFBundleShortVersionString' \"${INFOPLIST_FILE}\")\n                \n                # 组装Bugly默认识别的版本信息(格式为CFBundleShortVersionString(CFBundleVersion), 例如: 1.0(1))\n                if [ ! \"${CUSTOMIZED_APP_VERSION}\" ]; then\n                BUGLY_APP_VERSION=\"${BUNDLE_SHORT_VERSION}(${BUNDLE_VERSION})\"\n                else\n                BUGLY_APP_VERSION=\"${CUSTOMIZED_APP_VERSION}\"\n                fi\n                \n                echo \"--------------------------------\"\n                echo \"Prepare application information.\"\n                echo \"--------------------------------\"\n                \n                echo \"Product Name: ${PRODUCT_NAME}\"\n                echo \"Bundle Identifier: ${BUNDLE_IDENTIFIER}\"\n                echo \"Version: ${BUNDLE_SHORT_VERSION}\"\n                echo \"Build: ${BUNDLE_VERSION}\"\n                \n                echo \"Bugly App ID: ${BUGLY_APP_ID}\"\n                echo \"Bugly App key: ${BUGLY_APP_KEY}\"\n                echo \"Bugly App Version: ${BUGLY_APP_VERSION}\"\n                \n                echo \"--------------------------------\"\n                echo \"Check the arguments ...\"\n                \n                ##检查模拟器编译是否允许上传符号\n                if [ \"$EFFECTIVE_PLATFORM_NAME\" == \"-iphonesimulator\" ]; then\n                if [ $UPLOAD_SIMULATOR_SYMBOLS -eq 0 ]; then\n                exitWithMessage \"Warning: Build for simulator and skipping to upload. \\nYou can modify 'UPLOAD_SIMULATOR_SYMBOLS' to 1 in the script.\" 0\n                fi\n                fi\n                \n                ##检查是否是Release模式编译\n                if [ \"${CONFIGURATION=}\" == \"Debug\" ]; then\n                if [ $UPLOAD_DEBUG_SYMBOLS -eq 0 ]; then\n                exitWithMessage \"Warning: Build for debug mode and skipping to upload. \\nYou can modify 'UPLOAD_DEBUG_SYMBOLS' to 1 in the script.\" 0\n                fi\n                fi\n                \n                ##检查是否Archive操作\n                if [ $UPLOAD_ARCHIVE_ONLY -eq 1 ]; then\n                if [[ \"$TARGET_BUILD_DIR\" == *\"/Archive\"* ]]; then\n                echo \"Archive the package\"\n                else\n                exitWithMessage \"Warning: Build for NOT Archive mode and skipping to upload. \\nYou can modify 'UPLOAD_ARCHIVE_ONLY' to 0 in the script.\" 0\n                fi\n                fi\n                \n                #\n                run ${BUGLY_APP_ID} ${BUGLY_APP_KEY} ${BUNDLE_IDENTIFIER} ${BUGLY_APP_VERSION} ${DWARF_DSYM_FOLDER_PATH} ${BUILD_DIR}/BuglySymbolTemp ${UPLOAD_DSYM_ONLY}\n            }\n            \n            # 根据Xcode的环境变量判断是否处于Xcode环境\n            INFO_PLIST_FILE=\"${INFOPLIST_FILE}\"\n            \n            BuildInXcode=\"F\"\n            if [ -f \"${INFO_PLIST_FILE}\" ]; then\n            BuildInXcode=\"T\"\n            fi\n            \n            if [ $BuildInXcode = \"T\" ]; then\n            runInXcode\n            else\n            echo \"\\nUsage: dSYMUpload.sh <bugly_app_id> <bugly_app_key> <app_bundle_identifier> <app_version> <dSYM_src_dir> <bSYMBOL_dest_dir> [upload_dsym_only]\\n\"\n            # 你可以在此处直接设置BuglyAppID和BuglyAppKey，排除不常变参数的输入\n            BUGLY_APP_ID=\"$1\"\n            BUGLY_APP_KEY=\"$2\"\n            BUNDLE_IDENTIFIER=\"$3\"\n            BUGLY_APP_VERSION=\"$4\"\n            DWARF_DSYM_FOLDER_PATH=\"$5\"\n            SYMBOL_OUTPUT_PATH=\"$6\"\n            UPLOAD_DSYM_ONLY=$7\n            run ${BUGLY_APP_ID} ${BUGLY_APP_KEY} ${BUNDLE_IDENTIFIER} ${BUGLY_APP_VERSION} ${DWARF_DSYM_FOLDER_PATH} ${SYMBOL_OUTPUT_PATH} ${UPLOAD_DSYM_ONLY}\n            fi";
+		};
+		DBCC0125FDE4986C44950802 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-STCam/Pods-STCam-resources.sh",
+				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
+				"${PODS_ROOT}/SGQRCode/SGQRCode/SGQRCode.bundle",
+				"${PODS_ROOT}/YBImageBrowser/YBImageBrowser/YBImageBrowser.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SGQRCode.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/YBImageBrowser.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-STCam/Pods-STCam-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1976,12 +2358,137 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A4BBBBDD21D5FCC900CF311C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A4BBBBDE21D5FCC900CF311C /* STFileManager.m in Sources */,
+				A4BBBBDF21D5FCC900CF311C /* LiveVidViewModel.m in Sources */,
+				A4BBBBE021D5FCC900CF311C /* cJSON.c in Sources */,
+				A4BBBBE121D5FCC900CF311C /* ChangeAccountPwdController.m in Sources */,
+				A4BBBBE221D5FCC900CF311C /* DeviceSettingController.m in Sources */,
+				A4BBBBE321D5FCC900CF311C /* DevListViewModel.m in Sources */,
+				A4BBBBE421D5FCC900CF311C /* DevMediaCell.m in Sources */,
+				A4BBBBE521D5FCC900CF311C /* MoreViewController.m in Sources */,
+				A4BBBBE621D5FCC900CF311C /* CommonSettingCell.m in Sources */,
+				A4BBBBE721D5FCC900CF311C /* ShareAccountManager.m in Sources */,
+				A4BBBBE821D5FCC900CF311C /* UIView+Common.m in Sources */,
+				A4BBBBE921D5FCC900CF311C /* TFun.c in Sources */,
+				A4BBBBEA21D5FCC900CF311C /* UITableView+Common.m in Sources */,
+				A4BBBBEB21D5FCC900CF311C /* DeviceAdvanceSettingController.m in Sources */,
+				A4BBBBEC21D5FCC900CF311C /* SDInfoModel.m in Sources */,
+				A4BBBBED21D5FCC900CF311C /* thRec.c in Sources */,
+				A4BBBBEE21D5FCC900CF311C /* RecordListCell.m in Sources */,
+				A4BBBBEF21D5FCC900CF311C /* VideoDecoder.m in Sources */,
+				A4BBBBF021D5FCC900CF311C /* AlarmListViewController.m in Sources */,
+				A4BBBBF121D5FCC900CF311C /* NSDate+convenience.m in Sources */,
+				A4BBBBF221D5FCC900CF311C /* AccountManager.m in Sources */,
+				A4BBBBF321D5FCC900CF311C /* Model.xcdatamodeld in Sources */,
+				A4BBBBF421D5FCC900CF311C /* VideoBufferParser.m in Sources */,
+				A4BBBBF521D5FCC900CF311C /* AAPLEAGLLayer.m in Sources */,
+				A4BBBBF621D5FCC900CF311C /* SearchDeviceCell.m in Sources */,
+				A4BBBBF721D5FCC900CF311C /* LedControlController.m in Sources */,
+				A4BBBBF821D5FCC900CF311C /* UserModel.m in Sources */,
+				A4BBBBF921D5FCC900CF311C /* SSIDModel.m in Sources */,
+				A4BBBBFA21D5FCC900CF311C /* STNavigationController.m in Sources */,
+				A4BBBBFB21D5FCC900CF311C /* thRender.c in Sources */,
+				A4BBBBFC21D5FCC900CF311C /* UIView+Layout.m in Sources */,
+				A4BBBBFD21D5FCC900CF311C /* List.c in Sources */,
+				A4BBBBFE21D5FCC900CF311C /* UIColor+expanded.m in Sources */,
+				A4BBBBFF21D5FCC900CF311C /* audio_g711.c in Sources */,
+				A4BBBC0021D5FCC900CF311C /* MBProgressHUD+SGQRCode.m in Sources */,
+				A4BBBC0121D5FCC900CF311C /* LiveVidController.m in Sources */,
+				A4BBBC0221D5FCC900CF311C /* UIViewController+Utils.m in Sources */,
+				A4BBBC0321D5FCC900CF311C /* CommonInfoCell.m in Sources */,
+				A4BBBC0421D5FCC900CF311C /* LoginBackgroundView.m in Sources */,
+				A4BBBC0521D5FCC900CF311C /* STSlider.m in Sources */,
+				A4BBBC0621D5FCC900CF311C /* STMediaModel.m in Sources */,
+				A4BBBC0721D5FCC900CF311C /* Makefile in Sources */,
+				A4BBBC0821D5FCC900CF311C /* ForgetPwdControlle.m in Sources */,
+				A4BBBC0921D5FCC900CF311C /* WSDatePickerView.m in Sources */,
+				A4BBBC0A21D5FCC900CF311C /* PlayBackController.m in Sources */,
+				A4BBBC0B21D5FCC900CF311C /* AddDeviceSmartLinkNextController.m in Sources */,
+				A4BBBC0C21D5FCC900CF311C /* RecConfigModel.m in Sources */,
+				A4BBBC0D21D5FCC900CF311C /* AddDeviceController.m in Sources */,
+				A4BBBC0E21D5FCC900CF311C /* GenerateShareQRCodeController.m in Sources */,
+				A4BBBC0F21D5FCC900CF311C /* UIView+YYAdd.m in Sources */,
+				A4BBBC1021D5FCC900CF311C /* DevListCell.m in Sources */,
+				A4BBBC1121D5FCC900CF311C /* UIView+Extension.m in Sources */,
+				A4BBBC1221D5FCC900CF311C /* AddDeviceSmartLinkController.m in Sources */,
+				A4BBBC1321D5FCC900CF311C /* MediaDetailController.m in Sources */,
+				A4BBBC1421D5FCC900CF311C /* SoundButton.m in Sources */,
+				A4BBBC1521D5FCC900CF311C /* PlayBackViewModel.m in Sources */,
+				A4BBBC1621D5FCC900CF311C /* RecordListViewModel.m in Sources */,
+				A4BBBC1721D5FCC900CF311C /* DeviceSettingViewModel.m in Sources */,
+				A4BBBC1821D5FCC900CF311C /* MediaDetailCCell.m in Sources */,
+				A4BBBC1921D5FCC900CF311C /* WCQRCodeVC.m in Sources */,
+				A4BBBC1A21D5FCC900CF311C /* UIButton+Common.m in Sources */,
+				A4BBBC1B21D5FCC900CF311C /* CoreDataManager.m in Sources */,
+				A4BBBC1C21D5FCC900CF311C /* MainTabController.m in Sources */,
+				A4BBBC1D21D5FCC900CF311C /* UIImage+Common.m in Sources */,
+				A4BBBC1E21D5FCC900CF311C /* SplashViewController.m in Sources */,
+				A4BBBC1F21D5FCC900CF311C /* NSDate+Helper.m in Sources */,
+				A4BBBC2021D5FCC900CF311C /* AddDeviceStaController.m in Sources */,
+				A4BBBC2121D5FCC900CF311C /* ChangeDevicePwdController.m in Sources */,
+				A4BBBC2221D5FCC900CF311C /* WifiManager.m in Sources */,
+				A4BBBC2321D5FCC900CF311C /* MotionCfgModel.m in Sources */,
+				A4BBBC2421D5FCC900CF311C /* NSDate+Common.m in Sources */,
+				A4BBBC2521D5FCC900CF311C /* PowerConfigModel.m in Sources */,
+				A4BBBC2621D5FCC900CF311C /* UpdateDevModel.m in Sources */,
+				A4BBBC2721D5FCC900CF311C /* RecordListController.m in Sources */,
+				A4BBBC2821D5FCC900CF311C /* thVideoEnc.c in Sources */,
+				A4BBBC2921D5FCC900CF311C /* UIControl+YYAdd.m in Sources */,
+				A4BBBC2A21D5FCC900CF311C /* RetModel.m in Sources */,
+				A4BBBC2B21D5FCC900CF311C /* thPlay.c in Sources */,
+				A4BBBC2C21D5FCC900CF311C /* axdllEx.c in Sources */,
+				A4BBBC2D21D5FCC900CF311C /* DevListViewController.m in Sources */,
+				A4BBBC2E21D5FCC900CF311C /* LMJDropdownMenu.m in Sources */,
+				A4BBBC2F21D5FCC900CF311C /* SDVideoModel.m in Sources */,
+				A4BBBC3021D5FCC900CF311C /* AddDeviceAPToStaController.m in Sources */,
+				A4BBBC3121D5FCC900CF311C /* main.m in Sources */,
+				A4BBBC3221D5FCC900CF311C /* PowerOnOffAlertView.m in Sources */,
+				A4BBBC3321D5FCC900CF311C /* NSDate+Extension.m in Sources */,
+				A4BBBC3421D5FCC900CF311C /* skt.c in Sources */,
+				A4BBBC3521D5FCC900CF311C /* RootViewController.m in Sources */,
+				A4BBBC3621D5FCC900CF311C /* BasicTextField.m in Sources */,
+				A4BBBC3721D5FCC900CF311C /* DeviceModel.m in Sources */,
+				A4BBBC3821D5FCC900CF311C /* LedControlViewModel.m in Sources */,
+				A4BBBC3921D5FCC900CF311C /* AddDeviceApToStaNextController.m in Sources */,
+				A4BBBC3A21D5FCC900CF311C /* LedStatusModel.m in Sources */,
+				A4BBBC3B21D5FCC900CF311C /* AudioSession.m in Sources */,
+				A4BBBC3C21D5FCC900CF311C /* AlarmListViewModel.m in Sources */,
+				A4BBBC3D21D5FCC900CF311C /* DevShareModel.m in Sources */,
+				A4BBBC3E21D5FCC900CF311C /* SDVolumeManagerController.m in Sources */,
+				A4BBBC3F21D5FCC900CF311C /* PushSettingModel.m in Sources */,
+				A4BBBC4021D5FCC900CF311C /* AlarmListCell.m in Sources */,
+				A4BBBC4121D5FCC900CF311C /* AboutAppController.m in Sources */,
+				A4BBBC4221D5FCC900CF311C /* MediaViewController.m in Sources */,
+				A4BBBC4321D5FCC900CF311C /* UpdateModel.m in Sources */,
+				A4BBBC4421D5FCC900CF311C /* LoginViewModel.m in Sources */,
+				A4BBBC4521D5FCC900CF311C /* InfoModel.m in Sources */,
+				A4BBBC4621D5FCC900CF311C /* av_Queue.c in Sources */,
+				A4BBBC4721D5FCC900CF311C /* AlarmImageModel.m in Sources */,
+				A4BBBC4821D5FCC900CF311C /* NSString+Common.m in Sources */,
+				A4BBBC4921D5FCC900CF311C /* FFHttpTool.m in Sources */,
+				A4BBBC4A21D5FCC900CF311C /* LoginViewController.m in Sources */,
+				A4BBBC4B21D5FCC900CF311C /* MBProgressHUD+Add.m in Sources */,
+				A4BBBC4C21D5FCC900CF311C /* UIViewController+HUD.m in Sources */,
+				A4BBBC4D21D5FCC900CF311C /* UISegmentedControl+Category.m in Sources */,
+				A4BBBC4E21D5FCC900CF311C /* RegisterAccountController.m in Sources */,
+				A4BBBC4F21D5FCC900CF311C /* thImg.c in Sources */,
+				A4BBBC5021D5FCC900CF311C /* CommonSwitchCell.m in Sources */,
+				A4BBBC5121D5FCC900CF311C /* thVideoDec.c in Sources */,
+				A4BBBC5221D5FCC900CF311C /* ImageDisplayController.m in Sources */,
+				A4BBBC5321D5FCC900CF311C /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
 		A494700B212C5B470015990C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A4946FF0212C5B460015990C /* GRAVE */;
+			target = A4946FF0212C5B460015990C /* STCam */;
 			targetProxy = A494700A212C5B470015990C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -2129,7 +2636,7 @@
 		};
 		A4947013212C5B470015990C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 10316DF948407CA76D04A351 /* Pods-GRAVE.debug.xcconfig */;
+			baseConfigurationReference = C99CB2FCE47F51F123C0F082 /* Pods-STCam.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -2160,7 +2667,7 @@
 		};
 		A4947014212C5B470015990C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 47411A4140359C9380A0FB84 /* Pods-GRAVE.release.xcconfig */;
+			baseConfigurationReference = 02368DE58D9110FCE2D67420 /* Pods-STCam.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -2226,6 +2733,67 @@
 			};
 			name = Release;
 		};
+		A4BBBCAF21D5FCC900CF311C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 10316DF948407CA76D04A351 /* Pods-GRAVE.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGN_ENTITLEMENTS = STCam/STCam.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 2A2HCK25XM;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = "STCam copy-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/thSDK/lib",
+					"$(PROJECT_DIR)/ffmpeg/lib",
+					"$(PROJECT_DIR)/TUTK",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.south.STCam;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/ffmpeg/include";
+			};
+			name = Debug;
+		};
+		A4BBBCB021D5FCC900CF311C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 47411A4140359C9380A0FB84 /* Pods-GRAVE.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGN_ENTITLEMENTS = STCam/STCam.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2A2HCK25XM;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = "STCam copy-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/thSDK/lib",
+					"$(PROJECT_DIR)/ffmpeg/lib",
+					"$(PROJECT_DIR)/TUTK",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.south.STCam;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/ffmpeg/include";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -2238,7 +2806,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A4947012212C5B470015990C /* Build configuration list for PBXNativeTarget "GRAVE" */ = {
+		A4947012212C5B470015990C /* Build configuration list for PBXNativeTarget "STCam" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A4947013212C5B470015990C /* Debug */,
@@ -2252,6 +2820,15 @@
 			buildConfigurations = (
 				A4947016212C5B470015990C /* Debug */,
 				A4947017212C5B470015990C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A4BBBCAE21D5FCC900CF311C /* Build configuration list for PBXNativeTarget "GRAVE" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A4BBBCAF21D5FCC900CF311C /* Debug */,
+				A4BBBCB021D5FCC900CF311C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

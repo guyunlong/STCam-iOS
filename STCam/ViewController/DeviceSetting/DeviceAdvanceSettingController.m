@@ -70,6 +70,11 @@
          }
      }];
     
+    [[self.viewModel racGetPowerOnConfig]
+     subscribeNext:^(id x) {
+     }];
+    
+    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [[[self.viewModel racGetRecCfg]
           deliverOn:[RACScheduler mainThreadScheduler]]
@@ -170,7 +175,7 @@
     [_rowsArray addObject:model3];
     [_rowsArray addObject:model4];
     [_rowsArray addObject:model5];
-   // if([self.viewModel.model FunctionExistsTimerPowerOnOff])
+    if([self.viewModel.model FunctionExistsTimerPowerOnOff])
     {
          [_rowsArray addObject:model6];
     }
@@ -623,9 +628,22 @@
             @strongify(self)
             if (0 == channel) {
                 [self.powerOnOffContainer close];
+                [self showHudInView:self.view hint:nil];
+               [[[self.viewModel racSetPowerOnConfig]
+                  deliverOn:[RACScheduler mainThreadScheduler]]
+                subscribeNext:^(id x) {
+                    [self hideHud];
+                    if ([x integerValue] == 1) {
+                        [self showHint:@"action_Success".localizedString];
+                    }
+                }];
+            }
+            else if(1 == channel){
+                 [self.powerOnOffContainer close];
             }
         };
     }
+    [_powerOnOffAlertView setModel:self.viewModel.powerConfigModel];
     return _powerOnOffAlertView;
 }
 

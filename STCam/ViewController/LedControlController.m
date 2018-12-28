@@ -380,7 +380,7 @@
     if (self.viewModel.ledStatusModel) {
         _dateStart = [NSDate dateFromString:[NSString stringWithFormat:@"2018-01-01 %@:00",[self.self.viewModel.ledStatusModel.timerModel getStartTimeDesc]]];
         
-        _dateEnd = [NSDate dateFromString:[NSString stringWithFormat:@"2018-01-01 %@:00",[self.self.viewModel.ledStatusModel.timerModel getStopTimeDesc]]];
+        _dateEnd = [NSDate dateFromString:[NSString stringWithFormat:@"2018-01-01 %@:00",[self.viewModel.ledStatusModel.timerModel getStopTimeDesc]]];
         
         [_ledStatusImageView setSelected:self.viewModel.ledStatusModel.Status];
         [_modeSegment setSelectedSegmentIndex:self.viewModel.ledStatusModel.Mode-1];

@@ -17,6 +17,12 @@
             [self setBackgroundImage:[UIImage imageWithColor:kMainColor] forState:UIControlStateNormal];
             [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             break;
+        case ButtonStyleStyleGray:
+            self.layer.cornerRadius = 5;
+            self.layer.masksToBounds = true;
+            [self setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithHexString:@"0x969696"]] forState:UIControlStateNormal];
+            [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            break;
         case ButtonStyleHollow:
             self.layer.cornerRadius = 5;
             self.layer.masksToBounds = true;
