@@ -75,8 +75,8 @@
             [obtain playSoundName:@"SGQRCode.bundle/sound.caf"];
             @strongify(self)
             if([self.delegate respondsToSelector:@selector(SCanQRCodeResult:)]){
-                [self.delegate SCanQRCodeResult:result];
                 [self.navigationController popViewControllerAnimated:YES];
+                [self.delegate SCanQRCodeResult:result];
             }
            
         }
@@ -103,6 +103,14 @@
     UIBarButtonItem *backBarItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     self.navigationItem.leftBarButtonItem = backBarItem;
     
+   UIButton * photoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [photoBtn setTitle:@"photo".localizedString forState:UIControlStateNormal];
+    [photoBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [photoBtn setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
+    [photoBtn addTarget:self action:@selector(photoBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *rightBtnItem = [[UIBarButtonItem alloc] initWithCustomView:photoBtn];
+    self.navigationItem.rightBarButtonItem = rightBtnItem;
+    
     
 }
 -(void)back{
@@ -110,6 +118,33 @@
 }
 
 
+-(void)photoBtnClick{
+    __weak typeof(self) weakSelf = self;
+    
+    [obtain establishAuthorizationQRCodeObtainAlbumWithController:nil];
+    if (obtain.isPHAuthorization == YES) {
+        [self.scanView removeTimer];
+    }
+    [obtain setBlockWithQRCodeObtainAlbumDidCancelImagePickerController:^(SGQRCodeObtain *obtain) {
+        [weakSelf.view addSubview:weakSelf.scanView];
+    }];
+    [obtain setBlockWithQRCodeObtainAlbumResult:^(SGQRCodeObtain *obtain, NSString *result) {
+        [weakSelf showHudInView:weakSelf.view hint:nil];
+        if (result == nil) {
+            NSLog(@"暂未识别出二维码");
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [weakSelf hideHud];
+                [weakSelf showHint:@"Can't figure out the QR code"];
+                [MBProgressHUD SG_showMBProgressHUDWithOnlyMessage:@"Can't figure out the QR code" delayTime:1.0];
+            });
+        } else {
+            if([weakSelf.delegate respondsToSelector:@selector(SCanQRCodeResult:)]){
+                [weakSelf.navigationController popViewControllerAnimated:YES];
+                [weakSelf.delegate SCanQRCodeResult:result];
+            }
+        }
+    }];
+}
 
 
 

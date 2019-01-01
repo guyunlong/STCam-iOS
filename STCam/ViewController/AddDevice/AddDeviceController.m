@@ -19,8 +19,11 @@
 #import "WifiManager.h"
 #import "AddDeviceAPToStaController.h"
 #import "AddDeviceStaController.h"
+#import "CoreDataManager.h"
 #define buttonHeight 1.25*kButtonHeight
 @interface AddDeviceController ()<QRCodeDelegate>
+@property (nonatomic, strong) UIButton *scanSNAddButton;
+@property (nonatomic, strong) UIButton *inputSNAddButton;
 @property (nonatomic, strong) UIButton *smartAddButton;
 @property (nonatomic, strong) UIButton *apTStaAddButton;
 @property (nonatomic, strong) UIButton *wifiAddButton;
@@ -53,6 +56,21 @@
     [self initNav];
     [self.view setBackgroundColor:[UIColor whiteColor]];
     CGFloat y = 3*kPadding;
+    
+    _scanSNAddButton = [[UIButton alloc] initWithFrame:CGRectMake(2*kPadding, y, kScreenWidth-4*kPadding, buttonHeight)];
+    [_scanSNAddButton setTitle:@"action_add_qrcode_device".localizedString forState:UIControlStateNormal];
+    [_scanSNAddButton setAppThemeType:ButtonStyleHollowAppTheme];
+    [self.view addSubview:_scanSNAddButton];
+    
+    y+=buttonHeight+3*kPadding;
+    
+    _inputSNAddButton = [[UIButton alloc] initWithFrame:CGRectMake(2*kPadding, y, kScreenWidth-4*kPadding, buttonHeight)];
+    [_inputSNAddButton setTitle:@"action_add_inputSN".localizedString forState:UIControlStateNormal];
+    [_inputSNAddButton setAppThemeType:ButtonStyleHollowAppTheme];
+    [self.view addSubview:_inputSNAddButton];
+    
+    y+=buttonHeight+3*kPadding;
+    
     _smartAddButton= [[UIButton alloc] initWithFrame:CGRectMake(2*kPadding, y, kScreenWidth-4*kPadding, buttonHeight)];
     [_smartAddButton setTitle:@"action_add_one_key_setting".localizedString forState:UIControlStateNormal];
     [_smartAddButton setAppThemeType:ButtonStyleHollowAppTheme];
@@ -76,6 +94,8 @@
     [_qrCodeAddButton setAppThemeType:ButtonStyleHollowAppTheme];
     [self.view addSubview:_qrCodeAddButton];
     
+    [_scanSNAddButton addTarget:self action:@selector(addBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [_inputSNAddButton addTarget:self action:@selector(addBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [_smartAddButton addTarget:self action:@selector(addBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [_apTStaAddButton addTarget:self action:@selector(addBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [_wifiAddButton addTarget:self action:@selector(addBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -84,6 +104,14 @@
 }
 
 -(void)addBtnClicked:(id)sender{
+    if(sender == _scanSNAddButton){
+        WCQRCodeVC * vc = [WCQRCodeVC new];
+        vc.delegate = self;
+        [self QRCodeScanVC:vc];
+    }
+    else if(sender == _inputSNAddButton){
+        [self createInputSNAlertController];
+    }
     if(sender == _smartAddButton){
         if([[WifiManager ssid] length] == 0){
             [self showHint:@"string_OperationMustWifi".localizedString];
@@ -172,6 +200,10 @@
 #pragma QRCodeDelegate
 - (void)SCanQRCodeResult:(NSString*)result{
     if(result){
+        if ([result length] == 8) {
+            [self createInputSNAlertControllerWithSn:result];
+            return;
+        }
         NSData *utf8Data = [result dataUsingEncoding:NSUTF8StringEncoding];
         NSError *error;
         id dictionary = [NSJSONSerialization JSONObjectWithData:utf8Data options:NSJSONReadingMutableLeaves error:&error];
@@ -222,6 +254,177 @@
     }];
     
 }
+
+- (void)createInputSNAlertController
+{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"action_add_inputSN".localizedString message:nil preferredStyle:UIAlertControllerStyleAlert];
+    [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder = @"device_SN".localizedString ;
+        
+    }];
+    
+    [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        
+        textField.placeholder = @"device_pwd".localizedString;
+        
+    }];
+    
+    
+    UIAlertAction *sure = [UIAlertAction actionWithTitle:@"action_ok".localizedString style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UITextField *snField = alert.textFields.firstObject;
+        UITextField *pwdField = alert.textFields.lastObject;
+        //判断密码是否正确
+        //密码正确后，添加设备
+        
+        [self addDevice:snField.text pwd:pwdField.text];
+        
+        
+        
+    }];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"action_cancel".localizedString style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    }];
+    [alert addAction:sure];
+    [alert addAction:cancel];
+    [self presentViewController:alert animated:YES completion:^{
+        
+    }];
+    
+}
+- (void)createInputSNAlertControllerWithSn:(NSString*)sn
+{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"action_add_qrcode_device".localizedString message:nil preferredStyle:UIAlertControllerStyleAlert];
+    [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder = @"device_SN".localizedString ;
+        textField.text = sn;
+        
+    }];
+    
+    [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        
+        textField.placeholder = @"device_pwd".localizedString;
+        
+    }];
+    
+    
+    UIAlertAction *sure = [UIAlertAction actionWithTitle:@"action_ok".localizedString style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UITextField *snField = alert.textFields.firstObject;
+        UITextField *pwdField = alert.textFields.lastObject;
+        //判断密码是否正确
+        //密码正确后，添加设备
+        
+        [self addDevice:snField.text pwd:pwdField.text];
+        
+        
+        
+    }];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"action_cancel".localizedString style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    }];
+    [alert addAction:sure];
+    [alert addAction:cancel];
+    [self presentViewController:alert animated:YES completion:^{
+        
+    }];
+    
+}
+
+
+-(void)addDevice:(NSString*)sn pwd:(NSString*)pwd{
+    [self.view endEditing:YES];
+    DevListViewModel * viewModel = [DevListViewModel sharedDevListViewModel];
+    for (DeviceModel * model in viewModel.deviceArray) {
+        if ([model.SN isEqualToString:sn]) {
+            [self showHint:@"error_device_added".localizedString];
+            return;
+        }
+    }
+    if ([sn length] != 8) {
+        [self showHint:@"error_invalid_SN".localizedString];
+        return;
+    }
+    else if([pwd length] < 4){
+        [self showHint:@"error_invalid_password".localizedString];
+        return;
+    }
+    DeviceModel * model = [[DeviceModel alloc] init];
+    [model setPwd:pwd];
+    [model setSN:sn];
+    [[CoreDataManager sharedManager] saveDevice:model];
+    [self showHudInView:self.view hint:nil];
+    [[self racAddDevice:model] subscribeNext:^(id x) {
+        [self hideHud];
+        if ([x integerValue] == RESULT_SUCCESS) {
+            [self showHint:@"string_devAddSuccess".localizedString];
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
+        else if([x integerValue] == RESULT_USER_ISBIND){
+            [self showHint:@"string_user_IsBind".localizedString];
+        }
+        else{
+            [self showHint:@"string_devAddFail".localizedString];
+        }
+    }];
+    
+    
+}
+-(RACSignal *)racExcuteDeviceHttpCmd:(DeviceModel*)model{
+    @weakify(self)
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        @strongify(self)
+        
+        //http://211.149.199.247:800/app_user_get_devlst.asp?user=1257117229@qq.com&psd=12345678
+        NSString * url = [NSString stringWithFormat:@"http://%@:%ld/cfg1.cgi?User=%@&Psd=%@&MsgID=%d",model.IPUID,model.WebPort,model.User,model.Pwd,Msg_GetTime];
+        [FFHttpTool GET:url parameters:nil success:^(id data){
+            @strongify(self)
+            if ([data isKindOfClass:[NSDictionary class]]) {
+                NSInteger time = [[data objectForKey:@"time"] integerValue];
+                if (time > 0) {
+                    [subscriber sendNext:@1];//
+                }
+                else{
+                    [subscriber sendNext:@0];//
+                }
+                
+            }
+            else{
+                [subscriber sendNext:@0];//
+            }
+            [subscriber sendCompleted];
+        } failure:^(NSError * error){
+            [subscriber sendNext:@0];////未知网络错误
+            [subscriber sendCompleted];
+        }];
+        return nil;
+    }];
+}
+-(RACSignal *)racAddDevice:(DeviceModel*)model{
+    @weakify(self)
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        @strongify(self)
+        //http://211.149.199.247:800/app_user_get_devlst.asp?user=1257117229@qq.com&psd=12345678
+        NSString * url = [NSString stringWithFormat:@"http://%@:%d/app_user_add_dev.asp?user=%@&psd=%@&tokenid=%@&sn=%@",serverIP,ServerPort,[AccountManager getUser],[AccountManager getPassword],[AccountManager sharedManager].deviceToken,model.SN];
+        [FFHttpTool GET:url parameters:nil success:^(id data){
+            @strongify(self)
+            if ([data isKindOfClass:[NSDictionary class]]) {
+                RetModel * model =[RetModel RetModelWithDict:data];
+                if (model.ret == RESULT_SUCCESS) {
+                    [subscriber sendNext:@1];//
+                }
+                else{
+                    [subscriber sendNext:@(model.ret)];//
+                }
+            }
+            else{
+                [subscriber sendNext:@0];//
+            }
+            [subscriber sendCompleted];
+        } failure:^(NSError * error){
+            [subscriber sendNext:@0];////未知网络错误
+            [subscriber sendCompleted];
+        }];
+        return nil;
+    }];
+}
+
 
 
 @end

@@ -6,7 +6,7 @@
   Copyright © 2018 South. All rights reserved.
 */
 
-"app_name"="GRAVE";
+"app_name"="GraveTime";
 "title_activity_login"="Register";
 
 "prompt_email"="Email";
@@ -68,7 +68,7 @@
 "action_share_setting"="Set";
 "action_share_control"="Control";
 "action_generate_share"="Generate sharing";
-"action_add_share_device"="Add share device(scan QR code)";
+"action_add_share_device"="Scan Share Code";
 "action_net_not_connect"="Not connected to device";
 "action_not_exist_sd"="Device not exist SD";
 "action_alarm"="Alarm";
@@ -265,3 +265,8 @@
 "txtchk60"="60 Minutes later";
 "txtchk90"="90 Minutes later";
 "txtchk120"="120 Minutes later";
+"action_add_qrcode_device"="Scan Serial Number";
+"action_add_inputSN"="Input Serial Number";
+"device_SN"="SN";
+"error_invalid_SN"="Invalid Serial Number";
+"photo"="Photo";

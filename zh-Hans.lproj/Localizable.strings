@@ -1,4 +1,4 @@
-"app_name"="CAMLS";
+"app_name"="GraveTime";
 "title_activity_login"="Sign in";
 
 "prompt_email"="Email";
@@ -63,7 +63,7 @@
 "action_share_setting"="设置";
 "action_share_control"="控制";
 "action_generate_share"="生成分享";
-"action_add_share_device"="添加分享的设备(扫描二维码)";
+"action_add_share_device"="扫描分享码";
 "action_net_not_connect"="未连接到此设备";
 "action_not_exist_sd"="此设备无SD卡";
 "action_alarm"="警报";
@@ -262,3 +262,8 @@
 "txtchk60"="60分钟";
 "txtchk90"="90分钟";
 "txtchk120"="120分钟";
+"action_add_qrcode_device"="扫描序列号";
+"action_add_inputSN"="输入序列号";
+"device_SN"="序列号";
+"error_invalid_SN"="无效的序列号";
+"photo"="相册";

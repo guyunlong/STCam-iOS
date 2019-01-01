@@ -199,7 +199,7 @@
 }
 -(void)checkUpdateClicked{
     [self showHudInView:self.view hint:nil];
-    NSString * url = [NSString stringWithFormat:@"http://%@:%d/app_upgrade_app_check.asp?apptype=1&ostype=ios",serverIP,ServerPort];
+    NSString * url = [NSString stringWithFormat:@"http://%@:%d/app_upgrade_app_check.asp?apptype=1&ostype=ios&appname=%@",serverIP,ServerPort,@"app_name".localizedString];
     @weakify(self);
     [FFHttpTool GET:url parameters:nil success:^(id data){
         @strongify(self)

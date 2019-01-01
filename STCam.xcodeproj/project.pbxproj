@@ -928,7 +928,7 @@
 		A4AE70BC2167AEF600614024 /* DevListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DevListCell.xib; sourceTree = "<group>"; };
 		A4B25F122184A9EE00D69521 /* LedStatusModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LedStatusModel.h; sourceTree = "<group>"; };
 		A4B25F132184A9EE00D69521 /* LedStatusModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LedStatusModel.m; sourceTree = "<group>"; };
-		A4BBBCB121D5FCC900CF311C /* GRAVE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GRAVE.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A4BBBCB121D5FCC900CF311C /* GraveTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GraveTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4BBBCB221D5FCCA00CF311C /* STCam copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "STCam copy-Info.plist"; path = "/opt/android/android_studio/SouthSmartCamProject/STCam-iOS/STCam copy-Info.plist"; sourceTree = "<absolute>"; };
 		A4BC3653216F959B00FDCBF5 /* AlarmListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlarmListCell.h; sourceTree = "<group>"; };
 		A4BC3654216F959B00FDCBF5 /* AlarmListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlarmListCell.m; sourceTree = "<group>"; };
@@ -1682,7 +1682,7 @@
 			children = (
 				A4946FF1212C5B460015990C /* STCam.app */,
 				A4947009212C5B470015990C /* STCamTests.xctest */,
-				A4BBBCB121D5FCC900CF311C /* GRAVE.app */,
+				A4BBBCB121D5FCC900CF311C /* GraveTime.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1902,9 +1902,9 @@
 			productReference = A4947009212C5B470015990C /* STCamTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		A4BBBBDB21D5FCC900CF311C /* GRAVE */ = {
+		A4BBBBDB21D5FCC900CF311C /* GraveTime */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A4BBBCAE21D5FCC900CF311C /* Build configuration list for PBXNativeTarget "GRAVE" */;
+			buildConfigurationList = A4BBBCAE21D5FCC900CF311C /* Build configuration list for PBXNativeTarget "GraveTime" */;
 			buildPhases = (
 				A4BBBBDC21D5FCC900CF311C /* [CP] Check Pods Manifest.lock */,
 				A4BBBBDD21D5FCC900CF311C /* Sources */,
@@ -1917,9 +1917,9 @@
 			);
 			dependencies = (
 			);
-			name = GRAVE;
+			name = GraveTime;
 			productName = STCam;
-			productReference = A4BBBCB121D5FCC900CF311C /* GRAVE.app */;
+			productReference = A4BBBCB121D5FCC900CF311C /* GraveTime.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1964,7 +1964,7 @@
 			targets = (
 				A4946FF0212C5B460015990C /* STCam */,
 				A4947008212C5B470015990C /* STCamTests */,
-				A4BBBBDB21D5FCC900CF311C /* GRAVE */,
+				A4BBBBDB21D5FCC900CF311C /* GraveTime */,
 			);
 		};
 /* End PBXProject section */
@@ -2824,7 +2824,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A4BBBCAE21D5FCC900CF311C /* Build configuration list for PBXNativeTarget "GRAVE" */ = {
+		A4BBBCAE21D5FCC900CF311C /* Build configuration list for PBXNativeTarget "GraveTime" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A4BBBCAF21D5FCC900CF311C /* Debug */,
