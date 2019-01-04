@@ -415,6 +415,16 @@
 		A4CFFE862168C7D500A93B72 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4CFFE852168C7D500A93B72 /* AVKit.framework */; };
 		A4DAA3BA21AA63FF007E4600 /* splash_grave_01.png in Resources */ = {isa = PBXBuildFile; fileRef = A4DAA3B921AA63FF007E4600 /* splash_grave_01.png */; };
 		A4DAA3BC21AAAC94007E4600 /* launchscreen01.png in Resources */ = {isa = PBXBuildFile; fileRef = A4DAA3BB21AAAC94007E4600 /* launchscreen01.png */; };
+		A4F1233221DDB2A90045BEAC /* DoorCfgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A4F1233121DDB2A90045BEAC /* DoorCfgModel.m */; };
+		A4F1233321DDB2A90045BEAC /* DoorCfgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A4F1233121DDB2A90045BEAC /* DoorCfgModel.m */; };
+		A4F1233621DE009E0045BEAC /* DoorControlCCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4F1233521DE009E0045BEAC /* DoorControlCCell.m */; };
+		A4F1233721DE009E0045BEAC /* DoorControlCCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4F1233521DE009E0045BEAC /* DoorControlCCell.m */; };
+		A4F1233A21DE0B8C0045BEAC /* DoorHandelCCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4F1233921DE0B8C0045BEAC /* DoorHandelCCell.m */; };
+		A4F1233B21DE0B8C0045BEAC /* DoorHandelCCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4F1233921DE0B8C0045BEAC /* DoorHandelCCell.m */; };
+		A4F1233E21DE13990045BEAC /* DoorConfigAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4F1233D21DE13990045BEAC /* DoorConfigAlertView.m */; };
+		A4F1233F21DE13990045BEAC /* DoorConfigAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4F1233D21DE13990045BEAC /* DoorConfigAlertView.m */; };
+		A4F1234221DE159F0045BEAC /* DoorConfigCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4F1234121DE159F0045BEAC /* DoorConfigCell.m */; };
+		A4F1234321DE159F0045BEAC /* DoorConfigCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4F1234121DE159F0045BEAC /* DoorConfigCell.m */; };
 		A4F50440216268A6002B71FF /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4F5043F216268A6002B71FF /* RootViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -955,6 +965,16 @@
 		A4CFFE852168C7D500A93B72 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		A4DAA3B921AA63FF007E4600 /* splash_grave_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash_grave_01.png; sourceTree = SOURCE_ROOT; };
 		A4DAA3BB21AAAC94007E4600 /* launchscreen01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launchscreen01.png; sourceTree = SOURCE_ROOT; };
+		A4F1233021DDB2A90045BEAC /* DoorCfgModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoorCfgModel.h; sourceTree = "<group>"; };
+		A4F1233121DDB2A90045BEAC /* DoorCfgModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DoorCfgModel.m; sourceTree = "<group>"; };
+		A4F1233421DE009E0045BEAC /* DoorControlCCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoorControlCCell.h; sourceTree = "<group>"; };
+		A4F1233521DE009E0045BEAC /* DoorControlCCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DoorControlCCell.m; sourceTree = "<group>"; };
+		A4F1233821DE0B8C0045BEAC /* DoorHandelCCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoorHandelCCell.h; sourceTree = "<group>"; };
+		A4F1233921DE0B8C0045BEAC /* DoorHandelCCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DoorHandelCCell.m; sourceTree = "<group>"; };
+		A4F1233C21DE13990045BEAC /* DoorConfigAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoorConfigAlertView.h; sourceTree = "<group>"; };
+		A4F1233D21DE13990045BEAC /* DoorConfigAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DoorConfigAlertView.m; sourceTree = "<group>"; };
+		A4F1234021DE159F0045BEAC /* DoorConfigCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoorConfigCell.h; sourceTree = "<group>"; };
+		A4F1234121DE159F0045BEAC /* DoorConfigCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DoorConfigCell.m; sourceTree = "<group>"; };
 		A4F5043E216268A6002B71FF /* RootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		A4F5043F216268A6002B71FF /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		B4C56BD2FE6F48D777CF9CBD /* libPods-GRAVE.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GRAVE.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1212,6 +1232,8 @@
 				9D7E9D732188405500DE53E2 /* UpdateModel.m */,
 				A41391EB21D51916008F3116 /* PowerConfigModel.h */,
 				A41391EC21D51916008F3116 /* PowerConfigModel.m */,
+				A4F1233021DDB2A90045BEAC /* DoorCfgModel.h */,
+				A4F1233121DDB2A90045BEAC /* DoorCfgModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1601,6 +1623,8 @@
 				9DBBD6A22182F0A2003B4DB0 /* STSlider.m */,
 				A4722AFF21D234E3002B8F59 /* PowerOnOffAlertView.h */,
 				A4722B0021D234E3002B8F59 /* PowerOnOffAlertView.m */,
+				A4F1233C21DE13990045BEAC /* DoorConfigAlertView.h */,
+				A4F1233D21DE13990045BEAC /* DoorConfigAlertView.m */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -1832,6 +1856,12 @@
 				9DFEF154217F1F4E00FD28E1 /* SearchDeviceCell.h */,
 				9DFEF155217F1F4E00FD28E1 /* SearchDeviceCell.m */,
 				9DFEF156217F1F4E00FD28E1 /* SearchDeviceCell.xib */,
+				A4F1233421DE009E0045BEAC /* DoorControlCCell.h */,
+				A4F1233521DE009E0045BEAC /* DoorControlCCell.m */,
+				A4F1233821DE0B8C0045BEAC /* DoorHandelCCell.h */,
+				A4F1233921DE0B8C0045BEAC /* DoorHandelCCell.m */,
+				A4F1234021DE159F0045BEAC /* DoorConfigCell.h */,
+				A4F1234121DE159F0045BEAC /* DoorConfigCell.m */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -2266,6 +2296,7 @@
 				A452A9AF21762C4500E40A5F /* MBProgressHUD+SGQRCode.m in Sources */,
 				A4CFFE6E2168656000A93B72 /* LiveVidController.m in Sources */,
 				9D07DF3821895B8F006DDBB8 /* UIViewController+Utils.m in Sources */,
+				A4F1233A21DE0B8C0045BEAC /* DoorHandelCCell.m in Sources */,
 				A48C32F6217C713600CDF2D2 /* CommonInfoCell.m in Sources */,
 				A45934E32164A5FF0018A61B /* LoginBackgroundView.m in Sources */,
 				9DBBD6A32182F0A2003B4DB0 /* STSlider.m in Sources */,
@@ -2280,6 +2311,7 @@
 				9DBBD68E2182B3F0003B4DB0 /* GenerateShareQRCodeController.m in Sources */,
 				A4AE327521342EFD0036212B /* UIView+YYAdd.m in Sources */,
 				A4AE70BD2167AEF600614024 /* DevListCell.m in Sources */,
+				A4F1234221DE159F0045BEAC /* DoorConfigCell.m in Sources */,
 				9DBBD6A02182EB45003B4DB0 /* UIView+Extension.m in Sources */,
 				9DE7648621806FD500373090 /* AddDeviceSmartLinkController.m in Sources */,
 				9DBBD6812182B3E7003B4DB0 /* MediaDetailController.m in Sources */,
@@ -2289,6 +2321,8 @@
 				A40C8693217B6DD800D82B6B /* DeviceSettingViewModel.m in Sources */,
 				A47041B5216E1E2B007163C8 /* MediaDetailCCell.m in Sources */,
 				A452A9AC21762BEF00E40A5F /* WCQRCodeVC.m in Sources */,
+				A4F1233221DDB2A90045BEAC /* DoorCfgModel.m in Sources */,
+				A4F1233621DE009E0045BEAC /* DoorControlCCell.m in Sources */,
 				A470AA912163BE050068AA80 /* UIButton+Common.m in Sources */,
 				A4CFFE7A2168BB2E00A93B72 /* CoreDataManager.m in Sources */,
 				A4AE3241213426BE0036212B /* MainTabController.m in Sources */,
@@ -2311,6 +2345,7 @@
 				A4AE3244213427480036212B /* DevListViewController.m in Sources */,
 				9D47FCC421819BC500E7E8DB /* LMJDropdownMenu.m in Sources */,
 				A4434D9D217AFC6C00BDA9F2 /* SDVideoModel.m in Sources */,
+				A4F1233E21DE13990045BEAC /* DoorConfigAlertView.m in Sources */,
 				9DE7648921806FD500373090 /* AddDeviceAPToStaController.m in Sources */,
 				A4947004212C5B470015990C /* main.m in Sources */,
 				A4722B0121D234E3002B8F59 /* PowerOnOffAlertView.m in Sources */,
@@ -2399,6 +2434,7 @@
 				A4BBBC0021D5FCC900CF311C /* MBProgressHUD+SGQRCode.m in Sources */,
 				A4BBBC0121D5FCC900CF311C /* LiveVidController.m in Sources */,
 				A4BBBC0221D5FCC900CF311C /* UIViewController+Utils.m in Sources */,
+				A4F1233B21DE0B8C0045BEAC /* DoorHandelCCell.m in Sources */,
 				A4BBBC0321D5FCC900CF311C /* CommonInfoCell.m in Sources */,
 				A4BBBC0421D5FCC900CF311C /* LoginBackgroundView.m in Sources */,
 				A4BBBC0521D5FCC900CF311C /* STSlider.m in Sources */,
@@ -2413,6 +2449,7 @@
 				A4BBBC0E21D5FCC900CF311C /* GenerateShareQRCodeController.m in Sources */,
 				A4BBBC0F21D5FCC900CF311C /* UIView+YYAdd.m in Sources */,
 				A4BBBC1021D5FCC900CF311C /* DevListCell.m in Sources */,
+				A4F1234321DE159F0045BEAC /* DoorConfigCell.m in Sources */,
 				A4BBBC1121D5FCC900CF311C /* UIView+Extension.m in Sources */,
 				A4BBBC1221D5FCC900CF311C /* AddDeviceSmartLinkController.m in Sources */,
 				A4BBBC1321D5FCC900CF311C /* MediaDetailController.m in Sources */,
@@ -2422,6 +2459,8 @@
 				A4BBBC1721D5FCC900CF311C /* DeviceSettingViewModel.m in Sources */,
 				A4BBBC1821D5FCC900CF311C /* MediaDetailCCell.m in Sources */,
 				A4BBBC1921D5FCC900CF311C /* WCQRCodeVC.m in Sources */,
+				A4F1233321DDB2A90045BEAC /* DoorCfgModel.m in Sources */,
+				A4F1233721DE009E0045BEAC /* DoorControlCCell.m in Sources */,
 				A4BBBC1A21D5FCC900CF311C /* UIButton+Common.m in Sources */,
 				A4BBBC1B21D5FCC900CF311C /* CoreDataManager.m in Sources */,
 				A4BBBC1C21D5FCC900CF311C /* MainTabController.m in Sources */,
@@ -2444,6 +2483,7 @@
 				A4BBBC2D21D5FCC900CF311C /* DevListViewController.m in Sources */,
 				A4BBBC2E21D5FCC900CF311C /* LMJDropdownMenu.m in Sources */,
 				A4BBBC2F21D5FCC900CF311C /* SDVideoModel.m in Sources */,
+				A4F1233F21DE13990045BEAC /* DoorConfigAlertView.m in Sources */,
 				A4BBBC3021D5FCC900CF311C /* AddDeviceAPToStaController.m in Sources */,
 				A4BBBC3121D5FCC900CF311C /* main.m in Sources */,
 				A4BBBC3221D5FCC900CF311C /* PowerOnOffAlertView.m in Sources */,

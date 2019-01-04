@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "DeviceModel.h"
+#import <ReactiveCocoa/ReactiveCocoa.h>
+#import <ReactiveCocoa/RACEXTScope.h>
+#import "DoorCfgModel.h"
 typedef NS_ENUM(NSInteger, PtzControlType){
     PtzControlType_None,
     PtzControlType_Up = 1,
@@ -98,4 +101,20 @@ typedef NS_ENUM(NSInteger, PtzControlType){
  */
 -(void)ptzControl:(PtzControlType)ptzType;
 -(void)destroyVidSelfPoint;
+
+/**
+ 获取门控制配置
+ */
+-(RACSignal *)racGetDoorConfig;
+
+@property(nonatomic,strong) NSMutableArray*doorCfgArray;
+/**
+ 设置门控制
+ */
+-(RACSignal *)racSetDoorConfig;
+
+/**
+ 设置门控制
+ */
+-(RACSignal *)racHandleDoorControl:(NSInteger)channel cmd:(NSInteger)cmd;//门锁控制
 @end

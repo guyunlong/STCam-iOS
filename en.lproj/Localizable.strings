@@ -270,3 +270,10 @@
 "device_SN"="SN";
 "error_invalid_SN"="Invalid Serial Number";
 "photo"="Photo";
+"txt_DoorVideo"="Video Control";
+"txt_DoorDoor"="Door Control";
+"txt_DoorOpen"="Open";
+"txt_DoorClose"="Close";
+"txt_DoorStop"="Stop";
+"txt_DoorLock"="Lock";
+

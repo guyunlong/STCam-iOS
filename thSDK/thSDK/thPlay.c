@@ -597,6 +597,7 @@ void thread_QueueRec(HANDLE NetHandle)
   while (1)
   {
     if (Play->IsExit) break;
+      usleep(1000);
     //if (!Play->IsConnect) break;//不能要，不然重连不了
     tmpNode = avQueue_ReadBegin(Play->hQueueRec);
     if (tmpNode == NULL)

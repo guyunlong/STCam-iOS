@@ -79,6 +79,7 @@
 #define kSafeAreaBottomHeight (kScreenHeight == 812.0 ? 34 : 0)
 #define kSafeAreaHeaderHeight (kScreenHeight == 812.0 ? 44 : 20)
 #define kButtonHeight 40*kWidthCoefficient
+#define kBottomButtonHeight 60*kWidthCoefficient
 #endif /* PrefixHeader_pch */
 
 #define serverIP @"211.149.199.247"
@@ -187,6 +188,11 @@ static int Msg_SetPushCfg = 99;
 static int Msg_PlayWavFile = 100;
 static int Msg_GetPowerTimerCfg = 101;
 static int Msg_SetPowerTimerCfg = 102;
+
+static int Msg_GetDoorCfg = 104; //获取门配置
+static int Msg_SetDoorCfg = 105; //设置门配置
+static int Msg_DoorControl = 106; //门锁控制
+static int Msg_GetDoorStatus = 107; //获取门状态
 
  static  int RESULT_FAIL = 0;//失败
  static  int RESULT_SUCCESS = 1;//成功

@@ -70,4 +70,6 @@
  设置定时开关机配置
  */
 -(RACSignal *)racSetPowerOnConfig;
+
+
 @end

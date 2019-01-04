@@ -14,6 +14,7 @@ typedef NS_ENUM(NSInteger,ButtonStyle) {
     ButtonStyleStyleGray,
     ButtonStyleHollow,
     ButtonStyleHollowAppTheme,
+    ButtonStyleDoorTheme,//门控
     ButtonStyleText_Blue, // 文字按钮样式蓝色
     ButtonStyleText_Gray, // 文字按钮样式灰色
     ButtonStyleText_Gray_Right,

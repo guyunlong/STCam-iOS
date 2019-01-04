@@ -267,3 +267,10 @@
 "device_SN"="序列号";
 "error_invalid_SN"="无效的序列号";
 "photo"="相册";
+"txt_DoorVideo"="视频";
+"txt_DoorDoor"="门控";
+"txt_DoorOpen"="开";
+"txt_DoorClose"="关";
+"txt_DoorStop"="停";
+"txt_DoorLock"="锁";
+

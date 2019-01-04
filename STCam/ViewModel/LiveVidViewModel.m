@@ -298,17 +298,111 @@ void alarmRealTimeCallBack(int AlmType, int AlmTime, int AlmChl, void* UserCusto
 }
 
 -(void)ptzControl:(PtzControlType)ptzType{
-    NSString * url = [NSString stringWithFormat:@"%@&cmd=%d&sleep=500",[self.model getDevURL:Msg_PTZControl],(int)ptzType];
+    dispatch_queue_t quene = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(quene, ^{
+        NSString * url = [NSString stringWithFormat:@"%@&cmd=%d&sleep=500",[self.model getDevURL:Msg_PTZControl],(int)ptzType];
+        
+        id data = [self.model thNetHttpGet:url];
+        if([data isKindOfClass:[NSDictionary class]]){
+            RetModel * model = [RetModel RetModelWithDict:data];
+            if (model.ret == 1) {
+                NSLog(@"ptz ctl succtss");
+            }
+            else{
+                NSLog(@"ptz ctl failed");
+            }
+        }
+    });
     
-    id data = [self.model thNetHttpGet:url];
-    if([data isKindOfClass:[NSDictionary class]]){
-        RetModel * model = [RetModel RetModelWithDict:data];
-        if (model.ret == 1) {
-            NSLog(@"ptz ctl succtss");
-        }
-        else{
-            NSLog(@"ptz ctl failed");
-        }
-    }
 }
+
+/**
+ 获取门控制配置
+ */
+-(RACSignal *)racGetDoorConfig{
+    @weakify(self)
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber){
+        @strongify(self)
+        dispatch_queue_t quene = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(quene, ^{
+            
+            NSString * url = [NSString stringWithFormat:@"%@",[self.model getDevURL:Msg_GetPowerTimerCfg]];
+            
+            id data = [self.model thNetHttpGet:url];
+            if ([data isKindOfClass:[NSArray class]]) {
+                if (!self.doorCfgArray) {
+                    self.doorCfgArray = [[NSMutableArray alloc] init];
+                }
+                else{
+                    [self.doorCfgArray removeAllObjects];
+                }
+                for (NSDictionary * dic in data) {
+                    DoorCfgModel * model = [DoorCfgModel DoorCfgModelWithDict:dic];
+                    [self.doorCfgArray addObject:model];
+                }
+                [subscriber sendNext:@1];
+            }
+            else{
+                [subscriber sendNext:0];//
+            }
+        });
+        
+        return nil;
+    }];
+}
+
+/**
+ 设置门控制
+ */
+-(RACSignal *)racSetDoorConfig{
+    @weakify(self)
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber){
+        @strongify(self)
+        dispatch_queue_t quene = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(quene, ^{
+            
+            NSMutableString * url = [NSMutableString stringWithFormat:@"%@",[self.model getDevURL:Msg_SetDoorCfg]];
+            for (NSInteger index = 0;index<[self.doorCfgArray count];index++) {
+                DoorCfgModel * model =self.doorCfgArray[index];
+                [url appendString:[NSString stringWithFormat:@"&Active%ld=%ld&Name%ld=%@",index,model.Active,index,model.Name]];
+            }
+            
+            id data = [self.model thNetHttpGet:url];
+            if([data isKindOfClass:[NSDictionary class]]){
+                RetModel * model = [RetModel RetModelWithDict:data];
+                [subscriber sendNext:@(model.ret)];
+            }
+            else{
+                [subscriber sendNext:@0];
+            }
+        });
+        
+        return nil;
+    }];
+}
+
+-(RACSignal *)racHandleDoorControl:(NSInteger)channel cmd:(NSInteger)cmd{
+    //http://IP:Port/cfg1.cgi?User=admin&Psd=admin&MsgID=106&Chl=2&Cmd=1
+    @weakify(self)
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber){
+        @strongify(self)
+        dispatch_queue_t quene = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(quene, ^{
+            
+            NSString * url = [NSString stringWithFormat:@"%@&Chl=%ld&Cmd=%ld",[self.model getDevURL:Msg_DoorControl],channel,cmd];
+            
+            id data = [self.model thNetHttpGet:url];
+            if([data isKindOfClass:[NSDictionary class]]){
+                RetModel * model = [RetModel RetModelWithDict:data];
+                [subscriber sendNext:@(model.ret)];
+            }
+            else{
+                [subscriber sendNext:@0];
+            }
+        });
+        
+        return nil;
+    }];
+}
+
 @end

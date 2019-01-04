@@ -61,6 +61,16 @@
             [self setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithHexString:@"0xbbbbbb"]] forState:UIControlStateNormal];
             [self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             break;
+        case ButtonStyleDoorTheme:
+            [self setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor]] forState:UIControlStateNormal];
+            [self setTitleColor:kMainColor forState:UIControlStateNormal];
+            self.layer.borderWidth = 0.5;
+            self.layer.borderColor =kMainColor.CGColor;
+            [self setBackgroundImage:[UIImage imageWithColor:kMainColor] forState:UIControlStateSelected];
+            [self setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+            [self setTitleColor:kMainColor forState:UIControlStateDisabled];
+            [self setBackgroundImage:[UIImage imageWithColor:kLightGrayColor] forState:UIControlStateDisabled];
+            break;
         default:
             break;
     }

@@ -13,8 +13,12 @@
 #import "DeviceSettingController.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import "LedControlController.h"
+#import "DoorControlCCell.h"
+#import "DoorHandelCCell.h"
+#import "CustomIOSAlertView.h"
+#import "DoorConfigAlertView.h"
 
-@interface LiveVidController ()<VidViewModelDelegate>{
+@interface LiveVidController ()<VidViewModelDelegate,UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>{
     BOOL isLandscape;
 }
 @property (strong, nonatomic)  AAPLEAGLLayer *glLayer;//视频播放控件
@@ -44,7 +48,15 @@
 @property (strong, nonatomic) NSTimer * recordTime;
 @property (strong, nonatomic)  UIView *gestureControlView;//手势控制
 
+@property (strong, nonatomic)  UIButton * bottomVidBtn;//底部视频按钮
+@property (strong, nonatomic)  UIButton * bottomDoorBtn;//底部门控制按钮
+@property (strong, nonatomic)  UICollectionView * doorChannelColView;//
+@property (strong, nonatomic)  UICollectionView * doorHandelColView;//
 @property(nonatomic,assign) BOOL showHud;//是否已经获得第一帧视频
+
+@property(nonatomic,strong)NSArray* doorHandelTitleArray;
+@property(nonatomic ,strong) DoorConfigAlertView *doorConfigAlertView;
+@property(nonatomic ,strong) CustomIOSAlertView *doorConfigContainer;
 @end
 
 @implementation LiveVidController
@@ -70,6 +82,9 @@
             [self back];
         }
     }];
+    
+    [_doorChannelColView reloadData];
+    [_doorHandelColView reloadData];
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
@@ -82,7 +97,11 @@
     _viewModel.delegate = self;
     
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidEnterbackground) name:AppDidEnterbackground object:nil];
-    
+    @weakify(self)
+    [[_viewModel racGetDoorConfig] subscribeNext:^(id x) {
+       @strongify(self)
+       [self.doorChannelColView reloadData];
+    }];
     
 }
 -(void)appDidEnterbackground{
@@ -95,7 +114,7 @@
     [self initNav];
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
-    _glLayer = [[AAPLEAGLLayer alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-kSafeAreaBottomHeight-kSafeAreaHeaderHeight-64-250*kWidthCoefficient)];
+    _glLayer = [[AAPLEAGLLayer alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenWidth*9/16)];
     [_glLayer setBackgroundColor:[[UIColor blackColor] CGColor]];
     [self.view.layer addSublayer:_glLayer];
    
@@ -108,6 +127,8 @@
      [self initGesture];
     
     
+    
+    _doorHandelTitleArray = [NSArray arrayWithObjects:@"",@"txt_DoorOpen".localizedString,@"",@"txt_DoorClose".localizedString,@"",@"txt_DoorClose".localizedString,@"",@"txt_DoorClose".localizedString,@"" ,nil];
     [self layoutButtons];
     
     /***********录像时间***********/
@@ -147,11 +168,10 @@
     UIBarButtonItem *backBarItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     self.navigationItem.leftBarButtonItem = backBarItem;
     
-    
 }
 -(void)layoutButtons{
     /**********portrait buttons*************/
-    CGFloat y = kScreenHeight-kSafeAreaBottomHeight-kSafeAreaHeaderHeight-64-250*kWidthCoefficient;
+    CGFloat y = kScreenWidth*9/16 + 4*kPadding;
     _portButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, y, kScreenWidth, 250*kWidthCoefficient)];
     [self.view addSubview:_portButtonView];
     CGFloat firstLineWidth = 50*kWidthCoefficient;
@@ -246,8 +266,76 @@
      [_settingBtn addTarget:self action:@selector(controlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
      [_ledBtn addTarget:self action:@selector(controlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
+    if ([_viewModel.model FunctionExistsDoorControl]) {
+        _bottomVidBtn = [[UIButton alloc] initWithFrame:CGRectMake(0,kScreenHeight-kSafeAreaHeaderHeight-kSafeAreaBottomHeight-44-kBottomButtonHeight, kScreenWidth/2, kBottomButtonHeight)];
+        _bottomDoorBtn = [[UIButton alloc] initWithFrame:CGRectMake(kScreenWidth/2,kScreenHeight-kSafeAreaHeaderHeight-kSafeAreaBottomHeight-44-kBottomButtonHeight, kScreenWidth/2, kBottomButtonHeight)];
+        [_bottomDoorBtn setAppThemeType:ButtonStyleDoorTheme];
+        [_bottomVidBtn setAppThemeType:ButtonStyleDoorTheme];
+        [_bottomDoorBtn setTitle:@"txt_DoorDoor".localizedString forState:UIControlStateNormal];
+        [_bottomVidBtn setTitle:@"txt_DoorVideo".localizedString forState:UIControlStateNormal];
+        
+        [self.view addSubview:_bottomDoorBtn];
+        [self.view addSubview:_bottomVidBtn];
+        
+        [_bottomDoorBtn setSelected:NO];
+        [_bottomVidBtn setSelected:YES];
+        
+        [_bottomVidBtn addTarget:self action:@selector(doorBottomClick:) forControlEvents:UIControlEventTouchUpInside];
+        [_bottomDoorBtn addTarget:self action:@selector(doorBottomClick:) forControlEvents:UIControlEventTouchUpInside];
+        if (!_doorChannelColView) {
+            UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+            _doorChannelColView= [[UICollectionView alloc] initWithFrame:CGRectMake(kPadding, kScreenWidth*9/16+kPadding*2, doorBtnWidth*5, doorBtnHeight*2) collectionViewLayout:layout];
+            [_doorChannelColView setUserInteractionEnabled:true];
+            [_doorChannelColView setBackgroundColor:[UIColor redColor]];
+            [_doorChannelColView registerClass:[DoorControlCCell class] forCellWithReuseIdentifier:DoorControlCCellIdentify];
+            _doorChannelColView.dataSource = self;
+            _doorChannelColView.delegate = self;
+            [self.view addSubview:_doorChannelColView];
+            [_doorChannelColView reloadData];
+            
+        }
+        
+        if (!_doorHandelColView) {
+            UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+            _doorHandelColView= [[UICollectionView alloc] initWithFrame:CGRectMake((kScreenWidth-doorHandleBtnWidth*3)/2, CGRectGetMaxY(_doorChannelColView.frame)+kPadding*2, doorHandleBtnWidth*3, doorHandleBtnHeight*3) collectionViewLayout:layout];
+            [_doorHandelColView setUserInteractionEnabled:true];
+            [_doorHandelColView setBackgroundColor:[UIColor whiteColor]];
+            [_doorHandelColView registerClass:[DoorHandelCCell class] forCellWithReuseIdentifier:DoorHandelCCellIdentify];
+            _doorHandelColView.dataSource = self;
+            _doorHandelColView.delegate = self;
+            
+            [self.view addSubview:_doorHandelColView];
+            
+        }
+        
+       
+    }
+    
+    
+    [_doorChannelColView setHidden:YES];
+    [_doorHandelColView setHidden:YES];
+    [_portButtonView setHidden:NO];
+    
     /**********landscape buttons*************/
    
+}
+
+-(void)doorBottomClick:(id)sender{
+    if (sender == _bottomDoorBtn) {
+        [_bottomDoorBtn setSelected:YES];
+        [_bottomVidBtn setSelected:NO];
+        [_doorChannelColView setHidden:NO];
+        [_doorHandelColView setHidden:NO];
+        [_portButtonView setHidden:YES];
+    }
+    else if(sender == _bottomVidBtn){
+        [_bottomDoorBtn setSelected:NO];
+        [_bottomVidBtn setSelected:YES];
+        [_doorChannelColView setHidden:YES];
+        [_doorHandelColView setHidden:YES];
+        [_portButtonView setHidden:NO];
+    }
+    
 }
 
 -(void)initGesture{
@@ -405,10 +493,18 @@
 #pragma methods
 -(void)rotateToLandscape{
      [self.navigationController setNavigationBarHidden:YES animated:YES];
+    
     if(_exitFullScreenButton){
          [_exitFullScreenButton setHidden:NO];
     }
    
+    if ([_viewModel.model FunctionExistsDoorControl]){
+        [_bottomVidBtn setHidden:YES];
+        [_bottomDoorBtn setHidden:YES];
+        [_doorHandelColView setHidden:YES];
+        [_doorChannelColView setHidden:YES];
+    }
+    
     [_portButtonView setHidden:YES];
     
     self.view.bounds = CGRectMake(0, 0,kScreenHeight , kScreenWidth);
@@ -491,9 +587,6 @@
        
         
         
-        
-      
-        
         [self.view addSubview:_recordBtn_land];
         [self.view addSubview:_speechBtn_land];
         [self.view addSubview:_snapShotBtn_land];
@@ -565,12 +658,16 @@
      [self.navigationController setNavigationBarHidden:NO animated:YES];
     [_exitFullScreenButton setHidden:YES];
     [_portButtonView setHidden:NO];
+    if ([_viewModel.model FunctionExistsDoorControl]){
+        [_bottomVidBtn setHidden:NO];
+        [_bottomDoorBtn setHidden:NO];
+    }
     
     self.view.bounds = CGRectMake(0, 0,kScreenWidth , kScreenHeight);
     self.view.transform = CGAffineTransformMakeRotation(0);
     [UIView beginAnimations:nil context:nil];
     [UIView commitAnimations];
-    [_glLayer setFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-kSafeAreaBottomHeight-kSafeAreaHeaderHeight-64-250*kWidthCoefficient)];
+    [_glLayer setFrame:CGRectMake(0, 0, kScreenWidth, kScreenWidth*9/16)];
     
     [_recordTimeLabel setFrame:CGRectMake(0, 30*kWidthCoefficient, kScreenWidth, 40*kWidthCoefficient)];
     
@@ -612,5 +709,116 @@
     }
     
 }
+
+
+#pragma ccell
+
+
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView;{
+    return 1;
+}
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    if (collectionView == _doorChannelColView) {
+        return 10;
+    }
+    else{
+        return 9;
+    }
+}
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    NSInteger row = [indexPath row];
+    if (collectionView == _doorChannelColView) {
+        DoorControlCCell *ccell = [collectionView dequeueReusableCellWithReuseIdentifier:DoorControlCCellIdentify forIndexPath:indexPath];
+        @weakify(self)
+        ccell.btnClickBlock = ^(NSInteger channel) {
+          @strongify(self)
+            [self.doorConfigContainer show];
+        };
+        if ([_viewModel.doorCfgArray count]>0) {
+            DoorCfgModel * model = _viewModel.doorCfgArray[row];
+            [ccell setTitle:model.Name];
+        }
+        else{
+            [ccell setTitle:[NSString stringWithFormat:@"%ld",row]];
+        }
+        if (row == 9) {
+            [ccell setTitle:@"action_setting".localizedString];
+        }
+        return ccell;
+    }
+    else{
+        DoorHandelCCell *ccell = [collectionView dequeueReusableCellWithReuseIdentifier:DoorHandelCCellIdentify forIndexPath:indexPath];
+        [ccell setTitle:_doorHandelTitleArray[row]];
+        return ccell;
+    }
+    
+    
+    
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    if (collectionView == _doorChannelColView) {
+       return [DoorControlCCell ccellSize];
+    }
+    else{
+       return [DoorHandelCCell ccellSize];
+    }
+    
+    
+}
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
+    UIEdgeInsets insetForSection ;
+    insetForSection = UIEdgeInsetsMake(0, 0, 0, 0);
+    return insetForSection;
+}
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
+    return 0;
+}
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
+    return 0;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    NSInteger row = [indexPath row];
+   
+    
+    
+}
+
+#pragma mark custom alert view
+-(CustomIOSAlertView*)doorConfigContainer{
+    if (!_doorConfigContainer) {
+        _doorConfigContainer = [[CustomIOSAlertView alloc] init];
+        [_doorConfigContainer setContainerView:[self doorConfigAlertView]];
+        [_doorConfigContainer setButtonTitles:nil];
+        [_doorConfigContainer setUseMotionEffects:true];
+    }
+    return _doorConfigContainer;
+}
+-(DoorConfigAlertView*)doorConfigAlertView{
+    if (!_doorConfigAlertView) {
+        CGRect frame = CGRectMake(0, 0,[DoorConfigAlertView viewSize].width , [DoorConfigAlertView viewSize].height);
+        _doorConfigAlertView = [[DoorConfigAlertView alloc] initWithFrame:frame];
+        
+        @weakify(self)
+        _doorConfigAlertView.btnClickBlock = ^(NSInteger channel){
+            @strongify(self)
+            if (0 == channel) {
+                [self.doorConfigContainer close];
+                //[self showHudInView:self.view hint:nil];
+               
+            }
+            else if(1 == channel){
+                [self.doorConfigContainer close];
+            }
+        };
+    }
+//    [_powerOnOffAlertView setModel:self.viewModel.powerConfigModel];
+    return _doorConfigAlertView;
+}
+
+
 
 @end
