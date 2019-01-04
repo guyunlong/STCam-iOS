@@ -10,8 +10,8 @@
 
 @interface DoorCfgModel : NSObject
 @property(nonatomic,assign) NSInteger Chl;
-@property(nonatomic,assign) NSInteger Active;
-@property(nonatomic,assign) NSInteger Status;
+@property(nonatomic,assign) BOOL Active;
+@property(nonatomic,assign) BOOL Status;
 @property(nonatomic,strong) NSString *Name;
 +(instancetype)DoorCfgModelWithDict:(NSDictionary *)dict;
 -(instancetype)initWithDict:(NSDictionary *)dict;

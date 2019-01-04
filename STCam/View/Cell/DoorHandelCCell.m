@@ -19,6 +19,7 @@
         [self setBackgroundColor:[UIColor clearColor]];
         _doorConrolBtn = [[UIButton alloc] initWithFrame:CGRectMake(0,0,doorHandleBtnWidth,doorHandleBtnHeight)];
         [_doorConrolBtn setAppThemeType:ButtonStyleDoorTheme];
+        [_doorConrolBtn addTarget:self action:@selector(doorConrolBtnClick) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:_doorConrolBtn];
     }
     return self;
@@ -28,6 +29,11 @@
         _title  = title;
     }
     [self setNeedsLayout];
+}
+-(void)doorConrolBtnClick{
+    if (_btnClickBlock) {
+        _btnClickBlock(_channel);
+    }
 }
 - (void)layoutSubviews{
     [super layoutSubviews];

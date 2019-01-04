@@ -12,5 +12,7 @@
 #define DoorHandelCCellIdentify @"DoorHandelCCellIdentify"
 @interface DoorHandelCCell : UICollectionViewCell
 @property (strong, nonatomic) NSString *title;
+@property(nonatomic,assign)NSInteger channel;
+@property(copy,nonatomic)void (^btnClickBlock)(NSInteger channel);
 +(CGSize)ccellSize;
 @end

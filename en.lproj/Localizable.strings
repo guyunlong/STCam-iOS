@@ -276,4 +276,6 @@
 "txt_DoorClose"="Close";
 "txt_DoorStop"="Stop";
 "txt_DoorLock"="Lock";
+"txt_DoorOperationSuccessful"="Operation successful.";
+"txt_DoorOperationFailure"="Operation failure.";
 

@@ -325,9 +325,7 @@ void alarmRealTimeCallBack(int AlmType, int AlmTime, int AlmChl, void* UserCusto
         @strongify(self)
         dispatch_queue_t quene = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
         dispatch_async(quene, ^{
-            
-            NSString * url = [NSString stringWithFormat:@"%@",[self.model getDevURL:Msg_GetPowerTimerCfg]];
-            
+            NSString * url = [NSString stringWithFormat:@"%@",[self.model getDevURL:Msg_GetDoorCfg]];
             id data = [self.model thNetHttpGet:url];
             if ([data isKindOfClass:[NSArray class]]) {
                 if (!self.doorCfgArray) {
@@ -364,7 +362,7 @@ void alarmRealTimeCallBack(int AlmType, int AlmTime, int AlmChl, void* UserCusto
             NSMutableString * url = [NSMutableString stringWithFormat:@"%@",[self.model getDevURL:Msg_SetDoorCfg]];
             for (NSInteger index = 0;index<[self.doorCfgArray count];index++) {
                 DoorCfgModel * model =self.doorCfgArray[index];
-                [url appendString:[NSString stringWithFormat:@"&Active%ld=%ld&Name%ld=%@",index,model.Active,index,model.Name]];
+                [url appendString:[NSString stringWithFormat:@"&Active%ld=%d&Name%ld=%@",index,model.Active,index,model.Name]];
             }
             
             id data = [self.model thNetHttpGet:url];

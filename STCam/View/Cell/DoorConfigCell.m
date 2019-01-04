@@ -11,7 +11,7 @@
 #import "PrefixHeader.h"
 #define checkBoxHeight 20
 #define fieldHeight 35
-@interface DoorConfigCell()<BEMCheckBoxDelegate>
+@interface DoorConfigCell()<BEMCheckBoxDelegate,UITextFieldDelegate>
 @property(nonatomic,strong)BEMCheckBox  * checkBox;
 @property(nonatomic,strong)UILabel  * checklb;
 @property(nonatomic,strong)UITextField  * nameField;
@@ -36,11 +36,37 @@
         _nameField.layer.masksToBounds = YES;
         _nameField.layer.borderWidth = 0.5;
         _nameField.layer.borderColor =[UIColor colorWithHexString:@"0x333333"].CGColor;
+        
          [self.contentView addSubview:_nameField];
+        @weakify(self)
+        [self.nameField.rac_textSignal subscribeNext:^(id x) {
+            @strongify(self)
+            if (self.model) {
+                [self.model setName:x];
+            }
+        }];
         
     }
     return self;
 }
+-(void)setModel:(DoorCfgModel *)model{
+    if (model && _model != model) {
+        _model = model;
+    }
+    [self setNeedsLayout];
+}
+-(void)layoutSubviews{
+    [super layoutSubviews];
+    if (_model) {
+        [_checkBox setOn:_model.Active];
+        [_nameField setText:_model.Name];
+    }
+}
+- (void)didTapCheckBox:(BEMCheckBox*)checkBox{
+    BOOL value = checkBox.on;
+    _model.Active = value;
+}
+
 +(CGFloat)cellHeight{
     return DoorConfigCellHeight;
 }

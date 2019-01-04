@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "DoorCfgModel.h"
 @interface DoorConfigAlertView : UIView
 @property(copy,nonatomic)void (^btnClickBlock)(NSInteger channel);
-@property(nonatomic,strong)NSMutableArray * doorConfigList;
+@property(nonatomic,strong)NSMutableArray * doorCfgArray;
 +(CGSize)viewSize;
 @end

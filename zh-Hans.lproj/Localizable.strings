@@ -273,4 +273,5 @@
 "txt_DoorClose"="关";
 "txt_DoorStop"="停";
 "txt_DoorLock"="锁";
-
+"txt_DoorOperationSuccessful"="操作成功";
+"txt_DoorOperationFailure"="操作失败";

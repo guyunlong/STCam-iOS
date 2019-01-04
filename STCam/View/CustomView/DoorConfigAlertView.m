@@ -20,7 +20,7 @@
 @property(strong, nonatomic) UILabel *titleLb;
 @property(nonatomic,strong)UIButton* okBtn;
 @property(nonatomic,strong)UIButton* cancelBtn;
-@property(nonatomic,strong)UITableView * mTableView;
+@property(nonatomic,strong)TPKeyboardAvoidingTableView * mTableView;
 @end
 @implementation DoorConfigAlertView
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -110,6 +110,9 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     DoorConfigCell * cell = [tableView dequeueReusableCellWithIdentifier:DoorConfigCellIdentify forIndexPath:indexPath];
+    if ([_doorCfgArray count] > indexPath.row) {
+        [cell setModel:_doorCfgArray[indexPath.row]];
+    }
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

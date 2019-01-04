@@ -57,6 +57,7 @@
 @property(nonatomic,strong)NSArray* doorHandelTitleArray;
 @property(nonatomic ,strong) DoorConfigAlertView *doorConfigAlertView;
 @property(nonatomic ,strong) CustomIOSAlertView *doorConfigContainer;
+@property(nonatomic,assign)NSInteger selectChannel;
 @end
 
 @implementation LiveVidController
@@ -98,7 +99,9 @@
     
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidEnterbackground) name:AppDidEnterbackground object:nil];
     @weakify(self)
-    [[_viewModel racGetDoorConfig] subscribeNext:^(id x) {
+    [[[_viewModel racGetDoorConfig]
+     deliverOn:[RACScheduler mainThreadScheduler]]
+        subscribeNext:^(id x) {
        @strongify(self)
        [self.doorChannelColView reloadData];
     }];
@@ -731,26 +734,118 @@
     NSInteger row = [indexPath row];
     if (collectionView == _doorChannelColView) {
         DoorControlCCell *ccell = [collectionView dequeueReusableCellWithReuseIdentifier:DoorControlCCellIdentify forIndexPath:indexPath];
+        [ccell setChannel:row];
+        [ccell setSelectedChannel:_selectChannel];
         @weakify(self)
         ccell.btnClickBlock = ^(NSInteger channel) {
           @strongify(self)
-            [self.doorConfigContainer show];
+            if (9 == channel) {
+                [self.doorConfigContainer show];
+            }
+            else{
+                self.selectChannel = channel;
+                [self.doorChannelColView reloadData];
+            }
         };
-        if ([_viewModel.doorCfgArray count]>0) {
+        if ([_viewModel.doorCfgArray count]>0 && row != 9) {
             DoorCfgModel * model = _viewModel.doorCfgArray[row];
-            [ccell setTitle:model.Name];
+            [ccell setModel:model];
         }
-        else{
-            [ccell setTitle:[NSString stringWithFormat:@"%ld",row]];
-        }
+//        else{
+//            [ccell setTitle:[NSString stringWithFormat:@"%ld",row]];
+//        }
         if (row == 9) {
-            [ccell setTitle:@"action_setting".localizedString];
+            DoorCfgModel * model = [DoorCfgModel new];
+            [model setActive:YES];
+            [model setName:@"action_setting".localizedString];
+             [ccell setModel:model];
         }
         return ccell;
     }
     else{
         DoorHandelCCell *ccell = [collectionView dequeueReusableCellWithReuseIdentifier:DoorHandelCCellIdentify forIndexPath:indexPath];
         [ccell setTitle:_doorHandelTitleArray[row]];
+        [ccell setChannel:row];
+        @weakify(self)
+        ccell.btnClickBlock = ^(NSInteger channel) {
+            @strongify(self)
+            switch (channel) {
+                case 1:
+                {
+                    
+                    [self showHudInView:self.view hint:nil];
+                    [[ [self.viewModel racHandleDoorControl:channel cmd:0]
+                      deliverOn:[RACScheduler mainThreadScheduler]]
+                     subscribeNext:^(id x) {
+                         [self hideHud];
+                         if ([x integerValue] == 1) {
+                             [self showHint:@"txt_DoorOperationSuccessful".localizedString];
+                         }
+                         else{
+                             [self showHint:@"txt_DoorOperationFailure".localizedString];
+                         }
+                         
+                     }];
+                }
+                    break;
+                case 3:
+                {
+                    
+                    [self showHudInView:self.view hint:nil];
+                    [[ [self.viewModel racHandleDoorControl:channel cmd:2]
+                      deliverOn:[RACScheduler mainThreadScheduler]]
+                     subscribeNext:^(id x) {
+                         [self hideHud];
+                         if ([x integerValue] == 1) {
+                             [self showHint:@"txt_DoorOperationSuccessful".localizedString];
+                         }
+                         else{
+                             [self showHint:@"txt_DoorOperationFailure".localizedString];
+                         }
+                         
+                     }];
+                }
+                    break;
+                case 5:
+                {
+                    [self showHudInView:self.view hint:nil];
+                    [[ [self.viewModel racHandleDoorControl:channel cmd:3]
+                      deliverOn:[RACScheduler mainThreadScheduler]]
+                     subscribeNext:^(id x) {
+                         [self hideHud];
+                         if ([x integerValue] == 1) {
+                             [self showHint:@"txt_DoorOperationSuccessful".localizedString];
+                         }
+                         else{
+                             [self showHint:@"txt_DoorOperationFailure".localizedString];
+                         }
+                         
+                     }];
+                }
+                    break;
+                case 7:
+                {
+                    
+                    [self showHudInView:self.view hint:nil];
+                    [[ [self.viewModel racHandleDoorControl:channel cmd:1]
+                      deliverOn:[RACScheduler mainThreadScheduler]]
+                     subscribeNext:^(id x) {
+                         [self hideHud];
+                         if ([x integerValue] == 1) {
+                             [self showHint:@"txt_DoorOperationSuccessful".localizedString];
+                         }
+                         else{
+                             [self showHint:@"txt_DoorOperationFailure".localizedString];
+                         }
+                         
+                     }];
+                }
+                    break;
+                default:
+                    break;
+            }
+        };
+        
         return ccell;
     }
     
@@ -807,7 +902,18 @@
             @strongify(self)
             if (0 == channel) {
                 [self.doorConfigContainer close];
-                //[self showHudInView:self.view hint:nil];
+                [self showHudInView:self.view hint:nil];
+                
+                [[[self.viewModel racSetDoorConfig]
+                  deliverOn:[RACScheduler mainThreadScheduler]]
+                 subscribeNext:^(id x) {
+                     [self hideHud];
+                     if ([x integerValue] == 1) {
+                         [self showHint:@"action_Success".localizedString];
+                     }
+                     [self.doorChannelColView reloadData];
+                 }];
+                
                
             }
             else if(1 == channel){
@@ -815,6 +921,7 @@
             }
         };
     }
+    [_doorConfigAlertView setDoorCfgArray:_viewModel.doorCfgArray];
 //    [_powerOnOffAlertView setModel:self.viewModel.powerConfigModel];
     return _doorConfigAlertView;
 }

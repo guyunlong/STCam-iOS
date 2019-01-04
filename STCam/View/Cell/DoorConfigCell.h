@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DoorCfgModel.h"
 #define DoorConfigCellHeight 40
 #define DoorConfigCellIdentify @"DoorConfigCellIdentify"
 @interface DoorConfigCell : UITableViewCell
+@property(nonatomic,strong)DoorCfgModel * model;
 +(CGFloat)cellHeight;
 @end
