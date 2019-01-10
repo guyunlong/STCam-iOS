@@ -11,6 +11,7 @@
 #import "PrefixHeader.h"
 #import "RetModel.h"
 #import "AccountManager.h"
+#import "SouthUtil.h"
 @implementation LoginViewModel
 - (id)init {
     self = [super init];
@@ -21,10 +22,13 @@
    
 }
 -(void)initConfig{
+     @weakify(self)
     self.validLoginSignal = [[RACSignal
                               combineLatest:@[ RACObserve(self, user), RACObserve(self, password) ]
                               reduce:^(NSString *username, NSString *password) {
-                                  return @(username.length > 0 && password.length > 0);
+                                  @strongify(self)
+                                  BOOL vaildUser = [self validateEmail:username] || [SouthUtil isValidPhone:username];
+                                  return @(vaildUser && password.length > 0);
                               }]
                              distinctUntilChanged];
     self.user = [AccountManager getUser];
@@ -72,5 +76,10 @@
         }];
         return nil;
     }];
+}
+- (BOOL) validateEmail: (NSString *) strEmail {
+    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    return [emailTest evaluateWithObject:strEmail];
 }
 @end

@@ -12,6 +12,7 @@
 #import "BasicTextField.h"
 #import "FFHttpTool.h"
 #import "RetModel.h"
+#import "SouthUtil.h"
 @interface RegisterAccountController (){
 }
 @property(nonatomic,strong)TPKeyboardAvoidingScrollView * mainScrollView;
@@ -156,7 +157,7 @@
         [self showHint:@"error_field_required".localizedString];
         return;
     }
-    else if(![self validateEmail:email]){
+    else if(!([self validateEmail:email] || [SouthUtil isValidPhone:email] )){
         [self showHint:@"error_invalid_email".localizedString];
         return;
     }
@@ -221,7 +222,7 @@
             [self showHint:@"error_field_required".localizedString];
             return;
         }
-        else if(![self validateEmail:email]){
+        else if(!([self validateEmail:email]||[SouthUtil isValidPhone:email])){
             [self showHint:@"error_invalid_email".localizedString];
             return;
         }
@@ -271,6 +272,7 @@
     return [emailTest evaluateWithObject:strEmail];
 }
 
+    
 -(NSTimer*)coolDownTimer{
     if (!_coolDownTimer) {
         @weakify(self)

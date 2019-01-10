@@ -216,5 +216,11 @@ static int FunctionExistsLight = 5;
 static int FunctionExistsPIR = 6;
 static int FunctionExistsTimerPowerOnOff = 7;
 static int FunctionExistsDoorControl = 8;
+
+//DevType
+static int DevType_CAMLS = 84;
+static int DevType_GraveTime = 85;
+static int DevType_DoorSystem = 86;
+
 #endif
 

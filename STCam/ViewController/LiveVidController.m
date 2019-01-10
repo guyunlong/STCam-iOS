@@ -269,7 +269,8 @@
      [_settingBtn addTarget:self action:@selector(controlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
      [_ledBtn addTarget:self action:@selector(controlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
-    if ([_viewModel.model FunctionExistsDoorControl]) {
+    //if ([_viewModel.model FunctionExistsDoorControl])
+    if (_viewModel.model.DevType == DevType_DoorSystem) {
         _bottomVidBtn = [[UIButton alloc] initWithFrame:CGRectMake(0,kScreenHeight-kSafeAreaHeaderHeight-kSafeAreaBottomHeight-44-kBottomButtonHeight, kScreenWidth/2, kBottomButtonHeight)];
         _bottomDoorBtn = [[UIButton alloc] initWithFrame:CGRectMake(kScreenWidth/2,kScreenHeight-kSafeAreaHeaderHeight-kSafeAreaBottomHeight-44-kBottomButtonHeight, kScreenWidth/2, kBottomButtonHeight)];
         [_bottomDoorBtn setAppThemeType:ButtonStyleDoorTheme];
@@ -501,7 +502,9 @@
          [_exitFullScreenButton setHidden:NO];
     }
    
-    if ([_viewModel.model FunctionExistsDoorControl]){
+    //if ([_viewModel.model FunctionExistsDoorControl])
+    if (_viewModel.model.DevType == DevType_DoorSystem)
+    {
         [_bottomVidBtn setHidden:YES];
         [_bottomDoorBtn setHidden:YES];
         [_doorHandelColView setHidden:YES];
@@ -661,7 +664,8 @@
      [self.navigationController setNavigationBarHidden:NO animated:YES];
     [_exitFullScreenButton setHidden:YES];
     [_portButtonView setHidden:NO];
-    if ([_viewModel.model FunctionExistsDoorControl]){
+    //if ([_viewModel.model FunctionExistsDoorControl])
+    if (_viewModel.model.DevType == DevType_DoorSystem){
         [_bottomVidBtn setHidden:NO];
         [_bottomDoorBtn setHidden:NO];
     }
@@ -774,7 +778,7 @@
                 {
                     
                     [self showHudInView:self.view hint:nil];
-                    [[ [self.viewModel racHandleDoorControl:channel cmd:0]
+                    [[ [self.viewModel racHandleDoorControl:self.selectChannel cmd:0]
                       deliverOn:[RACScheduler mainThreadScheduler]]
                      subscribeNext:^(id x) {
                          [self hideHud];
@@ -792,7 +796,7 @@
                 {
                     
                     [self showHudInView:self.view hint:nil];
-                    [[ [self.viewModel racHandleDoorControl:channel cmd:2]
+                    [[ [self.viewModel racHandleDoorControl:self.selectChannel cmd:2]
                       deliverOn:[RACScheduler mainThreadScheduler]]
                      subscribeNext:^(id x) {
                          [self hideHud];
@@ -809,7 +813,7 @@
                 case 5:
                 {
                     [self showHudInView:self.view hint:nil];
-                    [[ [self.viewModel racHandleDoorControl:channel cmd:3]
+                    [[ [self.viewModel racHandleDoorControl:self.selectChannel cmd:3]
                       deliverOn:[RACScheduler mainThreadScheduler]]
                      subscribeNext:^(id x) {
                          [self hideHud];
@@ -827,7 +831,7 @@
                 {
                     
                     [self showHudInView:self.view hint:nil];
-                    [[ [self.viewModel racHandleDoorControl:channel cmd:1]
+                    [[ [self.viewModel racHandleDoorControl:self.selectChannel cmd:1]
                       deliverOn:[RACScheduler mainThreadScheduler]]
                      subscribeNext:^(id x) {
                          [self hideHud];

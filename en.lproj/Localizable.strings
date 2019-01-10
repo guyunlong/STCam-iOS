@@ -98,7 +98,7 @@
 "device_old_pwd"="Old Password";
 "device_new_pwd"="New Password";
 "device_confirm_pwd"="Confirm Password";
-"action_setting"="SeSt";
+"action_setting"="Set";
 "action_dev_setting"="Device settings";
 "device_name"="Device Name";
 "device_pwd"="Connect password";

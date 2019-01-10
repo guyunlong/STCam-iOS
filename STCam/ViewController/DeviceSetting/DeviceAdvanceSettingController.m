@@ -175,7 +175,8 @@
     [_rowsArray addObject:model3];
     [_rowsArray addObject:model4];
     [_rowsArray addObject:model5];
-    if([self.viewModel.model FunctionExistsTimerPowerOnOff])
+    //if([self.viewModel.model FunctionExistsTimerPowerOnOff])
+    if (self.viewModel.model.DevType == DevType_GraveTime)
     {
          [_rowsArray addObject:model6];
     }
