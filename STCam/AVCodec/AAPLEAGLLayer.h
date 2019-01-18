@@ -14,6 +14,10 @@
 
 @interface AAPLEAGLLayer : CAEAGLLayer
 @property CVPixelBufferRef pixelBuffer;
+
+/**放大缩小拖动等***/
+@property(nonatomic,assign)CGRect viewPortRect;
+
 - (id)initWithFrame:(CGRect)frame;
 - (void)resetRenderBuffer;
 @end

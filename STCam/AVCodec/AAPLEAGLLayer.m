@@ -114,7 +114,7 @@ static const GLfloat kColorConversion709[] = {
         
         // Set the default conversion to BT.709, which is the standard for HDTV.
         _preferredConversion = kColorConversion709;
-        
+      
         [self setupGL];
     }
     
@@ -218,7 +218,8 @@ static const GLfloat kColorConversion709[] = {
     glBindFramebuffer(GL_FRAMEBUFFER, _frameBufferHandle);
     
     // Set the view port to the entire view.
-    glViewport(0, 0, _backingWidth, _backingHeight);
+    glViewport(_viewPortRect.origin.x, _viewPortRect.origin.y, _viewPortRect.size.width,_viewPortRect.size.height);
+    
     
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
@@ -268,6 +269,18 @@ static const GLfloat kColorConversion709[] = {
         -1 ,1,
        1,1
     };
+//    float ratio = 1.25;
+//    float xOffsetRadio = 0.25;
+//    float YOffsetRadio = -0.25;
+//    for (int i=0;i<8;++i) {
+//        quadVertexData[i] =_ratio*quadVertexData[i];
+//    }
+//    for (int i=0;i<8;i=i+2) {
+//        quadVertexData[i] +=+xOffsetRadio;
+//    }
+//    for (int i=1;i<8;i=i+2) {
+//        quadVertexData[i] +=+YOffsetRadio;
+//    }
     
     
     // Update attribute values.

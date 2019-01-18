@@ -20,6 +20,10 @@
 
 @interface LiveVidController ()<VidViewModelDelegate,UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>{
     BOOL isLandscape;
+    CGFloat viewportRectWidth;
+    CGFloat viewportRectHeight;
+    CGFloat fullScreenWidth;
+    CGFloat fullScreenHeigth;
 }
 @property (strong, nonatomic)  AAPLEAGLLayer *glLayer;//视频播放控件
 @property (strong, nonatomic)  UIButton * ledBtn;
@@ -58,12 +62,22 @@
 @property(nonatomic ,strong) DoorConfigAlertView *doorConfigAlertView;
 @property(nonatomic ,strong) CustomIOSAlertView *doorConfigContainer;
 @property(nonatomic,assign)NSInteger selectChannel;
+
+/**放大缩小拖动等***/
+@property(nonatomic,assign)CGRect viewportRect;
+@property(nonatomic,assign)CGFloat ratio;
 @end
 
 @implementation LiveVidController
 
+
+
+
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
+    
+    
     [_viewModel openVid:1];
     
     _showHud = YES;
@@ -92,6 +106,17 @@
     [_viewModel closeVid];
     [self.navigationController setNavigationBarHidden:NO];
 }
+//是否可以旋转
+-(BOOL)shouldAutorotate
+{
+    return NO;
+}
+//支持的方向
+-(UIInterfaceOrientationMask)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskPortrait;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -106,6 +131,8 @@
        [self.doorChannelColView reloadData];
     }];
     
+    
+    
 }
 -(void)appDidEnterbackground{
     [_viewModel closeVid];
@@ -118,10 +145,18 @@
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
     _glLayer = [[AAPLEAGLLayer alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenWidth*9/16)];
+    viewportRectWidth = kScreenWidth*2;
+    viewportRectHeight = kScreenWidth*9/16*2;
+    fullScreenWidth = kScreenWidth*2;
+    fullScreenHeigth = kScreenWidth*9/16*2;
+    _viewportRect = CGRectMake(0, 0, viewportRectWidth, viewportRectHeight);
+    [_glLayer setViewPortRect:_viewportRect];
+    _ratio = 1;
     [_glLayer setBackgroundColor:[[UIColor blackColor] CGColor]];
     [self.view.layer addSublayer:_glLayer];
    
-    _gestureControlView = [[UIView alloc] initWithFrame:self.view.bounds];
+    //_gestureControlView = [[UIView alloc] initWithFrame:self.view.bounds];
+    _gestureControlView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenWidth*9/16)];
     [_gestureControlView setBackgroundColor:[UIColor clearColor]];
     [_gestureControlView setUserInteractionEnabled:YES];
     
@@ -369,20 +404,104 @@
     
     [_gestureControlView addGestureRecognizer:pinchGestureRecognizer];
     
+    
+    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];//创
+     [_gestureControlView addGestureRecognizer:pan];
+    
+    
 
     
     
 }
-
+- (void) handlePan: (UIPanGestureRecognizer *)rec{
+    // NSLog(@"xxoo---xxoo---xxoo");
+    CGPoint point = [rec translationInView:self.view];//该方法返回在横坐标上、纵坐标上拖动了多少像素
+    NSLog(@"%f,%f",point.x,point.y);
+    //if(rec.state == UIGestureRecognizerStateEnded)
+    {
+        _viewportRect.origin.x = _viewportRect.origin.x + point.x*2;
+        _viewportRect.origin.y = _viewportRect.origin.y - point.y*2;
+        
+        if (fullScreenWidth - _viewportRect.origin.x  > _viewportRect.size.width) {
+            _viewportRect.origin.x = -_viewportRect.size.width+fullScreenWidth;
+        }
+        else if (_viewportRect.origin.x > 0) {
+            _viewportRect.origin.x = 0;
+        }
+        
+        if (fullScreenHeigth - _viewportRect.origin.y  > _viewportRect.size.height) {
+            _viewportRect.origin.y = -_viewportRect.size.height+fullScreenHeigth ;
+        }
+        else if (_viewportRect.origin.y > 0) {
+            _viewportRect.origin.y = 0;
+        }
+        [_glLayer setViewPortRect:_viewportRect];
+         [rec setTranslation:CGPointZero inView:rec.view];
+    }
+    
+    
+}
+    
+ 
 - (void) handlePinch:(UIPinchGestureRecognizer*) recognizer {
     
-    if (recognizer.state== UIGestureRecognizerStateEnded) {
-        CGFloat zoomSize = recognizer.scale;
-        if ( zoomSize > 1 ) { // 放大
-            [_viewModel ptzControl:PtzControlType_Zoom0];
-        } else { // 缩小
-            [_viewModel ptzControl:PtzControlType_Zoom1];
+ //   if (recognizer.state== UIGestureRecognizerStateEnded)
+    {
+        CGFloat zoomSize1 = recognizer.scale;
+        
+         CGPoint touchPoint = [recognizer locationInView:_gestureControlView];
+        CGFloat zoomSize = sqrt(zoomSize1);
+        
+//        if ( zoomSize > 1 ) { // 放大
+//            [_viewModel ptzControl:PtzControlType_Zoom0];
+//        } else { // 缩小
+//            [_viewModel ptzControl:PtzControlType_Zoom1];
+//        }
+        //_ratio = _ratio*zoomSize;
+         if (_ratio*zoomSize <=1) {
+            zoomSize = 1/_ratio;
+            _ratio = 1;
+            _viewportRect=CGRectMake(0, 0, fullScreenWidth,  fullScreenHeigth);
+           
+            
+           
         }
+        else if (_ratio*zoomSize >=8) {
+            zoomSize = 8/_ratio;
+            _ratio = 8;
+            _viewportRect.size.width = _viewportRect.size.width*zoomSize;
+            _viewportRect.size.height = _viewportRect.size.height*zoomSize;
+            float touchX =touchPoint.x*2 +_viewportRect.origin.x;
+            float touchY =(fullScreenHeigth/2 - touchPoint.y)*2 +_viewportRect.origin.y;
+            _viewportRect.origin.x = _viewportRect.origin.x + (zoomSize-1)*touchX;
+            _viewportRect.origin.y = _viewportRect.origin.y + (zoomSize-1)*touchY;
+            
+        }
+        else{
+            _ratio = _ratio*zoomSize;
+            _viewportRect.size.width = _viewportRect.size.width*zoomSize;
+            _viewportRect.size.height = _viewportRect.size.height*zoomSize;
+            float touchX =touchPoint.x*2 +_viewportRect.origin.x;
+            float touchY =(fullScreenHeigth/2 - touchPoint.y)*2 +_viewportRect.origin.y;
+            _viewportRect.origin.x = _viewportRect.origin.x + (1-zoomSize)*touchX;
+            _viewportRect.origin.y = _viewportRect.origin.y + (1-zoomSize)*touchY;
+        }
+        if (fullScreenWidth - _viewportRect.origin.x  > _viewportRect.size.width) {
+            _viewportRect.origin.x = -_viewportRect.size.width+fullScreenWidth;
+        }
+        else if (_viewportRect.origin.x > 0) {
+            _viewportRect.origin.x = 0;
+        }
+        
+        if (fullScreenHeigth - _viewportRect.origin.y  > _viewportRect.size.height) {
+            _viewportRect.origin.y = -_viewportRect.size.height+fullScreenHeigth ;
+        }
+        else if (_viewportRect.origin.y > 0) {
+            _viewportRect.origin.y = 0;
+        }
+        
+         [_glLayer setViewPortRect:_viewportRect];
+         [recognizer setScale:1];
     }
     
 }
@@ -390,9 +509,10 @@
 
 
 -(void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer{
-    
+    return;
     if(recognizer.direction==UISwipeGestureRecognizerDirectionDown) {
         NSLog(@"DirectionDown");
+        
         [_viewModel ptzControl:PtzControlType_Down];
         
     }
@@ -498,6 +618,8 @@
 -(void)rotateToLandscape{
      [self.navigationController setNavigationBarHidden:YES animated:YES];
     
+   
+    
     if(_exitFullScreenButton){
          [_exitFullScreenButton setHidden:NO];
     }
@@ -517,11 +639,22 @@
     self.view.transform = CGAffineTransformMakeRotation(M_PI*1.5);
     [UIView beginAnimations:nil context:nil];
     [UIView commitAnimations];
-    [_glLayer setFrame:CGRectMake(0, 0, kScreenHeight, kScreenWidth)];
     
+    viewportRectWidth = kScreenHeight*2;
+    viewportRectHeight = kScreenWidth*2;
+    fullScreenWidth = kScreenHeight*2;
+    fullScreenHeigth = kScreenWidth*2;
+    _ratio = 1;
+    _viewportRect = CGRectMake(0, 0, viewportRectWidth, viewportRectHeight);
+    
+  //  [_glLayer setFrame:CGRectMake(0, 0, kScreenHeight, kScreenWidth)];
+     [_glLayer removeFromSuperlayer];
+    _glLayer = [[AAPLEAGLLayer alloc] initWithFrame:CGRectMake(0, 0, kScreenHeight,kScreenWidth)];
+      [self.view.layer addSublayer:_glLayer];
+     [_glLayer setViewPortRect:_viewportRect];
     [_recordTimeLabel setFrame:CGRectMake(0, 30*kWidthCoefficient, kScreenHeight, 40*kWidthCoefficient)];
     
-    
+  
 
     
     if (!_ledBtn_land) {
@@ -662,6 +795,18 @@
 }
 -(void)rotateToPortrait{
      [self.navigationController setNavigationBarHidden:NO animated:YES];
+    
+    viewportRectWidth = kScreenWidth*2;
+    viewportRectHeight = kScreenWidth*9/16*2;
+
+    fullScreenWidth = kScreenWidth*2;
+    fullScreenHeigth = kScreenWidth*9/16*2;
+    _ratio = 1;
+    
+    _viewportRect = CGRectMake(0, 0, viewportRectWidth, viewportRectHeight);
+    
+    
+    
     [_exitFullScreenButton setHidden:YES];
     [_portButtonView setHidden:NO];
     //if ([_viewModel.model FunctionExistsDoorControl])
@@ -674,7 +819,12 @@
     self.view.transform = CGAffineTransformMakeRotation(0);
     [UIView beginAnimations:nil context:nil];
     [UIView commitAnimations];
-    [_glLayer setFrame:CGRectMake(0, 0, kScreenWidth, kScreenWidth*9/16)];
+//    [_glLayer setFrame:CGRectMake(0, 0, kScreenWidth, kScreenWidth*9/16)];
+//    [_glLayer setViewPortRect:_viewportRect];
+    [_glLayer removeFromSuperlayer];
+    _glLayer = [[AAPLEAGLLayer alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth,kScreenWidth*9/16)];
+    [self.view.layer addSublayer:_glLayer];
+    [_glLayer setViewPortRect:_viewportRect];
     
     [_recordTimeLabel setFrame:CGRectMake(0, 30*kWidthCoefficient, kScreenWidth, 40*kWidthCoefficient)];
     
@@ -710,6 +860,7 @@
 # pragma  delegate
 - (void)updateVidView:(CVPixelBufferRef)pixelBuffer{
     _glLayer.pixelBuffer = pixelBuffer;
+    [_glLayer setPixelBuffer:pixelBuffer];
     if (_showHud) {
         _showHud = NO;
         [self hideHud];
