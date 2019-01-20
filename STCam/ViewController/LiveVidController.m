@@ -100,6 +100,10 @@
     
     [_doorChannelColView reloadData];
     [_doorHandelColView reloadData];
+    
+  
+    
+   
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];

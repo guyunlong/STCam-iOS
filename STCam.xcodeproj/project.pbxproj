@@ -1947,7 +1947,7 @@
 				A4BBBC5421D5FCC900CF311C /* Frameworks */,
 				A4BBBC6E21D5FCC900CF311C /* Resources */,
 				A4BBBCAC21D5FCC900CF311C /* [CP] Copy Pods Resources */,
-				A4BBBCAD21D5FCC900CF311C /* ShellScript */,
+				A4BBBCAD21D5FCC900CF311C /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -2223,13 +2223,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GRAVE/Pods-GRAVE-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A4BBBCAD21D5FCC900CF311C /* ShellScript */ = {
+		A4BBBCAD21D5FCC900CF311C /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Run Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;

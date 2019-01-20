@@ -37,11 +37,16 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self refreshDeviceList:NO];
     });
+    NSNumber *orientationUnknown = [NSNumber numberWithInt:UIInterfaceOrientationUnknown];
+    [[UIDevice currentDevice] setValue:orientationUnknown forKey:@"orientation"];
+    
+    NSNumber *orientationTarget = [NSNumber numberWithInt:UIInterfaceOrientationPortrait];
+    [[UIDevice currentDevice] setValue:orientationTarget forKey:@"orientation"];
 }
 //是否可以旋转
 -(BOOL)shouldAutorotate
 {
-    return NO;
+    return YES;
 }
 //支持的方向
 -(UIInterfaceOrientationMask)supportedInterfaceOrientations
