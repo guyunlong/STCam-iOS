@@ -125,7 +125,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     _viewModel.delegate = self;
-    
+    _selectChannel = -1;
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidEnterbackground) name:AppDidEnterbackground object:nil];
     @weakify(self)
     [[[_viewModel racGetDoorConfig]
@@ -170,7 +170,7 @@
     
     
     
-    _doorHandelTitleArray = [NSArray arrayWithObjects:@"",@"txt_DoorOpen".localizedString,@"",@"txt_DoorClose".localizedString,@"",@"txt_DoorClose".localizedString,@"",@"txt_DoorClose".localizedString,@"" ,nil];
+    _doorHandelTitleArray = [NSArray arrayWithObjects:@"",@"txt_DoorOpen".localizedString,@"",@"txt_DoorStop".localizedString,@"",@"txt_DoorLock".localizedString,@"",@"txt_DoorClose".localizedString,@"" ,nil];
     [self layoutButtons];
     
     /***********录像时间***********/

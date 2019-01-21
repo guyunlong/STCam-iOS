@@ -124,7 +124,7 @@
     
     gen.appliesPreferredTrackTransform = YES;
     
-    CMTime time = CMTimeMakeWithSeconds(0.0, 600);
+    CMTime time = CMTimeMakeWithSeconds(1.0, 100);
     
     NSError *error = nil;
     

@@ -240,7 +240,7 @@
 }
 //支持旋转
 -(BOOL)shouldAutorotate{
-    return YES;
+    return NO;
 }
 
 //支持的方向 因为界面A我们只需要支持竖屏

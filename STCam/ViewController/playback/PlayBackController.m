@@ -18,14 +18,25 @@
 
 @interface PlayBackController ()<PlayBackVidViewModelDelegate>{
     NSTimeInterval iTimeDragPos;
+    CGFloat viewportRectWidth;
+    CGFloat viewportRectHeight;
+    CGFloat fullScreenWidth;
+    CGFloat fullScreenHeigth;
 }
 @property (strong, nonatomic)  AAPLEAGLLayer *glLayer;//视频播放控件
+@property (strong, nonatomic)  UIView *gestureControlView;//手势控制
 @property (strong, nonatomic)  UIButton *exitBtn;//退出
 @property (strong, nonatomic)  UIButton *playBtn;//播放按钮
 @property (strong, nonatomic)  UILabel *posLabel;//播放时刻
 @property (strong, nonatomic)  UILabel *durLabel;//录像时常
 @property (strong, nonatomic)  UISlider *slider;//进度条
 @property (strong, nonatomic)  NSTimer *loopTimer;
+
+/**放大缩小拖动等***/
+@property(nonatomic,assign)CGRect viewportRect;
+@property(nonatomic,assign)CGFloat ratio;
+
+
 @end
 
 @implementation PlayBackController
@@ -56,16 +67,146 @@
 -(void)loadView{
     [super loadView];
     _glLayer = [[AAPLEAGLLayer alloc] initWithFrame:self.view.bounds];
+    
+    viewportRectWidth = kScreenHeight*2;
+    viewportRectHeight = kScreenWidth*2;
+    fullScreenWidth = kScreenHeight*2;
+    fullScreenHeigth = kScreenWidth*2;
+    _viewportRect = CGRectMake(0, 0, viewportRectWidth, viewportRectHeight);
+    [_glLayer setViewPortRect:_viewportRect];
+    
+    
+    
     [_glLayer setBackgroundColor:[[UIColor colorWithHexString:@"0x000000"] CGColor]];
     [self.view.layer addSublayer:_glLayer];
     
-    _exitBtn = [[UIButton alloc] initWithFrame:CGRectMake(kPadding*2, kPadding*1.5, 40*kWidthCoefficient, 40*kWidthCoefficient)];
-    [_exitBtn setImage:[UIImage imageNamed:@"back_nor"] forState:UIControlStateNormal];
-    [self.view addSubview:_exitBtn];
-    [_exitBtn addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+   
+    
+    
+    
     [self rotateToLandscape];
     
 }
+//是否可以旋转
+-(BOOL)shouldAutorotate
+{
+    return NO;
+}
+//支持的方向
+-(UIInterfaceOrientationMask)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+-(void)initGesture{
+  
+    
+    
+    UIPinchGestureRecognizer *pinchGestureRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinch:)];
+    
+    [_gestureControlView addGestureRecognizer:pinchGestureRecognizer];
+    
+    
+    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];//创
+    [_gestureControlView addGestureRecognizer:pan];
+    
+    
+    
+    
+    
+}
+
+- (void) handlePinch:(UIPinchGestureRecognizer*) recognizer {
+    
+    //   if (recognizer.state== UIGestureRecognizerStateEnded)
+    {
+        CGFloat zoomSize1 = recognizer.scale;
+        
+        CGPoint touchPoint = [recognizer locationInView:_gestureControlView];
+        CGFloat zoomSize = sqrt(zoomSize1);
+        
+        //        if ( zoomSize > 1 ) { // 放大
+        //            [_viewModel ptzControl:PtzControlType_Zoom0];
+        //        } else { // 缩小
+        //            [_viewModel ptzControl:PtzControlType_Zoom1];
+        //        }
+        //_ratio = _ratio*zoomSize;
+        if (_ratio*zoomSize <=1) {
+            zoomSize = 1/_ratio;
+            _ratio = 1;
+            _viewportRect=CGRectMake(0, 0, fullScreenWidth,  fullScreenHeigth);
+            
+            
+            
+        }
+        else if (_ratio*zoomSize >=8) {
+            zoomSize = 8/_ratio;
+            _ratio = 8;
+            _viewportRect.size.width = _viewportRect.size.width*zoomSize;
+            _viewportRect.size.height = _viewportRect.size.height*zoomSize;
+            float touchX =touchPoint.x*2 +_viewportRect.origin.x;
+            float touchY =(fullScreenHeigth/2 - touchPoint.y)*2 +_viewportRect.origin.y;
+            _viewportRect.origin.x = _viewportRect.origin.x + (zoomSize-1)*touchX;
+            _viewportRect.origin.y = _viewportRect.origin.y + (zoomSize-1)*touchY;
+            
+        }
+        else{
+            _ratio = _ratio*zoomSize;
+            _viewportRect.size.width = _viewportRect.size.width*zoomSize;
+            _viewportRect.size.height = _viewportRect.size.height*zoomSize;
+            float touchX =touchPoint.x*2 +_viewportRect.origin.x;
+            float touchY =(fullScreenHeigth/2 - touchPoint.y)*2 +_viewportRect.origin.y;
+            _viewportRect.origin.x = _viewportRect.origin.x + (1-zoomSize)*touchX;
+            _viewportRect.origin.y = _viewportRect.origin.y + (1-zoomSize)*touchY;
+        }
+        if (fullScreenWidth - _viewportRect.origin.x  > _viewportRect.size.width) {
+            _viewportRect.origin.x = -_viewportRect.size.width+fullScreenWidth;
+        }
+        else if (_viewportRect.origin.x > 0) {
+            _viewportRect.origin.x = 0;
+        }
+        
+        if (fullScreenHeigth - _viewportRect.origin.y  > _viewportRect.size.height) {
+            _viewportRect.origin.y = -_viewportRect.size.height+fullScreenHeigth ;
+        }
+        else if (_viewportRect.origin.y > 0) {
+            _viewportRect.origin.y = 0;
+        }
+        
+        [_glLayer setViewPortRect:_viewportRect];
+        [recognizer setScale:1];
+    }
+    
+}
+- (void) handlePan: (UIPanGestureRecognizer *)rec{
+    // NSLog(@"xxoo---xxoo---xxoo");
+    CGPoint point = [rec translationInView:self.view];//该方法返回在横坐标上、纵坐标上拖动了多少像素
+    NSLog(@"%f,%f",point.x,point.y);
+    //if(rec.state == UIGestureRecognizerStateEnded)
+    {
+        _viewportRect.origin.x = _viewportRect.origin.x + point.x*2;
+        _viewportRect.origin.y = _viewportRect.origin.y - point.y*2;
+        
+        if (fullScreenWidth - _viewportRect.origin.x  > _viewportRect.size.width) {
+            _viewportRect.origin.x = -_viewportRect.size.width+fullScreenWidth;
+        }
+        else if (_viewportRect.origin.x > 0) {
+            _viewportRect.origin.x = 0;
+        }
+        
+        if (fullScreenHeigth - _viewportRect.origin.y  > _viewportRect.size.height) {
+            _viewportRect.origin.y = -_viewportRect.size.height+fullScreenHeigth ;
+        }
+        else if (_viewportRect.origin.y > 0) {
+            _viewportRect.origin.y = 0;
+        }
+        [_glLayer setViewPortRect:_viewportRect];
+        [rec setTranslation:CGPointZero inView:rec.view];
+    }
+    
+    
+}
+
 
 -(void)refreshView{
     int IndexType = thNet_RemoteFileGetIndexType((HANDLE) self.viewModel.deviceModel.NetHandle);
@@ -133,7 +274,30 @@
     self.view.transform = CGAffineTransformMakeRotation(M_PI*1.5);
     [UIView beginAnimations:nil context:nil];
     [UIView commitAnimations];
-    [_glLayer setFrame:CGRectMake(0, 0, kScreenHeight, kScreenWidth)];
+    
+    viewportRectWidth = kScreenHeight*2;
+    viewportRectHeight = kScreenWidth*2;
+    fullScreenWidth = kScreenHeight*2;
+    fullScreenHeigth = kScreenWidth*2;
+    _ratio = 1;
+    _viewportRect = CGRectMake(0, 0, viewportRectWidth, viewportRectHeight);
+    
+    //  [_glLayer setFrame:CGRectMake(0, 0, kScreenHeight, kScreenWidth)];
+    [_glLayer removeFromSuperlayer];
+    _glLayer = [[AAPLEAGLLayer alloc] initWithFrame:CGRectMake(0, 0, kScreenHeight,kScreenWidth)];
+    [self.view.layer addSublayer:_glLayer];
+    [_glLayer setViewPortRect:_viewportRect];
+    
+    
+    _gestureControlView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenHeight, kScreenWidth)];
+    [_gestureControlView setBackgroundColor:[UIColor clearColor]];
+    [_gestureControlView setUserInteractionEnabled:YES];
+    
+    [self.view addSubview:_gestureControlView];
+    
+    [self initGesture];
+    
+    
     
     _playBtn = [[UIButton alloc] initWithFrame:CGRectMake(kScreenHeight/2-playButtonWidth/2, kScreenWidth-120*kWidthCoefficient, playButtonWidth, playButtonWidth)];
     [_playBtn setImage:[UIImage imageNamed:@"pause0"] forState:UIControlStateNormal];
@@ -164,6 +328,11 @@
         make.left.mas_equalTo(self.posLabel.mas_right).with.offset(kPadding);
         make.right.mas_equalTo(self.durLabel.mas_left).with.offset(-kPadding);
     }];
+    
+    _exitBtn = [[UIButton alloc] initWithFrame:CGRectMake(kPadding*2, kPadding*1.5, 40*kWidthCoefficient, 40*kWidthCoefficient)];
+    [_exitBtn setImage:[UIImage imageNamed:@"back_nor"] forState:UIControlStateNormal];
+    [self.view addSubview:_exitBtn];
+    [_exitBtn addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
     
     
 }
