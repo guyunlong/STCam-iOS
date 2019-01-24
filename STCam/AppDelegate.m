@@ -48,7 +48,20 @@
     // init Push
     // notice: 2.1.5 版本的 SDK 新增的注册方法，改成可上报 IDFA，如果没有使用 IDFA 直接传 nil
     // 如需继续使用 pushConfig.plist 文件声明 appKey 等配置内容，请依旧使用 [JPUSHService setupWithOption:launchOptions] 方式初始化。
-    NSString * appKey = @"e7a4318dfe0393afc10aec35";
+    NSString * appKey = @"48407180c345d9637ab4ebc2";
+    NSString * appName = @"app_name".localizedString;
+    if ([appName isEqualToString:@"GraveTime"]) {
+        appKey = @"48407180c345d9637ab4ebc2";
+    }
+    else if([appName isEqualToString:@"DoorSystem"]){
+        appKey = @"2ecc9655b57226a6b3de3fbb";
+    }
+    else if([appName isEqualToString:@"WifiIPCAM"]){
+        appKey = @"e7a4318dfe0393afc10aec35";
+    }
+    else if([appName isEqualToString:@"CAMLS "]){
+        appKey = @"7b285c54ef1ba1783fbd9ed3";
+    }
     [JPUSHService setupWithOption:launchOptions appKey:appKey
                           channel:nil
                  apsForProduction:NO

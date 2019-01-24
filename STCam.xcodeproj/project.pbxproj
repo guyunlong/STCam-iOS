@@ -2806,7 +2806,7 @@
 					"$(PROJECT_DIR)/ffmpeg/lib",
 					"$(PROJECT_DIR)/TUTK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.south.STCam;
+				PRODUCT_BUNDLE_IDENTIFIER = com.south.gravetime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/ffmpeg/include";
@@ -2836,7 +2836,7 @@
 					"$(PROJECT_DIR)/ffmpeg/lib",
 					"$(PROJECT_DIR)/TUTK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.south.STCam;
+				PRODUCT_BUNDLE_IDENTIFIER = com.south.gravetime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/ffmpeg/include";
