@@ -179,9 +179,9 @@
     
 }
 - (void) handlePan: (UIPanGestureRecognizer *)rec{
-    // NSLog(@"xxoo---xxoo---xxoo");
+    // DDLogDebug(@"xxoo---xxoo---xxoo");
     CGPoint point = [rec translationInView:self.view];//该方法返回在横坐标上、纵坐标上拖动了多少像素
-    NSLog(@"%f,%f",point.x,point.y);
+    DDLogDebug(@"%f,%f",point.x,point.y);
     //if(rec.state == UIGestureRecognizerStateEnded)
     {
         _viewportRect.origin.x = _viewportRect.origin.x + point.x*2;

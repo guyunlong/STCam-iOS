@@ -56,7 +56,17 @@
     
     CGFloat appIconWidth  = 70*kWidthCoefficient;
     _appIconImageView = [[UIImageView alloc] initWithFrame:CGRectMake(kScreenWidth/2-appIconWidth/2, 45*kWidthCoefficient, appIconWidth, appIconWidth)];
-    [_appIconImageView setImage:[UIImage imageNamed:@"appicon100"]];
+    
+    
+#if TARGETTYPE == 0
+[_appIconImageView setImage:[UIImage imageNamed:@"appicon100"]];
+#elif TARGETTYPE == 1
+[_appIconImageView setImage:[UIImage imageNamed:@"appicon100"]];
+#else
+[_appIconImageView setImage:[UIImage imageNamed:@"appicon100_door"]];
+#endif
+    
+    
     [_topBgView addSubview:_appIconImageView];
     
     _userLb = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_appIconImageView.frame)+kPadding/2, kScreenWidth, 24*kWidthCoefficient)];

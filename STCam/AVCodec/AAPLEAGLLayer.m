@@ -17,6 +17,7 @@
 #include <OpenGLES/EAGL.h>
 #include <OpenGLES/ES2/gl.h>
 #include <OpenGLES/ES2/glext.h>
+#import "PrefixHeader.h"
 
 // Uniform index.
 enum
@@ -128,7 +129,7 @@ static const GLfloat kColorConversion709[] = {
     }
     
     if(pixelBuffer == NULL) {
-        NSLog(@"Pixel buffer is null");
+        DDLogDebug(@"Pixel buffer is null");
         return;
     }
     
@@ -161,7 +162,7 @@ static const GLfloat kColorConversion709[] = {
     // Create CVOpenGLESTextureCacheRef for optimal CVPixelBufferRef to GLES texture conversion.
     err = CVOpenGLESTextureCacheCreate(kCFAllocatorDefault, NULL, _context, NULL, &_videoTextureCache);
     if (err != noErr) {
-        NSLog(@"Error at CVOpenGLESTextureCacheCreate %d", err);
+        DDLogDebug(@"Error at CVOpenGLESTextureCacheCreate %d", err);
         return;
     }
 
@@ -180,7 +181,7 @@ static const GLfloat kColorConversion709[] = {
                                                        0,
                                                        &_lumaTexture);
     if (err) {
-        NSLog(@"Error at CVOpenGLESTextureCacheCreateTextureFromImage %d", err);
+        DDLogDebug(@"Error at CVOpenGLESTextureCacheCreateTextureFromImage %d", err);
     }
     
     glBindTexture(CVOpenGLESTextureGetTarget(_lumaTexture), CVOpenGLESTextureGetName(_lumaTexture));
@@ -205,7 +206,7 @@ static const GLfloat kColorConversion709[] = {
                                                            1,
                                                            &_chromaTexture);
         if (err) {
-            NSLog(@"Error at CVOpenGLESTextureCacheCreateTextureFromImage %d", err);
+            DDLogDebug(@"Error at CVOpenGLESTextureCacheCreateTextureFromImage %d", err);
         }
         
         glBindTexture(CVOpenGLESTextureGetTarget(_chromaTexture), CVOpenGLESTextureGetName(_chromaTexture));
@@ -365,7 +366,7 @@ static const GLfloat kColorConversion709[] = {
     
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, _colorBufferHandle);
     if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
-        NSLog(@"Failed to make complete framebuffer object %x", glCheckFramebufferStatus(GL_FRAMEBUFFER));
+        DDLogDebug(@"Failed to make complete framebuffer object %x", glCheckFramebufferStatus(GL_FRAMEBUFFER));
     }
 }
 
@@ -445,12 +446,12 @@ const GLchar *shader_vsh = (const GLchar*)"attribute vec4 position;"
     self.program = glCreateProgram();
     
     if(![self compileShaderString:&vertShader type:GL_VERTEX_SHADER shaderString:shader_vsh]) {
-        NSLog(@"Failed to compile vertex shader");
+        DDLogDebug(@"Failed to compile vertex shader");
         return NO;
     }
     
     if(![self compileShaderString:&fragShader type:GL_FRAGMENT_SHADER shaderString:shader_fsh]) {
-        NSLog(@"Failed to compile fragment shader");
+        DDLogDebug(@"Failed to compile fragment shader");
         return NO;
     }
     
@@ -466,7 +467,7 @@ const GLchar *shader_vsh = (const GLchar*)"attribute vec4 position;"
     
     // Link the program.
     if (![self linkProgram:self.program]) {
-        NSLog(@"Failed to link program: %d", self.program);
+        DDLogDebug(@"Failed to link program: %d", self.program);
         
         if (vertShader) {
             glDeleteShader(vertShader);
@@ -517,7 +518,7 @@ const GLchar *shader_vsh = (const GLchar*)"attribute vec4 position;"
     if (logLength > 0) {
         GLchar *log = (GLchar *)malloc(logLength);
         glGetShaderInfoLog(*shader, logLength, &logLength, log);
-        NSLog(@"Shader compile log:\n%s", log);
+        DDLogDebug(@"Shader compile log:\n%s", log);
         free(log);
     }
 #endif
@@ -537,7 +538,7 @@ const GLchar *shader_vsh = (const GLchar*)"attribute vec4 position;"
     NSError *error;
     NSString *sourceString = [[NSString alloc] initWithContentsOfURL:URL encoding:NSUTF8StringEncoding error:&error];
     if (sourceString == nil) {
-        NSLog(@"Failed to load vertex shader: %@", [error localizedDescription]);
+        DDLogDebug(@"Failed to load vertex shader: %@", [error localizedDescription]);
         return NO;
     }
     
@@ -557,7 +558,7 @@ const GLchar *shader_vsh = (const GLchar*)"attribute vec4 position;"
     if (logLength > 0) {
         GLchar *log = (GLchar *)malloc(logLength);
         glGetProgramInfoLog(prog, logLength, &logLength, log);
-        NSLog(@"Program link log:\n%s", log);
+        DDLogDebug(@"Program link log:\n%s", log);
         free(log);
     }
 #endif
@@ -579,7 +580,7 @@ const GLchar *shader_vsh = (const GLchar*)"attribute vec4 position;"
     if (logLength > 0) {
         GLchar *log = (GLchar *)malloc(logLength);
         glGetProgramInfoLog(prog, logLength, &logLength, log);
-        NSLog(@"Program validate log:\n%s", log);
+        DDLogDebug(@"Program validate log:\n%s", log);
         free(log);
     }
     

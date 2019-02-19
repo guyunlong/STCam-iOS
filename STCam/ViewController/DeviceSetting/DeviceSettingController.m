@@ -14,6 +14,9 @@
 #import "DeviceAdvanceSettingController.h"
 #import "MJRefresh.h"
 #import "DevListViewModel.h"
+#import "DevChangeManagerController.h"
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 @interface DeviceSettingController ()<UITableViewDataSource, UITableViewDelegate>
 @property(nonatomic,strong)UIImageView * devThumbView;//设备缩略图
 @property(nonatomic,strong)UILabel * snLabel;
@@ -50,6 +53,7 @@
     InfoModel * model2 = [InfoModel new];
     InfoModel * model3 = [InfoModel new];
     InfoModel * model4 = [InfoModel new];
+    InfoModel * model5 = [InfoModel new];
     
     
     
@@ -58,6 +62,7 @@
     [model2 setTitle:@"action_push".localizedString];
     [model3 setTitle:@"string_DevAdvancedSettings".localizedString];
     [model4 setTitle:@"action_version".localizedString];
+    [model5 setTitle:@"txtDevChangeManager".localizedString];
     
    
     
@@ -66,6 +71,7 @@
     [_rowsArray addObject:model2];
     [_rowsArray addObject:model3];
     [_rowsArray addObject:model4];
+    [_rowsArray addObject:model5];
     
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -191,10 +197,10 @@
         tableView;
     });
     CGFloat y = 50*kWidthCoefficient + 2*kPadding;
-    [_mTableView setFrame:CGRectMake(0, y, kScreenWidth, 5*[CommonSettingCell cellHeight])];
+    [_mTableView setFrame:CGRectMake(0, y, kScreenWidth, 6*[CommonSettingCell cellHeight])];
     [self.view addSubview:_mTableView];
     
-    y+= 5*[CommonSettingCell cellHeight] + 5*kPadding;
+    y+= 6*[CommonSettingCell cellHeight] + 5*kPadding;
     _deleteButton = [[UIButton alloc] initWithFrame:CGRectMake(2*kPadding, y, kScreenWidth-4*kPadding, kButtonHeight)];
     [_deleteButton setTitle:@"action_delete_device".localizedString forState:UIControlStateNormal];
     [_deleteButton setAppThemeType:ButtonStyleStyleAppTheme];
@@ -307,6 +313,12 @@
     }
     else if(4 == row){
         [self checkUpdateSoftVersion];
+    }
+    else if(5 == row){
+       // [self checkUpdateSoftVersion];
+        DevChangeManagerController * ctl =  [DevChangeManagerController new];
+        [ctl setModel:_viewModel.model];
+        [self.navigationController pushViewController:ctl animated:YES];
     }
     
   

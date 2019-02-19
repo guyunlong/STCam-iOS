@@ -8,6 +8,7 @@
 
 #import "VideoDecoder.h"
 #import <VideoToolbox/VideoToolbox.h>
+#import "PrefixHeader.h"
 @interface VideoDecoder (){
     uint8_t *_sps;
     NSInteger _spsSize;
@@ -83,7 +84,7 @@ static void didDecompress( void *decompressionOutputRefCon, void *sourceFrameRef
                                               &_deocderSession);
         CFRelease(attrs);
     } else {
-        NSLog(@"IOS8VT: reset decoder session failed status=%d", status);
+        DDLogDebug(@"IOS8VT: reset decoder session failed status=%d", status);
         [self clearH264Deocder];
     }
     
@@ -91,9 +92,9 @@ static void didDecompress( void *decompressionOutputRefCon, void *sourceFrameRef
 }
 -(void)clearH264Deocder {
     @synchronized(self){
-        NSLog(@"clearH264Deocder -------- 0 ");
+        DDLogDebug(@"clearH264Deocder -------- 0 ");
         if(_deocderSession) {
-            NSLog(@"clearH264Deocder ------ 1");
+            DDLogDebug(@"clearH264Deocder ------ 1");
             
             VTDecompressionSessionInvalidate(_deocderSession);
             CFRelease(_deocderSession);
@@ -158,12 +159,12 @@ static void didDecompress( void *decompressionOutputRefCon, void *sourceFrameRef
                                                                       &flagOut);
             
             if(decodeStatus == kVTInvalidSessionErr) {
-                NSLog(@"IOS8VT: Invalid session, reset decoder session");
+                DDLogDebug(@"IOS8VT: Invalid session, reset decoder session");
                 [self clearH264Deocder];
             } else if(decodeStatus == kVTVideoDecoderBadDataErr) {
-                NSLog(@"IOS8VT: decode failed status=%d(Bad data)", decodeStatus);
+                DDLogDebug(@"IOS8VT: decode failed status=%d(Bad data)", decodeStatus);
             } else if(decodeStatus != noErr) {
-                NSLog(@"IOS8VT: decode failed status=%d", decodeStatus);
+                DDLogDebug(@"IOS8VT: decode failed status=%d", decodeStatus);
             }
             
             CFRelease(sampleBuffer);

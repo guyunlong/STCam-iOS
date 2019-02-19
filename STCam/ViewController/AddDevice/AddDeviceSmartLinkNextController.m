@@ -159,13 +159,13 @@
     const char* SSID = [self.ssid cStringUsingEncoding:NSASCIIStringEncoding];
     const char* Password = [self.ssidPwd cStringUsingEncoding:NSASCIIStringEncoding];
     
-    InitSmartConnection();
-    StartSmartConnection(SSID, Password, (unsigned char*)"", 0, "", 0);
+   // InitSmartConnection();
+   // StartSmartConnection(SSID, Password, (unsigned char*)"", 0, "", 0);
     
     
 }
 -(void)stopSmartConfig{
-    StopSmartConnection();
+   // StopSmartConnection();
 }
 
 @end

@@ -7,7 +7,13 @@
 //
 
 #import <Availability.h>
-
+#import <CocoaLumberjack/CocoaLumberjack.h>
+#import "DDLog.h"
+#ifdef DEBUG
+static const int ddLogLevel = DDLogLevelVerbose;
+#else
+static const int ddLogLevel = DDLogLevelVerbose;
+#endif
 #ifndef __IPHONE_3_0
 #warning "This project uses features only available in iOS SDK 3.0 and later."
 #endif
@@ -82,7 +88,15 @@
 #define kBottomButtonHeight 60*kWidthCoefficient
 #endif /* PrefixHeader_pch */
 
+#if TARGETTYPE == 0
+#define serverIP @"198.11.181.133"
+#elif TARGETTYPE == 1
 #define serverIP @"211.149.199.247"
+#else
+#define serverIP @"211.149.199.247"
+#endif
+
+
 #define ServerPort  800
 
 static int Msg_None = 0;

@@ -156,9 +156,9 @@
                             dispatch_sync(dispatch_get_main_queue(), ^{
                                 [self.navigationController pushViewController:scanVC animated:YES];
                             });
-                            NSLog(@"用户第一次同意了访问相机权限 - - %@", [NSThread currentThread]);
+                            DDLogDebug(@"用户第一次同意了访问相机权限 - - %@", [NSThread currentThread]);
                         } else {
-                            NSLog(@"用户第一次拒绝了访问相机权限 - - %@", [NSThread currentThread]);
+                            DDLogDebug(@"用户第一次拒绝了访问相机权限 - - %@", [NSThread currentThread]);
                         }
                     }];
                     break;
@@ -178,7 +178,7 @@
                     break;
                 }
                 case AVAuthorizationStatusRestricted: {
-                    NSLog(@"因为系统原因, 无法访问相册");
+                    DDLogDebug(@"因为系统原因, 无法访问相册");
                     break;
                 }
                 

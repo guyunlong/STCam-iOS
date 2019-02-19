@@ -275,3 +275,9 @@
 "txt_DoorLock"="锁";
 "txt_DoorOperationSuccessful"="操作成功";
 "txt_DoorOperationFailure"="操作失败";
+"txtDevChangeManager"="设备转移";
+"action_ChangeManager"="转移设备";
+"txtToUserSuccess"="转移成功";
+"txtToUserFailed"="转移失败";
+"txtToUser"="待转移帐号";
+"password_Error"="密码错误!";

@@ -62,7 +62,7 @@ EXPORT bool thNet_Free(HANDLE NetHandle);
 NetHandle:网络句柄，由thNet_Init返回
 返 回 值：成功返回true，失败返回false
 ------------------------------------------------------------------------------*/
-EXPORT bool thNet_Connect(HANDLE NetHandle, u64 SN, char *UserName, char *Password, char *IPUID, i32 DataPort, u32 TimeOut);
+EXPORT bool thNet_Connect(HANDLE NetHandle, u64 SN, const char* UserName, const char* Password,const  char* IPUID, i32 DataPort,const char* logfile, u32 TimeOut);
 /*-----------------------------------------------------------------------------
 函数描述：连接网络设备
 参数说明：

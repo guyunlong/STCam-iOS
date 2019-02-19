@@ -3,7 +3,7 @@
 //
 
 #import "CoreDataManager.h"
-
+#import "PrefixHeader.h"
 @implementation CoreDataManager
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
@@ -64,7 +64,7 @@
         error = [NSError errorWithDomain:@"YOUR_ERROR_DOMAIN" code:9999 userInfo:dict];
         // Replace this with code to handle the error appropriately.
         // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        DDLogDebug(@"Unresolved error %@, %@", error, [error userInfo]);
         //abort();
     }
     return _persistentStoreCoordinator;
@@ -109,7 +109,7 @@
     
     if (objects == nil)
     {
-        NSLog(@"There was an error!");
+        DDLogDebug(@"There was an error!");
         return false;
     }
     
@@ -161,7 +161,7 @@
     
     if (objects == nil)
     {
-        NSLog(@"There was an error!");
+        DDLogDebug(@"There was an error!");
         return false;
     }
     
@@ -210,7 +210,7 @@
     
     if (objects == nil)
     {
-        NSLog(@"There was an error!");
+        DDLogDebug(@"There was an error!");
         return NO;
     }
     else{
@@ -247,7 +247,7 @@
     
     if (objects == nil)
     {
-        NSLog(@"There was an error!");
+        DDLogDebug(@"There was an error!");
         return false;
     }
     else{
@@ -285,7 +285,7 @@
     
     if (objects == nil)
     {
-        NSLog(@"There was an error!");
+        DDLogDebug(@"There was an error!");
         return nil;
     }
     else if([objects count] > 0){
@@ -326,7 +326,7 @@
     
     if (objects == nil)
     {
-        NSLog(@"There was an error!");
+        DDLogDebug(@"There was an error!");
         return false;
     }
     
@@ -372,7 +372,7 @@
         if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
             // Replace this implementation with code to handle the error appropriately.
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            DDLogDebug(@"Unresolved error %@, %@", error, [error userInfo]);
             abort();
         }
     }

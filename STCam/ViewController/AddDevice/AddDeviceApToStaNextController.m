@@ -351,23 +351,23 @@
 #pragma mark - LMJDropdownMenu Delegate
 
 - (void)dropdownMenu:(LMJDropdownMenu *)menu selectedCellNumber:(NSInteger)number{
-    NSLog(@"你选择了：%ld",number);
+    DDLogDebug(@"你选择了：%ld",number);
     SSIDModel * model = _ssidArray[number];
     _ssid =model.SSID;
 }
 
 - (void)dropdownMenuWillShow:(LMJDropdownMenu *)menu{
-    NSLog(@"--将要显示--");
+    DDLogDebug(@"--将要显示--");
 }
 - (void)dropdownMenuDidShow:(LMJDropdownMenu *)menu{
-    NSLog(@"--已经显示--");
+    DDLogDebug(@"--已经显示--");
 }
 
 - (void)dropdownMenuWillHidden:(LMJDropdownMenu *)menu{
-    NSLog(@"--将要隐藏--");
+    DDLogDebug(@"--将要隐藏--");
 }
 - (void)dropdownMenuDidHidden:(LMJDropdownMenu *)menu{
-    NSLog(@"--已经隐藏--");
+    DDLogDebug(@"--已经隐藏--");
 }
 
 -(UIAlertController*)confirmAlertController{

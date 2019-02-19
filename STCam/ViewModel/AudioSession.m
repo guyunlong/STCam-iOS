@@ -7,7 +7,7 @@
 //
 
 #import "AudioSession.h"
-
+#import "PrefixHeader.h"
 @implementation AudioSession
 
 @synthesize queue;
@@ -49,9 +49,9 @@ static void BufferCallback(void *inUserData,AudioQueueRef inAQ,                 
         }
         
         int len = read_circular_buffer_bytes(outrb, nextBuffer,nextSize);
-        NSLog(@"333333333333333333 read buf is %d,circle size is %d",len,outrb->wp);
+        DDLogDebug(@"333333333333333333 read buf is %d,circle size is %d",len,outrb->wp);
         if (len > 0) {
-            // NSLog(@"back 1111111111111");
+            // DDLogDebug(@"back 1111111111111");
             memcpy(buffer->mAudioData, nextBuffer, nextSize);
             buffer->mAudioDataByteSize = len;
             AudioQueueEnqueueBuffer(inAQ, buffer, 0, NULL);
@@ -64,7 +64,7 @@ static void BufferCallback(void *inUserData,AudioQueueRef inAQ,                 
                 }
             }
             
-            // NSLog(@"back 2222222222222");
+            // DDLogDebug(@"back 2222222222222");
             if (cnt == NUM_BUFFERS) {
                 AudioQueueStop(inAQ, true);
             }
@@ -90,10 +90,10 @@ static void BufferCallback(void *inUserData,AudioQueueRef inAQ,                 
     AudioSessionGetProperty(kAudioSessionProperty_AudioRoute, &propertySize, &route);
     if((route == NULL) || (CFStringGetLength(route) == 0)){
         // Silent Mode
-        NSLog(@"AudioRoute: SILENT, do nothing!");
+        DDLogDebug(@"AudioRoute: SILENT, do nothing!");
     } else {
         NSString* routeStr = (__bridge NSString*)route;
-        NSLog(@"AudioRoute: %@", routeStr);
+        DDLogDebug(@"AudioRoute: %@", routeStr);
         
         NSRange headphoneRange = [routeStr rangeOfString : @"Headphone"];
         NSRange headsetRange = [routeStr rangeOfString : @"Headset"];
@@ -112,7 +112,7 @@ static void BufferCallback(void *inUserData,AudioQueueRef inAQ,                 
    // BOOL hasHeadset = [self hasHeadset];
     BOOL hasHeadset = NO;
 
-    NSLog (@"Will Set output target is_headset = %@ .", hasHeadset ? @"YES" : @"NO");
+    DDLogDebug (@"Will Set output target is_headset = %@ .", hasHeadset ? @"YES" : @"NO");
     UInt32 audioRouteOverride = hasHeadset ?
 kAudioSessionOverrideAudioRoute_None:kAudioSessionOverrideAudioRoute_Speaker;
     AudioSessionSetProperty(kAudioSessionProperty_OverrideAudioRoute, sizeof(audioRouteOverride), &audioRouteOverride);
@@ -188,7 +188,7 @@ kAudioSessionOverrideAudioRoute_None:kAudioSessionOverrideAudioRoute_Speaker;
 }
 -(void)playAudio:(char *)Buf length:(int)len
 {
-   　//  NSLog(@"audio play buffer size is %d",checkspace_circular_buffer(outrb, 0));
+   　//  DDLogDebug(@"audio play buffer size is %d",checkspace_circular_buffer(outrb, 0));
     
     int cnt = 0;
     for (int i=0; i<NUM_BUFFERS; i++) {
@@ -203,7 +203,7 @@ kAudioSessionOverrideAudioRoute_None:kAudioSessionOverrideAudioRoute_Speaker;
         if ( checkspace_circular_buffer(outrb, 0)>=0x1800) {
             
             AudioQueueStart(queue, nil);
-           // NSLog(@"~~~~~~~~\n");
+           // DDLogDebug(@"~~~~~~~~\n");
             for (int i=0; i<NUM_BUFFERS; i++)
                 _isplay[i] = true;
             for (int i=0; i<NUM_BUFFERS; i++) {
@@ -213,9 +213,9 @@ kAudioSessionOverrideAudioRoute_None:kAudioSessionOverrideAudioRoute_Speaker;
     }
     else
     {
-       // NSLog(@"+++++++++++\n");
+       // DDLogDebug(@"+++++++++++\n");
         int size = write_circular_buffer_bytes(outrb, Buf,len);
-        //NSLog(@"2222222222 size is %d\n",size);
+        //DDLogDebug(@"2222222222 size is %d\n",size);
     }
    // printf("writen size is %d\n",checkspace_circular_buffer(outrb, 0));
     
@@ -278,7 +278,7 @@ static void MyInputBufferHandler(	void *								inUserData,
     
     NSInteger len=inBuffer->mAudioDataByteSize;
     uint8_t *data=(uint8_t*)inBuffer->mAudioData;
-     NSLog(@"-------record size:%ld",len);
+     DDLogDebug(@"-------record size:%ld",len);
     //fwrite(data, len, 1, f);
     net_SetTalk((HANDLE)session.NetHandle,(char*) data,(int32_t)len);
     
@@ -287,7 +287,7 @@ static void MyInputBufferHandler(	void *								inUserData,
 }
 -(int)readbuf:(char*)Buf length:(int)len
 {
-    // NSLog("inrb len is %d",inrb->wp);
+    // DDLogDebug("inrb len is %d",inrb->wp);
     if (checkspace_circular_buffer(inrb, 0)>1024) {
         int readlen =  read_circular_buffer_bytes(inrb, Buf,len);
         return  readlen;

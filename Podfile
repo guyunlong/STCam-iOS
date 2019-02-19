@@ -15,11 +15,14 @@ def shared_pods
     pod 'SpinKit', '~> 1.1'
     pod 'Bugly'
     pod 'CustomIOSAlertView'
+    pod 'Fabric'
+    pod 'Crashlytics'
+    pod 'CocoaLumberjack', '3.4.2'
 end
 target 'STCam' do
     shared_pods
 end
-target 'GRAVE' do
+target 'GraveTime' do
     shared_pods
 end
 

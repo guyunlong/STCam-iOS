@@ -278,4 +278,9 @@
 "txt_DoorLock"="Lock";
 "txt_DoorOperationSuccessful"="Operation successful.";
 "txt_DoorOperationFailure"="Operation failure.";
-
+"txtDevChangeManager"="Change management";
+"action_ChangeManager"="Change Management";
+"txtToUserSuccess"="Set successful";
+"txtToUserFailed"="Set failure";
+"txtToUser"="To Account";
+"password_Error"="Password error!";

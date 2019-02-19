@@ -109,7 +109,14 @@
     [self.view addSubview:_mainScrollView];
     
     _iconImageView = [[UIImageView alloc] initWithFrame:CGRectMake(kScreenWidth/2-100*kWidthCoefficient/2, y, 100*kWidthCoefficient, 100*kWidthCoefficient)];
+#if TARGETTYPE == 0
     [_iconImageView setImage:[UIImage imageNamed:@"appicon100"]];
+#elif TARGETTYPE == 1
+    [_iconImageView setImage:[UIImage imageNamed:@"appicon100"]];
+#else
+    [_iconImageView setImage:[UIImage imageNamed:@"appicon100_door"]];
+#endif
+    
     _iconImageView.layer.cornerRadius = 8;
     _iconImageView.layer.masksToBounds = YES;
     _iconImageView.layer.borderColor = kMainColor.CGColor;

@@ -11,9 +11,11 @@
 #import "PrefixHeader.h"
 #import "DevListViewModel.h"
 #import "CoreDataManager.h"
+#import "STFileManager.h"
 @interface DeviceModel(){
-    dispatch_queue_t conSerialQueue;
-    dispatch_queue_t disConSerialQueue;
+//    dispatch_queue_t conSerialQueue;
+//    dispatch_queue_t disConSerialQueue;
+    int reconnectTime;
 }
 @property(assign)BOOL IsConnecting;
 @end
@@ -22,8 +24,8 @@
 -(id)init{
     self = [super init];
     if (self) {
-        conSerialQueue = dispatch_queue_create("com.southtec.cam", DISPATCH_QUEUE_SERIAL);
-        disConSerialQueue = dispatch_queue_create("com.southtec.camdis", DISPATCH_QUEUE_SERIAL);
+//        conSerialQueue = dispatch_queue_create("com.southtec.cam", DISPATCH_QUEUE_SERIAL);
+//        disConSerialQueue = dispatch_queue_create("com.southtec.camdis", DISPATCH_QUEUE_SERIAL);
         _User = @"admin";
         _Pwd = @"admin";
         _FunctionMask = 0xfffffffe;
@@ -110,14 +112,14 @@
             _Pwd = model.Pwd;
         }
         
-        conSerialQueue = dispatch_queue_create("com.southtec.cam", DISPATCH_QUEUE_SERIAL);
-        disConSerialQueue = dispatch_queue_create("com.southtec.camdis", DISPATCH_QUEUE_SERIAL);
+//        conSerialQueue = dispatch_queue_create("com.southtec.cam", DISPATCH_QUEUE_SERIAL);
+//        disConSerialQueue = dispatch_queue_create("com.southtec.camdis", DISPATCH_QUEUE_SERIAL);
         
     }
     return self;
 }
 -(void)setValue:(id)value forUndefinedKey:(NSString *)key{
-    NSLog(@"%s---%@",__func__,key);
+    DDLogDebug(@"%s---%@",__func__,key);
 }
 
 /**************设备连接**************/
@@ -139,48 +141,55 @@
         return NO;
     }
     
-    if (_IsConnecting)
+    if (_IsConnecting && reconnectTime < 2)
     {
+        ++reconnectTime;
         return NO;
     }
     
-    
+    DDLogDebug(@"-------------------------- Connect device 0,DeviceModel sn %@,User:%@,pwd:%@.ipuid:%@,dataport:%ld,self.NetHandle:%d",[self SN],self.User,self.Pwd,self.IPUID,self.DataPort,self.NetHandle);
     _IsConnecting = YES;
+    reconnectTime = 0;
     //thNet_Connect(HANDLE NetHandle, u64 SN, char* UserName, char* Password, char* IPUID, i32 DataPort, u32 TimeOut)
+    NSString * logFileName = [[STFileManager sharedManager] localPathForFile:@"log.txt" inDirectory:@""];
     ret = thNet_Connect(self.NetHandle,
                            [_SN integerValue],
                            [self.User UTF8String],
                            [self.Pwd UTF8String],
                            [self.IPUID UTF8String],
-                           self.DataPort,
-                           10 * 1000);
-    
-    _IsConnecting = false;
+                           (int32_t)self.DataPort,
+                           [logFileName UTF8String],
+                           5 * 1000);
+      DDLogDebug(@"-------------------------- Connect device 1,DeviceModel sn %@",[self SN]);
+    _IsConnecting = NO;
     return ret;
 }
 -(void)threadDisconnect{
     
     @weakify(self)
    
-    dispatch_async(disConSerialQueue, ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         @strongify(self);
         [self disconnect];
     });
     
 }
 -(void)disconnect{
+    DDLogDebug(@"------------disconnect  before,sn %@",self.SN);
+     DDLogDebug(@"------------disconnect  before 0 ,NetHandle %d",self.NetHandle);
     THandle NetHandle = self.NetHandle;
     self.NetHandle = 0;
     BOOL ret = thNet_DisConn(NetHandle);
+    DDLogDebug(@"------------disconnect  thNet_DisConn,sn %@,ret is %d",self.SN,ret);
     if (ret)
     {
-//        NSLog(@"------------disconnect sleep before");
+        
         usleep(200000);
-//        NSLog(@"------------disconnect sleep after");
+
         thNet_Free(NetHandle);
 
     }
-    
+    DDLogDebug(@"------------disconnect  after,sn %@",self.SN);
     
     DevListViewModel * listViewModel = [DevListViewModel sharedDevListViewModel];
     [listViewModel setRefreshView:YES];
@@ -188,18 +197,27 @@
 }
 -(void)threadConnect
 {
-    NSLog(@"-------------------------- connect before,DeviceModel sn %@",[self SN]);
+    if ([self IsConnect] && self.SoftVersion){
+        return;
+    }
+    DDLogDebug(@"-------------------------- connect before,DeviceModel sn %@",[self SN]);
     @weakify(self)
-    dispatch_async(conSerialQueue, ^{
+    //dispatch_async
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         @strongify(self);
+        DDLogDebug(@"-------------------------- connect 0,DeviceModel sn %@",[self SN]);
         if (self.NetHandle == 0) {
             self.NetHandle = thNet_Init(true, false);
         }
+        DDLogDebug(@"-------------------------- connect 1,DeviceModel sn %@",[self SN]);
         if (![self IsConnect]) {
+            DDLogDebug(@"-------------------------- connect 2,DeviceModel sn %@",[self SN]);
             [self Connect];
+            DDLogDebug(@"-------------------------- connect 3,DeviceModel sn %@",[self SN]);
             DevListViewModel * listViewModel = [DevListViewModel sharedDevListViewModel];
             [listViewModel setRefreshView:YES];
         }
+        DDLogDebug(@"-------------------------- connect 4,DeviceModel sn %@",[self SN]);
         if ([self IsConnect] && !self.SoftVersion) {
             char conv[1024 * 64];
             char* tmpBuf = NULL;
@@ -207,7 +225,7 @@
             tmpBuf = thNet_GetAllCfg((HANDLE) self.NetHandle);
             code_convert_name("gb2312", "utf8", tmpBuf,strlen(tmpBuf), conv, sizeof(conv));
             NSString * deviceInfoStr  = [[NSString alloc] initWithUTF8String:conv];
-            NSLog(@"deviceInfoStr is %@",deviceInfoStr);
+            DDLogDebug(@"deviceInfoStr is %@",deviceInfoStr);
             NSData *utf8Data = [deviceInfoStr dataUsingEncoding:NSUTF8StringEncoding];
             NSError *error;
             id deviceInfoDic = [NSJSONSerialization JSONObjectWithData:utf8Data options:NSJSONReadingMutableLeaves error:&error];
@@ -220,10 +238,10 @@
             }
         }
         
-        NSLog(@"threadConnect device end,sn :%@",self.SN);
+        DDLogDebug(@"threadConnect device end,sn :%@",self.SN);
     });
     
-    NSLog(@"-------------------------- connect after,DeviceModel sn %@",[self SN]);
+    DDLogDebug(@"-------------------------- connect after,DeviceModel sn %@",[self SN]);
 }
 
 -(NSString*)getDevURL:(int)MsgID{
@@ -257,7 +275,7 @@
         code_convert_name("gb2312", "utf8",Buf,strlen(Buf), conv, sizeof(conv));
         //const char* SSID = [self.ssid cStringUsingEncoding:NSASCIIStringEncoding];
         NSString * retStr  = [[NSString alloc] initWithUTF8String:conv];
-        NSLog(@"retstr is %@",retStr);
+        DDLogDebug(@"retstr is %@",retStr);
         NSData *utf8Data = [retStr dataUsingEncoding:NSUTF8StringEncoding];
         NSError *error;
         id retDic = [NSJSONSerialization JSONObjectWithData:utf8Data options:NSJSONReadingMutableLeaves error:&error];

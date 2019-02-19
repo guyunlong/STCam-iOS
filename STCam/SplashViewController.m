@@ -15,10 +15,13 @@
 #import "libthSDK.h"
 #import "LoginViewModel.h"
 #import "AccountManager.h"
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 #import "MainTabController.h"
 @interface SplashViewController ()
 @property(nonatomic,strong)LoginViewModel * viewModel;
 @property(nonatomic,strong)UILabel * versionLb;
+@property (nonatomic,weak) IBOutlet UIImageView * splashImage;
 @end
 
 @implementation SplashViewController
@@ -42,10 +45,24 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+#if TARGETTYPE == 0
+    [_splashImage setImage:[UIImage imageNamed:@"splash_grave_01"]];
+#elif TARGETTYPE == 1
+    [_splashImage setImage:[UIImage imageNamed:@"splash_grave_01"]];
+#else
+    [_splashImage setImage:[UIImage imageNamed:@"splash_doorsystem"]];
+#endif
+    
+    
     P2P_Init();
     // Do any additional setup after loading the view, typically from a nib.
     //_viewModel = [DevListViewModel new];
    // [_viewModel searchDevice];
+    
+    
+    
+
     
     _versionLb = [[UILabel alloc] initWithFrame:CGRectMake(0, kScreenHeight-100, kScreenWidth-kPadding, 24)];
     [self.view addSubview:_versionLb];

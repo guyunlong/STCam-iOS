@@ -20,7 +20,7 @@
     
     [parameters enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
         
-        NSLog(@"key = %@ and obj = %@", key, obj);
+        DDLogDebug(@"key = %@ and obj = %@", key, obj);
         [request setValue:obj forHTTPHeaderField:key];
         
     }];
@@ -30,7 +30,7 @@
     NSURLSessionTask *task=[session dataTaskWithRequest:request completionHandler:^(id  _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (error != nil) {
-                NSLog(@"error = %@", error);
+                DDLogDebug(@"error = %@", error);
                 failure(error);
                 return;
             }
@@ -50,7 +50,7 @@
                             //当前页面如果是登录页面，弹出强制登录框，如果不是登录页面，跳转到登录页面，弹出强制登录框
                             UIViewController * ctl  =[UIViewController currentViewController];
                             if (![ctl isKindOfClass:[LoginViewController class]]) {
-                                NSLog(@"current view controller is LoginViewController");
+                                DDLogDebug(@"current view controller is LoginViewController");
                                 LoginViewController * loginCtl  = [[LoginViewController alloc] init];
                                 [loginCtl setLogout:YES];
                                 STNavigationController *loginNav =   [[STNavigationController alloc] initWithRootViewController:loginCtl];

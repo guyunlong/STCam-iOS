@@ -7,6 +7,7 @@
 //
 
 #import "STFileManager.h"
+#import "PrefixHeader.h"
 
 @implementation STFileManager
 + (STFileManager *)sharedManager{
@@ -102,7 +103,7 @@
     
     if (error) {
         deleted = NO;
-        NSLog(@"Error deleting file: %@", error);
+        DDLogDebug(@"Error deleting file: %@", error);
     } else {
         deleted = YES;
     }

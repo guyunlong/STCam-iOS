@@ -55,7 +55,7 @@
         NSString * url = [NSString stringWithFormat:@"http://%@:%d/app_user_login.asp?user=%@&psd=%@&tokenid=%@&mbtype=2&apptype=0&pushtype=0&appname=%@&isforce=%d",serverIP,ServerPort,self.user,self.password,[[AccountManager sharedManager] deviceToken],@"app_name".localizedString,forceLogin];
         [FFHttpTool GET:url parameters:nil success:^(id data){
             @strongify(self)
-            NSLog(@"view model response data is %@",data);
+            DDLogDebug(@"view model response data is %@",data);
             if ([data isKindOfClass:[NSDictionary class]]) {
                 RetModel * model = [RetModel RetModelWithDict:data];
                 if (model.ret == 1) {

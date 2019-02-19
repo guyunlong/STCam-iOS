@@ -16,8 +16,12 @@
 #import "LoginViewController.h"
 #import "STNavigationController.h"
 #import <Bugly/Bugly.h>
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 // iOS10 注册 APNs 所需头文件
 #import <UserNotifications/UserNotifications.h>
+#import <CocoaLumberjack/CocoaLumberjack.h>
+#import "STFileManager.h"
 
 @interface AppDelegate ()<JPUSHRegisterDelegate>{
     UIBackgroundTaskIdentifier _backIden;
@@ -31,7 +35,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
+  
+   
     //Required
     //notice: 3.0.0 及以后版本注册可以这样写，也可以继续用之前的注册方式
     JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
@@ -74,7 +79,24 @@
     
     [Bugly startWithAppId:@"b27ed1377f"];
     
+    [DDLog addLogger:[DDOSLogger sharedInstance]]; // Uses os_log
     
+    DDFileLogger *fileLogger = [[DDFileLogger alloc] init]; // File Logger
+    fileLogger.rollingFrequency = 60 * 60 * 24; // 24 hour rolling
+    fileLogger.logFileManager.maximumNumberOfLogFiles = 7;
+    [DDLog addLogger:fileLogger];
+    
+    DDLogVerbose(@"Verbose");
+    DDLogDebug(@"Debug");
+    DDLogInfo(@"Info");
+    DDLogWarn(@"Warn-");
+    DDLogError(@"Error-");
+    NSString *logDirectory =[[fileLogger currentLogFileInfo] filePath];
+    DDLogInfo(@"++++++++++%@", logDirectory);
+    
+    
+    [Fabric with:@[[Crashlytics class]]];
+    [Crashlytics sharedInstance].debugMode = YES;
     return YES;
 }
 
@@ -96,7 +118,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 }
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
     //Optional
-    NSLog(@"did Fail To Register For Remote Notifications With Error: %@", error);
+    DDLogDebug(@"did Fail To Register For Remote Notifications With Error: %@", error);
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -108,19 +130,28 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    DDLogDebug(@"applicationDidEnterBackground");
+     [self beginBackgroundTask];
     DevListViewModel * viewModel = [DevListViewModel sharedDevListViewModel];
     [viewModel disConnectAllDevice];
      [[NSNotificationCenter defaultCenter] postNotificationName:AppDidEnterbackground object:nil];
+    [self endBackgroundBack];
     
-    [self beginBackgroundTask];
+   
 }
 
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+    DDLogDebug(@"applicationWillEnterForeground---0");
+    
+    /*3、重新初始化p2p*/
+    P2P_Free();
+    P2P_Init();
+    
     DevListViewModel * viewModel = [DevListViewModel sharedDevListViewModel];
     [viewModel connectAllDevice];
-    
+    DDLogDebug(@"applicationWillEnterForeground--1");
     [application setApplicationIconBadgeNumber:0]; //清除角标
 }
 
@@ -180,7 +211,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 #pragma methods
 -(void)beginBackgroundTask{
     _backIden = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
-        NSLog(@"begin  bgend=============");
+        DDLogDebug(@"begin  bgend=============");
      
         [self endBackgroundBack]; // 如果在系统规定时间内任务还没有完成，在时间到之前会调用到这个方法，一般是10分钟
     }];
@@ -192,7 +223,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     if ([alert isEqualToString:@"USER_LOGOUT"]) {
         UIViewController * ctl  =[UIViewController currentViewController];
         if (![ctl isKindOfClass:[LoginViewController class]]) {
-            NSLog(@"current view controller is LoginViewController");
+            DDLogDebug(@"current view controller is LoginViewController");
             LoginViewController * loginCtl  = [[LoginViewController alloc] init];
             [loginCtl setLogout:YES];
             STNavigationController *loginNav =   [[STNavigationController alloc] initWithRootViewController:loginCtl];
@@ -205,8 +236,12 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     }
  }
 -(void)endBackgroundBack{
-    [[UIApplication sharedApplication] endBackgroundTask:_backIden];
-    _backIden = UIBackgroundTaskInvalid;
+     DDLogDebug(@"endBackgroundBack=============");
+    if (_backIden != UIBackgroundTaskInvalid) {
+        [[UIApplication sharedApplication] endBackgroundTask:_backIden];
+        _backIden = UIBackgroundTaskInvalid;
+    }
+   
 }
 
 -(void)listenNetWorkingStatus{
@@ -224,7 +259,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     
     RealReachability *reachability = (RealReachability *)notification.object;
     ReachabilityStatus status = [reachability currentReachabilityStatus];
-    NSLog(@"-----currentStatus:%@",@(status));
+    DDLogDebug(@"-----currentStatus:%@",@(status));
     if (status == _netWorkStatus) {
         return;
     }
@@ -233,7 +268,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
         case RealStatusNotReachable:
         {
             //  case NotReachable handler
-            NSLog(@"------------没有联网");
+            DDLogDebug(@"------------没有联网");
            // [viewModel notifyNetworkStatusChanged:NetWorkConnType_Break];
             break;
         }
@@ -242,7 +277,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
         {
             _netWorkStatus = status;
             //  case WiFi handler
-            NSLog(@"------------无线网");
+            DDLogDebug(@"------------无线网");
             [viewModel notifyNetworkStatusChanged:NetWorkConnType_WWAN];
             break;
         }
@@ -251,7 +286,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
         {
             //  case WWAN handler
             _netWorkStatus = status;
-            NSLog(@"------------蜂窝数据");
+            DDLogDebug(@"------------蜂窝数据");
             [viewModel notifyNetworkStatusChanged:NetWorkConnType_WWAN];
             break;
         }

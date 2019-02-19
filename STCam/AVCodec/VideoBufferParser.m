@@ -8,6 +8,7 @@
 
 #import "VideoBufferParser.h"
 #import "VideoDecoder.h"
+#import "PrefixHeader.h"
 #import <UIKit/UIKit.h>
 @interface VideoBufferParser ()
 @property (strong, nonatomic)  VideoDecoder *decoder;
@@ -43,23 +44,23 @@
     CVPixelBufferRef pixelBuffer = NULL;
     switch (buf[0] & 0x1f){
         case 7: // SPS
-            NSLog(@"sps len is %d",len);
+            //DDLogDebug(@"sps len is %d",len);
             [_decoder setSps:buf size:len];
             break;
             
         case 8: // PPS
-            NSLog(@"pps len is %d",len);
+           // DDLogDebug(@"pps len is %d",len);
             [_decoder setPps:buf size:len];
             break;
             
         case 5:
-            NSLog(@"idr len is %d",len);
+           // DDLogDebug(@"idr len is %d",len);
             if([_decoder initH264Decoder]) {
                pixelBuffer =  [_decoder decode:buf size:len];
             }
             break;
         case 1:
-            NSLog(@"B/P len is %d",len);
+           // DDLogDebug(@"B/P len is %d",len);
               pixelBuffer = [_decoder decode:buf size:len];
             break;
             

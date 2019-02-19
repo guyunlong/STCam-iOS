@@ -14,6 +14,8 @@
 #import "AccountManager.h"
 #import "iconv.h"
 #import "RetModel.h"
+#import "PrefixHeader.h"
+
 @interface DevListViewModel ()
 
 @end
@@ -235,7 +237,7 @@ void callback_SearchDev(void *UserCustom, u32 SN, int DevType, char *DevModal, c
 -(void)disConnectAllDevice{
     for (DeviceModel * devModel in self.deviceArray) {
         if ([devModel IsConnect]) {
-            NSLog(@"threadDisconnect device ,sn :%@",devModel.SN);
+            DDLogDebug(@"threadDisconnect device ,sn :%@",devModel.SN);
             [devModel threadDisconnect];
         }
     }
@@ -257,7 +259,7 @@ void callback_SearchDev(void *UserCustom, u32 SN, int DevType, char *DevModal, c
     for (DeviceModel * devModel in self.deviceArray) {
         ConnType type = [devModel getConnectType];
         if (type == ConnType_LAN || type == ConnType_DDNS || type == ConnType_P2P) {
-            NSLog(@"threadConnect device ,sn :%@",devModel.SN);
+            DDLogDebug(@"threadConnect device ,sn :%@",devModel.SN);
             [devModel threadConnect];
         }
     }
@@ -288,7 +290,7 @@ void callback_SearchDev(void *UserCustom, u32 SN, int DevType, char *DevModal, c
                     @synchronized(self){
                         for (DeviceModel * devModel in self.deviceArray) {
                             if ([devModel IsConnect]) {
-                                NSLog(@"disconnect device ,sn :%@",devModel.SN);
+                                DDLogDebug(@"disconnect device ,sn :%@",devModel.SN);
                                 [devModel disconnect];
                             }
                         }

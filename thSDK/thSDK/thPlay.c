@@ -73,6 +73,20 @@ void thread_QueueAudio(HANDLE NetHandle);
 
 void thread_QueueRec(HANDLE NetHandle);
 
+
+static FILE *f = NULL;
+char * getLocaltime(){
+    
+    char  timebuffers[200];
+    time_t t;
+    struct tm * lt;
+    time (&t);//获取Unix时间戳。
+    lt = localtime (&t);//转为时间结构。
+    sprintf (timebuffers, "%d/%d %d:%d:%d\n", lt->tm_mon, lt->tm_mday, lt->tm_hour, lt->tm_min, lt->tm_sec);//输出结果
+    return timebuffers;
+}
+
+
 //*****************************************************************************
 //-----------------------------------------------------------------------------
 void OnRecvDataNotify_Search(void* Sender, char* Buf, i32 BufLen)
@@ -932,27 +946,56 @@ bool net_Connect_IP(HANDLE NetHandle, bool IsCreateRecvThread)
   Play->IsTaskRec = false;
 
   //strcpy(Play->LocalIP, GetLocalIP());
+    
+    if(f!=NULL){
+        fprintf(f, "net_Connect_IP 0 ,time is %s\n",getLocaltime() );
+        fflush(f);
+    }
+   
+    
   sprintf(Play->LocalIP, "%s", GetLocalIP());
 
+    if(f!=NULL){
+        fprintf(f, "net_Connect_IP 1 ,time is %s\n",getLocaltime() );
+        fflush(f);
+    }
+    
   Play->hSocket = SktConnect(Play->IPUID, Play->DataPort, Play->TimeOut);//ok
   if (Play->hSocket <= 0) return false;
 
+    if(f!=NULL){
+        fprintf(f, "net_Connect_IP 2 ,time is %s\n",getLocaltime() );
+        fflush(f);
+    }
+    
   ret = net_Login(NetHandle);
   if (ret == false)
   {
     thNet_DisConn(NetHandle);
     return false;
   }
+    if(f!=NULL){
+        fprintf(f, "net_Connect_IP 3 ,time is %s\n",getLocaltime() );
+        fflush(f);
+    }
   ret = net_GetAllCfg(NetHandle);
   if (ret == false)
   {
     thNet_DisConn(NetHandle);
     return false;
   }
-
+    if(f!=NULL){
+        fprintf(f, "net_Connect_IP 4 ,time is %s\n",getLocaltime() );
+        fflush(f);
+    }
   Play->IsExit = false;
   if (IsCreateRecvThread) Play->thRecv = ThreadCreate((void*) thread_RecvData_TCP, (void*) NetHandle, false);
 
+    if(f!=NULL){
+        fprintf(f, "net_Connect_IP 5 ,time is %s\n",getLocaltime() );
+        fflush(f);
+    }
+    
   Play->IsConnect = ret;
 
   return Play->IsConnect;
@@ -1202,6 +1245,10 @@ void thread_RecvData_P2P(HANDLE NetHandle)
 bool net_Connect_P2P(HANDLE NetHandle, bool IsCreateRecvThread)
 {
 #ifdef IsUsedP2P
+    if(f!=NULL){
+        fprintf(f, "net_Connect_P2P 0 ,time is %s\n",getLocaltime() );
+        fflush(f);
+    }
   char20 sLocalIP;
   i32 v1, v2, v3, v4;
   unsigned long nServType;
@@ -1212,13 +1259,20 @@ bool net_Connect_P2P(HANDLE NetHandle, bool IsCreateRecvThread)
   i32 tmpSID;
   i32 ret = false;
   TPlayParam* Play = (TPlayParam*) NetHandle;
-
+    if(f!=NULL){
+        fprintf(f, "net_Connect_P2P 1 ,time is %s\n",getLocaltime() );
+        fflush(f);
+    }
   if (NetHandle == 0) return false;
   if (Play->IsConnect) return true;
   Play->IsConnect = false;
   Play->IsExit = false;
   Play->IsTaskRec = false;
   Play->Isp2pConn = true;
+    if(f!=NULL){
+        fprintf(f, "net_Connect_P2P 2 ,time is %s\n",getLocaltime() );
+        fflush(f);
+    }
 #ifdef WIN32
   if (!PlayLst.Isp2pInit)
 {
@@ -1228,20 +1282,42 @@ bool net_Connect_P2P(HANDLE NetHandle, bool IsCreateRecvThread)
 sprintf(sLocalIP, "%s", GetLocalIP());
 strcpy(Play->LocalIP, sLocalIP);
 #endif
-
+    if(f!=NULL){
+        fprintf(f, "net_Connect_P2P 3 ,time is %s\n",getLocaltime() );
+        fflush(f);
+    }
+    if(f!=NULL){
+        fprintf(f, "net_Connect_P2P 3 1 ,ipuid is %s,time is %s\n",Play->IPUID,getLocaltime() );
+        fflush(f);
+    }
+    
 #if 1
   tmpSID = IOTC_Get_SessionID();
+    if(f!=NULL){
+        fprintf(f, "net_Connect_P2P 3 2 ,ipuid is %s，tmpSID is %d,time is %s\n",Play->IPUID,tmpSID,getLocaltime() );
+        fflush(f);
+    }
   Play->p2p_SessionID = IOTC_Connect_ByUID_Parallel(Play->IPUID, tmpSID);
+    if(f!=NULL){
+        fprintf(f, "net_Connect_P2P 4 ,time is %s\n",getLocaltime() );
+        fflush(f);
+    }
   if (Play->p2p_SessionID < 0) goto exits;
 #else
   Play->p2p_SessionID = IOTC_Connect_ByUID(Play->IPUID);
   if (Play->p2p_SessionID < 0) goto exits;
 #endif
-
+    if(f!=NULL){
+        fprintf(f, "net_Connect_P2P 5 ,time is %s\n",getLocaltime() );
+        fflush(f);
+    }
   memset(&Sinfo, 0, sizeof(struct st_SInfo));
   IOTC_Session_Check(Play->p2p_SessionID, &Sinfo);
   Play->p2p_avIndex = avClientStart2(Play->p2p_SessionID, Play->UserName, Play->Password, Play->TimeOut, &nServType, 0, &nResend);
-
+    if(f!=NULL){
+        fprintf(f, "net_Connect_P2P 6 ,time is %s\n",getLocaltime() );
+        fflush(f);
+    }
   if (Play->p2p_avIndex < 0) goto exits;
 
   //zzhhbb avSendIOCtrl(Play->p2p_avIndex, IOTYPE_INNER_SND_DATA_DELAY, (char *) &val, sizeof(u16));
@@ -1251,7 +1327,10 @@ strcpy(Play->LocalIP, sLocalIP);
   if (!ret) goto exits;
 */
   if (IsCreateRecvThread) Play->thRecv = ThreadCreate((void*) thread_RecvData_P2P, (void*) NetHandle, false);
-
+    if(f!=NULL){
+        fprintf(f, "net_Connect_P2P 7 ,time is %s\n",getLocaltime() );
+        fflush(f);
+    }
   Play->IsConnect = true;
   return Play->IsConnect;
 
@@ -1262,14 +1341,24 @@ strcpy(Play->LocalIP, sLocalIP);
   return false;
 #endif
 }
+
 //-----------------------------------------------------------------------------
-bool thNet_Connect(HANDLE NetHandle, u64 SN, char* UserName, char* Password, char* IPUID, i32 DataPort, u32 TimeOut)
+bool thNet_Connect(HANDLE NetHandle, u64 SN, const char* UserName,const  char* Password,const  char* IPUID, i32 DataPort,const  char* logFile, u32 TimeOut)
 {
+    
+    
+    if(f==NULL){
+       
+        f=fopen(logFile,"a+");
+    }
+     fprintf(f, "connect begin,time is %s\n",getLocaltime() );
+     fflush(f);
   bool ret;
   TPlayParam* Play = (TPlayParam*) NetHandle;
   if (NetHandle == 0) return false;
-  PRINTF("connect ,IPUID is %s\n", IPUID);
-
+    PRINTF("connect 0,IPUID is %s,DataPort is %d,time is %s\n", IPUID,DataPort,getLocaltime() );
+    fprintf(f, "connect 0,IPUID is %s,DataPort is %d,time is %s\n", IPUID,DataPort,getLocaltime() );
+     fflush(f);
   if (Play->IsConnect) return true;
   /*
   if (Play->iConnectStatus == THNET_CONNSTATUS_CONNING)
@@ -1285,7 +1374,9 @@ bool thNet_Connect(HANDLE NetHandle, u64 SN, char* UserName, char* Password, cha
   strcpy(Play->UserName, UserName);
   strcpy(Play->Password, Password);
   strcpy(Play->IPUID, IPUID);
-  PRINTF("connect ,strcpy Play->IPUID is %s\n", Play->IPUID);
+  PRINTF("connect1 ,strcpy Play->IPUID is %s,DataPort is %d\n", IPUID,DataPort);
+    fprintf(f, "connect 1 ,IPUID is %s,DataPort is %d,time is %s\n", IPUID,DataPort,getLocaltime() );
+     fflush(f);
   Play->DataPort = DataPort;
   Play->TimeOut = TimeOut;
   if (Play->TimeOut == 0) Play->TimeOut = NET_TIMEOUT;
@@ -1294,6 +1385,8 @@ bool thNet_Connect(HANDLE NetHandle, u64 SN, char* UserName, char* Password, cha
 
   Play->IsStopHttpGet = true;//必须
 
+    fprintf(f, "connect 2 ,IPUID is %s,DataPort is %d,time is %s\n", IPUID,DataPort,getLocaltime() );
+     fflush(f);
 
   if (Play->Isp2pConn == false)
   {
@@ -1303,7 +1396,8 @@ bool thNet_Connect(HANDLE NetHandle, u64 SN, char* UserName, char* Password, cha
   {
     ret = net_Connect_P2P(NetHandle, true);
   }
-
+ fprintf(f, "connect 3 ,IPUID is %s,DataPort is %d,time is %s\n", IPUID,DataPort,getLocaltime() );
+     fflush(f);
   if (Play->IsConnect)
   {
     Play->hQueueDraw = avQueue_Init(MAX_QUEUE_COUNT, true, false);//newBuf在Time_QueueDraw或thread_eglRender中释放
@@ -1314,8 +1408,9 @@ bool thNet_Connect(HANDLE NetHandle, u64 SN, char* UserName, char* Password, cha
  //  Play->thQueueVideo = ThreadCreate((void*) thread_QueueVideo, Play, false);
 //    Play->thQueueAudio = ThreadCreate((void*) thread_QueueAudio, Play, false);
    Play->thQueueRec = ThreadCreate((void*) thread_QueueRec, Play, false);
-
-    TMediaType MediaType = CODEC_NONE;
+ fprintf(f, "connect 4 ,IPUID is %s,DataPort is %d,time is %s\n", IPUID,DataPort,getLocaltime() );
+       fflush(f);
+      TMediaType MediaType = CODEC_NONE;
     TVideoFormat* vfmt = &Play->DevCfg.VideoCfgPkt.VideoFormat;
     if (vfmt->VideoType == MPEG4) vfmt->VideoType = H264;
 
@@ -1326,21 +1421,32 @@ bool thNet_Connect(HANDLE NetHandle, u64 SN, char* UserName, char* Password, cha
     Play->VideoMediaType = MediaType;
     Play->decHandle = thDecodeVideoInit(MediaType);
     Play->RenderHandle = thRender_Init(0);
+       fprintf(f, "connect 5 ,IPUID is %s,DataPort is %d,time is %s\n", IPUID,DataPort,getLocaltime() );
+       fflush(f);
   }
 
   if (Play->IsConnect) Play->iConnectStatus = THNET_CONNSTATUS_SUCCESS; else Play->iConnectStatus = THNET_CONNSTATUS_FAIL;
 
   PRINTF("%s(%s)(%s) UserName:%s Password:%s TimeOut:%d IsConnect:%d\n", __FUNCTION__, Play->IPUID, Play->LocalIP, Play->UserName,
          Play->Password, Play->TimeOut, Play->IsConnect);
+    
+    fprintf(f,"connect 6 %s(%s:%d)(%s) UserName:%s Password:%s TimeOut:%d IsConnect:%d,time is %s\n", __FUNCTION__, Play->IPUID,DataPort, Play->LocalIP, Play->UserName,
+           Play->Password, Play->TimeOut, Play->IsConnect,getLocaltime());
+    
+    
+    fflush(f);
   return Play->IsConnect;
 }
 //-----------------------------------------------------------------------------
 bool thNet_DisConn(HANDLE NetHandle)
 {
+    PRINTF("%s:thNet_DisConn 0\n", __FUNCTION__);
   int i, iCount;
   TavNode* tmpNode;
+      PRINTF("%s:thNet_DisConn 1\n", __FUNCTION__);
   TPlayParam* Play = (TPlayParam*) NetHandle;
   if (NetHandle == 0) return false;
+      PRINTF("%s:thNet_DisConn 2\n", __FUNCTION__);
   if (!Play->IsConnect) return true;
   PRINTF("%s(%s)(%s)\n", __FUNCTION__, Play->IPUID, Play->LocalIP);
 
@@ -2159,10 +2265,13 @@ bool thNet_StopRec(HANDLE NetHandle)
   PRINTF("%s(%s)\n", __FUNCTION__, Play->IPUID);
   if (Play->RecHandle)
   {
+      PRINTF("%s(%s) 0\n", __FUNCTION__, Play->IPUID);
     ret = thRecordStop(Play->RecHandle);
     if (ret) Play->RecHandle = NULL;
+      PRINTF("%s(%s) 1\n", __FUNCTION__, Play->IPUID);
     return ret;
   }
+    PRINTF("%s(%s) 2\n", __FUNCTION__, Play->IPUID);
   return true;
 }
 //-----------------------------------------------------------------------------

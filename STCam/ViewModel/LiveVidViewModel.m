@@ -65,12 +65,12 @@ void avRealTimeCallBack(void *UserCustom,         //用户自定义数据
       //   [myself.parser parseFrame:(uint8_t*)Buf len:Len];
         LiveVidBufferModel * model  = [LiveVidBufferModel new];
         [model setBuffer:Buf size:Len];
-       // NSLog(@"pthread_mutex_lock begin 2");
+       // DDLogDebug(@"pthread_mutex_lock begin 2");
             pthread_mutex_lock(&th_mutex_lock);
         NSInteger length  =[myself.queneArray count];
             [myself.queneArray insertObject:model atIndex:length];
             pthread_mutex_unlock(&th_mutex_lock);
-       // NSLog(@"pthread_mutex_lock end 2");
+       // DDLogDebug(@"pthread_mutex_lock end 2");
     }
    
     
@@ -114,7 +114,7 @@ void alarmRealTimeCallBack(int AlmType, int AlmTime, int AlmChl, void* UserCusto
         [_audioSession initRecordAudio];
         _queneArray = [NSMutableArray new];
         pthread_mutex_init(&th_mutex_lock, NULL);
-        if (error) NSLog(@"couldn't set audio category!,error is");
+        if (error) DDLogDebug(@"couldn't set audio category!,error is");
     }
     return self;
 }
@@ -126,13 +126,13 @@ void alarmRealTimeCallBack(int AlmType, int AlmTime, int AlmChl, void* UserCusto
         //
         bool ret = thNet_SetCallBack(self.model.NetHandle, avRealTimeCallBack,avAuddioCallBack, NULL, (void*)self.model.NetHandle);
         if (ret) {
-            // NSLog(@"pthread_mutex_lock begin 1");
+            // DDLogDebug(@"pthread_mutex_lock begin 1");
             pthread_mutex_lock(&th_mutex_lock);
             [self.queneArray removeAllObjects];
-            NSLog(@"clearH264Deocder --------- from openVid");
+            DDLogDebug(@"clearH264Deocder --------- from openVid");
             [self.parser clearDecoder];
             pthread_mutex_unlock(&th_mutex_lock);
-           //  NSLog(@"pthread_mutex_lock end 1");
+           //  DDLogDebug(@"pthread_mutex_lock end 1");
             ret = thNet_Play((HANDLE) self.model.NetHandle, 1-sub, self.openaud,sub, 0);;//
         }
        
@@ -149,20 +149,20 @@ void alarmRealTimeCallBack(int AlmType, int AlmTime, int AlmChl, void* UserCusto
         @strongify(self);
         //
         while (self.getQueneBufferStauts) {
-           // NSLog(@"pthread_mutex_lock begin 0");
+           // DDLogDebug(@"pthread_mutex_lock begin 0");
            pthread_mutex_lock(&th_mutex_lock);
             if ([self.queneArray count] > 0) {
                 
                 LiveVidBufferModel * model =self.queneArray[0];
                 [self.parser parseFrame:(uint8_t*)[model getBuffer] len:[model getBufLen]];
-                NSLog(@"queneArray count is %ld",[self.queneArray count]);
+                DDLogDebug(@"queneArray count is %ld",[self.queneArray count]);
                 [self.queneArray removeObject:model];
                 [model deallocBuf];
                 
                 
             }
             pthread_mutex_unlock(&th_mutex_lock);
-           // NSLog(@"pthread_mutex_lock end 0");
+           // DDLogDebug(@"pthread_mutex_lock end 0");
         }
     });
     
@@ -306,10 +306,10 @@ void alarmRealTimeCallBack(int AlmType, int AlmTime, int AlmChl, void* UserCusto
         if([data isKindOfClass:[NSDictionary class]]){
             RetModel * model = [RetModel RetModelWithDict:data];
             if (model.ret == 1) {
-                NSLog(@"ptz ctl succtss");
+                DDLogDebug(@"ptz ctl succtss");
             }
             else{
-                NSLog(@"ptz ctl failed");
+                DDLogDebug(@"ptz ctl failed");
             }
         }
     });

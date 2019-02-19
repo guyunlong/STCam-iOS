@@ -61,7 +61,7 @@ void avRemoteAuddioCallBack(void *UserCustom,         //用户自定义数据
         ;
         error = AudioSessionInitialize(NULL, NULL, NULL, NULL);
         error =  AudioSessionSetProperty(kAudioSessionProperty_AudioCategory, sizeof(category), &category);
-        if (error) NSLog(@"couldn't set audio category!,error is");
+        if (error) DDLogDebug(@"couldn't set audio category!,error is");
     }
     return self;
 }

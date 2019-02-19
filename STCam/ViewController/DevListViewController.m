@@ -19,6 +19,8 @@
 #import "AddDeviceController.h"
 #import "AddDeviceApToStaNextController.h"
 #import "RecordListController.h"
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 @interface DevListViewController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property(nonatomic,strong)UITableView * mTableView;
@@ -59,6 +61,8 @@
     [self setTitle:@"title_main_dev_list".localizedString];
     [self initNav];
     [self monitorRefreshViewKVO];
+    
+   
     
     
 }

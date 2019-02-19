@@ -86,10 +86,12 @@
         [self showHudInView:self.view hint:nil];
     }
     else{
-        [self showHudInViewOffset:self.view hint:nil offset:-kScreenHeight/6];
+        // [self showHudInViewOffset:self.view hint:nil offset:-kScreenHeight/6];
+       // [self showHudInViewOffset:self.gestureControlView hint:nil offset:-kScreenHeight/6];
+         [self showHudInView:self.gestureControlView hint:nil];
     }
     @weakify(self)
-    [NSTimer scheduledTimerWithTimeInterval:3 repeats:NO block:^(NSTimer * _Nonnull timer) {
+    [NSTimer scheduledTimerWithTimeInterval:10 repeats:NO block:^(NSTimer * _Nonnull timer) {
         @strongify(self)
         if (self.showHud)
         {
@@ -128,12 +130,16 @@
     _selectChannel = -1;
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidEnterbackground) name:AppDidEnterbackground object:nil];
     @weakify(self)
-    [[[_viewModel racGetDoorConfig]
-     deliverOn:[RACScheduler mainThreadScheduler]]
-        subscribeNext:^(id x) {
-       @strongify(self)
-       [self.doorChannelColView reloadData];
+    [NSTimer scheduledTimerWithTimeInterval:2 repeats:NO block:^(NSTimer * _Nonnull timer) {
+        @strongify(self)
+        [[[self.viewModel racGetDoorConfig]
+          deliverOn:[RACScheduler mainThreadScheduler]]
+         subscribeNext:^(id x) {
+             [self.doorChannelColView reloadData];
+         }];
     }];
+    
+   
     
     
     
@@ -418,9 +424,9 @@
     
 }
 - (void) handlePan: (UIPanGestureRecognizer *)rec{
-    // NSLog(@"xxoo---xxoo---xxoo");
+    // DDLogDebug(@"xxoo---xxoo---xxoo");
     CGPoint point = [rec translationInView:self.view];//该方法返回在横坐标上、纵坐标上拖动了多少像素
-    NSLog(@"%f,%f",point.x,point.y);
+    DDLogDebug(@"%f,%f",point.x,point.y);
     //if(rec.state == UIGestureRecognizerStateEnded)
     {
         _viewportRect.origin.x = _viewportRect.origin.x + point.x*2;
@@ -515,23 +521,23 @@
 -(void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer{
     return;
     if(recognizer.direction==UISwipeGestureRecognizerDirectionDown) {
-        NSLog(@"DirectionDown");
+        DDLogDebug(@"DirectionDown");
         
         [_viewModel ptzControl:PtzControlType_Down];
         
     }
     if(recognizer.direction==UISwipeGestureRecognizerDirectionUp) {
          [_viewModel ptzControl:PtzControlType_Up];
-        NSLog(@"DirectionUp");
+        DDLogDebug(@"DirectionUp");
     }
     
     if(recognizer.direction==UISwipeGestureRecognizerDirectionLeft) {
-        NSLog(@"DirectionLeft");
+        DDLogDebug(@"DirectionLeft");
          [_viewModel ptzControl:PtzControlType_Left];
     }
     
     if(recognizer.direction==UISwipeGestureRecognizerDirectionRight) {
-        NSLog(@"DirectionRight");
+        DDLogDebug(@"DirectionRight");
          [_viewModel ptzControl:PtzControlType_Right];
     }
 }
