@@ -55,6 +55,7 @@ typedef NS_ENUM(NSInteger, ConnType){
 @property(nonatomic,assign)  BOOL IsSnapshot;
 @property(nonatomic,assign)  BOOL ExistSD;
 @property(nonatomic,assign)  NSInteger FunctionMask;
+@property(nonatomic,assign)  NSInteger Battery;
 @property(nonatomic,strong) NSString* SoftVersion;
 @property(nonatomic,assign)  NSInteger  DevType;
 /**

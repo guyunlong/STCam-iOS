@@ -11,4 +11,5 @@
 #import "DeviceSettingViewModel.h"
 @interface DeviceSettingController : UIViewController
 @property(nonatomic,strong)DeviceSettingViewModel * viewModel;
+
 @end

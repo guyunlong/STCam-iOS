@@ -257,6 +257,8 @@
             
             DeviceSettingController * ctl = [DeviceSettingController new];
             DeviceSettingViewModel * viewModel = [DeviceSettingViewModel new];
+            viewModel.disableReset = NO;
+            viewModel.disableDelete = NO;
             [viewModel setModel:self.viewModel.deviceArray[indexPath.row]];
             [ctl setViewModel:viewModel];
             ctl.hidesBottomBarWhenPushed = YES;

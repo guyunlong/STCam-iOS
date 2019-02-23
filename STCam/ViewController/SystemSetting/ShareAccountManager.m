@@ -163,7 +163,7 @@
     InfoModel * model = [InfoModel new];
     UserModel * userModel = _sharedUserArray[indexPath.row];
     [model setTitle:userModel.User];
-    [model setInfo:userModel.SN];
+    [model setInfo:userModel.DevName];
     [cell setModel:model];
     [cell setFrame:CGRectMake(0, 0, kScreenWidth,[CommonInfoCell cellHeight] )];
     [tableView addLineforPlainCell:cell forRowAtIndexPath:indexPath withLeftSpace:0];

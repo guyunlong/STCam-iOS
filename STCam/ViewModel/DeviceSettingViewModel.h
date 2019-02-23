@@ -22,6 +22,8 @@
 @property(nonatomic,strong)PushSettingModel * mPushSettingModel;
 @property(nonatomic,strong)MotionCfgModel * motionCfgModel;//图像侦测灵明度
 @property(nonatomic,strong)PowerConfigModel * powerConfigModel;//定时开关机配置
+@property(nonatomic,assign)BOOL disableDelete;//
+@property(nonatomic,assign)BOOL disableReset;//
 -(RACSignal*)racChangeDeviceName:(NSString*)deviceName;
 -(RACSignal*)racChangeDevicePassword:(NSString*)devicePassword;
 -(RACSignal*)racGetPushSetting;

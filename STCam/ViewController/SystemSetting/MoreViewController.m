@@ -128,8 +128,9 @@
     
     NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
     NSString *app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
-    
-    [model3 setInfo:app_Version];
+
+ //   [_versionLb setText:[infoDictionary objectForKey:@"CFBundleVersion"]];
+    [model3 setInfo:[NSString stringWithFormat:@"%@(%@)",app_Version,[infoDictionary objectForKey:@"CFBundleVersion"]]];
     
    // [_rowsArray addObject:model0];
     [_rowsArray addObject:model1];

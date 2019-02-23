@@ -129,6 +129,8 @@
             [self refreshDeviceConfig];
         });
         
+        
+        [_deleteButton setEnabled:!_viewModel.disableDelete];
        
        
     }

@@ -56,6 +56,7 @@
 @property (strong, nonatomic)  UIButton * bottomDoorBtn;//底部门控制按钮
 @property (strong, nonatomic)  UICollectionView * doorChannelColView;//
 @property (strong, nonatomic)  UICollectionView * doorHandelColView;//
+@property (strong, nonatomic)  UIImageView * batteryView;//电池状态
 @property(nonatomic,assign) BOOL showHud;//是否已经获得第一帧视频
 
 @property(nonatomic,strong)NSArray* doorHandelTitleArray;
@@ -66,6 +67,7 @@
 /**放大缩小拖动等***/
 @property(nonatomic,assign)CGRect viewportRect;
 @property(nonatomic,assign)CGFloat ratio;
+
 @end
 
 @implementation LiveVidController
@@ -75,7 +77,6 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
     
     
     [_viewModel openVid:1];
@@ -91,7 +92,7 @@
          [self showHudInView:self.gestureControlView hint:nil];
     }
     @weakify(self)
-    [NSTimer scheduledTimerWithTimeInterval:10 repeats:NO block:^(NSTimer * _Nonnull timer) {
+    [NSTimer scheduledTimerWithTimeInterval:5 repeats:NO block:^(NSTimer * _Nonnull timer) {
         @strongify(self)
         if (self.showHud)
         {
@@ -99,6 +100,8 @@
             [self back];
         }
     }];
+    
+         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidEnterbackground) name:AppDidEnterbackground object:nil];
     
     [_doorChannelColView reloadData];
     [_doorHandelColView reloadData];
@@ -111,6 +114,8 @@
     [super viewWillDisappear:animated];
     [_viewModel closeVid];
     [self.navigationController setNavigationBarHidden:NO];
+      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidEnterbackground) name:AppDidEnterbackground object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 //是否可以旋转
 -(BOOL)shouldAutorotate
@@ -123,18 +128,22 @@
     return UIInterfaceOrientationMaskPortrait;
 }
 
+-(void)dealloc{
+    
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     _viewModel.delegate = self;
     _selectChannel = -1;
-     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidEnterbackground) name:AppDidEnterbackground object:nil];
+
     @weakify(self)
     [NSTimer scheduledTimerWithTimeInterval:2 repeats:NO block:^(NSTimer * _Nonnull timer) {
         @strongify(self)
         [[[self.viewModel racGetDoorConfig]
           deliverOn:[RACScheduler mainThreadScheduler]]
          subscribeNext:^(id x) {
+             @strongify(self)
              [self.doorChannelColView reloadData];
          }];
     }];
@@ -310,9 +319,9 @@
     [_hdBtn addTarget:self action:@selector(controlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [_playAudioBtn addTarget:self action:@selector(controlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [_snapShotBtn addTarget:self action:@selector(controlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-     [_recordBtn addTarget:self action:@selector(controlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-     [_settingBtn addTarget:self action:@selector(controlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-     [_ledBtn addTarget:self action:@selector(controlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [_recordBtn addTarget:self action:@selector(controlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [_settingBtn addTarget:self action:@selector(controlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [_ledBtn addTarget:self action:@selector(controlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     //if ([_viewModel.model FunctionExistsDoorControl])
     if (_viewModel.model.DevType == DevType_DoorSystem) {
@@ -364,11 +373,67 @@
     [_doorChannelColView setHidden:YES];
     [_doorHandelColView setHidden:YES];
     [_portButtonView setHidden:NO];
+  
     
-    /**********landscape buttons*************/
+    [self setupFloatView:YES];
+
+    
+    
+    
    
 }
 
+/*
+ *设置电池状态和录像状态
+ */
+-(void)setupFloatView:(BOOL)isPortrait{
+    if (isPortrait) {
+        _batteryView = [[UIImageView alloc] initWithFrame:CGRectMake(kScreenWidth-40, 20, 20, 40)];
+        [_batteryView setImage:[UIImage imageNamed:@"battery_0"]];
+        [self.view addSubview:_batteryView];
+        
+        
+     
+        
+        
+    }
+    else{
+        _batteryView = [[UIImageView alloc] initWithFrame:CGRectMake(20, 20, 20, 40)];
+        [_batteryView setImage:[UIImage imageNamed:@"battery_0"]];
+        [self.view addSubview:_batteryView];
+        
+        
+    
+        
+        
+    }
+        if (_viewModel.model.Battery == -1) {
+            [_batteryView setHidden:YES];
+        }
+        else if(_viewModel.model.Battery < 20 && _viewModel.model.Battery >=0){
+            [_batteryView setImage:[UIImage imageNamed:@"battery_0"]];
+        }
+        else if(_viewModel.model.Battery < 40 && _viewModel.model.Battery >=0){
+            [_batteryView setImage:[UIImage imageNamed:@"battery_20"]];
+        }
+        else if(_viewModel.model.Battery < 60 && _viewModel.model.Battery >=0){
+            [_batteryView setImage:[UIImage imageNamed:@"battery_40"]];
+        }
+        else if(_viewModel.model.Battery < 80 && _viewModel.model.Battery >=0){
+            [_batteryView setImage:[UIImage imageNamed:@"battery_60"]];
+        }
+        else if(_viewModel.model.Battery < 100 && _viewModel.model.Battery >=0){
+            [_batteryView setImage:[UIImage imageNamed:@"battery_80"]];
+        }
+        else if(_viewModel.model.Battery >= 100 ){
+            [_batteryView setImage:[UIImage imageNamed:@"battery_100"]];
+        }
+        else{
+            [_batteryView setHidden:YES];
+        }
+    
+   
+}
 -(void)doorBottomClick:(id)sender{
     if (sender == _bottomDoorBtn) {
         [_bottomDoorBtn setSelected:YES];
@@ -612,6 +677,8 @@
     else if([sender isEqual:_settingBtn] || [sender isEqual:_settingBtn_land]){
         DeviceSettingController * ctl = [DeviceSettingController new];
         DeviceSettingViewModel * viewModel = [DeviceSettingViewModel new];
+        viewModel.disableReset = YES;
+        viewModel.disableDelete = YES;
         [viewModel setModel:self.viewModel.model];
         [ctl setViewModel:viewModel];
         [self.navigationController pushViewController:ctl animated:YES];
@@ -624,6 +691,16 @@
         [self.navigationController pushViewController:ctl animated:YES];
     }
 }
+- (BOOL)prefersStatusBarHidden
+{
+    if (isLandscape) {
+        return YES;
+    }
+    else{
+        return NO;//隐藏为YES，显示为NO
+    }
+}
+
 #pragma methods
 -(void)rotateToLandscape{
      [self.navigationController setNavigationBarHidden:YES animated:YES];
@@ -646,7 +723,7 @@
     [_portButtonView setHidden:YES];
     
     self.view.bounds = CGRectMake(0, 0,kScreenHeight , kScreenWidth);
-    self.view.transform = CGAffineTransformMakeRotation(M_PI*1.5);
+    self.view.transform = CGAffineTransformMakeRotation(M_PI*0.5);
     [UIView beginAnimations:nil context:nil];
     [UIView commitAnimations];
     
@@ -663,7 +740,7 @@
       [self.view.layer addSublayer:_glLayer];
      [_glLayer setViewPortRect:_viewportRect];
     [_recordTimeLabel setFrame:CGRectMake(0, 30*kWidthCoefficient, kScreenHeight, 40*kWidthCoefficient)];
-    
+    [self.view bringSubviewToFront:_recordTimeLabel];
   
 
     
@@ -801,6 +878,13 @@
     isLandscape = YES;
     
     [_gestureControlView setFrame:CGRectMake(0, 0, kScreenHeight, kScreenWidth)];
+    
+    
+    [self setupFloatView:NO];
+    
+    [self prefersStatusBarHidden];
+    [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
+    
    
 }
 -(void)rotateToPortrait{
@@ -837,7 +921,7 @@
     [_glLayer setViewPortRect:_viewportRect];
     
     [_recordTimeLabel setFrame:CGRectMake(0, 30*kWidthCoefficient, kScreenWidth, 40*kWidthCoefficient)];
-    
+    [self.view bringSubviewToFront:_recordTimeLabel];
     
     [_ledBtn_land setHidden:YES];
     [_playAudioBtn_land setHidden:YES];
@@ -865,6 +949,11 @@
     
     [_gestureControlView setFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
     
+   
+    
+    [self setupFloatView:YES];
+    [self prefersStatusBarHidden];
+    [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)]; 
 }
 
 # pragma  delegate

@@ -44,27 +44,29 @@
         InfoModel * model1 = _rowsArray[1];
         [model1 setInfo:[_viewModel.motionCfgModel getMotionDesc]];
         
-        InfoModel * model2 = _rowsArray[2];
-        [model2 setInfo:[_viewModel.mPushSettingModel getPIRSensitiveDesc]];
+//        InfoModel * model2 = _rowsArray[2];
+//        [model2 setInfo:[_viewModel.mPushSettingModel getPIRSensitiveDesc]];
         
         [_mTableView reloadData];
        
         [self refreshDeviceAdvanceConfig];
         
     }
+     [_resetButton setEnabled:!_viewModel.disableReset];
     
 }
 
 -(void)refreshDeviceAdvanceConfig{
-    
+    [self showHudInView:self.view hint:nil];
     @weakify(self)
     [[[self.viewModel racGetAudioCfg]
       deliverOn:[RACScheduler mainThreadScheduler]]
      subscribeNext:^(id x) {
+         [self hideHud];
          if([x integerValue] == 1){
              @strongify(self)
              NSString * soundDesc = self.viewModel.AUDIO_IsPlayPromptSound?@"action_open".localizedString:@"action_close".localizedString;
-             InfoModel * model3 = self.rowsArray[3];
+             InfoModel * model3 = self.rowsArray[2];
              [model3 setInfo:soundDesc];
              [self.mTableView reloadData];
          }
@@ -82,7 +84,7 @@
              if([x integerValue] == 1){
                  @strongify(self)
                  
-                 InfoModel * model4 = self.rowsArray[4];
+                 InfoModel * model4 = self.rowsArray[3];
                  [model4 setInfo:[self.viewModel.mRecConfigModel getRecordLenDesc]];
                  [self.mTableView reloadData];
              }
@@ -152,7 +154,7 @@
     
     InfoModel * model0 = [InfoModel new];
     InfoModel * model1 = [InfoModel new];
-    InfoModel * model2 = [InfoModel new];
+//    InfoModel * model2 = [InfoModel new];
     InfoModel * model3 = [InfoModel new];
     InfoModel * model4 = [InfoModel new];
     InfoModel * model5 = [InfoModel new];
@@ -162,7 +164,7 @@
     
     [model0 setTitle:@"string_DevAdvancedSettings_PushInterval".localizedString];
     [model1 setTitle:@"string_DevAdvancedSettings_MotionSensitivity".localizedString];
-    [model2 setTitle:@"string_DevAdvancedSettings_PIRSensitivity".localizedString];
+//    [model2 setTitle:@"string_DevAdvancedSettings_PIRSensitivity".localizedString];
     [model3 setTitle:@"string_DevAdvancedSettings_IsSoundPlay".localizedString];
     [model4 setTitle:@"string_DevAdvancedSettings_AlmTimeLen".localizedString];
     [model5 setTitle:@"string_DevAdvancedSettings_TFManage".localizedString];
@@ -171,7 +173,7 @@
     
     [_rowsArray addObject:model0];
     [_rowsArray addObject:model1];
-    [_rowsArray addObject:model2];
+//    [_rowsArray addObject:model2];
     [_rowsArray addObject:model3];
     [_rowsArray addObject:model4];
     [_rowsArray addObject:model5];
@@ -192,20 +194,20 @@
 #pragma mark - tableView
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return [_rowsArray count];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [_rowsArray count];
+    return 1;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    
+    NSInteger section = [indexPath section];
     CommonSettingCell * cell = [CommonSettingCell CommonSettingCellWith:tableView indexPath:indexPath];
-    [cell setModel:_rowsArray[indexPath.row]];
+    [cell setModel:_rowsArray[section]];
     [cell setFrame:CGRectMake(0, 0, kScreenWidth, [CommonSettingCell cellHeight])];
     [tableView addLineforPlainCell:cell forRowAtIndexPath:indexPath withLeftSpace:0];
     
@@ -222,7 +224,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+     NSInteger section = [indexPath section];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (![_viewModel.model IsConnect])
     {
@@ -230,23 +232,23 @@
         return;
     }
     
-    NSInteger row = indexPath.row;
-    if (0 == row) {
+    
+    if (0 == section) {
         [self presentViewController:self.changePushIntervalSheet animated:YES completion:nil];
     }
-    else if(1 == row){
+    else if(1 == section){
          [self presentViewController:self.changeMotionConfigSheet animated:YES completion:nil];
     }
-    else if(2 == row){
-        [self presentViewController:self.changePIRConfigSheet animated:YES completion:nil];
-    }
-    else if(3 == row){
+//    else if(2 == section){
+//        [self presentViewController:self.changePIRConfigSheet animated:YES completion:nil];
+//    }
+    else if(2 == section){
         [self presentViewController:self.deviceAudioConfigSheet animated:YES completion:nil];
     }
-    else if(4 == row){
+    else if(3 == section){
         [self presentViewController:self.alarmRecordDurationConfigSheet animated:YES completion:nil];
     }
-    else if(5 == row){
+    else if(4 == section){
         if (!_viewModel.model.ExistSD) {
             [self showHint:@"action_not_exist_sd".localizedString];
             return;
@@ -255,7 +257,7 @@
         [ctl setViewModel:_viewModel];
         [self.navigationController pushViewController:ctl animated:YES];
     }
-    else if(6 == row){
+    else if(5 == section){
         [self.powerOnOffContainer show];
     }
     
@@ -347,7 +349,7 @@
          @strongify(self)
          if ([x integerValue] == 1) {
              NSString * soundDesc = self.viewModel.AUDIO_IsPlayPromptSound?@"action_open".localizedString:@"action_close".localizedString;
-             InfoModel * model3 = self.rowsArray[3];
+             InfoModel * model3 = self.rowsArray[2];
              [model3 setInfo:soundDesc];
              [self.mTableView reloadData];
          }
@@ -367,7 +369,7 @@
      subscribeNext:^(id x) {
          @strongify(self)
          if ([x integerValue] == 1) {
-             InfoModel * model4 = self.rowsArray[4];
+             InfoModel * model4 = self.rowsArray[3];
              [model4 setInfo:[self.viewModel.mRecConfigModel getRecordLenDesc]];
              [self.mTableView reloadData];
          }
