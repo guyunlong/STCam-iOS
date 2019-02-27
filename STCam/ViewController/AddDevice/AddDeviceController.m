@@ -50,6 +50,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+     DDLogDebug(@"view did load AddDeviceController");
 }
 -(void)loadView{
     [super loadView];
@@ -121,6 +122,7 @@
         [self.navigationController pushViewController:ctl animated:YES];
     }
     else if(sender == _apTStaAddButton){
+         DDLogDebug(@"btn click apTSta");
         AddDeviceAPToStaController * ctl = [AddDeviceAPToStaController new];
         [self.navigationController pushViewController:ctl animated:YES];
     }

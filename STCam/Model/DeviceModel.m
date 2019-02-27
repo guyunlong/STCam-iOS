@@ -211,6 +211,7 @@
         }
         DDLogDebug(@"-------------------------- connect 1,DeviceModel sn %@",[self SN]);
         if (![self IsConnect]) {
+             P2P_Init();
             DDLogDebug(@"-------------------------- connect 2,DeviceModel sn %@",[self SN]);
             [self Connect];
             DDLogDebug(@"-------------------------- connect 3,DeviceModel sn %@",[self SN]);

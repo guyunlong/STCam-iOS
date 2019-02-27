@@ -164,11 +164,21 @@
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
     _glLayer = [[AAPLEAGLLayer alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenWidth*9/16)];
-    viewportRectWidth = kScreenWidth*2;
-    viewportRectHeight = kScreenWidth*9/16*2;
-    fullScreenWidth = kScreenWidth*2;
-    fullScreenHeigth = kScreenWidth*9/16*2;
+    CGFloat scale_screen = [UIScreen mainScreen].scale;
+#if TARGETTYPE == 0
+//gravetime
+    viewportRectWidth = kScreenWidth*scale_screen*9/5;
+    viewportRectHeight = kScreenWidth*9/16*scale_screen;
+    fullScreenWidth = kScreenWidth*scale_screen;
+    fullScreenHeigth = kScreenWidth*9/16*scale_screen;
+    _viewportRect = CGRectMake(-kScreenWidth*scale_screen*2/5, 0, viewportRectWidth, viewportRectHeight);
+#else
+    viewportRectWidth = kScreenWidth*scale_screen;
+    viewportRectHeight = kScreenWidth*9/16*scale_screen;
+    fullScreenWidth = kScreenWidth*scale_screen;
+    fullScreenHeigth = kScreenWidth*9/16*scale_screen;
     _viewportRect = CGRectMake(0, 0, viewportRectWidth, viewportRectHeight);
+#endif
     [_glLayer setViewPortRect:_viewportRect];
     _ratio = 1;
     [_glLayer setBackgroundColor:[[UIColor blackColor] CGColor]];
@@ -387,23 +397,19 @@
  *设置电池状态和录像状态
  */
 -(void)setupFloatView:(BOOL)isPortrait{
-    if (isPortrait) {
-        _batteryView = [[UIImageView alloc] initWithFrame:CGRectMake(kScreenWidth-40, 20, 20, 40)];
+    if (!_batteryView ) {
+        _batteryView =  [[UIImageView alloc] initWithFrame:CGRectMake(kScreenWidth-40, 20, 20, 40)];
         [_batteryView setImage:[UIImage imageNamed:@"battery_0"]];
         [self.view addSubview:_batteryView];
-        
-        
-     
+    }
+    if (isPortrait) {
+        [self.view bringSubviewToFront:_batteryView];
         
         
     }
     else{
-        _batteryView = [[UIImageView alloc] initWithFrame:CGRectMake(20, 20, 20, 40)];
-        [_batteryView setImage:[UIImage imageNamed:@"battery_0"]];
-        [self.view addSubview:_batteryView];
-        
-        
-    
+         [_batteryView setFrame:CGRectMake(20, 20, 20, 40)];
+        [self.view bringSubviewToFront:_batteryView];
         
         
     }
@@ -492,10 +498,11 @@
     // DDLogDebug(@"xxoo---xxoo---xxoo");
     CGPoint point = [rec translationInView:self.view];//该方法返回在横坐标上、纵坐标上拖动了多少像素
     DDLogDebug(@"%f,%f",point.x,point.y);
+    CGFloat scale_screen = [UIScreen mainScreen].scale;
     //if(rec.state == UIGestureRecognizerStateEnded)
     {
-        _viewportRect.origin.x = _viewportRect.origin.x + point.x*2;
-        _viewportRect.origin.y = _viewportRect.origin.y - point.y*2;
+        _viewportRect.origin.x = _viewportRect.origin.x + point.x*scale_screen;
+        _viewportRect.origin.y = _viewportRect.origin.y - point.y*scale_screen;
         
         if (fullScreenWidth - _viewportRect.origin.x  > _viewportRect.size.width) {
             _viewportRect.origin.x = -_viewportRect.size.width+fullScreenWidth;
@@ -520,6 +527,7 @@
  
 - (void) handlePinch:(UIPinchGestureRecognizer*) recognizer {
     
+    CGFloat scale_screen = [UIScreen mainScreen].scale;
  //   if (recognizer.state== UIGestureRecognizerStateEnded)
     {
         CGFloat zoomSize1 = recognizer.scale;
@@ -536,18 +544,25 @@
          if (_ratio*zoomSize <=1) {
             zoomSize = 1/_ratio;
             _ratio = 1;
-            _viewportRect=CGRectMake(0, 0, fullScreenWidth,  fullScreenHeigth);
+             
            
-            
+#if TARGETTYPE == 0
+             //gravetime
+             _viewportRect = CGRectMake(-kScreenWidth*scale_screen*2/5, 0, viewportRectWidth, viewportRectHeight);
+#else
            
+             _viewportRect = CGRectMake(0, 0, viewportRectWidth, viewportRectHeight);
+#endif
+             
+             
         }
         else if (_ratio*zoomSize >=8) {
             zoomSize = 8/_ratio;
             _ratio = 8;
             _viewportRect.size.width = _viewportRect.size.width*zoomSize;
             _viewportRect.size.height = _viewportRect.size.height*zoomSize;
-            float touchX =touchPoint.x*2 +_viewportRect.origin.x;
-            float touchY =(fullScreenHeigth/2 - touchPoint.y)*2 +_viewportRect.origin.y;
+            float touchX =touchPoint.x*scale_screen +_viewportRect.origin.x;
+            float touchY =(fullScreenHeigth/2 - touchPoint.y)*scale_screen +_viewportRect.origin.y;
             _viewportRect.origin.x = _viewportRect.origin.x + (zoomSize-1)*touchX;
             _viewportRect.origin.y = _viewportRect.origin.y + (zoomSize-1)*touchY;
             
@@ -556,12 +571,12 @@
             _ratio = _ratio*zoomSize;
             _viewportRect.size.width = _viewportRect.size.width*zoomSize;
             _viewportRect.size.height = _viewportRect.size.height*zoomSize;
-            float touchX =touchPoint.x*2 +_viewportRect.origin.x;
-            float touchY =(fullScreenHeigth/2 - touchPoint.y)*2 +_viewportRect.origin.y;
+            float touchX =touchPoint.x*scale_screen +_viewportRect.origin.x;
+            float touchY =(fullScreenHeigth/2 - touchPoint.y)*scale_screen +_viewportRect.origin.y;
             _viewportRect.origin.x = _viewportRect.origin.x + (1-zoomSize)*touchX;
             _viewportRect.origin.y = _viewportRect.origin.y + (1-zoomSize)*touchY;
         }
-        if (fullScreenWidth - _viewportRect.origin.x  > _viewportRect.size.width) {
+        if (fullScreenWidth - _viewportRect.origin.x  > _viewportRect.size.width && _ratio != 1) {
             _viewportRect.origin.x = -_viewportRect.size.width+fullScreenWidth;
         }
         else if (_viewportRect.origin.x > 0) {
@@ -727,10 +742,13 @@
     [UIView beginAnimations:nil context:nil];
     [UIView commitAnimations];
     
-    viewportRectWidth = kScreenHeight*2;
-    viewportRectHeight = kScreenWidth*2;
-    fullScreenWidth = kScreenHeight*2;
-    fullScreenHeigth = kScreenWidth*2;
+    
+    CGFloat scale_screen = [UIScreen mainScreen].scale;
+    
+    viewportRectWidth = kScreenHeight*scale_screen;
+    viewportRectHeight = kScreenWidth*scale_screen;
+    fullScreenWidth = kScreenHeight*scale_screen;
+    fullScreenHeigth = kScreenWidth*scale_screen;
     _ratio = 1;
     _viewportRect = CGRectMake(0, 0, viewportRectWidth, viewportRectHeight);
     
@@ -890,14 +908,24 @@
 -(void)rotateToPortrait{
      [self.navigationController setNavigationBarHidden:NO animated:YES];
     
-    viewportRectWidth = kScreenWidth*2;
-    viewportRectHeight = kScreenWidth*9/16*2;
-
-    fullScreenWidth = kScreenWidth*2;
-    fullScreenHeigth = kScreenWidth*9/16*2;
+    CGFloat scale_screen = [UIScreen mainScreen].scale;
+#if TARGETTYPE == 0
+    //gravetime
+    viewportRectWidth = kScreenWidth*scale_screen*9/5;
+    viewportRectHeight = kScreenWidth*9/16*scale_screen;
+    fullScreenWidth = kScreenWidth*scale_screen;
+    fullScreenHeigth = kScreenWidth*9/16*scale_screen;
+    _viewportRect = CGRectMake(-kScreenWidth*scale_screen*2/5, 0, viewportRectWidth, viewportRectHeight);
+#else
+    viewportRectWidth = kScreenWidth*scale_screen;
+    viewportRectHeight = kScreenWidth*9/16*scale_screen;
+    fullScreenWidth = kScreenWidth*scale_screen;
+    fullScreenHeigth = kScreenWidth*9/16*scale_screen;
+    _viewportRect = CGRectMake(0, 0, viewportRectWidth, viewportRectHeight);
+#endif
+    
     _ratio = 1;
     
-    _viewportRect = CGRectMake(0, 0, viewportRectWidth, viewportRectHeight);
     
     
     

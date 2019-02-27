@@ -43,7 +43,7 @@
     
     //RAC(self, ssid)  = self.ssidField.rac_textSignal;
     RAC(self, ssidPwd)  = self.ssidPwdField.rac_textSignal;
-    
+    DDLogDebug(@"view did load ApToStaNext");
     
     
 }
@@ -192,6 +192,7 @@
 }
 
 -(void)nextButtonClicked{
+     DDLogDebug(@"ap to sta btn click,to ap");
     if ([_ssidPwd length] == 0) {
         [self presentViewController:self.confirmAlertController animated:YES completion:nil];
     }
@@ -201,9 +202,11 @@
 }
 
 -(void)backToAddController:(BOOL)wait{
+    DDLogDebug(@"backToAddController,wait %d",wait);
     DevListViewModel * viewModel = [DevListViewModel sharedDevListViewModel];
     [self.model threadDisconnect];
     [viewModel.searchDeviceArray removeAllObjects];
+    DDLogDebug(@"searchDeviceArray removeAllObjects");
     if(wait){
         __block NSInteger count = 45;
         [self showHudInView:self.view hint:[NSString stringWithFormat:@"%ld%@",count,@"action_reboot_seconds".localizedString]];
@@ -226,7 +229,7 @@
 }
 -(void)backToAddControllerIM{
     
-    
+    DDLogDebug(@"backToAddControllerIM");
     NSMutableArray *controllerArray = [[NSMutableArray alloc]initWithArray:self.navigationController.viewControllers];
     NSInteger count = [controllerArray count];
     for (NSInteger index = count-1;index>=0;index--) {
@@ -252,6 +255,7 @@
         
         //http://211.149.199.247:800/app_user_get_devlst.asp?user=1257117229@qq.com&psd=12345678
         NSString * url = [NSString stringWithFormat:@"http://%@:%ld/cfg1.cgi?User=%@&Psd=%@&MsgID=%d",self.model.IPUID,self.model.WebPort,self.model.User,self.model.Pwd,Msg_WiFiSearch];
+        DDLogDebug(@"Wi-Fi search %@",url);
         [FFHttpTool GET:url parameters:nil success:^(id data){
             @strongify(self)
              [self hideHud];
@@ -321,21 +325,27 @@
         NSString * url = [NSString stringWithFormat:@"%@&wifi_Active=1&wifi_IsAPMode=0&wifi_SSID_STA=%@&wifi_Password_STA=%@",[self.model getDevURL:Msg_SetWiFiCfg],self.ssid,self.ssidPwd];
         
         id data = [self.model thNetHttpGet:url];
+        DDLogDebug(@"Handle_APSTA_OnNext %@",url);
         dispatch_async(dispatch_get_main_queue(), ^(){
             [self hideHud];
             if([data isKindOfClass:[NSDictionary class]]){
                 RetModel * model = [RetModel RetModelWithDict:data];
                 if (model.ret == RESULT_SUCCESS_REBOOT) {
                   // [self.model threadDisconnect];
+                     DDLogDebug(@"Handle_APSTA_OnNext RESULT_SUCCESS_REBOOT");
                     [self showHint:@"action_AP_T_STA_Success".localizedString];
                     [self backToAddController:YES];
+                     DDLogDebug(@"Handle_APSTA_OnNext RESULT_SUCCESS_REBOOT end");
                 }
                 if (model.ret == RESULT_SUCCESS) {
+                     DDLogDebug(@"Handle_APSTA_OnNext RESULT_SUCCESS");
                    // [self.model threadDisconnect];
                     [self showHint:@"action_AP_T_STA_Success".localizedString];
                     [self backToAddController:YES];
+                    DDLogDebug(@"Handle_APSTA_OnNext RESULT_SUCCESS end");
                 }
                 else{
+                    DDLogDebug(@"action_AP_T_STA_Failed");
                     [self showHint:@"action_AP_T_STA_Failed".localizedString];
                 }
             }

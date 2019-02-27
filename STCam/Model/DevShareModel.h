@@ -10,6 +10,7 @@
 
 @interface DevShareModel : NSObject
 @property(nonatomic,strong) NSString * SN;
+@property(nonatomic,strong) NSString * DevName;
 @property(nonatomic,strong) NSString * From;
 @property(nonatomic,strong) NSString * Pwd;
 @property(nonatomic,assign) BOOL IsVideo;

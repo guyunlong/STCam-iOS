@@ -13,13 +13,14 @@
 #import "AddDeviceApToStaNextController.h"
 #import "WifiManager.h"
 @interface AddDeviceAPToStaController ()<UITableViewDataSource, UITableViewDelegate>{
-    BOOL isSearchingDevice;
+    
 }
 @property(nonatomic,strong)UIAlertController  *joinAPAlertController;//提示加入ap网络
 @property(nonatomic,strong)DevListViewModel *viewModel;
 @property(nonatomic,strong)UILabel * titleLb;
 @property(nonatomic,strong)UITableView * mTableView;
 @property(nonatomic,strong)UIButton *refreshButton;
+@property(nonatomic,assign)BOOL isSearchingDevice;
 @end
 
 @implementation AddDeviceAPToStaController
@@ -29,14 +30,20 @@
     if (![[WifiManager ssid] hasPrefix:@"IPCAM_AP"]) {
          [self presentViewController:self.joinAPAlertController animated:YES completion:nil];
     }
+      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshApDevList) name:AppDidBecomeActive object:nil];
+}
+-(void)viewDidDisAppear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     _viewModel =[DevListViewModel sharedDevListViewModel];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshApDevList) name:AppDidBecomeActive object:nil];
-    
+
+    DDLogDebug(@"view did load AddDeviceAPToSta");
     
 }
 
@@ -106,10 +113,10 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)refreshApDevList{
-    if (isSearchingDevice) {
+    if (_isSearchingDevice) {
         return;
     }
-    isSearchingDevice = YES;
+    _isSearchingDevice = YES;
     
     [self showHudInView:self.view hint:@""];
     
@@ -119,7 +126,7 @@
      subscribeNext:^(id x) {
          @strongify(self)
          [self hideHud];
-         isSearchingDevice = NO;
+         self.isSearchingDevice = NO;
          if ([x integerValue] == 1) {
              [self.mTableView reloadData];
          }

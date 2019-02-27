@@ -10,7 +10,7 @@
 
 @implementation DevShareModel
 -(NSString*)localDescription{
-    NSDictionary *details =@{@"SN":_SN,@"From":_From,@"Pwd":_Pwd,@"IsVideo":@(_IsVideo?1:0),@"IsHistory":@(_IsHistory?1:0), @"IsPush":@(_IsPush?1:0),@"IsControl":@(_IsControl?1:0)};
+    NSDictionary *details =@{@"DevName":_DevName,@"SN":_SN,@"From":_From,@"Pwd":_Pwd,@"IsVideo":@(_IsVideo?1:0),@"IsHistory":@(_IsHistory?1:0), @"IsPush":@(_IsPush?1:0),@"IsControl":@(_IsControl?1:0)};
     
     NSError *error;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:details

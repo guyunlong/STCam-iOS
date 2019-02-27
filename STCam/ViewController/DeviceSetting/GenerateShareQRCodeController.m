@@ -37,6 +37,9 @@
 
 @property (nonatomic, strong) UIButton *generateButton;
 @property (nonatomic, strong) UIImageView *qrImageView;
+
+@property (nonatomic, strong) UILabel *devNameLabel;
+
 @end
 
 @implementation GenerateShareQRCodeController
@@ -44,6 +47,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self creatCIQRCodeImage];
+    
 }
 
 
@@ -56,8 +60,10 @@
         _shareModel = [DevShareModel new];
         [_shareModel setSN:model.SN];
         [_shareModel setPwd:model.Pwd];
+        [_shareModel setDevName:model.DevName];
         [_shareModel setFrom:[AccountManager getUser]];
     }
+    
 }
 -(void)initNav{
     [self setTitle:@"action_device_share".localizedString];
@@ -186,6 +192,16 @@
     _qrImageView = [[UIImageView alloc] initWithFrame:CGRectMake(kScreenWidth/2-qrimagewidth/2, y, qrimagewidth, qrimagewidth)];
     
     [self.view addSubview:_qrImageView];
+    
+    y += qrimagewidth+ 2*kPadding;
+    
+    _devNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, y, kScreenWidth, kButtonHeight)];
+    [_devNameLabel setTextAlignment:NSTextAlignmentCenter];
+    [_devNameLabel setTextColor:[UIColor blackColor]];
+    [self.view addSubview:_devNameLabel];
+    
+     [_devNameLabel setText:[NSString stringWithFormat:@"%@(%@)",_shareModel.DevName,_shareModel.SN]];
+   
     
 }
 - (void)didReceiveMemoryWarning {

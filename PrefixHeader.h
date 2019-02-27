@@ -90,6 +90,7 @@ static const int ddLogLevel = DDLogLevelVerbose;
 
 #if TARGETTYPE == 0
 #define serverIP @"198.11.181.133"
+//#define serverIP @"211.149.199.247"
 #elif TARGETTYPE == 1
 #define serverIP @"211.149.199.247"
 #else

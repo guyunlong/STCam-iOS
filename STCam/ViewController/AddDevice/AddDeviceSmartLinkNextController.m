@@ -159,13 +159,25 @@
     const char* SSID = [self.ssid cStringUsingEncoding:NSASCIIStringEncoding];
     const char* Password = [self.ssidPwd cStringUsingEncoding:NSASCIIStringEncoding];
     
-//    InitSmartConnection();
-//    StartSmartConnection(SSID, Password, (unsigned char*)"", 0, "", 0);
+#if TARGET_IPHONE_SIMULATOR//模拟器
+    
+#elif TARGET_OS_IPHONE//真机
+    InitSmartConnection();
+    StartSmartConnection(SSID, Password, (unsigned char*)"", 0, "", 0);
+#endif
+    
+    
+   
     
     
 }
 -(void)stopSmartConfig{
-//    StopSmartConnection();
+#if TARGET_IPHONE_SIMULATOR//模拟器
+#elif TARGET_OS_IPHONE//真机
+    StopSmartConnection();
+#endif
+    
+    
 }
 
 @end
