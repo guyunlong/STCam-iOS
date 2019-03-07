@@ -395,7 +395,7 @@
         }]
        flattenMap:^RACStream *(id value) {
            
-          return  [[DevListViewModel sharedDevListViewModel] racDeleteDevice:self.viewModel.model];
+          return  [[DevListViewModel sharedDevListViewModel] racDeleteDevice:self.viewModel.model reset:YES];
        }]
       deliverOn:[RACScheduler mainThreadScheduler]]
      subscribeNext:^(id x) {

@@ -33,6 +33,7 @@
 @property(nonatomic,strong)NSMutableArray * ssidArray;
 @property(nonatomic,strong)UIAlertController  *confirmAlertController;//确认弹框
 @property(nonatomic,strong)NSTimer  *coolTimer;
+@property(nonatomic,strong)UIButton *refreshButton;
 @end
 
 @implementation AddDeviceApToStaNextController
@@ -174,14 +175,14 @@
     UIBarButtonItem *backBarItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     self.navigationItem.leftBarButtonItem = backBarItem;
     
-    UIButton *refreshButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    refreshButton.frame = CGRectMake(0, 0, 80, 28);
-    refreshButton.contentHorizontalAlignment =  UIControlContentHorizontalAlignmentRight;
-    [refreshButton addTarget:self action:@selector(searchWiFi) forControlEvents:UIControlEventTouchUpInside];
-    [refreshButton setTitle:@"action_refresh".localizedString forState:UIControlStateNormal];
-    [refreshButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [refreshButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
-    UIBarButtonItem *rightBarItem = [[UIBarButtonItem alloc] initWithCustomView:refreshButton];
+    _refreshButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    _refreshButton.frame = CGRectMake(0, 0, 80, 28);
+    _refreshButton.contentHorizontalAlignment =  UIControlContentHorizontalAlignmentRight;
+    [_refreshButton addTarget:self action:@selector(searchWiFi) forControlEvents:UIControlEventTouchUpInside];
+    [_refreshButton setTitle:@"action_refresh".localizedString forState:UIControlStateNormal];
+    [_refreshButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [_refreshButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
+    UIBarButtonItem *rightBarItem = [[UIBarButtonItem alloc] initWithCustomView:_refreshButton];
     
     self.navigationItem.rightBarButtonItem = rightBarItem;
     
@@ -204,9 +205,9 @@
 -(void)backToAddController:(BOOL)wait{
     DDLogDebug(@"backToAddController,wait %d",wait);
     DevListViewModel * viewModel = [DevListViewModel sharedDevListViewModel];
-    [self.model threadDisconnect];
-    [viewModel.searchDeviceArray removeAllObjects];
-    DDLogDebug(@"searchDeviceArray removeAllObjects");
+    //[self.model threadDisconnect];
+    [viewModel.searchDeviceInSubViewArray removeAllObjects];
+    DDLogDebug(@"searchDeviceInSubViewArray removeAllObjects");
     if(wait){
         __block NSInteger count = 45;
         [self showHudInView:self.view hint:[NSString stringWithFormat:@"%ld%@",count,@"action_reboot_seconds".localizedString]];
@@ -250,14 +251,16 @@
 /**/
 
 -(void)searchWiFi{
+    
     @weakify(self)
    [self showHudInView:self.view hint:@""];
-        
+    [self.refreshButton setUserInteractionEnabled:NO];
         //http://211.149.199.247:800/app_user_get_devlst.asp?user=1257117229@qq.com&psd=12345678
         NSString * url = [NSString stringWithFormat:@"http://%@:%ld/cfg1.cgi?User=%@&Psd=%@&MsgID=%d",self.model.IPUID,self.model.WebPort,self.model.User,self.model.Pwd,Msg_WiFiSearch];
         DDLogDebug(@"Wi-Fi search %@",url);
         [FFHttpTool GET:url parameters:nil success:^(id data){
             @strongify(self)
+             [self.refreshButton setUserInteractionEnabled:YES];
              [self hideHud];
             if([data isKindOfClass:[NSArray class]]){
                 if (!self.ssidArray) {
@@ -274,6 +277,7 @@
             }
         } failure:^(NSError * error){
             @strongify(self)
+             [self.refreshButton setUserInteractionEnabled:YES];
              [self hideHud];
         }];
 }
@@ -319,42 +323,75 @@
     [self showHudInView:self.view hint:@""];
     @weakify(self);
     
-    dispatch_queue_t quene = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_async(quene, ^{
+     NSString * url = [NSString stringWithFormat:@"%@&wifi_Active=1&wifi_IsAPMode=0&wifi_SSID_STA=%@&wifi_Password_STA=%@",[self.model getDevURL:Msg_SetWiFiCfg],self.ssid,self.ssidPwd];
+    
+    [FFHttpTool GET:url parameters:nil success:^(id data){
         @strongify(self)
-        NSString * url = [NSString stringWithFormat:@"%@&wifi_Active=1&wifi_IsAPMode=0&wifi_SSID_STA=%@&wifi_Password_STA=%@",[self.model getDevURL:Msg_SetWiFiCfg],self.ssid,self.ssidPwd];
-        
-        id data = [self.model thNetHttpGet:url];
-        DDLogDebug(@"Handle_APSTA_OnNext %@",url);
-        dispatch_async(dispatch_get_main_queue(), ^(){
-            [self hideHud];
-            if([data isKindOfClass:[NSDictionary class]]){
-                RetModel * model = [RetModel RetModelWithDict:data];
-                if (model.ret == RESULT_SUCCESS_REBOOT) {
-                  // [self.model threadDisconnect];
-                     DDLogDebug(@"Handle_APSTA_OnNext RESULT_SUCCESS_REBOOT");
-                    [self showHint:@"action_AP_T_STA_Success".localizedString];
-                    [self backToAddController:YES];
-                     DDLogDebug(@"Handle_APSTA_OnNext RESULT_SUCCESS_REBOOT end");
-                }
-                if (model.ret == RESULT_SUCCESS) {
-                     DDLogDebug(@"Handle_APSTA_OnNext RESULT_SUCCESS");
-                   // [self.model threadDisconnect];
-                    [self showHint:@"action_AP_T_STA_Success".localizedString];
-                    [self backToAddController:YES];
-                    DDLogDebug(@"Handle_APSTA_OnNext RESULT_SUCCESS end");
-                }
-                else{
-                    DDLogDebug(@"action_AP_T_STA_Failed");
-                    [self showHint:@"action_AP_T_STA_Failed".localizedString];
-                }
+        [self hideHud];
+        if([data isKindOfClass:[NSDictionary class]]){
+            RetModel * model = [RetModel RetModelWithDict:data];
+            if (model.ret == RESULT_SUCCESS_REBOOT) {
+                // [self.model threadDisconnect];
+                DDLogDebug(@"Handle_APSTA_OnNext RESULT_SUCCESS_REBOOT");
+                [self showHint:@"action_AP_T_STA_Success".localizedString];
+                [self backToAddController:YES];
+                DDLogDebug(@"Handle_APSTA_OnNext RESULT_SUCCESS_REBOOT end");
             }
-        });
-        
+            if (model.ret == RESULT_SUCCESS) {
+                DDLogDebug(@"Handle_APSTA_OnNext RESULT_SUCCESS");
+                // [self.model threadDisconnect];
+                [self showHint:@"action_AP_T_STA_Success".localizedString];
+                [self backToAddController:YES];
+                DDLogDebug(@"Handle_APSTA_OnNext RESULT_SUCCESS end");
+            }
+            else{
+                DDLogDebug(@"action_AP_T_STA_Failed");
+                [self showHint:@"action_AP_T_STA_Failed".localizedString];
+            }
+        }
+    } failure:^(NSError * error){
+        @strongify(self)
+        [self hideHud];
+    }];
+    
+    
+    
+//    dispatch_queue_t quene = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+//    dispatch_async(quene, ^{
+//        @strongify(self)
+//        NSString * url = [NSString stringWithFormat:@"%@&wifi_Active=1&wifi_IsAPMode=0&wifi_SSID_STA=%@&wifi_Password_STA=%@",[self.model getDevURL:Msg_SetWiFiCfg],self.ssid,self.ssidPwd];
+//
+//        id data = [self.model thNetHttpGet:url];
+//        DDLogDebug(@"Handle_APSTA_OnNext %@",url);
+//        dispatch_async(dispatch_get_main_queue(), ^(){
+//            [self hideHud];
+//            if([data isKindOfClass:[NSDictionary class]]){
+//                RetModel * model = [RetModel RetModelWithDict:data];
+//                if (model.ret == RESULT_SUCCESS_REBOOT) {
+//                  // [self.model threadDisconnect];
+//                     DDLogDebug(@"Handle_APSTA_OnNext RESULT_SUCCESS_REBOOT");
+//                    [self showHint:@"action_AP_T_STA_Success".localizedString];
+//                    [self backToAddController:YES];
+//                     DDLogDebug(@"Handle_APSTA_OnNext RESULT_SUCCESS_REBOOT end");
+//                }
+//                if (model.ret == RESULT_SUCCESS) {
+//                     DDLogDebug(@"Handle_APSTA_OnNext RESULT_SUCCESS");
+//                   // [self.model threadDisconnect];
+//                    [self showHint:@"action_AP_T_STA_Success".localizedString];
+//                    [self backToAddController:YES];
+//                    DDLogDebug(@"Handle_APSTA_OnNext RESULT_SUCCESS end");
+//                }
+//                else{
+//                    DDLogDebug(@"action_AP_T_STA_Failed");
+//                    [self showHint:@"action_AP_T_STA_Failed".localizedString];
+//                }
+//            }
+//        });
+    
 
        
         
-    });
+//    });
 }
 
 #pragma mark - IGLDropDownMenuDelegate

@@ -146,12 +146,14 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     DDLogDebug(@"applicationWillEnterForeground---0");
     
     /*3、重新初始化p2p*/
-    P2P_Free();
+    //P2P_Free();
+     DDLogDebug(@"applicationWillEnterForeground---1");
     P2P_Init();
+     DDLogDebug(@"applicationWillEnterForeground---2");
     
     DevListViewModel * viewModel = [DevListViewModel sharedDevListViewModel];
     [viewModel connectAllDevice];
-    DDLogDebug(@"applicationWillEnterForeground--1");
+    DDLogDebug(@"applicationWillEnterForeground--3");
     [application setApplicationIconBadgeNumber:0]; //清除角标
 }
 

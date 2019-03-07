@@ -17,7 +17,7 @@
 #import "PrefixHeader.h"
 
 @interface DevListViewModel ()
-
+@property BOOL searchInMainView;
 @end
 
 @implementation DevListViewModel
@@ -44,17 +44,23 @@ void callback_SearchDev(void *UserCustom, u32 SN, int DevType, char *DevModal, c
     printf("sn is %d,DevIP is %s,DevName is %s,ddns host is %s\n",SN,DevIP,DevName,DDNSHost);
     
     //设置 DevIP 的设备
-    for (DeviceModel * model in myself.searchDeviceArray) {
-        if ([model.IPUID isEqualToString:[NSString stringWithUTF8String:DevIP]]) {
-            if (![model IsConnect]) {
-                [model threadConnect];
-            }
-            return;
-        }
-    }
+   
     DeviceModel * node = [DeviceModel new];
     [node setIPUID:[NSString stringWithUTF8String:DevIP]];
     [node setSN:[NSString stringWithFormat:@"%0.8x", SN]];
+    if (myself.searchInMainView) {
+        for (DeviceModel * model in myself.searchDeviceArray) {
+            if ([model.SN isEqualToString:node.SN] && myself.searchInMainView) {
+                if (![model IsConnect]) {
+                    [model threadConnect];
+                }
+                return;
+            }
+        }
+    }
+    
+    
+    
     [node setDataPort:DataPort];
     [node setWebPort: HttpPort];
     [node setIsHistory:YES];
@@ -74,14 +80,28 @@ void callback_SearchDev(void *UserCustom, u32 SN, int DevType, char *DevModal, c
         [node setDevName:devName];
     }
     free(utf8String);
-    [node threadConnect];
-    if ([myself isSearchDevExistInDeviceArray:node]){
-        NSInteger count  = [myself.searchDeviceArray count];
-        [myself.searchDeviceArray insertObject:node atIndex:count];
+    if (myself.searchInMainView) {
+        [node threadConnect];
+    }
+    if ([myself searchInMainView]) {
+        if ([myself isSearchDevExistInDeviceArray:node]){
+//            NSInteger count  = [myself.searchDeviceArray count];
+//            [myself.searchDeviceArray insertObject:node atIndex:count];
+        }
+        else{
+            [myself.searchDeviceArray addObject:node];
+        }
     }
     else{
-        [myself.searchDeviceArray addObject:node];
+        if ([myself isSearchDevExistInSubDeviceArray:node]){
+//            NSInteger count  = [myself.searchDeviceInSubViewArray count];
+//            [myself.searchDeviceInSubViewArray insertObject:node atIndex:count];
+        }
+        else{
+            [myself.searchDeviceInSubViewArray addObject:node];
+        }
     }
+    
     
     
 }
@@ -101,6 +121,7 @@ void callback_SearchDev(void *UserCustom, u32 SN, int DevType, char *DevModal, c
     if (self) {
         _deviceArray = [NSMutableArray new];
         _searchDeviceArray = [NSMutableArray new];
+        _searchDeviceInSubViewArray =[NSMutableArray new];
         refSelf = (__bridge void *)(self);
         
     }
@@ -160,7 +181,7 @@ void callback_SearchDev(void *UserCustom, u32 SN, int DevType, char *DevModal, c
     }];
 }
 
--(RACSignal *)racDeleteDevice:(DeviceModel*)model{
+-(RACSignal *)racDeleteDevice:(DeviceModel*)model reset:(BOOL)isReset{
     @weakify(self)
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
         @strongify(self)
@@ -172,8 +193,10 @@ void callback_SearchDev(void *UserCustom, u32 SN, int DevType, char *DevModal, c
             if ([data isKindOfClass:[NSDictionary class]]) {
                 RetModel * retModel = [RetModel RetModelWithDict:data];
                 if (retModel.ret == 1) {
-                    //删除设备
-                    [model threadDisconnect];
+                    //删除设备,如果是恢复出厂设置，不要断开链接，会奔溃
+                    if (!isReset) {
+                         [model threadDisconnect];
+                    }
                     [self.deviceArray removeObject:model];
                 }
                 [subscriber sendNext:@(retModel.ret)];
@@ -208,7 +231,7 @@ void callback_SearchDev(void *UserCustom, u32 SN, int DevType, char *DevModal, c
 -(void)searchDeviceInMainView:(BOOL)inMainView{
     
   
-    
+    _searchInMainView = inMainView;
     HANDLE SearchHandle;
     SearchHandle = thSearch_Init(callback_SearchDev, NULL);
     if (!SearchHandle) {
@@ -245,6 +268,14 @@ void callback_SearchDev(void *UserCustom, u32 SN, int DevType, char *DevModal, c
 
 -(BOOL)isSearchDevExistInDeviceArray:(DeviceModel*)model{
     for (DeviceModel * devModel in self.deviceArray) {
+        if ([devModel.SN isEqualToString:model.SN]) {
+            return YES;
+        }
+    }
+    return NO;
+}
+-(BOOL)isSearchDevExistInSubDeviceArray:(DeviceModel*)model{
+    for (DeviceModel * devModel in self.searchDeviceInSubViewArray) {
         if ([devModel.SN isEqualToString:model.SN]) {
             return YES;
         }

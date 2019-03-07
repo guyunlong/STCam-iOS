@@ -32,8 +32,8 @@
     }
       [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshApDevList) name:AppDidBecomeActive object:nil];
 }
--(void)viewDidDisAppear:(BOOL)animated{
-    [super viewDidDisappear:animated];
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
         [[NSNotificationCenter defaultCenter] removeObserver:self];
     
 }
@@ -44,6 +44,9 @@
     
 
     DDLogDebug(@"view did load AddDeviceAPToSta");
+    
+}
+-(void)dealloc{
     
 }
 
@@ -105,17 +108,25 @@
 }
 -(void)back{
     DevListViewModel * viewModel = [DevListViewModel sharedDevListViewModel];
-    for (DeviceModel* model in viewModel.searchDeviceArray) {
-        [model threadDisconnect];
-    }
-    [viewModel.searchDeviceArray removeAllObjects];
+//    for (DeviceModel* model in viewModel.searchDeviceArray) {
+//        [model threadDisconnect];
+//    }
+    [viewModel.searchDeviceInSubViewArray removeAllObjects];
     
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)refreshApDevList{
+    
+    
+    if (![[WifiManager ssid] hasPrefix:@"IPCAM_AP"]) {
+        return;
+    }
+    
+    DDLogDebug(@"refreshApDevList enter forground ---0");
     if (_isSearchingDevice) {
         return;
     }
+     DDLogDebug(@"refreshApDevList enter forground---1");
     _isSearchingDevice = YES;
     
     [self showHudInView:self.view hint:@""];
@@ -171,7 +182,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [_viewModel.searchDeviceArray count];
+    return [_viewModel.searchDeviceInSubViewArray count];
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -181,7 +192,7 @@
 {
     SearchDeviceCell * cell = [SearchDeviceCell SearchDeviceCellWith:tableView indexPath:indexPath];
     
-    [cell setModel:_viewModel.searchDeviceArray[indexPath.row]];
+    [cell setModel:_viewModel.searchDeviceInSubViewArray[indexPath.row]];
     [cell setFrame:CGRectMake(0, 0, kScreenWidth,[SearchDeviceCell cellHeight])];
    
     return cell;
@@ -192,7 +203,7 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     AddDeviceApToStaNextController * ctl = [AddDeviceApToStaNextController new];
-    [ctl setModel:_viewModel.searchDeviceArray[indexPath.row]];
+    [ctl setModel:_viewModel.searchDeviceInSubViewArray[indexPath.row]];
     [self.navigationController pushViewController:ctl animated:YES];
 }
 

@@ -35,11 +35,12 @@ typedef NS_ENUM(NSInteger, TUserMode){
  @param model 设备
  @return 信号量
  */
--(RACSignal *)racDeleteDevice:(DeviceModel*)model;
+-(RACSignal *)racDeleteDevice:(DeviceModel*)model reset:(BOOL)isReset;
 
 
 
-@property (strong, nonatomic)  NSMutableArray *searchDeviceArray;
+@property (strong, nonatomic)  NSMutableArray *searchDeviceArray;//主页面搜索设备
+@property (strong, nonatomic)  NSMutableArray *searchDeviceInSubViewArray;//sta页面，ap转sta页面搜索设备，这些页面返回后，数组要清空
 
 @property(nonatomic,strong)NSMutableArray* deviceArray;
 

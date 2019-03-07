@@ -365,7 +365,7 @@
 }
 -(void)deleteDevice{
     @weakify(self);
-    [[[DevListViewModel sharedDevListViewModel] racDeleteDevice:self.viewModel.model] subscribeNext:^(id x) {
+    [[[DevListViewModel sharedDevListViewModel] racDeleteDevice:self.viewModel.model reset:NO] subscribeNext:^(id x) {
          @strongify(self);
         if ([x integerValue] == 1) {
             [self showHint:@"string_delsuccess".localizedString];

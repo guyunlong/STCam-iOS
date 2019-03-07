@@ -94,6 +94,7 @@
     
 }
 -(void)back{
+    [[DevListViewModel sharedDevListViewModel].searchDeviceInSubViewArray removeAllObjects];
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)refreshStaDevList{
@@ -119,7 +120,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [_viewModel.searchDeviceArray count];
+    return [_viewModel.searchDeviceInSubViewArray count];
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -129,7 +130,7 @@
 {
     SearchDeviceCell * cell = [SearchDeviceCell SearchDeviceCellWith:tableView indexPath:indexPath];
     
-    [cell setModel:_viewModel.searchDeviceArray[indexPath.row]];
+    [cell setModel:_viewModel.searchDeviceInSubViewArray[indexPath.row]];
     [cell setFrame:CGRectMake(0, 0, kScreenWidth,[SearchDeviceCell cellHeight])];
     
     return cell;
@@ -140,7 +141,7 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     _selectIndex = indexPath.row;
-     DeviceModel * model  = self.viewModel.searchDeviceArray[self.selectIndex];
+     DeviceModel * model  = self.viewModel.searchDeviceInSubViewArray[self.selectIndex];
     if ([_viewModel isSearchDevExistInDeviceArray:model]) {
         [self showHint:@"error_device_added".localizedString];
         return;
@@ -149,7 +150,7 @@
 }
 
 -(void)addDevice:(NSString*)devpwd{
-    DeviceModel * model  = self.viewModel.searchDeviceArray[self.selectIndex];
+    DeviceModel * model  = self.viewModel.searchDeviceInSubViewArray[self.selectIndex];
     model.Pwd = devpwd;
     [[CoreDataManager sharedManager] saveDevice:model];
     
@@ -173,6 +174,7 @@
          [self hideHud];
          if ([x integerValue] == RESULT_SUCCESS) {
              [self showHint:@"string_devAddSuccess".localizedString];
+             [[DevListViewModel sharedDevListViewModel].searchDeviceInSubViewArray removeAllObjects];
              [self.navigationController popToRootViewControllerAnimated:YES];
          }
          else if([x integerValue] == RESULT_USER_ISBIND){
@@ -257,7 +259,7 @@
         [_fillDevicePwdAlertController addTextFieldWithConfigurationHandler:^(UITextField *textField){
             @strongify(self)
             textField.placeholder = @"device_pwd".localizedString;
-            DeviceModel * model  = self.viewModel.searchDeviceArray[self.selectIndex];
+            DeviceModel * model  = self.viewModel.searchDeviceInSubViewArray[self.selectIndex];
             textField.text =model.Pwd;
         }];
         
