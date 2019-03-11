@@ -1447,6 +1447,7 @@ bool thNet_DisConn(HANDLE NetHandle)
   TPlayParam* Play = (TPlayParam*) NetHandle;
   if (NetHandle == 0) return false;
       PRINTF("%s:thNet_DisConn 2\n", __FUNCTION__);
+    PRINTF("%s:thNet_DisConn 3  Play->IsConnect：%d\n", __FUNCTION__,Play->IsConnect);
   if (!Play->IsConnect) return true;
   PRINTF("%s(%s)(%s)\n", __FUNCTION__, Play->IPUID, Play->LocalIP);
 
