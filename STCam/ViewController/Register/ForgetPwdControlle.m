@@ -58,7 +58,7 @@
     
     
     CGFloat rowHeight = 40*kWidthCoefficient;
-    CGFloat prefixWidth = 80*kWidthCoefficient;
+    CGFloat prefixWidth = 110*kWidthCoefficient;
     
     CGFloat y = kPadding*3;
     _topBackView = [[UIView alloc] initWithFrame:CGRectMake(kPadding*2, y, kScreenWidth-4*kPadding, 4*rowHeight+3)];
@@ -73,6 +73,7 @@
     
     UILabel *userLb = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, prefixWidth, rowHeight)];
     [userLb setText:@"string_user".localizedString];
+    [userLb setFont:[UIFont systemFontOfSize:13]];
     self.userField = [[BasicTextField alloc] initWithFrame:CGRectMake(0, contentY, kScreenWidth-4*kPadding, rowHeight)];
     
     self.userField.placeholder = @"string_input_email_address".localizedString;
@@ -91,6 +92,7 @@
     /******************pwdField*********************/
     UILabel *pwdLb = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, prefixWidth, rowHeight)];
     [pwdLb setText:@"string_new_pwd_title".localizedString];
+      [pwdLb setFont:[UIFont systemFontOfSize:13]];
     self.pwdField = [[BasicTextField alloc] initWithFrame:CGRectMake(0, contentY, kScreenWidth-4*kPadding, rowHeight)];
     
     self.pwdField.placeholder = @"string_input_password".localizedString;
@@ -108,6 +110,7 @@
     
     UILabel *confirmLb = [[UILabel alloc] initWithFrame:CGRectMake(0,0, prefixWidth, rowHeight)];
     [confirmLb setText:@"string_confirm_pwd_title".localizedString];
+     [confirmLb setFont:[UIFont systemFontOfSize:13]];
     self.confirmPwdField = [[BasicTextField alloc] initWithFrame:CGRectMake(0, contentY, kScreenWidth-4*kPadding, rowHeight)];
     self.confirmPwdField.secureTextEntry = YES;
     self.confirmPwdField.placeholder = @"string_confirm_new_password".localizedString;

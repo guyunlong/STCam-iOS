@@ -55,6 +55,7 @@ static const void *HttpRequestHUDKey = &HttpRequestHUDKey;
     // Configure for text only and offset down
     hud.mode = MBProgressHUDModeText;
     hud.labelText = hint;
+    [hud.label setNumberOfLines:0];
     hud.margin = 10.f;
     hud.yOffset = 180;
     hud.removeFromSuperViewOnHide = YES;

@@ -152,7 +152,7 @@
         [_rememberTitleLb setText:@"action_check_remeber_pwd".localizedString];
     }
     
-    _forgotButton = [[UIButton alloc] initWithFrame:CGRectMake(kScreenWidth-2*kPadding-100*kWidthCoefficient, y, 100*kWidthCoefficient, checkboxwidth)];
+    _forgotButton = [[UIButton alloc] initWithFrame:CGRectMake(kScreenWidth-2*kPadding-120*kWidthCoefficient, y, 120*kWidthCoefficient, checkboxwidth)];
     [_forgotButton setAppThemeType:ButtonStyleText_Gray_Right];
     [_forgotButton setTitle:@"action_Forgetpwd".localizedString forState:UIControlStateNormal];
     [_forgotButton.titleLabel setFont:TextFont];

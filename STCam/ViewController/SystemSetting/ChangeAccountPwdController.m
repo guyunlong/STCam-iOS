@@ -48,7 +48,7 @@
     
     
     CGFloat rowHeight = 40*kWidthCoefficient;
-    CGFloat prefixWidth = 80*kWidthCoefficient;
+    CGFloat prefixWidth = 120*kWidthCoefficient;
     
     CGFloat y = kPadding*3;
     _topBackView = [[UIView alloc] initWithFrame:CGRectMake(kPadding*2, y, kScreenWidth-4*kPadding, rowHeight*3+2)];
@@ -60,6 +60,7 @@
     
     /******************ori**********************/
     UILabel *oriPwdLb = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, prefixWidth, rowHeight)];
+    [oriPwdLb setFont:[UIFont systemFontOfSize:12]];
     [oriPwdLb setText:@"string_old_pwd".localizedString];
     self.oriPwdField = [[BasicTextField alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth-4*kPadding, rowHeight)];
     
@@ -76,6 +77,7 @@
     /******************new**********************/
     UILabel *newerPwdLb = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, prefixWidth, rowHeight)];
     [newerPwdLb setText:@"string_new_pwd".localizedString];
+    [newerPwdLb setFont:[UIFont systemFontOfSize:12]];
     self.newerPwdField = [[BasicTextField alloc] initWithFrame:CGRectMake(0, rowHeight+1, kScreenWidth-4*kPadding, rowHeight)];
     
     self.newerPwdField.placeholder = @"string_input_new_password".localizedString;
@@ -91,6 +93,7 @@
     
     /******************confirm**********************/
     UILabel *confirmPwdLb = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, prefixWidth, rowHeight)];
+    [confirmPwdLb setFont:[UIFont systemFontOfSize:12]];
     [confirmPwdLb setText:@"string_confirm_pwd_title2".localizedString];
     self.confirmPwdField = [[BasicTextField alloc] initWithFrame:CGRectMake(0, 2*rowHeight+2, kScreenWidth-4*kPadding, rowHeight)];
     

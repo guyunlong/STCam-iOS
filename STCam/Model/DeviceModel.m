@@ -29,6 +29,7 @@
         _User = @"admin";
         _Pwd = @"admin";
         _FunctionMask = 0xfffffffe;
+        _Battery = -1;
     }
     return self;
 }
@@ -179,7 +180,13 @@
      DDLogDebug(@"------------disconnect  before 0 ,NetHandle %d",self.NetHandle);
     THandle NetHandle = self.NetHandle;
     self.NetHandle = 0;
-    BOOL ret = thNet_DisConn(NetHandle);
+    BOOL ret = NO;
+    @try
+    {
+       ret = thNet_DisConn(NetHandle);
+    }@catch (NSException * e) {
+        DDLogDebug(@"------------disconnect  Exception,exception is %@",e.description);
+    }
     DDLogDebug(@"------------disconnect  thNet_DisConn,sn %@,ret is %d",self.SN,ret);
     if (ret)
     {

@@ -10,7 +10,7 @@
 #import "PrefixHeader.h"
 #import "TPKeyboardAvoidingScrollView.h"
 #define fieldHeight 44*kWidthCoefficient
-#define lbwidth 80*kWidthCoefficient
+#define lbwidth 120*kWidthCoefficient
 @interface ChangeDevicePwdController ()
 
 @property (strong, nonatomic)UILabel*oldPwdLb;
@@ -80,6 +80,7 @@
     /****************************旧密码************************************/
     CGFloat ry = 0;
     _oldPwdLb = [[UILabel alloc] initWithFrame:CGRectMake(kPadding, ry, lbwidth, fieldHeight)];
+    [_oldPwdLb setFont:[UIFont systemFontOfSize:13]];
     [_oldPwdLb setText:@"device_old_pwd".localizedString];
     _oldPwdFd = [[UITextField alloc] initWithFrame:CGRectMake(kPadding + lbwidth, ry, kScreenWidth-2*kPadding-(kPadding + lbwidth)-kPadding, fieldHeight)];
     [_oldPwdFd setPlaceholder:@"device_old_pwd".localizedString];
@@ -96,6 +97,7 @@
     /****************************新密码************************************/
     _newerPwdLb = [[UILabel alloc] initWithFrame:CGRectMake(kPadding, ry, lbwidth, fieldHeight)];
     [_newerPwdLb setText:@"device_new_pwd".localizedString];
+     [_newerPwdLb setFont:[UIFont systemFontOfSize:13]];
     _newerPwdFd = [[UITextField alloc] initWithFrame:CGRectMake(kPadding + lbwidth, ry, kScreenWidth-2*kPadding-(kPadding + lbwidth)-kPadding, fieldHeight)];
     [_newerPwdFd setPlaceholder:@"device_new_pwd".localizedString];
     [_backgroundView addSubview:_newerPwdLb];
@@ -111,6 +113,7 @@
     /****************************确认新密码************************************/
     _confirmPwdLb = [[UILabel alloc] initWithFrame:CGRectMake(kPadding, ry, lbwidth, fieldHeight)];
     [_confirmPwdLb setText:@"device_confirm_pwd".localizedString];
+     [_confirmPwdLb setFont:[UIFont systemFontOfSize:13]];
     _confirmPwdFd = [[UITextField alloc] initWithFrame:CGRectMake(kPadding + lbwidth, ry, kScreenWidth-2*kPadding-(kPadding + lbwidth)-kPadding, fieldHeight)];
     [_confirmPwdFd setPlaceholder:@"device_confirm_pwd".localizedString];
     [_backgroundView addSubview:_confirmPwdFd];

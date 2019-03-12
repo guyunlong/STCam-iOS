@@ -54,7 +54,7 @@
 "action_change_password"="Set password";
 "action_device_password_manager"="Manage password";
 "action_change"="Renewal";
-"action_add_device_search"="Add device under the same router (LAN search)";
+"action_add_device_search"="Add device under the same router";
 "action_device_share"="Share";
 "action_device_play_record"="Playback";
 "action_device_play_setting"="Set";
@@ -148,11 +148,11 @@
 "action_Failed"="Set failure";
 "action_manager_push"="Manage push";
 "string_DevAdvancedSettings"="Advanced settings";
-"string_DevAdvancedSettings_IsSoundPlay"="Device prompting sound switch";
+"string_DevAdvancedSettings_IsSoundPlay"="Device prompting sound";
 "string_DevAdvancedSettings_AlmTimeLen"="Alarm video time";
 "action_reset_origin"="Reset origin";
 "string_DevAdvancedSettings_TFManage"="Manage video volume";
-"string_DevAdvancedSettings_MotionSensitivity"="Sensitivity of image detection";
+"string_DevAdvancedSettings_MotionSensitivity"="Sensitivity of motion detection";
 "action_version"="Device Version";
 "action_request_ssid"="Write wifi information";
 "SmartConfigOver"="Configuration finish";
@@ -203,7 +203,7 @@
 "string_search_no_device"="Cannot search the device";
 "string_search_no_device1"="Cannot search the device, try to search again!";
 "action_input_verify_code"="Input verity code";
-"action_get_verify_code"="Get verity code";
+"action_get_verify_code"="Get Code";
 "action_clear_alarm_image"="Confirm to delete alarm image?";
 "action_delete_device_ask"="Confirm to delete device?";
 "action_reboot_seconds"="Go back to wifi searching page";

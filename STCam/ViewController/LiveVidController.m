@@ -79,7 +79,7 @@
     [super viewWillAppear:animated];
     
     
-    [_viewModel openVid:1];
+   
     
     _showHud = YES;
     if(isLandscape){
@@ -112,7 +112,7 @@
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [_viewModel closeVid];
+//    [_viewModel closeVid];
     [self.navigationController setNavigationBarHidden:NO];
       [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidEnterbackground) name:AppDidEnterbackground object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -148,7 +148,7 @@
          }];
     }];
     
-   
+    [_viewModel openVid:1];
     
     
     
@@ -624,6 +624,7 @@
 
 #pragma click event
 -(void)back{
+    [_viewModel closeVid];
     [_viewModel destroyVidSelfPoint];
     [self.navigationController popViewControllerAnimated:YES];
 }

@@ -78,9 +78,12 @@
 }
 +(NSData *)UTF8WithGB2312Data:(NSData *)gb2312Data
 {
-    NSStringEncoding enc = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
     
-    NSString *str = [[NSString alloc] initWithData:gb2312Data encoding:enc];
+    NSString *str = [[NSString alloc] initWithData:gb2312Data encoding:NSUTF8StringEncoding];
+    if (!str) {
+        NSStringEncoding enc = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
+         str = [[NSString alloc] initWithData:gb2312Data encoding:enc];
+    }
     if (!str) {
         str = [[NSString alloc] initWithData:gb2312Data encoding:NSASCIIStringEncoding];
     }
